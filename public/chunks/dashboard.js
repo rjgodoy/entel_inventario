@@ -500,6 +500,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
  // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -539,6 +549,9 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     },
     // RedCoreChart,
     // ###### Equipment #####
+    JunctionsData: function JunctionsData() {
+      return __webpack_require__.e(/*! import() | chunks/dashboard/junctions */ "chunks/dashboard/junctions").then(__webpack_require__.bind(null, /*! ./JunctionsData */ "./resources/js/components/dashboard/JunctionsData.vue"));
+    },
     ElectricLinesData: function ElectricLinesData() {
       return __webpack_require__.e(/*! import() | chunks/dashboard/electricLines */ "chunks/dashboard/electricLines").then(__webpack_require__.bind(null, /*! ./ElectricLinesData */ "./resources/js/components/dashboard/ElectricLinesData.vue"));
     },
@@ -752,89 +765,71 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
         }
       });
     }, 10),
-    viewCriticPops: function () {
-      var _viewCriticPops = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this3 = this;
+    viewCriticPops: function viewCriticPops() {
+      var _this3 = this;
 
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var crm_id, zona_id;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                this.currentTab = 'critics';
-                crm_id = this.selectedCrm ? this.selectedCrm.id : 0;
-                zona_id = this.selectedZona ? this.selectedZona.id : 0;
-                axios.get("/api/criticPopsMap?core=".concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
+                _this3.currentTab = 'critics';
+                crm_id = _this3.selectedCrm ? _this3.selectedCrm.id : 0;
+                zona_id = _this3.selectedZona ? _this3.selectedZona.id : 0;
+                axios.get("/api/criticPopsMap?core=".concat(_this3.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
                   // console.log(response.data)
                   _this3.pops = response.data.data;
                 });
-                this.criticPopsSwitch = this.criticPopsSwitch == 0 ? 1 : 0;
+                _this3.criticPopsSwitch = _this3.criticPopsSwitch == 0 ? 1 : 0;
 
               case 5:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
-      }));
+        }, _callee);
+      }))();
+    },
+    viewAlbaPops: function viewAlbaPops() {
+      var _this4 = this;
 
-      function viewCriticPops() {
-        return _viewCriticPops.apply(this, arguments);
-      }
-
-      return viewCriticPops;
-    }(),
-    viewAlbaPops: function () {
-      var _viewAlbaPops = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var _this4 = this;
-
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var crm_id, zona_id;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                this.currentTab = 'alba';
-                crm_id = this.selectedCrm ? this.selectedCrm.id : 0;
-                zona_id = this.selectedZona ? this.selectedZona.id : 0;
-                axios.get("/api/albaPopsMap?core=".concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
+                _this4.currentTab = 'alba';
+                crm_id = _this4.selectedCrm ? _this4.selectedCrm.id : 0;
+                zona_id = _this4.selectedZona ? _this4.selectedZona.id : 0;
+                axios.get("/api/albaPopsMap?core=".concat(_this4.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
                   // console.log(response.data)
                   _this4.pops = response.data.data;
                 });
-                this.albaPopsSwitch = this.albaPopsSwitch == 0 ? 1 : 0;
+                _this4.albaPopsSwitch = _this4.albaPopsSwitch == 0 ? 1 : 0;
 
               case 5:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this);
-      }));
-
-      function viewAlbaPops() {
-        return _viewAlbaPops.apply(this, arguments);
-      }
-
-      return viewAlbaPops;
-    }(),
+        }, _callee2);
+      }))();
+    },
     // CONTERS
-    getCounters: function () {
-      var _getCounters = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var _this5 = this;
+    getCounters: function getCounters() {
+      var _this5 = this;
 
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var crm_id, zona_id;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                crm_id = this.selectedCrm ? this.selectedCrm.id : 0;
-                zona_id = this.selectedZona ? this.selectedZona.id : 0;
-                axios.get("/api/dashboard?core=".concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
+                crm_id = _this5.selectedCrm ? _this5.selectedCrm.id : 0;
+                zona_id = _this5.selectedZona ? _this5.selectedZona.id : 0;
+                axios.get("/api/dashboard?core=".concat(_this5.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
                   _this5.popsQuantity = response.data.pops;
                   _this5.sitesQuantity = response.data.sites;
                   _this5.technologiesQuantity = response.data.technologies;
@@ -847,15 +842,9 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
                 return _context3.stop();
             }
           }
-        }, _callee3, this);
-      }));
-
-      function getCounters() {
-        return _getCounters.apply(this, arguments);
-      }
-
-      return getCounters;
-    }(),
+        }, _callee3);
+      }))();
+    },
     status: function status(site) {
       var state = 'Inactivo';
       var id = 0;
@@ -993,30 +982,24 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       }
     },
     // SWITCHES
-    switchCore: function () {
-      var _switchCore = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+    switchCore: function switchCore() {
+      var _this7 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                this.core = this.core == 0 ? 1 : 0;
+                _this7.core = _this7.core == 0 ? 1 : 0;
 
               case 1:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, this);
-      }));
-
-      function switchCore() {
-        return _switchCore.apply(this, arguments);
-      }
-
-      return switchCore;
-    }(),
+        }, _callee4);
+      }))();
+    },
     changeStyle: function changeStyle() {
       this.darkMode = this.darkMode == 0 ? 1 : 0;
     },
@@ -1031,7 +1014,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       }
     },
     downloadPops: function downloadPops() {
-      var _this7 = this;
+      var _this8 = this;
 
       this.isLoading = true;
       var params = {
@@ -1061,15 +1044,15 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
         var data = window.URL.createObjectURL(blob);
         var link = document.createElement('a');
         link.href = data;
-        link.download = "Listado PoP - ".concat(_this7.middleFileName).concat(moment().format('YYYY-MM-DD hh:mm:ss'), ".xlsx");
+        link.download = "Listado PoP - ".concat(_this8.middleFileName).concat(moment().format('YYYY-MM-DD hh:mm:ss'), ".xlsx");
         link.click(); // setTimeout(function () {
         //     // For Firefox it is necessary to delay revoking the ObjectURL
         //     window.URL.revokeObjectURL(data)
         // }, 100)
 
-        _this7.isLoading = false;
+        _this8.isLoading = false;
 
-        _this7.$buefy.toast.open({
+        _this8.$buefy.toast.open({
           message: 'La planilla se ha descargado exitosamente.',
           type: 'is-success',
           duration: 3000,
@@ -1077,9 +1060,9 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
         });
       })["catch"](function (error) {
         console.log(error);
-        _this7.isLoading = false;
+        _this8.isLoading = false;
 
-        _this7.$buefy.toast.open({
+        _this8.$buefy.toast.open({
           message: 'Ha ocurrido un error. Favor contactar al administrador',
           type: 'is-danger',
           duration: 3000,
@@ -1155,6 +1138,8 @@ var map = {
 	"./bm": "./node_modules/moment/locale/bm.js",
 	"./bm.js": "./node_modules/moment/locale/bm.js",
 	"./bn": "./node_modules/moment/locale/bn.js",
+	"./bn-bd": "./node_modules/moment/locale/bn-bd.js",
+	"./bn-bd.js": "./node_modules/moment/locale/bn-bd.js",
 	"./bn.js": "./node_modules/moment/locale/bn.js",
 	"./bo": "./node_modules/moment/locale/bo.js",
 	"./bo.js": "./node_modules/moment/locale/bo.js",
@@ -1203,6 +1188,8 @@ var map = {
 	"./es": "./node_modules/moment/locale/es.js",
 	"./es-do": "./node_modules/moment/locale/es-do.js",
 	"./es-do.js": "./node_modules/moment/locale/es-do.js",
+	"./es-mx": "./node_modules/moment/locale/es-mx.js",
+	"./es-mx.js": "./node_modules/moment/locale/es-mx.js",
 	"./es-us": "./node_modules/moment/locale/es-us.js",
 	"./es-us.js": "./node_modules/moment/locale/es-us.js",
 	"./es.js": "./node_modules/moment/locale/es.js",
@@ -1358,6 +1345,8 @@ var map = {
 	"./tg.js": "./node_modules/moment/locale/tg.js",
 	"./th": "./node_modules/moment/locale/th.js",
 	"./th.js": "./node_modules/moment/locale/th.js",
+	"./tk": "./node_modules/moment/locale/tk.js",
+	"./tk.js": "./node_modules/moment/locale/tk.js",
 	"./tl-ph": "./node_modules/moment/locale/tl-ph.js",
 	"./tl-ph.js": "./node_modules/moment/locale/tl-ph.js",
 	"./tlh": "./node_modules/moment/locale/tlh.js",
@@ -2491,8 +2480,8 @@ var render = function() {
                               _c(
                                 "div",
                                 {
-                                  staticClass:
-                                    "is-size-3 has-text-weight-normal"
+                                  staticClass: "has-text-weight-semibold",
+                                  staticStyle: { "font-size": "2.1rem" }
                                 },
                                 [
                                   _vm._v(
@@ -2616,8 +2605,8 @@ var render = function() {
                               _c(
                                 "div",
                                 {
-                                  staticClass:
-                                    "is-size-3 has-text-weight-normal"
+                                  staticClass: "has-text-weight-semibold",
+                                  staticStyle: { "font-size": "2.1rem" }
                                 },
                                 [
                                   _vm._v(
@@ -2858,6 +2847,19 @@ var render = function() {
               }
             }),
             _vm._v(" "),
+            _c("junctions-data", {
+              attrs: {
+                user: _vm.user,
+                bodyBackground: _vm.bodyBackground,
+                boxBackground: _vm.boxBackground,
+                primaryText: _vm.primaryText,
+                secondaryText: _vm.secondaryText,
+                selectedCrm: this.selectedCrm,
+                selectedZona: this.selectedZona,
+                core: _vm.core
+              }
+            }),
+            _vm._v(" "),
             _c("generator-sets-data", {
               attrs: {
                 user: _vm.user,
@@ -3039,8 +3041,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_style_index_0_id_376ddb84_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--7-2!../../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./Dashboard.vue?vue&type=style&index=0&id=376ddb84&lang=scss&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/Dashboard.vue?vue&type=style&index=0&id=376ddb84&lang=scss&scoped=true&");
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_style_index_0_id_376ddb84_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_style_index_0_id_376ddb84_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_style_index_0_id_376ddb84_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_style_index_0_id_376ddb84_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_style_index_0_id_376ddb84_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_style_index_0_id_376ddb84_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_style_index_0_id_376ddb84_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
 
 /***/ }),
 

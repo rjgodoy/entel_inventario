@@ -19,10 +19,10 @@ class AuthController extends Controller
     public function login(Request $request)
     {
 
-        // $http = new Client([
-        //     'base_uri' => config('app.url'),
-        //     'timeout'  => 5.0,
-        // ]);
+        $http = new Client([
+            'base_uri' => config('app.url'),
+            'timeout'  => 5.0,
+        ]);
         // try {
         //     $response = $http->post(config('services.passport.login_endpoint'), [
         //         'form_params' => [
@@ -65,13 +65,14 @@ class AuthController extends Controller
         }
         $token->save();
 
-        return response()->json([
+        $response = response()->json([
             'access_token' => $tokenResult->accessToken,
             'token_type'   => 'Bearer',
             'expires_at'   => Carbon::parse(
                 $tokenResult->token->expires_at)
                     ->toDateTimeString(),
         ]);
+
     }
 
     public function logout(Request $request)

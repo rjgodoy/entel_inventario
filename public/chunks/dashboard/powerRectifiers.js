@@ -197,7 +197,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "column is-4" }, [
+  return _c("div", { staticClass: "column is-3" }, [
     _c(
       "article",
       {
@@ -222,7 +222,7 @@ var render = function() {
             "div",
             {
               staticClass:
-                "column is-size-5 has-text-weight-semibold has-text-left",
+                "column is-8 is-size-5 has-text-weight-semibold has-text-left",
               class: _vm.primaryText
             },
             [_vm._v("Plantas Rectificadoras")]

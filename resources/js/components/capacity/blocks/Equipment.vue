@@ -184,6 +184,14 @@
                                                                         </div>
                                                                     </div>
                                                                 </b-dropdown-item>
+                                                                <b-dropdown-item aria-role="listitem" class="is-size-6" @click="deletePlane(plane)">
+                                                                    <div class="media">
+                                                                        <font-awesome-icon class="media-left" :icon="['fas', 'trash']" />
+                                                                        <div class="media-content">
+                                                                            <h3>Eliminar Plano</h3>
+                                                                        </div>
+                                                                    </div>
+                                                                </b-dropdown-item>
                                                             </b-dropdown>
                                                         </b-field>
                                                     </div>
@@ -1020,7 +1028,21 @@
             reload() {
                 // console.log('reloaded')
                 this.$eventBus.$emit('change-room')
-            }    
+            },
+
+            deletePlane(plane) {
+                this.$buefy.dialog.confirm({
+                    message: `Confirma la eliminación del plano?`,
+                    type: 'is-link',
+                    onConfirm: () => {
+                        axios.delete(`/api/planes/${plane.id}`)
+                        .then(response => {
+                            // console.log(response.data)
+                            this.$eventBus.$emit('room-data')
+                        })
+                    }
+                })
+            }       
         },
 
         beforeDestroy() {

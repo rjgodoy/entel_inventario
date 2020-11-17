@@ -195,6 +195,8 @@ class PlaneController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $plane = Plane::find($id);
+        $plane->delete();
+        return 'deleted';
     }
 }

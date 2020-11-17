@@ -327,18 +327,16 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
       console.log(thisPop);
       return "\n                <div class=\"card\">\n                    <div class=\"card-content\">\n                        <div class=\"media\">\n                            <div class=\"media-left\">\n                                <span class=\"tag ".concat(thisPop.classification_type_id == 1 ? 'is-danger' : thisPop.classification_type_id == 2 ? 'is-warning' : thisPop.classification_type_id_type_id == 3 ? 'is-blue' : 'is-link', " is-large has-text-weight-bold\" data-tooltip=\"Categor\xEDa\">\n                                    ").concat(thisPop.classification_type.classification_type, "\n                                </span>\n                            </div>\n                            <div class=\"media-content\">\n                                <p class=\"has-text-weight-semibold is-size-6 has-text-info\">").concat(thisPop.nem_site, "</p>\n                                <p class=\"has-text-weight-bold is-size-4\">").concat(thisPop.nombre, "</p>\n                                <p class=\"has-text-weight-normal is-size-6\">").concat(pop.direccion ? pop.direccion : 'Sin dirección registrada', ", ").concat(pop.comuna.nombre_comuna, "</p>\n                                <p class=\"has-text-weight-light is-size-6\">Zona ").concat(pop.comuna.zona.nombre_zona, ", CRM ").concat(pop.comuna.zona.crm.nombre_crm, "</p>\n                            </div>\n                        </div>\n\n                        <div class=\"content\">\n                            <a href=\"/pop/").concat(pop.id, "\" target=\"_blank\" class=\"button is-outlined is-link is-small\">\n                                <font-awesome-icon icon=\"info-circle\"/>\n                                &nbsp;Ver detalles\n                            </a>\n                        </div>\n                    </div>\n                </div>\n            ");
     },
-    getDependences: function () {
-      var _getDependences = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this3 = this;
+    getDependences: function getDependences() {
+      var _this3 = this;
 
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get("/api/dependences/".concat(this.popMaster.id)).then(function (response) {
+                return axios.get("/api/dependences/".concat(_this3.popMaster.id)).then(function (response) {
                   _this3.dependences = response.data.data;
 
                   if (_this3.dependences.length) {
@@ -366,15 +364,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
                 return _context.stop();
             }
           }
-        }, _callee, this);
-      }));
-
-      function getDependences() {
-        return _getDependences.apply(this, arguments);
-      }
-
-      return getDependences;
-    }(),
+        }, _callee);
+      }))();
+    },
     panDependences: function panDependences(google) {
       var _this4 = this;
 

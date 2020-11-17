@@ -188,10 +188,8 @@ var numeral = __webpack_require__(/*! numeral */ "./node_modules/numeral/numeral
       // this.fillData()
     }
   },
-  mounted: function () {
-    var _mounted = _asyncToGenerator(
-    /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+  mounted: function mounted() {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -201,14 +199,8 @@ var numeral = __webpack_require__(/*! numeral */ "./node_modules/numeral/numeral
           }
         }
       }, _callee);
-    }));
-
-    function mounted() {
-      return _mounted.apply(this, arguments);
-    }
-
-    return mounted;
-  }(),
+    }))();
+  },
   methods: {}
 });
 

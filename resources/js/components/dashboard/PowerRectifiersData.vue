@@ -1,12 +1,12 @@
 <template>
-    <div class="column is-4">
+    <div class="column is-3">
         <article class="tile is-child box is-bold has-background" :class="boxBackground">
             <div class="is-box-background is-transparent-light">
                 <font-awesome-icon 
                     :icon="['fab', 'superpowers']" size="10x" class="is-pulled-right" style=""/>
             </div>
             <div class="columns">
-                <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Plantas Rectificadoras</div>
+                <div class="column is-8 is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Plantas Rectificadoras</div>
                 <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</div>
             </div>
 

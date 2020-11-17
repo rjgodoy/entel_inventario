@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"chunks/admin":"chunks/admin","chunks/comsite":"chunks/comsite","chunks/helpers/notFound":"chunks/helpers/notFound","chunks/login":"chunks/login","chunks/passwordEmail":"chunks/passwordEmail","chunks/passwordReset":"chunks/passwordReset","chunks/pops":"chunks/pops","chunks/register":"chunks/register","chunks/reports":"chunks/reports","vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~f7ed369a":"vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~f7ed369a","chunks/documents":"chunks/documents","chunks/eco":"chunks/eco","chunks/pop":"chunks/pop","vendors~chunks/capacityPlanning~chunks/dashboard":"vendors~chunks/capacityPlanning~chunks/dashboard","chunks/capacityPlanning":"chunks/capacityPlanning","vendors~chunks/capacity/charts/projectionChart~chunks/capacity/gaugeChart~chunks/dashboard~chunks/he~c20aef62":"vendors~chunks/capacity/charts/projectionChart~chunks/capacity/gaugeChart~chunks/dashboard~chunks/he~c20aef62","chunks/helpers":"chunks/helpers","chunks/layouts/footer":"chunks/layouts/footer","vendors~chunks/capacity/projection~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks/ma~66c43816":"vendors~chunks/capacity/projection~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks/ma~66c43816","vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload":"vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload","chunks/dashboard":"chunks/dashboard","chunks/admin/massive":"chunks/admin/massive","chunks/admin/tps":"chunks/admin/tps","chunks/admin/usersPermissions":"chunks/admin/usersPermissions","chunks/admin/files":"chunks/admin/files","chunks/admin/pops":"chunks/admin/pops","chunks/helpers/vuePagination":"chunks/helpers/vuePagination","chunks/dashboard/modalDownload":"chunks/dashboard/modalDownload","chunks/maps/mapView":"chunks/maps/mapView","chunks/documents/modals/newFolder":"chunks/documents/modals/newFolder","chunks/documents/modals/newRootFolder":"chunks/documents/modals/newRootFolder","chunks/documents/modals/upload":"chunks/documents/modals/upload","chunks/eco/documents":"chunks/eco/documents","chunks/eco/popProtectedZones":"chunks/eco/popProtectedZones","chunks/eco/protectedZones":"chunks/eco/protectedZones","chunks/eco/rcas":"chunks/eco/rcas","chunks/eco/temporaryStorages":"chunks/eco/temporaryStorages","chunks/maps/ecoMap":"chunks/maps/ecoMap","chunks/pop/characteristics":"chunks/pop/characteristics","chunks/pop/climate/airConditioner":"chunks/pop/climate/airConditioner","chunks/pop/climate/climate":"chunks/pop/climate/climate","chunks/pop/documents/documents":"chunks/pop/documents/documents","chunks/pop/eco":"chunks/pop/eco","chunks/pop/infrastructure/infrastructure":"chunks/pop/infrastructure/infrastructure","chunks/pop/layout/layout":"chunks/pop/layout/layout","chunks/pop/power/power":"chunks/pop/power/power","chunks/pop/sites":"chunks/pop/sites","chunks/pop/comsite":"chunks/pop/comsite","chunks/pop/location":"chunks/pop/location","chunks/pop/logs":"chunks/pop/logs","chunks/pop/vision":"chunks/pop/vision","chunks/capacity/capacity":"chunks/capacity/capacity","chunks/capacity/distribution":"chunks/capacity/distribution","chunks/capacity/layout":"chunks/capacity/layout","chunks/capacity/modals/new/newRoom":"chunks/capacity/modals/new/newRoom","chunks/capacity/roomsTable":"chunks/capacity/roomsTable","chunks/capacity/projection":"chunks/capacity/projection","chunks/layouts/modals/info":"chunks/layouts/modals/info","chunks/dashboard/airConditioners":"chunks/dashboard/airConditioners","chunks/dashboard/albaPopsData":"chunks/dashboard/albaPopsData","chunks/dashboard/criticPopsData":"chunks/dashboard/criticPopsData","chunks/dashboard/electricLines":"chunks/dashboard/electricLines","chunks/dashboard/generatorSets":"chunks/dashboard/generatorSets","chunks/dashboard/infrastructures":"chunks/dashboard/infrastructures","chunks/dashboard/popsData":"chunks/dashboard/popsData","chunks/dashboard/powerRectifiers":"chunks/dashboard/powerRectifiers","chunks/dashboard/sitesData":"chunks/dashboard/sitesData","chunks/dashboard/technologyData":"chunks/dashboard/technologyData","chunks/dashboard/verticalStructures":"chunks/dashboard/verticalStructures","chunks/maps/mapView/":"chunks/maps/mapView/","vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart":"vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart","chunks/dashboard/pretDataChart":"chunks/dashboard/pretDataChart","chunks/admin/modals/modalInfoCircle":"chunks/admin/modals/modalInfoCircle","chunks/admin/adminTpsTable":"chunks/admin/adminTpsTable","chunks/eco/modals/upload":"chunks/eco/modals/upload","chunks/eco/modals/newStorage":"chunks/eco/modals/newStorage","chunks/pop/documents/modals/newFolder":"chunks/pop/documents/modals/newFolder","chunks/pop/documents/modals/upload":"chunks/pop/documents/modals/upload","chunks/capacity/modals/airConditioner":"chunks/capacity/modals/airConditioner","chunks/capacity/modals/generator":"chunks/capacity/modals/generator","chunks/capacity/modals/junction":"chunks/capacity/modals/junction","chunks/capacity/modals/powerRectifier":"chunks/capacity/modals/powerRectifier","chunks/pop/power/electricLines":"chunks/pop/power/electricLines","chunks/pop/power/generatorSets":"chunks/pop/power/generatorSets","chunks/pop/power/junctions":"chunks/pop/power/junctions","chunks/pop/power/powerRectifiers":"chunks/pop/power/powerRectifiers","chunks/pop/modals/editParameter":"chunks/pop/modals/editParameter","chunks/maps/popMapView":"chunks/maps/popMapView","chunks/capacity/roomLights":"chunks/capacity/roomLights","vendors~chunks/capacity/charts/projectionChart":"vendors~chunks/capacity/charts/projectionChart","chunks/capacity/charts/projectionChart":"chunks/capacity/charts/projectionChart","chunks/capacity/gaugeChart":"chunks/capacity/gaugeChart","chunks/capacity/blocks/equipment":"chunks/capacity/blocks/equipment","chunks/capacity/blocks/generator":"chunks/capacity/blocks/generator","chunks/capacity/blocks/junction":"chunks/capacity/blocks/junction","chunks/capacity/blocks/solarPanels":"chunks/capacity/blocks/solarPanels","chunks/pop/power/generatorSet":"chunks/pop/power/generatorSet","chunks/pop/power/junction":"chunks/pop/power/junction","chunks/pop/power/batteryBank":"chunks/pop/power/batteryBank","chunks/pop/power/powerRectifier":"chunks/pop/power/powerRectifier","chunks/capacity/modals/editPlane":"chunks/capacity/modals/editPlane","chunks/capacity/modals/new/newAirConditioner":"chunks/capacity/modals/new/newAirConditioner","chunks/capacity/modals/new/newBatteryBank":"chunks/capacity/modals/new/newBatteryBank","chunks/capacity/modals/new/newPowerRectifier":"chunks/capacity/modals/new/newPowerRectifier","chunks/capacity/surface":"chunks/capacity/surface","chunks/capacity/modals/new/newGeneratorSet":"chunks/capacity/modals/new/newGeneratorSet","chunks/pop/layout/modals/newJunction":"chunks/pop/layout/modals/newJunction","chunks/capacity/modals/new/newSolarPanel":"chunks/capacity/modals/new/newSolarPanel","chunks/pop/power/modals/editJunction":"chunks/pop/power/modals/editJunction","chunks/capacity/modals/distribution":"chunks/capacity/modals/distribution","chunks/capacity/modals/surface":"chunks/capacity/modals/surface"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"chunks/admin":"chunks/admin","chunks/comsite":"chunks/comsite","chunks/helpers/notFound":"chunks/helpers/notFound","chunks/login":"chunks/login","chunks/passwordEmail":"chunks/passwordEmail","chunks/passwordReset":"chunks/passwordReset","chunks/pops":"chunks/pops","chunks/register":"chunks/register","chunks/reports":"chunks/reports","vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~f7ed369a":"vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~f7ed369a","chunks/documents":"chunks/documents","chunks/eco":"chunks/eco","chunks/pop":"chunks/pop","vendors~chunks/capacityPlanning~chunks/dashboard":"vendors~chunks/capacityPlanning~chunks/dashboard","chunks/capacityPlanning":"chunks/capacityPlanning","vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~54cb6b07":"vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~54cb6b07","chunks/helpers":"chunks/helpers","chunks/layouts/footer":"chunks/layouts/footer","vendors~chunks/capacity/projection~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks/ma~66c43816":"vendors~chunks/capacity/projection~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks/ma~66c43816","vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload":"vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload","chunks/dashboard":"chunks/dashboard","chunks/admin/massive":"chunks/admin/massive","chunks/admin/tps":"chunks/admin/tps","chunks/admin/usersPermissions":"chunks/admin/usersPermissions","chunks/admin/files":"chunks/admin/files","chunks/admin/pops":"chunks/admin/pops","chunks/helpers/vuePagination":"chunks/helpers/vuePagination","chunks/dashboard/modalDownload":"chunks/dashboard/modalDownload","chunks/maps/mapView":"chunks/maps/mapView","chunks/documents/modals/newFolder":"chunks/documents/modals/newFolder","chunks/documents/modals/newRootFolder":"chunks/documents/modals/newRootFolder","chunks/documents/modals/upload":"chunks/documents/modals/upload","chunks/eco/documents":"chunks/eco/documents","chunks/eco/popProtectedZones":"chunks/eco/popProtectedZones","chunks/eco/protectedZones":"chunks/eco/protectedZones","chunks/eco/rcas":"chunks/eco/rcas","chunks/eco/temporaryStorages":"chunks/eco/temporaryStorages","chunks/maps/ecoMap":"chunks/maps/ecoMap","chunks/pop/characteristics":"chunks/pop/characteristics","chunks/pop/climate/airConditioner":"chunks/pop/climate/airConditioner","chunks/pop/climate/climate":"chunks/pop/climate/climate","chunks/pop/documents/documents":"chunks/pop/documents/documents","chunks/pop/eco":"chunks/pop/eco","chunks/pop/infrastructure/infrastructure":"chunks/pop/infrastructure/infrastructure","chunks/pop/layout/layout":"chunks/pop/layout/layout","chunks/pop/power/power":"chunks/pop/power/power","chunks/pop/sites":"chunks/pop/sites","chunks/pop/clients":"chunks/pop/clients","chunks/pop/comsite":"chunks/pop/comsite","chunks/pop/location":"chunks/pop/location","chunks/pop/logs":"chunks/pop/logs","chunks/pop/vision":"chunks/pop/vision","chunks/capacity/capacity":"chunks/capacity/capacity","chunks/capacity/distribution":"chunks/capacity/distribution","chunks/capacity/layout":"chunks/capacity/layout","chunks/capacity/modals/new/newRoom":"chunks/capacity/modals/new/newRoom","chunks/capacity/roomsTable":"chunks/capacity/roomsTable","chunks/capacity/projection":"chunks/capacity/projection","chunks/layouts/modals/info":"chunks/layouts/modals/info","chunks/dashboard/airConditioners":"chunks/dashboard/airConditioners","chunks/dashboard/albaPopsData":"chunks/dashboard/albaPopsData","chunks/dashboard/criticPopsData":"chunks/dashboard/criticPopsData","chunks/dashboard/electricLines":"chunks/dashboard/electricLines","chunks/dashboard/generatorSets":"chunks/dashboard/generatorSets","chunks/dashboard/infrastructures":"chunks/dashboard/infrastructures","chunks/dashboard/junctions":"chunks/dashboard/junctions","chunks/dashboard/popsData":"chunks/dashboard/popsData","chunks/dashboard/powerRectifiers":"chunks/dashboard/powerRectifiers","chunks/dashboard/sitesData":"chunks/dashboard/sitesData","chunks/dashboard/technologyData":"chunks/dashboard/technologyData","chunks/dashboard/verticalStructures":"chunks/dashboard/verticalStructures","chunks/maps/mapView/":"chunks/maps/mapView/","vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart":"vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart","chunks/dashboard/pretDataChart":"chunks/dashboard/pretDataChart","chunks/admin/modals/modalInfoCircle":"chunks/admin/modals/modalInfoCircle","chunks/admin/adminTpsTable":"chunks/admin/adminTpsTable","chunks/eco/modals/upload":"chunks/eco/modals/upload","chunks/eco/modals/newStorage":"chunks/eco/modals/newStorage","chunks/pop/documents/modals/newFolder":"chunks/pop/documents/modals/newFolder","chunks/pop/documents/modals/upload":"chunks/pop/documents/modals/upload","chunks/capacity/modals/airConditioner":"chunks/capacity/modals/airConditioner","chunks/capacity/modals/generator":"chunks/capacity/modals/generator","chunks/capacity/modals/junction":"chunks/capacity/modals/junction","chunks/capacity/modals/powerRectifier":"chunks/capacity/modals/powerRectifier","chunks/pop/power/electricLines":"chunks/pop/power/electricLines","chunks/pop/power/generatorSets":"chunks/pop/power/generatorSets","chunks/pop/power/junctions":"chunks/pop/power/junctions","chunks/pop/power/powerRectifiers":"chunks/pop/power/powerRectifiers","chunks/pop/modals/editParameter":"chunks/pop/modals/editParameter","chunks/maps/popMapView":"chunks/maps/popMapView","chunks/capacity/roomLights":"chunks/capacity/roomLights","vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart":"vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart","chunks/capacity/charts/polarChart":"chunks/capacity/charts/polarChart","chunks/capacity/charts/projectionChart":"chunks/capacity/charts/projectionChart","chunks/capacity/gaugeChart":"chunks/capacity/gaugeChart","chunks/capacity/blocks/equipment":"chunks/capacity/blocks/equipment","chunks/capacity/blocks/generator":"chunks/capacity/blocks/generator","chunks/capacity/blocks/junction":"chunks/capacity/blocks/junction","chunks/capacity/blocks/solarPanels":"chunks/capacity/blocks/solarPanels","chunks/pop/power/generatorSet":"chunks/pop/power/generatorSet","chunks/pop/power/junction":"chunks/pop/power/junction","chunks/pop/power/batteryBank":"chunks/pop/power/batteryBank","chunks/pop/power/powerRectifier":"chunks/pop/power/powerRectifier","chunks/capacity/modals/editPlane":"chunks/capacity/modals/editPlane","chunks/capacity/modals/new/newAirConditioner":"chunks/capacity/modals/new/newAirConditioner","chunks/capacity/modals/new/newBatteryBank":"chunks/capacity/modals/new/newBatteryBank","chunks/capacity/modals/new/newPowerRectifier":"chunks/capacity/modals/new/newPowerRectifier","chunks/capacity/surface":"chunks/capacity/surface","chunks/capacity/modals/new/newGeneratorSet":"chunks/capacity/modals/new/newGeneratorSet","chunks/pop/layout/modals/newJunction":"chunks/pop/layout/modals/newJunction","chunks/capacity/modals/new/newSolarPanel":"chunks/capacity/modals/new/newSolarPanel","chunks/pop/power/modals/editJunction":"chunks/pop/power/modals/editJunction","chunks/capacity/modals/distribution":"chunks/capacity/modals/distribution","chunks/capacity/modals/surface":"chunks/capacity/modals/surface"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -221,6 +221,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dom", function() { return dom; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parse", function() { return parse; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "findIconDefinition", function() { return findIconDefinition; });
+/*!
+ * Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
 function _typeof(obj) {
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     _typeof = function (obj) {
@@ -403,6 +407,7 @@ var PREFIX_TO_STYLE = {
   'fal': 'light',
   'fad': 'duotone',
   'fab': 'brands',
+  'fak': 'kit',
   'fa': 'solid'
 };
 var STYLE_TO_PREFIX = {
@@ -410,10 +415,12 @@ var STYLE_TO_PREFIX = {
   'regular': 'far',
   'light': 'fal',
   'duotone': 'fad',
-  'brands': 'fab'
+  'brands': 'fab',
+  'kit': 'fak'
 };
 var LAYERS_TEXT_CLASSNAME = 'fa-layers-text';
-var FONT_FAMILY_PATTERN = /Font Awesome 5 (Solid|Regular|Light|Duotone|Brands|Free|Pro)/;
+var FONT_FAMILY_PATTERN = /Font Awesome ([5 ]*)(Solid|Regular|Light|Duotone|Brands|Free|Pro|Kit).*/; // TODO: do we need to handle font-weight for kit SVG pseudo-elements?
+
 var FONT_WEIGHT_TO_PREFIX = {
   '900': 'fas',
   '400': 'far',
@@ -1154,9 +1161,12 @@ function makeInlineSvgAbstract(params) {
       width = _ref.width,
       height = _ref.height;
 
-  var widthClass = "fa-w-".concat(Math.ceil(width / height * 16));
+  var isUploadedIcon = prefix === 'fak';
+  var widthClass = isUploadedIcon ? '' : "fa-w-".concat(Math.ceil(width / height * 16));
   var attrClass = [config.replacementClass, iconName ? "".concat(config.familyPrefix, "-").concat(iconName) : '', widthClass].filter(function (c) {
     return extra.classes.indexOf(c) === -1;
+  }).filter(function (c) {
+    return c !== '' || !!c;
   }).concat(extra.classes).join(' ');
   var content = {
     children: [],
@@ -1169,6 +1179,9 @@ function makeInlineSvgAbstract(params) {
       'viewBox': "0 0 ".concat(width, " ").concat(height)
     })
   };
+  var uploadedIconWidthStyle = isUploadedIcon && !~extra.classes.indexOf('fa-fw') ? {
+    width: "".concat(width / height * 16 * 0.0625, "em")
+  } : {};
 
   if (watchable) {
     content.attributes[DATA_FA_I2SVG] = '';
@@ -1190,7 +1203,7 @@ function makeInlineSvgAbstract(params) {
     maskId: maskId,
     transform: transform,
     symbol: symbol,
-    styles: extra.styles
+    styles: _objectSpread({}, uploadedIconWidthStyle, extra.styles)
   });
 
   var _ref2 = mask.found && main.found ? makeIconMasking(args) : makeIconStandard(args),
@@ -1306,7 +1319,7 @@ var p = config.measurePerformance && PERFORMANCE && PERFORMANCE.mark && PERFORMA
   mark: noop$1,
   measure: noop$1
 };
-var preamble = "FA \"5.13.0\"";
+var preamble = "FA \"5.15.1\"";
 
 var begin = function begin(name) {
   p.mark("".concat(preamble, " ").concat(name, " begins"));
@@ -1382,6 +1395,35 @@ function toHex(unicode) {
   }
 
   return result;
+}
+function codePointAt(string, index) {
+  /*! https://mths.be/codepointat v0.2.0 by @mathias */
+  var size = string.length;
+  var first = string.charCodeAt(index);
+  var second;
+
+  if (first >= 0xD800 && first <= 0xDBFF && size > index + 1) {
+    second = string.charCodeAt(index + 1);
+
+    if (second >= 0xDC00 && second <= 0xDFFF) {
+      return (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
+    }
+  }
+
+  return first;
+}
+/**
+ * Used to check that the character is between the E000..F8FF private unicode
+ * range
+ */
+
+function isPrivateUnicode(iconName) {
+  if (iconName.length !== 1) {
+    return false;
+  } else {
+    var cp = codePointAt(iconName, 0);
+    return cp >= 57344 && cp <= 63743;
+  }
 }
 
 function defineIcons(prefix, icons) {
@@ -1492,7 +1534,7 @@ function getCanonicalIcon(values) {
 
     if (styles$1[cls]) {
       acc.prefix = cls;
-    } else if (config.autoFetchSvg && ['fas', 'far', 'fal', 'fad', 'fab', 'fa'].indexOf(cls) > -1) {
+    } else if (config.autoFetchSvg && Object.keys(PREFIX_TO_STYLE).indexOf(cls) > -1) {
       acc.prefix = cls;
     } else if (iconName) {
       var shim = acc.prefix === 'fa' ? byOldName(iconName) : {};
@@ -1554,7 +1596,7 @@ var mutators = {
     }).join('\n');
 
     if (node.parentNode && node.outerHTML) {
-      node.outerHTML = newOuterHTML + (config.keepOriginalSource && node.tagName.toLowerCase() !== 'svg' ? "<!-- ".concat(node.outerHTML, " -->") : '');
+      node.outerHTML = newOuterHTML + (config.keepOriginalSource && node.tagName.toLowerCase() !== 'svg' ? "<!-- ".concat(node.outerHTML, " Font Awesome fontawesome.com -->") : '');
     } else if (node.parentNode) {
       var newNode = document.createElement('span');
       node.parentNode.replaceChild(newNode, node);
@@ -1961,6 +2003,27 @@ var missing = {
 };
 
 var styles$2 = namespace.styles;
+function resolveCustomIconVersion() {
+  var kitConfig = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var iconName = arguments.length > 1 ? arguments[1] : undefined;
+
+  if (iconName && isPrivateUnicode(iconName)) {
+    if (kitConfig && kitConfig.iconUploads) {
+      var iconUploads = kitConfig.iconUploads;
+      var descriptiveIconName = Object.keys(iconUploads).find(function (key) {
+        return iconUploads[key] && iconUploads[key].u && iconUploads[key].u === toHex(iconName);
+      });
+
+      if (descriptiveIconName) {
+        return iconUploads[descriptiveIconName].v;
+      }
+    }
+  } else {
+    if (kitConfig && kitConfig.iconUploads && kitConfig.iconUploads[iconName] && kitConfig.iconUploads[iconName].v) {
+      return kitConfig.iconUploads[iconName].v;
+    }
+  }
+}
 function asFoundIcon(icon) {
   var width = icon[0];
   var height = icon[1];
@@ -2023,11 +2086,11 @@ function findIcon(iconName, prefix) {
       var icon = styles$2[prefix][iconName];
       return resolve(asFoundIcon(icon));
     }
+    var kitToken = null;
+    var iconVersion = resolveCustomIconVersion(WINDOW.FontAwesomeKitConfig, iconName);
 
-    var headers = {};
-
-    if (_typeof(WINDOW.FontAwesomeKitConfig) === 'object' && typeof window.FontAwesomeKitConfig.token === 'string') {
-      headers['fa-kit-token'] = WINDOW.FontAwesomeKitConfig.token;
+    if (WINDOW.FontAwesomeKitConfig && WINDOW.FontAwesomeKitConfig.token) {
+      kitToken = WINDOW.FontAwesomeKitConfig.token;
     }
 
     if (iconName && prefix && !config.showMissingIcons) {
@@ -2218,8 +2281,10 @@ function replaceForPosition(node, position) {
       node.removeChild(alreadyProcessedPseudoElement);
       return resolve();
     } else if (fontFamily && content !== 'none' && content !== '') {
-      var prefix = ~['Solid', 'Regular', 'Light', 'Duotone', 'Brands'].indexOf(fontFamily[1]) ? STYLE_TO_PREFIX[fontFamily[1].toLowerCase()] : FONT_WEIGHT_TO_PREFIX[fontWeight];
-      var hexValue = toHex(content.length === 3 ? content.substr(1, 1) : content);
+      var _content = styles.getPropertyValue('content');
+
+      var prefix = ~['Solid', 'Regular', 'Light', 'Duotone', 'Brands', 'Kit'].indexOf(fontFamily[2]) ? STYLE_TO_PREFIX[fontFamily[2].toLowerCase()] : FONT_WEIGHT_TO_PREFIX[fontWeight];
+      var hexValue = toHex(_content.length === 3 ? _content.substr(1, 1) : _content);
       var iconName = byUnicode(prefix, hexValue);
       var iconIdentifier = iconName; // Only convert the pseudo element in this :before/:after position into an icon if we haven't
       // already done so with the same prefix and iconName
@@ -2656,7 +2721,7 @@ var autoReplace = function autoReplace() {
 /*!********************************************************************!*\
   !*** ./node_modules/@fortawesome/free-solid-svg-icons/index.es.js ***!
   \********************************************************************/
-/*! exports provided: fas, prefix, faAd, faAddressBook, faAddressCard, faAdjust, faAirFreshener, faAlignCenter, faAlignJustify, faAlignLeft, faAlignRight, faAllergies, faAmbulance, faAmericanSignLanguageInterpreting, faAnchor, faAngleDoubleDown, faAngleDoubleLeft, faAngleDoubleRight, faAngleDoubleUp, faAngleDown, faAngleLeft, faAngleRight, faAngleUp, faAngry, faAnkh, faAppleAlt, faArchive, faArchway, faArrowAltCircleDown, faArrowAltCircleLeft, faArrowAltCircleRight, faArrowAltCircleUp, faArrowCircleDown, faArrowCircleLeft, faArrowCircleRight, faArrowCircleUp, faArrowDown, faArrowLeft, faArrowRight, faArrowUp, faArrowsAlt, faArrowsAltH, faArrowsAltV, faAssistiveListeningSystems, faAsterisk, faAt, faAtlas, faAtom, faAudioDescription, faAward, faBaby, faBabyCarriage, faBackspace, faBackward, faBacon, faBahai, faBalanceScale, faBalanceScaleLeft, faBalanceScaleRight, faBan, faBandAid, faBarcode, faBars, faBaseballBall, faBasketballBall, faBath, faBatteryEmpty, faBatteryFull, faBatteryHalf, faBatteryQuarter, faBatteryThreeQuarters, faBed, faBeer, faBell, faBellSlash, faBezierCurve, faBible, faBicycle, faBiking, faBinoculars, faBiohazard, faBirthdayCake, faBlender, faBlenderPhone, faBlind, faBlog, faBold, faBolt, faBomb, faBone, faBong, faBook, faBookDead, faBookMedical, faBookOpen, faBookReader, faBookmark, faBorderAll, faBorderNone, faBorderStyle, faBowlingBall, faBox, faBoxOpen, faBoxTissue, faBoxes, faBraille, faBrain, faBreadSlice, faBriefcase, faBriefcaseMedical, faBroadcastTower, faBroom, faBrush, faBug, faBuilding, faBullhorn, faBullseye, faBurn, faBus, faBusAlt, faBusinessTime, faCalculator, faCalendar, faCalendarAlt, faCalendarCheck, faCalendarDay, faCalendarMinus, faCalendarPlus, faCalendarTimes, faCalendarWeek, faCamera, faCameraRetro, faCampground, faCandyCane, faCannabis, faCapsules, faCar, faCarAlt, faCarBattery, faCarCrash, faCarSide, faCaravan, faCaretDown, faCaretLeft, faCaretRight, faCaretSquareDown, faCaretSquareLeft, faCaretSquareRight, faCaretSquareUp, faCaretUp, faCarrot, faCartArrowDown, faCartPlus, faCashRegister, faCat, faCertificate, faChair, faChalkboard, faChalkboardTeacher, faChargingStation, faChartArea, faChartBar, faChartLine, faChartPie, faCheck, faCheckCircle, faCheckDouble, faCheckSquare, faCheese, faChess, faChessBishop, faChessBoard, faChessKing, faChessKnight, faChessPawn, faChessQueen, faChessRook, faChevronCircleDown, faChevronCircleLeft, faChevronCircleRight, faChevronCircleUp, faChevronDown, faChevronLeft, faChevronRight, faChevronUp, faChild, faChurch, faCircle, faCircleNotch, faCity, faClinicMedical, faClipboard, faClipboardCheck, faClipboardList, faClock, faClone, faClosedCaptioning, faCloud, faCloudDownloadAlt, faCloudMeatball, faCloudMoon, faCloudMoonRain, faCloudRain, faCloudShowersHeavy, faCloudSun, faCloudSunRain, faCloudUploadAlt, faCocktail, faCode, faCodeBranch, faCoffee, faCog, faCogs, faCoins, faColumns, faComment, faCommentAlt, faCommentDollar, faCommentDots, faCommentMedical, faCommentSlash, faComments, faCommentsDollar, faCompactDisc, faCompass, faCompress, faCompressAlt, faCompressArrowsAlt, faConciergeBell, faCookie, faCookieBite, faCopy, faCopyright, faCouch, faCreditCard, faCrop, faCropAlt, faCross, faCrosshairs, faCrow, faCrown, faCrutch, faCube, faCubes, faCut, faDatabase, faDeaf, faDemocrat, faDesktop, faDharmachakra, faDiagnoses, faDice, faDiceD20, faDiceD6, faDiceFive, faDiceFour, faDiceOne, faDiceSix, faDiceThree, faDiceTwo, faDigitalTachograph, faDirections, faDisease, faDivide, faDizzy, faDna, faDog, faDollarSign, faDolly, faDollyFlatbed, faDonate, faDoorClosed, faDoorOpen, faDotCircle, faDove, faDownload, faDraftingCompass, faDragon, faDrawPolygon, faDrum, faDrumSteelpan, faDrumstickBite, faDumbbell, faDumpster, faDumpsterFire, faDungeon, faEdit, faEgg, faEject, faEllipsisH, faEllipsisV, faEnvelope, faEnvelopeOpen, faEnvelopeOpenText, faEnvelopeSquare, faEquals, faEraser, faEthernet, faEuroSign, faExchangeAlt, faExclamation, faExclamationCircle, faExclamationTriangle, faExpand, faExpandAlt, faExpandArrowsAlt, faExternalLinkAlt, faExternalLinkSquareAlt, faEye, faEyeDropper, faEyeSlash, faFan, faFastBackward, faFastForward, faFaucet, faFax, faFeather, faFeatherAlt, faFemale, faFighterJet, faFile, faFileAlt, faFileArchive, faFileAudio, faFileCode, faFileContract, faFileCsv, faFileDownload, faFileExcel, faFileExport, faFileImage, faFileImport, faFileInvoice, faFileInvoiceDollar, faFileMedical, faFileMedicalAlt, faFilePdf, faFilePowerpoint, faFilePrescription, faFileSignature, faFileUpload, faFileVideo, faFileWord, faFill, faFillDrip, faFilm, faFilter, faFingerprint, faFire, faFireAlt, faFireExtinguisher, faFirstAid, faFish, faFistRaised, faFlag, faFlagCheckered, faFlagUsa, faFlask, faFlushed, faFolder, faFolderMinus, faFolderOpen, faFolderPlus, faFont, faFontAwesomeLogoFull, faFootballBall, faForward, faFrog, faFrown, faFrownOpen, faFunnelDollar, faFutbol, faGamepad, faGasPump, faGavel, faGem, faGenderless, faGhost, faGift, faGifts, faGlassCheers, faGlassMartini, faGlassMartiniAlt, faGlassWhiskey, faGlasses, faGlobe, faGlobeAfrica, faGlobeAmericas, faGlobeAsia, faGlobeEurope, faGolfBall, faGopuram, faGraduationCap, faGreaterThan, faGreaterThanEqual, faGrimace, faGrin, faGrinAlt, faGrinBeam, faGrinBeamSweat, faGrinHearts, faGrinSquint, faGrinSquintTears, faGrinStars, faGrinTears, faGrinTongue, faGrinTongueSquint, faGrinTongueWink, faGrinWink, faGripHorizontal, faGripLines, faGripLinesVertical, faGripVertical, faGuitar, faHSquare, faHamburger, faHammer, faHamsa, faHandHolding, faHandHoldingHeart, faHandHoldingMedical, faHandHoldingUsd, faHandHoldingWater, faHandLizard, faHandMiddleFinger, faHandPaper, faHandPeace, faHandPointDown, faHandPointLeft, faHandPointRight, faHandPointUp, faHandPointer, faHandRock, faHandScissors, faHandSparkles, faHandSpock, faHands, faHandsHelping, faHandsWash, faHandshake, faHandshakeAltSlash, faHandshakeSlash, faHanukiah, faHardHat, faHashtag, faHatCowboy, faHatCowboySide, faHatWizard, faHdd, faHeadSideCough, faHeadSideCoughSlash, faHeadSideMask, faHeadSideVirus, faHeading, faHeadphones, faHeadphonesAlt, faHeadset, faHeart, faHeartBroken, faHeartbeat, faHelicopter, faHighlighter, faHiking, faHippo, faHistory, faHockeyPuck, faHollyBerry, faHome, faHorse, faHorseHead, faHospital, faHospitalAlt, faHospitalSymbol, faHospitalUser, faHotTub, faHotdog, faHotel, faHourglass, faHourglassEnd, faHourglassHalf, faHourglassStart, faHouseDamage, faHouseUser, faHryvnia, faICursor, faIceCream, faIcicles, faIcons, faIdBadge, faIdCard, faIdCardAlt, faIgloo, faImage, faImages, faInbox, faIndent, faIndustry, faInfinity, faInfo, faInfoCircle, faItalic, faJedi, faJoint, faJournalWhills, faKaaba, faKey, faKeyboard, faKhanda, faKiss, faKissBeam, faKissWinkHeart, faKiwiBird, faLandmark, faLanguage, faLaptop, faLaptopCode, faLaptopHouse, faLaptopMedical, faLaugh, faLaughBeam, faLaughSquint, faLaughWink, faLayerGroup, faLeaf, faLemon, faLessThan, faLessThanEqual, faLevelDownAlt, faLevelUpAlt, faLifeRing, faLightbulb, faLink, faLiraSign, faList, faListAlt, faListOl, faListUl, faLocationArrow, faLock, faLockOpen, faLongArrowAltDown, faLongArrowAltLeft, faLongArrowAltRight, faLongArrowAltUp, faLowVision, faLuggageCart, faLungs, faLungsVirus, faMagic, faMagnet, faMailBulk, faMale, faMap, faMapMarked, faMapMarkedAlt, faMapMarker, faMapMarkerAlt, faMapPin, faMapSigns, faMarker, faMars, faMarsDouble, faMarsStroke, faMarsStrokeH, faMarsStrokeV, faMask, faMedal, faMedkit, faMeh, faMehBlank, faMehRollingEyes, faMemory, faMenorah, faMercury, faMeteor, faMicrochip, faMicrophone, faMicrophoneAlt, faMicrophoneAltSlash, faMicrophoneSlash, faMicroscope, faMinus, faMinusCircle, faMinusSquare, faMitten, faMobile, faMobileAlt, faMoneyBill, faMoneyBillAlt, faMoneyBillWave, faMoneyBillWaveAlt, faMoneyCheck, faMoneyCheckAlt, faMonument, faMoon, faMortarPestle, faMosque, faMotorcycle, faMountain, faMouse, faMousePointer, faMugHot, faMusic, faNetworkWired, faNeuter, faNewspaper, faNotEqual, faNotesMedical, faObjectGroup, faObjectUngroup, faOilCan, faOm, faOtter, faOutdent, faPager, faPaintBrush, faPaintRoller, faPalette, faPallet, faPaperPlane, faPaperclip, faParachuteBox, faParagraph, faParking, faPassport, faPastafarianism, faPaste, faPause, faPauseCircle, faPaw, faPeace, faPen, faPenAlt, faPenFancy, faPenNib, faPenSquare, faPencilAlt, faPencilRuler, faPeopleArrows, faPeopleCarry, faPepperHot, faPercent, faPercentage, faPersonBooth, faPhone, faPhoneAlt, faPhoneSlash, faPhoneSquare, faPhoneSquareAlt, faPhoneVolume, faPhotoVideo, faPiggyBank, faPills, faPizzaSlice, faPlaceOfWorship, faPlane, faPlaneArrival, faPlaneDeparture, faPlaneSlash, faPlay, faPlayCircle, faPlug, faPlus, faPlusCircle, faPlusSquare, faPodcast, faPoll, faPollH, faPoo, faPooStorm, faPoop, faPortrait, faPoundSign, faPowerOff, faPray, faPrayingHands, faPrescription, faPrescriptionBottle, faPrescriptionBottleAlt, faPrint, faProcedures, faProjectDiagram, faPumpMedical, faPumpSoap, faPuzzlePiece, faQrcode, faQuestion, faQuestionCircle, faQuidditch, faQuoteLeft, faQuoteRight, faQuran, faRadiation, faRadiationAlt, faRainbow, faRandom, faReceipt, faRecordVinyl, faRecycle, faRedo, faRedoAlt, faRegistered, faRemoveFormat, faReply, faReplyAll, faRepublican, faRestroom, faRetweet, faRibbon, faRing, faRoad, faRobot, faRocket, faRoute, faRss, faRssSquare, faRubleSign, faRuler, faRulerCombined, faRulerHorizontal, faRulerVertical, faRunning, faRupeeSign, faSadCry, faSadTear, faSatellite, faSatelliteDish, faSave, faSchool, faScrewdriver, faScroll, faSdCard, faSearch, faSearchDollar, faSearchLocation, faSearchMinus, faSearchPlus, faSeedling, faServer, faShapes, faShare, faShareAlt, faShareAltSquare, faShareSquare, faShekelSign, faShieldAlt, faShieldVirus, faShip, faShippingFast, faShoePrints, faShoppingBag, faShoppingBasket, faShoppingCart, faShower, faShuttleVan, faSign, faSignInAlt, faSignLanguage, faSignOutAlt, faSignal, faSignature, faSimCard, faSitemap, faSkating, faSkiing, faSkiingNordic, faSkull, faSkullCrossbones, faSlash, faSleigh, faSlidersH, faSmile, faSmileBeam, faSmileWink, faSmog, faSmoking, faSmokingBan, faSms, faSnowboarding, faSnowflake, faSnowman, faSnowplow, faSoap, faSocks, faSolarPanel, faSort, faSortAlphaDown, faSortAlphaDownAlt, faSortAlphaUp, faSortAlphaUpAlt, faSortAmountDown, faSortAmountDownAlt, faSortAmountUp, faSortAmountUpAlt, faSortDown, faSortNumericDown, faSortNumericDownAlt, faSortNumericUp, faSortNumericUpAlt, faSortUp, faSpa, faSpaceShuttle, faSpellCheck, faSpider, faSpinner, faSplotch, faSprayCan, faSquare, faSquareFull, faSquareRootAlt, faStamp, faStar, faStarAndCrescent, faStarHalf, faStarHalfAlt, faStarOfDavid, faStarOfLife, faStepBackward, faStepForward, faStethoscope, faStickyNote, faStop, faStopCircle, faStopwatch, faStopwatch20, faStore, faStoreAlt, faStoreAltSlash, faStoreSlash, faStream, faStreetView, faStrikethrough, faStroopwafel, faSubscript, faSubway, faSuitcase, faSuitcaseRolling, faSun, faSuperscript, faSurprise, faSwatchbook, faSwimmer, faSwimmingPool, faSynagogue, faSync, faSyncAlt, faSyringe, faTable, faTableTennis, faTablet, faTabletAlt, faTablets, faTachometerAlt, faTag, faTags, faTape, faTasks, faTaxi, faTeeth, faTeethOpen, faTemperatureHigh, faTemperatureLow, faTenge, faTerminal, faTextHeight, faTextWidth, faTh, faThLarge, faThList, faTheaterMasks, faThermometer, faThermometerEmpty, faThermometerFull, faThermometerHalf, faThermometerQuarter, faThermometerThreeQuarters, faThumbsDown, faThumbsUp, faThumbtack, faTicketAlt, faTimes, faTimesCircle, faTint, faTintSlash, faTired, faToggleOff, faToggleOn, faToilet, faToiletPaper, faToiletPaperSlash, faToolbox, faTools, faTooth, faTorah, faToriiGate, faTractor, faTrademark, faTrafficLight, faTrailer, faTrain, faTram, faTransgender, faTransgenderAlt, faTrash, faTrashAlt, faTrashRestore, faTrashRestoreAlt, faTree, faTrophy, faTruck, faTruckLoading, faTruckMonster, faTruckMoving, faTruckPickup, faTshirt, faTty, faTv, faUmbrella, faUmbrellaBeach, faUnderline, faUndo, faUndoAlt, faUniversalAccess, faUniversity, faUnlink, faUnlock, faUnlockAlt, faUpload, faUser, faUserAlt, faUserAltSlash, faUserAstronaut, faUserCheck, faUserCircle, faUserClock, faUserCog, faUserEdit, faUserFriends, faUserGraduate, faUserInjured, faUserLock, faUserMd, faUserMinus, faUserNinja, faUserNurse, faUserPlus, faUserSecret, faUserShield, faUserSlash, faUserTag, faUserTie, faUserTimes, faUsers, faUsersCog, faUtensilSpoon, faUtensils, faVectorSquare, faVenus, faVenusDouble, faVenusMars, faVial, faVials, faVideo, faVideoSlash, faVihara, faVirus, faVirusSlash, faViruses, faVoicemail, faVolleyballBall, faVolumeDown, faVolumeMute, faVolumeOff, faVolumeUp, faVoteYea, faVrCardboard, faWalking, faWallet, faWarehouse, faWater, faWaveSquare, faWeight, faWeightHanging, faWheelchair, faWifi, faWind, faWindowClose, faWindowMaximize, faWindowMinimize, faWindowRestore, faWineBottle, faWineGlass, faWineGlassAlt, faWonSign, faWrench, faXRay, faYenSign, faYinYang */
+/*! exports provided: fas, prefix, faAd, faAddressBook, faAddressCard, faAdjust, faAirFreshener, faAlignCenter, faAlignJustify, faAlignLeft, faAlignRight, faAllergies, faAmbulance, faAmericanSignLanguageInterpreting, faAnchor, faAngleDoubleDown, faAngleDoubleLeft, faAngleDoubleRight, faAngleDoubleUp, faAngleDown, faAngleLeft, faAngleRight, faAngleUp, faAngry, faAnkh, faAppleAlt, faArchive, faArchway, faArrowAltCircleDown, faArrowAltCircleLeft, faArrowAltCircleRight, faArrowAltCircleUp, faArrowCircleDown, faArrowCircleLeft, faArrowCircleRight, faArrowCircleUp, faArrowDown, faArrowLeft, faArrowRight, faArrowUp, faArrowsAlt, faArrowsAltH, faArrowsAltV, faAssistiveListeningSystems, faAsterisk, faAt, faAtlas, faAtom, faAudioDescription, faAward, faBaby, faBabyCarriage, faBackspace, faBackward, faBacon, faBacteria, faBacterium, faBahai, faBalanceScale, faBalanceScaleLeft, faBalanceScaleRight, faBan, faBandAid, faBarcode, faBars, faBaseballBall, faBasketballBall, faBath, faBatteryEmpty, faBatteryFull, faBatteryHalf, faBatteryQuarter, faBatteryThreeQuarters, faBed, faBeer, faBell, faBellSlash, faBezierCurve, faBible, faBicycle, faBiking, faBinoculars, faBiohazard, faBirthdayCake, faBlender, faBlenderPhone, faBlind, faBlog, faBold, faBolt, faBomb, faBone, faBong, faBook, faBookDead, faBookMedical, faBookOpen, faBookReader, faBookmark, faBorderAll, faBorderNone, faBorderStyle, faBowlingBall, faBox, faBoxOpen, faBoxTissue, faBoxes, faBraille, faBrain, faBreadSlice, faBriefcase, faBriefcaseMedical, faBroadcastTower, faBroom, faBrush, faBug, faBuilding, faBullhorn, faBullseye, faBurn, faBus, faBusAlt, faBusinessTime, faCalculator, faCalendar, faCalendarAlt, faCalendarCheck, faCalendarDay, faCalendarMinus, faCalendarPlus, faCalendarTimes, faCalendarWeek, faCamera, faCameraRetro, faCampground, faCandyCane, faCannabis, faCapsules, faCar, faCarAlt, faCarBattery, faCarCrash, faCarSide, faCaravan, faCaretDown, faCaretLeft, faCaretRight, faCaretSquareDown, faCaretSquareLeft, faCaretSquareRight, faCaretSquareUp, faCaretUp, faCarrot, faCartArrowDown, faCartPlus, faCashRegister, faCat, faCertificate, faChair, faChalkboard, faChalkboardTeacher, faChargingStation, faChartArea, faChartBar, faChartLine, faChartPie, faCheck, faCheckCircle, faCheckDouble, faCheckSquare, faCheese, faChess, faChessBishop, faChessBoard, faChessKing, faChessKnight, faChessPawn, faChessQueen, faChessRook, faChevronCircleDown, faChevronCircleLeft, faChevronCircleRight, faChevronCircleUp, faChevronDown, faChevronLeft, faChevronRight, faChevronUp, faChild, faChurch, faCircle, faCircleNotch, faCity, faClinicMedical, faClipboard, faClipboardCheck, faClipboardList, faClock, faClone, faClosedCaptioning, faCloud, faCloudDownloadAlt, faCloudMeatball, faCloudMoon, faCloudMoonRain, faCloudRain, faCloudShowersHeavy, faCloudSun, faCloudSunRain, faCloudUploadAlt, faCocktail, faCode, faCodeBranch, faCoffee, faCog, faCogs, faCoins, faColumns, faComment, faCommentAlt, faCommentDollar, faCommentDots, faCommentMedical, faCommentSlash, faComments, faCommentsDollar, faCompactDisc, faCompass, faCompress, faCompressAlt, faCompressArrowsAlt, faConciergeBell, faCookie, faCookieBite, faCopy, faCopyright, faCouch, faCreditCard, faCrop, faCropAlt, faCross, faCrosshairs, faCrow, faCrown, faCrutch, faCube, faCubes, faCut, faDatabase, faDeaf, faDemocrat, faDesktop, faDharmachakra, faDiagnoses, faDice, faDiceD20, faDiceD6, faDiceFive, faDiceFour, faDiceOne, faDiceSix, faDiceThree, faDiceTwo, faDigitalTachograph, faDirections, faDisease, faDivide, faDizzy, faDna, faDog, faDollarSign, faDolly, faDollyFlatbed, faDonate, faDoorClosed, faDoorOpen, faDotCircle, faDove, faDownload, faDraftingCompass, faDragon, faDrawPolygon, faDrum, faDrumSteelpan, faDrumstickBite, faDumbbell, faDumpster, faDumpsterFire, faDungeon, faEdit, faEgg, faEject, faEllipsisH, faEllipsisV, faEnvelope, faEnvelopeOpen, faEnvelopeOpenText, faEnvelopeSquare, faEquals, faEraser, faEthernet, faEuroSign, faExchangeAlt, faExclamation, faExclamationCircle, faExclamationTriangle, faExpand, faExpandAlt, faExpandArrowsAlt, faExternalLinkAlt, faExternalLinkSquareAlt, faEye, faEyeDropper, faEyeSlash, faFan, faFastBackward, faFastForward, faFaucet, faFax, faFeather, faFeatherAlt, faFemale, faFighterJet, faFile, faFileAlt, faFileArchive, faFileAudio, faFileCode, faFileContract, faFileCsv, faFileDownload, faFileExcel, faFileExport, faFileImage, faFileImport, faFileInvoice, faFileInvoiceDollar, faFileMedical, faFileMedicalAlt, faFilePdf, faFilePowerpoint, faFilePrescription, faFileSignature, faFileUpload, faFileVideo, faFileWord, faFill, faFillDrip, faFilm, faFilter, faFingerprint, faFire, faFireAlt, faFireExtinguisher, faFirstAid, faFish, faFistRaised, faFlag, faFlagCheckered, faFlagUsa, faFlask, faFlushed, faFolder, faFolderMinus, faFolderOpen, faFolderPlus, faFont, faFontAwesomeLogoFull, faFootballBall, faForward, faFrog, faFrown, faFrownOpen, faFunnelDollar, faFutbol, faGamepad, faGasPump, faGavel, faGem, faGenderless, faGhost, faGift, faGifts, faGlassCheers, faGlassMartini, faGlassMartiniAlt, faGlassWhiskey, faGlasses, faGlobe, faGlobeAfrica, faGlobeAmericas, faGlobeAsia, faGlobeEurope, faGolfBall, faGopuram, faGraduationCap, faGreaterThan, faGreaterThanEqual, faGrimace, faGrin, faGrinAlt, faGrinBeam, faGrinBeamSweat, faGrinHearts, faGrinSquint, faGrinSquintTears, faGrinStars, faGrinTears, faGrinTongue, faGrinTongueSquint, faGrinTongueWink, faGrinWink, faGripHorizontal, faGripLines, faGripLinesVertical, faGripVertical, faGuitar, faHSquare, faHamburger, faHammer, faHamsa, faHandHolding, faHandHoldingHeart, faHandHoldingMedical, faHandHoldingUsd, faHandHoldingWater, faHandLizard, faHandMiddleFinger, faHandPaper, faHandPeace, faHandPointDown, faHandPointLeft, faHandPointRight, faHandPointUp, faHandPointer, faHandRock, faHandScissors, faHandSparkles, faHandSpock, faHands, faHandsHelping, faHandsWash, faHandshake, faHandshakeAltSlash, faHandshakeSlash, faHanukiah, faHardHat, faHashtag, faHatCowboy, faHatCowboySide, faHatWizard, faHdd, faHeadSideCough, faHeadSideCoughSlash, faHeadSideMask, faHeadSideVirus, faHeading, faHeadphones, faHeadphonesAlt, faHeadset, faHeart, faHeartBroken, faHeartbeat, faHelicopter, faHighlighter, faHiking, faHippo, faHistory, faHockeyPuck, faHollyBerry, faHome, faHorse, faHorseHead, faHospital, faHospitalAlt, faHospitalSymbol, faHospitalUser, faHotTub, faHotdog, faHotel, faHourglass, faHourglassEnd, faHourglassHalf, faHourglassStart, faHouseDamage, faHouseUser, faHryvnia, faICursor, faIceCream, faIcicles, faIcons, faIdBadge, faIdCard, faIdCardAlt, faIgloo, faImage, faImages, faInbox, faIndent, faIndustry, faInfinity, faInfo, faInfoCircle, faItalic, faJedi, faJoint, faJournalWhills, faKaaba, faKey, faKeyboard, faKhanda, faKiss, faKissBeam, faKissWinkHeart, faKiwiBird, faLandmark, faLanguage, faLaptop, faLaptopCode, faLaptopHouse, faLaptopMedical, faLaugh, faLaughBeam, faLaughSquint, faLaughWink, faLayerGroup, faLeaf, faLemon, faLessThan, faLessThanEqual, faLevelDownAlt, faLevelUpAlt, faLifeRing, faLightbulb, faLink, faLiraSign, faList, faListAlt, faListOl, faListUl, faLocationArrow, faLock, faLockOpen, faLongArrowAltDown, faLongArrowAltLeft, faLongArrowAltRight, faLongArrowAltUp, faLowVision, faLuggageCart, faLungs, faLungsVirus, faMagic, faMagnet, faMailBulk, faMale, faMap, faMapMarked, faMapMarkedAlt, faMapMarker, faMapMarkerAlt, faMapPin, faMapSigns, faMarker, faMars, faMarsDouble, faMarsStroke, faMarsStrokeH, faMarsStrokeV, faMask, faMedal, faMedkit, faMeh, faMehBlank, faMehRollingEyes, faMemory, faMenorah, faMercury, faMeteor, faMicrochip, faMicrophone, faMicrophoneAlt, faMicrophoneAltSlash, faMicrophoneSlash, faMicroscope, faMinus, faMinusCircle, faMinusSquare, faMitten, faMobile, faMobileAlt, faMoneyBill, faMoneyBillAlt, faMoneyBillWave, faMoneyBillWaveAlt, faMoneyCheck, faMoneyCheckAlt, faMonument, faMoon, faMortarPestle, faMosque, faMotorcycle, faMountain, faMouse, faMousePointer, faMugHot, faMusic, faNetworkWired, faNeuter, faNewspaper, faNotEqual, faNotesMedical, faObjectGroup, faObjectUngroup, faOilCan, faOm, faOtter, faOutdent, faPager, faPaintBrush, faPaintRoller, faPalette, faPallet, faPaperPlane, faPaperclip, faParachuteBox, faParagraph, faParking, faPassport, faPastafarianism, faPaste, faPause, faPauseCircle, faPaw, faPeace, faPen, faPenAlt, faPenFancy, faPenNib, faPenSquare, faPencilAlt, faPencilRuler, faPeopleArrows, faPeopleCarry, faPepperHot, faPercent, faPercentage, faPersonBooth, faPhone, faPhoneAlt, faPhoneSlash, faPhoneSquare, faPhoneSquareAlt, faPhoneVolume, faPhotoVideo, faPiggyBank, faPills, faPizzaSlice, faPlaceOfWorship, faPlane, faPlaneArrival, faPlaneDeparture, faPlaneSlash, faPlay, faPlayCircle, faPlug, faPlus, faPlusCircle, faPlusSquare, faPodcast, faPoll, faPollH, faPoo, faPooStorm, faPoop, faPortrait, faPoundSign, faPowerOff, faPray, faPrayingHands, faPrescription, faPrescriptionBottle, faPrescriptionBottleAlt, faPrint, faProcedures, faProjectDiagram, faPumpMedical, faPumpSoap, faPuzzlePiece, faQrcode, faQuestion, faQuestionCircle, faQuidditch, faQuoteLeft, faQuoteRight, faQuran, faRadiation, faRadiationAlt, faRainbow, faRandom, faReceipt, faRecordVinyl, faRecycle, faRedo, faRedoAlt, faRegistered, faRemoveFormat, faReply, faReplyAll, faRepublican, faRestroom, faRetweet, faRibbon, faRing, faRoad, faRobot, faRocket, faRoute, faRss, faRssSquare, faRubleSign, faRuler, faRulerCombined, faRulerHorizontal, faRulerVertical, faRunning, faRupeeSign, faSadCry, faSadTear, faSatellite, faSatelliteDish, faSave, faSchool, faScrewdriver, faScroll, faSdCard, faSearch, faSearchDollar, faSearchLocation, faSearchMinus, faSearchPlus, faSeedling, faServer, faShapes, faShare, faShareAlt, faShareAltSquare, faShareSquare, faShekelSign, faShieldAlt, faShieldVirus, faShip, faShippingFast, faShoePrints, faShoppingBag, faShoppingBasket, faShoppingCart, faShower, faShuttleVan, faSign, faSignInAlt, faSignLanguage, faSignOutAlt, faSignal, faSignature, faSimCard, faSink, faSitemap, faSkating, faSkiing, faSkiingNordic, faSkull, faSkullCrossbones, faSlash, faSleigh, faSlidersH, faSmile, faSmileBeam, faSmileWink, faSmog, faSmoking, faSmokingBan, faSms, faSnowboarding, faSnowflake, faSnowman, faSnowplow, faSoap, faSocks, faSolarPanel, faSort, faSortAlphaDown, faSortAlphaDownAlt, faSortAlphaUp, faSortAlphaUpAlt, faSortAmountDown, faSortAmountDownAlt, faSortAmountUp, faSortAmountUpAlt, faSortDown, faSortNumericDown, faSortNumericDownAlt, faSortNumericUp, faSortNumericUpAlt, faSortUp, faSpa, faSpaceShuttle, faSpellCheck, faSpider, faSpinner, faSplotch, faSprayCan, faSquare, faSquareFull, faSquareRootAlt, faStamp, faStar, faStarAndCrescent, faStarHalf, faStarHalfAlt, faStarOfDavid, faStarOfLife, faStepBackward, faStepForward, faStethoscope, faStickyNote, faStop, faStopCircle, faStopwatch, faStopwatch20, faStore, faStoreAlt, faStoreAltSlash, faStoreSlash, faStream, faStreetView, faStrikethrough, faStroopwafel, faSubscript, faSubway, faSuitcase, faSuitcaseRolling, faSun, faSuperscript, faSurprise, faSwatchbook, faSwimmer, faSwimmingPool, faSynagogue, faSync, faSyncAlt, faSyringe, faTable, faTableTennis, faTablet, faTabletAlt, faTablets, faTachometerAlt, faTag, faTags, faTape, faTasks, faTaxi, faTeeth, faTeethOpen, faTemperatureHigh, faTemperatureLow, faTenge, faTerminal, faTextHeight, faTextWidth, faTh, faThLarge, faThList, faTheaterMasks, faThermometer, faThermometerEmpty, faThermometerFull, faThermometerHalf, faThermometerQuarter, faThermometerThreeQuarters, faThumbsDown, faThumbsUp, faThumbtack, faTicketAlt, faTimes, faTimesCircle, faTint, faTintSlash, faTired, faToggleOff, faToggleOn, faToilet, faToiletPaper, faToiletPaperSlash, faToolbox, faTools, faTooth, faTorah, faToriiGate, faTractor, faTrademark, faTrafficLight, faTrailer, faTrain, faTram, faTransgender, faTransgenderAlt, faTrash, faTrashAlt, faTrashRestore, faTrashRestoreAlt, faTree, faTrophy, faTruck, faTruckLoading, faTruckMonster, faTruckMoving, faTruckPickup, faTshirt, faTty, faTv, faUmbrella, faUmbrellaBeach, faUnderline, faUndo, faUndoAlt, faUniversalAccess, faUniversity, faUnlink, faUnlock, faUnlockAlt, faUpload, faUser, faUserAlt, faUserAltSlash, faUserAstronaut, faUserCheck, faUserCircle, faUserClock, faUserCog, faUserEdit, faUserFriends, faUserGraduate, faUserInjured, faUserLock, faUserMd, faUserMinus, faUserNinja, faUserNurse, faUserPlus, faUserSecret, faUserShield, faUserSlash, faUserTag, faUserTie, faUserTimes, faUsers, faUsersCog, faUsersSlash, faUtensilSpoon, faUtensils, faVectorSquare, faVenus, faVenusDouble, faVenusMars, faVest, faVestPatches, faVial, faVials, faVideo, faVideoSlash, faVihara, faVirus, faVirusSlash, faViruses, faVoicemail, faVolleyballBall, faVolumeDown, faVolumeMute, faVolumeOff, faVolumeUp, faVoteYea, faVrCardboard, faWalking, faWallet, faWarehouse, faWater, faWaveSquare, faWeight, faWeightHanging, faWheelchair, faWifi, faWind, faWindowClose, faWindowMaximize, faWindowMinimize, faWindowRestore, faWineBottle, faWineGlass, faWineGlassAlt, faWonSign, faWrench, faXRay, faYenSign, faYinYang */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2716,6 +2781,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faBackspace", function() { return faBackspace; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faBackward", function() { return faBackward; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faBacon", function() { return faBacon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faBacteria", function() { return faBacteria; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faBacterium", function() { return faBacterium; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faBahai", function() { return faBahai; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faBalanceScale", function() { return faBalanceScale; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faBalanceScaleLeft", function() { return faBalanceScaleLeft; });
@@ -3423,6 +3490,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faSignal", function() { return faSignal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faSignature", function() { return faSignature; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faSimCard", function() { return faSimCard; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faSink", function() { return faSink; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faSitemap", function() { return faSitemap; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faSkating", function() { return faSkating; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faSkiing", function() { return faSkiing; });
@@ -3615,12 +3683,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faUserTimes", function() { return faUserTimes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faUsers", function() { return faUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faUsersCog", function() { return faUsersCog; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faUsersSlash", function() { return faUsersSlash; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faUtensilSpoon", function() { return faUtensilSpoon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faUtensils", function() { return faUtensils; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faVectorSquare", function() { return faVectorSquare; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faVenus", function() { return faVenus; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faVenusDouble", function() { return faVenusDouble; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faVenusMars", function() { return faVenusMars; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faVest", function() { return faVest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faVestPatches", function() { return faVestPatches; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faVial", function() { return faVial; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faVials", function() { return faVials; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faVideo", function() { return faVideo; });
@@ -3659,6 +3730,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faXRay", function() { return faXRay; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faYenSign", function() { return faYenSign; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faYinYang", function() { return faYinYang; });
+/*!
+ * Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
 var prefix = "fas";
 var faAd = {
   prefix: 'fas',
@@ -3925,6 +4000,16 @@ var faBacon = {
   iconName: 'bacon',
   icon: [576, 512, [], "f7e5", "M218.92 336.39c34.89-34.89 44.2-59.7 54.05-86 10.61-28.29 21.59-57.54 61.37-97.34s69.05-50.77 97.35-61.38c23.88-9 46.64-17.68 76.79-45.37L470.81 8.91a31 31 0 0 0-40.18-2.83c-13.64 10.1-25.15 14.39-41 20.3C247 79.52 209.26 191.29 200.65 214.1c-29.75 78.83-89.55 94.68-98.72 98.09-24.86 9.26-54.73 20.38-91.07 50.36C-3 374-3.63 395 9.07 407.61l35.76 35.51C80 410.52 107 400.15 133 390.39c26.27-9.84 51.06-19.12 85.92-54zm348-232l-35.75-35.51c-35.19 32.63-62.18 43-88.25 52.79-26.26 9.85-51.06 19.16-85.95 54s-44.19 59.69-54 86C292.33 290 281.34 319.22 241.55 359s-69 50.73-97.3 61.32c-23.86 9-46.61 17.66-76.72 45.33l37.68 37.43a31 31 0 0 0 40.18 2.82c13.6-10.06 25.09-14.34 40.94-20.24 142.2-53 180-164.1 188.94-187.69C405 219.18 464.8 203.3 474 199.86c24.87-9.27 54.74-20.4 91.11-50.41 13.89-11.4 14.52-32.45 1.82-45.05z"]
 };
+var faBacteria = {
+  prefix: 'fas',
+  iconName: 'bacteria',
+  icon: [640, 512, [], "e059", "M272.35,226.4A17.71,17.71,0,0,0,281.46,203l-4-9.08a121.29,121.29,0,0,1,12.36-3.08A83.34,83.34,0,0,0,323.57,177l10,9a17.76,17.76,0,1,0,23.92-26.27l-9.72-8.76a83.12,83.12,0,0,0,11.65-48.18l11.85-3.51a17.73,17.73,0,1,0-10.15-34l-11.34,3.36a84,84,0,0,0-36.38-35.57l2.84-10.85a17.8,17.8,0,0,0-34.47-8.93l-2.82,10.78a83.25,83.25,0,0,0-16.74,1.1C250.83,27,240,30.22,229.1,33.39l-3.38-9.46a17.8,17.8,0,0,0-33.56,11.89l3.49,9.8a286.74,286.74,0,0,0-43.94,23.57l-6.32-8.43a17.9,17.9,0,0,0-24.94-3.6A17.69,17.69,0,0,0,116.84,82l6.45,8.61a286.59,286.59,0,0,0-34.95,35.33l-8.82-6.42a17.84,17.84,0,0,0-24.89,3.86,17.66,17.66,0,0,0,3.88,24.77l8.88,6.47a286.6,286.6,0,0,0-23,43.91l-10.48-3.59a17.73,17.73,0,1,0-11.59,33.52L32.67,232c-2.79,10-5.79,19.84-7.52,30.22a83.16,83.16,0,0,0-.82,19l-11.58,3.43a17.73,17.73,0,1,0,10.13,34l11.27-3.33a83.51,83.51,0,0,0,36.39,35.43l-2.88,11.06a17.81,17.81,0,0,0,34.48,8.92l2.87-11c1,0,2.07.26,3.1.26a83.39,83.39,0,0,0,45.65-13.88l8.59,8.8a17.77,17.77,0,0,0,25.56-24.7l-9.14-9.37a83.41,83.41,0,0,0,12.08-31.05,119.08,119.08,0,0,1,3.87-15.53l9,4.22a17.74,17.74,0,1,0,15.15-32.09l-8.8-4.11c.67-1,1.2-2.08,1.9-3.05a119.89,119.89,0,0,1,7.87-9.41,121.73,121.73,0,0,1,11.65-11.4,119.49,119.49,0,0,1,9.94-7.82c1.12-.77,2.32-1.42,3.47-2.15l3.92,8.85a17.86,17.86,0,0,0,16.32,10.58A18.14,18.14,0,0,0,272.35,226.4ZM128,256a32,32,0,1,1,32-32A32,32,0,0,1,128,256Zm80-96a16,16,0,1,1,16-16A16,16,0,0,1,208,160Zm431.26,45.3a17.79,17.79,0,0,0-17.06-12.69,17.55,17.55,0,0,0-5.08.74l-11.27,3.33a83.61,83.61,0,0,0-36.39-35.43l2.88-11.06a17.81,17.81,0,0,0-34.48-8.91l-2.87,11c-1,0-2.07-.26-3.1-.26a83.32,83.32,0,0,0-45.65,13.89l-8.59-8.81a17.77,17.77,0,0,0-25.56,24.7l9.14,9.37a83.28,83.28,0,0,0-12.08,31.06,119.34,119.34,0,0,1-3.87,15.52l-9-4.22a17.74,17.74,0,1,0-15.15,32.09l8.8,4.11c-.67,1-1.2,2.08-1.89,3.05a117.71,117.71,0,0,1-7.94,9.47,119,119,0,0,1-11.57,11.33,121.59,121.59,0,0,1-10,7.83c-1.12.77-2.32,1.42-3.47,2.15l-3.92-8.85a17.86,17.86,0,0,0-16.32-10.58,18.14,18.14,0,0,0-7.18,1.5A17.71,17.71,0,0,0,358.54,309l4,9.08a118.71,118.71,0,0,1-12.36,3.08,83.34,83.34,0,0,0-33.77,13.9l-10-9a17.77,17.77,0,1,0-23.92,26.28l9.72,8.75a83.12,83.12,0,0,0-11.65,48.18l-11.86,3.51a17.73,17.73,0,1,0,10.16,34l11.34-3.36A84,84,0,0,0,326.61,479l-2.84,10.85a17.8,17.8,0,0,0,34.47,8.93L361.06,488a83.3,83.3,0,0,0,16.74-1.1c11.37-1.89,22.24-5.07,33.1-8.24l3.38,9.46a17.8,17.8,0,0,0,33.56-11.89l-3.49-9.79a287.66,287.66,0,0,0,43.94-23.58l6.32,8.43a17.88,17.88,0,0,0,24.93,3.6A17.67,17.67,0,0,0,523.16,430l-6.45-8.61a287.37,287.37,0,0,0,34.95-35.34l8.82,6.42a17.76,17.76,0,1,0,21-28.63l-8.88-6.46a287.17,287.17,0,0,0,23-43.92l10.48,3.59a17.73,17.73,0,1,0,11.59-33.52L607.33,280c2.79-10,5.79-19.84,7.52-30.21a83.27,83.27,0,0,0,.82-19.05l11.58-3.43A17.7,17.7,0,0,0,639.26,205.3ZM416,416a32,32,0,1,1,32-32A32,32,0,0,1,416,416Z"]
+};
+var faBacterium = {
+  prefix: 'fas',
+  iconName: 'bacterium',
+  icon: [512, 512, [], "e05a", "M511,102.93A23.76,23.76,0,0,0,481.47,87l-15.12,4.48a111.85,111.85,0,0,0-48.5-47.42l3.79-14.47a23.74,23.74,0,0,0-46-11.91l-3.76,14.37a111.94,111.94,0,0,0-22.33,1.47,386.74,386.74,0,0,0-44.33,10.41l-4.3-12a23.74,23.74,0,0,0-44.75,15.85l4.3,12.05a383.4,383.4,0,0,0-58.69,31.83l-8-10.63a23.85,23.85,0,0,0-33.24-4.8,23.57,23.57,0,0,0-4.83,33.09l8,10.63a386.14,386.14,0,0,0-46.7,47.44l-11-8a23.68,23.68,0,1,0-28,38.17l11.09,8.06a383.45,383.45,0,0,0-30.92,58.75l-12.93-4.43a23.65,23.65,0,1,0-15.47,44.69l13,4.48a385.81,385.81,0,0,0-9.3,40.53A111.58,111.58,0,0,0,32.44,375L17,379.56a23.64,23.64,0,0,0,13.51,45.31l15-4.44a111.49,111.49,0,0,0,48.53,47.24l-3.85,14.75a23.66,23.66,0,0,0,17,28.83,24.7,24.7,0,0,0,6,.75,23.73,23.73,0,0,0,23-17.7L140,479.67c1.37.05,2.77.35,4.13.35A111.22,111.22,0,0,0,205,461.5l11.45,11.74a23.7,23.7,0,0,0,34.08-32.93l-12.19-12.5a111,111,0,0,0,16.11-41.4,158.69,158.69,0,0,1,5.16-20.71l12,5.64a23.66,23.66,0,1,0,20.19-42.79l-11.72-5.49c.89-1.32,1.59-2.77,2.52-4.06a157.86,157.86,0,0,1,10.46-12.49,159.5,159.5,0,0,1,15.59-15.28,162.18,162.18,0,0,1,13.23-10.4c1.5-1,3.1-1.89,4.63-2.87l5.23,11.8a23.74,23.74,0,0,0,43.48-19.08l-5.36-12.11a158.87,158.87,0,0,1,16.49-4.1,111,111,0,0,0,45-18.54l13.33,12a23.69,23.69,0,1,0,31.88-35l-12.94-11.67A110.83,110.83,0,0,0,479.21,137L495,132.32A23.61,23.61,0,0,0,511,102.93ZM160,368a48,48,0,1,1,48-48A48,48,0,0,1,160,368Zm80-136a24,24,0,1,1,24-24A24,24,0,0,1,240,232Z"]
+};
 var faBahai = {
   prefix: 'fas',
   iconName: 'bahai',
@@ -4168,7 +4253,7 @@ var faBoxOpen = {
 var faBoxTissue = {
   prefix: 'fas',
   iconName: 'box-tissue',
-  icon: [512, 512, [], "f95b", "M383.88,287.82l64-192H338.47a70.2,70.2,0,0,1-66.59-48,70.21,70.21,0,0,0-66.6-48H63.88l64,288Zm-384,192a32,32,0,0,0,32,32h448a32,32,0,0,0,32-32v-64H-.12Zm480-256H438.94l-21.33,64h14.27a16,16,0,0,1,0,32h-352a16,16,0,1,1,0-32H95.09l-14.22-64h-49a32,32,0,0,0-32,32v128h512v-128A32,32,0,0,0,479.88,223.82Z"]
+  icon: [512, 512, [], "e05b", "M383.88,287.82l64-192H338.47a70.2,70.2,0,0,1-66.59-48,70.21,70.21,0,0,0-66.6-48H63.88l64,288Zm-384,192a32,32,0,0,0,32,32h448a32,32,0,0,0,32-32v-64H-.12Zm480-256H438.94l-21.33,64h14.27a16,16,0,0,1,0,32h-352a16,16,0,1,1,0-32H95.09l-14.22-64h-49a32,32,0,0,0-32,32v128h512v-128A32,32,0,0,0,479.88,223.82Z"]
 };
 var faBoxes = {
   prefix: 'fas',
@@ -5223,7 +5308,7 @@ var faFastForward = {
 var faFaucet = {
   prefix: 'fas',
   iconName: 'faucet',
-  icon: [512, 512, [], "f905", "M352,256H313.39c-15.71-13.44-35.46-23.07-57.39-28V180.44l-32-3.38-32,3.38V228c-21.93,5-41.68,14.6-57.39,28H16A16,16,0,0,0,0,272v96a16,16,0,0,0,16,16h92.79C129.38,421.73,173,448,224,448s94.62-26.27,115.21-64H352a32,32,0,0,1,32,32,32,32,0,0,0,32,32h64a32,32,0,0,0,32-32A160,160,0,0,0,352,256ZM81.59,159.91l142.41-15,142.41,15c9.42,1,17.59-6.81,17.59-16.8V112.89c0-10-8.17-17.8-17.59-16.81L256,107.74V80a16,16,0,0,0-16-16H208a16,16,0,0,0-16,16v27.74L81.59,96.08C72.17,95.09,64,102.9,64,112.89v30.22C64,153.1,72.17,160.91,81.59,159.91Z"]
+  icon: [512, 512, [], "e005", "M352,256H313.39c-15.71-13.44-35.46-23.07-57.39-28V180.44l-32-3.38-32,3.38V228c-21.93,5-41.68,14.6-57.39,28H16A16,16,0,0,0,0,272v96a16,16,0,0,0,16,16h92.79C129.38,421.73,173,448,224,448s94.62-26.27,115.21-64H352a32,32,0,0,1,32,32,32,32,0,0,0,32,32h64a32,32,0,0,0,32-32A160,160,0,0,0,352,256ZM81.59,159.91l142.41-15,142.41,15c9.42,1,17.59-6.81,17.59-16.8V112.89c0-10-8.17-17.8-17.59-16.81L256,107.74V80a16,16,0,0,0-16-16H208a16,16,0,0,0-16,16v27.74L81.59,96.08C72.17,95.09,64,102.9,64,112.89v30.22C64,153.1,72.17,160.91,81.59,159.91Z"]
 };
 var faFax = {
   prefix: 'fas',
@@ -5753,7 +5838,7 @@ var faHandHoldingHeart = {
 var faHandHoldingMedical = {
   prefix: 'fas',
   iconName: 'hand-holding-medical',
-  icon: [576, 512, [], "f95c", "M159.88,175.82h64v64a16,16,0,0,0,16,16h64a16,16,0,0,0,16-16v-64h64a16,16,0,0,0,16-16v-64a16,16,0,0,0-16-16h-64v-64a16,16,0,0,0-16-16h-64a16,16,0,0,0-16,16v64h-64a16,16,0,0,0-16,16v64A16,16,0,0,0,159.88,175.82ZM568.07,336.13a39.91,39.91,0,0,0-55.93-8.47L392.47,415.84H271.86a16,16,0,0,1,0-32H350.1c16,0,30.75-10.87,33.37-26.61a32.06,32.06,0,0,0-31.62-37.38h-160a117.7,117.7,0,0,0-74.12,26.25l-46.5,37.74H15.87a16.11,16.11,0,0,0-16,16v96a16.11,16.11,0,0,0,16,16h347a104.8,104.8,0,0,0,61.7-20.27L559.6,392A40,40,0,0,0,568.07,336.13Z"]
+  icon: [576, 512, [], "e05c", "M159.88,175.82h64v64a16,16,0,0,0,16,16h64a16,16,0,0,0,16-16v-64h64a16,16,0,0,0,16-16v-64a16,16,0,0,0-16-16h-64v-64a16,16,0,0,0-16-16h-64a16,16,0,0,0-16,16v64h-64a16,16,0,0,0-16,16v64A16,16,0,0,0,159.88,175.82ZM568.07,336.13a39.91,39.91,0,0,0-55.93-8.47L392.47,415.84H271.86a16,16,0,0,1,0-32H350.1c16,0,30.75-10.87,33.37-26.61a32.06,32.06,0,0,0-31.62-37.38h-160a117.7,117.7,0,0,0-74.12,26.25l-46.5,37.74H15.87a16.11,16.11,0,0,0-16,16v96a16.11,16.11,0,0,0,16,16h347a104.8,104.8,0,0,0,61.7-20.27L559.6,392A40,40,0,0,0,568.07,336.13Z"]
 };
 var faHandHoldingUsd = {
   prefix: 'fas',
@@ -5823,7 +5908,7 @@ var faHandScissors = {
 var faHandSparkles = {
   prefix: 'fas',
   iconName: 'hand-sparkles',
-  icon: [640, 512, [], "f95d", "M106.66,170.64l.09,0,49.55-20.65a7.32,7.32,0,0,0,3.68-6h0a7.29,7.29,0,0,0-3.68-6l-49.57-20.67-.07,0L86,67.68a6.66,6.66,0,0,0-11.92,0l-20.7,49.63-.05,0L3.7,138A7.29,7.29,0,0,0,0,144H0a7.32,7.32,0,0,0,3.68,6L53.27,170.6l.07,0L74,220.26a6.65,6.65,0,0,0,11.92,0l20.69-49.62ZM471.38,467.41l-1-.42-1-.5a38.67,38.67,0,0,1,0-69.14l1-.49,1-.43,37.49-15.63,15.63-37.48.41-1,.47-.95c3.85-7.74,10.58-13.63,18.35-17.34,0-1.33.25-2.69.27-4V144a32,32,0,0,0-64,0v72a8,8,0,0,1-8,8H456a8,8,0,0,1-8-8V64a32,32,0,0,0-64,0V216a8,8,0,0,1-8,8H360a8,8,0,0,1-8-8V32a32,32,0,0,0-64,0V216a8,8,0,0,1-8,8H264a8,8,0,0,1-8-8V64a32,32,0,0,0-64,0v241l-23.59-32.49a40,40,0,0,0-64.71,47.09L229.3,492.21A48.07,48.07,0,0,0,268.09,512H465.7c19.24,0,35.65-11.73,43.24-28.79l-.07-.17ZM349.79,339.52,320,351.93l-12.42,29.78a4,4,0,0,1-7.15,0L288,351.93l-29.79-12.41a4,4,0,0,1,0-7.16L288,319.94l12.42-29.78a4,4,0,0,1,7.15,0L320,319.94l29.79,12.42a4,4,0,0,1,0,7.16ZM640,431.91a7.28,7.28,0,0,0-3.68-6l-49.57-20.67-.07,0L566,355.63a6.66,6.66,0,0,0-11.92,0l-20.7,49.63-.05,0L483.7,426a7.28,7.28,0,0,0-3.68,6h0a7.29,7.29,0,0,0,3.68,5.95l49.57,20.67.07,0L554,508.21a6.65,6.65,0,0,0,11.92,0l20.69-49.62h0l.09,0,49.55-20.66a7.29,7.29,0,0,0,3.68-5.95h0Z"]
+  icon: [640, 512, [], "e05d", "M106.66,170.64l.09,0,49.55-20.65a7.32,7.32,0,0,0,3.68-6h0a7.29,7.29,0,0,0-3.68-6l-49.57-20.67-.07,0L86,67.68a6.66,6.66,0,0,0-11.92,0l-20.7,49.63-.05,0L3.7,138A7.29,7.29,0,0,0,0,144H0a7.32,7.32,0,0,0,3.68,6L53.27,170.6l.07,0L74,220.26a6.65,6.65,0,0,0,11.92,0l20.69-49.62ZM471.38,467.41l-1-.42-1-.5a38.67,38.67,0,0,1,0-69.14l1-.49,1-.43,37.49-15.63,15.63-37.48.41-1,.47-.95c3.85-7.74,10.58-13.63,18.35-17.34,0-1.33.25-2.69.27-4V144a32,32,0,0,0-64,0v72a8,8,0,0,1-8,8H456a8,8,0,0,1-8-8V64a32,32,0,0,0-64,0V216a8,8,0,0,1-8,8H360a8,8,0,0,1-8-8V32a32,32,0,0,0-64,0V216a8,8,0,0,1-8,8H264a8,8,0,0,1-8-8V64a32,32,0,0,0-64,0v241l-23.59-32.49a40,40,0,0,0-64.71,47.09L229.3,492.21A48.07,48.07,0,0,0,268.09,512H465.7c19.24,0,35.65-11.73,43.24-28.79l-.07-.17ZM349.79,339.52,320,351.93l-12.42,29.78a4,4,0,0,1-7.15,0L288,351.93l-29.79-12.41a4,4,0,0,1,0-7.16L288,319.94l12.42-29.78a4,4,0,0,1,7.15,0L320,319.94l29.79,12.42a4,4,0,0,1,0,7.16ZM640,431.91a7.28,7.28,0,0,0-3.68-6l-49.57-20.67-.07,0L566,355.63a6.66,6.66,0,0,0-11.92,0l-20.7,49.63-.05,0L483.7,426a7.28,7.28,0,0,0-3.68,6h0a7.29,7.29,0,0,0,3.68,5.95l49.57,20.67.07,0L554,508.21a6.65,6.65,0,0,0,11.92,0l20.69-49.62h0l.09,0,49.55-20.66a7.29,7.29,0,0,0,3.68-5.95h0Z"]
 };
 var faHandSpock = {
   prefix: 'fas',
@@ -5843,7 +5928,7 @@ var faHandsHelping = {
 var faHandsWash = {
   prefix: 'fas',
   iconName: 'hands-wash',
-  icon: [576, 512, [], "f95e", "M496,224a48,48,0,1,0-48-48A48,48,0,0,0,496,224ZM311.47,178.45A56.77,56.77,0,0,1,328,176a56,56,0,0,1,19,3.49l15.35-48.61A24,24,0,0,0,342,99.74c-11.53-1.35-22.21,6.44-25.71,17.51l-20.9,66.17ZM93.65,386.33c.8-.19,1.54-.54,2.35-.71V359.93a156,156,0,0,1,107.06-148l73.7-22.76L310.92,81.05a24,24,0,0,0-20.33-31.11c-11.53-1.34-22.22,6.45-25.72,17.52L231.42,173.88a8,8,0,0,1-15.26-4.83L259.53,31.26A24,24,0,0,0,239.2.15C227.67-1.19,217,6.6,213.49,17.66L165.56,169.37a8,8,0,1,1-15.26-4.82l38.56-122a24,24,0,0,0-20.33-31.11C157,10,146.32,17.83,142.82,28.9l-60,189.85L80.76,168.7A24,24,0,0,0,56.9,144.55c-13.23-.05-24.72,10.54-24.9,23.86V281.14A123.69,123.69,0,0,0,93.65,386.33ZM519.1,336H360a8,8,0,0,1,0-16H488a24,24,0,0,0,23.54-28.76C509.35,279.84,498.71,272,487.1,272H288l47.09-17.06a24,24,0,0,0-14.18-45.88L213.19,242.31A123.88,123.88,0,0,0,128,360v25.65a79.78,79.78,0,0,1,58,108.63A118.9,118.9,0,0,0,248,512H456a24,24,0,0,0,23.54-28.76C477.35,471.84,466.71,464,455.1,464H360a8,8,0,0,1,0-16H488a24,24,0,0,0,23.54-28.76C509.35,407.84,498.71,400,487.1,400H360a8,8,0,0,1,0-16H520a24,24,0,0,0,23.54-28.76C541.35,343.84,530.71,336,519.1,336ZM416,64a32,32,0,1,0-32-32A32,32,0,0,0,416,64ZM112,416a48,48,0,1,0,48,48A48,48,0,0,0,112,416Z"]
+  icon: [576, 512, [], "e05e", "M496,224a48,48,0,1,0-48-48A48,48,0,0,0,496,224ZM311.47,178.45A56.77,56.77,0,0,1,328,176a56,56,0,0,1,19,3.49l15.35-48.61A24,24,0,0,0,342,99.74c-11.53-1.35-22.21,6.44-25.71,17.51l-20.9,66.17ZM93.65,386.33c.8-.19,1.54-.54,2.35-.71V359.93a156,156,0,0,1,107.06-148l73.7-22.76L310.92,81.05a24,24,0,0,0-20.33-31.11c-11.53-1.34-22.22,6.45-25.72,17.52L231.42,173.88a8,8,0,0,1-15.26-4.83L259.53,31.26A24,24,0,0,0,239.2.15C227.67-1.19,217,6.6,213.49,17.66L165.56,169.37a8,8,0,1,1-15.26-4.82l38.56-122a24,24,0,0,0-20.33-31.11C157,10,146.32,17.83,142.82,28.9l-60,189.85L80.76,168.7A24,24,0,0,0,56.9,144.55c-13.23-.05-24.72,10.54-24.9,23.86V281.14A123.69,123.69,0,0,0,93.65,386.33ZM519.1,336H360a8,8,0,0,1,0-16H488a24,24,0,0,0,23.54-28.76C509.35,279.84,498.71,272,487.1,272H288l47.09-17.06a24,24,0,0,0-14.18-45.88L213.19,242.31A123.88,123.88,0,0,0,128,360v25.65a79.78,79.78,0,0,1,58,108.63A118.9,118.9,0,0,0,248,512H456a24,24,0,0,0,23.54-28.76C477.35,471.84,466.71,464,455.1,464H360a8,8,0,0,1,0-16H488a24,24,0,0,0,23.54-28.76C509.35,407.84,498.71,400,487.1,400H360a8,8,0,0,1,0-16H520a24,24,0,0,0,23.54-28.76C541.35,343.84,530.71,336,519.1,336ZM416,64a32,32,0,1,0-32-32A32,32,0,0,0,416,64ZM112,416a48,48,0,1,0,48,48A48,48,0,0,0,112,416Z"]
 };
 var faHandshake = {
   prefix: 'fas',
@@ -5853,12 +5938,12 @@ var faHandshake = {
 var faHandshakeAltSlash = {
   prefix: 'fas',
   iconName: 'handshake-alt-slash',
-  icon: [640, 512, [], "f95f", "M358.59,195.6,504.2,313.8a63.4,63.4,0,0,1,22.21,37.91H624a16.05,16.05,0,0,0,16-16V143.91A16,16,0,0,0,624,128H512L457.41,73.41A32,32,0,0,0,434.8,64H348.91a32,32,0,0,0-21.61,8.41l-88.12,80.68-25.69-19.85L289.09,64H205.3a32,32,0,0,0-22.6,9.41l-20.34,20.3L45.47,3.38A16,16,0,0,0,23,6.19L3.38,31.46A16,16,0,0,0,6.19,53.91L594.54,508.63A16,16,0,0,0,617,505.82l19.64-25.27a16,16,0,0,0-2.81-22.45L303.4,202.72l32.69-29.92,27-24.7a16,16,0,0,1,21.61,23.61ZM16,128A16.05,16.05,0,0,0,0,144V335.91a16,16,0,0,0,16,16H146.3l90.5,81.89a64,64,0,0,0,90-9.3l.2-.2,17.91,15.5a37.16,37.16,0,0,0,52.29-5.39l8.8-10.82L23.56,128Z"]
+  icon: [640, 512, [], "e05f", "M358.59,195.6,504.2,313.8a63.4,63.4,0,0,1,22.21,37.91H624a16.05,16.05,0,0,0,16-16V143.91A16,16,0,0,0,624,128H512L457.41,73.41A32,32,0,0,0,434.8,64H348.91a32,32,0,0,0-21.61,8.41l-88.12,80.68-25.69-19.85L289.09,64H205.3a32,32,0,0,0-22.6,9.41l-20.34,20.3L45.47,3.38A16,16,0,0,0,23,6.19L3.38,31.46A16,16,0,0,0,6.19,53.91L594.54,508.63A16,16,0,0,0,617,505.82l19.64-25.27a16,16,0,0,0-2.81-22.45L303.4,202.72l32.69-29.92,27-24.7a16,16,0,0,1,21.61,23.61ZM16,128A16.05,16.05,0,0,0,0,144V335.91a16,16,0,0,0,16,16H146.3l90.5,81.89a64,64,0,0,0,90-9.3l.2-.2,17.91,15.5a37.16,37.16,0,0,0,52.29-5.39l8.8-10.82L23.56,128Z"]
 };
 var faHandshakeSlash = {
   prefix: 'fas',
   iconName: 'handshake-slash',
-  icon: [640, 512, [], "f960", "M0,128.21V384H64a32,32,0,0,0,32-32V184L23.83,128.21ZM48,320.1a16,16,0,1,1-16,16A16,16,0,0,1,48,320.1Zm80,31.81h18.3l90.5,81.89a64,64,0,0,0,90-9.3l.2-.2,17.91,15.5a37.16,37.16,0,0,0,52.29-5.39l8.8-10.82L128,208.72Zm416-223.7V352.1a32,32,0,0,0,32,32h64V128.21ZM592,352.1a16,16,0,1,1,16-16A16,16,0,0,1,592,352.1ZM303.33,202.67l59.58-54.57a16,16,0,0,1,21.59,23.61L358.41,195.6,504,313.8a73.08,73.08,0,0,1,7.91,7.7V128L457.3,73.41A31.76,31.76,0,0,0,434.7,64H348.8a31.93,31.93,0,0,0-21.6,8.41l-88.07,80.64-25.64-19.81L289.09,64H205.3a32,32,0,0,0-22.6,9.41L162.36,93.72,45.47,3.38A16,16,0,0,0,23,6.19L3.38,31.46A16,16,0,0,0,6.19,53.91L594.53,508.63A16,16,0,0,0,617,505.82l19.65-25.27a16,16,0,0,0-2.82-22.45Z"]
+  icon: [640, 512, [], "e060", "M0,128.21V384H64a32,32,0,0,0,32-32V184L23.83,128.21ZM48,320.1a16,16,0,1,1-16,16A16,16,0,0,1,48,320.1Zm80,31.81h18.3l90.5,81.89a64,64,0,0,0,90-9.3l.2-.2,17.91,15.5a37.16,37.16,0,0,0,52.29-5.39l8.8-10.82L128,208.72Zm416-223.7V352.1a32,32,0,0,0,32,32h64V128.21ZM592,352.1a16,16,0,1,1,16-16A16,16,0,0,1,592,352.1ZM303.33,202.67l59.58-54.57a16,16,0,0,1,21.59,23.61L358.41,195.6,504,313.8a73.08,73.08,0,0,1,7.91,7.7V128L457.3,73.41A31.76,31.76,0,0,0,434.7,64H348.8a31.93,31.93,0,0,0-21.6,8.41l-88.07,80.64-25.64-19.81L289.09,64H205.3a32,32,0,0,0-22.6,9.41L162.36,93.72,45.47,3.38A16,16,0,0,0,23,6.19L3.38,31.46A16,16,0,0,0,6.19,53.91L594.53,508.63A16,16,0,0,0,617,505.82l19.65-25.27a16,16,0,0,0-2.82-22.45Z"]
 };
 var faHanukiah = {
   prefix: 'fas',
@@ -5898,22 +5983,22 @@ var faHdd = {
 var faHeadSideCough = {
   prefix: 'fas',
   iconName: 'head-side-cough',
-  icon: [640, 512, [], "f961", "M616,304a24,24,0,1,0-24-24A24,24,0,0,0,616,304ZM552,416a24,24,0,1,0,24,24A24,24,0,0,0,552,416Zm-64-56a24,24,0,1,0,24,24A24,24,0,0,0,488,360ZM616,464a24,24,0,1,0,24,24A24,24,0,0,0,616,464Zm0-104a24,24,0,1,0,24,24A24,24,0,0,0,616,360Zm-64-40a24,24,0,1,0,24,24A24,24,0,0,0,552,320Zm-74.78-45c-21-47.12-48.5-151.75-73.12-186.75A208.13,208.13,0,0,0,234.1,0H192C86,0,0,86,0,192c0,56.75,24.75,107.62,64,142.88V512H288V480h64a64,64,0,0,0,64-64H320a32,32,0,0,1,0-64h96V320h32A32,32,0,0,0,477.22,275ZM288,224a32,32,0,1,1,32-32A32.07,32.07,0,0,1,288,224Z"]
+  icon: [640, 512, [], "e061", "M616,304a24,24,0,1,0-24-24A24,24,0,0,0,616,304ZM552,416a24,24,0,1,0,24,24A24,24,0,0,0,552,416Zm-64-56a24,24,0,1,0,24,24A24,24,0,0,0,488,360ZM616,464a24,24,0,1,0,24,24A24,24,0,0,0,616,464Zm0-104a24,24,0,1,0,24,24A24,24,0,0,0,616,360Zm-64-40a24,24,0,1,0,24,24A24,24,0,0,0,552,320Zm-74.78-45c-21-47.12-48.5-151.75-73.12-186.75A208.13,208.13,0,0,0,234.1,0H192C86,0,0,86,0,192c0,56.75,24.75,107.62,64,142.88V512H288V480h64a64,64,0,0,0,64-64H320a32,32,0,0,1,0-64h96V320h32A32,32,0,0,0,477.22,275ZM288,224a32,32,0,1,1,32-32A32.07,32.07,0,0,1,288,224Z"]
 };
 var faHeadSideCoughSlash = {
   prefix: 'fas',
   iconName: 'head-side-cough-slash',
-  icon: [640, 512, [], "f962", "M454.11,319.21c19.56-3.81,31.62-25,23.11-44.21-21-47.12-48.5-151.75-73.12-186.75A208.13,208.13,0,0,0,234.1,0H192A190.64,190.64,0,0,0,84.18,33.3L45.46,3.38A16,16,0,0,0,23,6.19L3.37,31.46A16,16,0,0,0,6.18,53.91L594.53,508.63A16,16,0,0,0,617,505.82l19.64-25.27a16,16,0,0,0-2.81-22.45ZM313.39,210.45,263.61,172c5.88-7.14,14.43-12,24.36-12a32.06,32.06,0,0,1,32,32C320,199,317.24,205.17,313.39,210.45ZM616,304a24,24,0,1,0-24-24A24,24,0,0,0,616,304Zm-64,64a24,24,0,1,0-24-24A24,24,0,0,0,552,368ZM288,384a32,32,0,0,1,32-32h19.54L20.73,105.59A190.86,190.86,0,0,0,0,192c0,56.75,24.75,107.62,64,142.88V512H288V480h64a64,64,0,0,0,64-64H320A32,32,0,0,1,288,384Zm328-24a24,24,0,1,0,24,24A24,24,0,0,0,616,360Z"]
+  icon: [640, 512, [], "e062", "M454.11,319.21c19.56-3.81,31.62-25,23.11-44.21-21-47.12-48.5-151.75-73.12-186.75A208.13,208.13,0,0,0,234.1,0H192A190.64,190.64,0,0,0,84.18,33.3L45.46,3.38A16,16,0,0,0,23,6.19L3.37,31.46A16,16,0,0,0,6.18,53.91L594.53,508.63A16,16,0,0,0,617,505.82l19.64-25.27a16,16,0,0,0-2.81-22.45ZM313.39,210.45,263.61,172c5.88-7.14,14.43-12,24.36-12a32.06,32.06,0,0,1,32,32C320,199,317.24,205.17,313.39,210.45ZM616,304a24,24,0,1,0-24-24A24,24,0,0,0,616,304Zm-64,64a24,24,0,1,0-24-24A24,24,0,0,0,552,368ZM288,384a32,32,0,0,1,32-32h19.54L20.73,105.59A190.86,190.86,0,0,0,0,192c0,56.75,24.75,107.62,64,142.88V512H288V480h64a64,64,0,0,0,64-64H320A32,32,0,0,1,288,384Zm328-24a24,24,0,1,0,24,24A24,24,0,0,0,616,360Z"]
 };
 var faHeadSideMask = {
   prefix: 'fas',
   iconName: 'head-side-mask',
-  icon: [512, 512, [], "f963", "M.15,184.42C-2.17,244.21,23,298.06,64,334.88V512H224V316.51L3.67,156.25A182.28,182.28,0,0,0,.15,184.42ZM509.22,275c-21-47.12-48.5-151.75-73.12-186.75A208.11,208.11,0,0,0,266.11,0H200C117,0,42.48,50.57,13.25,123.65L239.21,288H511.76A31.35,31.35,0,0,0,509.22,275ZM320,224a32,32,0,1,1,32-32A32.07,32.07,0,0,1,320,224Zm16,144H496l16-48H256V512H401.88a64,64,0,0,0,60.71-43.76L464,464H336a16,16,0,0,1,0-32H474.67l10.67-32H336a16,16,0,0,1,0-32Z"]
+  icon: [512, 512, [], "e063", "M.15,184.42C-2.17,244.21,23,298.06,64,334.88V512H224V316.51L3.67,156.25A182.28,182.28,0,0,0,.15,184.42ZM509.22,275c-21-47.12-48.5-151.75-73.12-186.75A208.11,208.11,0,0,0,266.11,0H200C117,0,42.48,50.57,13.25,123.65L239.21,288H511.76A31.35,31.35,0,0,0,509.22,275ZM320,224a32,32,0,1,1,32-32A32.07,32.07,0,0,1,320,224Zm16,144H496l16-48H256V512H401.88a64,64,0,0,0,60.71-43.76L464,464H336a16,16,0,0,1,0-32H474.67l10.67-32H336a16,16,0,0,1,0-32Z"]
 };
 var faHeadSideVirus = {
   prefix: 'fas',
   iconName: 'head-side-virus',
-  icon: [512, 512, [], "f964", "M272,240a16,16,0,1,0,16,16A16,16,0,0,0,272,240Zm-64-64a16,16,0,1,0,16,16A16,16,0,0,0,208,176Zm301.2,99c-20.93-47.12-48.43-151.73-73.07-186.75A207.9,207.9,0,0,0,266.09,0H192C86,0,0,86,0,192A191.23,191.23,0,0,0,64,334.81V512H320V448h64a64,64,0,0,0,64-64V320H480A32,32,0,0,0,509.2,275ZM368,240H355.88c-28.51,0-42.79,34.47-22.63,54.63l8.58,8.57a16,16,0,1,1-22.63,22.63l-8.57-8.58C290.47,297.09,256,311.37,256,339.88V352a16,16,0,0,1-32,0V339.88c0-28.51-34.47-42.79-54.63-22.63l-8.57,8.58a16,16,0,0,1-22.63-22.63l8.58-8.57c20.16-20.16,5.88-54.63-22.63-54.63H112a16,16,0,0,1,0-32h12.12c28.51,0,42.79-34.47,22.63-54.63l-8.58-8.57a16,16,0,0,1,22.63-22.63l8.57,8.58c20.16,20.16,54.63,5.88,54.63-22.63V96a16,16,0,0,1,32,0v12.12c0,28.51,34.47,42.79,54.63,22.63l8.57-8.58a16,16,0,0,1,22.63,22.63l-8.58,8.57C313.09,173.53,327.37,208,355.88,208H368a16,16,0,0,1,0,32Z"]
+  icon: [512, 512, [], "e064", "M272,240a16,16,0,1,0,16,16A16,16,0,0,0,272,240Zm-64-64a16,16,0,1,0,16,16A16,16,0,0,0,208,176Zm301.2,99c-20.93-47.12-48.43-151.73-73.07-186.75A207.9,207.9,0,0,0,266.09,0H192C86,0,0,86,0,192A191.23,191.23,0,0,0,64,334.81V512H320V448h64a64,64,0,0,0,64-64V320H480A32,32,0,0,0,509.2,275ZM368,240H355.88c-28.51,0-42.79,34.47-22.63,54.63l8.58,8.57a16,16,0,1,1-22.63,22.63l-8.57-8.58C290.47,297.09,256,311.37,256,339.88V352a16,16,0,0,1-32,0V339.88c0-28.51-34.47-42.79-54.63-22.63l-8.57,8.58a16,16,0,0,1-22.63-22.63l8.58-8.57c20.16-20.16,5.88-54.63-22.63-54.63H112a16,16,0,0,1,0-32h12.12c28.51,0,42.79-34.47,22.63-54.63l-8.58-8.57a16,16,0,0,1,22.63-22.63l8.57,8.58c20.16,20.16,54.63,5.88,54.63-22.63V96a16,16,0,0,1,32,0v12.12c0,28.51,34.47,42.79,54.63,22.63l8.57-8.58a16,16,0,0,1,22.63,22.63l-8.58,8.57C313.09,173.53,327.37,208,355.88,208H368a16,16,0,0,1,0,32Z"]
 };
 var faHeading = {
   prefix: 'fas',
@@ -6063,7 +6148,7 @@ var faHouseDamage = {
 var faHouseUser = {
   prefix: 'fas',
   iconName: 'house-user',
-  icon: [576, 512, [], "f965", "M570.69,236.27,512,184.44V48a16,16,0,0,0-16-16H432a16,16,0,0,0-16,16V99.67L314.78,10.3C308.5,4.61,296.53,0,288,0s-20.46,4.61-26.74,10.3l-256,226A18.27,18.27,0,0,0,0,248.2a18.64,18.64,0,0,0,4.09,10.71L25.5,282.7a21.14,21.14,0,0,0,12,5.3,21.67,21.67,0,0,0,10.69-4.11l15.9-14V480a32,32,0,0,0,32,32H480a32,32,0,0,0,32-32V269.88l15.91,14A21.94,21.94,0,0,0,538.63,288a20.89,20.89,0,0,0,11.87-5.31l21.41-23.81A21.64,21.64,0,0,0,576,248.19,21,21,0,0,0,570.69,236.27ZM288,176a64,64,0,1,1-64,64A64,64,0,0,1,288,176ZM400,448H176a16,16,0,0,1-16-16,96,96,0,0,1,96-96h64a96,96,0,0,1,96,96A16,16,0,0,1,400,448Z"]
+  icon: [576, 512, [], "e065", "M570.69,236.27,512,184.44V48a16,16,0,0,0-16-16H432a16,16,0,0,0-16,16V99.67L314.78,10.3C308.5,4.61,296.53,0,288,0s-20.46,4.61-26.74,10.3l-256,226A18.27,18.27,0,0,0,0,248.2a18.64,18.64,0,0,0,4.09,10.71L25.5,282.7a21.14,21.14,0,0,0,12,5.3,21.67,21.67,0,0,0,10.69-4.11l15.9-14V480a32,32,0,0,0,32,32H480a32,32,0,0,0,32-32V269.88l15.91,14A21.94,21.94,0,0,0,538.63,288a20.89,20.89,0,0,0,11.87-5.31l21.41-23.81A21.64,21.64,0,0,0,576,248.19,21,21,0,0,0,570.69,236.27ZM288,176a64,64,0,1,1-64,64A64,64,0,0,1,288,176ZM400,448H176a16,16,0,0,1-16-16,96,96,0,0,1,96-96h64a96,96,0,0,1,96,96A16,16,0,0,1,400,448Z"]
 };
 var faHryvnia = {
   prefix: 'fas',
@@ -6233,7 +6318,7 @@ var faLaptopCode = {
 var faLaptopHouse = {
   prefix: 'fas',
   iconName: 'laptop-house',
-  icon: [640, 512, [], "f966", "M272,288H208a16,16,0,0,1-16-16V208a16,16,0,0,1,16-16h64a16,16,0,0,1,16,16v37.12C299.11,232.24,315,224,332.8,224H469.74l6.65-7.53A16.51,16.51,0,0,0,480,207a16.31,16.31,0,0,0-4.75-10.61L416,144V48a16,16,0,0,0-16-16H368a16,16,0,0,0-16,16V87.3L263.5,8.92C258,4,247.45,0,240.05,0s-17.93,4-23.47,8.92L4.78,196.42A16.15,16.15,0,0,0,0,207a16.4,16.4,0,0,0,3.55,9.39L22.34,237.7A16.22,16.22,0,0,0,33,242.48,16.51,16.51,0,0,0,42.34,239L64,219.88V384a32,32,0,0,0,32,32H272ZM629.33,448H592V288c0-17.67-12.89-32-28.8-32H332.8c-15.91,0-28.8,14.33-28.8,32V448H266.67A10.67,10.67,0,0,0,256,458.67v10.66A42.82,42.82,0,0,0,298.6,512H597.4A42.82,42.82,0,0,0,640,469.33V458.67A10.67,10.67,0,0,0,629.33,448ZM544,448H352V304H544Z"]
+  icon: [640, 512, [], "e066", "M272,288H208a16,16,0,0,1-16-16V208a16,16,0,0,1,16-16h64a16,16,0,0,1,16,16v37.12C299.11,232.24,315,224,332.8,224H469.74l6.65-7.53A16.51,16.51,0,0,0,480,207a16.31,16.31,0,0,0-4.75-10.61L416,144V48a16,16,0,0,0-16-16H368a16,16,0,0,0-16,16V87.3L263.5,8.92C258,4,247.45,0,240.05,0s-17.93,4-23.47,8.92L4.78,196.42A16.15,16.15,0,0,0,0,207a16.4,16.4,0,0,0,3.55,9.39L22.34,237.7A16.22,16.22,0,0,0,33,242.48,16.51,16.51,0,0,0,42.34,239L64,219.88V384a32,32,0,0,0,32,32H272ZM629.33,448H592V288c0-17.67-12.89-32-28.8-32H332.8c-15.91,0-28.8,14.33-28.8,32V448H266.67A10.67,10.67,0,0,0,256,458.67v10.66A42.82,42.82,0,0,0,298.6,512H597.4A42.82,42.82,0,0,0,640,469.33V458.67A10.67,10.67,0,0,0,629.33,448ZM544,448H352V304H544Z"]
 };
 var faLaptopMedical = {
   prefix: 'fas',
@@ -6388,7 +6473,7 @@ var faLungs = {
 var faLungsVirus = {
   prefix: 'fas',
   iconName: 'lungs-virus',
-  icon: [640, 512, [], "f967", "M344,150.68V16A16,16,0,0,0,328,0H312a16,16,0,0,0-16,16V150.68a46.45,46.45,0,0,1,48,0ZM195.54,444.46a48.06,48.06,0,0,1,0-67.88l8.58-8.58H192a48,48,0,0,1,0-96h12.12l-8.58-8.57a48,48,0,0,1,60.46-74V161.75C256,125.38,224.62,96,186,96c-44,0-58,28.5-80.12,63.13a819.52,819.52,0,0,0-102,231A113.16,113.16,0,0,0,0,419.75C0,481,62.5,525.26,125.25,508.38l59.5-15.87a98.51,98.51,0,0,0,52.5-34.75,46.49,46.49,0,0,1-41.71-13.3Zm226.29-22.63a16,16,0,0,0,0-22.62l-8.58-8.58C393.09,370.47,407.37,336,435.88,336H448a16,16,0,0,0,0-32H435.88c-28.51,0-42.79-34.47-22.63-54.62l8.58-8.58a16,16,0,0,0-22.63-22.63l-8.57,8.58C370.47,246.91,336,232.63,336,204.12V192a16,16,0,0,0-32,0v12.12c0,28.51-34.47,42.79-54.63,22.63l-8.57-8.58a16,16,0,0,0-22.63,22.63l8.58,8.58c20.16,20.15,5.88,54.62-22.63,54.62H192a16,16,0,0,0,0,32h12.12c28.51,0,42.79,34.47,22.63,54.63l-8.58,8.58a16,16,0,1,0,22.63,22.62l8.57-8.57C269.53,393.1,304,407.38,304,435.88V448a16,16,0,0,0,32,0V435.88c0-28.5,34.47-42.78,54.63-22.62l8.57,8.57a16,16,0,0,0,22.63,0ZM288,304a16,16,0,1,1,16-16A16,16,0,0,1,288,304Zm64,64a16,16,0,1,1,16-16A16,16,0,0,1,352,368Zm284.12,22.13a819.52,819.52,0,0,0-102-231C512,124.5,498,96,454,96c-38.62,0-70,29.38-70,65.75v27.72a48,48,0,0,1,60.46,74L435.88,272H448a48,48,0,0,1,0,96H435.88l8.58,8.58a47.7,47.7,0,0,1-41.71,81.18,98.51,98.51,0,0,0,52.5,34.75l59.5,15.87C577.5,525.26,640,481,640,419.75A113.16,113.16,0,0,0,636.12,390.13Z"]
+  icon: [640, 512, [], "e067", "M344,150.68V16A16,16,0,0,0,328,0H312a16,16,0,0,0-16,16V150.68a46.45,46.45,0,0,1,48,0ZM195.54,444.46a48.06,48.06,0,0,1,0-67.88l8.58-8.58H192a48,48,0,0,1,0-96h12.12l-8.58-8.57a48,48,0,0,1,60.46-74V161.75C256,125.38,224.62,96,186,96c-44,0-58,28.5-80.12,63.13a819.52,819.52,0,0,0-102,231A113.16,113.16,0,0,0,0,419.75C0,481,62.5,525.26,125.25,508.38l59.5-15.87a98.51,98.51,0,0,0,52.5-34.75,46.49,46.49,0,0,1-41.71-13.3Zm226.29-22.63a16,16,0,0,0,0-22.62l-8.58-8.58C393.09,370.47,407.37,336,435.88,336H448a16,16,0,0,0,0-32H435.88c-28.51,0-42.79-34.47-22.63-54.62l8.58-8.58a16,16,0,0,0-22.63-22.63l-8.57,8.58C370.47,246.91,336,232.63,336,204.12V192a16,16,0,0,0-32,0v12.12c0,28.51-34.47,42.79-54.63,22.63l-8.57-8.58a16,16,0,0,0-22.63,22.63l8.58,8.58c20.16,20.15,5.88,54.62-22.63,54.62H192a16,16,0,0,0,0,32h12.12c28.51,0,42.79,34.47,22.63,54.63l-8.58,8.58a16,16,0,1,0,22.63,22.62l8.57-8.57C269.53,393.1,304,407.38,304,435.88V448a16,16,0,0,0,32,0V435.88c0-28.5,34.47-42.78,54.63-22.62l8.57,8.57a16,16,0,0,0,22.63,0ZM288,304a16,16,0,1,1,16-16A16,16,0,0,1,288,304Zm64,64a16,16,0,1,1,16-16A16,16,0,0,1,352,368Zm284.12,22.13a819.52,819.52,0,0,0-102-231C512,124.5,498,96,454,96c-38.62,0-70,29.38-70,65.75v27.72a48,48,0,0,1,60.46,74L435.88,272H448a48,48,0,0,1,0,96H435.88l8.58,8.58a47.7,47.7,0,0,1-41.71,81.18,98.51,98.51,0,0,0,52.5,34.75l59.5,15.87C577.5,525.26,640,481,640,419.75A113.16,113.16,0,0,0,636.12,390.13Z"]
 };
 var faMagic = {
   prefix: 'fas',
@@ -6843,7 +6928,7 @@ var faPencilRuler = {
 var faPeopleArrows = {
   prefix: 'fas',
   iconName: 'people-arrows',
-  icon: [576, 512, [], "f968", "M96,128A64,64,0,1,0,32,64,64,64,0,0,0,96,128Zm0,176.08a44.11,44.11,0,0,1,13.64-32L181.77,204c1.65-1.55,3.77-2.31,5.61-3.57A63.91,63.91,0,0,0,128,160H64A64,64,0,0,0,0,224v96a32,32,0,0,0,32,32V480a32,32,0,0,0,32,32h64a32,32,0,0,0,32-32V383.61l-50.36-47.53A44.08,44.08,0,0,1,96,304.08ZM480,128a64,64,0,1,0-64-64A64,64,0,0,0,480,128Zm32,32H448a63.91,63.91,0,0,0-59.38,40.42c1.84,1.27,4,2,5.62,3.59l72.12,68.06a44.37,44.37,0,0,1,0,64L416,383.62V480a32,32,0,0,0,32,32h64a32,32,0,0,0,32-32V352a32,32,0,0,0,32-32V224A64,64,0,0,0,512,160ZM444.4,295.34l-72.12-68.06A12,12,0,0,0,352,236v36H224V236a12,12,0,0,0-20.28-8.73L131.6,295.34a12.4,12.4,0,0,0,0,17.47l72.12,68.07A12,12,0,0,0,224,372.14V336H352v36.14a12,12,0,0,0,20.28,8.74l72.12-68.07A12.4,12.4,0,0,0,444.4,295.34Z"]
+  icon: [576, 512, [], "e068", "M96,128A64,64,0,1,0,32,64,64,64,0,0,0,96,128Zm0,176.08a44.11,44.11,0,0,1,13.64-32L181.77,204c1.65-1.55,3.77-2.31,5.61-3.57A63.91,63.91,0,0,0,128,160H64A64,64,0,0,0,0,224v96a32,32,0,0,0,32,32V480a32,32,0,0,0,32,32h64a32,32,0,0,0,32-32V383.61l-50.36-47.53A44.08,44.08,0,0,1,96,304.08ZM480,128a64,64,0,1,0-64-64A64,64,0,0,0,480,128Zm32,32H448a63.91,63.91,0,0,0-59.38,40.42c1.84,1.27,4,2,5.62,3.59l72.12,68.06a44.37,44.37,0,0,1,0,64L416,383.62V480a32,32,0,0,0,32,32h64a32,32,0,0,0,32-32V352a32,32,0,0,0,32-32V224A64,64,0,0,0,512,160ZM444.4,295.34l-72.12-68.06A12,12,0,0,0,352,236v36H224V236a12,12,0,0,0-20.28-8.73L131.6,295.34a12.4,12.4,0,0,0,0,17.47l72.12,68.07A12,12,0,0,0,224,372.14V336H352v36.14a12,12,0,0,0,20.28,8.74l72.12-68.07A12.4,12.4,0,0,0,444.4,295.34Z"]
 };
 var faPeopleCarry = {
   prefix: 'fas',
@@ -6943,7 +7028,7 @@ var faPlaneDeparture = {
 var faPlaneSlash = {
   prefix: 'fas',
   iconName: 'plane-slash',
-  icon: [640, 512, [], "f969", "M32.48,147.88,64,256,32.48,364.13A16,16,0,0,0,48,384H88a16,16,0,0,0,12.8-6.41L144,320H246.85l-49,171.59A16,16,0,0,0,213.2,512h65.5a16,16,0,0,0,13.89-8.06l66.6-116.54L34.35,136.34A15.47,15.47,0,0,0,32.48,147.88ZM633.82,458.09,455.14,320H512c35.34,0,96-28.66,96-64s-60.66-64-96-64H397.7L292.61,8.06C290.06,3.61,283.84,0,278.71,0H213.2a16,16,0,0,0-15.38,20.39l36.94,129.29L45.46,3.38A16,16,0,0,0,23,6.19L3.37,31.45A16,16,0,0,0,6.18,53.91L594.54,508.63A16,16,0,0,0,617,505.81l19.64-25.26A16,16,0,0,0,633.82,458.09Z"]
+  icon: [640, 512, [], "e069", "M32.48,147.88,64,256,32.48,364.13A16,16,0,0,0,48,384H88a16,16,0,0,0,12.8-6.41L144,320H246.85l-49,171.59A16,16,0,0,0,213.2,512h65.5a16,16,0,0,0,13.89-8.06l66.6-116.54L34.35,136.34A15.47,15.47,0,0,0,32.48,147.88ZM633.82,458.09,455.14,320H512c35.34,0,96-28.66,96-64s-60.66-64-96-64H397.7L292.61,8.06C290.06,3.61,283.84,0,278.71,0H213.2a16,16,0,0,0-15.38,20.39l36.94,129.29L45.46,3.38A16,16,0,0,0,23,6.19L3.37,31.45A16,16,0,0,0,6.18,53.91L594.54,508.63A16,16,0,0,0,617,505.81l19.64-25.26A16,16,0,0,0,633.82,458.09Z"]
 };
 var faPlay = {
   prefix: 'fas',
@@ -7063,12 +7148,12 @@ var faProjectDiagram = {
 var faPumpMedical = {
   prefix: 'fas',
   iconName: 'pump-medical',
-  icon: [384, 512, [], "f96a", "M235.51,159.82H84.24A64,64,0,0,0,20.51,218L.14,442a64,64,0,0,0,63.74,69.8h192A64,64,0,0,0,319.61,442L299.24,218A64,64,0,0,0,235.51,159.82Zm4.37,173.33a13.35,13.35,0,0,1-13.34,13.34h-40v40a13.33,13.33,0,0,1-13.33,13.33H146.54a13.33,13.33,0,0,1-13.33-13.33v-40h-40a13.34,13.34,0,0,1-13.33-13.34V306.49a13.33,13.33,0,0,1,13.33-13.34h40v-40a13.33,13.33,0,0,1,13.33-13.33h26.67a13.33,13.33,0,0,1,13.33,13.33v40h40a13.34,13.34,0,0,1,13.34,13.34ZM379.19,93.88,335.87,50.56a64,64,0,0,0-45.24-18.74H223.88a32,32,0,0,0-32-32h-64a32,32,0,0,0-32,32v96h128v-32h66.75l43.31,43.31a16,16,0,0,0,22.63,0l22.62-22.62A16,16,0,0,0,379.19,93.88Z"]
+  icon: [384, 512, [], "e06a", "M235.51,159.82H84.24A64,64,0,0,0,20.51,218L.14,442a64,64,0,0,0,63.74,69.8h192A64,64,0,0,0,319.61,442L299.24,218A64,64,0,0,0,235.51,159.82Zm4.37,173.33a13.35,13.35,0,0,1-13.34,13.34h-40v40a13.33,13.33,0,0,1-13.33,13.33H146.54a13.33,13.33,0,0,1-13.33-13.33v-40h-40a13.34,13.34,0,0,1-13.33-13.34V306.49a13.33,13.33,0,0,1,13.33-13.34h40v-40a13.33,13.33,0,0,1,13.33-13.33h26.67a13.33,13.33,0,0,1,13.33,13.33v40h40a13.34,13.34,0,0,1,13.34,13.34ZM379.19,93.88,335.87,50.56a64,64,0,0,0-45.24-18.74H223.88a32,32,0,0,0-32-32h-64a32,32,0,0,0-32,32v96h128v-32h66.75l43.31,43.31a16,16,0,0,0,22.63,0l22.62-22.62A16,16,0,0,0,379.19,93.88Z"]
 };
 var faPumpSoap = {
   prefix: 'fas',
   iconName: 'pump-soap',
-  icon: [384, 512, [], "f96b", "M235.63,160H84.37a64,64,0,0,0-63.74,58.21L.27,442.21A64,64,0,0,0,64,512H256a64,64,0,0,0,63.74-69.79l-20.36-224A64,64,0,0,0,235.63,160ZM160,416c-33.12,0-60-26.33-60-58.75,0-25,35.7-75.47,52-97.27A10,10,0,0,1,168,260c16.33,21.8,52,72.27,52,97.27C220,389.67,193.12,416,160,416ZM379.31,94.06,336,50.74A64,64,0,0,0,290.75,32H224A32,32,0,0,0,192,0H128A32,32,0,0,0,96,32v96H224V96h66.75l43.31,43.31a16,16,0,0,0,22.63,0l22.62-22.62A16,16,0,0,0,379.31,94.06Z"]
+  icon: [384, 512, [], "e06b", "M235.63,160H84.37a64,64,0,0,0-63.74,58.21L.27,442.21A64,64,0,0,0,64,512H256a64,64,0,0,0,63.74-69.79l-20.36-224A64,64,0,0,0,235.63,160ZM160,416c-33.12,0-60-26.33-60-58.75,0-25,35.7-75.47,52-97.27A10,10,0,0,1,168,260c16.33,21.8,52,72.27,52,97.27C220,389.67,193.12,416,160,416ZM379.31,94.06,336,50.74A64,64,0,0,0,290.75,32H224A32,32,0,0,0,192,0H128A32,32,0,0,0,96,32v96H224V96h66.75l43.31,43.31a16,16,0,0,0,22.63,0l22.62-22.62A16,16,0,0,0,379.31,94.06Z"]
 };
 var faPuzzlePiece = {
   prefix: 'fas',
@@ -7383,7 +7468,7 @@ var faShieldAlt = {
 var faShieldVirus = {
   prefix: 'fas',
   iconName: 'shield-virus',
-  icon: [512, 512, [], "f96c", "M224,192a16,16,0,1,0,16,16A16,16,0,0,0,224,192ZM466.5,83.68l-192-80A57.4,57.4,0,0,0,256.05,0a57.4,57.4,0,0,0-18.46,3.67l-192,80A47.93,47.93,0,0,0,16,128C16,326.5,130.5,463.72,237.5,508.32a48.09,48.09,0,0,0,36.91,0C360.09,472.61,496,349.3,496,128A48,48,0,0,0,466.5,83.68ZM384,256H371.88c-28.51,0-42.79,34.47-22.63,54.63l8.58,8.57a16,16,0,1,1-22.63,22.63l-8.57-8.58C306.47,313.09,272,327.37,272,355.88V368a16,16,0,0,1-32,0V355.88c0-28.51-34.47-42.79-54.63-22.63l-8.57,8.58a16,16,0,0,1-22.63-22.63l8.58-8.57c20.16-20.16,5.88-54.63-22.63-54.63H128a16,16,0,0,1,0-32h12.12c28.51,0,42.79-34.47,22.63-54.63l-8.58-8.57a16,16,0,0,1,22.63-22.63l8.57,8.58c20.16,20.16,54.63,5.88,54.63-22.63V112a16,16,0,0,1,32,0v12.12c0,28.51,34.47,42.79,54.63,22.63l8.57-8.58a16,16,0,0,1,22.63,22.63l-8.58,8.57C329.09,189.53,343.37,224,371.88,224H384a16,16,0,0,1,0,32Zm-96,0a16,16,0,1,0,16,16A16,16,0,0,0,288,256Z"]
+  icon: [512, 512, [], "e06c", "M224,192a16,16,0,1,0,16,16A16,16,0,0,0,224,192ZM466.5,83.68l-192-80A57.4,57.4,0,0,0,256.05,0a57.4,57.4,0,0,0-18.46,3.67l-192,80A47.93,47.93,0,0,0,16,128C16,326.5,130.5,463.72,237.5,508.32a48.09,48.09,0,0,0,36.91,0C360.09,472.61,496,349.3,496,128A48,48,0,0,0,466.5,83.68ZM384,256H371.88c-28.51,0-42.79,34.47-22.63,54.63l8.58,8.57a16,16,0,1,1-22.63,22.63l-8.57-8.58C306.47,313.09,272,327.37,272,355.88V368a16,16,0,0,1-32,0V355.88c0-28.51-34.47-42.79-54.63-22.63l-8.57,8.58a16,16,0,0,1-22.63-22.63l8.58-8.57c20.16-20.16,5.88-54.63-22.63-54.63H128a16,16,0,0,1,0-32h12.12c28.51,0,42.79-34.47,22.63-54.63l-8.58-8.57a16,16,0,0,1,22.63-22.63l8.57,8.58c20.16,20.16,54.63,5.88,54.63-22.63V112a16,16,0,0,1,32,0v12.12c0,28.51,34.47,42.79,54.63,22.63l8.57-8.58a16,16,0,0,1,22.63,22.63l-8.58,8.57C329.09,189.53,343.37,224,371.88,224H384a16,16,0,0,1,0,32Zm-96,0a16,16,0,1,0,16,16A16,16,0,0,0,288,256Z"]
 };
 var faShip = {
   prefix: 'fas',
@@ -7459,6 +7544,11 @@ var faSimCard = {
   prefix: 'fas',
   iconName: 'sim-card',
   icon: [384, 512, [], "f7c4", "M0 64v384c0 35.3 28.7 64 64 64h256c35.3 0 64-28.7 64-64V128L256 0H64C28.7 0 0 28.7 0 64zm224 192h-64v-64h64v64zm96 0h-64v-64h32c17.7 0 32 14.3 32 32v32zm-64 128h64v32c0 17.7-14.3 32-32 32h-32v-64zm-96 0h64v64h-64v-64zm-96 0h64v64H96c-17.7 0-32-14.3-32-32v-32zm0-96h256v64H64v-64zm0-64c0-17.7 14.3-32 32-32h32v64H64v-32z"]
+};
+var faSink = {
+  prefix: 'fas',
+  iconName: 'sink',
+  icon: [512, 512, [], "e06d", "M32,416a96,96,0,0,0,96,96H384a96,96,0,0,0,96-96V384H32ZM496,288H400V256h64a16,16,0,0,0,16-16V224a16,16,0,0,0-16-16H384a32,32,0,0,0-32,32v48H288V96a32,32,0,0,1,64,0v16a16,16,0,0,0,16,16h32a16,16,0,0,0,16-16V96A96.16,96.16,0,0,0,300.87,1.86C255.29,10.71,224,53.36,224,99.79V288H160V240a32,32,0,0,0-32-32H48a16,16,0,0,0-16,16v16a16,16,0,0,0,16,16h64v32H16A16,16,0,0,0,0,304v32a16,16,0,0,0,16,16H496a16,16,0,0,0,16-16V304A16,16,0,0,0,496,288Z"]
 };
 var faSitemap = {
   prefix: 'fas',
@@ -7563,7 +7653,7 @@ var faSnowplow = {
 var faSoap = {
   prefix: 'fas',
   iconName: 'soap',
-  icon: [512, 512, [], "f96e", "M416,192a95.42,95.42,0,0,1-30.94,70.21A95.8,95.8,0,0,1,352,448H160a96,96,0,0,1,0-192h88.91A95.3,95.3,0,0,1,224,192H96A96,96,0,0,0,0,288V416a96,96,0,0,0,96,96H416a96,96,0,0,0,96-96V288A96,96,0,0,0,416,192Zm-96,64a64,64,0,1,0-64-64A64,64,0,0,0,320,256ZM208,96a48,48,0,1,0-48-48A48,48,0,0,0,208,96ZM384,64a32,32,0,1,0-32-32A32,32,0,0,0,384,64ZM160,288a64,64,0,0,0,0,128H352a64,64,0,0,0,0-128Z"]
+  icon: [512, 512, [], "e06e", "M416,192a95.42,95.42,0,0,1-30.94,70.21A95.8,95.8,0,0,1,352,448H160a96,96,0,0,1,0-192h88.91A95.3,95.3,0,0,1,224,192H96A96,96,0,0,0,0,288V416a96,96,0,0,0,96,96H416a96,96,0,0,0,96-96V288A96,96,0,0,0,416,192Zm-96,64a64,64,0,1,0-64-64A64,64,0,0,0,320,256ZM208,96a48,48,0,1,0-48-48A48,48,0,0,0,208,96ZM384,64a32,32,0,1,0-32-32A32,32,0,0,0,384,64ZM160,288a64,64,0,0,0,0,128H352a64,64,0,0,0,0-128Z"]
 };
 var faSocks = {
   prefix: 'fas',
@@ -7773,7 +7863,7 @@ var faStopwatch = {
 var faStopwatch20 = {
   prefix: 'fas',
   iconName: 'stopwatch-20',
-  icon: [448, 512, [], "f96f", "M398.5,190.91l.59-.61,26.59-26.58a16,16,0,0,0,0-22.63L403,118.41a16,16,0,0,0-22.63,0l-24.68,24.68A206.68,206.68,0,0,0,256,98.5V64h32a16,16,0,0,0,16-16V16A16,16,0,0,0,288,0H160a16.05,16.05,0,0,0-16,16V48a16.05,16.05,0,0,0,16,16h32V98.5A207.92,207.92,0,0,0,16.09,297.57C12.64,411.5,106.76,510.22,220.72,512,337.13,513.77,432,420,432,304A206,206,0,0,0,398.5,190.91ZM204.37,377.55a8.2,8.2,0,0,1,8.32,8.07v22.31a8.2,8.2,0,0,1-8.32,8.07H121.52a16.46,16.46,0,0,1-16.61-17.62c2.78-35.22,14.67-57.41,38.45-91.37,20.42-29.19,27.1-37.32,27.1-62.34,0-16.92-1.79-24.27-12.21-24.27-9.39,0-12.69,7.4-12.69,22.68v5.23a8.2,8.2,0,0,1-8.33,8.07h-24.9a8.2,8.2,0,0,1-8.33-8.07v-4.07c0-27.3,8.48-60.24,56.43-60.24,43,0,55.57,25.85,55.57,61,0,35.58-12.44,51.21-34.35,81.31-11.56,15-24.61,35.57-26.41,51.2ZM344,352.32c0,35.16-12.3,63.68-57.23,63.68C243.19,416,232,386.48,232,352.55V247.22c0-40.73,19.58-63.22,56.2-63.22C325,184,344,206.64,344,245.3ZM287.87,221.73c-9.41,0-13.23,7.5-13.23,20V357.68c0,13.11,3.59,20.59,13.23,20.59s13-8,13-21.27V241.06C300.89,229.79,297.88,221.73,287.87,221.73Z"]
+  icon: [448, 512, [], "e06f", "M398.5,190.91l.59-.61,26.59-26.58a16,16,0,0,0,0-22.63L403,118.41a16,16,0,0,0-22.63,0l-24.68,24.68A206.68,206.68,0,0,0,256,98.5V64h32a16,16,0,0,0,16-16V16A16,16,0,0,0,288,0H160a16.05,16.05,0,0,0-16,16V48a16.05,16.05,0,0,0,16,16h32V98.5A207.92,207.92,0,0,0,16.09,297.57C12.64,411.5,106.76,510.22,220.72,512,337.13,513.77,432,420,432,304A206,206,0,0,0,398.5,190.91ZM204.37,377.55a8.2,8.2,0,0,1,8.32,8.07v22.31a8.2,8.2,0,0,1-8.32,8.07H121.52a16.46,16.46,0,0,1-16.61-17.62c2.78-35.22,14.67-57.41,38.45-91.37,20.42-29.19,27.1-37.32,27.1-62.34,0-16.92-1.79-24.27-12.21-24.27-9.39,0-12.69,7.4-12.69,22.68v5.23a8.2,8.2,0,0,1-8.33,8.07h-24.9a8.2,8.2,0,0,1-8.33-8.07v-4.07c0-27.3,8.48-60.24,56.43-60.24,43,0,55.57,25.85,55.57,61,0,35.58-12.44,51.21-34.35,81.31-11.56,15-24.61,35.57-26.41,51.2ZM344,352.32c0,35.16-12.3,63.68-57.23,63.68C243.19,416,232,386.48,232,352.55V247.22c0-40.73,19.58-63.22,56.2-63.22C325,184,344,206.64,344,245.3ZM287.87,221.73c-9.41,0-13.23,7.5-13.23,20V357.68c0,13.11,3.59,20.59,13.23,20.59s13-8,13-21.27V241.06C300.89,229.79,297.88,221.73,287.87,221.73Z"]
 };
 var faStore = {
   prefix: 'fas',
@@ -7788,12 +7878,12 @@ var faStoreAlt = {
 var faStoreAltSlash = {
   prefix: 'fas',
   iconName: 'store-alt-slash',
-  icon: [640, 512, [], "f970", "M17.89,123.62,5.51,142.2c-14.2,21.3,1,49.8,26.59,49.8h74.26ZM576,413.42V224H512V364L384,265V224H330.92l-41.4-32H608c25.5,0,40.7-28.5,26.59-49.8l-85.29-128A32.18,32.18,0,0,0,522.6,0H117.42A31.87,31.87,0,0,0,90.81,14.2l-10.66,16L45.46,3.38A16,16,0,0,0,23,6.19L3.37,31.46A16,16,0,0,0,6.18,53.91L594.53,508.63A16,16,0,0,0,617,505.81l19.64-25.26a16,16,0,0,0-2.81-22.45ZM320,384H128V224H64V480a32,32,0,0,0,32,32H352a32,32,0,0,0,32-32V406.59l-64-49.47Z"]
+  icon: [640, 512, [], "e070", "M17.89,123.62,5.51,142.2c-14.2,21.3,1,49.8,26.59,49.8h74.26ZM576,413.42V224H512V364L384,265V224H330.92l-41.4-32H608c25.5,0,40.7-28.5,26.59-49.8l-85.29-128A32.18,32.18,0,0,0,522.6,0H117.42A31.87,31.87,0,0,0,90.81,14.2l-10.66,16L45.46,3.38A16,16,0,0,0,23,6.19L3.37,31.46A16,16,0,0,0,6.18,53.91L594.53,508.63A16,16,0,0,0,617,505.81l19.64-25.26a16,16,0,0,0-2.81-22.45ZM320,384H128V224H64V480a32,32,0,0,0,32,32H352a32,32,0,0,0,32-32V406.59l-64-49.47Z"]
 };
 var faStoreSlash = {
   prefix: 'fas',
   iconName: 'store-slash',
-  icon: [640, 512, [], "f971", "M121.51,384V284.2a119.43,119.43,0,0,1-28,3.8,123.46,123.46,0,0,1-17.1-1.2,114.88,114.88,0,0,1-15.58-3.6V480c0,17.7,13.59,32,30.4,32H505.75L348.42,384Zm-28-128.09c25.1,0,47.29-10.72,64-27.24L24,120.05c-30.52,53.39-2.45,126.53,56.49,135A95.68,95.68,0,0,0,93.48,255.91ZM602.13,458.09,547.2,413.41V283.2a93.5,93.5,0,0,1-15.57,3.6,127.31,127.31,0,0,1-17.29,1.2,114.89,114.89,0,0,1-28-3.8v79.68L348.52,251.77a88.06,88.06,0,0,0,25.41,4.14c28.11,0,53-13,70.11-33.11,17.19,20.11,42.08,33.11,70.11,33.11a94.31,94.31,0,0,0,13-.91c59.66-8.41,88-82.8,56.06-136.4L521.55,15A30.1,30.1,0,0,0,495.81,0H112A30.11,30.11,0,0,0,86.27,15L76.88,30.78,43.19,3.38A14.68,14.68,0,0,0,21.86,6.19L3.2,31.45A16.58,16.58,0,0,0,5.87,53.91L564.81,508.63a14.69,14.69,0,0,0,21.33-2.82l18.66-25.26A16.58,16.58,0,0,0,602.13,458.09Z"]
+  icon: [640, 512, [], "e071", "M121.51,384V284.2a119.43,119.43,0,0,1-28,3.8,123.46,123.46,0,0,1-17.1-1.2,114.88,114.88,0,0,1-15.58-3.6V480c0,17.7,13.59,32,30.4,32H505.75L348.42,384Zm-28-128.09c25.1,0,47.29-10.72,64-27.24L24,120.05c-30.52,53.39-2.45,126.53,56.49,135A95.68,95.68,0,0,0,93.48,255.91ZM602.13,458.09,547.2,413.41V283.2a93.5,93.5,0,0,1-15.57,3.6,127.31,127.31,0,0,1-17.29,1.2,114.89,114.89,0,0,1-28-3.8v79.68L348.52,251.77a88.06,88.06,0,0,0,25.41,4.14c28.11,0,53-13,70.11-33.11,17.19,20.11,42.08,33.11,70.11,33.11a94.31,94.31,0,0,0,13-.91c59.66-8.41,88-82.8,56.06-136.4L521.55,15A30.1,30.1,0,0,0,495.81,0H112A30.11,30.11,0,0,0,86.27,15L76.88,30.78,43.19,3.38A14.68,14.68,0,0,0,21.86,6.19L3.2,31.45A16.58,16.58,0,0,0,5.87,53.91L564.81,508.63a14.69,14.69,0,0,0,21.33-2.82l18.66-25.26A16.58,16.58,0,0,0,602.13,458.09Z"]
 };
 var faStream = {
   prefix: 'fas',
@@ -8098,7 +8188,7 @@ var faToiletPaper = {
 var faToiletPaperSlash = {
   prefix: 'fas',
   iconName: 'toilet-paper-slash',
-  icon: [640, 512, [], "f972", "M64,192V364.13c0,41.12-9.75,62.75-31.12,126.87A16,16,0,0,0,48,512H328.86a31.87,31.87,0,0,0,30.38-21.87c9.31-27.83,18-53.35,22.18-85.55l-316-244.25C64.53,170.66,64,181.19,64,192ZM633.82,458.09l-102-78.81C575.28,360.91,608,284.32,608,192,608,86,565,0,512,0s-96,86-96,192c0,42,7,80.4,18.43,112L384,265V192c0-83.62,23.63-153.5,60.5-192H160c-23.33,0-44.63,16.83-61.26,44.53L45.46,3.38A16,16,0,0,0,23,6.19L3.37,31.45A16,16,0,0,0,6.18,53.91L594.54,508.63A16,16,0,0,0,617,505.81l19.64-25.26A16,16,0,0,0,633.82,458.09ZM512,256c-17.63,0-32-28.62-32-64s14.37-64,32-64,32,28.63,32,64S529.62,256,512,256Z"]
+  icon: [640, 512, [], "e072", "M64,192V364.13c0,41.12-9.75,62.75-31.12,126.87A16,16,0,0,0,48,512H328.86a31.87,31.87,0,0,0,30.38-21.87c9.31-27.83,18-53.35,22.18-85.55l-316-244.25C64.53,170.66,64,181.19,64,192ZM633.82,458.09l-102-78.81C575.28,360.91,608,284.32,608,192,608,86,565,0,512,0s-96,86-96,192c0,42,7,80.4,18.43,112L384,265V192c0-83.62,23.63-153.5,60.5-192H160c-23.33,0-44.63,16.83-61.26,44.53L45.46,3.38A16,16,0,0,0,23,6.19L3.37,31.45A16,16,0,0,0,6.18,53.91L594.54,508.63A16,16,0,0,0,617,505.81l19.64-25.26A16,16,0,0,0,633.82,458.09ZM512,256c-17.63,0-32-28.62-32-64s14.37-64,32-64,32,28.63,32,64S529.62,256,512,256Z"]
 };
 var faToolbox = {
   prefix: 'fas',
@@ -8143,7 +8233,7 @@ var faTrafficLight = {
 var faTrailer = {
   prefix: 'fas',
   iconName: 'trailer',
-  icon: [640, 512, [], "f941", "M624,320H544V80a16,16,0,0,0-16-16H16A16,16,0,0,0,0,80V368a16,16,0,0,0,16,16H65.61c7.83-54.21,54-96,110.39-96s102.56,41.79,110.39,96H624a16,16,0,0,0,16-16V336A16,16,0,0,0,624,320ZM96,243.68a176.29,176.29,0,0,0-32,20.71V136a8,8,0,0,1,8-8H88a8,8,0,0,1,8,8Zm96-18.54c-5.31-.49-10.57-1.14-16-1.14s-10.69.65-16,1.14V136a8,8,0,0,1,8-8h16a8,8,0,0,1,8,8Zm96,39.25a176.29,176.29,0,0,0-32-20.71V136a8,8,0,0,1,8-8h16a8,8,0,0,1,8,8ZM384,320H352V136a8,8,0,0,1,8-8h16a8,8,0,0,1,8,8Zm96,0H448V136a8,8,0,0,1,8-8h16a8,8,0,0,1,8,8Zm-304,0a80,80,0,1,0,80,80A80,80,0,0,0,176,320Zm0,112a32,32,0,1,1,32-32A32,32,0,0,1,176,432Z"]
+  icon: [640, 512, [], "e041", "M624,320H544V80a16,16,0,0,0-16-16H16A16,16,0,0,0,0,80V368a16,16,0,0,0,16,16H65.61c7.83-54.21,54-96,110.39-96s102.56,41.79,110.39,96H624a16,16,0,0,0,16-16V336A16,16,0,0,0,624,320ZM96,243.68a176.29,176.29,0,0,0-32,20.71V136a8,8,0,0,1,8-8H88a8,8,0,0,1,8,8Zm96-18.54c-5.31-.49-10.57-1.14-16-1.14s-10.69.65-16,1.14V136a8,8,0,0,1,8-8h16a8,8,0,0,1,8,8Zm96,39.25a176.29,176.29,0,0,0-32-20.71V136a8,8,0,0,1,8-8h16a8,8,0,0,1,8,8ZM384,320H352V136a8,8,0,0,1,8-8h16a8,8,0,0,1,8,8Zm96,0H448V136a8,8,0,0,1,8-8h16a8,8,0,0,1,8,8Zm-304,0a80,80,0,1,0,80,80A80,80,0,0,0,176,320Zm0,112a32,32,0,1,1,32-32A32,32,0,0,1,176,432Z"]
 };
 var faTrain = {
   prefix: 'fas',
@@ -8420,6 +8510,11 @@ var faUsersCog = {
   iconName: 'users-cog',
   icon: [640, 512, [], "f509", "M610.5 341.3c2.6-14.1 2.6-28.5 0-42.6l25.8-14.9c3-1.7 4.3-5.2 3.3-8.5-6.7-21.6-18.2-41.2-33.2-57.4-2.3-2.5-6-3.1-9-1.4l-25.8 14.9c-10.9-9.3-23.4-16.5-36.9-21.3v-29.8c0-3.4-2.4-6.4-5.7-7.1-22.3-5-45-4.8-66.2 0-3.3.7-5.7 3.7-5.7 7.1v29.8c-13.5 4.8-26 12-36.9 21.3l-25.8-14.9c-2.9-1.7-6.7-1.1-9 1.4-15 16.2-26.5 35.8-33.2 57.4-1 3.3.4 6.8 3.3 8.5l25.8 14.9c-2.6 14.1-2.6 28.5 0 42.6l-25.8 14.9c-3 1.7-4.3 5.2-3.3 8.5 6.7 21.6 18.2 41.1 33.2 57.4 2.3 2.5 6 3.1 9 1.4l25.8-14.9c10.9 9.3 23.4 16.5 36.9 21.3v29.8c0 3.4 2.4 6.4 5.7 7.1 22.3 5 45 4.8 66.2 0 3.3-.7 5.7-3.7 5.7-7.1v-29.8c13.5-4.8 26-12 36.9-21.3l25.8 14.9c2.9 1.7 6.7 1.1 9-1.4 15-16.2 26.5-35.8 33.2-57.4 1-3.3-.4-6.8-3.3-8.5l-25.8-14.9zM496 368.5c-26.8 0-48.5-21.8-48.5-48.5s21.8-48.5 48.5-48.5 48.5 21.8 48.5 48.5-21.7 48.5-48.5 48.5zM96 224c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm224 32c1.9 0 3.7-.5 5.6-.6 8.3-21.7 20.5-42.1 36.3-59.2 7.4-8 17.9-12.6 28.9-12.6 6.9 0 13.7 1.8 19.6 5.3l7.9 4.6c.8-.5 1.6-.9 2.4-1.4 7-14.6 11.2-30.8 11.2-48 0-61.9-50.1-112-112-112S208 82.1 208 144c0 61.9 50.1 112 112 112zm105.2 194.5c-2.3-1.2-4.6-2.6-6.8-3.9-8.2 4.8-15.3 9.8-27.5 9.8-10.9 0-21.4-4.6-28.9-12.6-18.3-19.8-32.3-43.9-40.2-69.6-10.7-34.5 24.9-49.7 25.8-50.3-.1-2.6-.1-5.2 0-7.8l-7.9-4.6c-3.8-2.2-7-5-9.8-8.1-3.3.2-6.5.6-9.8.6-24.6 0-47.6-6-68.5-16h-8.3C179.6 288 128 339.6 128 403.2V432c0 26.5 21.5 48 48 48h255.4c-3.7-6-6.2-12.8-6.2-20.3v-9.2zM173.1 274.6C161.5 263.1 145.6 256 128 256H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32h65.9c6.3-47.4 34.9-87.3 75.2-109.4z"]
 };
+var faUsersSlash = {
+  prefix: 'fas',
+  iconName: 'users-slash',
+  icon: [640, 512, [], "e073", "M132.65,212.32,36.21,137.78A63.4,63.4,0,0,0,32,160a63.84,63.84,0,0,0,100.65,52.32Zm40.44,62.28A63.79,63.79,0,0,0,128,256H64A64.06,64.06,0,0,0,0,320v32a32,32,0,0,0,32,32H97.91A146.62,146.62,0,0,1,173.09,274.6ZM544,224a64,64,0,1,0-64-64A64.06,64.06,0,0,0,544,224ZM500.56,355.11a114.24,114.24,0,0,0-84.47-65.28L361,247.23c41.46-16.3,71-55.92,71-103.23A111.93,111.93,0,0,0,320,32c-57.14,0-103.69,42.83-110.6,98.08L45.46,3.38A16,16,0,0,0,23,6.19L3.37,31.46A16,16,0,0,0,6.18,53.91L594.53,508.63A16,16,0,0,0,617,505.82l19.64-25.27a16,16,0,0,0-2.81-22.45ZM128,403.21V432a48,48,0,0,0,48,48H464a47.45,47.45,0,0,0,12.57-1.87L232,289.13C173.74,294.83,128,343.42,128,403.21ZM576,256H512a63.79,63.79,0,0,0-45.09,18.6A146.29,146.29,0,0,1,542,384h66a32,32,0,0,0,32-32V320A64.06,64.06,0,0,0,576,256Z"]
+};
 var faUtensilSpoon = {
   prefix: 'fas',
   iconName: 'utensil-spoon',
@@ -8450,6 +8545,16 @@ var faVenusMars = {
   iconName: 'venus-mars',
   icon: [576, 512, [], "f228", "M564 0h-79c-10.7 0-16 12.9-8.5 20.5l16.9 16.9-48.7 48.7C422.5 72.1 396.2 64 368 64c-33.7 0-64.6 11.6-89.2 30.9 14 16.7 25 36 32.1 57.1 14.5-14.8 34.7-24 57.1-24 44.1 0 80 35.9 80 80s-35.9 80-80 80c-22.3 0-42.6-9.2-57.1-24-7.1 21.1-18 40.4-32.1 57.1 24.5 19.4 55.5 30.9 89.2 30.9 79.5 0 144-64.5 144-144 0-28.2-8.1-54.5-22.1-76.7l48.7-48.7 16.9 16.9c2.4 2.4 5.4 3.5 8.4 3.5 6.2 0 12.1-4.8 12.1-12V12c0-6.6-5.4-12-12-12zM144 64C64.5 64 0 128.5 0 208c0 68.5 47.9 125.9 112 140.4V400H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h36v36c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-36h36c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-36v-51.6c64.1-14.6 112-71.9 112-140.4 0-79.5-64.5-144-144-144zm0 224c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"]
 };
+var faVest = {
+  prefix: 'fas',
+  iconName: 'vest',
+  icon: [448, 512, [], "e085", "M437.252,239.877,384,160V32A32,32,0,0,0,352,0H320a24.021,24.021,0,0,0-13.312,4.031l-25,16.672a103.794,103.794,0,0,1-115.376,0l-25-16.672A24.021,24.021,0,0,0,128,0H96A32,32,0,0,0,64,32V160L10.748,239.877A64,64,0,0,0,0,275.377V480a32,32,0,0,0,32,32H192V288a31.987,31.987,0,0,1,1.643-10.119L207.135,237.4,150.188,66.564A151.518,151.518,0,0,0,224,86.234a151.55,151.55,0,0,0,73.812-19.672L224,288V512H416a32,32,0,0,0,32-32V275.377A64,64,0,0,0,437.252,239.877ZM131.312,371.312l-48,48a16,16,0,0,1-22.624-22.624l48-48a16,16,0,0,1,22.624,22.624Zm256,48a15.992,15.992,0,0,1-22.624,0l-48-48a16,16,0,0,1,22.624-22.624l48,48A15.993,15.993,0,0,1,387.312,419.312Z"]
+};
+var faVestPatches = {
+  prefix: 'fas',
+  iconName: 'vest-patches',
+  icon: [448, 512, [], "e086", "M437.252,239.877,384,160V32A32,32,0,0,0,352,0H320a23.982,23.982,0,0,0-13.312,4.031l-25,16.672a103.794,103.794,0,0,1-115.376,0l-25-16.672A23.982,23.982,0,0,0,128,0H96A32,32,0,0,0,64,32V160L10.748,239.877A64,64,0,0,0,0,275.377V480a32,32,0,0,0,32,32H192V288a31.987,31.987,0,0,1,1.643-10.119L207.135,237.4,150.188,66.561A151.579,151.579,0,0,0,224,86.234a151.565,151.565,0,0,0,73.811-19.668L224,288V512H416a32,32,0,0,0,32-32V275.377A64,64,0,0,0,437.252,239.877ZM63.5,272.484a12.01,12.01,0,0,1,17-16.968l15.5,15.5,15.5-15.5a12.01,12.01,0,0,1,17,16.968L112.984,288,128.5,303.516a12.01,12.01,0,0,1-17,16.968L96,304.984l-15.5,15.5a12.01,12.01,0,0,1-17-16.968L79.016,288ZM96,456a40,40,0,1,1,40-40A40,40,0,0,1,96,456ZM359.227,335.785,310.7,336a6.671,6.671,0,0,1-6.7-6.7l.215-48.574A24.987,24.987,0,0,1,331.43,256.1c12.789,1.162,22.129,12.619,22.056,25.419l-.037,5.057,5.051-.037c12.826-.035,24.236,9.275,25.4,22.076A24.948,24.948,0,0,1,359.227,335.785Z"]
+};
 var faVial = {
   prefix: 'fas',
   iconName: 'vial',
@@ -8478,17 +8583,17 @@ var faVihara = {
 var faVirus = {
   prefix: 'fas',
   iconName: 'virus',
-  icon: [512, 512, [], "f974", "M483.55,227.55H462c-50.68,0-76.07-61.27-40.23-97.11L437,115.19A28.44,28.44,0,0,0,396.8,75L381.56,90.22c-35.84,35.83-97.11,10.45-97.11-40.23V28.44a28.45,28.45,0,0,0-56.9,0V50c0,50.68-61.27,76.06-97.11,40.23L115.2,75A28.44,28.44,0,0,0,75,115.19l15.25,15.25c35.84,35.84,10.45,97.11-40.23,97.11H28.45a28.45,28.45,0,1,0,0,56.89H50c50.68,0,76.07,61.28,40.23,97.12L75,396.8A28.45,28.45,0,0,0,115.2,437l15.24-15.25c35.84-35.84,97.11-10.45,97.11,40.23v21.54a28.45,28.45,0,0,0,56.9,0V462c0-50.68,61.27-76.07,97.11-40.23L396.8,437A28.45,28.45,0,0,0,437,396.8l-15.25-15.24c-35.84-35.84-10.45-97.12,40.23-97.12h21.54a28.45,28.45,0,1,0,0-56.89ZM224,272a48,48,0,1,1,48-48A48,48,0,0,1,224,272Zm80,56a24,24,0,1,1,24-24A24,24,0,0,1,304,328Z"]
+  icon: [512, 512, [], "e074", "M483.55,227.55H462c-50.68,0-76.07-61.27-40.23-97.11L437,115.19A28.44,28.44,0,0,0,396.8,75L381.56,90.22c-35.84,35.83-97.11,10.45-97.11-40.23V28.44a28.45,28.45,0,0,0-56.9,0V50c0,50.68-61.27,76.06-97.11,40.23L115.2,75A28.44,28.44,0,0,0,75,115.19l15.25,15.25c35.84,35.84,10.45,97.11-40.23,97.11H28.45a28.45,28.45,0,1,0,0,56.89H50c50.68,0,76.07,61.28,40.23,97.12L75,396.8A28.45,28.45,0,0,0,115.2,437l15.24-15.25c35.84-35.84,97.11-10.45,97.11,40.23v21.54a28.45,28.45,0,0,0,56.9,0V462c0-50.68,61.27-76.07,97.11-40.23L396.8,437A28.45,28.45,0,0,0,437,396.8l-15.25-15.24c-35.84-35.84-10.45-97.12,40.23-97.12h21.54a28.45,28.45,0,1,0,0-56.89ZM224,272a48,48,0,1,1,48-48A48,48,0,0,1,224,272Zm80,56a24,24,0,1,1,24-24A24,24,0,0,1,304,328Z"]
 };
 var faVirusSlash = {
   prefix: 'fas',
   iconName: 'virus-slash',
-  icon: [640, 512, [], "f975", "M114,227.56H92.44a28.44,28.44,0,0,0,0,56.88H114c50.68,0,76.06,61.28,40.23,97.12L139,396.81A28.44,28.44,0,1,0,179.19,437l15.25-15.25c35.84-35.84,97.11-10.45,97.11,40.23v21.54a28.45,28.45,0,0,0,56.9,0V462c0-26.61,17-45.91,38.22-53.37l-244.5-189A55.58,55.58,0,0,1,114,227.56ZM633.82,458.09,470.62,332c4.17-25.39,24.91-47.52,55.39-47.52h21.55a28.44,28.44,0,1,0,0-56.88H526c-50.68,0-76.06-61.28-40.23-97.12L501,115.19A28.44,28.44,0,0,0,460.81,75L445.56,90.22c-35.84,35.84-97.11,10.46-97.11-40.23V28.45a28.45,28.45,0,0,0-56.9,0V50c0,50.69-61.27,76.07-97.11,40.23L179.19,75A28.43,28.43,0,0,0,139,75c-.13.14-.15.32-.28.46L45.46,3.38A16,16,0,0,0,23,6.19L3.37,31.45A16,16,0,0,0,6.18,53.91L594.54,508.63A16,16,0,0,0,617,505.81l19.64-25.26A16,16,0,0,0,633.82,458.09ZM335.43,227.48l-62.87-48.59A46.55,46.55,0,0,1,288,176a48,48,0,0,1,48,48C336,225.22,335.52,226.29,335.43,227.48Z"]
+  icon: [640, 512, [], "e075", "M114,227.6H92.4C76.7,227.6,64,240.3,64,256s12.7,28.4,28.4,28.4H114c50.7,0,76.1,61.3,40.2,97.1L139,396.8 c-11.5,10.7-12.2,28.7-1.6,40.2s28.7,12.2,40.2,1.6c0.5-0.5,1.1-1,1.6-1.6l15.2-15.2c35.8-35.8,97.1-10.5,97.1,40.2v21.5 c0,15.7,12.8,28.4,28.5,28.4c15.7,0,28.4-12.7,28.4-28.4V462c0-26.6,17-45.9,38.2-53.4l-244.5-189 C133.7,224.7,123.9,227.5,114,227.6z M617,505.8l19.6-25.3c5.4-7,4.2-17-2.8-22.5L470.6,332c4.2-25.4,24.9-47.5,55.4-47.5h21.5 c15.7,0,28.4-12.7,28.4-28.4s-12.7-28.4-28.4-28.4H526c-50.7,0-76.1-61.3-40.2-97.1l15.2-15.3c10.7-11.5,10-29.5-1.6-40.2 c-10.9-10.1-27.7-10.1-38.6,0l-15.2,15.2c-35.8,35.8-97.1,10.5-97.1-40.2V28.5C348.4,12.7,335.7,0,320,0 c-15.7,0-28.4,12.7-28.4,28.4V50c0,50.7-61.3,76.1-97.1,40.2L179.2,75c-11.1-11.1-29.4-10.6-40.5,0.5L45.5,3.4 c-7-5.4-17-4.2-22.5,2.8L3.4,31.5c-5.4,7-4.2,17,2.8,22.5l588.4,454.7C601.5,514.1,611.6,512.8,617,505.8z M335.4,227.5l-62.9-48.6 c4.9-1.8,10.2-2.8,15.4-2.9c26.5,0,48,21.5,48,48C336,225.2,335.5,226.3,335.4,227.5z"]
 };
 var faViruses = {
   prefix: 'fas',
   iconName: 'viruses',
-  icon: [640, 512, [], "f976", "M624,352H611.88c-28.51,0-42.79-34.47-22.63-54.63l8.58-8.57a16,16,0,1,0-22.63-22.63l-8.57,8.58C546.47,294.91,512,280.63,512,252.12V240a16,16,0,0,0-32,0v12.12c0,28.51-34.47,42.79-54.63,22.63l-8.57-8.58a16,16,0,0,0-22.63,22.63l8.58,8.57c20.16,20.16,5.88,54.63-22.63,54.63H368a16,16,0,0,0,0,32h12.12c28.51,0,42.79,34.47,22.63,54.63l-8.58,8.57a16,16,0,1,0,22.63,22.63l8.57-8.58c20.16-20.16,54.63-5.88,54.63,22.63V496a16,16,0,0,0,32,0V483.88c0-28.51,34.47-42.79,54.63-22.63l8.57,8.58a16,16,0,1,0,22.63-22.63l-8.58-8.57C569.09,418.47,583.37,384,611.88,384H624a16,16,0,0,0,0-32ZM480,384a32,32,0,1,1,32-32A32,32,0,0,1,480,384ZM346.51,213.33h16.16a21.33,21.33,0,0,0,0-42.66H346.51c-38,0-57.05-46-30.17-72.84l11.43-11.44A21.33,21.33,0,0,0,297.6,56.23L286.17,67.66c-26.88,26.88-72.84,7.85-72.84-30.17V21.33a21.33,21.33,0,0,0-42.66,0V37.49c0,38-46,57.05-72.84,30.17L86.4,56.23A21.33,21.33,0,0,0,56.23,86.39L67.66,97.83c26.88,26.88,7.85,72.84-30.17,72.84H21.33a21.33,21.33,0,0,0,0,42.66H37.49c38,0,57.05,46,30.17,72.84L56.23,297.6A21.33,21.33,0,1,0,86.4,327.77l11.43-11.43c26.88-26.88,72.84-7.85,72.84,30.17v16.16a21.33,21.33,0,0,0,42.66,0V346.51c0-38,46-57.05,72.84-30.17l11.43,11.43a21.33,21.33,0,0,0,30.17-30.17l-11.43-11.43C289.46,259.29,308.49,213.33,346.51,213.33ZM160,192a32,32,0,1,1,32-32A32,32,0,0,1,160,192Zm80,32a16,16,0,1,1,16-16A16,16,0,0,1,240,224Z"]
+  icon: [640, 512, [], "e076", "M624,352H611.88c-28.51,0-42.79-34.47-22.63-54.63l8.58-8.57a16,16,0,1,0-22.63-22.63l-8.57,8.58C546.47,294.91,512,280.63,512,252.12V240a16,16,0,0,0-32,0v12.12c0,28.51-34.47,42.79-54.63,22.63l-8.57-8.58a16,16,0,0,0-22.63,22.63l8.58,8.57c20.16,20.16,5.88,54.63-22.63,54.63H368a16,16,0,0,0,0,32h12.12c28.51,0,42.79,34.47,22.63,54.63l-8.58,8.57a16,16,0,1,0,22.63,22.63l8.57-8.58c20.16-20.16,54.63-5.88,54.63,22.63V496a16,16,0,0,0,32,0V483.88c0-28.51,34.47-42.79,54.63-22.63l8.57,8.58a16,16,0,1,0,22.63-22.63l-8.58-8.57C569.09,418.47,583.37,384,611.88,384H624a16,16,0,0,0,0-32ZM480,384a32,32,0,1,1,32-32A32,32,0,0,1,480,384ZM346.51,213.33h16.16a21.33,21.33,0,0,0,0-42.66H346.51c-38,0-57.05-46-30.17-72.84l11.43-11.44A21.33,21.33,0,0,0,297.6,56.23L286.17,67.66c-26.88,26.88-72.84,7.85-72.84-30.17V21.33a21.33,21.33,0,0,0-42.66,0V37.49c0,38-46,57.05-72.84,30.17L86.4,56.23A21.33,21.33,0,0,0,56.23,86.39L67.66,97.83c26.88,26.88,7.85,72.84-30.17,72.84H21.33a21.33,21.33,0,0,0,0,42.66H37.49c38,0,57.05,46,30.17,72.84L56.23,297.6A21.33,21.33,0,1,0,86.4,327.77l11.43-11.43c26.88-26.88,72.84-7.85,72.84,30.17v16.16a21.33,21.33,0,0,0,42.66,0V346.51c0-38,46-57.05,72.84-30.17l11.43,11.43a21.33,21.33,0,0,0,30.17-30.17l-11.43-11.43C289.46,259.29,308.49,213.33,346.51,213.33ZM160,192a32,32,0,1,1,32-32A32,32,0,0,1,160,192Zm80,32a16,16,0,1,1,16-16A16,16,0,0,1,240,224Z"]
 };
 var faVoicemail = {
   prefix: 'fas',
@@ -8694,6 +8799,8 @@ var _iconsCache = {
   faBackspace: faBackspace,
   faBackward: faBackward,
   faBacon: faBacon,
+  faBacteria: faBacteria,
+  faBacterium: faBacterium,
   faBahai: faBahai,
   faBalanceScale: faBalanceScale,
   faBalanceScaleLeft: faBalanceScaleLeft,
@@ -9401,6 +9508,7 @@ var _iconsCache = {
   faSignal: faSignal,
   faSignature: faSignature,
   faSimCard: faSimCard,
+  faSink: faSink,
   faSitemap: faSitemap,
   faSkating: faSkating,
   faSkiing: faSkiing,
@@ -9593,12 +9701,15 @@ var _iconsCache = {
   faUserTimes: faUserTimes,
   faUsers: faUsers,
   faUsersCog: faUsersCog,
+  faUsersSlash: faUsersSlash,
   faUtensilSpoon: faUtensilSpoon,
   faUtensils: faUtensils,
   faVectorSquare: faVectorSquare,
   faVenus: faVenus,
   faVenusDouble: faVenusDouble,
   faVenusMars: faVenusMars,
+  faVest: faVest,
+  faVestPatches: faVestPatches,
   faVial: faVial,
   faVials: faVials,
   faVideo: faVideo,
@@ -12231,10 +12342,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Clock: function Clock() {
-      return Promise.all(/*! import() | chunks/helpers */[__webpack_require__.e("vendors~chunks/capacity/charts/projectionChart~chunks/capacity/gaugeChart~chunks/dashboard~chunks/he~c20aef62"), __webpack_require__.e("chunks/helpers")]).then(__webpack_require__.bind(null, /*! ./helpers/Clock */ "./resources/js/components/helpers/Clock.vue"));
+      return Promise.all(/*! import() | chunks/helpers */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~54cb6b07"), __webpack_require__.e("chunks/helpers")]).then(__webpack_require__.bind(null, /*! ./helpers/Clock */ "./resources/js/components/helpers/Clock.vue"));
     },
     Footer: function Footer() {
-      return Promise.all(/*! import() | chunks/layouts/footer */[__webpack_require__.e("vendors~chunks/capacity/charts/projectionChart~chunks/capacity/gaugeChart~chunks/dashboard~chunks/he~c20aef62"), __webpack_require__.e("chunks/layouts/footer")]).then(__webpack_require__.bind(null, /*! ./layouts/Footer */ "./resources/js/components/layouts/Footer.vue"));
+      return Promise.all(/*! import() | chunks/layouts/footer */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~54cb6b07"), __webpack_require__.e("chunks/layouts/footer")]).then(__webpack_require__.bind(null, /*! ./layouts/Footer */ "./resources/js/components/layouts/Footer.vue"));
     }
   },
   props: ['user', 'user_permissions', 'app_name', 'last_data_counters', 'last_updated_data', 'is_dark_mode'],
@@ -12393,12 +12504,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-197ef742.js */ "./node_modules/buefy/dist/esm/chunk-197ef742.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-f647b5cb.js */ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-85a8ec35.js */ "./node_modules/buefy/dist/esm/chunk-85a8ec35.js");
-/* harmony import */ var _chunk_1c37796e_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-1c37796e.js */ "./node_modules/buefy/dist/esm/chunk-1c37796e.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BAutocomplete", function() { return _chunk_1c37796e_js__WEBPACK_IMPORTED_MODULE_7__["A"]; });
+/* harmony import */ var _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-b59d2948.js */ "./node_modules/buefy/dist/esm/chunk-b59d2948.js");
+/* harmony import */ var _chunk_4f0d2958_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-4f0d2958.js */ "./node_modules/buefy/dist/esm/chunk-4f0d2958.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BAutocomplete", function() { return _chunk_4f0d2958_js__WEBPACK_IMPORTED_MODULE_7__["A"]; });
 
 
 
@@ -12412,7 +12523,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var Plugin = {
   install: function install(Vue) {
-    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__["r"])(Vue, _chunk_1c37796e_js__WEBPACK_IMPORTED_MODULE_7__["A"]);
+    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__["r"])(Vue, _chunk_4f0d2958_js__WEBPACK_IMPORTED_MODULE_7__["A"]);
   }
 };
 Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__["u"])(Plugin);
@@ -12435,7 +12546,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
 
 
@@ -12445,7 +12556,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var script = {
   name: 'BButton',
-  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"]),
+  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"]),
   inheritAttrs: false,
   props: {
     type: [String, Object],
@@ -12573,9 +12684,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-56f84f22.js */ "./node_modules/buefy/dist/esm/chunk-56f84f22.js");
+/* harmony import */ var _chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-e3b0b539.js */ "./node_modules/buefy/dist/esm/chunk-e3b0b539.js");
 
 
 
@@ -12585,8 +12696,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var script = {
   name: 'BCarousel',
-  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"]),
-  mixins: [Object(_chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_5__["P"])('carousel', _chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_5__["S"])],
+  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"]),
+  mixins: [Object(_chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_5__["P"])('carousel', _chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_5__["S"])],
   props: {
     value: {
       type: Number,
@@ -12876,7 +12987,7 @@ var __vue_staticRenderFns__ = [];
 //
 var script$1 = {
   name: 'BCarouselItem',
-  mixins: [Object(_chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_5__["I"])('carousel', _chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_5__["a"])],
+  mixins: [Object(_chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_5__["I"])('carousel', _chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_5__["a"])],
   data: function data() {
     return {
       transitionName: null
@@ -12930,7 +13041,7 @@ var __vue_staticRenderFns__$1 = [];
 
 var script$2 = {
   name: 'BCarouselList',
-  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"]),
+  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"]),
   props: {
     data: {
       type: Array,
@@ -13038,11 +13149,11 @@ var script$2 = {
     settings: function settings() {
       var _this = this;
 
-      var breakpoint = this.breakpointKeys.find(function (breakpoint) {
+      var breakpoint = this.breakpointKeys.filter(function (breakpoint) {
         if (_this.windowWidth >= breakpoint) {
           return true;
         }
-      });
+      })[0];
 
       if (breakpoint) {
         return Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["a"])({}, this.$props, {}, this.breakpoints[breakpoint]);
@@ -13167,6 +13278,9 @@ var script$2 = {
       }
 
       window.addEventListener('resize', this.resized);
+      document.addEventListener('animationend', this.refresh);
+      document.addEventListener('transitionend', this.refresh);
+      document.addEventListener('transitionstart', this.refresh);
       this.resized();
     }
 
@@ -13181,6 +13295,9 @@ var script$2 = {
       }
 
       window.removeEventListener('resize', this.resized);
+      document.removeEventListener('animationend', this.refresh);
+      document.removeEventListener('transitionend', this.refresh);
+      document.removeEventListener('transitionstart', this.refresh);
       this.dragEnd();
     }
   }
@@ -13329,9 +13446,325 @@ Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_0__["u"])(Plugin);
 
 /***/ }),
 
-/***/ "./node_modules/buefy/dist/esm/chunk-10cf3f0e.js":
+/***/ "./node_modules/buefy/dist/esm/chunk-01bc3886.js":
 /*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-10cf3f0e.js ***!
+  !*** ./node_modules/buefy/dist/esm/chunk-01bc3886.js ***!
+  \*******************************************************/
+/*! exports provided: S */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "S", function() { return Select; });
+/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
+/* harmony import */ var _chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-f647b5cb.js */ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
+/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
+
+
+
+
+
+var script = {
+  name: 'BSelect',
+  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_2__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_2__["I"]),
+  mixins: [_chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_1__["F"]],
+  inheritAttrs: false,
+  props: {
+    value: {
+      type: [String, Number, Boolean, Object, Array, Function],
+      default: null
+    },
+    placeholder: String,
+    multiple: Boolean,
+    nativeSize: [String, Number]
+  },
+  data: function data() {
+    return {
+      selected: this.value,
+      _elementRef: 'select'
+    };
+  },
+  computed: {
+    computedValue: {
+      get: function get() {
+        return this.selected;
+      },
+      set: function set(value) {
+        this.selected = value;
+        this.$emit('input', value);
+        !this.isValid && this.checkHtml5Validity();
+      }
+    },
+    spanClasses: function spanClasses() {
+      return [this.size, this.statusType, {
+        'is-fullwidth': this.expanded,
+        'is-loading': this.loading,
+        'is-multiple': this.multiple,
+        'is-rounded': this.rounded,
+        'is-empty': this.selected === null
+      }];
+    }
+  },
+  watch: {
+    /**
+    * When v-model is changed:
+    *   1. Set the selected option.
+    *   2. If it's invalid, validate again.
+    */
+    value: function value(_value) {
+      this.selected = _value;
+      !this.isValid && this.checkHtml5Validity();
+    }
+  }
+};
+
+/* script */
+const __vue_script__ = script;
+
+/* template */
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"control",class:{ 'is-expanded': _vm.expanded, 'has-icons-left': _vm.icon }},[_c('span',{staticClass:"select",class:_vm.spanClasses},[_c('select',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.computedValue),expression:"computedValue"}],ref:"select",attrs:{"multiple":_vm.multiple,"size":_vm.nativeSize},on:{"blur":function($event){_vm.$emit('blur', $event) && _vm.checkHtml5Validity();},"focus":function($event){return _vm.$emit('focus', $event)},"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.computedValue=$event.target.multiple ? $$selectedVal : $$selectedVal[0];}}},'select',_vm.$attrs,false),[(_vm.placeholder)?[(_vm.computedValue == null)?_c('option',{attrs:{"disabled":"","hidden":""},domProps:{"value":null}},[_vm._v(" "+_vm._s(_vm.placeholder)+" ")]):_vm._e()]:_vm._e(),_vm._t("default")],2)]),(_vm.icon)?_c('b-icon',{staticClass:"is-left",attrs:{"icon":_vm.icon,"pack":_vm.iconPack,"size":_vm.iconSize}}):_vm._e()],1)};
+var __vue_staticRenderFns__ = [];
+
+  /* style */
+  const __vue_inject_styles__ = undefined;
+  /* scoped */
+  const __vue_scope_id__ = undefined;
+  /* module identifier */
+  const __vue_module_identifier__ = undefined;
+  /* functional template */
+  const __vue_is_functional_template__ = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var Select = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["_"])(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    undefined,
+    undefined
+  );
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/buefy/dist/esm/chunk-0928016a.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/buefy/dist/esm/chunk-0928016a.js ***!
+  \*******************************************************/
+/*! exports provided: I */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I", function() { return Icon; });
+/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
+/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
+/* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
+/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
+
+
+
+
+
+var mdiIcons = {
+  sizes: {
+    'default': 'mdi-24px',
+    'is-small': null,
+    'is-medium': 'mdi-36px',
+    'is-large': 'mdi-48px'
+  },
+  iconPrefix: 'mdi-'
+};
+
+var faIcons = function faIcons() {
+  var faIconPrefix = _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"] && _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"].defaultIconComponent ? '' : 'fa-';
+  return {
+    sizes: {
+      'default': null,
+      'is-small': null,
+      'is-medium': faIconPrefix + 'lg',
+      'is-large': faIconPrefix + '2x'
+    },
+    iconPrefix: faIconPrefix,
+    internalIcons: {
+      'information': 'info-circle',
+      'alert': 'exclamation-triangle',
+      'alert-circle': 'exclamation-circle',
+      'chevron-right': 'angle-right',
+      'chevron-left': 'angle-left',
+      'chevron-down': 'angle-down',
+      'eye-off': 'eye-slash',
+      'menu-down': 'caret-down',
+      'menu-up': 'caret-up',
+      'close-circle': 'times-circle'
+    }
+  };
+};
+
+var getIcons = function getIcons() {
+  var icons = {
+    mdi: mdiIcons,
+    fa: faIcons(),
+    fas: faIcons(),
+    far: faIcons(),
+    fad: faIcons(),
+    fab: faIcons(),
+    fal: faIcons()
+  };
+
+  if (_chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"] && _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"].customIconPacks) {
+    icons = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["merge"])(icons, _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"].customIconPacks, true);
+  }
+
+  return icons;
+};
+
+var script = {
+  name: 'BIcon',
+  props: {
+    type: [String, Object],
+    component: String,
+    pack: String,
+    icon: String,
+    size: String,
+    customSize: String,
+    customClass: String,
+    both: Boolean // This is used internally to show both MDI and FA icon
+
+  },
+  computed: {
+    iconConfig: function iconConfig() {
+      var allIcons = getIcons();
+      return allIcons[this.newPack];
+    },
+    iconPrefix: function iconPrefix() {
+      if (this.iconConfig && this.iconConfig.iconPrefix) {
+        return this.iconConfig.iconPrefix;
+      }
+
+      return '';
+    },
+
+    /**
+    * Internal icon name based on the pack.
+    * If pack is 'fa', gets the equivalent FA icon name of the MDI,
+    * internal icons are always MDI.
+    */
+    newIcon: function newIcon() {
+      return "".concat(this.iconPrefix).concat(this.getEquivalentIconOf(this.icon));
+    },
+    newPack: function newPack() {
+      return this.pack || _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"].defaultIconPack;
+    },
+    newType: function newType() {
+      if (!this.type) return;
+      var splitType = [];
+
+      if (typeof this.type === 'string') {
+        splitType = this.type.split('-');
+      } else {
+        for (var key in this.type) {
+          if (this.type[key]) {
+            splitType = key.split('-');
+            break;
+          }
+        }
+      }
+
+      if (splitType.length <= 1) return;
+
+      var _splitType = splitType,
+          _splitType2 = Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["c"])(_splitType),
+          type = _splitType2.slice(1);
+
+      return "has-text-".concat(type.join('-'));
+    },
+    newCustomSize: function newCustomSize() {
+      return this.customSize || this.customSizeByPack;
+    },
+    customSizeByPack: function customSizeByPack() {
+      if (this.iconConfig && this.iconConfig.sizes) {
+        if (this.size && this.iconConfig.sizes[this.size] !== undefined) {
+          return this.iconConfig.sizes[this.size];
+        } else if (this.iconConfig.sizes.default) {
+          return this.iconConfig.sizes.default;
+        }
+      }
+
+      return null;
+    },
+    useIconComponent: function useIconComponent() {
+      return this.component || _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"].defaultIconComponent;
+    }
+  },
+  methods: {
+    /**
+    * Equivalent icon name of the MDI.
+    */
+    getEquivalentIconOf: function getEquivalentIconOf(value) {
+      // Only transform the class if the both prop is set to true
+      if (!this.both) {
+        return value;
+      }
+
+      if (this.iconConfig && this.iconConfig.internalIcons && this.iconConfig.internalIcons[value]) {
+        return this.iconConfig.internalIcons[value];
+      }
+
+      return value;
+    }
+  }
+};
+
+/* script */
+const __vue_script__ = script;
+
+/* template */
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"icon",class:[_vm.newType, _vm.size]},[(!_vm.useIconComponent)?_c('i',{class:[_vm.newPack, _vm.newIcon, _vm.newCustomSize, _vm.customClass]}):_c(_vm.useIconComponent,{tag:"component",class:[_vm.customClass],attrs:{"icon":[_vm.newPack, _vm.newIcon],"size":_vm.newCustomSize}})],1)};
+var __vue_staticRenderFns__ = [];
+
+  /* style */
+  const __vue_inject_styles__ = undefined;
+  /* scoped */
+  const __vue_scope_id__ = undefined;
+  /* module identifier */
+  const __vue_module_identifier__ = undefined;
+  /* functional template */
+  const __vue_is_functional_template__ = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var Icon = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["_"])(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    undefined,
+    undefined
+  );
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/buefy/dist/esm/chunk-1bad8473.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/buefy/dist/esm/chunk-1bad8473.js ***!
   \*******************************************************/
 /*! exports provided: T */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -13341,7 +13774,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "T", function() { return TimepickerMixin; });
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-197ef742.js */ "./node_modules/buefy/dist/esm/chunk-197ef742.js");
+/* harmony import */ var _chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-f647b5cb.js */ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js");
 
 
 
@@ -13432,7 +13865,7 @@ var defaultTimeParser = function defaultTimeParser(timeString, vm) {
 };
 
 var TimepickerMixin = {
-  mixins: [_chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_2__["F"]],
+  mixins: [_chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_2__["F"]],
   inheritAttrs: false,
   props: {
     value: Date,
@@ -14069,188 +14502,332 @@ var TimepickerMixin = {
 
 /***/ }),
 
-/***/ "./node_modules/buefy/dist/esm/chunk-197ef742.js":
+/***/ "./node_modules/buefy/dist/esm/chunk-1d4d79a1.js":
 /*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-197ef742.js ***!
+  !*** ./node_modules/buefy/dist/esm/chunk-1d4d79a1.js ***!
   \*******************************************************/
-/*! exports provided: F */
+/*! exports provided: L */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return FormElementMixin; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "L", function() { return Loading; });
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
-/* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
+/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
+/* harmony import */ var _chunk_b9bdb0e4_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-b9bdb0e4.js */ "./node_modules/buefy/dist/esm/chunk-b9bdb0e4.js");
 
 
 
-var FormElementMixin = {
+
+//
+var script = {
+  name: 'BLoading',
+  // deprecated, to replace with default 'value' in the next breaking change
+  model: {
+    prop: 'active',
+    event: 'update:active'
+  },
   props: {
-    size: String,
-    expanded: Boolean,
-    loading: Boolean,
-    rounded: Boolean,
-    icon: String,
-    iconPack: String,
-    // Native options to use in HTML5 validation
-    autocomplete: String,
-    maxlength: [Number, String],
-    useHtml5Validation: {
+    active: Boolean,
+    programmatic: Boolean,
+    container: [Object, Function, _chunk_b9bdb0e4_js__WEBPACK_IMPORTED_MODULE_2__["H"]],
+    isFullPage: {
       type: Boolean,
-      default: function _default() {
-        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultUseHtml5Validation;
-      }
+      default: true
     },
-    validationMessage: String,
-    locale: {
-      type: [String, Array],
-      default: function _default() {
-        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultLocale;
-      }
+    animation: {
+      type: String,
+      default: 'fade'
     },
-    statusIcon: {
+    canCancel: {
       type: Boolean,
-      default: function _default() {
-        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultStatusIcon;
-      }
+      default: false
+    },
+    onCancel: {
+      type: Function,
+      default: function _default() {}
     }
   },
   data: function data() {
     return {
-      isValid: true,
-      isFocused: false,
-      newIconPack: this.iconPack || _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultIconPack
+      isActive: this.active || false,
+      displayInFullPage: this.isFullPage
     };
   },
-  computed: {
-    /**
-     * Find parent Field, max 3 levels deep.
-     */
-    parentField: function parentField() {
-      var parent = this.$parent;
-
-      for (var i = 0; i < 3; i++) {
-        if (parent && !parent.$data._isField) {
-          parent = parent.$parent;
-        }
-      }
-
-      return parent;
+  watch: {
+    active: function active(value) {
+      this.isActive = value;
     },
-
-    /**
-     * Get the type prop from parent if it's a Field.
-     */
-    statusType: function statusType() {
-      if (!this.parentField) return;
-      if (!this.parentField.newType) return;
-
-      if (typeof this.parentField.newType === 'string') {
-        return this.parentField.newType;
-      } else {
-        for (var key in this.parentField.newType) {
-          if (this.parentField.newType[key]) {
-            return key;
-          }
-        }
-      }
-    },
-
-    /**
-     * Get the message prop from parent if it's a Field.
-     */
-    statusMessage: function statusMessage() {
-      if (!this.parentField) return;
-      return this.parentField.newMessage || this.parentField.$slots.message;
-    },
-
-    /**
-     * Fix icon size for inputs, large was too big
-     */
-    iconSize: function iconSize() {
-      switch (this.size) {
-        case 'is-small':
-          return this.size;
-
-        case 'is-medium':
-          return;
-
-        case 'is-large':
-          return this.newIconPack === 'mdi' ? 'is-medium' : '';
-      }
+    isFullPage: function isFullPage(value) {
+      this.displayInFullPage = value;
     }
   },
   methods: {
     /**
-     * Focus method that work dynamically depending on the component.
-     */
-    focus: function focus() {
-      var el = this.getElement();
-      if (el === undefined) return;
-      this.$nextTick(function () {
-        if (el) el.focus();
-      });
-    },
-    onBlur: function onBlur($event) {
-      this.isFocused = false;
-      this.$emit('blur', $event);
-      this.checkHtml5Validity();
-    },
-    onFocus: function onFocus($event) {
-      this.isFocused = true;
-      this.$emit('focus', $event);
-    },
-    getElement: function getElement() {
-      var el = this.$refs[this.$data._elementRef];
-
-      while (Object(_helpers_js__WEBPACK_IMPORTED_MODULE_0__["isVueComponent"])(el)) {
-        el = el.$refs[el.$data._elementRef];
-      }
-
-      return el;
-    },
-    setInvalid: function setInvalid() {
-      var type = 'is-danger';
-      var message = this.validationMessage || this.getElement().validationMessage;
-      this.setValidity(type, message);
-    },
-    setValidity: function setValidity(type, message) {
-      var _this = this;
-
-      this.$nextTick(function () {
-        if (_this.parentField) {
-          // Set type only if not defined
-          if (!_this.parentField.type) {
-            _this.parentField.newType = type;
-          } // Set message only if not defined
-
-
-          if (!_this.parentField.message) {
-            _this.parentField.newMessage = message;
-          }
-        }
-      });
+    * Close the Modal if canCancel.
+    */
+    cancel: function cancel() {
+      if (!this.canCancel || !this.isActive) return;
+      this.close();
     },
 
     /**
-     * Check HTML5 validation, set isValid property.
-     * If validation fail, send 'is-danger' type,
-     * and error message to parent if it's a Field.
-     */
-    checkHtml5Validity: function checkHtml5Validity() {
-      if (!this.useHtml5Validation) return;
-      var el = this.getElement();
-      if (el === undefined) return;
+    * Emit events, and destroy modal if it's programmatic.
+    */
+    close: function close() {
+      var _this = this;
 
-      if (!el.checkValidity()) {
-        this.setInvalid();
-        this.isValid = false;
-      } else {
-        this.setValidity(null, null);
-        this.isValid = true;
+      this.onCancel.apply(null, arguments);
+      this.$emit('close');
+      this.$emit('update:active', false); // Timeout for the animation complete before destroying
+
+      if (this.programmatic) {
+        this.isActive = false;
+        setTimeout(function () {
+          _this.$destroy();
+
+          Object(_helpers_js__WEBPACK_IMPORTED_MODULE_0__["removeElement"])(_this.$el);
+        }, 150);
       }
+    },
 
-      return this.isValid;
+    /**
+    * Keypress event that is bound to the document.
+    */
+    keyPress: function keyPress(_ref) {
+      var key = _ref.key;
+      if (key === 'Escape' || key === 'Esc') this.cancel();
+    }
+  },
+  created: function created() {
+    if (typeof window !== 'undefined') {
+      document.addEventListener('keyup', this.keyPress);
+    }
+  },
+  beforeMount: function beforeMount() {
+    // Insert the Loading component in body tag
+    // only if it's programmatic
+    if (this.programmatic) {
+      if (!this.container) {
+        document.body.appendChild(this.$el);
+      } else {
+        this.displayInFullPage = false;
+        this.$emit('update:is-full-page', false);
+        this.container.appendChild(this.$el);
+      }
+    }
+  },
+  mounted: function mounted() {
+    if (this.programmatic) this.isActive = true;
+  },
+  beforeDestroy: function beforeDestroy() {
+    if (typeof window !== 'undefined') {
+      document.removeEventListener('keyup', this.keyPress);
+    }
+  }
+};
+
+/* script */
+const __vue_script__ = script;
+
+/* template */
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('transition',{attrs:{"name":_vm.animation}},[(_vm.isActive)?_c('div',{staticClass:"loading-overlay is-active",class:{ 'is-full-page': _vm.displayInFullPage }},[_c('div',{staticClass:"loading-background",on:{"click":_vm.cancel}}),_vm._t("default",[_c('div',{staticClass:"loading-icon"})])],2):_vm._e()])};
+var __vue_staticRenderFns__ = [];
+
+  /* style */
+  const __vue_inject_styles__ = undefined;
+  /* scoped */
+  const __vue_scope_id__ = undefined;
+  /* module identifier */
+  const __vue_module_identifier__ = undefined;
+  /* functional template */
+  const __vue_is_functional_template__ = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var Loading = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_1__["_"])(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    undefined,
+    undefined
+  );
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/buefy/dist/esm/chunk-1fafdf15.js ***!
+  \*******************************************************/
+/*! exports provided: _, a, b, c, d */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_", function() { return _defineProperty; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _objectSpread2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return _typeof; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return _toArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return _toConsumableArray; });
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function (obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _toArray(arr) {
+  return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest();
+}
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+    return arr2;
+  }
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+}
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance");
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/buefy/dist/esm/chunk-2793447b.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/buefy/dist/esm/chunk-2793447b.js ***!
+  \*******************************************************/
+/*! exports provided: C */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return CheckRadioMixin; });
+var CheckRadioMixin = {
+  props: {
+    value: [String, Number, Boolean, Function, Object, Array],
+    nativeValue: [String, Number, Boolean, Function, Object, Array],
+    type: String,
+    disabled: Boolean,
+    required: Boolean,
+    name: String,
+    size: String
+  },
+  data: function data() {
+    return {
+      newValue: this.value
+    };
+  },
+  computed: {
+    computedValue: {
+      get: function get() {
+        return this.newValue;
+      },
+      set: function set(value) {
+        this.newValue = value;
+        this.$emit('input', value);
+      }
+    }
+  },
+  watch: {
+    /**
+    * When v-model change, set internal value.
+    */
+    value: function value(_value) {
+      this.newValue = _value;
+    }
+  },
+  methods: {
+    focus: function focus() {
+      // MacOS FireFox and Safari do not focus when clicked
+      this.$refs.input.focus();
     }
   }
 };
@@ -14260,9 +14837,80 @@ var FormElementMixin = {
 
 /***/ }),
 
-/***/ "./node_modules/buefy/dist/esm/chunk-1c37796e.js":
+/***/ "./node_modules/buefy/dist/esm/chunk-42f463e6.js":
 /*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-1c37796e.js ***!
+  !*** ./node_modules/buefy/dist/esm/chunk-42f463e6.js ***!
+  \*******************************************************/
+/*! exports provided: t */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return directive; });
+var findFocusable = function findFocusable(element) {
+  var programmatic = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+  if (!element) {
+    return null;
+  }
+
+  if (programmatic) {
+    return element.querySelectorAll("*[tabindex=\"-1\"]");
+  }
+
+  return element.querySelectorAll("a[href]:not([tabindex=\"-1\"]),\n                                     area[href],\n                                     input:not([disabled]),\n                                     select:not([disabled]),\n                                     textarea:not([disabled]),\n                                     button:not([disabled]),\n                                     iframe,\n                                     object,\n                                     embed,\n                                     *[tabindex]:not([tabindex=\"-1\"]),\n                                     *[contenteditable]");
+};
+
+var onKeyDown;
+
+var bind = function bind(el, _ref) {
+  var _ref$value = _ref.value,
+      value = _ref$value === void 0 ? true : _ref$value;
+
+  if (value) {
+    var focusable = findFocusable(el);
+    var focusableProg = findFocusable(el, true);
+
+    if (focusable && focusable.length > 0) {
+      onKeyDown = function onKeyDown(event) {
+        // Need to get focusable each time since it can change between key events
+        // ex. changing month in a datepicker
+        focusable = findFocusable(el);
+        focusableProg = findFocusable(el, true);
+        var firstFocusable = focusable[0];
+        var lastFocusable = focusable[focusable.length - 1];
+
+        if (event.target === firstFocusable && event.shiftKey && event.key === 'Tab') {
+          event.preventDefault();
+          lastFocusable.focus();
+        } else if ((event.target === lastFocusable || Array.from(focusableProg).indexOf(event.target) >= 0) && !event.shiftKey && event.key === 'Tab') {
+          event.preventDefault();
+          firstFocusable.focus();
+        }
+      };
+
+      el.addEventListener('keydown', onKeyDown);
+    }
+  }
+};
+
+var unbind = function unbind(el) {
+  el.removeEventListener('keydown', onKeyDown);
+};
+
+var directive = {
+  bind: bind,
+  unbind: unbind
+};
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/buefy/dist/esm/chunk-4f0d2958.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/buefy/dist/esm/chunk-4f0d2958.js ***!
   \*******************************************************/
 /*! exports provided: A */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -14272,9 +14920,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return Autocomplete; });
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
-/* harmony import */ var _chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-197ef742.js */ "./node_modules/buefy/dist/esm/chunk-197ef742.js");
+/* harmony import */ var _chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-f647b5cb.js */ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-85a8ec35.js */ "./node_modules/buefy/dist/esm/chunk-85a8ec35.js");
+/* harmony import */ var _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-b59d2948.js */ "./node_modules/buefy/dist/esm/chunk-b59d2948.js");
 
 
 
@@ -14283,8 +14931,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var script = {
   name: 'BAutocomplete',
-  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_4__["I"].name, _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_4__["I"]),
-  mixins: [_chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_2__["F"]],
+  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_4__["I"].name, _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_4__["I"]),
+  mixins: [_chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_2__["F"]],
   inheritAttrs: false,
   props: {
     value: [Number, String],
@@ -14369,6 +15017,12 @@ var script = {
       return [{
         items: this.data
       }];
+    },
+    isEmpty: function isEmpty() {
+      if (!this.computedData) return true;
+      return !this.computedData.some(function (element) {
+        return element.items && element.items.length;
+      });
     },
 
     /**
@@ -14866,7 +15520,7 @@ var script = {
 const __vue_script__ = script;
 
 /* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"autocomplete control",class:{ 'is-expanded': _vm.expanded }},[_c('b-input',_vm._b({ref:"input",attrs:{"type":"text","size":_vm.size,"loading":_vm.loading,"rounded":_vm.rounded,"icon":_vm.icon,"icon-right":_vm.newIconRight,"icon-right-clickable":_vm.newIconRightClickable,"icon-pack":_vm.iconPack,"maxlength":_vm.maxlength,"autocomplete":_vm.newAutocomplete,"use-html5-validation":false},on:{"input":_vm.onInput,"focus":_vm.focused,"blur":_vm.onBlur,"icon-right-click":_vm.rightIconClick,"icon-click":function (event) { return _vm.$emit('icon-click', event); }},nativeOn:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"esc",27,$event.key,["Esc","Escape"])){ return null; }$event.preventDefault();_vm.isActive = false;},"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"tab",9,$event.key,"Tab")){ return null; }return _vm.tabPressed($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.enterPressed($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"up",38,$event.key,["Up","ArrowUp"])){ return null; }$event.preventDefault();return _vm.keyArrows('up')},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"down",40,$event.key,["Down","ArrowDown"])){ return null; }$event.preventDefault();return _vm.keyArrows('down')}]},model:{value:(_vm.newValue),callback:function ($$v) {_vm.newValue=$$v;},expression:"newValue"}},'b-input',_vm.$attrs,false)),_c('transition',{attrs:{"name":"fade"}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isActive && (_vm.computedData.length > 0 || _vm.hasEmptySlot || _vm.hasHeaderSlot)),expression:"isActive && (computedData.length > 0 || hasEmptySlot || hasHeaderSlot)"}],ref:"dropdown",staticClass:"dropdown-menu",class:{ 'is-opened-top': _vm.isOpenedTop && !_vm.appendToBody },style:(_vm.style)},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isActive),expression:"isActive"}],staticClass:"dropdown-content",style:(_vm.contentStyle)},[(_vm.hasHeaderSlot)?_c('div',{staticClass:"dropdown-item"},[_vm._t("header")],2):_vm._e(),_vm._l((_vm.computedData),function(element,groupindex){return [(element.group)?_c('div',{key:groupindex + 'group',staticClass:"dropdown-item"},[(_vm.hasGroupSlot)?_vm._t("group",null,{"group":element.group,"index":groupindex}):_c('span',{staticClass:"has-text-weight-bold"},[_vm._v(" "+_vm._s(element.group)+" ")])],2):_vm._e(),_vm._l((element.items),function(option,index){return _c('a',{key:groupindex + ':' + index,staticClass:"dropdown-item",class:{ 'is-hovered': option === _vm.hovered },on:{"click":function($event){return _vm.setSelected(option, undefined, $event)}}},[(_vm.hasDefaultSlot)?_vm._t("default",null,{"option":option,"index":index}):_c('span',[_vm._v(" "+_vm._s(_vm.getValue(option, true))+" ")])],2)})]}),(_vm.computedData.length === 0 && _vm.hasEmptySlot)?_c('div',{staticClass:"dropdown-item is-disabled"},[_vm._t("empty")],2):_vm._e(),(_vm.hasFooterSlot)?_c('div',{staticClass:"dropdown-item"},[_vm._t("footer")],2):_vm._e()],2)])])],1)};
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"autocomplete control",class:{ 'is-expanded': _vm.expanded }},[_c('b-input',_vm._b({ref:"input",attrs:{"type":"text","size":_vm.size,"loading":_vm.loading,"rounded":_vm.rounded,"icon":_vm.icon,"icon-right":_vm.newIconRight,"icon-right-clickable":_vm.newIconRightClickable,"icon-pack":_vm.iconPack,"maxlength":_vm.maxlength,"autocomplete":_vm.newAutocomplete,"use-html5-validation":false},on:{"input":_vm.onInput,"focus":_vm.focused,"blur":_vm.onBlur,"icon-right-click":_vm.rightIconClick,"icon-click":function (event) { return _vm.$emit('icon-click', event); }},nativeOn:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"esc",27,$event.key,["Esc","Escape"])){ return null; }$event.preventDefault();_vm.isActive = false;},"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"tab",9,$event.key,"Tab")){ return null; }return _vm.tabPressed($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.enterPressed($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"up",38,$event.key,["Up","ArrowUp"])){ return null; }$event.preventDefault();return _vm.keyArrows('up')},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"down",40,$event.key,["Down","ArrowDown"])){ return null; }$event.preventDefault();return _vm.keyArrows('down')}]},model:{value:(_vm.newValue),callback:function ($$v) {_vm.newValue=$$v;},expression:"newValue"}},'b-input',_vm.$attrs,false)),_c('transition',{attrs:{"name":"fade"}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isActive && (!_vm.isEmpty || _vm.hasEmptySlot || _vm.hasHeaderSlot)),expression:"isActive && (!isEmpty || hasEmptySlot || hasHeaderSlot)"}],ref:"dropdown",staticClass:"dropdown-menu",class:{ 'is-opened-top': _vm.isOpenedTop && !_vm.appendToBody },style:(_vm.style)},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isActive),expression:"isActive"}],staticClass:"dropdown-content",style:(_vm.contentStyle)},[(_vm.hasHeaderSlot)?_c('div',{staticClass:"dropdown-item"},[_vm._t("header")],2):_vm._e(),_vm._l((_vm.computedData),function(element,groupindex){return [(element.group)?_c('div',{key:groupindex + 'group',staticClass:"dropdown-item"},[(_vm.hasGroupSlot)?_vm._t("group",null,{"group":element.group,"index":groupindex}):_c('span',{staticClass:"has-text-weight-bold"},[_vm._v(" "+_vm._s(element.group)+" ")])],2):_vm._e(),_vm._l((element.items),function(option,index){return _c('a',{key:groupindex + ':' + index,staticClass:"dropdown-item",class:{ 'is-hovered': option === _vm.hovered },on:{"click":function($event){return _vm.setSelected(option, undefined, $event)}}},[(_vm.hasDefaultSlot)?_vm._t("default",null,{"option":option,"index":index}):_c('span',[_vm._v(" "+_vm._s(_vm.getValue(option, true))+" ")])],2)})]}),(_vm.isEmpty && _vm.hasEmptySlot)?_c('div',{staticClass:"dropdown-item is-disabled"},[_vm._t("empty")],2):_vm._e(),(_vm.hasFooterSlot)?_c('div',{staticClass:"dropdown-item"},[_vm._t("footer")],2):_vm._e()],2)])])],1)};
 var __vue_staticRenderFns__ = [];
 
   /* style */
@@ -14899,125 +15553,1670 @@ var __vue_staticRenderFns__ = [];
 
 /***/ }),
 
-/***/ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js":
+/***/ "./node_modules/buefy/dist/esm/chunk-5d5e2574.js":
 /*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-1fafdf15.js ***!
+  !*** ./node_modules/buefy/dist/esm/chunk-5d5e2574.js ***!
   \*******************************************************/
-/*! exports provided: _, a, b, c, d */
+/*! exports provided: F */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_", function() { return _defineProperty; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _objectSpread2; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return _typeof; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return _toArray; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return _toConsumableArray; });
-function _typeof(obj) {
-  "@babel/helpers - typeof";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return Field; });
+/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
+/* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
+/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
 
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function (obj) {
-      return typeof obj;
+
+
+
+var script = {
+  name: 'BFieldBody',
+  props: {
+    message: {
+      type: [String, Array]
+    },
+    type: {
+      type: [String, Object]
+    }
+  },
+  render: function render(createElement) {
+    var _this = this;
+
+    var first = true;
+    return createElement('div', {
+      attrs: {
+        'class': 'field-body'
+      }
+    }, this.$slots.default.map(function (element) {
+      // skip returns and comments
+      if (!element.tag) {
+        return element;
+      }
+
+      var message;
+
+      if (first) {
+        message = _this.message;
+        first = false;
+      }
+
+      return createElement('b-field', {
+        attrs: {
+          type: _this.type,
+          message: message
+        }
+      }, [element]);
+    }));
+  }
+};
+
+/* script */
+const __vue_script__ = script;
+
+/* template */
+
+  /* style */
+  const __vue_inject_styles__ = undefined;
+  /* scoped */
+  const __vue_scope_id__ = undefined;
+  /* module identifier */
+  const __vue_module_identifier__ = undefined;
+  /* functional template */
+  const __vue_is_functional_template__ = undefined;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var FieldBody = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__["_"])(
+    {},
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    undefined,
+    undefined
+  );
+
+var script$1 = {
+  name: 'BField',
+  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, FieldBody.name, FieldBody),
+  provide: function provide() {
+    return {
+      'BField': this
     };
-  } else {
-    _typeof = function (obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  },
+  inject: {
+    parent: {
+      from: 'BField',
+      default: false
+    }
+  },
+  // Used internally only when using Field in Field
+  props: {
+    type: [String, Object],
+    label: String,
+    labelFor: String,
+    message: [String, Array, Object],
+    grouped: Boolean,
+    groupMultiline: Boolean,
+    position: String,
+    expanded: Boolean,
+    horizontal: Boolean,
+    addons: {
+      type: Boolean,
+      default: true
+    },
+    customClass: String,
+    labelPosition: {
+      type: String,
+      default: function _default() {
+        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultFieldLabelPosition;
+      }
+    }
+  },
+  data: function data() {
+    return {
+      newType: this.type,
+      newMessage: this.message,
+      fieldLabelSize: null,
+      _isField: true // Used internally by Input and Select
+
     };
-  }
+  },
+  computed: {
+    rootClasses: function rootClasses() {
+      return [{
+        'is-expanded': this.expanded,
+        'is-horizontal': this.horizontal,
+        'is-floating-in-label': this.hasLabel && !this.horizontal && this.labelPosition === 'inside',
+        'is-floating-label': this.hasLabel && !this.horizontal && this.labelPosition === 'on-border'
+      }, this.numberInputClasses];
+    },
+    innerFieldClasses: function innerFieldClasses() {
+      return [this.fieldType(), this.newPosition, {
+        'is-grouped-multiline': this.groupMultiline
+      }];
+    },
+    hasInnerField: function hasInnerField() {
+      return this.grouped || this.groupMultiline || this.hasAddons();
+    },
 
-  return _typeof(obj);
-}
+    /**
+    * Correct Bulma class for the side of the addon or group.
+    *
+    * This is not kept like the others (is-small, etc.),
+    * because since 'has-addons' is set automatically it
+    * doesn't make sense to teach users what addons are exactly.
+    */
+    newPosition: function newPosition() {
+      if (this.position === undefined) return;
+      var position = this.position.split('-');
+      if (position.length < 1) return;
+      var prefix = this.grouped ? 'is-grouped-' : 'has-addons-';
+      if (this.position) return prefix + position[1];
+    },
 
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
+    /**
+    * Formatted message in case it's an array
+    * (each element is separated by <br> tag)
+    */
+    formattedMessage: function formattedMessage() {
+      if (this.parent && this.parent.hasInnerField) {
+        return ''; // Message will be displayed in parent field
+      }
 
-  return obj;
-}
+      if (typeof this.newMessage === 'string') {
+        return [this.newMessage];
+      }
 
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
+      var messages = [];
 
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    });
-    keys.push.apply(keys, symbols);
-  }
+      if (Array.isArray(this.newMessage)) {
+        this.newMessage.forEach(function (message) {
+          if (typeof message === 'string') {
+            messages.push(message);
+          } else {
+            for (var key in message) {
+              if (message[key]) {
+                messages.push(key);
+              }
+            }
+          }
+        });
+      } else {
+        for (var key in this.newMessage) {
+          if (this.newMessage[key]) {
+            messages.push(key);
+          }
+        }
+      }
 
-  return keys;
-}
-
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
-        _defineProperty(target, key, source[key]);
+      return messages.filter(function (m) {
+        if (m) return m;
       });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
+    },
+    hasLabel: function hasLabel() {
+      return this.label || this.$slots.label;
+    },
+    hasMessage: function hasMessage() {
+      return (!this.parent || !this.parent.hasInnerField) && this.newMessage || this.$slots.message;
+    },
+    numberInputClasses: function numberInputClasses() {
+      if (this.$slots.default) {
+        var numberinput = this.$slots.default.filter(function (node) {
+          return node.tag && node.tag.toLowerCase().indexOf('numberinput') >= 0;
+        })[0];
+
+        if (numberinput) {
+          var classes = ['has-numberinput'];
+          var controlsPosition = numberinput.componentOptions.propsData.controlsPosition;
+          var size = numberinput.componentOptions.propsData.size;
+
+          if (controlsPosition) {
+            classes.push("has-numberinput-".concat(controlsPosition));
+          }
+
+          if (size) {
+            classes.push("has-numberinput-".concat(size));
+          }
+
+          return classes;
+        }
+      }
+
+      return null;
+    }
+  },
+  watch: {
+    /**
+    * Set internal type when prop change.
+    */
+    type: function type(value) {
+      this.newType = value;
+    },
+
+    /**
+    * Set internal message when prop change.
+    */
+    message: function message(value) {
+      this.newMessage = value;
+    },
+
+    /**
+    * Set parent message if we use Field in Field.
+    */
+    newMessage: function newMessage(value) {
+      if (this.parent && this.parent.hasInnerField) {
+        if (!this.parent.type) {
+          this.parent.newType = this.newType;
+        }
+
+        this.parent.newMessage = value;
+      }
+    }
+  },
+  methods: {
+    /**
+    * Field has addons if there are more than one slot
+    * (element / component) in the Field.
+    * Or is grouped when prop is set.
+    * Is a method to be called when component re-render.
+    */
+    fieldType: function fieldType() {
+      if (this.grouped) return 'is-grouped';
+      if (this.hasAddons()) return 'has-addons';
+    },
+    hasAddons: function hasAddons() {
+      var renderedNode = 0;
+
+      if (this.$slots.default) {
+        renderedNode = this.$slots.default.reduce(function (i, node) {
+          return node.tag ? i + 1 : i;
+        }, 0);
+      }
+
+      return renderedNode > 1 && this.addons && !this.horizontal;
+    }
+  },
+  mounted: function mounted() {
+    if (this.horizontal) {
+      // Bulma docs: .is-normal for any .input or .button
+      var elements = this.$el.querySelectorAll('.input, .select, .button, .textarea, .b-slider');
+
+      if (elements.length > 0) {
+        this.fieldLabelSize = 'is-normal';
+      }
     }
   }
+};
 
-  return target;
-}
+/* script */
+const __vue_script__$1 = script$1;
 
-function _toArray(arr) {
-  return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest();
-}
+/* template */
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"field",class:_vm.rootClasses},[(_vm.horizontal)?_c('div',{staticClass:"field-label",class:[_vm.customClass, _vm.fieldLabelSize]},[(_vm.hasLabel)?_c('label',{staticClass:"label",class:_vm.customClass,attrs:{"for":_vm.labelFor}},[(_vm.$slots.label)?_vm._t("label"):[_vm._v(_vm._s(_vm.label))]],2):_vm._e()]):[(_vm.hasLabel)?_c('label',{staticClass:"label",class:_vm.customClass,attrs:{"for":_vm.labelFor}},[(_vm.$slots.label)?_vm._t("label"):[_vm._v(_vm._s(_vm.label))]],2):_vm._e()],(_vm.horizontal)?_c('b-field-body',{attrs:{"message":_vm.newMessage ? _vm.formattedMessage : '',"type":_vm.newType}},[_vm._t("default")],2):(_vm.hasInnerField)?_c('div',{staticClass:"field-body"},[_c('b-field',{class:_vm.innerFieldClasses,attrs:{"addons":false,"type":_vm.newType}},[_vm._t("default")],2)],1):[_vm._t("default")],(_vm.hasMessage && !_vm.horizontal)?_c('p',{staticClass:"help",class:_vm.newType},[(_vm.$slots.message)?_vm._t("message"):[_vm._l((_vm.formattedMessage),function(mess,i){return [_vm._v(" "+_vm._s(mess)+" "),((i + 1) < _vm.formattedMessage.length)?_c('br',{key:i}):_vm._e()]})]],2):_vm._e()],2)};
+var __vue_staticRenderFns__ = [];
 
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
-}
+  /* style */
+  const __vue_inject_styles__$1 = undefined;
+  /* scoped */
+  const __vue_scope_id__$1 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$1 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$1 = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
 
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-    return arr2;
-  }
-}
-
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-
-function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-}
-
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance");
-}
+  
+  var Field = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__["_"])(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+    __vue_inject_styles__$1,
+    __vue_script__$1,
+    __vue_scope_id__$1,
+    __vue_is_functional_template__$1,
+    __vue_module_identifier__$1,
+    undefined,
+    undefined
+  );
 
 
 
 
 /***/ }),
 
-/***/ "./node_modules/buefy/dist/esm/chunk-21abdf85.js":
+/***/ "./node_modules/buefy/dist/esm/chunk-608cd4c1.js":
 /*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-21abdf85.js ***!
+  !*** ./node_modules/buefy/dist/esm/chunk-608cd4c1.js ***!
+  \*******************************************************/
+/*! exports provided: M */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "M", function() { return Modal; });
+/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
+/* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
+/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
+/* harmony import */ var _chunk_42f463e6_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-42f463e6.js */ "./node_modules/buefy/dist/esm/chunk-42f463e6.js");
+
+
+
+
+
+//
+var script = {
+  name: 'BModal',
+  directives: {
+    trapFocus: _chunk_42f463e6_js__WEBPACK_IMPORTED_MODULE_3__["t"]
+  },
+  // deprecated, to replace with default 'value' in the next breaking change
+  model: {
+    prop: 'active',
+    event: 'update:active'
+  },
+  props: {
+    active: Boolean,
+    component: [Object, Function, String],
+    content: [String, Array],
+    programmatic: Boolean,
+    props: Object,
+    events: Object,
+    width: {
+      type: [String, Number],
+      default: 960
+    },
+    hasModalCard: Boolean,
+    animation: {
+      type: String,
+      default: 'zoom-out'
+    },
+    canCancel: {
+      type: [Array, Boolean],
+      default: function _default() {
+        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultModalCanCancel;
+      }
+    },
+    onCancel: {
+      type: Function,
+      default: function _default() {}
+    },
+    scroll: {
+      type: String,
+      default: function _default() {
+        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultModalScroll ? _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultModalScroll : 'clip';
+      },
+      validator: function validator(value) {
+        return ['clip', 'keep'].indexOf(value) >= 0;
+      }
+    },
+    fullScreen: Boolean,
+    trapFocus: {
+      type: Boolean,
+      default: function _default() {
+        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultTrapFocus;
+      }
+    },
+    customClass: String,
+    ariaRole: {
+      type: String,
+      validator: function validator(value) {
+        return ['dialog', 'alertdialog'].indexOf(value) >= 0;
+      }
+    },
+    ariaModal: Boolean,
+    destroyOnHide: {
+      type: Boolean,
+      default: true
+    }
+  },
+  data: function data() {
+    return {
+      isActive: this.active || false,
+      savedScrollTop: null,
+      newWidth: typeof this.width === 'number' ? this.width + 'px' : this.width,
+      animating: true,
+      destroyed: !this.active
+    };
+  },
+  computed: {
+    cancelOptions: function cancelOptions() {
+      return typeof this.canCancel === 'boolean' ? this.canCancel ? _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultModalCanCancel : [] : this.canCancel;
+    },
+    showX: function showX() {
+      return this.cancelOptions.indexOf('x') >= 0 && !this.hasModalCard;
+    },
+    customStyle: function customStyle() {
+      if (!this.fullScreen) {
+        return {
+          maxWidth: this.newWidth
+        };
+      }
+
+      return null;
+    }
+  },
+  watch: {
+    active: function active(value) {
+      this.isActive = value;
+    },
+    isActive: function isActive(value) {
+      var _this = this;
+
+      if (value) this.destroyed = false;
+      this.handleScroll();
+      this.$nextTick(function () {
+        if (value && _this.$el && _this.$el.focus) {
+          _this.$el.focus();
+        }
+      });
+    }
+  },
+  methods: {
+    handleScroll: function handleScroll() {
+      if (typeof window === 'undefined') return;
+
+      if (this.scroll === 'clip') {
+        if (this.isActive) {
+          document.documentElement.classList.add('is-clipped');
+        } else {
+          document.documentElement.classList.remove('is-clipped');
+        }
+
+        return;
+      }
+
+      this.savedScrollTop = !this.savedScrollTop ? document.documentElement.scrollTop : this.savedScrollTop;
+
+      if (this.isActive) {
+        document.body.classList.add('is-noscroll');
+      } else {
+        document.body.classList.remove('is-noscroll');
+      }
+
+      if (this.isActive) {
+        document.body.style.top = "-".concat(this.savedScrollTop, "px");
+        return;
+      }
+
+      document.documentElement.scrollTop = this.savedScrollTop;
+      document.body.style.top = null;
+      this.savedScrollTop = null;
+    },
+
+    /**
+    * Close the Modal if canCancel and call the onCancel prop (function).
+    */
+    cancel: function cancel(method) {
+      if (this.cancelOptions.indexOf(method) < 0) return;
+      this.$emit('cancel', arguments);
+      this.onCancel.apply(null, arguments);
+      this.close();
+    },
+
+    /**
+    * Call the onCancel prop (function).
+    * Emit events, and destroy modal if it's programmatic.
+    */
+    close: function close() {
+      var _this2 = this;
+
+      this.$emit('close');
+      this.$emit('update:active', false); // Timeout for the animation complete before destroying
+
+      if (this.programmatic) {
+        this.isActive = false;
+        setTimeout(function () {
+          _this2.$destroy();
+
+          Object(_helpers_js__WEBPACK_IMPORTED_MODULE_0__["removeElement"])(_this2.$el);
+        }, 150);
+      }
+    },
+
+    /**
+    * Keypress event that is bound to the document.
+    */
+    keyPress: function keyPress(_ref) {
+      var key = _ref.key;
+      if (this.isActive && (key === 'Escape' || key === 'Esc')) this.cancel('escape');
+    },
+
+    /**
+    * Transition after-enter hook
+    */
+    afterEnter: function afterEnter() {
+      this.animating = false;
+      this.$emit('after-enter');
+    },
+
+    /**
+    * Transition before-leave hook
+    */
+    beforeLeave: function beforeLeave() {
+      this.animating = true;
+    },
+
+    /**
+    * Transition after-leave hook
+    */
+    afterLeave: function afterLeave() {
+      if (this.destroyOnHide) {
+        this.destroyed = true;
+      }
+
+      this.$emit('after-leave');
+    }
+  },
+  created: function created() {
+    if (typeof window !== 'undefined') {
+      document.addEventListener('keyup', this.keyPress);
+    }
+  },
+  beforeMount: function beforeMount() {
+    // Insert the Modal component in body tag
+    // only if it's programmatic
+    this.programmatic && document.body.appendChild(this.$el);
+  },
+  mounted: function mounted() {
+    if (this.programmatic) this.isActive = true;else if (this.isActive) this.handleScroll();
+  },
+  beforeDestroy: function beforeDestroy() {
+    if (typeof window !== 'undefined') {
+      document.removeEventListener('keyup', this.keyPress); // reset scroll
+
+      document.documentElement.classList.remove('is-clipped');
+      var savedScrollTop = !this.savedScrollTop ? document.documentElement.scrollTop : this.savedScrollTop;
+      document.body.classList.remove('is-noscroll');
+      document.documentElement.scrollTop = savedScrollTop;
+      document.body.style.top = null;
+    }
+  }
+};
+
+/* script */
+const __vue_script__ = script;
+
+/* template */
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('transition',{attrs:{"name":_vm.animation},on:{"after-enter":_vm.afterEnter,"before-leave":_vm.beforeLeave,"after-leave":_vm.afterLeave}},[(!_vm.destroyed)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isActive),expression:"isActive"},{name:"trap-focus",rawName:"v-trap-focus",value:(_vm.trapFocus),expression:"trapFocus"}],staticClass:"modal is-active",class:[{'is-full-screen': _vm.fullScreen}, _vm.customClass],attrs:{"tabindex":"-1","role":_vm.ariaRole,"aria-modal":_vm.ariaModal}},[_c('div',{staticClass:"modal-background",on:{"click":function($event){return _vm.cancel('outside')}}}),_c('div',{staticClass:"animation-content",class:{ 'modal-content': !_vm.hasModalCard },style:(_vm.customStyle)},[(_vm.component)?_c(_vm.component,_vm._g(_vm._b({tag:"component",attrs:{"can-cancel":_vm.canCancel},on:{"close":_vm.close}},'component',_vm.props,false),_vm.events)):(_vm.content)?[_c('div',{domProps:{"innerHTML":_vm._s(_vm.content)}})]:_vm._t("default",null,{"canCancel":_vm.canCancel,"close":_vm.close}),(_vm.showX)?_c('button',{directives:[{name:"show",rawName:"v-show",value:(!_vm.animating),expression:"!animating"}],staticClass:"modal-close is-large",attrs:{"type":"button"},on:{"click":function($event){return _vm.cancel('x')}}}):_vm._e()],2)]):_vm._e()])};
+var __vue_staticRenderFns__ = [];
+
+  /* style */
+  const __vue_inject_styles__ = undefined;
+  /* scoped */
+  const __vue_scope_id__ = undefined;
+  /* module identifier */
+  const __vue_module_identifier__ = undefined;
+  /* functional template */
+  const __vue_is_functional_template__ = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var Modal = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__["_"])(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    undefined,
+    undefined
+  );
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/buefy/dist/esm/chunk-6348754d.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/buefy/dist/esm/chunk-6348754d.js ***!
+  \*******************************************************/
+/*! exports provided: P, a */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "P", function() { return Pagination; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PaginationButton; });
+/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
+/* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
+/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
+
+
+
+
+
+//
+var script = {
+  name: 'BPaginationButton',
+  props: {
+    page: {
+      type: Object,
+      required: true
+    },
+    tag: {
+      type: String,
+      default: 'a',
+      validator: function validator(value) {
+        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultLinkTags.indexOf(value) >= 0;
+      }
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    href: function href() {
+      if (this.tag === 'a') {
+        return '#';
+      }
+    },
+    isDisabled: function isDisabled() {
+      return this.disabled || this.page.disabled;
+    }
+  }
+};
+
+/* script */
+const __vue_script__ = script;
+
+/* template */
+var __vue_render__ = function () {
+var _obj;
+var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,_vm._b({tag:"component",staticClass:"pagination-link",class:( _obj = { 'is-current': _vm.page.isCurrent }, _obj[_vm.page.class] = true, _obj ),attrs:{"role":"button","href":_vm.href,"disabled":_vm.isDisabled,"aria-label":_vm.page['aria-label'],"aria-current":_vm.page.isCurrent},on:{"click":function($event){$event.preventDefault();return _vm.page.click($event)}}},'component',_vm.$attrs,false),[_vm._t("default",[_vm._v(_vm._s(_vm.page.number))])],2)};
+var __vue_staticRenderFns__ = [];
+
+  /* style */
+  const __vue_inject_styles__ = undefined;
+  /* scoped */
+  const __vue_scope_id__ = undefined;
+  /* module identifier */
+  const __vue_module_identifier__ = undefined;
+  /* functional template */
+  const __vue_is_functional_template__ = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var PaginationButton = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["_"])(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    undefined,
+    undefined
+  );
+
+var _components;
+var script$1 = {
+  name: 'BPagination',
+  components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_2__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_2__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, PaginationButton.name, PaginationButton), _components),
+  // deprecated, to replace with default 'value' in the next breaking change
+  model: {
+    prop: 'current',
+    event: 'update:current'
+  },
+  props: {
+    total: [Number, String],
+    perPage: {
+      type: [Number, String],
+      default: 20
+    },
+    current: {
+      type: [Number, String],
+      default: 1
+    },
+    rangeBefore: {
+      type: [Number, String],
+      default: 1
+    },
+    rangeAfter: {
+      type: [Number, String],
+      default: 1
+    },
+    size: String,
+    simple: Boolean,
+    rounded: Boolean,
+    order: String,
+    iconPack: String,
+    iconPrev: {
+      type: String,
+      default: function _default() {
+        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultIconPrev;
+      }
+    },
+    iconNext: {
+      type: String,
+      default: function _default() {
+        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultIconNext;
+      }
+    },
+    ariaNextLabel: String,
+    ariaPreviousLabel: String,
+    ariaPageLabel: String,
+    ariaCurrentLabel: String
+  },
+  computed: {
+    rootClasses: function rootClasses() {
+      return [this.order, this.size, {
+        'is-simple': this.simple,
+        'is-rounded': this.rounded
+      }];
+    },
+    beforeCurrent: function beforeCurrent() {
+      return parseInt(this.rangeBefore);
+    },
+    afterCurrent: function afterCurrent() {
+      return parseInt(this.rangeAfter);
+    },
+
+    /**
+    * Total page size (count).
+    */
+    pageCount: function pageCount() {
+      return Math.ceil(this.total / this.perPage);
+    },
+
+    /**
+    * First item of the page (count).
+    */
+    firstItem: function firstItem() {
+      var firstItem = this.current * this.perPage - this.perPage + 1;
+      return firstItem >= 0 ? firstItem : 0;
+    },
+
+    /**
+    * Check if previous button is available.
+    */
+    hasPrev: function hasPrev() {
+      return this.current > 1;
+    },
+
+    /**
+    * Check if first page button should be visible.
+    */
+    hasFirst: function hasFirst() {
+      return this.current >= 2 + this.beforeCurrent;
+    },
+
+    /**
+    * Check if first ellipsis should be visible.
+    */
+    hasFirstEllipsis: function hasFirstEllipsis() {
+      return this.current >= this.beforeCurrent + 4;
+    },
+
+    /**
+    * Check if last page button should be visible.
+    */
+    hasLast: function hasLast() {
+      return this.current <= this.pageCount - (1 + this.afterCurrent);
+    },
+
+    /**
+    * Check if last ellipsis should be visible.
+    */
+    hasLastEllipsis: function hasLastEllipsis() {
+      return this.current < this.pageCount - (2 + this.afterCurrent);
+    },
+
+    /**
+    * Check if next button is available.
+    */
+    hasNext: function hasNext() {
+      return this.current < this.pageCount;
+    },
+
+    /**
+    * Get near pages, 1 before and 1 after the current.
+    * Also add the click event to the array.
+    */
+    pagesInRange: function pagesInRange() {
+      if (this.simple) return;
+      var left = Math.max(1, this.current - this.beforeCurrent);
+
+      if (left - 1 === 2) {
+        left--; // Do not show the ellipsis if there is only one to hide
+      }
+
+      var right = Math.min(this.current + this.afterCurrent, this.pageCount);
+
+      if (this.pageCount - right === 2) {
+        right++; // Do not show the ellipsis if there is only one to hide
+      }
+
+      var pages = [];
+
+      for (var i = left; i <= right; i++) {
+        pages.push(this.getPage(i));
+      }
+
+      return pages;
+    }
+  },
+  watch: {
+    /**
+    * If current page is trying to be greater than page count, set to last.
+    */
+    pageCount: function pageCount(value) {
+      if (this.current > value) this.last();
+    }
+  },
+  methods: {
+    /**
+    * Previous button click listener.
+    */
+    prev: function prev(event) {
+      this.changePage(this.current - 1, event);
+    },
+
+    /**
+    * Next button click listener.
+    */
+    next: function next(event) {
+      this.changePage(this.current + 1, event);
+    },
+
+    /**
+    * First button click listener.
+    */
+    first: function first(event) {
+      this.changePage(1, event);
+    },
+
+    /**
+    * Last button click listener.
+    */
+    last: function last(event) {
+      this.changePage(this.pageCount, event);
+    },
+    changePage: function changePage(num, event) {
+      if (this.current === num || num < 1 || num > this.pageCount) return;
+      this.$emit('update:current', num);
+      this.$emit('change', num); // Set focus on element to keep tab order
+
+      if (event && event.target) {
+        this.$nextTick(function () {
+          return event.target.focus();
+        });
+      }
+    },
+    getPage: function getPage(num) {
+      var _this = this;
+
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      return {
+        number: num,
+        isCurrent: this.current === num,
+        click: function click(event) {
+          return _this.changePage(num, event);
+        },
+        disabled: options.disabled || false,
+        class: options.class || '',
+        'aria-label': options['aria-label'] || this.getAriaPageLabel(num, this.current === num)
+      };
+    },
+
+    /**
+    * Get text for aria-label according to page number.
+    */
+    getAriaPageLabel: function getAriaPageLabel(pageNumber, isCurrent) {
+      if (this.ariaPageLabel && (!isCurrent || !this.ariaCurrentLabel)) {
+        return this.ariaPageLabel + ' ' + pageNumber + '.';
+      } else if (this.ariaPageLabel && isCurrent && this.ariaCurrentLabel) {
+        return this.ariaCurrentLabel + ', ' + this.ariaPageLabel + ' ' + pageNumber + '.';
+      }
+
+      return null;
+    }
+  }
+};
+
+/* script */
+const __vue_script__$1 = script$1;
+
+/* template */
+var __vue_render__$1 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',{staticClass:"pagination",class:_vm.rootClasses},[(_vm.$scopedSlots.previous)?_vm._t("previous",[_c('b-icon',{attrs:{"icon":_vm.iconPrev,"pack":_vm.iconPack,"both":"","aria-hidden":"true"}})],{"page":_vm.getPage(_vm.current - 1, {
+            disabled: !_vm.hasPrev,
+            class: 'pagination-previous',
+            'aria-label': _vm.ariaPreviousLabel
+    })}):_c('BPaginationButton',{staticClass:"pagination-previous",attrs:{"disabled":!_vm.hasPrev,"page":_vm.getPage(_vm.current - 1)}},[_c('b-icon',{attrs:{"icon":_vm.iconPrev,"pack":_vm.iconPack,"both":"","aria-hidden":"true"}})],1),(_vm.$scopedSlots.next)?_vm._t("next",[_c('b-icon',{attrs:{"icon":_vm.iconNext,"pack":_vm.iconPack,"both":"","aria-hidden":"true"}})],{"page":_vm.getPage(_vm.current + 1, {
+            disabled: !_vm.hasNext,
+            class: 'pagination-next',
+            'aria-label': _vm.ariaNextLabel
+    })}):_c('BPaginationButton',{staticClass:"pagination-next",attrs:{"disabled":!_vm.hasNext,"page":_vm.getPage(_vm.current + 1)}},[_c('b-icon',{attrs:{"icon":_vm.iconNext,"pack":_vm.iconPack,"both":"","aria-hidden":"true"}})],1),(_vm.simple)?_c('small',{staticClass:"info"},[(_vm.perPage == 1)?[_vm._v(" "+_vm._s(_vm.firstItem)+" / "+_vm._s(_vm.total)+" ")]:[_vm._v(" "+_vm._s(_vm.firstItem)+"-"+_vm._s(Math.min(_vm.current * _vm.perPage, _vm.total))+" / "+_vm._s(_vm.total)+" ")]],2):_c('ul',{staticClass:"pagination-list"},[(_vm.hasFirst)?_c('li',[(_vm.$scopedSlots.default)?_vm._t("default",null,{"page":_vm.getPage(1)}):_c('BPaginationButton',{attrs:{"page":_vm.getPage(1)}})],2):_vm._e(),(_vm.hasFirstEllipsis)?_c('li',[_c('span',{staticClass:"pagination-ellipsis"},[_vm._v("…")])]):_vm._e(),_vm._l((_vm.pagesInRange),function(page){return _c('li',{key:page.number},[(_vm.$scopedSlots.default)?_vm._t("default",null,{"page":page}):_c('BPaginationButton',{attrs:{"page":page}})],2)}),(_vm.hasLastEllipsis)?_c('li',[_c('span',{staticClass:"pagination-ellipsis"},[_vm._v("…")])]):_vm._e(),(_vm.hasLast)?_c('li',[(_vm.$scopedSlots.default)?_vm._t("default",null,{"page":_vm.getPage(_vm.pageCount)}):_c('BPaginationButton',{attrs:{"page":_vm.getPage(_vm.pageCount)}})],2):_vm._e()],2)],2)};
+var __vue_staticRenderFns__$1 = [];
+
+  /* style */
+  const __vue_inject_styles__$1 = undefined;
+  /* scoped */
+  const __vue_scope_id__$1 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$1 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$1 = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var Pagination = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["_"])(
+    { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
+    __vue_inject_styles__$1,
+    __vue_script__$1,
+    __vue_scope_id__$1,
+    __vue_is_functional_template__$1,
+    __vue_module_identifier__$1,
+    undefined,
+    undefined
+  );
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/buefy/dist/esm/chunk-7c7cf2b6.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/buefy/dist/esm/chunk-7c7cf2b6.js ***!
+  \*******************************************************/
+/*! exports provided: T */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "T", function() { return Tooltip; });
+/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
+/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
+/* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
+/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
+
+
+
+
+
+var script = {
+  name: 'BTooltip',
+  props: {
+    active: {
+      type: Boolean,
+      default: true
+    },
+    type: {
+      type: String,
+      default: function _default() {
+        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"].defaultTooltipType;
+      }
+    },
+    label: String,
+    delay: {
+      type: Number,
+      default: function _default() {
+        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"].defaultTooltipDelay;
+      }
+    },
+    position: {
+      type: String,
+      default: 'is-top',
+      validator: function validator(value) {
+        return ['is-top', 'is-bottom', 'is-left', 'is-right'].indexOf(value) > -1;
+      }
+    },
+    triggers: {
+      type: Array,
+      default: function _default() {
+        return ['hover'];
+      }
+    },
+    always: Boolean,
+    square: Boolean,
+    dashed: Boolean,
+    multilined: Boolean,
+    size: {
+      type: String,
+      default: 'is-medium'
+    },
+    appendToBody: Boolean,
+    animated: {
+      type: Boolean,
+      default: true
+    },
+    animation: {
+      type: String,
+      default: 'fade'
+    },
+    contentClass: String,
+    autoClose: {
+      type: [Array, Boolean],
+      default: true
+    }
+  },
+  data: function data() {
+    return {
+      isActive: false,
+      style: {},
+      timer: null,
+      _bodyEl: undefined // Used to append to body
+
+    };
+  },
+  computed: {
+    rootClasses: function rootClasses() {
+      return ['b-tooltip', this.type, this.position, this.size, {
+        'is-square': this.square,
+        'is-always': this.always,
+        'is-multiline': this.multilined,
+        'is-dashed': this.dashed
+      }];
+    },
+    newAnimation: function newAnimation() {
+      return this.animated ? this.animation : undefined;
+    }
+  },
+  watch: {
+    isActive: function isActive(value) {
+      if (this.appendToBody) {
+        this.updateAppendToBody();
+      }
+    }
+  },
+  methods: {
+    updateAppendToBody: function updateAppendToBody() {
+      var tooltip = this.$refs.tooltip;
+      var trigger = this.$refs.trigger;
+
+      if (tooltip && trigger) {
+        // update wrapper tooltip
+        var tooltipEl = this.$data._bodyEl.children[0];
+        tooltipEl.classList.forEach(function (item) {
+          return tooltipEl.classList.remove(item);
+        });
+
+        if (this.$vnode && this.$vnode.data && this.$vnode.data.staticClass) {
+          tooltipEl.classList.add(this.$vnode.data.staticClass);
+        }
+
+        this.rootClasses.forEach(function (item) {
+          if (Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["b"])(item) === 'object') {
+            for (var key in item) {
+              if (item[key]) {
+                tooltipEl.classList.add(key);
+              }
+            }
+          } else {
+            tooltipEl.classList.add(item);
+          }
+        });
+        tooltipEl.style.width = "".concat(trigger.clientWidth, "px");
+        tooltipEl.style.height = "".concat(trigger.clientHeight, "px");
+        var rect = trigger.getBoundingClientRect();
+        var top = rect.top + window.scrollY;
+        var left = rect.left + window.scrollX;
+        var wrapper = this.$data._bodyEl;
+        wrapper.style.position = 'absolute';
+        wrapper.style.top = "".concat(top, "px");
+        wrapper.style.left = "".concat(left, "px");
+        wrapper.style.zIndex = this.isActive || this.always ? '99' : '-1';
+      }
+    },
+    onClick: function onClick() {
+      var _this = this;
+
+      if (this.triggers.indexOf('click') < 0) return; // if not active, toggle after clickOutside event
+      // this fixes toggling programmatic
+
+      this.$nextTick(function () {
+        setTimeout(function () {
+          return _this.open();
+        });
+      });
+    },
+    onHover: function onHover() {
+      if (this.triggers.indexOf('hover') < 0) return;
+      this.open();
+    },
+    onContextMenu: function onContextMenu(e) {
+      if (this.triggers.indexOf('contextmenu') < 0) return;
+      e.preventDefault();
+      this.open();
+    },
+    onFocus: function onFocus() {
+      if (this.triggers.indexOf('focus') < 0) return;
+      this.open();
+    },
+    open: function open() {
+      var _this2 = this;
+
+      if (this.delay) {
+        this.timer = setTimeout(function () {
+          _this2.isActive = true;
+          _this2.timer = null;
+        }, this.delay);
+      } else {
+        this.isActive = true;
+      }
+    },
+    close: function close() {
+      if (typeof this.autoClose === 'boolean') {
+        this.isActive = !this.autoClose;
+        if (this.autoClose && this.timer) clearTimeout(this.timer);
+      }
+    },
+
+    /**
+    * Close tooltip if clicked outside.
+    */
+    clickedOutside: function clickedOutside(event) {
+      if (this.isActive) {
+        if (Array.isArray(this.autoClose)) {
+          if (this.autoClose.indexOf('outside') >= 0) {
+            if (!this.isInWhiteList(event.target)) this.isActive = false;
+          } else if (this.autoClose.indexOf('inside') >= 0) {
+            if (this.isInWhiteList(event.target)) this.isActive = false;
+          }
+        }
+      }
+    },
+
+    /**
+     * Keypress event that is bound to the document
+     */
+    keyPress: function keyPress(_ref) {
+      var key = _ref.key;
+
+      if (this.isActive && (key === 'Escape' || key === 'Esc')) {
+        if (Array.isArray(this.autoClose)) {
+          if (this.autoClose.indexOf('escape') >= 0) this.isActive = false;
+        }
+      }
+    },
+
+    /**
+    * White-listed items to not close when clicked.
+    */
+    isInWhiteList: function isInWhiteList(el) {
+      if (el === this.$refs.content) return true; // All chidren from content
+
+      if (this.$refs.content !== undefined) {
+        var children = this.$refs.content.querySelectorAll('*');
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var child = _step.value;
+
+            if (el === child) {
+              return true;
+            }
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+      }
+
+      return false;
+    }
+  },
+  mounted: function mounted() {
+    if (this.appendToBody && typeof window !== 'undefined') {
+      this.$data._bodyEl = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["createAbsoluteElement"])(this.$refs.content);
+      this.updateAppendToBody();
+    }
+  },
+  created: function created() {
+    if (typeof window !== 'undefined') {
+      document.addEventListener('click', this.clickedOutside);
+      document.addEventListener('keyup', this.keyPress);
+    }
+  },
+  beforeDestroy: function beforeDestroy() {
+    if (typeof window !== 'undefined') {
+      document.removeEventListener('click', this.clickedOutside);
+      document.removeEventListener('keyup', this.keyPress);
+    }
+
+    if (this.appendToBody) {
+      Object(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["removeElement"])(this.$data._bodyEl);
+    }
+  }
+};
+
+/* script */
+const __vue_script__ = script;
+
+/* template */
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{ref:"tooltip",class:_vm.rootClasses},[_c('transition',{attrs:{"name":_vm.newAnimation}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.active && (_vm.isActive || _vm.always)),expression:"active && (isActive || always)"}],ref:"content",class:['tooltip-content', _vm.contentClass],style:(_vm.style)},[(_vm.label)?[_vm._v(_vm._s(_vm.label))]:(_vm.$slots.content)?[_vm._t("content")]:_vm._e()],2)]),_c('div',{ref:"trigger",staticClass:"tooltip-trigger",on:{"click":_vm.onClick,"contextmenu":_vm.onContextMenu,"mouseenter":_vm.onHover,"!focus":function($event){return _vm.onFocus($event)},"mouseleave":_vm.close}},[_vm._t("default")],2)],1)};
+var __vue_staticRenderFns__ = [];
+
+  /* style */
+  const __vue_inject_styles__ = undefined;
+  /* scoped */
+  const __vue_scope_id__ = undefined;
+  /* module identifier */
+  const __vue_module_identifier__ = undefined;
+  /* functional template */
+  const __vue_is_functional_template__ = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var Tooltip = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["_"])(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    undefined,
+    undefined
+  );
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/buefy/dist/esm/chunk-97298426.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/buefy/dist/esm/chunk-97298426.js ***!
+  \*******************************************************/
+/*! exports provided: T */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "T", function() { return Timepicker; });
+/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
+/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
+/* harmony import */ var _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-b59d2948.js */ "./node_modules/buefy/dist/esm/chunk-b59d2948.js");
+/* harmony import */ var _chunk_1bad8473_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-1bad8473.js */ "./node_modules/buefy/dist/esm/chunk-1bad8473.js");
+/* harmony import */ var _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-f8007af2.js */ "./node_modules/buefy/dist/esm/chunk-f8007af2.js");
+/* harmony import */ var _chunk_5d5e2574_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-5d5e2574.js */ "./node_modules/buefy/dist/esm/chunk-5d5e2574.js");
+/* harmony import */ var _chunk_01bc3886_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-01bc3886.js */ "./node_modules/buefy/dist/esm/chunk-01bc3886.js");
+
+
+
+
+
+
+
+
+
+var _components;
+var script = {
+  name: 'BTimepicker',
+  components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_3__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_5d5e2574_js__WEBPACK_IMPORTED_MODULE_6__["F"].name, _chunk_5d5e2574_js__WEBPACK_IMPORTED_MODULE_6__["F"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_01bc3886_js__WEBPACK_IMPORTED_MODULE_7__["S"].name, _chunk_01bc3886_js__WEBPACK_IMPORTED_MODULE_7__["S"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_1__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_1__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_5__["D"].name, _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_5__["D"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_5__["a"].name, _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_5__["a"]), _components),
+  mixins: [_chunk_1bad8473_js__WEBPACK_IMPORTED_MODULE_4__["T"]],
+  inheritAttrs: false,
+  data: function data() {
+    return {
+      _isTimepicker: true
+    };
+  },
+  computed: {
+    nativeStep: function nativeStep() {
+      if (this.enableSeconds) return '1';
+    }
+  }
+};
+
+/* script */
+const __vue_script__ = script;
+
+/* template */
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"timepicker control",class:[_vm.size, {'is-expanded': _vm.expanded}]},[(!_vm.isMobile || _vm.inline)?_c('b-dropdown',{ref:"dropdown",attrs:{"position":_vm.position,"disabled":_vm.disabled,"inline":_vm.inline,"append-to-body":_vm.appendToBody,"append-to-body-copy-parent":""},on:{"active-change":_vm.onActiveChange},scopedSlots:_vm._u([(!_vm.inline)?{key:"trigger",fn:function(){return [_vm._t("trigger",[_c('b-input',_vm._b({ref:"input",attrs:{"autocomplete":"off","value":_vm.formatValue(_vm.computedValue),"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"loading":_vm.loading,"disabled":_vm.disabled,"readonly":!_vm.editable,"rounded":_vm.rounded,"use-html5-validation":_vm.useHtml5Validation},on:{"focus":_vm.handleOnFocus},nativeOn:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.toggle(true)},"change":function($event){return _vm.onChange($event.target.value)}}},'b-input',_vm.$attrs,false))])]},proxy:true}:null],null,true)},[_c('b-dropdown-item',{attrs:{"disabled":_vm.disabled,"focusable":_vm.focusable,"custom":""}},[_c('b-field',{attrs:{"grouped":"","position":"is-centered"}},[_c('b-select',{attrs:{"disabled":_vm.disabled,"placeholder":"00"},nativeOn:{"change":function($event){return _vm.onHoursChange($event.target.value)}},model:{value:(_vm.hoursSelected),callback:function ($$v) {_vm.hoursSelected=$$v;},expression:"hoursSelected"}},_vm._l((_vm.hours),function(hour){return _c('option',{key:hour.value,attrs:{"disabled":_vm.isHourDisabled(hour.value)},domProps:{"value":hour.value}},[_vm._v(" "+_vm._s(hour.label)+" ")])}),0),_c('span',{staticClass:"control is-colon"},[_vm._v(_vm._s(_vm.hourLiteral))]),_c('b-select',{attrs:{"disabled":_vm.disabled,"placeholder":"00"},nativeOn:{"change":function($event){return _vm.onMinutesChange($event.target.value)}},model:{value:(_vm.minutesSelected),callback:function ($$v) {_vm.minutesSelected=$$v;},expression:"minutesSelected"}},_vm._l((_vm.minutes),function(minute){return _c('option',{key:minute.value,attrs:{"disabled":_vm.isMinuteDisabled(minute.value)},domProps:{"value":minute.value}},[_vm._v(" "+_vm._s(minute.label)+" ")])}),0),(_vm.enableSeconds)?[_c('span',{staticClass:"control is-colon"},[_vm._v(_vm._s(_vm.minuteLiteral))]),_c('b-select',{attrs:{"disabled":_vm.disabled,"placeholder":"00"},nativeOn:{"change":function($event){return _vm.onSecondsChange($event.target.value)}},model:{value:(_vm.secondsSelected),callback:function ($$v) {_vm.secondsSelected=$$v;},expression:"secondsSelected"}},_vm._l((_vm.seconds),function(second){return _c('option',{key:second.value,attrs:{"disabled":_vm.isSecondDisabled(second.value)},domProps:{"value":second.value}},[_vm._v(" "+_vm._s(second.label)+" ")])}),0),_c('span',{staticClass:"control is-colon"},[_vm._v(_vm._s(_vm.secondLiteral))])]:_vm._e(),(!_vm.isHourFormat24)?_c('b-select',{attrs:{"disabled":_vm.disabled},nativeOn:{"change":function($event){return _vm.onMeridienChange($event.target.value)}},model:{value:(_vm.meridienSelected),callback:function ($$v) {_vm.meridienSelected=$$v;},expression:"meridienSelected"}},_vm._l((_vm.meridiens),function(meridien){return _c('option',{key:meridien,domProps:{"value":meridien}},[_vm._v(" "+_vm._s(meridien)+" ")])}),0):_vm._e()],2),(_vm.$slots.default !== undefined && _vm.$slots.default.length)?_c('footer',{staticClass:"timepicker-footer"},[_vm._t("default")],2):_vm._e()],1)],1):_c('b-input',_vm._b({ref:"input",attrs:{"type":"time","step":_vm.nativeStep,"autocomplete":"off","value":_vm.formatHHMMSS(_vm.computedValue),"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"rounded":_vm.rounded,"loading":_vm.loading,"max":_vm.formatHHMMSS(_vm.maxTime),"min":_vm.formatHHMMSS(_vm.minTime),"disabled":_vm.disabled,"readonly":false,"reset-on-meridian-change":_vm.isReset,"use-html5-validation":_vm.useHtml5Validation},on:{"focus":_vm.handleOnFocus,"blur":function($event){_vm.onBlur() && _vm.checkHtml5Validity();}},nativeOn:{"change":function($event){return _vm.onChange($event.target.value)}}},'b-input',_vm.$attrs,false))],1)};
+var __vue_staticRenderFns__ = [];
+
+  /* style */
+  const __vue_inject_styles__ = undefined;
+  /* scoped */
+  const __vue_scope_id__ = undefined;
+  /* module identifier */
+  const __vue_module_identifier__ = undefined;
+  /* functional template */
+  const __vue_is_functional_template__ = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var Timepicker = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__["_"])(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    undefined,
+    undefined
+  );
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/buefy/dist/esm/chunk-9a266722.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/buefy/dist/esm/chunk-9a266722.js ***!
+  \*******************************************************/
+/*! exports provided: N */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "N", function() { return NoticeMixin; });
+/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
+/* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
+
+
+
+var NoticeMixin = {
+  props: {
+    type: {
+      type: String,
+      default: 'is-dark'
+    },
+    message: [String, Array],
+    duration: Number,
+    queue: {
+      type: Boolean,
+      default: undefined
+    },
+    position: {
+      type: String,
+      default: 'is-top',
+      validator: function validator(value) {
+        return ['is-top-right', 'is-top', 'is-top-left', 'is-bottom-right', 'is-bottom', 'is-bottom-left'].indexOf(value) > -1;
+      }
+    },
+    container: String
+  },
+  data: function data() {
+    return {
+      isActive: false,
+      parentTop: null,
+      parentBottom: null,
+      newContainer: this.container || _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultContainerElement
+    };
+  },
+  computed: {
+    correctParent: function correctParent() {
+      switch (this.position) {
+        case 'is-top-right':
+        case 'is-top':
+        case 'is-top-left':
+          return this.parentTop;
+
+        case 'is-bottom-right':
+        case 'is-bottom':
+        case 'is-bottom-left':
+          return this.parentBottom;
+      }
+    },
+    transition: function transition() {
+      switch (this.position) {
+        case 'is-top-right':
+        case 'is-top':
+        case 'is-top-left':
+          return {
+            enter: 'fadeInDown',
+            leave: 'fadeOut'
+          };
+
+        case 'is-bottom-right':
+        case 'is-bottom':
+        case 'is-bottom-left':
+          return {
+            enter: 'fadeInUp',
+            leave: 'fadeOut'
+          };
+      }
+    }
+  },
+  methods: {
+    shouldQueue: function shouldQueue() {
+      var queue = this.queue !== undefined ? this.queue : _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultNoticeQueue;
+      if (!queue) return false;
+      return this.parentTop.childElementCount > 0 || this.parentBottom.childElementCount > 0;
+    },
+    close: function close() {
+      var _this = this;
+
+      clearTimeout(this.timer);
+      this.isActive = false;
+      this.$emit('close'); // Timeout for the animation complete before destroying
+
+      setTimeout(function () {
+        _this.$destroy();
+
+        Object(_helpers_js__WEBPACK_IMPORTED_MODULE_0__["removeElement"])(_this.$el);
+      }, 150);
+    },
+    showNotice: function showNotice() {
+      var _this2 = this;
+
+      if (this.shouldQueue()) {
+        // Call recursively if should queue
+        setTimeout(function () {
+          return _this2.showNotice();
+        }, 250);
+        return;
+      }
+
+      this.correctParent.insertAdjacentElement('afterbegin', this.$el);
+      this.isActive = true;
+
+      if (!this.indefinite) {
+        this.timer = setTimeout(function () {
+          return _this2.close();
+        }, this.newDuration);
+      }
+    },
+    setupContainer: function setupContainer() {
+      this.parentTop = document.querySelector((this.newContainer ? this.newContainer : 'body') + '>.notices.is-top');
+      this.parentBottom = document.querySelector((this.newContainer ? this.newContainer : 'body') + '>.notices.is-bottom');
+      if (this.parentTop && this.parentBottom) return;
+
+      if (!this.parentTop) {
+        this.parentTop = document.createElement('div');
+        this.parentTop.className = 'notices is-top';
+      }
+
+      if (!this.parentBottom) {
+        this.parentBottom = document.createElement('div');
+        this.parentBottom.className = 'notices is-bottom';
+      }
+
+      var container = document.querySelector(this.newContainer) || document.body;
+      container.appendChild(this.parentTop);
+      container.appendChild(this.parentBottom);
+
+      if (this.newContainer) {
+        this.parentTop.classList.add('has-custom-container');
+        this.parentBottom.classList.add('has-custom-container');
+      }
+    }
+  },
+  beforeMount: function beforeMount() {
+    this.setupContainer();
+  },
+  mounted: function mounted() {
+    this.showNotice();
+  }
+};
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/buefy/dist/esm/chunk-9afd18b7.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/buefy/dist/esm/chunk-9afd18b7.js ***!
+  \*******************************************************/
+/*! exports provided: M */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "M", function() { return MessageMixin; });
+/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
+
+
+
+var MessageMixin = {
+  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_1__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_1__["I"]),
+  // deprecated, to replace with default 'value' in the next breaking change
+  model: {
+    prop: 'active',
+    event: 'update:active'
+  },
+  props: {
+    active: {
+      type: Boolean,
+      default: true
+    },
+    title: String,
+    closable: {
+      type: Boolean,
+      default: true
+    },
+    message: String,
+    type: String,
+    hasIcon: Boolean,
+    size: String,
+    icon: String,
+    iconPack: String,
+    iconSize: String,
+    autoClose: {
+      type: Boolean,
+      default: false
+    },
+    duration: {
+      type: Number,
+      default: 2000
+    }
+  },
+  data: function data() {
+    return {
+      isActive: this.active
+    };
+  },
+  watch: {
+    active: function active(value) {
+      this.isActive = value;
+    },
+    isActive: function isActive(value) {
+      if (value) {
+        this.setAutoClose();
+      } else {
+        if (this.timer) {
+          clearTimeout(this.timer);
+        }
+      }
+    }
+  },
+  computed: {
+    /**
+     * Icon name (MDI) based on type.
+     */
+    computedIcon: function computedIcon() {
+      if (this.icon) {
+        return this.icon;
+      }
+
+      switch (this.type) {
+        case 'is-info':
+          return 'information';
+
+        case 'is-success':
+          return 'check-circle';
+
+        case 'is-warning':
+          return 'alert';
+
+        case 'is-danger':
+          return 'alert-circle';
+
+        default:
+          return null;
+      }
+    }
+  },
+  methods: {
+    /**
+     * Close the Message and emit events.
+     */
+    close: function close() {
+      this.isActive = false;
+      this.$emit('close');
+      this.$emit('update:active', false);
+    },
+
+    /**
+     * Set timer to auto close message
+     */
+    setAutoClose: function setAutoClose() {
+      var _this = this;
+
+      if (this.autoClose) {
+        this.timer = setTimeout(function () {
+          if (_this.isActive) {
+            _this.close();
+          }
+        }, this.duration);
+      }
+    }
+  },
+  mounted: function mounted() {
+    this.setAutoClose();
+  }
+};
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/buefy/dist/esm/chunk-b1bc759a.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/buefy/dist/esm/chunk-b1bc759a.js ***!
   \*******************************************************/
 /*! exports provided: D */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -15028,13 +17227,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-197ef742.js */ "./node_modules/buefy/dist/esm/chunk-197ef742.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-f647b5cb.js */ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-85a8ec35.js */ "./node_modules/buefy/dist/esm/chunk-85a8ec35.js");
-/* harmony import */ var _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-5ccea041.js */ "./node_modules/buefy/dist/esm/chunk-5ccea041.js");
-/* harmony import */ var _chunk_722c2a14_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./chunk-722c2a14.js */ "./node_modules/buefy/dist/esm/chunk-722c2a14.js");
-/* harmony import */ var _chunk_3c26c4a0_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./chunk-3c26c4a0.js */ "./node_modules/buefy/dist/esm/chunk-3c26c4a0.js");
+/* harmony import */ var _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-b59d2948.js */ "./node_modules/buefy/dist/esm/chunk-b59d2948.js");
+/* harmony import */ var _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-f8007af2.js */ "./node_modules/buefy/dist/esm/chunk-f8007af2.js");
+/* harmony import */ var _chunk_5d5e2574_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./chunk-5d5e2574.js */ "./node_modules/buefy/dist/esm/chunk-5d5e2574.js");
+/* harmony import */ var _chunk_01bc3886_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./chunk-01bc3886.js */ "./node_modules/buefy/dist/esm/chunk-01bc3886.js");
 
 
 
@@ -15398,10 +17597,6 @@ var __vue_staticRenderFns__ = [];
     undefined
   );
 
-var isDefined = function isDefined(d) {
-  return d !== undefined;
-};
-
 var script$1 = {
   name: 'BDatepickerTable',
   components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, DatepickerTableRow.name, DatepickerTableRow),
@@ -15521,10 +17716,10 @@ var script$1 = {
       }
 
       if (this.hoveredEndDate < this.selectedBeginDate) {
-        return [this.hoveredEndDate, this.selectedBeginDate].filter(isDefined);
+        return [this.hoveredEndDate, this.selectedBeginDate].filter(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["isDefined"]);
       }
 
-      return [this.selectedBeginDate, this.hoveredEndDate].filter(isDefined);
+      return [this.selectedBeginDate, this.hoveredEndDate].filter(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["isDefined"]);
     }
   },
   methods: {
@@ -15739,48 +17934,6 @@ var __vue_staticRenderFns__$1 = [];
   );
 
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var script$2 = {
   name: 'BDatepickerMonth',
   props: {
@@ -15798,10 +17951,14 @@ var script$2 = {
     unselectableDates: Array,
     unselectableDaysOfWeek: Array,
     selectableDates: Array,
+    range: Boolean,
     multiple: Boolean
   },
   data: function data() {
     return {
+      selectedBeginDate: undefined,
+      selectedEndDate: undefined,
+      hoveredEndDate: undefined,
       multipleSelectedDates: this.multiple && this.value ? this.value : []
     };
   },
@@ -15851,6 +18008,21 @@ var script$2 = {
     },
     focusedMonth: function focusedMonth() {
       return this.focused.month;
+    },
+    hoveredDateRange: function hoveredDateRange() {
+      if (!this.range) {
+        return [];
+      }
+
+      if (!isNaN(this.selectedEndDate)) {
+        return [];
+      }
+
+      if (this.hoveredEndDate < this.selectedBeginDate) {
+        return [this.hoveredEndDate, this.selectedBeginDate].filter(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["isDefined"]);
+      }
+
+      return [this.selectedBeginDate, this.hoveredEndDate].filter(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["isDefined"]);
     }
   },
   watch: {
@@ -15952,7 +18124,21 @@ var script$2 = {
           return false;
         }
 
+        if (Array.isArray(dateTwo)) {
+          return dateTwo.some(function (date) {
+            return dateOne.getFullYear() === date.getFullYear() && dateOne.getMonth() === date.getMonth();
+          });
+        }
+
         return dateOne.getFullYear() === dateTwo.getFullYear() && dateOne.getMonth() === dateTwo.getMonth();
+      }
+
+      function dateWithin(dateOne, dates, multiple) {
+        if (!Array.isArray(dates) || multiple) {
+          return false;
+        }
+
+        return dateOne > dates[0] && dateOne < dates[1];
       }
 
       function dateMultipleSelected(dateOne, dates, multiple) {
@@ -15966,7 +18152,14 @@ var script$2 = {
       }
 
       return {
-        'is-selected': dateMatch(day, this.value, this.multiple) || dateMultipleSelected(day, this.multipleSelectedDates, this.multiple),
+        'is-selected': dateMatch(day, this.value, this.multiple) || dateWithin(day, this.value, this.multiple) || dateMultipleSelected(day, this.multipleSelectedDates, this.multiple),
+        'is-first-selected': dateMatch(day, Array.isArray(this.value) && this.value[0], this.multiple),
+        'is-within-selected': dateWithin(day, this.value, this.multiple),
+        'is-last-selected': dateMatch(day, Array.isArray(this.value) && this.value[1], this.multiple),
+        'is-within-hovered-range': this.hoveredDateRange && this.hoveredDateRange.length === 2 && (dateMatch(day, this.hoveredDateRange) || dateWithin(day, this.hoveredDateRange)),
+        'is-first-hovered': dateMatch(day, Array.isArray(this.hoveredDateRange) && this.hoveredDateRange[0]),
+        'is-within-hovered': dateWithin(day, this.hoveredDateRange),
+        'is-last-hovered': dateMatch(day, Array.isArray(this.hoveredDateRange) && this.hoveredDateRange[1]),
         'is-today': dateMatch(day, this.dateCreator()),
         'is-selectable': this.selectableDate(day) && !this.disabled,
         'is-unselectable': !this.selectableDate(day) || this.disabled
@@ -15982,7 +18175,7 @@ var script$2 = {
         case 'Spacebar':
         case 'Enter':
           {
-            this.emitChosenDate(date);
+            this.updateSelectedDate(date);
             break;
           }
 
@@ -16017,6 +18210,19 @@ var script$2 = {
     },
 
     /*
+    * Emit input event with selected date as payload for v-model in parent
+    */
+    updateSelectedDate: function updateSelectedDate(date) {
+      if (!this.range && !this.multiple) {
+        this.emitChosenDate(date);
+      } else if (this.range) {
+        this.handleSelectRangeDate(date);
+      } else if (this.multiple) {
+        this.selectMultipleDates(date);
+      }
+    },
+
+    /*
      * Emit select event with chosen date as payload
      */
     emitChosenDate: function emitChosenDate(day) {
@@ -16028,6 +18234,39 @@ var script$2 = {
         }
       } else {
         this.selectMultipleDates(day);
+      }
+    },
+
+    /*
+    * If both begin and end dates are set, reset the end date and set the begin date.
+    * If only begin date is selected, emit an array of the begin date and the new date.
+    * If not set, only set the begin date.
+    */
+    handleSelectRangeDate: function handleSelectRangeDate(date) {
+      if (this.disabled) return;
+
+      if (this.selectedBeginDate && this.selectedEndDate) {
+        this.selectedBeginDate = date;
+        this.selectedEndDate = undefined;
+        this.$emit('range-start', date);
+      } else if (this.selectedBeginDate && !this.selectedEndDate) {
+        if (this.selectedBeginDate > date) {
+          this.selectedEndDate = this.selectedBeginDate;
+          this.selectedBeginDate = date;
+        } else {
+          this.selectedEndDate = date;
+        }
+
+        this.$emit('range-end', date);
+        this.$emit('input', [this.selectedBeginDate, this.selectedEndDate]);
+      } else {
+        this.selectedBeginDate = date;
+        this.$emit('range-start', date);
+      }
+    },
+    setRangeHoverEndDate: function setRangeHoverEndDate(day) {
+      if (this.range) {
+        this.hoveredEndDate = day;
       }
     },
     changeFocus: function changeFocus(month, inc) {
@@ -16046,7 +18285,7 @@ var __vue_render__$2 = function () {var _vm=this;var _h=_vm.$createElement;var _
                         _vm.classObject(date),
                         {'has-event': _vm.eventsDateMatch(date)},
                         _vm.indicators
-                    ],attrs:{"role":"button","href":"#","disabled":_vm.disabled,"tabindex":_vm.focused.month === date.getMonth() ? null : -1},on:{"click":function($event){$event.preventDefault();return _vm.emitChosenDate(date)},"keydown":function($event){$event.preventDefault();return _vm.manageKeydown($event, date)}}},[_vm._v(" "+_vm._s(_vm.monthNames[date.getMonth()])+" "),(_vm.eventsDateMatch(date))?_c('div',{staticClass:"events"},_vm._l((_vm.eventsDateMatch(date)),function(event,index){return _c('div',{key:index,staticClass:"event",class:event.type})}),0):_vm._e()]):_c('div',{key:index,staticClass:"datepicker-cell",class:_vm.classObject(date)},[_vm._v(" "+_vm._s(_vm.monthNames[date.getMonth()])+" ")])]})],2)])])};
+                    ],attrs:{"role":"button","href":"#","disabled":_vm.disabled,"tabindex":_vm.focused.month === date.getMonth() ? null : -1},on:{"click":function($event){$event.preventDefault();return _vm.updateSelectedDate(date)},"mouseenter":function($event){return _vm.setRangeHoverEndDate(date)},"keydown":function($event){$event.preventDefault();return _vm.manageKeydown($event, date)}}},[_vm._v(" "+_vm._s(_vm.monthNames[date.getMonth()])+" "),(_vm.eventsDateMatch(date))?_c('div',{staticClass:"events"},_vm._l((_vm.eventsDateMatch(date)),function(event,index){return _c('div',{key:index,staticClass:"event",class:event.type})}),0):_vm._e()]):_c('div',{key:index,staticClass:"datepicker-cell",class:_vm.classObject(date)},[_vm._v(" "+_vm._s(_vm.monthNames[date.getMonth()])+" ")])]})],2)])])};
 var __vue_staticRenderFns__$2 = [];
 
   /* style */
@@ -16122,8 +18361,8 @@ var defaultDateParser = function defaultDateParser(date, vm) {
 
 var script$3 = {
   name: 'BDatepicker',
-  components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, DatepickerTable.name, DatepickerTable), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, DatepickerMonth.name, DatepickerMonth), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__["I"].name, _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_722c2a14_js__WEBPACK_IMPORTED_MODULE_8__["F"].name, _chunk_722c2a14_js__WEBPACK_IMPORTED_MODULE_8__["F"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_3c26c4a0_js__WEBPACK_IMPORTED_MODULE_9__["S"].name, _chunk_3c26c4a0_js__WEBPACK_IMPORTED_MODULE_9__["S"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_7__["D"].name, _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_7__["D"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_7__["a"].name, _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_7__["a"]), _components),
-  mixins: [_chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__["F"]],
+  components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, DatepickerTable.name, DatepickerTable), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, DatepickerMonth.name, DatepickerMonth), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__["I"].name, _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_5d5e2574_js__WEBPACK_IMPORTED_MODULE_8__["F"].name, _chunk_5d5e2574_js__WEBPACK_IMPORTED_MODULE_8__["F"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_01bc3886_js__WEBPACK_IMPORTED_MODULE_9__["S"].name, _chunk_01bc3886_js__WEBPACK_IMPORTED_MODULE_9__["S"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_7__["D"].name, _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_7__["D"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_7__["a"].name, _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_7__["a"]), _components),
+  mixins: [_chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__["F"]],
   inheritAttrs: false,
   props: {
     value: {
@@ -16300,6 +18539,11 @@ var script$3 = {
   },
   data: function data() {
     var focusedDate = (Array.isArray(this.value) ? this.value[0] : this.value) || this.focusedDate || this.dateCreator();
+
+    if (this.maxDate && this.maxDate.getFullYear() < new Date().getFullYear()) {
+      focusedDate.setFullYear(this.maxDate.getFullYear());
+    }
+
     return {
       dateSelected: this.value,
       focusedDateData: {
@@ -16694,7 +18938,7 @@ var script$3 = {
 const __vue_script__$3 = script$3;
 
 /* template */
-var __vue_render__$3 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"datepicker control",class:[_vm.size, {'is-expanded': _vm.expanded}]},[(!_vm.isMobile || _vm.inline)?_c('b-dropdown',{ref:"dropdown",attrs:{"position":_vm.position,"disabled":_vm.disabled,"inline":_vm.inline,"mobile-modal":_vm.mobileModal,"trap-focus":_vm.trapFocus,"aria-role":_vm.ariaRole,"aria-modal":!_vm.inline,"append-to-body":_vm.appendToBody,"append-to-body-copy-parent":""},on:{"active-change":_vm.onActiveChange},scopedSlots:_vm._u([(!_vm.inline)?{key:"trigger",fn:function(){return [_vm._t("trigger",[_c('b-input',_vm._b({ref:"input",attrs:{"autocomplete":"off","value":_vm.formattedValue,"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"rounded":_vm.rounded,"loading":_vm.loading,"disabled":_vm.disabled,"readonly":!_vm.editable,"use-html5-validation":false},on:{"focus":_vm.handleOnFocus},nativeOn:{"click":function($event){return _vm.onInputClick($event)},"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.togglePicker(true)},"change":function($event){return _vm.onChange($event.target.value)}}},'b-input',_vm.$attrs,false))])]},proxy:true}:null],null,true)},[_c('b-dropdown-item',{class:{'dropdown-horizonal-timepicker': _vm.horizontalTimePicker},attrs:{"disabled":_vm.disabled,"focusable":_vm.focusable,"custom":""}},[_c('div',[_c('header',{staticClass:"datepicker-header"},[(_vm.$slots.header !== undefined && _vm.$slots.header.length)?[_vm._t("header")]:_c('div',{staticClass:"pagination field is-centered",class:_vm.size},[_c('a',{directives:[{name:"show",rawName:"v-show",value:(!_vm.showPrev && !_vm.disabled),expression:"!showPrev && !disabled"}],staticClass:"pagination-previous",attrs:{"role":"button","href":"#","disabled":_vm.disabled,"aria-label":_vm.ariaPreviousLabel},on:{"click":function($event){$event.preventDefault();return _vm.prev($event)},"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.prev($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }$event.preventDefault();return _vm.prev($event)}]}},[_c('b-icon',{attrs:{"icon":_vm.iconPrev,"pack":_vm.iconPack,"both":"","type":"is-primary is-clickable"}})],1),_c('a',{directives:[{name:"show",rawName:"v-show",value:(!_vm.showNext && !_vm.disabled),expression:"!showNext && !disabled"}],staticClass:"pagination-next",attrs:{"role":"button","href":"#","disabled":_vm.disabled,"aria-label":_vm.ariaNextLabel},on:{"click":function($event){$event.preventDefault();return _vm.next($event)},"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.next($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }$event.preventDefault();return _vm.next($event)}]}},[_c('b-icon',{attrs:{"icon":_vm.iconNext,"pack":_vm.iconPack,"both":"","type":"is-primary is-clickable"}})],1),_c('div',{staticClass:"pagination-list"},[_c('b-field',[(!_vm.isTypeMonth)?_c('b-select',{attrs:{"disabled":_vm.disabled,"size":_vm.size},model:{value:(_vm.focusedDateData.month),callback:function ($$v) {_vm.$set(_vm.focusedDateData, "month", $$v);},expression:"focusedDateData.month"}},_vm._l((_vm.listOfMonths),function(month){return _c('option',{key:month.name,attrs:{"disabled":month.disabled},domProps:{"value":month.index}},[_vm._v(" "+_vm._s(month.name)+" ")])}),0):_vm._e(),_c('b-select',{attrs:{"disabled":_vm.disabled,"size":_vm.size},model:{value:(_vm.focusedDateData.year),callback:function ($$v) {_vm.$set(_vm.focusedDateData, "year", $$v);},expression:"focusedDateData.year"}},_vm._l((_vm.listOfYears),function(year){return _c('option',{key:year,domProps:{"value":year}},[_vm._v(" "+_vm._s(year)+" ")])}),0)],1)],1)])],2),(!_vm.isTypeMonth)?_c('div',{staticClass:"datepicker-content",class:{'content-horizonal-timepicker': _vm.horizontalTimePicker}},[_c('b-datepicker-table',{attrs:{"day-names":_vm.newDayNames,"month-names":_vm.newMonthNames,"first-day-of-week":_vm.firstDayOfWeek,"rules-for-first-week":_vm.rulesForFirstWeek,"min-date":_vm.minDate,"max-date":_vm.maxDate,"focused":_vm.focusedDateData,"disabled":_vm.disabled,"unselectable-dates":_vm.unselectableDates,"unselectable-days-of-week":_vm.unselectableDaysOfWeek,"selectable-dates":_vm.selectableDates,"events":_vm.events,"indicators":_vm.indicators,"date-creator":_vm.dateCreator,"type-month":_vm.isTypeMonth,"nearby-month-days":_vm.nearbyMonthDays,"nearby-selectable-month-days":_vm.nearbySelectableMonthDays,"show-week-number":_vm.showWeekNumber,"range":_vm.range,"multiple":_vm.multiple},on:{"range-start":function (date) { return _vm.$emit('range-start', date); },"range-end":function (date) { return _vm.$emit('range-end', date); },"close":function($event){return _vm.togglePicker(false)},"update:focused":function($event){_vm.focusedDateData = $event;}},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=$$v;},expression:"computedValue"}})],1):_c('div',[_c('b-datepicker-month',{attrs:{"month-names":_vm.newMonthNames,"min-date":_vm.minDate,"max-date":_vm.maxDate,"focused":_vm.focusedDateData,"disabled":_vm.disabled,"unselectable-dates":_vm.unselectableDates,"unselectable-days-of-week":_vm.unselectableDaysOfWeek,"selectable-dates":_vm.selectableDates,"events":_vm.events,"indicators":_vm.indicators,"date-creator":_vm.dateCreator,"multiple":_vm.multiple},on:{"close":function($event){return _vm.togglePicker(false)},"change-focus":_vm.changeFocus,"update:focused":function($event){_vm.focusedDateData = $event;}},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=$$v;},expression:"computedValue"}})],1)]),(_vm.$slots.default !== undefined && _vm.$slots.default.length)?_c('footer',{staticClass:"datepicker-footer",class:{'footer-horizontal-timepicker': _vm.horizontalTimePicker}},[_vm._t("default")],2):_vm._e()])],1):_c('b-input',_vm._b({ref:"input",attrs:{"type":!_vm.isTypeMonth ? 'date' : 'month',"autocomplete":"off","value":_vm.formatNative(_vm.computedValue),"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"rounded":_vm.rounded,"loading":_vm.loading,"max":_vm.formatNative(_vm.maxDate),"min":_vm.formatNative(_vm.minDate),"disabled":_vm.disabled,"readonly":false,"use-html5-validation":false},on:{"focus":_vm.onFocus,"blur":_vm.onBlur},nativeOn:{"change":function($event){return _vm.onChangeNativePicker($event)}}},'b-input',_vm.$attrs,false))],1)};
+var __vue_render__$3 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"datepicker control",class:[_vm.size, {'is-expanded': _vm.expanded}]},[(!_vm.isMobile || _vm.inline)?_c('b-dropdown',{ref:"dropdown",attrs:{"position":_vm.position,"disabled":_vm.disabled,"inline":_vm.inline,"mobile-modal":_vm.mobileModal,"trap-focus":_vm.trapFocus,"aria-role":_vm.ariaRole,"aria-modal":!_vm.inline,"append-to-body":_vm.appendToBody,"append-to-body-copy-parent":""},on:{"active-change":_vm.onActiveChange},scopedSlots:_vm._u([(!_vm.inline)?{key:"trigger",fn:function(){return [_vm._t("trigger",[_c('b-input',_vm._b({ref:"input",attrs:{"autocomplete":"off","value":_vm.formattedValue,"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"rounded":_vm.rounded,"loading":_vm.loading,"disabled":_vm.disabled,"readonly":!_vm.editable,"use-html5-validation":false},on:{"focus":_vm.handleOnFocus},nativeOn:{"click":function($event){return _vm.onInputClick($event)},"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.togglePicker(true)},"change":function($event){return _vm.onChange($event.target.value)}}},'b-input',_vm.$attrs,false))])]},proxy:true}:null],null,true)},[_c('b-dropdown-item',{class:{'dropdown-horizonal-timepicker': _vm.horizontalTimePicker},attrs:{"disabled":_vm.disabled,"focusable":_vm.focusable,"custom":""}},[_c('div',[_c('header',{staticClass:"datepicker-header"},[(_vm.$slots.header !== undefined && _vm.$slots.header.length)?[_vm._t("header")]:_c('div',{staticClass:"pagination field is-centered",class:_vm.size},[_c('a',{directives:[{name:"show",rawName:"v-show",value:(!_vm.showPrev && !_vm.disabled),expression:"!showPrev && !disabled"}],staticClass:"pagination-previous",attrs:{"role":"button","href":"#","disabled":_vm.disabled,"aria-label":_vm.ariaPreviousLabel},on:{"click":function($event){$event.preventDefault();return _vm.prev($event)},"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.prev($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }$event.preventDefault();return _vm.prev($event)}]}},[_c('b-icon',{attrs:{"icon":_vm.iconPrev,"pack":_vm.iconPack,"both":"","type":"is-primary is-clickable"}})],1),_c('a',{directives:[{name:"show",rawName:"v-show",value:(!_vm.showNext && !_vm.disabled),expression:"!showNext && !disabled"}],staticClass:"pagination-next",attrs:{"role":"button","href":"#","disabled":_vm.disabled,"aria-label":_vm.ariaNextLabel},on:{"click":function($event){$event.preventDefault();return _vm.next($event)},"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.next($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }$event.preventDefault();return _vm.next($event)}]}},[_c('b-icon',{attrs:{"icon":_vm.iconNext,"pack":_vm.iconPack,"both":"","type":"is-primary is-clickable"}})],1),_c('div',{staticClass:"pagination-list"},[_c('b-field',[(!_vm.isTypeMonth)?_c('b-select',{attrs:{"disabled":_vm.disabled,"size":_vm.size},model:{value:(_vm.focusedDateData.month),callback:function ($$v) {_vm.$set(_vm.focusedDateData, "month", $$v);},expression:"focusedDateData.month"}},_vm._l((_vm.listOfMonths),function(month){return _c('option',{key:month.name,attrs:{"disabled":month.disabled},domProps:{"value":month.index}},[_vm._v(" "+_vm._s(month.name)+" ")])}),0):_vm._e(),_c('b-select',{attrs:{"disabled":_vm.disabled,"size":_vm.size},model:{value:(_vm.focusedDateData.year),callback:function ($$v) {_vm.$set(_vm.focusedDateData, "year", $$v);},expression:"focusedDateData.year"}},_vm._l((_vm.listOfYears),function(year){return _c('option',{key:year,domProps:{"value":year}},[_vm._v(" "+_vm._s(year)+" ")])}),0)],1)],1)])],2),(!_vm.isTypeMonth)?_c('div',{staticClass:"datepicker-content",class:{'content-horizonal-timepicker': _vm.horizontalTimePicker}},[_c('b-datepicker-table',{attrs:{"day-names":_vm.newDayNames,"month-names":_vm.newMonthNames,"first-day-of-week":_vm.firstDayOfWeek,"rules-for-first-week":_vm.rulesForFirstWeek,"min-date":_vm.minDate,"max-date":_vm.maxDate,"focused":_vm.focusedDateData,"disabled":_vm.disabled,"unselectable-dates":_vm.unselectableDates,"unselectable-days-of-week":_vm.unselectableDaysOfWeek,"selectable-dates":_vm.selectableDates,"events":_vm.events,"indicators":_vm.indicators,"date-creator":_vm.dateCreator,"type-month":_vm.isTypeMonth,"nearby-month-days":_vm.nearbyMonthDays,"nearby-selectable-month-days":_vm.nearbySelectableMonthDays,"show-week-number":_vm.showWeekNumber,"range":_vm.range,"multiple":_vm.multiple},on:{"range-start":function (date) { return _vm.$emit('range-start', date); },"range-end":function (date) { return _vm.$emit('range-end', date); },"close":function($event){return _vm.togglePicker(false)},"update:focused":function($event){_vm.focusedDateData = $event;}},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=$$v;},expression:"computedValue"}})],1):_c('div',[_c('b-datepicker-month',{attrs:{"month-names":_vm.newMonthNames,"min-date":_vm.minDate,"max-date":_vm.maxDate,"focused":_vm.focusedDateData,"disabled":_vm.disabled,"unselectable-dates":_vm.unselectableDates,"unselectable-days-of-week":_vm.unselectableDaysOfWeek,"selectable-dates":_vm.selectableDates,"events":_vm.events,"indicators":_vm.indicators,"date-creator":_vm.dateCreator,"range":_vm.range,"multiple":_vm.multiple},on:{"range-start":function (date) { return _vm.$emit('range-start', date); },"range-end":function (date) { return _vm.$emit('range-end', date); },"close":function($event){return _vm.togglePicker(false)},"change-focus":_vm.changeFocus,"update:focused":function($event){_vm.focusedDateData = $event;}},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=$$v;},expression:"computedValue"}})],1)]),(_vm.$slots.default !== undefined && _vm.$slots.default.length)?_c('footer',{staticClass:"datepicker-footer",class:{'footer-horizontal-timepicker': _vm.horizontalTimePicker}},[_vm._t("default")],2):_vm._e()])],1):_c('b-input',_vm._b({ref:"input",attrs:{"type":!_vm.isTypeMonth ? 'date' : 'month',"autocomplete":"off","value":_vm.formatNative(_vm.computedValue),"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"rounded":_vm.rounded,"loading":_vm.loading,"max":_vm.formatNative(_vm.maxDate),"min":_vm.formatNative(_vm.minDate),"disabled":_vm.disabled,"readonly":false,"use-html5-validation":false},on:{"focus":_vm.onFocus,"blur":_vm.onBlur},nativeOn:{"change":function($event){return _vm.onChangeNativePicker($event)}}},'b-input',_vm.$attrs,false))],1)};
 var __vue_staticRenderFns__$3 = [];
 
   /* style */
@@ -16727,9 +18971,779 @@ var __vue_staticRenderFns__$3 = [];
 
 /***/ }),
 
-/***/ "./node_modules/buefy/dist/esm/chunk-23f32560.js":
+/***/ "./node_modules/buefy/dist/esm/chunk-b59d2948.js":
 /*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-23f32560.js ***!
+  !*** ./node_modules/buefy/dist/esm/chunk-b59d2948.js ***!
+  \*******************************************************/
+/*! exports provided: I */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I", function() { return Input; });
+/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
+/* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
+/* harmony import */ var _chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-f647b5cb.js */ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
+/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
+
+
+
+
+
+
+var script = {
+  name: 'BInput',
+  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"]),
+  mixins: [_chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_2__["F"]],
+  inheritAttrs: false,
+  props: {
+    value: [Number, String],
+    type: {
+      type: String,
+      default: 'text'
+    },
+    lazy: {
+      type: Boolean,
+      default: false
+    },
+    passwordReveal: Boolean,
+    iconClickable: Boolean,
+    hasCounter: {
+      type: Boolean,
+      default: function _default() {
+        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultInputHasCounter;
+      }
+    },
+    customClass: {
+      type: String,
+      default: ''
+    },
+    iconRight: String,
+    iconRightClickable: Boolean
+  },
+  data: function data() {
+    return {
+      newValue: this.value,
+      newType: this.type,
+      newAutocomplete: this.autocomplete || _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultInputAutocomplete,
+      isPasswordVisible: false,
+      _elementRef: this.type === 'textarea' ? 'textarea' : 'input'
+    };
+  },
+  computed: {
+    computedValue: {
+      get: function get() {
+        return this.newValue;
+      },
+      set: function set(value) {
+        this.newValue = value;
+        this.$emit('input', value);
+      }
+    },
+    rootClasses: function rootClasses() {
+      return [this.iconPosition, this.size, {
+        'is-expanded': this.expanded,
+        'is-loading': this.loading,
+        'is-clearfix': !this.hasMessage
+      }];
+    },
+    inputClasses: function inputClasses() {
+      return [this.statusType, this.size, {
+        'is-rounded': this.rounded
+      }];
+    },
+    hasIconRight: function hasIconRight() {
+      return this.passwordReveal || this.loading || this.statusIcon && this.statusTypeIcon || this.iconRight;
+    },
+    rightIcon: function rightIcon() {
+      if (this.passwordReveal) {
+        return this.passwordVisibleIcon;
+      } else if (this.iconRight) {
+        return this.iconRight;
+      }
+
+      return this.statusTypeIcon;
+    },
+    rightIconType: function rightIconType() {
+      if (this.passwordReveal) {
+        return 'is-primary';
+      } else if (this.iconRight) {
+        return null;
+      }
+
+      return this.statusType;
+    },
+
+    /**
+    * Position of the icon or if it's both sides.
+    */
+    iconPosition: function iconPosition() {
+      var iconClasses = '';
+
+      if (this.icon) {
+        iconClasses += 'has-icons-left ';
+      }
+
+      if (this.hasIconRight) {
+        iconClasses += 'has-icons-right';
+      }
+
+      return iconClasses;
+    },
+
+    /**
+    * Icon name (MDI) based on the type.
+    */
+    statusTypeIcon: function statusTypeIcon() {
+      switch (this.statusType) {
+        case 'is-success':
+          return 'check';
+
+        case 'is-danger':
+          return 'alert-circle';
+
+        case 'is-info':
+          return 'information';
+
+        case 'is-warning':
+          return 'alert';
+      }
+    },
+
+    /**
+    * Check if have any message prop from parent if it's a Field.
+    */
+    hasMessage: function hasMessage() {
+      return !!this.statusMessage;
+    },
+
+    /**
+    * Current password-reveal icon name.
+    */
+    passwordVisibleIcon: function passwordVisibleIcon() {
+      return !this.isPasswordVisible ? 'eye' : 'eye-off';
+    },
+
+    /**
+    * Get value length
+    */
+    valueLength: function valueLength() {
+      if (typeof this.computedValue === 'string') {
+        return this.computedValue.length;
+      } else if (typeof this.computedValue === 'number') {
+        return this.computedValue.toString().length;
+      }
+
+      return 0;
+    }
+  },
+  watch: {
+    /**
+    * When v-model is changed:
+    *   1. Set internal value.
+    */
+    value: function value(_value) {
+      this.newValue = _value;
+    }
+  },
+  methods: {
+    /**
+    * Toggle the visibility of a password-reveal input
+    * by changing the type and focus the input right away.
+    */
+    togglePasswordVisibility: function togglePasswordVisibility() {
+      var _this = this;
+
+      this.isPasswordVisible = !this.isPasswordVisible;
+      this.newType = this.isPasswordVisible ? 'text' : 'password';
+      this.$nextTick(function () {
+        _this.focus();
+      });
+    },
+    iconClick: function iconClick(emit, event) {
+      var _this2 = this;
+
+      this.$emit(emit, event);
+      this.$nextTick(function () {
+        _this2.focus();
+      });
+    },
+    rightIconClick: function rightIconClick(event) {
+      if (this.passwordReveal) {
+        this.togglePasswordVisibility();
+      } else if (this.iconRightClickable) {
+        this.iconClick('icon-right-click', event);
+      }
+    },
+    onInput: function onInput(event) {
+      if (!this.lazy) {
+        var value = event.target.value;
+        this.updateValue(value);
+      }
+    },
+    onChange: function onChange(event) {
+      if (this.lazy) {
+        var value = event.target.value;
+        this.updateValue(value);
+      }
+    },
+    updateValue: function updateValue(value) {
+      this.computedValue = value;
+      !this.isValid && this.checkHtml5Validity();
+    }
+  }
+};
+
+/* script */
+const __vue_script__ = script;
+
+/* template */
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"control",class:_vm.rootClasses},[(_vm.type !== 'textarea')?_c('input',_vm._b({ref:"input",staticClass:"input",class:[_vm.inputClasses, _vm.customClass],attrs:{"type":_vm.newType,"autocomplete":_vm.newAutocomplete,"maxlength":_vm.maxlength},domProps:{"value":_vm.computedValue},on:{"input":_vm.onInput,"change":_vm.onChange,"blur":_vm.onBlur,"focus":_vm.onFocus}},'input',_vm.$attrs,false)):_c('textarea',_vm._b({ref:"textarea",staticClass:"textarea",class:[_vm.inputClasses, _vm.customClass],attrs:{"maxlength":_vm.maxlength},domProps:{"value":_vm.computedValue},on:{"input":_vm.onInput,"change":_vm.onChange,"blur":_vm.onBlur,"focus":_vm.onFocus}},'textarea',_vm.$attrs,false)),(_vm.icon)?_c('b-icon',{staticClass:"is-left",class:{'is-clickable': _vm.iconClickable},attrs:{"icon":_vm.icon,"pack":_vm.iconPack,"size":_vm.iconSize},nativeOn:{"click":function($event){return _vm.iconClick('icon-click', $event)}}}):_vm._e(),(!_vm.loading && _vm.hasIconRight)?_c('b-icon',{staticClass:"is-right",class:{ 'is-clickable': _vm.passwordReveal || _vm.iconRightClickable },attrs:{"icon":_vm.rightIcon,"pack":_vm.iconPack,"size":_vm.iconSize,"type":_vm.rightIconType,"both":""},nativeOn:{"click":function($event){return _vm.rightIconClick($event)}}}):_vm._e(),(_vm.maxlength && _vm.hasCounter && _vm.type !== 'number')?_c('small',{staticClass:"help counter",class:{ 'is-invisible': !_vm.isFocused }},[_vm._v(" "+_vm._s(_vm.valueLength)+" / "+_vm._s(_vm.maxlength)+" ")]):_vm._e()],1)};
+var __vue_staticRenderFns__ = [];
+
+  /* style */
+  const __vue_inject_styles__ = undefined;
+  /* scoped */
+  const __vue_scope_id__ = undefined;
+  /* module identifier */
+  const __vue_module_identifier__ = undefined;
+  /* functional template */
+  const __vue_is_functional_template__ = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var Input = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__["_"])(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    undefined,
+    undefined
+  );
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/buefy/dist/esm/chunk-b9bdb0e4.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/buefy/dist/esm/chunk-b9bdb0e4.js ***!
+  \*******************************************************/
+/*! exports provided: F, H */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return File; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "H", function() { return HTMLElement; });
+// Polyfills for SSR
+var isSSR = typeof window === 'undefined';
+var HTMLElement = isSSR ? Object : window.HTMLElement;
+var File = isSSR ? Object : window.File;
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/buefy/dist/esm/chunk-bd4264c6.js ***!
+  \*******************************************************/
+/*! exports provided: V, a, c, s */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "V", function() { return VueInstance; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return setVueInstance; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return config; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return setOptions; });
+var config = {
+  defaultContainerElement: null,
+  defaultIconPack: 'mdi',
+  defaultIconComponent: null,
+  defaultIconPrev: 'chevron-left',
+  defaultIconNext: 'chevron-right',
+  defaultLocale: undefined,
+  defaultDialogConfirmText: null,
+  defaultDialogCancelText: null,
+  defaultSnackbarDuration: 3500,
+  defaultSnackbarPosition: null,
+  defaultToastDuration: 2000,
+  defaultToastPosition: null,
+  defaultNotificationDuration: 2000,
+  defaultNotificationPosition: null,
+  defaultTooltipType: 'is-primary',
+  defaultTooltipDelay: null,
+  defaultInputAutocomplete: 'on',
+  defaultDateFormatter: null,
+  defaultDateParser: null,
+  defaultDateCreator: null,
+  defaultTimeCreator: null,
+  defaultDayNames: null,
+  defaultMonthNames: null,
+  defaultFirstDayOfWeek: null,
+  defaultUnselectableDaysOfWeek: null,
+  defaultTimeFormatter: null,
+  defaultTimeParser: null,
+  defaultModalCanCancel: ['escape', 'x', 'outside', 'button'],
+  defaultModalScroll: null,
+  defaultDatepickerMobileNative: true,
+  defaultTimepickerMobileNative: true,
+  defaultNoticeQueue: true,
+  defaultInputHasCounter: true,
+  defaultTaginputHasCounter: true,
+  defaultUseHtml5Validation: true,
+  defaultDropdownMobileModal: true,
+  defaultFieldLabelPosition: null,
+  defaultDatepickerYearsRange: [-100, 10],
+  defaultDatepickerNearbyMonthDays: true,
+  defaultDatepickerNearbySelectableMonthDays: false,
+  defaultDatepickerShowWeekNumber: false,
+  defaultDatepickerMobileModal: true,
+  defaultTrapFocus: true,
+  defaultButtonRounded: false,
+  defaultCarouselInterval: 3500,
+  defaultTabsExpanded: false,
+  defaultTabsAnimated: true,
+  defaultTabsType: null,
+  defaultStatusIcon: true,
+  defaultProgrammaticPromise: false,
+  defaultLinkTags: ['a', 'button', 'input', 'router-link', 'nuxt-link', 'n-link', 'RouterLink', 'NuxtLink', 'NLink'],
+  defaultImageWebpFallback: null,
+  defaultImageLazy: true,
+  defaultImageResponsive: true,
+  defaultImageRatio: null,
+  defaultImageSrcsetFormatter: null,
+  customIconPacks: null
+};
+var setOptions = function setOptions(options) {
+  config = options;
+};
+var setVueInstance = function setVueInstance(Vue) {
+  VueInstance = Vue;
+};
+var VueInstance;
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/buefy/dist/esm/chunk-cca88db8.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/buefy/dist/esm/chunk-cca88db8.js ***!
+  \*******************************************************/
+/*! exports provided: _, a, r, u */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_", function() { return normalizeComponent_1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return registerComponentProgrammatic; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return registerComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return use; });
+function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
+/* server only */
+, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+  if (typeof shadowMode !== 'boolean') {
+    createInjectorSSR = createInjector;
+    createInjector = shadowMode;
+    shadowMode = false;
+  } // Vue.extend constructor export interop.
+
+
+  var options = typeof script === 'function' ? script.options : script; // render functions
+
+  if (template && template.render) {
+    options.render = template.render;
+    options.staticRenderFns = template.staticRenderFns;
+    options._compiled = true; // functional template
+
+    if (isFunctionalTemplate) {
+      options.functional = true;
+    }
+  } // scopedId
+
+
+  if (scopeId) {
+    options._scopeId = scopeId;
+  }
+
+  var hook;
+
+  if (moduleIdentifier) {
+    // server build
+    hook = function hook(context) {
+      // 2.3 injection
+      context = context || // cached call
+      this.$vnode && this.$vnode.ssrContext || // stateful
+      this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext; // functional
+      // 2.2 with runInNewContext: true
+
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__;
+      } // inject component styles
+
+
+      if (style) {
+        style.call(this, createInjectorSSR(context));
+      } // register component module identifier for async chunk inference
+
+
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier);
+      }
+    }; // used by ssr in case component is cached and beforeCreate
+    // never gets called
+
+
+    options._ssrRegister = hook;
+  } else if (style) {
+    hook = shadowMode ? function () {
+      style.call(this, createInjectorShadow(this.$root.$options.shadowRoot));
+    } : function (context) {
+      style.call(this, createInjector(context));
+    };
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // register for functional component in vue file
+      var originalRender = options.render;
+
+      options.render = function renderWithStyleInjection(h, context) {
+        hook.call(context);
+        return originalRender(h, context);
+      };
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate;
+      options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+    }
+  }
+
+  return script;
+}
+
+var normalizeComponent_1 = normalizeComponent;
+
+var use = function use(plugin) {
+  if (typeof window !== 'undefined' && window.Vue) {
+    window.Vue.use(plugin);
+  }
+};
+var registerComponent = function registerComponent(Vue, component) {
+  Vue.component(component.name, component);
+};
+var registerComponentProgrammatic = function registerComponentProgrammatic(Vue, property, component) {
+  if (!Vue.prototype.$buefy) Vue.prototype.$buefy = {};
+  Vue.prototype.$buefy[property] = component;
+};
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/buefy/dist/esm/chunk-d6bb2470.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/buefy/dist/esm/chunk-d6bb2470.js ***!
+  \*******************************************************/
+/*! exports provided: C */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return Checkbox; });
+/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
+/* harmony import */ var _chunk_2793447b_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-2793447b.js */ "./node_modules/buefy/dist/esm/chunk-2793447b.js");
+
+
+
+//
+var script = {
+  name: 'BCheckbox',
+  mixins: [_chunk_2793447b_js__WEBPACK_IMPORTED_MODULE_1__["C"]],
+  props: {
+    indeterminate: Boolean,
+    trueValue: {
+      type: [String, Number, Boolean, Function, Object, Array],
+      default: true
+    },
+    falseValue: {
+      type: [String, Number, Boolean, Function, Object, Array],
+      default: false
+    }
+  }
+};
+
+/* script */
+const __vue_script__ = script;
+
+/* template */
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('label',{ref:"label",staticClass:"b-checkbox checkbox",class:[_vm.size, { 'is-disabled': _vm.disabled }],attrs:{"disabled":_vm.disabled},on:{"click":_vm.focus,"keydown":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.$refs.label.click()}}},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.computedValue),expression:"computedValue"}],ref:"input",attrs:{"type":"checkbox","disabled":_vm.disabled,"required":_vm.required,"name":_vm.name,"true-value":_vm.trueValue,"false-value":_vm.falseValue},domProps:{"indeterminate":_vm.indeterminate,"value":_vm.nativeValue,"checked":Array.isArray(_vm.computedValue)?_vm._i(_vm.computedValue,_vm.nativeValue)>-1:_vm._q(_vm.computedValue,_vm.trueValue)},on:{"click":function($event){$event.stopPropagation();},"change":function($event){var $$a=_vm.computedValue,$$el=$event.target,$$c=$$el.checked?(_vm.trueValue):(_vm.falseValue);if(Array.isArray($$a)){var $$v=_vm.nativeValue,$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.computedValue=$$a.concat([$$v]));}else{$$i>-1&&(_vm.computedValue=$$a.slice(0,$$i).concat($$a.slice($$i+1)));}}else{_vm.computedValue=$$c;}}}}),_c('span',{staticClass:"check",class:_vm.type}),_c('span',{staticClass:"control-label"},[_vm._t("default")],2)])};
+var __vue_staticRenderFns__ = [];
+
+  /* style */
+  const __vue_inject_styles__ = undefined;
+  /* scoped */
+  const __vue_scope_id__ = undefined;
+  /* module identifier */
+  const __vue_module_identifier__ = undefined;
+  /* functional template */
+  const __vue_is_functional_template__ = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var Checkbox = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_0__["_"])(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    undefined,
+    undefined
+  );
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/buefy/dist/esm/chunk-dad7a70a.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/buefy/dist/esm/chunk-dad7a70a.js ***!
+  \*******************************************************/
+/*! exports provided: T, a */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "T", function() { return TabbedMixin; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabbedChildMixin; });
+/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
+/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
+/* harmony import */ var _chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-e3b0b539.js */ "./node_modules/buefy/dist/esm/chunk-e3b0b539.js");
+/* harmony import */ var _chunk_db919f11_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-db919f11.js */ "./node_modules/buefy/dist/esm/chunk-db919f11.js");
+
+
+
+
+
+
+var TabbedMixin = (function (cmp) {
+  var _components;
+
+  return {
+    mixins: [Object(_chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_3__["P"])(cmp, _chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_3__["S"])],
+    components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_2__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_2__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_db919f11_js__WEBPACK_IMPORTED_MODULE_4__["S"].name, _chunk_db919f11_js__WEBPACK_IMPORTED_MODULE_4__["S"]), _components),
+    props: {
+      value: {
+        type: [String, Number],
+        default: undefined
+      },
+      size: String,
+      animated: {
+        type: Boolean,
+        default: true
+      },
+      animation: String,
+      vertical: {
+        type: Boolean,
+        default: false
+      },
+      position: String,
+      destroyOnHide: {
+        type: Boolean,
+        default: false
+      }
+    },
+    data: function data() {
+      return {
+        activeId: this.value,
+        // Internal state
+        defaultSlots: [],
+        contentHeight: 0,
+        isTransitioning: false
+      };
+    },
+    mounted: function mounted() {
+      if (typeof this.value === 'number') {
+        // Backward compatibility: converts the index value to an id
+        var value = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["bound"])(this.value, 0, this.items.length - 1);
+        this.activeId = this.items[value].value;
+      } else {
+        this.activeId = this.value;
+      }
+    },
+    computed: {
+      activeItem: function activeItem() {
+        var _this = this;
+
+        return this.activeId === undefined ? this.items[0] : this.activeId === null ? null : this.childItems.find(function (i) {
+          return i.value === _this.activeId;
+        });
+      },
+      items: function items() {
+        return this.sortedItems;
+      }
+    },
+    watch: {
+      /**
+       * When v-model is changed set the new active tab.
+       */
+      value: function value(_value) {
+        if (typeof _value === 'number') {
+          // Backward compatibility: converts the index value to an id
+          _value = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["bound"])(_value, 0, this.items.length - 1);
+          this.activeId = this.items[_value].value;
+        } else {
+          this.activeId = _value;
+        }
+      },
+
+      /**
+       * Sync internal state with external state
+       */
+      activeId: function activeId(val, oldValue) {
+        var oldTab = oldValue !== undefined && oldValue !== null ? this.childItems.find(function (i) {
+          return i.value === oldValue;
+        }) : null;
+
+        if (oldTab && this.activeItem) {
+          oldTab.deactivate(this.activeItem.index);
+          this.activeItem.activate(oldTab.index);
+        }
+
+        val = this.activeItem ? typeof this.value === 'number' ? this.items.indexOf(this.activeItem) : this.activeItem.value : undefined;
+
+        if (val !== this.value) {
+          this.$emit('input', val);
+        }
+      }
+    },
+    methods: {
+      /**
+      * Child click listener, emit input event and change active child.
+      */
+      childClick: function childClick(child) {
+        this.activeId = child.value;
+      }
+    }
+  };
+});
+
+var TabbedChildMixin = (function (parentCmp) {
+  return {
+    mixins: [Object(_chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_3__["I"])(parentCmp, _chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_3__["a"])],
+    props: {
+      label: String,
+      icon: String,
+      iconPack: String,
+      visible: {
+        type: Boolean,
+        default: true
+      },
+      value: {
+        type: String,
+        default: function _default() {
+          return this._uid.toString();
+        }
+      },
+      headerClass: {
+        type: [String, Array, Object],
+        default: null
+      }
+    },
+    data: function data() {
+      return {
+        transitionName: null,
+        elementClass: 'item'
+      };
+    },
+    computed: {
+      isActive: function isActive() {
+        return this.parent.activeItem === this;
+      }
+    },
+    methods: {
+      /**
+       * Activate element, alter animation name based on the index.
+       */
+      activate: function activate(oldIndex) {
+        this.transitionName = this.index < oldIndex ? this.parent.vertical ? 'slide-down' : 'slide-next' : this.parent.vertical ? 'slide-up' : 'slide-prev';
+      },
+
+      /**
+       * Deactivate element, alter animation name based on the index.
+       */
+      deactivate: function deactivate(newIndex) {
+        this.transitionName = newIndex < this.index ? this.parent.vertical ? 'slide-down' : 'slide-next' : this.parent.vertical ? 'slide-up' : 'slide-prev';
+      }
+    },
+    render: function render(createElement) {
+      var _this = this;
+
+      // if destroy apply v-if
+      if (this.parent.destroyOnHide) {
+        if (!this.isActive || !this.visible) {
+          return;
+        }
+      }
+
+      var vnode = createElement('div', {
+        directives: [{
+          name: 'show',
+          value: this.isActive && this.visible
+        }],
+        attrs: {
+          'class': this.elementClass
+        }
+      }, this.$slots.default); // check animated prop
+
+      if (this.parent.animated) {
+        return createElement('transition', {
+          props: {
+            'name': this.parent.animation || this.transitionName
+          },
+          on: {
+            'before-enter': function beforeEnter() {
+              _this.parent.isTransitioning = true;
+            },
+            'after-enter': function afterEnter() {
+              _this.parent.isTransitioning = false;
+            }
+          }
+        }, [vnode]);
+      }
+
+      return vnode;
+    }
+  };
+});
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/buefy/dist/esm/chunk-db919f11.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/buefy/dist/esm/chunk-db919f11.js ***!
   \*******************************************************/
 /*! exports provided: S */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -16793,767 +19807,9 @@ var SlotComponent = {
 
 /***/ }),
 
-/***/ "./node_modules/buefy/dist/esm/chunk-2793447b.js":
+/***/ "./node_modules/buefy/dist/esm/chunk-e3b0b539.js":
 /*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-2793447b.js ***!
-  \*******************************************************/
-/*! exports provided: C */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return CheckRadioMixin; });
-var CheckRadioMixin = {
-  props: {
-    value: [String, Number, Boolean, Function, Object, Array],
-    nativeValue: [String, Number, Boolean, Function, Object, Array],
-    type: String,
-    disabled: Boolean,
-    required: Boolean,
-    name: String,
-    size: String
-  },
-  data: function data() {
-    return {
-      newValue: this.value
-    };
-  },
-  computed: {
-    computedValue: {
-      get: function get() {
-        return this.newValue;
-      },
-      set: function set(value) {
-        this.newValue = value;
-        this.$emit('input', value);
-      }
-    }
-  },
-  watch: {
-    /**
-    * When v-model change, set internal value.
-    */
-    value: function value(_value) {
-      this.newValue = _value;
-    }
-  },
-  methods: {
-    focus: function focus() {
-      // MacOS FireFox and Safari do not focus when clicked
-      this.$refs.input.focus();
-    }
-  }
-};
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-3852f5fd.js ***!
-  \*******************************************************/
-/*! exports provided: I */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I", function() { return Icon; });
-/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
-/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
-/* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-
-
-
-
-
-var mdiIcons = {
-  sizes: {
-    'default': 'mdi-24px',
-    'is-small': null,
-    'is-medium': 'mdi-36px',
-    'is-large': 'mdi-48px'
-  },
-  iconPrefix: 'mdi-'
-};
-
-var faIcons = function faIcons() {
-  var faIconPrefix = _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"] && _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"].defaultIconComponent ? '' : 'fa-';
-  return {
-    sizes: {
-      'default': null,
-      'is-small': null,
-      'is-medium': faIconPrefix + 'lg',
-      'is-large': faIconPrefix + '2x'
-    },
-    iconPrefix: faIconPrefix,
-    internalIcons: {
-      'information': 'info-circle',
-      'alert': 'exclamation-triangle',
-      'alert-circle': 'exclamation-circle',
-      'chevron-right': 'angle-right',
-      'chevron-left': 'angle-left',
-      'chevron-down': 'angle-down',
-      'eye-off': 'eye-slash',
-      'menu-down': 'caret-down',
-      'menu-up': 'caret-up',
-      'close-circle': 'times-circle'
-    }
-  };
-};
-
-var getIcons = function getIcons() {
-  var icons = {
-    mdi: mdiIcons,
-    fa: faIcons(),
-    fas: faIcons(),
-    far: faIcons(),
-    fad: faIcons(),
-    fab: faIcons(),
-    fal: faIcons()
-  };
-
-  if (_chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"] && _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"].customIconPacks) {
-    icons = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["merge"])(icons, _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"].customIconPacks, true);
-  }
-
-  return icons;
-};
-
-var script = {
-  name: 'BIcon',
-  props: {
-    type: [String, Object],
-    component: String,
-    pack: String,
-    icon: String,
-    size: String,
-    customSize: String,
-    customClass: String,
-    both: Boolean // This is used internally to show both MDI and FA icon
-
-  },
-  computed: {
-    iconConfig: function iconConfig() {
-      var allIcons = getIcons();
-      return allIcons[this.newPack];
-    },
-    iconPrefix: function iconPrefix() {
-      if (this.iconConfig && this.iconConfig.iconPrefix) {
-        return this.iconConfig.iconPrefix;
-      }
-
-      return '';
-    },
-
-    /**
-    * Internal icon name based on the pack.
-    * If pack is 'fa', gets the equivalent FA icon name of the MDI,
-    * internal icons are always MDI.
-    */
-    newIcon: function newIcon() {
-      return "".concat(this.iconPrefix).concat(this.getEquivalentIconOf(this.icon));
-    },
-    newPack: function newPack() {
-      return this.pack || _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"].defaultIconPack;
-    },
-    newType: function newType() {
-      if (!this.type) return;
-      var splitType = [];
-
-      if (typeof this.type === 'string') {
-        splitType = this.type.split('-');
-      } else {
-        for (var key in this.type) {
-          if (this.type[key]) {
-            splitType = key.split('-');
-            break;
-          }
-        }
-      }
-
-      if (splitType.length <= 1) return;
-
-      var _splitType = splitType,
-          _splitType2 = Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["c"])(_splitType),
-          type = _splitType2.slice(1);
-
-      return "has-text-".concat(type.join('-'));
-    },
-    newCustomSize: function newCustomSize() {
-      return this.customSize || this.customSizeByPack;
-    },
-    customSizeByPack: function customSizeByPack() {
-      if (this.iconConfig && this.iconConfig.sizes) {
-        if (this.size && this.iconConfig.sizes[this.size] !== undefined) {
-          return this.iconConfig.sizes[this.size];
-        } else if (this.iconConfig.sizes.default) {
-          return this.iconConfig.sizes.default;
-        }
-      }
-
-      return null;
-    },
-    useIconComponent: function useIconComponent() {
-      return this.component || _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"].defaultIconComponent;
-    }
-  },
-  methods: {
-    /**
-    * Equivalent icon name of the MDI.
-    */
-    getEquivalentIconOf: function getEquivalentIconOf(value) {
-      // Only transform the class if the both prop is set to true
-      if (!this.both) {
-        return value;
-      }
-
-      if (this.iconConfig && this.iconConfig.internalIcons && this.iconConfig.internalIcons[value]) {
-        return this.iconConfig.internalIcons[value];
-      }
-
-      return value;
-    }
-  }
-};
-
-/* script */
-const __vue_script__ = script;
-
-/* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"icon",class:[_vm.newType, _vm.size]},[(!_vm.useIconComponent)?_c('i',{class:[_vm.newPack, _vm.newIcon, _vm.newCustomSize, _vm.customClass]}):_c(_vm.useIconComponent,{tag:"component",class:[_vm.customClass],attrs:{"icon":[_vm.newPack, _vm.newIcon],"size":_vm.newCustomSize}})],1)};
-var __vue_staticRenderFns__ = [];
-
-  /* style */
-  const __vue_inject_styles__ = undefined;
-  /* scoped */
-  const __vue_scope_id__ = undefined;
-  /* module identifier */
-  const __vue_module_identifier__ = undefined;
-  /* functional template */
-  const __vue_is_functional_template__ = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-
-  
-  var Icon = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["_"])(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
-    undefined,
-    undefined
-  );
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/buefy/dist/esm/chunk-3c26c4a0.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-3c26c4a0.js ***!
-  \*******************************************************/
-/*! exports provided: S */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "S", function() { return Select; });
-/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
-/* harmony import */ var _chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-197ef742.js */ "./node_modules/buefy/dist/esm/chunk-197ef742.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
-/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-
-
-
-
-
-var script = {
-  name: 'BSelect',
-  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_2__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_2__["I"]),
-  mixins: [_chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_1__["F"]],
-  inheritAttrs: false,
-  props: {
-    value: {
-      type: [String, Number, Boolean, Object, Array, Function],
-      default: null
-    },
-    placeholder: String,
-    multiple: Boolean,
-    nativeSize: [String, Number]
-  },
-  data: function data() {
-    return {
-      selected: this.value,
-      _elementRef: 'select'
-    };
-  },
-  computed: {
-    computedValue: {
-      get: function get() {
-        return this.selected;
-      },
-      set: function set(value) {
-        this.selected = value;
-        this.$emit('input', value);
-        !this.isValid && this.checkHtml5Validity();
-      }
-    },
-    spanClasses: function spanClasses() {
-      return [this.size, this.statusType, {
-        'is-fullwidth': this.expanded,
-        'is-loading': this.loading,
-        'is-multiple': this.multiple,
-        'is-rounded': this.rounded,
-        'is-empty': this.selected === null
-      }];
-    }
-  },
-  watch: {
-    /**
-    * When v-model is changed:
-    *   1. Set the selected option.
-    *   2. If it's invalid, validate again.
-    */
-    value: function value(_value) {
-      this.selected = _value;
-      !this.isValid && this.checkHtml5Validity();
-    }
-  }
-};
-
-/* script */
-const __vue_script__ = script;
-
-/* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"control",class:{ 'is-expanded': _vm.expanded, 'has-icons-left': _vm.icon }},[_c('span',{staticClass:"select",class:_vm.spanClasses},[_c('select',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.computedValue),expression:"computedValue"}],ref:"select",attrs:{"multiple":_vm.multiple,"size":_vm.nativeSize},on:{"blur":function($event){_vm.$emit('blur', $event) && _vm.checkHtml5Validity();},"focus":function($event){return _vm.$emit('focus', $event)},"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.computedValue=$event.target.multiple ? $$selectedVal : $$selectedVal[0];}}},'select',_vm.$attrs,false),[(_vm.placeholder)?[(_vm.computedValue == null)?_c('option',{attrs:{"disabled":"","hidden":""},domProps:{"value":null}},[_vm._v(" "+_vm._s(_vm.placeholder)+" ")]):_vm._e()]:_vm._e(),_vm._t("default")],2)]),(_vm.icon)?_c('b-icon',{staticClass:"is-left",attrs:{"icon":_vm.icon,"pack":_vm.iconPack,"size":_vm.iconSize}}):_vm._e()],1)};
-var __vue_staticRenderFns__ = [];
-
-  /* style */
-  const __vue_inject_styles__ = undefined;
-  /* scoped */
-  const __vue_scope_id__ = undefined;
-  /* module identifier */
-  const __vue_module_identifier__ = undefined;
-  /* functional template */
-  const __vue_is_functional_template__ = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-
-  
-  var Select = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["_"])(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
-    undefined,
-    undefined
-  );
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/buefy/dist/esm/chunk-42f463e6.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-42f463e6.js ***!
-  \*******************************************************/
-/*! exports provided: t */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return directive; });
-var findFocusable = function findFocusable(element) {
-  var programmatic = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-  if (!element) {
-    return null;
-  }
-
-  if (programmatic) {
-    return element.querySelectorAll("*[tabindex=\"-1\"]");
-  }
-
-  return element.querySelectorAll("a[href]:not([tabindex=\"-1\"]),\n                                     area[href],\n                                     input:not([disabled]),\n                                     select:not([disabled]),\n                                     textarea:not([disabled]),\n                                     button:not([disabled]),\n                                     iframe,\n                                     object,\n                                     embed,\n                                     *[tabindex]:not([tabindex=\"-1\"]),\n                                     *[contenteditable]");
-};
-
-var onKeyDown;
-
-var bind = function bind(el, _ref) {
-  var _ref$value = _ref.value,
-      value = _ref$value === void 0 ? true : _ref$value;
-
-  if (value) {
-    var focusable = findFocusable(el);
-    var focusableProg = findFocusable(el, true);
-
-    if (focusable && focusable.length > 0) {
-      onKeyDown = function onKeyDown(event) {
-        // Need to get focusable each time since it can change between key events
-        // ex. changing month in a datepicker
-        focusable = findFocusable(el);
-        focusableProg = findFocusable(el, true);
-        var firstFocusable = focusable[0];
-        var lastFocusable = focusable[focusable.length - 1];
-
-        if (event.target === firstFocusable && event.shiftKey && event.key === 'Tab') {
-          event.preventDefault();
-          lastFocusable.focus();
-        } else if ((event.target === lastFocusable || Array.from(focusableProg).indexOf(event.target) >= 0) && !event.shiftKey && event.key === 'Tab') {
-          event.preventDefault();
-          firstFocusable.focus();
-        }
-      };
-
-      el.addEventListener('keydown', onKeyDown);
-    }
-  }
-};
-
-var unbind = function unbind(el) {
-  el.removeEventListener('keydown', onKeyDown);
-};
-
-var directive = {
-  bind: bind,
-  unbind: unbind
-};
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/buefy/dist/esm/chunk-4939e2ec.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-4939e2ec.js ***!
-  \*******************************************************/
-/*! exports provided: T */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "T", function() { return Tooltip; });
-/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
-/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
-/* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-
-
-
-
-
-var script = {
-  name: 'BTooltip',
-  props: {
-    active: {
-      type: Boolean,
-      default: true
-    },
-    type: {
-      type: String,
-      default: function _default() {
-        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"].defaultTooltipType;
-      }
-    },
-    label: String,
-    delay: {
-      type: Number,
-      default: function _default() {
-        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"].defaultTooltipDelay;
-      }
-    },
-    position: {
-      type: String,
-      default: 'is-top',
-      validator: function validator(value) {
-        return ['is-top', 'is-bottom', 'is-left', 'is-right'].indexOf(value) > -1;
-      }
-    },
-    triggers: {
-      type: Array,
-      default: function _default() {
-        return ['hover'];
-      }
-    },
-    always: Boolean,
-    square: Boolean,
-    dashed: Boolean,
-    multilined: Boolean,
-    size: {
-      type: String,
-      default: 'is-medium'
-    },
-    appendToBody: Boolean,
-    animated: {
-      type: Boolean,
-      default: true
-    },
-    animation: {
-      type: String,
-      default: 'fade'
-    },
-    contentClass: String,
-    autoClose: {
-      type: [Array, Boolean],
-      default: true
-    }
-  },
-  data: function data() {
-    return {
-      isActive: false,
-      style: {},
-      timer: null,
-      _bodyEl: undefined // Used to append to body
-
-    };
-  },
-  computed: {
-    rootClasses: function rootClasses() {
-      return ['b-tooltip', this.type, this.position, this.size, {
-        'is-square': this.square,
-        'is-always': this.always,
-        'is-multiline': this.multilined,
-        'is-dashed': this.dashed
-      }];
-    },
-    newAnimation: function newAnimation() {
-      return this.animated ? this.animation : undefined;
-    }
-  },
-  watch: {
-    isActive: function isActive(value) {
-      if (this.appendToBody) {
-        this.updateAppendToBody();
-      }
-    }
-  },
-  methods: {
-    updateAppendToBody: function updateAppendToBody() {
-      var tooltip = this.$refs.tooltip;
-      var trigger = this.$refs.trigger;
-
-      if (tooltip && trigger) {
-        // update wrapper tooltip
-        var tooltipEl = this.$data._bodyEl.children[0];
-        tooltipEl.classList.forEach(function (item) {
-          return tooltipEl.classList.remove(item);
-        });
-
-        if (this.$vnode && this.$vnode.data && this.$vnode.data.staticClass) {
-          tooltipEl.classList.add(this.$vnode.data.staticClass);
-        }
-
-        this.rootClasses.forEach(function (item) {
-          if (Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["b"])(item) === 'object') {
-            for (var key in item) {
-              if (item[key]) {
-                tooltipEl.classList.add(key);
-              }
-            }
-          } else {
-            tooltipEl.classList.add(item);
-          }
-        });
-        tooltipEl.style.width = "".concat(trigger.clientWidth, "px");
-        tooltipEl.style.height = "".concat(trigger.clientHeight, "px");
-        var rect = trigger.getBoundingClientRect();
-        var top = rect.top + window.scrollY;
-        var left = rect.left + window.scrollX;
-        var wrapper = this.$data._bodyEl;
-        wrapper.style.position = 'absolute';
-        wrapper.style.top = "".concat(top, "px");
-        wrapper.style.left = "".concat(left, "px");
-        wrapper.style.zIndex = this.isActive || this.always ? '99' : '-1';
-      }
-    },
-    onClick: function onClick() {
-      var _this = this;
-
-      if (this.triggers.indexOf('click') < 0) return; // if not active, toggle after clickOutside event
-      // this fixes toggling programmatic
-
-      this.$nextTick(function () {
-        setTimeout(function () {
-          return _this.open();
-        });
-      });
-    },
-    onHover: function onHover() {
-      if (this.triggers.indexOf('hover') < 0) return;
-      this.open();
-    },
-    onContextMenu: function onContextMenu() {
-      if (this.triggers.indexOf('contextmenu') < 0) return;
-      this.open();
-    },
-    onFocus: function onFocus() {
-      if (this.triggers.indexOf('focus') < 0) return;
-      this.open();
-    },
-    open: function open() {
-      var _this2 = this;
-
-      if (this.delay) {
-        this.timer = setTimeout(function () {
-          _this2.isActive = true;
-          _this2.timer = null;
-        }, this.delay);
-      } else {
-        this.isActive = true;
-      }
-    },
-    close: function close() {
-      if (typeof this.autoClose === 'boolean') {
-        this.isActive = !this.autoClose;
-        if (this.autoClose && this.timer) clearTimeout(this.timer);
-      }
-    },
-
-    /**
-    * Close tooltip if clicked outside.
-    */
-    clickedOutside: function clickedOutside(event) {
-      if (this.isActive) {
-        if (Array.isArray(this.autoClose)) {
-          if (this.autoClose.indexOf('outside') >= 0) {
-            if (!this.isInWhiteList(event.target)) this.isActive = false;
-          } else if (this.autoClose.indexOf('inside') >= 0) {
-            if (this.isInWhiteList(event.target)) this.isActive = false;
-          }
-        }
-      }
-    },
-
-    /**
-     * Keypress event that is bound to the document
-     */
-    keyPress: function keyPress(_ref) {
-      var key = _ref.key;
-
-      if (this.isActive && (key === 'Escape' || key === 'Esc')) {
-        if (Array.isArray(this.autoClose)) {
-          if (this.autoClose.indexOf('escape') >= 0) this.isActive = false;
-        }
-      }
-    },
-
-    /**
-    * White-listed items to not close when clicked.
-    */
-    isInWhiteList: function isInWhiteList(el) {
-      if (el === this.$refs.content) return true; // All chidren from content
-
-      if (this.$refs.content !== undefined) {
-        var children = this.$refs.content.querySelectorAll('*');
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-          for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var child = _step.value;
-
-            if (el === child) {
-              return true;
-            }
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
-        }
-      }
-
-      return false;
-    }
-  },
-  mounted: function mounted() {
-    if (this.appendToBody && typeof window !== 'undefined') {
-      this.$data._bodyEl = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["createAbsoluteElement"])(this.$refs.content);
-      this.updateAppendToBody();
-    }
-  },
-  created: function created() {
-    if (typeof window !== 'undefined') {
-      document.addEventListener('click', this.clickedOutside);
-      document.addEventListener('keyup', this.keyPress);
-    }
-  },
-  beforeDestroy: function beforeDestroy() {
-    if (typeof window !== 'undefined') {
-      document.removeEventListener('click', this.clickedOutside);
-      document.removeEventListener('keyup', this.keyPress);
-    }
-
-    if (this.appendToBody) {
-      Object(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["removeElement"])(this.$data._bodyEl);
-    }
-  }
-};
-
-/* script */
-const __vue_script__ = script;
-
-/* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{ref:"tooltip",class:_vm.rootClasses},[_c('transition',{attrs:{"name":_vm.newAnimation}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.active && (_vm.isActive || _vm.always)),expression:"active && (isActive || always)"}],ref:"content",class:['tooltip-content', _vm.contentClass],style:(_vm.style)},[(_vm.label)?[_vm._v(_vm._s(_vm.label))]:(_vm.$slots.content)?[_vm._t("content")]:_vm._e()],2)]),_c('div',{ref:"trigger",staticClass:"tooltip-trigger",on:{"click":_vm.onClick,"contextmenu":function($event){$event.preventDefault();return _vm.onContextMenu($event)},"mouseenter":_vm.onHover,"!focus":function($event){return _vm.onFocus($event)},"mouseleave":_vm.close}},[_vm._t("default")],2)],1)};
-var __vue_staticRenderFns__ = [];
-
-  /* style */
-  const __vue_inject_styles__ = undefined;
-  /* scoped */
-  const __vue_scope_id__ = undefined;
-  /* module identifier */
-  const __vue_module_identifier__ = undefined;
-  /* functional template */
-  const __vue_is_functional_template__ = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-
-  
-  var Tooltip = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["_"])(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
-    undefined,
-    undefined
-  );
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/buefy/dist/esm/chunk-56f84f22.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-56f84f22.js ***!
+  !*** ./node_modules/buefy/dist/esm/chunk-e3b0b539.js ***!
   \*******************************************************/
 /*! exports provided: I, P, S, a */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -17724,153 +19980,191 @@ var InjectedChildMixin = (function (parentItemName) {
 
 /***/ }),
 
-/***/ "./node_modules/buefy/dist/esm/chunk-58668f16.js":
+/***/ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js":
 /*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-58668f16.js ***!
+  !*** ./node_modules/buefy/dist/esm/chunk-f647b5cb.js ***!
   \*******************************************************/
-/*! exports provided: N */
+/*! exports provided: F */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "N", function() { return NoticeMixin; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return FormElementMixin; });
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
 
 
 
-var NoticeMixin = {
+var FormElementMixin = {
   props: {
-    type: {
-      type: String,
-      default: 'is-dark'
-    },
-    message: [String, Array],
-    duration: Number,
-    queue: {
+    size: String,
+    expanded: Boolean,
+    loading: Boolean,
+    rounded: Boolean,
+    icon: String,
+    iconPack: String,
+    // Native options to use in HTML5 validation
+    autocomplete: String,
+    maxlength: [Number, String],
+    useHtml5Validation: {
       type: Boolean,
-      default: undefined
-    },
-    position: {
-      type: String,
-      default: 'is-top',
-      validator: function validator(value) {
-        return ['is-top-right', 'is-top', 'is-top-left', 'is-bottom-right', 'is-bottom', 'is-bottom-left'].indexOf(value) > -1;
+      default: function _default() {
+        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultUseHtml5Validation;
       }
     },
-    container: String
+    validationMessage: String,
+    locale: {
+      type: [String, Array],
+      default: function _default() {
+        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultLocale;
+      }
+    },
+    statusIcon: {
+      type: Boolean,
+      default: function _default() {
+        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultStatusIcon;
+      }
+    }
   },
   data: function data() {
     return {
-      isActive: false,
-      parentTop: null,
-      parentBottom: null,
-      newContainer: this.container || _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultContainerElement
+      isValid: true,
+      isFocused: false,
+      newIconPack: this.iconPack || _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultIconPack
     };
   },
   computed: {
-    correctParent: function correctParent() {
-      switch (this.position) {
-        case 'is-top-right':
-        case 'is-top':
-        case 'is-top-left':
-          return this.parentTop;
+    /**
+     * Find parent Field, max 3 levels deep.
+     */
+    parentField: function parentField() {
+      var parent = this.$parent;
 
-        case 'is-bottom-right':
-        case 'is-bottom':
-        case 'is-bottom-left':
-          return this.parentBottom;
+      for (var i = 0; i < 3; i++) {
+        if (parent && !parent.$data._isField) {
+          parent = parent.$parent;
+        }
+      }
+
+      return parent;
+    },
+
+    /**
+     * Get the type prop from parent if it's a Field.
+     */
+    statusType: function statusType() {
+      var _ref = this.parentField || {},
+          newType = _ref.newType;
+
+      if (!newType) return;
+
+      if (typeof newType === 'string') {
+        return newType;
+      } else {
+        for (var key in newType) {
+          if (newType[key]) {
+            return key;
+          }
+        }
       }
     },
-    transition: function transition() {
-      switch (this.position) {
-        case 'is-top-right':
-        case 'is-top':
-        case 'is-top-left':
-          return {
-            enter: 'fadeInDown',
-            leave: 'fadeOut'
-          };
 
-        case 'is-bottom-right':
-        case 'is-bottom':
-        case 'is-bottom-left':
-          return {
-            enter: 'fadeInUp',
-            leave: 'fadeOut'
-          };
+    /**
+     * Get the message prop from parent if it's a Field.
+     */
+    statusMessage: function statusMessage() {
+      if (!this.parentField) return;
+      return this.parentField.newMessage || this.parentField.$slots.message;
+    },
+
+    /**
+     * Fix icon size for inputs, large was too big
+     */
+    iconSize: function iconSize() {
+      switch (this.size) {
+        case 'is-small':
+          return this.size;
+
+        case 'is-medium':
+          return;
+
+        case 'is-large':
+          return this.newIconPack === 'mdi' ? 'is-medium' : '';
       }
     }
   },
   methods: {
-    shouldQueue: function shouldQueue() {
-      var queue = this.queue !== undefined ? this.queue : _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultNoticeQueue;
-      if (!queue) return false;
-      return this.parentTop.childElementCount > 0 || this.parentBottom.childElementCount > 0;
+    /**
+     * Focus method that work dynamically depending on the component.
+     */
+    focus: function focus() {
+      var el = this.getElement();
+      if (el === undefined) return;
+      this.$nextTick(function () {
+        if (el) el.focus();
+      });
     },
-    close: function close() {
+    onBlur: function onBlur($event) {
+      this.isFocused = false;
+      this.$emit('blur', $event);
+      this.checkHtml5Validity();
+    },
+    onFocus: function onFocus($event) {
+      this.isFocused = true;
+      this.$emit('focus', $event);
+    },
+    getElement: function getElement() {
+      var el = this.$refs[this.$data._elementRef];
+
+      while (Object(_helpers_js__WEBPACK_IMPORTED_MODULE_0__["isVueComponent"])(el)) {
+        el = el.$refs[el.$data._elementRef];
+      }
+
+      return el;
+    },
+    setInvalid: function setInvalid() {
+      var type = 'is-danger';
+      var message = this.validationMessage || this.getElement().validationMessage;
+      this.setValidity(type, message);
+    },
+    setValidity: function setValidity(type, message) {
       var _this = this;
 
-      clearTimeout(this.timer);
-      this.isActive = false;
-      this.$emit('close'); // Timeout for the animation complete before destroying
+      this.$nextTick(function () {
+        if (_this.parentField) {
+          // Set type only if not defined
+          if (!_this.parentField.type) {
+            _this.parentField.newType = type;
+          } // Set message only if not defined
 
-      setTimeout(function () {
-        _this.$destroy();
 
-        Object(_helpers_js__WEBPACK_IMPORTED_MODULE_0__["removeElement"])(_this.$el);
-      }, 150);
+          if (!_this.parentField.message) {
+            _this.parentField.newMessage = message;
+          }
+        }
+      });
     },
-    showNotice: function showNotice() {
-      var _this2 = this;
 
-      if (this.shouldQueue()) {
-        // Call recursively if should queue
-        setTimeout(function () {
-          return _this2.showNotice();
-        }, 250);
-        return;
+    /**
+     * Check HTML5 validation, set isValid property.
+     * If validation fail, send 'is-danger' type,
+     * and error message to parent if it's a Field.
+     */
+    checkHtml5Validity: function checkHtml5Validity() {
+      if (!this.useHtml5Validation) return;
+      var el = this.getElement();
+      if (el === undefined) return;
+
+      if (!el.checkValidity()) {
+        this.setInvalid();
+        this.isValid = false;
+      } else {
+        this.setValidity(null, null);
+        this.isValid = true;
       }
 
-      this.correctParent.insertAdjacentElement('afterbegin', this.$el);
-      this.isActive = true;
-
-      if (!this.indefinite) {
-        this.timer = setTimeout(function () {
-          return _this2.close();
-        }, this.newDuration);
-      }
-    },
-    setupContainer: function setupContainer() {
-      this.parentTop = document.querySelector((this.newContainer ? this.newContainer : 'body') + '>.notices.is-top');
-      this.parentBottom = document.querySelector((this.newContainer ? this.newContainer : 'body') + '>.notices.is-bottom');
-      if (this.parentTop && this.parentBottom) return;
-
-      if (!this.parentTop) {
-        this.parentTop = document.createElement('div');
-        this.parentTop.className = 'notices is-top';
-      }
-
-      if (!this.parentBottom) {
-        this.parentBottom = document.createElement('div');
-        this.parentBottom.className = 'notices is-bottom';
-      }
-
-      var container = document.querySelector(this.newContainer) || document.body;
-      container.appendChild(this.parentTop);
-      container.appendChild(this.parentBottom);
-
-      if (this.newContainer) {
-        this.parentTop.classList.add('has-custom-container');
-        this.parentBottom.classList.add('has-custom-container');
-      }
+      return this.isValid;
     }
-  },
-  beforeMount: function beforeMount() {
-    this.setupContainer();
-  },
-  mounted: function mounted() {
-    this.showNotice();
   }
 };
 
@@ -17879,91 +20173,9 @@ var NoticeMixin = {
 
 /***/ }),
 
-/***/ "./node_modules/buefy/dist/esm/chunk-5c7b2549.js":
+/***/ "./node_modules/buefy/dist/esm/chunk-f8007af2.js":
 /*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-5c7b2549.js ***!
-  \*******************************************************/
-/*! exports provided: T */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "T", function() { return Timepicker; });
-/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
-/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-85a8ec35.js */ "./node_modules/buefy/dist/esm/chunk-85a8ec35.js");
-/* harmony import */ var _chunk_10cf3f0e_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-10cf3f0e.js */ "./node_modules/buefy/dist/esm/chunk-10cf3f0e.js");
-/* harmony import */ var _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-5ccea041.js */ "./node_modules/buefy/dist/esm/chunk-5ccea041.js");
-/* harmony import */ var _chunk_722c2a14_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-722c2a14.js */ "./node_modules/buefy/dist/esm/chunk-722c2a14.js");
-/* harmony import */ var _chunk_3c26c4a0_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-3c26c4a0.js */ "./node_modules/buefy/dist/esm/chunk-3c26c4a0.js");
-
-
-
-
-
-
-
-
-
-var _components;
-var script = {
-  name: 'BTimepicker',
-  components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_3__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_722c2a14_js__WEBPACK_IMPORTED_MODULE_6__["F"].name, _chunk_722c2a14_js__WEBPACK_IMPORTED_MODULE_6__["F"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_3c26c4a0_js__WEBPACK_IMPORTED_MODULE_7__["S"].name, _chunk_3c26c4a0_js__WEBPACK_IMPORTED_MODULE_7__["S"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_1__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_1__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_5__["D"].name, _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_5__["D"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_5__["a"].name, _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_5__["a"]), _components),
-  mixins: [_chunk_10cf3f0e_js__WEBPACK_IMPORTED_MODULE_4__["T"]],
-  inheritAttrs: false,
-  data: function data() {
-    return {
-      _isTimepicker: true
-    };
-  },
-  computed: {
-    nativeStep: function nativeStep() {
-      if (this.enableSeconds) return '1';
-    }
-  }
-};
-
-/* script */
-const __vue_script__ = script;
-
-/* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"timepicker control",class:[_vm.size, {'is-expanded': _vm.expanded}]},[(!_vm.isMobile || _vm.inline)?_c('b-dropdown',{ref:"dropdown",attrs:{"position":_vm.position,"disabled":_vm.disabled,"inline":_vm.inline,"append-to-body":_vm.appendToBody,"append-to-body-copy-parent":""},on:{"active-change":_vm.onActiveChange},scopedSlots:_vm._u([(!_vm.inline)?{key:"trigger",fn:function(){return [_vm._t("trigger",[_c('b-input',_vm._b({ref:"input",attrs:{"autocomplete":"off","value":_vm.formatValue(_vm.computedValue),"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"loading":_vm.loading,"disabled":_vm.disabled,"readonly":!_vm.editable,"rounded":_vm.rounded,"use-html5-validation":_vm.useHtml5Validation},on:{"focus":_vm.handleOnFocus},nativeOn:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.toggle(true)},"change":function($event){return _vm.onChange($event.target.value)}}},'b-input',_vm.$attrs,false))])]},proxy:true}:null],null,true)},[_c('b-dropdown-item',{attrs:{"disabled":_vm.disabled,"focusable":_vm.focusable,"custom":""}},[_c('b-field',{attrs:{"grouped":"","position":"is-centered"}},[_c('b-select',{attrs:{"disabled":_vm.disabled,"placeholder":"00"},nativeOn:{"change":function($event){return _vm.onHoursChange($event.target.value)}},model:{value:(_vm.hoursSelected),callback:function ($$v) {_vm.hoursSelected=$$v;},expression:"hoursSelected"}},_vm._l((_vm.hours),function(hour){return _c('option',{key:hour.value,attrs:{"disabled":_vm.isHourDisabled(hour.value)},domProps:{"value":hour.value}},[_vm._v(" "+_vm._s(hour.label)+" ")])}),0),_c('span',{staticClass:"control is-colon"},[_vm._v(_vm._s(_vm.hourLiteral))]),_c('b-select',{attrs:{"disabled":_vm.disabled,"placeholder":"00"},nativeOn:{"change":function($event){return _vm.onMinutesChange($event.target.value)}},model:{value:(_vm.minutesSelected),callback:function ($$v) {_vm.minutesSelected=$$v;},expression:"minutesSelected"}},_vm._l((_vm.minutes),function(minute){return _c('option',{key:minute.value,attrs:{"disabled":_vm.isMinuteDisabled(minute.value)},domProps:{"value":minute.value}},[_vm._v(" "+_vm._s(minute.label)+" ")])}),0),(_vm.enableSeconds)?[_c('span',{staticClass:"control is-colon"},[_vm._v(_vm._s(_vm.minuteLiteral))]),_c('b-select',{attrs:{"disabled":_vm.disabled,"placeholder":"00"},nativeOn:{"change":function($event){return _vm.onSecondsChange($event.target.value)}},model:{value:(_vm.secondsSelected),callback:function ($$v) {_vm.secondsSelected=$$v;},expression:"secondsSelected"}},_vm._l((_vm.seconds),function(second){return _c('option',{key:second.value,attrs:{"disabled":_vm.isSecondDisabled(second.value)},domProps:{"value":second.value}},[_vm._v(" "+_vm._s(second.label)+" ")])}),0),_c('span',{staticClass:"control is-colon"},[_vm._v(_vm._s(_vm.secondLiteral))])]:_vm._e(),(!_vm.isHourFormat24)?_c('b-select',{attrs:{"disabled":_vm.disabled},nativeOn:{"change":function($event){return _vm.onMeridienChange($event.target.value)}},model:{value:(_vm.meridienSelected),callback:function ($$v) {_vm.meridienSelected=$$v;},expression:"meridienSelected"}},_vm._l((_vm.meridiens),function(meridien){return _c('option',{key:meridien,domProps:{"value":meridien}},[_vm._v(" "+_vm._s(meridien)+" ")])}),0):_vm._e()],2),(_vm.$slots.default !== undefined && _vm.$slots.default.length)?_c('footer',{staticClass:"timepicker-footer"},[_vm._t("default")],2):_vm._e()],1)],1):_c('b-input',_vm._b({ref:"input",attrs:{"type":"time","step":_vm.nativeStep,"autocomplete":"off","value":_vm.formatHHMMSS(_vm.computedValue),"placeholder":_vm.placeholder,"size":_vm.size,"icon":_vm.icon,"icon-pack":_vm.iconPack,"rounded":_vm.rounded,"loading":_vm.loading,"max":_vm.formatHHMMSS(_vm.maxTime),"min":_vm.formatHHMMSS(_vm.minTime),"disabled":_vm.disabled,"readonly":false,"reset-on-meridian-change":_vm.isReset,"use-html5-validation":_vm.useHtml5Validation},on:{"focus":_vm.handleOnFocus,"blur":function($event){_vm.onBlur() && _vm.checkHtml5Validity();}},nativeOn:{"change":function($event){return _vm.onChange($event.target.value)}}},'b-input',_vm.$attrs,false))],1)};
-var __vue_staticRenderFns__ = [];
-
-  /* style */
-  const __vue_inject_styles__ = undefined;
-  /* scoped */
-  const __vue_scope_id__ = undefined;
-  /* module identifier */
-  const __vue_module_identifier__ = undefined;
-  /* functional template */
-  const __vue_is_functional_template__ = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-
-  
-  var Timepicker = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__["_"])(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
-    undefined,
-    undefined
-  );
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/buefy/dist/esm/chunk-5ccea041.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-5ccea041.js ***!
+  !*** ./node_modules/buefy/dist/esm/chunk-f8007af2.js ***!
   \*******************************************************/
 /*! exports provided: D, a */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -17976,7 +20188,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-56f84f22.js */ "./node_modules/buefy/dist/esm/chunk-56f84f22.js");
+/* harmony import */ var _chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-e3b0b539.js */ "./node_modules/buefy/dist/esm/chunk-e3b0b539.js");
 /* harmony import */ var _chunk_42f463e6_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-42f463e6.js */ "./node_modules/buefy/dist/esm/chunk-42f463e6.js");
 
 
@@ -17991,7 +20203,7 @@ var script = {
   directives: {
     trapFocus: _chunk_42f463e6_js__WEBPACK_IMPORTED_MODULE_5__["t"]
   },
-  mixins: [Object(_chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_4__["P"])('dropdown')],
+  mixins: [Object(_chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_4__["P"])('dropdown')],
   props: {
     value: {
       type: [String, Number, Boolean, Object, Array, Function],
@@ -18406,7 +20618,7 @@ var __vue_staticRenderFns__ = [];
 //
 var script$1 = {
   name: 'BDropdownItem',
-  mixins: [Object(_chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_4__["I"])('dropdown')],
+  mixins: [Object(_chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_4__["I"])('dropdown')],
   props: {
     value: {
       type: [String, Number, Boolean, Object, Array, Function],
@@ -18498,1863 +20710,6 @@ var __vue_staticRenderFns__$1 = [];
     __vue_scope_id__$1,
     __vue_is_functional_template__$1,
     __vue_module_identifier__$1,
-    undefined,
-    undefined
-  );
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/buefy/dist/esm/chunk-685815b3.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-685815b3.js ***!
-  \*******************************************************/
-/*! exports provided: L */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "L", function() { return Loading; });
-/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
-/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_b9bdb0e4_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-b9bdb0e4.js */ "./node_modules/buefy/dist/esm/chunk-b9bdb0e4.js");
-
-
-
-
-//
-var script = {
-  name: 'BLoading',
-  // deprecated, to replace with default 'value' in the next breaking change
-  model: {
-    prop: 'active',
-    event: 'update:active'
-  },
-  props: {
-    active: Boolean,
-    programmatic: Boolean,
-    container: [Object, Function, _chunk_b9bdb0e4_js__WEBPACK_IMPORTED_MODULE_2__["H"]],
-    isFullPage: {
-      type: Boolean,
-      default: true
-    },
-    animation: {
-      type: String,
-      default: 'fade'
-    },
-    canCancel: {
-      type: Boolean,
-      default: false
-    },
-    onCancel: {
-      type: Function,
-      default: function _default() {}
-    }
-  },
-  data: function data() {
-    return {
-      isActive: this.active || false,
-      displayInFullPage: this.isFullPage
-    };
-  },
-  watch: {
-    active: function active(value) {
-      this.isActive = value;
-    },
-    isFullPage: function isFullPage(value) {
-      this.displayInFullPage = value;
-    }
-  },
-  methods: {
-    /**
-    * Close the Modal if canCancel.
-    */
-    cancel: function cancel() {
-      if (!this.canCancel || !this.isActive) return;
-      this.close();
-    },
-
-    /**
-    * Emit events, and destroy modal if it's programmatic.
-    */
-    close: function close() {
-      var _this = this;
-
-      this.onCancel.apply(null, arguments);
-      this.$emit('close');
-      this.$emit('update:active', false); // Timeout for the animation complete before destroying
-
-      if (this.programmatic) {
-        this.isActive = false;
-        setTimeout(function () {
-          _this.$destroy();
-
-          Object(_helpers_js__WEBPACK_IMPORTED_MODULE_0__["removeElement"])(_this.$el);
-        }, 150);
-      }
-    },
-
-    /**
-    * Keypress event that is bound to the document.
-    */
-    keyPress: function keyPress(_ref) {
-      var key = _ref.key;
-      if (key === 'Escape' || key === 'Esc') this.cancel();
-    }
-  },
-  created: function created() {
-    if (typeof window !== 'undefined') {
-      document.addEventListener('keyup', this.keyPress);
-    }
-  },
-  beforeMount: function beforeMount() {
-    // Insert the Loading component in body tag
-    // only if it's programmatic
-    if (this.programmatic) {
-      if (!this.container) {
-        document.body.appendChild(this.$el);
-      } else {
-        this.displayInFullPage = false;
-        this.$emit('update:is-full-page', false);
-        this.container.appendChild(this.$el);
-      }
-    }
-  },
-  mounted: function mounted() {
-    if (this.programmatic) this.isActive = true;
-  },
-  beforeDestroy: function beforeDestroy() {
-    if (typeof window !== 'undefined') {
-      document.removeEventListener('keyup', this.keyPress);
-    }
-  }
-};
-
-/* script */
-const __vue_script__ = script;
-
-/* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('transition',{attrs:{"name":_vm.animation}},[(_vm.isActive)?_c('div',{staticClass:"loading-overlay is-active",class:{ 'is-full-page': _vm.displayInFullPage }},[_c('div',{staticClass:"loading-background",on:{"click":_vm.cancel}}),_vm._t("default",[_c('div',{staticClass:"loading-icon"})])],2):_vm._e()])};
-var __vue_staticRenderFns__ = [];
-
-  /* style */
-  const __vue_inject_styles__ = undefined;
-  /* scoped */
-  const __vue_scope_id__ = undefined;
-  /* module identifier */
-  const __vue_module_identifier__ = undefined;
-  /* functional template */
-  const __vue_is_functional_template__ = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-
-  
-  var Loading = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_1__["_"])(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
-    undefined,
-    undefined
-  );
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/buefy/dist/esm/chunk-722c2a14.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-722c2a14.js ***!
-  \*******************************************************/
-/*! exports provided: F */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return Field; });
-/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
-/* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-
-
-
-
-var script = {
-  name: 'BFieldBody',
-  props: {
-    message: {
-      type: [String, Array]
-    },
-    type: {
-      type: [String, Object]
-    }
-  },
-  render: function render(createElement) {
-    var _this = this;
-
-    var first = true;
-    return createElement('div', {
-      attrs: {
-        'class': 'field-body'
-      }
-    }, this.$slots.default.map(function (element) {
-      // skip returns and comments
-      if (!element.tag) {
-        return element;
-      }
-
-      var message;
-
-      if (first) {
-        message = _this.message;
-        first = false;
-      }
-
-      return createElement('b-field', {
-        attrs: {
-          type: _this.type,
-          message: message
-        }
-      }, [element]);
-    }));
-  }
-};
-
-/* script */
-const __vue_script__ = script;
-
-/* template */
-
-  /* style */
-  const __vue_inject_styles__ = undefined;
-  /* scoped */
-  const __vue_scope_id__ = undefined;
-  /* module identifier */
-  const __vue_module_identifier__ = undefined;
-  /* functional template */
-  const __vue_is_functional_template__ = undefined;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-
-  
-  var FieldBody = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__["_"])(
-    {},
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
-    undefined,
-    undefined
-  );
-
-var script$1 = {
-  name: 'BField',
-  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, FieldBody.name, FieldBody),
-  props: {
-    type: [String, Object],
-    label: String,
-    labelFor: String,
-    message: [String, Array, Object],
-    grouped: Boolean,
-    groupMultiline: Boolean,
-    position: String,
-    expanded: Boolean,
-    horizontal: Boolean,
-    addons: {
-      type: Boolean,
-      default: true
-    },
-    customClass: String,
-    labelPosition: {
-      type: String,
-      default: function _default() {
-        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultFieldLabelPosition;
-      }
-    }
-  },
-  data: function data() {
-    return {
-      newType: this.type,
-      newMessage: this.message,
-      fieldLabelSize: null,
-      _isField: true // Used internally by Input and Select
-
-    };
-  },
-  computed: {
-    rootClasses: function rootClasses() {
-      return [{
-        'is-expanded': this.expanded,
-        'is-horizontal': this.horizontal,
-        'is-floating-in-label': this.hasLabel && !this.horizontal && this.labelPosition === 'inside',
-        'is-floating-label': this.hasLabel && !this.horizontal && this.labelPosition === 'on-border'
-      }, this.numberInputClasses];
-    },
-    innerFieldClasses: function innerFieldClasses() {
-      return [this.fieldType(), this.newPosition, {
-        'is-grouped-multiline': this.groupMultiline
-      }];
-    },
-
-    /**
-    * Correct Bulma class for the side of the addon or group.
-    *
-    * This is not kept like the others (is-small, etc.),
-    * because since 'has-addons' is set automatically it
-    * doesn't make sense to teach users what addons are exactly.
-    */
-    newPosition: function newPosition() {
-      if (this.position === undefined) return;
-      var position = this.position.split('-');
-      if (position.length < 1) return;
-      var prefix = this.grouped ? 'is-grouped-' : 'has-addons-';
-      if (this.position) return prefix + position[1];
-    },
-
-    /**
-    * Formatted message in case it's an array
-    * (each element is separated by <br> tag)
-    */
-    formattedMessage: function formattedMessage() {
-      if (typeof this.newMessage === 'string') {
-        return [this.newMessage];
-      }
-
-      var messages = [];
-
-      if (Array.isArray(this.newMessage)) {
-        this.newMessage.forEach(function (message) {
-          if (typeof message === 'string') {
-            messages.push(message);
-          } else {
-            for (var key in message) {
-              if (message[key]) {
-                messages.push(key);
-              }
-            }
-          }
-        });
-      } else {
-        for (var key in this.newMessage) {
-          if (this.newMessage[key]) {
-            messages.push(key);
-          }
-        }
-      }
-
-      return messages.filter(function (m) {
-        if (m) return m;
-      });
-    },
-    hasLabel: function hasLabel() {
-      return this.label || this.$slots.label;
-    },
-    hasMessage: function hasMessage() {
-      return this.newMessage || this.$slots.message;
-    },
-    numberInputClasses: function numberInputClasses() {
-      if (this.$slots.default) {
-        var numberinput = this.$slots.default.filter(function (node) {
-          return node.tag && node.tag.toLowerCase().indexOf('numberinput') >= 0;
-        })[0];
-
-        if (numberinput) {
-          var classes = ['has-numberinput'];
-          var controlsPosition = numberinput.componentOptions.propsData.controlsPosition;
-          var size = numberinput.componentOptions.propsData.size;
-
-          if (controlsPosition) {
-            classes.push("has-numberinput-".concat(controlsPosition));
-          }
-
-          if (size) {
-            classes.push("has-numberinput-".concat(size));
-          }
-
-          return classes;
-        }
-      }
-
-      return null;
-    }
-  },
-  watch: {
-    /**
-    * Set internal type when prop change.
-    */
-    type: function type(value) {
-      this.newType = value;
-    },
-
-    /**
-    * Set internal message when prop change.
-    */
-    message: function message(value) {
-      this.newMessage = value;
-    }
-  },
-  methods: {
-    /**
-    * Field has addons if there are more than one slot
-    * (element / component) in the Field.
-    * Or is grouped when prop is set.
-    * Is a method to be called when component re-render.
-    */
-    fieldType: function fieldType() {
-      if (this.grouped) return 'is-grouped';
-      if (this.hasAddons()) return 'has-addons';
-    },
-    hasAddons: function hasAddons() {
-      var renderedNode = 0;
-
-      if (this.$slots.default) {
-        renderedNode = this.$slots.default.reduce(function (i, node) {
-          return node.tag ? i + 1 : i;
-        }, 0);
-      }
-
-      return renderedNode > 1 && this.addons && !this.horizontal;
-    }
-  },
-  mounted: function mounted() {
-    if (this.horizontal) {
-      // Bulma docs: .is-normal for any .input or .button
-      var elements = this.$el.querySelectorAll('.input, .select, .button, .textarea, .b-slider');
-
-      if (elements.length > 0) {
-        this.fieldLabelSize = 'is-normal';
-      }
-    }
-  }
-};
-
-/* script */
-const __vue_script__$1 = script$1;
-
-/* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"field",class:_vm.rootClasses},[(_vm.horizontal)?_c('div',{staticClass:"field-label",class:[_vm.customClass, _vm.fieldLabelSize]},[(_vm.hasLabel)?_c('label',{staticClass:"label",class:_vm.customClass,attrs:{"for":_vm.labelFor}},[(_vm.$slots.label)?_vm._t("label"):[_vm._v(_vm._s(_vm.label))]],2):_vm._e()]):[(_vm.hasLabel)?_c('label',{staticClass:"label",class:_vm.customClass,attrs:{"for":_vm.labelFor}},[(_vm.$slots.label)?_vm._t("label"):[_vm._v(_vm._s(_vm.label))]],2):_vm._e()],(_vm.horizontal)?_c('b-field-body',{attrs:{"message":_vm.newMessage ? _vm.formattedMessage : '',"type":_vm.newType}},[_vm._t("default")],2):(_vm.grouped || _vm.groupMultiline || _vm.hasAddons())?_c('div',{staticClass:"field-body"},[_c('b-field',{class:_vm.innerFieldClasses,attrs:{"addons":false,"type":_vm.newType}},[_vm._t("default")],2)],1):[_vm._t("default")],(_vm.hasMessage && !_vm.horizontal)?_c('p',{staticClass:"help",class:_vm.newType},[(_vm.$slots.message)?_vm._t("message"):[_vm._l((_vm.formattedMessage),function(mess,i){return [_vm._v(" "+_vm._s(mess)+" "),((i + 1) < _vm.formattedMessage.length)?_c('br',{key:i}):_vm._e()]})]],2):_vm._e()],2)};
-var __vue_staticRenderFns__ = [];
-
-  /* style */
-  const __vue_inject_styles__$1 = undefined;
-  /* scoped */
-  const __vue_scope_id__$1 = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$1 = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$1 = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-
-  
-  var Field = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__["_"])(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__$1,
-    __vue_script__$1,
-    __vue_scope_id__$1,
-    __vue_is_functional_template__$1,
-    __vue_module_identifier__$1,
-    undefined,
-    undefined
-  );
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/buefy/dist/esm/chunk-847dd5f6.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-847dd5f6.js ***!
-  \*******************************************************/
-/*! exports provided: T, a */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "T", function() { return TabbedMixin; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabbedChildMixin; });
-/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
-/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
-/* harmony import */ var _chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-56f84f22.js */ "./node_modules/buefy/dist/esm/chunk-56f84f22.js");
-/* harmony import */ var _chunk_23f32560_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-23f32560.js */ "./node_modules/buefy/dist/esm/chunk-23f32560.js");
-
-
-
-
-
-
-var TabbedMixin = (function (cmp) {
-  var _components;
-
-  return {
-    mixins: [Object(_chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_3__["P"])(cmp, _chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_3__["S"])],
-    components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_2__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_2__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_23f32560_js__WEBPACK_IMPORTED_MODULE_4__["S"].name, _chunk_23f32560_js__WEBPACK_IMPORTED_MODULE_4__["S"]), _components),
-    props: {
-      value: {
-        type: [String, Number],
-        default: undefined
-      },
-      size: String,
-      animated: {
-        type: Boolean,
-        default: true
-      },
-      vertical: {
-        type: Boolean,
-        default: false
-      },
-      position: String,
-      destroyOnHide: {
-        type: Boolean,
-        default: false
-      }
-    },
-    data: function data() {
-      return {
-        activeId: this.value,
-        // Internal state
-        defaultSlots: [],
-        contentHeight: 0,
-        isTransitioning: false
-      };
-    },
-    mounted: function mounted() {
-      if (typeof this.value === 'number') {
-        // Backward compatibility: converts the index value to an id
-        var value = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["bound"])(this.value, 0, this.items.length - 1);
-        this.activeId = this.items[value].value;
-      } else {
-        this.activeId = this.value;
-      }
-    },
-    computed: {
-      activeItem: function activeItem() {
-        var _this = this;
-
-        return this.activeId === undefined ? this.items[0] : this.activeId === null ? null : this.childItems.find(function (i) {
-          return i.value === _this.activeId;
-        });
-      },
-      items: function items() {
-        return this.sortedItems;
-      }
-    },
-    watch: {
-      /**
-       * When v-model is changed set the new active tab.
-       */
-      value: function value(_value) {
-        if (typeof _value === 'number') {
-          // Backward compatibility: converts the index value to an id
-          _value = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["bound"])(_value, 0, this.items.length - 1);
-          this.activeId = this.items[_value].value;
-        } else {
-          this.activeId = _value;
-        }
-      },
-
-      /**
-       * Sync internal state with external state
-       */
-      activeId: function activeId(val, oldValue) {
-        var oldTab = oldValue !== undefined && oldValue !== null ? this.childItems.find(function (i) {
-          return i.value === oldValue;
-        }) : null;
-
-        if (oldTab && this.activeItem) {
-          oldTab.deactivate(this.activeItem.index);
-          this.activeItem.activate(oldTab.index);
-        }
-
-        val = this.activeItem ? typeof this.value === 'number' ? this.items.indexOf(this.activeItem) : this.activeItem.value : undefined;
-
-        if (val !== this.value) {
-          this.$emit('input', val);
-        }
-      }
-    },
-    methods: {
-      /**
-      * Child click listener, emit input event and change active child.
-      */
-      childClick: function childClick(child) {
-        this.activeId = child.value;
-      }
-    }
-  };
-});
-
-var TabbedChildMixin = (function (parentCmp) {
-  return {
-    mixins: [Object(_chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_3__["I"])(parentCmp, _chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_3__["a"])],
-    props: {
-      label: String,
-      icon: String,
-      iconPack: String,
-      visible: {
-        type: Boolean,
-        default: true
-      },
-      value: {
-        type: String,
-        default: function _default() {
-          return this._uid.toString();
-        }
-      },
-      headerClass: {
-        type: [String, Array, Object],
-        default: null
-      }
-    },
-    data: function data() {
-      return {
-        transitionName: null,
-        elementClass: 'item'
-      };
-    },
-    computed: {
-      isActive: function isActive() {
-        return this.parent.activeItem === this;
-      }
-    },
-    methods: {
-      /**
-       * Activate element, alter animation name based on the index.
-       */
-      activate: function activate(oldIndex) {
-        this.transitionName = this.index < oldIndex ? this.parent.vertical ? 'slide-down' : 'slide-next' : this.parent.vertical ? 'slide-up' : 'slide-prev';
-      },
-
-      /**
-       * Deactivate element, alter animation name based on the index.
-       */
-      deactivate: function deactivate(newIndex) {
-        this.transitionName = newIndex < this.index ? this.parent.vertical ? 'slide-down' : 'slide-next' : this.parent.vertical ? 'slide-up' : 'slide-prev';
-      }
-    },
-    render: function render(createElement) {
-      var _this = this;
-
-      // if destroy apply v-if
-      if (this.parent.destroyOnHide) {
-        if (!this.isActive || !this.visible) {
-          return;
-        }
-      }
-
-      var vnode = createElement('div', {
-        directives: [{
-          name: 'show',
-          value: this.isActive && this.visible
-        }],
-        attrs: {
-          'class': this.elementClass
-        }
-      }, this.$slots.default); // check animated prop
-
-      if (this.parent.animated) {
-        return createElement('transition', {
-          props: {
-            'name': this.transitionName
-          },
-          on: {
-            'before-enter': function beforeEnter() {
-              _this.parent.isTransitioning = true;
-            },
-            'after-enter': function afterEnter() {
-              _this.parent.isTransitioning = false;
-            }
-          }
-        }, [vnode]);
-      }
-
-      return vnode;
-    }
-  };
-});
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/buefy/dist/esm/chunk-85a8ec35.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-85a8ec35.js ***!
-  \*******************************************************/
-/*! exports provided: I */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I", function() { return Input; });
-/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
-/* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-197ef742.js */ "./node_modules/buefy/dist/esm/chunk-197ef742.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
-/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-
-
-
-
-
-
-var script = {
-  name: 'BInput',
-  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"]),
-  mixins: [_chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_2__["F"]],
-  inheritAttrs: false,
-  props: {
-    value: [Number, String],
-    type: {
-      type: String,
-      default: 'text'
-    },
-    passwordReveal: Boolean,
-    iconClickable: Boolean,
-    hasCounter: {
-      type: Boolean,
-      default: function _default() {
-        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultInputHasCounter;
-      }
-    },
-    customClass: {
-      type: String,
-      default: ''
-    },
-    iconRight: String,
-    iconRightClickable: Boolean
-  },
-  data: function data() {
-    return {
-      newValue: this.value,
-      newType: this.type,
-      newAutocomplete: this.autocomplete || _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultInputAutocomplete,
-      isPasswordVisible: false,
-      _elementRef: this.type === 'textarea' ? 'textarea' : 'input'
-    };
-  },
-  computed: {
-    computedValue: {
-      get: function get() {
-        return this.newValue;
-      },
-      set: function set(value) {
-        this.newValue = value;
-        this.$emit('input', value);
-      }
-    },
-    rootClasses: function rootClasses() {
-      return [this.iconPosition, this.size, {
-        'is-expanded': this.expanded,
-        'is-loading': this.loading,
-        'is-clearfix': !this.hasMessage
-      }];
-    },
-    inputClasses: function inputClasses() {
-      return [this.statusType, this.size, {
-        'is-rounded': this.rounded
-      }];
-    },
-    hasIconRight: function hasIconRight() {
-      return this.passwordReveal || this.loading || this.statusIcon && this.statusTypeIcon || this.iconRight;
-    },
-    rightIcon: function rightIcon() {
-      if (this.passwordReveal) {
-        return this.passwordVisibleIcon;
-      } else if (this.iconRight) {
-        return this.iconRight;
-      }
-
-      return this.statusTypeIcon;
-    },
-    rightIconType: function rightIconType() {
-      if (this.passwordReveal) {
-        return 'is-primary';
-      } else if (this.iconRight) {
-        return null;
-      }
-
-      return this.statusType;
-    },
-
-    /**
-    * Position of the icon or if it's both sides.
-    */
-    iconPosition: function iconPosition() {
-      if (this.icon && this.hasIconRight) {
-        return 'has-icons-left has-icons-right';
-      } else if (!this.icon && this.hasIconRight) {
-        return 'has-icons-right';
-      } else if (this.icon) {
-        return 'has-icons-left';
-      }
-    },
-
-    /**
-    * Icon name (MDI) based on the type.
-    */
-    statusTypeIcon: function statusTypeIcon() {
-      switch (this.statusType) {
-        case 'is-success':
-          return 'check';
-
-        case 'is-danger':
-          return 'alert-circle';
-
-        case 'is-info':
-          return 'information';
-
-        case 'is-warning':
-          return 'alert';
-      }
-    },
-
-    /**
-    * Check if have any message prop from parent if it's a Field.
-    */
-    hasMessage: function hasMessage() {
-      return !!this.statusMessage;
-    },
-
-    /**
-    * Current password-reveal icon name.
-    */
-    passwordVisibleIcon: function passwordVisibleIcon() {
-      return !this.isPasswordVisible ? 'eye' : 'eye-off';
-    },
-
-    /**
-    * Get value length
-    */
-    valueLength: function valueLength() {
-      if (typeof this.computedValue === 'string') {
-        return this.computedValue.length;
-      } else if (typeof this.computedValue === 'number') {
-        return this.computedValue.toString().length;
-      }
-
-      return 0;
-    }
-  },
-  watch: {
-    /**
-    * When v-model is changed:
-    *   1. Set internal value.
-    */
-    value: function value(_value) {
-      this.newValue = _value;
-    }
-  },
-  methods: {
-    /**
-    * Toggle the visibility of a password-reveal input
-    * by changing the type and focus the input right away.
-    */
-    togglePasswordVisibility: function togglePasswordVisibility() {
-      var _this = this;
-
-      this.isPasswordVisible = !this.isPasswordVisible;
-      this.newType = this.isPasswordVisible ? 'text' : 'password';
-      this.$nextTick(function () {
-        _this.focus();
-      });
-    },
-    iconClick: function iconClick(emit, event) {
-      var _this2 = this;
-
-      this.$emit(emit, event);
-      this.$nextTick(function () {
-        _this2.focus();
-      });
-    },
-    rightIconClick: function rightIconClick(event) {
-      if (this.passwordReveal) {
-        this.togglePasswordVisibility();
-      } else if (this.iconRightClickable) {
-        this.iconClick('icon-right-click', event);
-      }
-    },
-    onInput: function onInput(event) {
-      var value = event.target.value;
-      this.computedValue = value;
-      !this.isValid && this.checkHtml5Validity();
-    }
-  }
-};
-
-/* script */
-const __vue_script__ = script;
-
-/* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"control",class:_vm.rootClasses},[(_vm.type !== 'textarea')?_c('input',_vm._b({ref:"input",staticClass:"input",class:[_vm.inputClasses, _vm.customClass],attrs:{"type":_vm.newType,"autocomplete":_vm.newAutocomplete,"maxlength":_vm.maxlength},domProps:{"value":_vm.computedValue},on:{"input":_vm.onInput,"blur":_vm.onBlur,"focus":_vm.onFocus}},'input',_vm.$attrs,false)):_c('textarea',_vm._b({ref:"textarea",staticClass:"textarea",class:[_vm.inputClasses, _vm.customClass],attrs:{"maxlength":_vm.maxlength},domProps:{"value":_vm.computedValue},on:{"input":_vm.onInput,"blur":_vm.onBlur,"focus":_vm.onFocus}},'textarea',_vm.$attrs,false)),(_vm.icon)?_c('b-icon',{staticClass:"is-left",class:{'is-clickable': _vm.iconClickable},attrs:{"icon":_vm.icon,"pack":_vm.iconPack,"size":_vm.iconSize},nativeOn:{"click":function($event){return _vm.iconClick('icon-click', $event)}}}):_vm._e(),(!_vm.loading && _vm.hasIconRight)?_c('b-icon',{staticClass:"is-right",class:{ 'is-clickable': _vm.passwordReveal || _vm.iconRightClickable },attrs:{"icon":_vm.rightIcon,"pack":_vm.iconPack,"size":_vm.iconSize,"type":_vm.rightIconType,"both":""},nativeOn:{"click":function($event){return _vm.rightIconClick($event)}}}):_vm._e(),(_vm.maxlength && _vm.hasCounter && _vm.type !== 'number')?_c('small',{staticClass:"help counter",class:{ 'is-invisible': !_vm.isFocused }},[_vm._v(" "+_vm._s(_vm.valueLength)+" / "+_vm._s(_vm.maxlength)+" ")]):_vm._e()],1)};
-var __vue_staticRenderFns__ = [];
-
-  /* style */
-  const __vue_inject_styles__ = undefined;
-  /* scoped */
-  const __vue_scope_id__ = undefined;
-  /* module identifier */
-  const __vue_module_identifier__ = undefined;
-  /* functional template */
-  const __vue_is_functional_template__ = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-
-  
-  var Input = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__["_"])(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
-    undefined,
-    undefined
-  );
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/buefy/dist/esm/chunk-b9bdb0e4.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-b9bdb0e4.js ***!
-  \*******************************************************/
-/*! exports provided: F, H */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return File; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "H", function() { return HTMLElement; });
-// Polyfills for SSR
-var isSSR = typeof window === 'undefined';
-var HTMLElement = isSSR ? Object : window.HTMLElement;
-var File = isSSR ? Object : window.File;
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-bd4264c6.js ***!
-  \*******************************************************/
-/*! exports provided: V, a, c, s */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "V", function() { return VueInstance; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return setVueInstance; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return config; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return setOptions; });
-var config = {
-  defaultContainerElement: null,
-  defaultIconPack: 'mdi',
-  defaultIconComponent: null,
-  defaultIconPrev: 'chevron-left',
-  defaultIconNext: 'chevron-right',
-  defaultLocale: undefined,
-  defaultDialogConfirmText: null,
-  defaultDialogCancelText: null,
-  defaultSnackbarDuration: 3500,
-  defaultSnackbarPosition: null,
-  defaultToastDuration: 2000,
-  defaultToastPosition: null,
-  defaultNotificationDuration: 2000,
-  defaultNotificationPosition: null,
-  defaultTooltipType: 'is-primary',
-  defaultTooltipDelay: null,
-  defaultInputAutocomplete: 'on',
-  defaultDateFormatter: null,
-  defaultDateParser: null,
-  defaultDateCreator: null,
-  defaultTimeCreator: null,
-  defaultDayNames: null,
-  defaultMonthNames: null,
-  defaultFirstDayOfWeek: null,
-  defaultUnselectableDaysOfWeek: null,
-  defaultTimeFormatter: null,
-  defaultTimeParser: null,
-  defaultModalCanCancel: ['escape', 'x', 'outside', 'button'],
-  defaultModalScroll: null,
-  defaultDatepickerMobileNative: true,
-  defaultTimepickerMobileNative: true,
-  defaultNoticeQueue: true,
-  defaultInputHasCounter: true,
-  defaultTaginputHasCounter: true,
-  defaultUseHtml5Validation: true,
-  defaultDropdownMobileModal: true,
-  defaultFieldLabelPosition: null,
-  defaultDatepickerYearsRange: [-100, 10],
-  defaultDatepickerNearbyMonthDays: true,
-  defaultDatepickerNearbySelectableMonthDays: false,
-  defaultDatepickerShowWeekNumber: false,
-  defaultDatepickerMobileModal: true,
-  defaultTrapFocus: true,
-  defaultButtonRounded: false,
-  defaultCarouselInterval: 3500,
-  defaultTabsExpanded: false,
-  defaultTabsAnimated: true,
-  defaultTabsType: null,
-  defaultStatusIcon: true,
-  defaultProgrammaticPromise: false,
-  defaultLinkTags: ['a', 'button', 'input', 'router-link', 'nuxt-link', 'n-link', 'RouterLink', 'NuxtLink', 'NLink'],
-  defaultImageWebpFallback: null,
-  defaultImageLazy: true,
-  defaultImageResponsive: true,
-  defaultImageRatio: null,
-  defaultImageSrcsetFormatter: null,
-  customIconPacks: null
-};
-var setOptions = function setOptions(options) {
-  config = options;
-};
-var setVueInstance = function setVueInstance(Vue) {
-  VueInstance = Vue;
-};
-var VueInstance;
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/buefy/dist/esm/chunk-cca88db8.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-cca88db8.js ***!
-  \*******************************************************/
-/*! exports provided: _, a, r, u */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_", function() { return normalizeComponent_1; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return registerComponentProgrammatic; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return registerComponent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return use; });
-function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
-/* server only */
-, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
-  if (typeof shadowMode !== 'boolean') {
-    createInjectorSSR = createInjector;
-    createInjector = shadowMode;
-    shadowMode = false;
-  } // Vue.extend constructor export interop.
-
-
-  var options = typeof script === 'function' ? script.options : script; // render functions
-
-  if (template && template.render) {
-    options.render = template.render;
-    options.staticRenderFns = template.staticRenderFns;
-    options._compiled = true; // functional template
-
-    if (isFunctionalTemplate) {
-      options.functional = true;
-    }
-  } // scopedId
-
-
-  if (scopeId) {
-    options._scopeId = scopeId;
-  }
-
-  var hook;
-
-  if (moduleIdentifier) {
-    // server build
-    hook = function hook(context) {
-      // 2.3 injection
-      context = context || // cached call
-      this.$vnode && this.$vnode.ssrContext || // stateful
-      this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext; // functional
-      // 2.2 with runInNewContext: true
-
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__;
-      } // inject component styles
-
-
-      if (style) {
-        style.call(this, createInjectorSSR(context));
-      } // register component module identifier for async chunk inference
-
-
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier);
-      }
-    }; // used by ssr in case component is cached and beforeCreate
-    // never gets called
-
-
-    options._ssrRegister = hook;
-  } else if (style) {
-    hook = shadowMode ? function () {
-      style.call(this, createInjectorShadow(this.$root.$options.shadowRoot));
-    } : function (context) {
-      style.call(this, createInjector(context));
-    };
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // register for functional component in vue file
-      var originalRender = options.render;
-
-      options.render = function renderWithStyleInjection(h, context) {
-        hook.call(context);
-        return originalRender(h, context);
-      };
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate;
-      options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
-    }
-  }
-
-  return script;
-}
-
-var normalizeComponent_1 = normalizeComponent;
-
-var use = function use(plugin) {
-  if (typeof window !== 'undefined' && window.Vue) {
-    window.Vue.use(plugin);
-  }
-};
-var registerComponent = function registerComponent(Vue, component) {
-  Vue.component(component.name, component);
-};
-var registerComponentProgrammatic = function registerComponentProgrammatic(Vue, property, component) {
-  if (!Vue.prototype.$buefy) Vue.prototype.$buefy = {};
-  Vue.prototype.$buefy[property] = component;
-};
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/buefy/dist/esm/chunk-d3f604a3.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-d3f604a3.js ***!
-  \*******************************************************/
-/*! exports provided: P, a */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "P", function() { return Pagination; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PaginationButton; });
-/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
-/* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
-/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-
-
-
-
-
-//
-var script = {
-  name: 'BPaginationButton',
-  props: {
-    page: {
-      type: Object,
-      required: true
-    },
-    tag: {
-      type: String,
-      default: 'a',
-      validator: function validator(value) {
-        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultLinkTags.indexOf(value) >= 0;
-      }
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    }
-  },
-  computed: {
-    href: function href() {
-      if (this.tag === 'a') {
-        return '#';
-      }
-    },
-    isDisabled: function isDisabled() {
-      return this.disabled || this.page.disabled;
-    }
-  }
-};
-
-/* script */
-const __vue_script__ = script;
-
-/* template */
-var __vue_render__ = function () {
-var _obj;
-var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tag,_vm._b({tag:"component",staticClass:"pagination-link",class:( _obj = { 'is-current': _vm.page.isCurrent }, _obj[_vm.page.class] = true, _obj ),attrs:{"role":"button","href":_vm.href,"disabled":_vm.isDisabled,"aria-label":_vm.page['aria-label'],"aria-current":_vm.page.isCurrent},on:{"click":function($event){$event.preventDefault();return _vm.page.click($event)}}},'component',_vm.$attrs,false),[_vm._t("default",[_vm._v(_vm._s(_vm.page.number))])],2)};
-var __vue_staticRenderFns__ = [];
-
-  /* style */
-  const __vue_inject_styles__ = undefined;
-  /* scoped */
-  const __vue_scope_id__ = undefined;
-  /* module identifier */
-  const __vue_module_identifier__ = undefined;
-  /* functional template */
-  const __vue_is_functional_template__ = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-
-  
-  var PaginationButton = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["_"])(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
-    undefined,
-    undefined
-  );
-
-var _components;
-var script$1 = {
-  name: 'BPagination',
-  components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_2__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_2__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, PaginationButton.name, PaginationButton), _components),
-  // deprecated, to replace with default 'value' in the next breaking change
-  model: {
-    prop: 'current',
-    event: 'update:current'
-  },
-  props: {
-    total: [Number, String],
-    perPage: {
-      type: [Number, String],
-      default: 20
-    },
-    current: {
-      type: [Number, String],
-      default: 1
-    },
-    rangeBefore: {
-      type: [Number, String],
-      default: 1
-    },
-    rangeAfter: {
-      type: [Number, String],
-      default: 1
-    },
-    size: String,
-    simple: Boolean,
-    rounded: Boolean,
-    order: String,
-    iconPack: String,
-    iconPrev: {
-      type: String,
-      default: function _default() {
-        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultIconPrev;
-      }
-    },
-    iconNext: {
-      type: String,
-      default: function _default() {
-        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultIconNext;
-      }
-    },
-    ariaNextLabel: String,
-    ariaPreviousLabel: String,
-    ariaPageLabel: String,
-    ariaCurrentLabel: String
-  },
-  computed: {
-    rootClasses: function rootClasses() {
-      return [this.order, this.size, {
-        'is-simple': this.simple,
-        'is-rounded': this.rounded
-      }];
-    },
-    beforeCurrent: function beforeCurrent() {
-      return parseInt(this.rangeBefore);
-    },
-    afterCurrent: function afterCurrent() {
-      return parseInt(this.rangeAfter);
-    },
-
-    /**
-    * Total page size (count).
-    */
-    pageCount: function pageCount() {
-      return Math.ceil(this.total / this.perPage);
-    },
-
-    /**
-    * First item of the page (count).
-    */
-    firstItem: function firstItem() {
-      var firstItem = this.current * this.perPage - this.perPage + 1;
-      return firstItem >= 0 ? firstItem : 0;
-    },
-
-    /**
-    * Check if previous button is available.
-    */
-    hasPrev: function hasPrev() {
-      return this.current > 1;
-    },
-
-    /**
-    * Check if first page button should be visible.
-    */
-    hasFirst: function hasFirst() {
-      return this.current >= 2 + this.beforeCurrent;
-    },
-
-    /**
-    * Check if first ellipsis should be visible.
-    */
-    hasFirstEllipsis: function hasFirstEllipsis() {
-      return this.current >= this.beforeCurrent + 4;
-    },
-
-    /**
-    * Check if last page button should be visible.
-    */
-    hasLast: function hasLast() {
-      return this.current <= this.pageCount - (1 + this.afterCurrent);
-    },
-
-    /**
-    * Check if last ellipsis should be visible.
-    */
-    hasLastEllipsis: function hasLastEllipsis() {
-      return this.current < this.pageCount - (2 + this.afterCurrent);
-    },
-
-    /**
-    * Check if next button is available.
-    */
-    hasNext: function hasNext() {
-      return this.current < this.pageCount;
-    },
-
-    /**
-    * Get near pages, 1 before and 1 after the current.
-    * Also add the click event to the array.
-    */
-    pagesInRange: function pagesInRange() {
-      if (this.simple) return;
-      var left = Math.max(1, this.current - this.beforeCurrent);
-
-      if (left - 1 === 2) {
-        left--; // Do not show the ellipsis if there is only one to hide
-      }
-
-      var right = Math.min(this.current + this.afterCurrent, this.pageCount);
-
-      if (this.pageCount - right === 2) {
-        right++; // Do not show the ellipsis if there is only one to hide
-      }
-
-      var pages = [];
-
-      for (var i = left; i <= right; i++) {
-        pages.push(this.getPage(i));
-      }
-
-      return pages;
-    }
-  },
-  watch: {
-    /**
-    * If current page is trying to be greater than page count, set to last.
-    */
-    pageCount: function pageCount(value) {
-      if (this.current > value) this.last();
-    }
-  },
-  methods: {
-    /**
-    * Previous button click listener.
-    */
-    prev: function prev(event) {
-      this.changePage(this.current - 1, event);
-    },
-
-    /**
-    * Next button click listener.
-    */
-    next: function next(event) {
-      this.changePage(this.current + 1, event);
-    },
-
-    /**
-    * First button click listener.
-    */
-    first: function first(event) {
-      this.changePage(1, event);
-    },
-
-    /**
-    * Last button click listener.
-    */
-    last: function last(event) {
-      this.changePage(this.pageCount, event);
-    },
-    changePage: function changePage(num, event) {
-      if (this.current === num || num < 1 || num > this.pageCount) return;
-      this.$emit('update:current', num);
-      this.$emit('change', num); // Set focus on element to keep tab order
-
-      if (event && event.target) {
-        this.$nextTick(function () {
-          return event.target.focus();
-        });
-      }
-    },
-    getPage: function getPage(num) {
-      var _this = this;
-
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      return {
-        number: num,
-        isCurrent: this.current === num,
-        click: function click(event) {
-          return _this.changePage(num, event);
-        },
-        disabled: options.disabled || false,
-        class: options.class || '',
-        'aria-label': options['aria-label'] || this.getAriaPageLabel(num, this.current === num)
-      };
-    },
-
-    /**
-    * Get text for aria-label according to page number.
-    */
-    getAriaPageLabel: function getAriaPageLabel(pageNumber, isCurrent) {
-      if (this.ariaPageLabel && (!isCurrent || !this.ariaCurrentLabel)) {
-        return this.ariaPageLabel + ' ' + pageNumber + '.';
-      } else if (this.ariaPageLabel && isCurrent && this.ariaCurrentLabel) {
-        return this.ariaCurrentLabel + ', ' + this.ariaPageLabel + ' ' + pageNumber + '.';
-      }
-
-      return null;
-    }
-  }
-};
-
-/* script */
-const __vue_script__$1 = script$1;
-
-/* template */
-var __vue_render__$1 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',{staticClass:"pagination",class:_vm.rootClasses},[(_vm.$scopedSlots.previous)?_vm._t("previous",[_c('b-icon',{attrs:{"icon":_vm.iconPrev,"pack":_vm.iconPack,"both":"","aria-hidden":"true"}})],{"page":_vm.getPage(_vm.current - 1, {
-            disabled: !_vm.hasPrev,
-            class: 'pagination-previous',
-            'aria-label': _vm.ariaPreviousLabel
-    })}):_c('BPaginationButton',{staticClass:"pagination-previous",attrs:{"disabled":!_vm.hasPrev,"page":_vm.getPage(_vm.current - 1)}},[_c('b-icon',{attrs:{"icon":_vm.iconPrev,"pack":_vm.iconPack,"both":"","aria-hidden":"true"}})],1),(_vm.$scopedSlots.next)?_vm._t("next",[_c('b-icon',{attrs:{"icon":_vm.iconNext,"pack":_vm.iconPack,"both":"","aria-hidden":"true"}})],{"page":_vm.getPage(_vm.current + 1, {
-            disabled: !_vm.hasNext,
-            class: 'pagination-next',
-            'aria-label': _vm.ariaNextLabel
-    })}):_c('BPaginationButton',{staticClass:"pagination-next",attrs:{"disabled":!_vm.hasNext,"page":_vm.getPage(_vm.current + 1)}},[_c('b-icon',{attrs:{"icon":_vm.iconNext,"pack":_vm.iconPack,"both":"","aria-hidden":"true"}})],1),(_vm.simple)?_c('small',{staticClass:"info"},[(_vm.perPage == 1)?[_vm._v(" "+_vm._s(_vm.firstItem)+" / "+_vm._s(_vm.total)+" ")]:[_vm._v(" "+_vm._s(_vm.firstItem)+"-"+_vm._s(Math.min(_vm.current * _vm.perPage, _vm.total))+" / "+_vm._s(_vm.total)+" ")]],2):_c('ul',{staticClass:"pagination-list"},[(_vm.hasFirst)?_c('li',[(_vm.$scopedSlots.default)?_vm._t("default",null,{"page":_vm.getPage(1)}):_c('BPaginationButton',{attrs:{"page":_vm.getPage(1)}})],2):_vm._e(),(_vm.hasFirstEllipsis)?_c('li',[_c('span',{staticClass:"pagination-ellipsis"},[_vm._v("…")])]):_vm._e(),_vm._l((_vm.pagesInRange),function(page){return _c('li',{key:page.number},[(_vm.$scopedSlots.default)?_vm._t("default",null,{"page":page}):_c('BPaginationButton',{attrs:{"page":page}})],2)}),(_vm.hasLastEllipsis)?_c('li',[_c('span',{staticClass:"pagination-ellipsis"},[_vm._v("…")])]):_vm._e(),(_vm.hasLast)?_c('li',[(_vm.$scopedSlots.default)?_vm._t("default",null,{"page":_vm.getPage(_vm.pageCount)}):_c('BPaginationButton',{attrs:{"page":_vm.getPage(_vm.pageCount)}})],2):_vm._e()],2)],2)};
-var __vue_staticRenderFns__$1 = [];
-
-  /* style */
-  const __vue_inject_styles__$1 = undefined;
-  /* scoped */
-  const __vue_scope_id__$1 = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$1 = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$1 = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-
-  
-  var Pagination = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["_"])(
-    { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
-    __vue_inject_styles__$1,
-    __vue_script__$1,
-    __vue_scope_id__$1,
-    __vue_is_functional_template__$1,
-    __vue_module_identifier__$1,
-    undefined,
-    undefined
-  );
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/buefy/dist/esm/chunk-d6bb2470.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-d6bb2470.js ***!
-  \*******************************************************/
-/*! exports provided: C */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return Checkbox; });
-/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_2793447b_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-2793447b.js */ "./node_modules/buefy/dist/esm/chunk-2793447b.js");
-
-
-
-//
-var script = {
-  name: 'BCheckbox',
-  mixins: [_chunk_2793447b_js__WEBPACK_IMPORTED_MODULE_1__["C"]],
-  props: {
-    indeterminate: Boolean,
-    trueValue: {
-      type: [String, Number, Boolean, Function, Object, Array],
-      default: true
-    },
-    falseValue: {
-      type: [String, Number, Boolean, Function, Object, Array],
-      default: false
-    }
-  }
-};
-
-/* script */
-const __vue_script__ = script;
-
-/* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('label',{ref:"label",staticClass:"b-checkbox checkbox",class:[_vm.size, { 'is-disabled': _vm.disabled }],attrs:{"disabled":_vm.disabled},on:{"click":_vm.focus,"keydown":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }$event.preventDefault();return _vm.$refs.label.click()}}},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.computedValue),expression:"computedValue"}],ref:"input",attrs:{"type":"checkbox","disabled":_vm.disabled,"required":_vm.required,"name":_vm.name,"true-value":_vm.trueValue,"false-value":_vm.falseValue},domProps:{"indeterminate":_vm.indeterminate,"value":_vm.nativeValue,"checked":Array.isArray(_vm.computedValue)?_vm._i(_vm.computedValue,_vm.nativeValue)>-1:_vm._q(_vm.computedValue,_vm.trueValue)},on:{"click":function($event){$event.stopPropagation();},"change":function($event){var $$a=_vm.computedValue,$$el=$event.target,$$c=$$el.checked?(_vm.trueValue):(_vm.falseValue);if(Array.isArray($$a)){var $$v=_vm.nativeValue,$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.computedValue=$$a.concat([$$v]));}else{$$i>-1&&(_vm.computedValue=$$a.slice(0,$$i).concat($$a.slice($$i+1)));}}else{_vm.computedValue=$$c;}}}}),_c('span',{staticClass:"check",class:_vm.type}),_c('span',{staticClass:"control-label"},[_vm._t("default")],2)])};
-var __vue_staticRenderFns__ = [];
-
-  /* style */
-  const __vue_inject_styles__ = undefined;
-  /* scoped */
-  const __vue_scope_id__ = undefined;
-  /* module identifier */
-  const __vue_module_identifier__ = undefined;
-  /* functional template */
-  const __vue_is_functional_template__ = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-
-  
-  var Checkbox = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_0__["_"])(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
-    undefined,
-    undefined
-  );
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/buefy/dist/esm/chunk-dbb1a60b.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-dbb1a60b.js ***!
-  \*******************************************************/
-/*! exports provided: M */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "M", function() { return Modal; });
-/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
-/* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_42f463e6_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-42f463e6.js */ "./node_modules/buefy/dist/esm/chunk-42f463e6.js");
-
-
-
-
-
-//
-var script = {
-  name: 'BModal',
-  directives: {
-    trapFocus: _chunk_42f463e6_js__WEBPACK_IMPORTED_MODULE_3__["t"]
-  },
-  // deprecated, to replace with default 'value' in the next breaking change
-  model: {
-    prop: 'active',
-    event: 'update:active'
-  },
-  props: {
-    active: Boolean,
-    component: [Object, Function, String],
-    content: [String, Array],
-    programmatic: Boolean,
-    props: Object,
-    events: Object,
-    width: {
-      type: [String, Number],
-      default: 960
-    },
-    hasModalCard: Boolean,
-    animation: {
-      type: String,
-      default: 'zoom-out'
-    },
-    canCancel: {
-      type: [Array, Boolean],
-      default: function _default() {
-        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultModalCanCancel;
-      }
-    },
-    onCancel: {
-      type: Function,
-      default: function _default() {}
-    },
-    scroll: {
-      type: String,
-      default: function _default() {
-        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultModalScroll ? _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultModalScroll : 'clip';
-      },
-      validator: function validator(value) {
-        return ['clip', 'keep'].indexOf(value) >= 0;
-      }
-    },
-    fullScreen: Boolean,
-    trapFocus: {
-      type: Boolean,
-      default: function _default() {
-        return _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultTrapFocus;
-      }
-    },
-    customClass: String,
-    ariaRole: {
-      type: String,
-      validator: function validator(value) {
-        return ['dialog', 'alertdialog'].indexOf(value) >= 0;
-      }
-    },
-    ariaModal: Boolean,
-    destroyOnHide: {
-      type: Boolean,
-      default: true
-    }
-  },
-  data: function data() {
-    return {
-      isActive: this.active || false,
-      savedScrollTop: null,
-      newWidth: typeof this.width === 'number' ? this.width + 'px' : this.width,
-      animating: true,
-      destroyed: !this.active
-    };
-  },
-  computed: {
-    cancelOptions: function cancelOptions() {
-      return typeof this.canCancel === 'boolean' ? this.canCancel ? _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__["c"].defaultModalCanCancel : [] : this.canCancel;
-    },
-    showX: function showX() {
-      return this.cancelOptions.indexOf('x') >= 0 && !this.hasModalCard;
-    },
-    customStyle: function customStyle() {
-      if (!this.fullScreen) {
-        return {
-          maxWidth: this.newWidth
-        };
-      }
-
-      return null;
-    }
-  },
-  watch: {
-    active: function active(value) {
-      this.isActive = value;
-    },
-    isActive: function isActive(value) {
-      var _this = this;
-
-      if (value) this.destroyed = false;
-      this.handleScroll();
-      this.$nextTick(function () {
-        if (value && _this.$el && _this.$el.focus) {
-          _this.$el.focus();
-        }
-      });
-    }
-  },
-  methods: {
-    handleScroll: function handleScroll() {
-      if (typeof window === 'undefined') return;
-
-      if (this.scroll === 'clip') {
-        if (this.isActive) {
-          document.documentElement.classList.add('is-clipped');
-        } else {
-          document.documentElement.classList.remove('is-clipped');
-        }
-
-        return;
-      }
-
-      this.savedScrollTop = !this.savedScrollTop ? document.documentElement.scrollTop : this.savedScrollTop;
-
-      if (this.isActive) {
-        document.body.classList.add('is-noscroll');
-      } else {
-        document.body.classList.remove('is-noscroll');
-      }
-
-      if (this.isActive) {
-        document.body.style.top = "-".concat(this.savedScrollTop, "px");
-        return;
-      }
-
-      document.documentElement.scrollTop = this.savedScrollTop;
-      document.body.style.top = null;
-      this.savedScrollTop = null;
-    },
-
-    /**
-    * Close the Modal if canCancel and call the onCancel prop (function).
-    */
-    cancel: function cancel(method) {
-      if (this.cancelOptions.indexOf(method) < 0) return;
-      this.$emit('cancel', arguments);
-      this.onCancel.apply(null, arguments);
-      this.close();
-    },
-
-    /**
-    * Call the onCancel prop (function).
-    * Emit events, and destroy modal if it's programmatic.
-    */
-    close: function close() {
-      var _this2 = this;
-
-      this.$emit('close');
-      this.$emit('update:active', false); // Timeout for the animation complete before destroying
-
-      if (this.programmatic) {
-        this.isActive = false;
-        setTimeout(function () {
-          _this2.$destroy();
-
-          Object(_helpers_js__WEBPACK_IMPORTED_MODULE_0__["removeElement"])(_this2.$el);
-        }, 150);
-      }
-    },
-
-    /**
-    * Keypress event that is bound to the document.
-    */
-    keyPress: function keyPress(_ref) {
-      var key = _ref.key;
-      if (this.isActive && (key === 'Escape' || key === 'Esc')) this.cancel('escape');
-    },
-
-    /**
-    * Transition after-enter hook
-    */
-    afterEnter: function afterEnter() {
-      this.animating = false;
-    },
-
-    /**
-    * Transition before-leave hook
-    */
-    beforeLeave: function beforeLeave() {
-      this.animating = true;
-    },
-
-    /**
-    * Transition after-leave hook
-    */
-    afterLeave: function afterLeave() {
-      if (this.destroyOnHide) {
-        this.destroyed = true;
-      }
-    }
-  },
-  created: function created() {
-    if (typeof window !== 'undefined') {
-      document.addEventListener('keyup', this.keyPress);
-    }
-  },
-  beforeMount: function beforeMount() {
-    // Insert the Modal component in body tag
-    // only if it's programmatic
-    this.programmatic && document.body.appendChild(this.$el);
-  },
-  mounted: function mounted() {
-    if (this.programmatic) this.isActive = true;else if (this.isActive) this.handleScroll();
-  },
-  beforeDestroy: function beforeDestroy() {
-    if (typeof window !== 'undefined') {
-      document.removeEventListener('keyup', this.keyPress); // reset scroll
-
-      document.documentElement.classList.remove('is-clipped');
-      var savedScrollTop = !this.savedScrollTop ? document.documentElement.scrollTop : this.savedScrollTop;
-      document.body.classList.remove('is-noscroll');
-      document.documentElement.scrollTop = savedScrollTop;
-      document.body.style.top = null;
-    }
-  }
-};
-
-/* script */
-const __vue_script__ = script;
-
-/* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('transition',{attrs:{"name":_vm.animation},on:{"after-enter":_vm.afterEnter,"before-leave":_vm.beforeLeave,"after-leave":_vm.afterLeave}},[(!_vm.destroyed)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isActive),expression:"isActive"},{name:"trap-focus",rawName:"v-trap-focus",value:(_vm.trapFocus),expression:"trapFocus"}],staticClass:"modal is-active",class:[{'is-full-screen': _vm.fullScreen}, _vm.customClass],attrs:{"tabindex":"-1","role":_vm.ariaRole,"aria-modal":_vm.ariaModal}},[_c('div',{staticClass:"modal-background",on:{"click":function($event){return _vm.cancel('outside')}}}),_c('div',{staticClass:"animation-content",class:{ 'modal-content': !_vm.hasModalCard },style:(_vm.customStyle)},[(_vm.component)?_c(_vm.component,_vm._g(_vm._b({tag:"component",attrs:{"can-cancel":_vm.canCancel},on:{"close":_vm.close}},'component',_vm.props,false),_vm.events)):(_vm.content)?[_c('div',{domProps:{"innerHTML":_vm._s(_vm.content)}})]:_vm._t("default",null,{"canCancel":_vm.canCancel,"close":_vm.close}),(_vm.showX)?_c('button',{directives:[{name:"show",rawName:"v-show",value:(!_vm.animating),expression:"!animating"}],staticClass:"modal-close is-large",attrs:{"type":"button"},on:{"click":function($event){return _vm.cancel('x')}}}):_vm._e()],2)]):_vm._e()])};
-var __vue_staticRenderFns__ = [];
-
-  /* style */
-  const __vue_inject_styles__ = undefined;
-  /* scoped */
-  const __vue_scope_id__ = undefined;
-  /* module identifier */
-  const __vue_module_identifier__ = undefined;
-  /* functional template */
-  const __vue_is_functional_template__ = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-
-  
-  var Modal = Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__["_"])(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
     undefined,
     undefined
   );
@@ -20502,135 +20857,6 @@ var __vue_staticRenderFns__ = [];
 
 /***/ }),
 
-/***/ "./node_modules/buefy/dist/esm/chunk-fe8a1a80.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/buefy/dist/esm/chunk-fe8a1a80.js ***!
-  \*******************************************************/
-/*! exports provided: M */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "M", function() { return MessageMixin; });
-/* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
-
-
-
-var MessageMixin = {
-  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_1__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_1__["I"]),
-  // deprecated, to replace with default 'value' in the next breaking change
-  model: {
-    prop: 'active',
-    event: 'update:active'
-  },
-  props: {
-    active: {
-      type: Boolean,
-      default: true
-    },
-    title: String,
-    closable: {
-      type: Boolean,
-      default: true
-    },
-    message: String,
-    type: String,
-    hasIcon: Boolean,
-    size: String,
-    icon: String,
-    iconPack: String,
-    iconSize: String,
-    autoClose: {
-      type: Boolean,
-      default: false
-    },
-    duration: {
-      type: Number,
-      default: 2000
-    }
-  },
-  data: function data() {
-    return {
-      isActive: this.active
-    };
-  },
-  watch: {
-    active: function active(value) {
-      this.isActive = value;
-    },
-    isActive: function isActive(value) {
-      if (value) {
-        this.setAutoClose();
-      } else {
-        if (this.timer) {
-          clearTimeout(this.timer);
-        }
-      }
-    }
-  },
-  computed: {
-    /**
-     * Icon name (MDI) based on type.
-     */
-    computedIcon: function computedIcon() {
-      if (this.icon) {
-        return this.icon;
-      }
-
-      switch (this.type) {
-        case 'is-info':
-          return 'information';
-
-        case 'is-success':
-          return 'check-circle';
-
-        case 'is-warning':
-          return 'alert';
-
-        case 'is-danger':
-          return 'alert-circle';
-
-        default:
-          return null;
-      }
-    }
-  },
-  methods: {
-    /**
-     * Close the Message and emit events.
-     */
-    close: function close() {
-      this.isActive = false;
-      this.$emit('close');
-      this.$emit('update:active', false);
-    },
-
-    /**
-     * Set timer to auto close message
-     */
-    setAutoClose: function setAutoClose() {
-      var _this = this;
-
-      if (this.autoClose) {
-        this.timer = setTimeout(function () {
-          if (_this.isActive) {
-            _this.close();
-          }
-        }, this.duration);
-      }
-    }
-  },
-  mounted: function mounted() {
-    this.setAutoClose();
-  }
-};
-
-
-
-
-/***/ }),
-
 /***/ "./node_modules/buefy/dist/esm/clockpicker.js":
 /*!****************************************************!*\
   !*** ./node_modules/buefy/dist/esm/clockpicker.js ***!
@@ -20644,15 +20870,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-197ef742.js */ "./node_modules/buefy/dist/esm/chunk-197ef742.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-f647b5cb.js */ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-85a8ec35.js */ "./node_modules/buefy/dist/esm/chunk-85a8ec35.js");
-/* harmony import */ var _chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-56f84f22.js */ "./node_modules/buefy/dist/esm/chunk-56f84f22.js");
-/* harmony import */ var _chunk_10cf3f0e_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./chunk-10cf3f0e.js */ "./node_modules/buefy/dist/esm/chunk-10cf3f0e.js");
+/* harmony import */ var _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-b59d2948.js */ "./node_modules/buefy/dist/esm/chunk-b59d2948.js");
+/* harmony import */ var _chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-e3b0b539.js */ "./node_modules/buefy/dist/esm/chunk-e3b0b539.js");
+/* harmony import */ var _chunk_1bad8473_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./chunk-1bad8473.js */ "./node_modules/buefy/dist/esm/chunk-1bad8473.js");
 /* harmony import */ var _chunk_42f463e6_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./chunk-42f463e6.js */ "./node_modules/buefy/dist/esm/chunk-42f463e6.js");
-/* harmony import */ var _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./chunk-5ccea041.js */ "./node_modules/buefy/dist/esm/chunk-5ccea041.js");
-/* harmony import */ var _chunk_722c2a14_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./chunk-722c2a14.js */ "./node_modules/buefy/dist/esm/chunk-722c2a14.js");
+/* harmony import */ var _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./chunk-f8007af2.js */ "./node_modules/buefy/dist/esm/chunk-f8007af2.js");
+/* harmony import */ var _chunk_5d5e2574_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./chunk-5d5e2574.js */ "./node_modules/buefy/dist/esm/chunk-5d5e2574.js");
 
 
 
@@ -20974,8 +21200,8 @@ var _components;
 var outerPadding = 12;
 var script$1 = {
   name: 'BClockpicker',
-  components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, ClockpickerFace.name, ClockpickerFace), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__["I"].name, _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_722c2a14_js__WEBPACK_IMPORTED_MODULE_11__["F"].name, _chunk_722c2a14_js__WEBPACK_IMPORTED_MODULE_11__["F"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_10__["D"].name, _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_10__["D"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_10__["a"].name, _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_10__["a"]), _components),
-  mixins: [_chunk_10cf3f0e_js__WEBPACK_IMPORTED_MODULE_8__["T"]],
+  components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, ClockpickerFace.name, ClockpickerFace), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__["I"].name, _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_5d5e2574_js__WEBPACK_IMPORTED_MODULE_11__["F"].name, _chunk_5d5e2574_js__WEBPACK_IMPORTED_MODULE_11__["F"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_10__["D"].name, _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_10__["D"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_10__["a"].name, _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_10__["a"]), _components),
+  mixins: [_chunk_1bad8473_js__WEBPACK_IMPORTED_MODULE_8__["T"]],
   props: {
     pickerSize: {
       type: Number,
@@ -21265,17 +21491,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-197ef742.js */ "./node_modules/buefy/dist/esm/chunk-197ef742.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-f647b5cb.js */ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-85a8ec35.js */ "./node_modules/buefy/dist/esm/chunk-85a8ec35.js");
-/* harmony import */ var _chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-56f84f22.js */ "./node_modules/buefy/dist/esm/chunk-56f84f22.js");
+/* harmony import */ var _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-b59d2948.js */ "./node_modules/buefy/dist/esm/chunk-b59d2948.js");
+/* harmony import */ var _chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-e3b0b539.js */ "./node_modules/buefy/dist/esm/chunk-e3b0b539.js");
 /* harmony import */ var _chunk_42f463e6_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./chunk-42f463e6.js */ "./node_modules/buefy/dist/esm/chunk-42f463e6.js");
-/* harmony import */ var _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./chunk-5ccea041.js */ "./node_modules/buefy/dist/esm/chunk-5ccea041.js");
-/* harmony import */ var _chunk_722c2a14_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./chunk-722c2a14.js */ "./node_modules/buefy/dist/esm/chunk-722c2a14.js");
-/* harmony import */ var _chunk_3c26c4a0_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./chunk-3c26c4a0.js */ "./node_modules/buefy/dist/esm/chunk-3c26c4a0.js");
-/* harmony import */ var _chunk_21abdf85_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./chunk-21abdf85.js */ "./node_modules/buefy/dist/esm/chunk-21abdf85.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BDatepicker", function() { return _chunk_21abdf85_js__WEBPACK_IMPORTED_MODULE_12__["D"]; });
+/* harmony import */ var _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./chunk-f8007af2.js */ "./node_modules/buefy/dist/esm/chunk-f8007af2.js");
+/* harmony import */ var _chunk_5d5e2574_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./chunk-5d5e2574.js */ "./node_modules/buefy/dist/esm/chunk-5d5e2574.js");
+/* harmony import */ var _chunk_01bc3886_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./chunk-01bc3886.js */ "./node_modules/buefy/dist/esm/chunk-01bc3886.js");
+/* harmony import */ var _chunk_b1bc759a_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./chunk-b1bc759a.js */ "./node_modules/buefy/dist/esm/chunk-b1bc759a.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BDatepicker", function() { return _chunk_b1bc759a_js__WEBPACK_IMPORTED_MODULE_12__["D"]; });
 
 
 
@@ -21294,7 +21520,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var Plugin = {
   install: function install(Vue) {
-    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__["r"])(Vue, _chunk_21abdf85_js__WEBPACK_IMPORTED_MODULE_12__["D"]);
+    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__["r"])(Vue, _chunk_b1bc759a_js__WEBPACK_IMPORTED_MODULE_12__["D"]);
   }
 };
 Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__["u"])(Plugin);
@@ -21317,18 +21543,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-197ef742.js */ "./node_modules/buefy/dist/esm/chunk-197ef742.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-f647b5cb.js */ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-85a8ec35.js */ "./node_modules/buefy/dist/esm/chunk-85a8ec35.js");
-/* harmony import */ var _chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-56f84f22.js */ "./node_modules/buefy/dist/esm/chunk-56f84f22.js");
-/* harmony import */ var _chunk_10cf3f0e_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./chunk-10cf3f0e.js */ "./node_modules/buefy/dist/esm/chunk-10cf3f0e.js");
+/* harmony import */ var _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-b59d2948.js */ "./node_modules/buefy/dist/esm/chunk-b59d2948.js");
+/* harmony import */ var _chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-e3b0b539.js */ "./node_modules/buefy/dist/esm/chunk-e3b0b539.js");
+/* harmony import */ var _chunk_1bad8473_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./chunk-1bad8473.js */ "./node_modules/buefy/dist/esm/chunk-1bad8473.js");
 /* harmony import */ var _chunk_42f463e6_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./chunk-42f463e6.js */ "./node_modules/buefy/dist/esm/chunk-42f463e6.js");
-/* harmony import */ var _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./chunk-5ccea041.js */ "./node_modules/buefy/dist/esm/chunk-5ccea041.js");
-/* harmony import */ var _chunk_722c2a14_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./chunk-722c2a14.js */ "./node_modules/buefy/dist/esm/chunk-722c2a14.js");
-/* harmony import */ var _chunk_3c26c4a0_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./chunk-3c26c4a0.js */ "./node_modules/buefy/dist/esm/chunk-3c26c4a0.js");
-/* harmony import */ var _chunk_21abdf85_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./chunk-21abdf85.js */ "./node_modules/buefy/dist/esm/chunk-21abdf85.js");
-/* harmony import */ var _chunk_5c7b2549_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./chunk-5c7b2549.js */ "./node_modules/buefy/dist/esm/chunk-5c7b2549.js");
+/* harmony import */ var _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./chunk-f8007af2.js */ "./node_modules/buefy/dist/esm/chunk-f8007af2.js");
+/* harmony import */ var _chunk_5d5e2574_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./chunk-5d5e2574.js */ "./node_modules/buefy/dist/esm/chunk-5d5e2574.js");
+/* harmony import */ var _chunk_01bc3886_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./chunk-01bc3886.js */ "./node_modules/buefy/dist/esm/chunk-01bc3886.js");
+/* harmony import */ var _chunk_b1bc759a_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./chunk-b1bc759a.js */ "./node_modules/buefy/dist/esm/chunk-b1bc759a.js");
+/* harmony import */ var _chunk_97298426_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./chunk-97298426.js */ "./node_modules/buefy/dist/esm/chunk-97298426.js");
 
 
 
@@ -21350,8 +21576,8 @@ var AM = 'AM';
 var PM = 'PM';
 var script = {
   name: 'BDatetimepicker',
-  components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_21abdf85_js__WEBPACK_IMPORTED_MODULE_13__["D"].name, _chunk_21abdf85_js__WEBPACK_IMPORTED_MODULE_13__["D"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_5c7b2549_js__WEBPACK_IMPORTED_MODULE_14__["T"].name, _chunk_5c7b2549_js__WEBPACK_IMPORTED_MODULE_14__["T"]), _components),
-  mixins: [_chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__["F"]],
+  components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_b1bc759a_js__WEBPACK_IMPORTED_MODULE_13__["D"].name, _chunk_b1bc759a_js__WEBPACK_IMPORTED_MODULE_13__["D"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_97298426_js__WEBPACK_IMPORTED_MODULE_14__["T"].name, _chunk_97298426_js__WEBPACK_IMPORTED_MODULE_14__["T"]), _components),
+  mixins: [_chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__["F"]],
   inheritAttrs: false,
   props: {
     value: {
@@ -21710,10 +21936,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
 /* harmony import */ var _chunk_42f463e6_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-42f463e6.js */ "./node_modules/buefy/dist/esm/chunk-42f463e6.js");
-/* harmony import */ var _chunk_dbb1a60b_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-dbb1a60b.js */ "./node_modules/buefy/dist/esm/chunk-dbb1a60b.js");
+/* harmony import */ var _chunk_608cd4c1_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-608cd4c1.js */ "./node_modules/buefy/dist/esm/chunk-608cd4c1.js");
 
 
 
@@ -21724,11 +21950,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var script = {
   name: 'BDialog',
-  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"]),
+  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"]),
   directives: {
     trapFocus: _chunk_42f463e6_js__WEBPACK_IMPORTED_MODULE_5__["t"]
   },
-  extends: _chunk_dbb1a60b_js__WEBPACK_IMPORTED_MODULE_6__["M"],
+  extends: _chunk_608cd4c1_js__WEBPACK_IMPORTED_MODULE_6__["M"],
   props: {
     title: String,
     message: [String, Array],
@@ -22033,12 +22259,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-56f84f22.js */ "./node_modules/buefy/dist/esm/chunk-56f84f22.js");
+/* harmony import */ var _chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-e3b0b539.js */ "./node_modules/buefy/dist/esm/chunk-e3b0b539.js");
 /* harmony import */ var _chunk_42f463e6_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-42f463e6.js */ "./node_modules/buefy/dist/esm/chunk-42f463e6.js");
-/* harmony import */ var _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-5ccea041.js */ "./node_modules/buefy/dist/esm/chunk-5ccea041.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BDropdown", function() { return _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_6__["D"]; });
+/* harmony import */ var _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-f8007af2.js */ "./node_modules/buefy/dist/esm/chunk-f8007af2.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BDropdown", function() { return _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_6__["D"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BDropdownItem", function() { return _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_6__["a"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BDropdownItem", function() { return _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_6__["a"]; });
 
 
 
@@ -22051,8 +22277,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var Plugin = {
   install: function install(Vue) {
-    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["r"])(Vue, _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_6__["D"]);
-    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["r"])(Vue, _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_6__["a"]);
+    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["r"])(Vue, _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_6__["D"]);
+    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["r"])(Vue, _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_6__["a"]);
   }
 };
 Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["u"])(Plugin);
@@ -22074,8 +22300,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_722c2a14_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-722c2a14.js */ "./node_modules/buefy/dist/esm/chunk-722c2a14.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BField", function() { return _chunk_722c2a14_js__WEBPACK_IMPORTED_MODULE_3__["F"]; });
+/* harmony import */ var _chunk_5d5e2574_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-5d5e2574.js */ "./node_modules/buefy/dist/esm/chunk-5d5e2574.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BField", function() { return _chunk_5d5e2574_js__WEBPACK_IMPORTED_MODULE_3__["F"]; });
 
 
 
@@ -22085,7 +22311,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var Plugin = {
   install: function install(Vue) {
-    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__["r"])(Vue, _chunk_722c2a14_js__WEBPACK_IMPORTED_MODULE_3__["F"]);
+    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__["r"])(Vue, _chunk_5d5e2574_js__WEBPACK_IMPORTED_MODULE_3__["F"]);
   }
 };
 Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__["u"])(Plugin);
@@ -22099,7 +22325,7 @@ Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_2__["u"])(Plugin);
 /*!************************************************!*\
   !*** ./node_modules/buefy/dist/esm/helpers.js ***!
   \************************************************/
-/*! exports provided: bound, createAbsoluteElement, createNewEvent, escapeRegExpChars, getMonthNames, getValueByPath, getWeekdayNames, hasFlag, indexOf, isCustomElement, isMobile, isVueComponent, isWebpSupported, matchWithGroups, merge, mod, multiColumnSort, removeElement, sign, toCssWidth */
+/*! exports provided: bound, createAbsoluteElement, createNewEvent, escapeRegExpChars, getMonthNames, getValueByPath, getWeekdayNames, hasFlag, indexOf, isCustomElement, isDefined, isMobile, isVueComponent, isWebpSupported, matchWithGroups, merge, mod, multiColumnSort, removeElement, sign, toCssWidth */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22114,6 +22340,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasFlag", function() { return hasFlag; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "indexOf", function() { return indexOf; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isCustomElement", function() { return isCustomElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDefined", function() { return isDefined; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isMobile", function() { return isMobile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isVueComponent", function() { return isVueComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isWebpSupported", function() { return isWebpSupported; });
@@ -22426,6 +22653,9 @@ function isWebpSupported() {
 function isCustomElement(vm) {
   return 'shadowRoot' in vm.$root.$options;
 }
+var isDefined = function isDefined(d) {
+  return d !== undefined;
+};
 
 
 
@@ -22444,8 +22674,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BIcon", function() { return _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"]; });
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BIcon", function() { return _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"]; });
 
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
 
@@ -22457,7 +22687,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var Plugin = {
   install: function install(Vue) {
-    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__["r"])(Vue, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"]);
+    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__["r"])(Vue, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"]);
   }
 };
 Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__["u"])(Plugin);
@@ -22789,7 +23019,7 @@ Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["u"])(Plugin);
 /*!**********************************************!*\
   !*** ./node_modules/buefy/dist/esm/index.js ***!
   \**********************************************/
-/*! exports provided: bound, createAbsoluteElement, createNewEvent, escapeRegExpChars, getMonthNames, getValueByPath, getWeekdayNames, hasFlag, indexOf, isCustomElement, isMobile, isVueComponent, isWebpSupported, matchWithGroups, merge, mod, multiColumnSort, removeElement, sign, toCssWidth, Autocomplete, Button, Carousel, Checkbox, Collapse, Clockpicker, Datepicker, Datetimepicker, Dialog, DialogProgrammatic, Dropdown, Field, Icon, Image, Input, Loading, LoadingProgrammatic, Menu, Message, Modal, ModalProgrammatic, Notification, NotificationProgrammatic, Navbar, Numberinput, Pagination, Progress, Radio, Rate, Select, Skeleton, Sidebar, Slider, Snackbar, SnackbarProgrammatic, Steps, Switch, Table, Tabs, Tag, Taginput, Timepicker, Toast, ToastProgrammatic, Tooltip, Upload, default, ConfigProgrammatic */
+/*! exports provided: bound, createAbsoluteElement, createNewEvent, escapeRegExpChars, getMonthNames, getValueByPath, getWeekdayNames, hasFlag, indexOf, isCustomElement, isDefined, isMobile, isVueComponent, isWebpSupported, matchWithGroups, merge, mod, multiColumnSort, removeElement, sign, toCssWidth, Autocomplete, Button, Carousel, Checkbox, Collapse, Clockpicker, Datepicker, Datetimepicker, Dialog, DialogProgrammatic, Dropdown, Field, Icon, Image, Input, Loading, LoadingProgrammatic, Menu, Message, Modal, ModalProgrammatic, Notification, NotificationProgrammatic, Navbar, Numberinput, Pagination, Progress, Radio, Rate, Select, Skeleton, Sidebar, Slider, Snackbar, SnackbarProgrammatic, Steps, Switch, Table, Tabs, Tag, Taginput, Timepicker, Toast, ToastProgrammatic, Tooltip, Upload, default, ConfigProgrammatic */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22817,6 +23047,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isCustomElement", function() { return _helpers_js__WEBPACK_IMPORTED_MODULE_1__["isCustomElement"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isDefined", function() { return _helpers_js__WEBPACK_IMPORTED_MODULE_1__["isDefined"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isMobile", function() { return _helpers_js__WEBPACK_IMPORTED_MODULE_1__["isMobile"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isVueComponent", function() { return _helpers_js__WEBPACK_IMPORTED_MODULE_1__["isVueComponent"]; });
@@ -22838,18 +23070,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "toCssWidth", function() { return _helpers_js__WEBPACK_IMPORTED_MODULE_1__["toCssWidth"]; });
 
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-197ef742.js */ "./node_modules/buefy/dist/esm/chunk-197ef742.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-f647b5cb.js */ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-85a8ec35.js */ "./node_modules/buefy/dist/esm/chunk-85a8ec35.js");
-/* harmony import */ var _chunk_1c37796e_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-1c37796e.js */ "./node_modules/buefy/dist/esm/chunk-1c37796e.js");
+/* harmony import */ var _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-b59d2948.js */ "./node_modules/buefy/dist/esm/chunk-b59d2948.js");
+/* harmony import */ var _chunk_4f0d2958_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-4f0d2958.js */ "./node_modules/buefy/dist/esm/chunk-4f0d2958.js");
 /* harmony import */ var _autocomplete_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./autocomplete.js */ "./node_modules/buefy/dist/esm/autocomplete.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Autocomplete", function() { return _autocomplete_js__WEBPACK_IMPORTED_MODULE_8__["default"]; });
 
 /* harmony import */ var _button_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./button.js */ "./node_modules/buefy/dist/esm/button.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Button", function() { return _button_js__WEBPACK_IMPORTED_MODULE_9__["default"]; });
 
-/* harmony import */ var _chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./chunk-56f84f22.js */ "./node_modules/buefy/dist/esm/chunk-56f84f22.js");
+/* harmony import */ var _chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./chunk-e3b0b539.js */ "./node_modules/buefy/dist/esm/chunk-e3b0b539.js");
 /* harmony import */ var _carousel_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./carousel.js */ "./node_modules/buefy/dist/esm/carousel.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Carousel", function() { return _carousel_js__WEBPACK_IMPORTED_MODULE_11__["default"]; });
 
@@ -22861,23 +23093,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _collapse_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./collapse.js */ "./node_modules/buefy/dist/esm/collapse.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Collapse", function() { return _collapse_js__WEBPACK_IMPORTED_MODULE_15__["default"]; });
 
-/* harmony import */ var _chunk_10cf3f0e_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./chunk-10cf3f0e.js */ "./node_modules/buefy/dist/esm/chunk-10cf3f0e.js");
+/* harmony import */ var _chunk_1bad8473_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./chunk-1bad8473.js */ "./node_modules/buefy/dist/esm/chunk-1bad8473.js");
 /* harmony import */ var _chunk_42f463e6_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./chunk-42f463e6.js */ "./node_modules/buefy/dist/esm/chunk-42f463e6.js");
-/* harmony import */ var _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./chunk-5ccea041.js */ "./node_modules/buefy/dist/esm/chunk-5ccea041.js");
-/* harmony import */ var _chunk_722c2a14_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./chunk-722c2a14.js */ "./node_modules/buefy/dist/esm/chunk-722c2a14.js");
+/* harmony import */ var _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./chunk-f8007af2.js */ "./node_modules/buefy/dist/esm/chunk-f8007af2.js");
+/* harmony import */ var _chunk_5d5e2574_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./chunk-5d5e2574.js */ "./node_modules/buefy/dist/esm/chunk-5d5e2574.js");
 /* harmony import */ var _clockpicker_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./clockpicker.js */ "./node_modules/buefy/dist/esm/clockpicker.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Clockpicker", function() { return _clockpicker_js__WEBPACK_IMPORTED_MODULE_20__["default"]; });
 
-/* harmony import */ var _chunk_3c26c4a0_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./chunk-3c26c4a0.js */ "./node_modules/buefy/dist/esm/chunk-3c26c4a0.js");
-/* harmony import */ var _chunk_21abdf85_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./chunk-21abdf85.js */ "./node_modules/buefy/dist/esm/chunk-21abdf85.js");
+/* harmony import */ var _chunk_01bc3886_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./chunk-01bc3886.js */ "./node_modules/buefy/dist/esm/chunk-01bc3886.js");
+/* harmony import */ var _chunk_b1bc759a_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./chunk-b1bc759a.js */ "./node_modules/buefy/dist/esm/chunk-b1bc759a.js");
 /* harmony import */ var _datepicker_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./datepicker.js */ "./node_modules/buefy/dist/esm/datepicker.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Datepicker", function() { return _datepicker_js__WEBPACK_IMPORTED_MODULE_23__["default"]; });
 
-/* harmony import */ var _chunk_5c7b2549_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./chunk-5c7b2549.js */ "./node_modules/buefy/dist/esm/chunk-5c7b2549.js");
+/* harmony import */ var _chunk_97298426_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./chunk-97298426.js */ "./node_modules/buefy/dist/esm/chunk-97298426.js");
 /* harmony import */ var _datetimepicker_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./datetimepicker.js */ "./node_modules/buefy/dist/esm/datetimepicker.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Datetimepicker", function() { return _datetimepicker_js__WEBPACK_IMPORTED_MODULE_25__["default"]; });
 
-/* harmony import */ var _chunk_dbb1a60b_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./chunk-dbb1a60b.js */ "./node_modules/buefy/dist/esm/chunk-dbb1a60b.js");
+/* harmony import */ var _chunk_608cd4c1_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./chunk-608cd4c1.js */ "./node_modules/buefy/dist/esm/chunk-608cd4c1.js");
 /* harmony import */ var _dialog_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./dialog.js */ "./node_modules/buefy/dist/esm/dialog.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Dialog", function() { return _dialog_js__WEBPACK_IMPORTED_MODULE_27__["default"]; });
 
@@ -22899,7 +23131,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Input", function() { return _input_js__WEBPACK_IMPORTED_MODULE_32__["default"]; });
 
 /* harmony import */ var _chunk_b9bdb0e4_js__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./chunk-b9bdb0e4.js */ "./node_modules/buefy/dist/esm/chunk-b9bdb0e4.js");
-/* harmony import */ var _chunk_685815b3_js__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./chunk-685815b3.js */ "./node_modules/buefy/dist/esm/chunk-685815b3.js");
+/* harmony import */ var _chunk_1d4d79a1_js__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./chunk-1d4d79a1.js */ "./node_modules/buefy/dist/esm/chunk-1d4d79a1.js");
 /* harmony import */ var _loading_js__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./loading.js */ "./node_modules/buefy/dist/esm/loading.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Loading", function() { return _loading_js__WEBPACK_IMPORTED_MODULE_35__["default"]; });
 
@@ -22908,7 +23140,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _menu_js__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./menu.js */ "./node_modules/buefy/dist/esm/menu.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Menu", function() { return _menu_js__WEBPACK_IMPORTED_MODULE_36__["default"]; });
 
-/* harmony import */ var _chunk_fe8a1a80_js__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./chunk-fe8a1a80.js */ "./node_modules/buefy/dist/esm/chunk-fe8a1a80.js");
+/* harmony import */ var _chunk_9afd18b7_js__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./chunk-9afd18b7.js */ "./node_modules/buefy/dist/esm/chunk-9afd18b7.js");
 /* harmony import */ var _message_js__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./message.js */ "./node_modules/buefy/dist/esm/message.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Message", function() { return _message_js__WEBPACK_IMPORTED_MODULE_38__["default"]; });
 
@@ -22922,14 +23154,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "NotificationProgrammatic", function() { return _notification_js__WEBPACK_IMPORTED_MODULE_40__["NotificationProgrammatic"]; });
 
-/* harmony import */ var _chunk_58668f16_js__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./chunk-58668f16.js */ "./node_modules/buefy/dist/esm/chunk-58668f16.js");
+/* harmony import */ var _chunk_9a266722_js__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./chunk-9a266722.js */ "./node_modules/buefy/dist/esm/chunk-9a266722.js");
 /* harmony import */ var _navbar_js__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./navbar.js */ "./node_modules/buefy/dist/esm/navbar.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Navbar", function() { return _navbar_js__WEBPACK_IMPORTED_MODULE_42__["default"]; });
 
 /* harmony import */ var _numberinput_js__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./numberinput.js */ "./node_modules/buefy/dist/esm/numberinput.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Numberinput", function() { return _numberinput_js__WEBPACK_IMPORTED_MODULE_43__["default"]; });
 
-/* harmony import */ var _chunk_d3f604a3_js__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./chunk-d3f604a3.js */ "./node_modules/buefy/dist/esm/chunk-d3f604a3.js");
+/* harmony import */ var _chunk_6348754d_js__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./chunk-6348754d.js */ "./node_modules/buefy/dist/esm/chunk-6348754d.js");
 /* harmony import */ var _pagination_js__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./pagination.js */ "./node_modules/buefy/dist/esm/pagination.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Pagination", function() { return _pagination_js__WEBPACK_IMPORTED_MODULE_45__["default"]; });
 
@@ -22951,7 +23183,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sidebar_js__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./sidebar.js */ "./node_modules/buefy/dist/esm/sidebar.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Sidebar", function() { return _sidebar_js__WEBPACK_IMPORTED_MODULE_51__["default"]; });
 
-/* harmony import */ var _chunk_4939e2ec_js__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./chunk-4939e2ec.js */ "./node_modules/buefy/dist/esm/chunk-4939e2ec.js");
+/* harmony import */ var _chunk_7c7cf2b6_js__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./chunk-7c7cf2b6.js */ "./node_modules/buefy/dist/esm/chunk-7c7cf2b6.js");
 /* harmony import */ var _slider_js__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./slider.js */ "./node_modules/buefy/dist/esm/slider.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Slider", function() { return _slider_js__WEBPACK_IMPORTED_MODULE_53__["default"]; });
 
@@ -22960,8 +23192,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SnackbarProgrammatic", function() { return _snackbar_js__WEBPACK_IMPORTED_MODULE_54__["SnackbarProgrammatic"]; });
 
-/* harmony import */ var _chunk_23f32560_js__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./chunk-23f32560.js */ "./node_modules/buefy/dist/esm/chunk-23f32560.js");
-/* harmony import */ var _chunk_847dd5f6_js__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./chunk-847dd5f6.js */ "./node_modules/buefy/dist/esm/chunk-847dd5f6.js");
+/* harmony import */ var _chunk_db919f11_js__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./chunk-db919f11.js */ "./node_modules/buefy/dist/esm/chunk-db919f11.js");
+/* harmony import */ var _chunk_dad7a70a_js__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./chunk-dad7a70a.js */ "./node_modules/buefy/dist/esm/chunk-dad7a70a.js");
 /* harmony import */ var _steps_js__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./steps.js */ "./node_modules/buefy/dist/esm/steps.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Steps", function() { return _steps_js__WEBPACK_IMPORTED_MODULE_57__["default"]; });
 
@@ -23194,11 +23426,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-197ef742.js */ "./node_modules/buefy/dist/esm/chunk-197ef742.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-f647b5cb.js */ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-85a8ec35.js */ "./node_modules/buefy/dist/esm/chunk-85a8ec35.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BInput", function() { return _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__["I"]; });
+/* harmony import */ var _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-b59d2948.js */ "./node_modules/buefy/dist/esm/chunk-b59d2948.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BInput", function() { return _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__["I"]; });
 
 
 
@@ -23211,7 +23443,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var Plugin = {
   install: function install(Vue) {
-    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__["r"])(Vue, _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__["I"]);
+    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__["r"])(Vue, _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__["I"]);
   }
 };
 Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__["u"])(Plugin);
@@ -23236,8 +23468,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
 /* harmony import */ var _chunk_b9bdb0e4_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-b9bdb0e4.js */ "./node_modules/buefy/dist/esm/chunk-b9bdb0e4.js");
-/* harmony import */ var _chunk_685815b3_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-685815b3.js */ "./node_modules/buefy/dist/esm/chunk-685815b3.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BLoading", function() { return _chunk_685815b3_js__WEBPACK_IMPORTED_MODULE_5__["L"]; });
+/* harmony import */ var _chunk_1d4d79a1_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-1d4d79a1.js */ "./node_modules/buefy/dist/esm/chunk-1d4d79a1.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BLoading", function() { return _chunk_1d4d79a1_js__WEBPACK_IMPORTED_MODULE_5__["L"]; });
 
 
 
@@ -23255,7 +23487,7 @@ var LoadingProgrammatic = {
     };
     var propsData = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["merge"])(defaultParam, params);
     var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["V"];
-    var LoadingComponent = vm.extend(_chunk_685815b3_js__WEBPACK_IMPORTED_MODULE_5__["L"]);
+    var LoadingComponent = vm.extend(_chunk_1d4d79a1_js__WEBPACK_IMPORTED_MODULE_5__["L"]);
     return new LoadingComponent({
       el: document.createElement('div'),
       propsData: propsData
@@ -23265,7 +23497,7 @@ var LoadingProgrammatic = {
 var Plugin = {
   install: function install(Vue) {
     localVueInstance = Vue;
-    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["r"])(Vue, _chunk_685815b3_js__WEBPACK_IMPORTED_MODULE_5__["L"]);
+    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["r"])(Vue, _chunk_1d4d79a1_js__WEBPACK_IMPORTED_MODULE_5__["L"]);
     Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["a"])(Vue, 'loading', LoadingProgrammatic);
   }
 };
@@ -23292,7 +23524,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
 
 
@@ -23434,7 +23666,7 @@ const __vue_script__$1 = script$1;
 
 var script$2 = {
   name: 'BMenuItem',
-  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"]),
+  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"]),
   inheritAttrs: false,
   // deprecated, to replace with default 'value' in the next breaking change
   model: {
@@ -23598,9 +23830,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_fe8a1a80_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-fe8a1a80.js */ "./node_modules/buefy/dist/esm/chunk-fe8a1a80.js");
+/* harmony import */ var _chunk_9afd18b7_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-9afd18b7.js */ "./node_modules/buefy/dist/esm/chunk-9afd18b7.js");
 
 
 
@@ -23611,7 +23843,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 var script = {
   name: 'BMessage',
-  mixins: [_chunk_fe8a1a80_js__WEBPACK_IMPORTED_MODULE_5__["M"]],
+  mixins: [_chunk_9afd18b7_js__WEBPACK_IMPORTED_MODULE_5__["M"]],
   props: {
     ariaCloseLabel: String
   },
@@ -23682,8 +23914,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
 /* harmony import */ var _chunk_42f463e6_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-42f463e6.js */ "./node_modules/buefy/dist/esm/chunk-42f463e6.js");
-/* harmony import */ var _chunk_dbb1a60b_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-dbb1a60b.js */ "./node_modules/buefy/dist/esm/chunk-dbb1a60b.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BModal", function() { return _chunk_dbb1a60b_js__WEBPACK_IMPORTED_MODULE_5__["M"]; });
+/* harmony import */ var _chunk_608cd4c1_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-608cd4c1.js */ "./node_modules/buefy/dist/esm/chunk-608cd4c1.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BModal", function() { return _chunk_608cd4c1_js__WEBPACK_IMPORTED_MODULE_5__["M"]; });
 
 
 
@@ -23722,7 +23954,7 @@ var ModalProgrammatic = {
 
     var propsData = Object(_helpers_js__WEBPACK_IMPORTED_MODULE_1__["merge"])(defaultParam, params);
     var vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["V"];
-    var ModalComponent = vm.extend(_chunk_dbb1a60b_js__WEBPACK_IMPORTED_MODULE_5__["M"]);
+    var ModalComponent = vm.extend(_chunk_608cd4c1_js__WEBPACK_IMPORTED_MODULE_5__["M"]);
     var component = new ModalComponent({
       parent: parent,
       el: document.createElement('div'),
@@ -23740,7 +23972,7 @@ var ModalProgrammatic = {
 var Plugin = {
   install: function install(Vue) {
     localVueInstance = Vue;
-    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["r"])(Vue, _chunk_dbb1a60b_js__WEBPACK_IMPORTED_MODULE_5__["M"]);
+    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["r"])(Vue, _chunk_608cd4c1_js__WEBPACK_IMPORTED_MODULE_5__["M"]);
     Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["a"])(Vue, 'modal', ModalProgrammatic);
   }
 };
@@ -23956,6 +24188,7 @@ var BODY_SPACED_FIXED_TOP_CLASS = 'has-spaced-navbar-fixed-top';
 var FIXED_BOTTOM_CLASS = 'is-fixed-bottom';
 var BODY_FIXED_BOTTOM_CLASS = 'has-navbar-fixed-bottom';
 var BODY_SPACED_FIXED_BOTTOM_CLASS = 'has-spaced-navbar-fixed-bottom';
+var BODY_CENTERED_CLASS = 'has-navbar-centered';
 
 var isFilled = function isFilled(str) {
   return !!str;
@@ -23992,6 +24225,10 @@ var script$1 = {
       type: Boolean,
       default: false
     },
+    centered: {
+      type: Boolean,
+      default: false
+    },
     wrapperClass: {
       type: String
     },
@@ -24020,7 +24257,7 @@ var script$1 = {
     computedClasses: function computedClasses() {
       var _ref;
 
-      return [this.type, (_ref = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_ref, FIXED_TOP_CLASS, this.fixedTop), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_ref, FIXED_BOTTOM_CLASS, this.fixedBottom), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_ref, 'is-spaced', this.spaced), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_ref, 'has-shadow', this.shadow), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_ref, 'is-transparent', this.transparent), _ref)];
+      return [this.type, (_ref = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_ref, FIXED_TOP_CLASS, this.fixedTop), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_ref, FIXED_BOTTOM_CLASS, this.fixedBottom), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_ref, BODY_CENTERED_CLASS, this.centered), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_ref, 'is-spaced', this.spaced), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_ref, 'has-shadow', this.shadow), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_ref, 'is-transparent', this.transparent), _ref)];
     }
   },
   watch: {
@@ -24441,10 +24678,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_fe8a1a80_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-fe8a1a80.js */ "./node_modules/buefy/dist/esm/chunk-fe8a1a80.js");
-/* harmony import */ var _chunk_58668f16_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-58668f16.js */ "./node_modules/buefy/dist/esm/chunk-58668f16.js");
+/* harmony import */ var _chunk_9afd18b7_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-9afd18b7.js */ "./node_modules/buefy/dist/esm/chunk-9afd18b7.js");
+/* harmony import */ var _chunk_9a266722_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-9a266722.js */ "./node_modules/buefy/dist/esm/chunk-9a266722.js");
 
 
 
@@ -24456,7 +24693,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 var script = {
   name: 'BNotification',
-  mixins: [_chunk_fe8a1a80_js__WEBPACK_IMPORTED_MODULE_5__["M"]],
+  mixins: [_chunk_9afd18b7_js__WEBPACK_IMPORTED_MODULE_5__["M"]],
   props: {
     position: String,
     ariaCloseLabel: String,
@@ -24502,7 +24739,7 @@ var __vue_staticRenderFns__ = [];
 //
 var script$1 = {
   name: 'BNotificationNotice',
-  mixins: [_chunk_58668f16_js__WEBPACK_IMPORTED_MODULE_6__["N"]],
+  mixins: [_chunk_9a266722_js__WEBPACK_IMPORTED_MODULE_6__["N"]],
   props: {
     indefinite: {
       type: Boolean,
@@ -24624,10 +24861,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-197ef742.js */ "./node_modules/buefy/dist/esm/chunk-197ef742.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-f647b5cb.js */ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-85a8ec35.js */ "./node_modules/buefy/dist/esm/chunk-85a8ec35.js");
+/* harmony import */ var _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-b59d2948.js */ "./node_modules/buefy/dist/esm/chunk-b59d2948.js");
 
 
 
@@ -24639,8 +24876,8 @@ __webpack_require__.r(__webpack_exports__);
 var _components;
 var script = {
   name: 'BNumberinput',
-  components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__["I"].name, _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__["I"]), _components),
-  mixins: [_chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__["F"]],
+  components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__["I"].name, _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__["I"]), _components),
+  mixins: [_chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__["F"]],
   inheritAttrs: false,
   props: {
     value: Number,
@@ -24649,6 +24886,7 @@ var script = {
     },
     max: [Number, String],
     step: [Number, String],
+    minStep: [Number, String],
     exponential: [Boolean, Number],
     disabled: Boolean,
     type: {
@@ -24674,6 +24912,7 @@ var script = {
     return {
       newValue: this.value,
       newStep: this.step || 1,
+      newMinStep: this.minStep,
       timesPressed: 1,
       _elementRef: 'input'
     };
@@ -24718,6 +24957,10 @@ var script = {
     stepNumber: function stepNumber() {
       return typeof this.newStep === 'string' ? parseFloat(this.newStep) : this.newStep;
     },
+    minStepNumber: function minStepNumber() {
+      var step = typeof this.newMinStep !== 'undefined' ? this.newMinStep : this.newStep;
+      return typeof step === 'string' ? parseFloat(step) : step;
+    },
     disabledMin: function disabledMin() {
       return this.computedValue - this.stepNumber < this.minNumber;
     },
@@ -24725,7 +24968,7 @@ var script = {
       return this.computedValue + this.stepNumber > this.maxNumber;
     },
     stepDecimals: function stepDecimals() {
-      var step = this.stepNumber.toString();
+      var step = this.minStepNumber.toString();
       var index = step.indexOf('.');
 
       if (index >= 0) {
@@ -24748,6 +24991,9 @@ var script = {
     },
     step: function step(value) {
       this.newStep = value;
+    },
+    minStep: function minStep(value) {
+      this.newMinStep = value;
     }
   },
   methods: {
@@ -24812,7 +25058,7 @@ var script = {
 const __vue_script__ = script;
 
 /* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-numberinput field",class:_vm.fieldClasses},[(_vm.controls)?_c('p',{staticClass:"control minus",on:{"mouseup":function($event){return _vm.onStopLongPress(false)},"mouseleave":function($event){return _vm.onStopLongPress(false)},"touchend":function($event){return _vm.onStopLongPress(false)},"touchcancel":function($event){return _vm.onStopLongPress(false)}}},[_c('button',{staticClass:"button",class:_vm.buttonClasses,attrs:{"type":"button","disabled":_vm.disabled || _vm.disabledMin},on:{"mousedown":function($event){return _vm.onStartLongPress($event, false)},"touchstart":function($event){$event.preventDefault();return _vm.onStartLongPress($event, false)},"click":function($event){return _vm.onControlClick($event, false)}}},[_c('b-icon',{attrs:{"icon":"minus","both":"","pack":_vm.iconPack,"size":_vm.iconSize}})],1)]):_vm._e(),_c('b-input',_vm._b({ref:"input",attrs:{"type":"number","step":_vm.newStep,"max":_vm.max,"min":_vm.min,"size":_vm.size,"disabled":_vm.disabled,"readonly":!_vm.editable,"loading":_vm.loading,"rounded":_vm.rounded,"icon":_vm.icon,"icon-pack":_vm.iconPack,"autocomplete":_vm.autocomplete,"expanded":_vm.expanded,"placeholder":_vm.placeholder,"use-html5-validation":_vm.useHtml5Validation},on:{"focus":function($event){return _vm.$emit('focus', $event)},"blur":function($event){return _vm.$emit('blur', $event)}},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=_vm._n($$v);},expression:"computedValue"}},'b-input',_vm.$attrs,false)),(_vm.controls)?_c('p',{staticClass:"control plus",on:{"mouseup":function($event){return _vm.onStopLongPress(true)},"mouseleave":function($event){return _vm.onStopLongPress(true)},"touchend":function($event){return _vm.onStopLongPress(true)},"touchcancel":function($event){return _vm.onStopLongPress(true)}}},[_c('button',{staticClass:"button",class:_vm.buttonClasses,attrs:{"type":"button","disabled":_vm.disabled || _vm.disabledMax},on:{"mousedown":function($event){return _vm.onStartLongPress($event, true)},"touchstart":function($event){$event.preventDefault();return _vm.onStartLongPress($event, true)},"click":function($event){return _vm.onControlClick($event, true)}}},[_c('b-icon',{attrs:{"icon":"plus","both":"","pack":_vm.iconPack,"size":_vm.iconSize}})],1)]):_vm._e()],1)};
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"b-numberinput field",class:_vm.fieldClasses},[(_vm.controls)?_c('p',{staticClass:"control minus",on:{"mouseup":function($event){return _vm.onStopLongPress(false)},"mouseleave":function($event){return _vm.onStopLongPress(false)},"touchend":function($event){return _vm.onStopLongPress(false)},"touchcancel":function($event){return _vm.onStopLongPress(false)}}},[_c('button',{staticClass:"button",class:_vm.buttonClasses,attrs:{"type":"button","disabled":_vm.disabled || _vm.disabledMin},on:{"mousedown":function($event){return _vm.onStartLongPress($event, false)},"touchstart":function($event){$event.preventDefault();return _vm.onStartLongPress($event, false)},"click":function($event){return _vm.onControlClick($event, false)}}},[_c('b-icon',{attrs:{"icon":"minus","both":"","pack":_vm.iconPack,"size":_vm.iconSize}})],1)]):_vm._e(),_c('b-input',_vm._b({ref:"input",attrs:{"type":"number","step":_vm.minStepNumber,"max":_vm.max,"min":_vm.min,"size":_vm.size,"disabled":_vm.disabled,"readonly":!_vm.editable,"loading":_vm.loading,"rounded":_vm.rounded,"icon":_vm.icon,"icon-pack":_vm.iconPack,"autocomplete":_vm.autocomplete,"expanded":_vm.expanded,"placeholder":_vm.placeholder,"use-html5-validation":_vm.useHtml5Validation},on:{"focus":function($event){return _vm.$emit('focus', $event)},"blur":function($event){return _vm.$emit('blur', $event)}},model:{value:(_vm.computedValue),callback:function ($$v) {_vm.computedValue=_vm._n($$v);},expression:"computedValue"}},'b-input',_vm.$attrs,false)),(_vm.controls)?_c('p',{staticClass:"control plus",on:{"mouseup":function($event){return _vm.onStopLongPress(true)},"mouseleave":function($event){return _vm.onStopLongPress(true)},"touchend":function($event){return _vm.onStopLongPress(true)},"touchcancel":function($event){return _vm.onStopLongPress(true)}}},[_c('button',{staticClass:"button",class:_vm.buttonClasses,attrs:{"type":"button","disabled":_vm.disabled || _vm.disabledMax},on:{"mousedown":function($event){return _vm.onStartLongPress($event, true)},"touchstart":function($event){$event.preventDefault();return _vm.onStartLongPress($event, true)},"click":function($event){return _vm.onControlClick($event, true)}}},[_c('b-icon',{attrs:{"icon":"plus","both":"","pack":_vm.iconPack,"size":_vm.iconSize}})],1)]):_vm._e()],1)};
 var __vue_staticRenderFns__ = [];
 
   /* style */
@@ -24865,12 +25111,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_d3f604a3_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-d3f604a3.js */ "./node_modules/buefy/dist/esm/chunk-d3f604a3.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BPagination", function() { return _chunk_d3f604a3_js__WEBPACK_IMPORTED_MODULE_5__["P"]; });
+/* harmony import */ var _chunk_6348754d_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-6348754d.js */ "./node_modules/buefy/dist/esm/chunk-6348754d.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BPagination", function() { return _chunk_6348754d_js__WEBPACK_IMPORTED_MODULE_5__["P"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BPaginationButton", function() { return _chunk_d3f604a3_js__WEBPACK_IMPORTED_MODULE_5__["a"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BPaginationButton", function() { return _chunk_6348754d_js__WEBPACK_IMPORTED_MODULE_5__["a"]; });
 
 
 
@@ -24882,8 +25128,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var Plugin = {
   install: function install(Vue) {
-    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__["r"])(Vue, _chunk_d3f604a3_js__WEBPACK_IMPORTED_MODULE_5__["P"]);
-    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__["r"])(Vue, _chunk_d3f604a3_js__WEBPACK_IMPORTED_MODULE_5__["a"]);
+    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__["r"])(Vue, _chunk_6348754d_js__WEBPACK_IMPORTED_MODULE_5__["P"]);
+    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__["r"])(Vue, _chunk_6348754d_js__WEBPACK_IMPORTED_MODULE_5__["a"]);
   }
 };
 Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__["u"])(Plugin);
@@ -24956,7 +25202,9 @@ var script = {
       return this.value === undefined || this.value === null;
     },
     newType: function newType() {
-      return [this.size, this.type];
+      return [this.size, this.type, {
+        'is-more-than-half': this.value && this.value > this.max / 2
+      }];
     },
     newValue: function newValue() {
       if (this.value === undefined || this.value === null || isNaN(this.value)) {
@@ -25180,7 +25428,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
 
 
@@ -25190,7 +25438,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var script = {
   name: 'BRate',
-  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"]),
+  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"]),
   props: {
     value: {
       type: Number,
@@ -25349,11 +25597,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-197ef742.js */ "./node_modules/buefy/dist/esm/chunk-197ef742.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-f647b5cb.js */ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_3c26c4a0_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-3c26c4a0.js */ "./node_modules/buefy/dist/esm/chunk-3c26c4a0.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BSelect", function() { return _chunk_3c26c4a0_js__WEBPACK_IMPORTED_MODULE_6__["S"]; });
+/* harmony import */ var _chunk_01bc3886_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-01bc3886.js */ "./node_modules/buefy/dist/esm/chunk-01bc3886.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BSelect", function() { return _chunk_01bc3886_js__WEBPACK_IMPORTED_MODULE_6__["S"]; });
 
 
 
@@ -25366,7 +25614,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var Plugin = {
   install: function install(Vue) {
-    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__["r"])(Vue, _chunk_3c26c4a0_js__WEBPACK_IMPORTED_MODULE_6__["S"]);
+    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__["r"])(Vue, _chunk_01bc3886_js__WEBPACK_IMPORTED_MODULE_6__["S"]);
   }
 };
 Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__["u"])(Plugin);
@@ -25780,7 +26028,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_4939e2ec_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-4939e2ec.js */ "./node_modules/buefy/dist/esm/chunk-4939e2ec.js");
+/* harmony import */ var _chunk_7c7cf2b6_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-7c7cf2b6.js */ "./node_modules/buefy/dist/esm/chunk-7c7cf2b6.js");
 
 
 
@@ -25789,7 +26037,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var script = {
   name: 'BSliderThumb',
-  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_4939e2ec_js__WEBPACK_IMPORTED_MODULE_4__["T"].name, _chunk_4939e2ec_js__WEBPACK_IMPORTED_MODULE_4__["T"]),
+  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_7c7cf2b6_js__WEBPACK_IMPORTED_MODULE_4__["T"].name, _chunk_7c7cf2b6_js__WEBPACK_IMPORTED_MODULE_4__["T"]),
   inheritAttrs: false,
   props: {
     value: {
@@ -26339,7 +26587,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_58668f16_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-58668f16.js */ "./node_modules/buefy/dist/esm/chunk-58668f16.js");
+/* harmony import */ var _chunk_9a266722_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-9a266722.js */ "./node_modules/buefy/dist/esm/chunk-9a266722.js");
 
 
 
@@ -26349,7 +26597,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 var script = {
   name: 'BSnackbar',
-  mixins: [_chunk_58668f16_js__WEBPACK_IMPORTED_MODULE_4__["N"]],
+  mixins: [_chunk_9a266722_js__WEBPACK_IMPORTED_MODULE_4__["N"]],
   props: {
     actionText: {
       type: String,
@@ -26486,11 +26734,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-56f84f22.js */ "./node_modules/buefy/dist/esm/chunk-56f84f22.js");
-/* harmony import */ var _chunk_23f32560_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-23f32560.js */ "./node_modules/buefy/dist/esm/chunk-23f32560.js");
-/* harmony import */ var _chunk_847dd5f6_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-847dd5f6.js */ "./node_modules/buefy/dist/esm/chunk-847dd5f6.js");
+/* harmony import */ var _chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-e3b0b539.js */ "./node_modules/buefy/dist/esm/chunk-e3b0b539.js");
+/* harmony import */ var _chunk_db919f11_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-db919f11.js */ "./node_modules/buefy/dist/esm/chunk-db919f11.js");
+/* harmony import */ var _chunk_dad7a70a_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-dad7a70a.js */ "./node_modules/buefy/dist/esm/chunk-dad7a70a.js");
 
 
 
@@ -26502,8 +26750,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var script = {
   name: 'BSteps',
-  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__["I"]),
-  mixins: [Object(_chunk_847dd5f6_js__WEBPACK_IMPORTED_MODULE_7__["T"])('step')],
+  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__["I"]),
+  mixins: [Object(_chunk_dad7a70a_js__WEBPACK_IMPORTED_MODULE_7__["T"])('step')],
   props: {
     type: [String, Object],
     iconPack: String,
@@ -26549,9 +26797,9 @@ var script = {
     activeItem: function activeItem() {
       var _this = this;
 
-      return this.childItems.find(function (i) {
+      return this.childItems.filter(function (i) {
         return i.value === _this.activeId;
-      }) || this.items[0];
+      })[0] || this.items[0];
     },
     wrapperClasses: function wrapperClasses() {
       return [this.size, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({
@@ -26699,7 +26947,7 @@ var __vue_staticRenderFns__ = [];
 
 var script$1 = {
   name: 'BStepItem',
-  mixins: [Object(_chunk_847dd5f6_js__WEBPACK_IMPORTED_MODULE_7__["a"])('step')],
+  mixins: [Object(_chunk_dad7a70a_js__WEBPACK_IMPORTED_MODULE_7__["a"])('step')],
   props: {
     step: [String, Number],
     type: [String, Object],
@@ -26934,17 +27182,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-197ef742.js */ "./node_modules/buefy/dist/esm/chunk-197ef742.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-f647b5cb.js */ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-85a8ec35.js */ "./node_modules/buefy/dist/esm/chunk-85a8ec35.js");
+/* harmony import */ var _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-b59d2948.js */ "./node_modules/buefy/dist/esm/chunk-b59d2948.js");
 /* harmony import */ var _chunk_2793447b_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-2793447b.js */ "./node_modules/buefy/dist/esm/chunk-2793447b.js");
 /* harmony import */ var _chunk_d6bb2470_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./chunk-d6bb2470.js */ "./node_modules/buefy/dist/esm/chunk-d6bb2470.js");
-/* harmony import */ var _chunk_3c26c4a0_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./chunk-3c26c4a0.js */ "./node_modules/buefy/dist/esm/chunk-3c26c4a0.js");
+/* harmony import */ var _chunk_01bc3886_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./chunk-01bc3886.js */ "./node_modules/buefy/dist/esm/chunk-01bc3886.js");
 /* harmony import */ var _chunk_b9bdb0e4_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./chunk-b9bdb0e4.js */ "./node_modules/buefy/dist/esm/chunk-b9bdb0e4.js");
-/* harmony import */ var _chunk_685815b3_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./chunk-685815b3.js */ "./node_modules/buefy/dist/esm/chunk-685815b3.js");
-/* harmony import */ var _chunk_d3f604a3_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./chunk-d3f604a3.js */ "./node_modules/buefy/dist/esm/chunk-d3f604a3.js");
-/* harmony import */ var _chunk_23f32560_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./chunk-23f32560.js */ "./node_modules/buefy/dist/esm/chunk-23f32560.js");
+/* harmony import */ var _chunk_1d4d79a1_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./chunk-1d4d79a1.js */ "./node_modules/buefy/dist/esm/chunk-1d4d79a1.js");
+/* harmony import */ var _chunk_6348754d_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./chunk-6348754d.js */ "./node_modules/buefy/dist/esm/chunk-6348754d.js");
+/* harmony import */ var _chunk_db919f11_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./chunk-db919f11.js */ "./node_modules/buefy/dist/esm/chunk-db919f11.js");
 
 
 
@@ -26981,7 +27229,7 @@ function debounce (func, wait, immediate) {
 var _components;
 var script = {
   name: 'BTableMobileSort',
-  components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_3c26c4a0_js__WEBPACK_IMPORTED_MODULE_9__["S"].name, _chunk_3c26c4a0_js__WEBPACK_IMPORTED_MODULE_9__["S"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__["I"]), _components),
+  components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_01bc3886_js__WEBPACK_IMPORTED_MODULE_9__["S"].name, _chunk_01bc3886_js__WEBPACK_IMPORTED_MODULE_9__["S"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__["I"]), _components),
   props: {
     currentSortColumn: Object,
     sortMultipleData: Array,
@@ -27222,34 +27470,9 @@ const __vue_script__$1 = script$1;
     undefined
   );
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var script$2 = {
   name: 'BTablePagination',
+  components: Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])({}, _chunk_6348754d_js__WEBPACK_IMPORTED_MODULE_12__["P"].name, _chunk_6348754d_js__WEBPACK_IMPORTED_MODULE_12__["P"]),
   props: {
     paginated: Boolean,
     total: [Number, String],
@@ -27321,7 +27544,7 @@ var __vue_staticRenderFns__$1 = [];
 var _components$1;
 var script$3 = {
   name: 'BTable',
-  components: (_components$1 = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components$1, _chunk_d6bb2470_js__WEBPACK_IMPORTED_MODULE_8__["C"].name, _chunk_d6bb2470_js__WEBPACK_IMPORTED_MODULE_8__["C"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components$1, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__["I"].name, _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components$1, _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__["I"].name, _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components$1, _chunk_d3f604a3_js__WEBPACK_IMPORTED_MODULE_12__["P"].name, _chunk_d3f604a3_js__WEBPACK_IMPORTED_MODULE_12__["P"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components$1, _chunk_685815b3_js__WEBPACK_IMPORTED_MODULE_11__["L"].name, _chunk_685815b3_js__WEBPACK_IMPORTED_MODULE_11__["L"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components$1, _chunk_23f32560_js__WEBPACK_IMPORTED_MODULE_13__["S"].name, _chunk_23f32560_js__WEBPACK_IMPORTED_MODULE_13__["S"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components$1, TableMobileSort.name, TableMobileSort), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components$1, TableColumn.name, TableColumn), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components$1, TablePagination.name, TablePagination), _components$1),
+  components: (_components$1 = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components$1, _chunk_d6bb2470_js__WEBPACK_IMPORTED_MODULE_8__["C"].name, _chunk_d6bb2470_js__WEBPACK_IMPORTED_MODULE_8__["C"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components$1, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__["I"].name, _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components$1, _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__["I"].name, _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__["I"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components$1, _chunk_1d4d79a1_js__WEBPACK_IMPORTED_MODULE_11__["L"].name, _chunk_1d4d79a1_js__WEBPACK_IMPORTED_MODULE_11__["L"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components$1, _chunk_db919f11_js__WEBPACK_IMPORTED_MODULE_13__["S"].name, _chunk_db919f11_js__WEBPACK_IMPORTED_MODULE_13__["S"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components$1, TableMobileSort.name, TableMobileSort), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components$1, TableColumn.name, TableColumn), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components$1, TablePagination.name, TablePagination), _components$1),
   inheritAttrs: false,
   provide: function provide() {
     return {
@@ -28350,11 +28573,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-56f84f22.js */ "./node_modules/buefy/dist/esm/chunk-56f84f22.js");
-/* harmony import */ var _chunk_23f32560_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-23f32560.js */ "./node_modules/buefy/dist/esm/chunk-23f32560.js");
-/* harmony import */ var _chunk_847dd5f6_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-847dd5f6.js */ "./node_modules/buefy/dist/esm/chunk-847dd5f6.js");
+/* harmony import */ var _chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-e3b0b539.js */ "./node_modules/buefy/dist/esm/chunk-e3b0b539.js");
+/* harmony import */ var _chunk_db919f11_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-db919f11.js */ "./node_modules/buefy/dist/esm/chunk-db919f11.js");
+/* harmony import */ var _chunk_dad7a70a_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-dad7a70a.js */ "./node_modules/buefy/dist/esm/chunk-dad7a70a.js");
 
 
 
@@ -28366,7 +28589,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var script = {
   name: 'BTabs',
-  mixins: [Object(_chunk_847dd5f6_js__WEBPACK_IMPORTED_MODULE_7__["T"])('tab')],
+  mixins: [Object(_chunk_dad7a70a_js__WEBPACK_IMPORTED_MODULE_7__["T"])('tab')],
   props: {
     expanded: {
       type: Boolean,
@@ -28439,7 +28662,7 @@ var __vue_staticRenderFns__ = [];
 
 var script$1 = {
   name: 'BTabItem',
-  mixins: [Object(_chunk_847dd5f6_js__WEBPACK_IMPORTED_MODULE_7__["a"])('tab')],
+  mixins: [Object(_chunk_dad7a70a_js__WEBPACK_IMPORTED_MODULE_7__["a"])('tab')],
   props: {
     disabled: Boolean
   },
@@ -28584,11 +28807,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-197ef742.js */ "./node_modules/buefy/dist/esm/chunk-197ef742.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-f647b5cb.js */ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-85a8ec35.js */ "./node_modules/buefy/dist/esm/chunk-85a8ec35.js");
-/* harmony import */ var _chunk_1c37796e_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-1c37796e.js */ "./node_modules/buefy/dist/esm/chunk-1c37796e.js");
+/* harmony import */ var _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-b59d2948.js */ "./node_modules/buefy/dist/esm/chunk-b59d2948.js");
+/* harmony import */ var _chunk_4f0d2958_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-4f0d2958.js */ "./node_modules/buefy/dist/esm/chunk-4f0d2958.js");
 /* harmony import */ var _chunk_fb315748_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./chunk-fb315748.js */ "./node_modules/buefy/dist/esm/chunk-fb315748.js");
 
 
@@ -28603,8 +28826,8 @@ __webpack_require__.r(__webpack_exports__);
 var _components;
 var script = {
   name: 'BTaginput',
-  components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_1c37796e_js__WEBPACK_IMPORTED_MODULE_7__["A"].name, _chunk_1c37796e_js__WEBPACK_IMPORTED_MODULE_7__["A"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_fb315748_js__WEBPACK_IMPORTED_MODULE_8__["T"].name, _chunk_fb315748_js__WEBPACK_IMPORTED_MODULE_8__["T"]), _components),
-  mixins: [_chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__["F"]],
+  components: (_components = {}, Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_4f0d2958_js__WEBPACK_IMPORTED_MODULE_7__["A"].name, _chunk_4f0d2958_js__WEBPACK_IMPORTED_MODULE_7__["A"]), Object(_chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__["_"])(_components, _chunk_fb315748_js__WEBPACK_IMPORTED_MODULE_8__["T"].name, _chunk_fb315748_js__WEBPACK_IMPORTED_MODULE_8__["T"]), _components),
+  mixins: [_chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__["F"]],
   inheritAttrs: false,
   props: {
     value: {
@@ -28860,7 +29083,7 @@ var script = {
 const __vue_script__ = script;
 
 /* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"taginput control",class:_vm.rootClasses},[_c('div',{staticClass:"taginput-container",class:[_vm.statusType, _vm.size, _vm.containerClasses],attrs:{"disabled":_vm.disabled},on:{"click":function($event){_vm.hasInput && _vm.focus($event);}}},[_vm._t("selected",_vm._l((_vm.tags),function(tag,index){return _c('b-tag',{key:_vm.getNormalizedTagText(tag) + index,attrs:{"type":_vm.type,"close-type":_vm.closeType,"size":_vm.size,"rounded":_vm.rounded,"attached":_vm.attached,"tabstop":false,"disabled":_vm.disabled,"ellipsis":_vm.ellipsis,"closable":_vm.closable,"title":_vm.ellipsis && _vm.getNormalizedTagText(tag)},on:{"close":function($event){return _vm.removeTag(index, $event)}}},[_vm._t("tag",[_vm._v(" "+_vm._s(_vm.getNormalizedTagText(tag))+" ")],{"tag":tag})],2)}),{"tags":_vm.tags}),(_vm.hasInput)?_c('b-autocomplete',_vm._b({ref:"autocomplete",attrs:{"data":_vm.data,"field":_vm.field,"icon":_vm.icon,"icon-pack":_vm.iconPack,"maxlength":_vm.maxlength,"has-counter":false,"size":_vm.size,"disabled":_vm.disabled,"loading":_vm.loading,"autocomplete":_vm.nativeAutocomplete,"open-on-focus":_vm.openOnFocus,"keep-open":_vm.openOnFocus,"keep-first":!_vm.allowNew,"group-field":_vm.groupField,"group-options":_vm.groupOptions,"use-html5-validation":_vm.useHtml5Validation,"check-infinite-scroll":_vm.checkInfiniteScroll,"append-to-body":_vm.appendToBody},on:{"typing":_vm.onTyping,"focus":_vm.onFocus,"blur":_vm.customOnBlur,"select":_vm.onSelect,"infinite-scroll":_vm.emitInfiniteScroll},nativeOn:{"keydown":function($event){return _vm.keydown($event)}},scopedSlots:_vm._u([(_vm.hasHeaderSlot)?{key:"header",fn:function(){return [_vm._t("header")]},proxy:true}:null,(_vm.hasDefaultSlot)?{key:"default",fn:function(props){return [_vm._t("default",null,{"option":props.option,"index":props.index})]}}:null,(_vm.hasHeaderSlot)?{key:"empty",fn:function(){return [_vm._t("empty")]},proxy:true}:null,(_vm.hasFooterSlot)?{key:"footer",fn:function(){return [_vm._t("footer")]},proxy:true}:null],null,true),model:{value:(_vm.newTag),callback:function ($$v) {_vm.newTag=$$v;},expression:"newTag"}},'b-autocomplete',_vm.$attrs,false)):_vm._e()],2),(_vm.hasCounter && (_vm.maxtags || _vm.maxlength))?_c('small',{staticClass:"help counter"},[(_vm.maxlength && _vm.valueLength > 0)?[_vm._v(" "+_vm._s(_vm.valueLength)+" / "+_vm._s(_vm.maxlength)+" ")]:(_vm.maxtags)?[_vm._v(" "+_vm._s(_vm.tagsLength)+" / "+_vm._s(_vm.maxtags)+" ")]:_vm._e()],2):_vm._e()])};
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"taginput control",class:_vm.rootClasses},[_c('div',{staticClass:"taginput-container",class:[_vm.statusType, _vm.size, _vm.containerClasses],attrs:{"disabled":_vm.disabled},on:{"click":function($event){_vm.hasInput && _vm.focus($event);}}},[_vm._t("selected",_vm._l((_vm.tags),function(tag,index){return _c('b-tag',{key:_vm.getNormalizedTagText(tag) + index,attrs:{"type":_vm.type,"close-type":_vm.closeType,"size":_vm.size,"rounded":_vm.rounded,"attached":_vm.attached,"tabstop":false,"disabled":_vm.disabled,"ellipsis":_vm.ellipsis,"closable":_vm.closable,"title":_vm.ellipsis && _vm.getNormalizedTagText(tag)},on:{"close":function($event){return _vm.removeTag(index, $event)}}},[_vm._t("tag",[_vm._v(" "+_vm._s(_vm.getNormalizedTagText(tag))+" ")],{"tag":tag})],2)}),{"tags":_vm.tags}),(_vm.hasInput)?_c('b-autocomplete',_vm._b({ref:"autocomplete",attrs:{"data":_vm.data,"field":_vm.field,"icon":_vm.icon,"icon-pack":_vm.iconPack,"maxlength":_vm.maxlength,"has-counter":false,"size":_vm.size,"disabled":_vm.disabled,"loading":_vm.loading,"autocomplete":_vm.nativeAutocomplete,"open-on-focus":_vm.openOnFocus,"keep-open":_vm.openOnFocus,"keep-first":!_vm.allowNew,"group-field":_vm.groupField,"group-options":_vm.groupOptions,"use-html5-validation":_vm.useHtml5Validation,"check-infinite-scroll":_vm.checkInfiniteScroll,"append-to-body":_vm.appendToBody},on:{"typing":_vm.onTyping,"focus":_vm.onFocus,"blur":_vm.customOnBlur,"select":_vm.onSelect,"infinite-scroll":_vm.emitInfiniteScroll},nativeOn:{"keydown":function($event){return _vm.keydown($event)}},scopedSlots:_vm._u([(_vm.hasHeaderSlot)?{key:"header",fn:function(){return [_vm._t("header")]},proxy:true}:null,(_vm.hasDefaultSlot)?{key:"default",fn:function(props){return [_vm._t("default",null,{"option":props.option,"index":props.index})]}}:null,(_vm.hasEmptySlot)?{key:"empty",fn:function(){return [_vm._t("empty")]},proxy:true}:null,(_vm.hasFooterSlot)?{key:"footer",fn:function(){return [_vm._t("footer")]},proxy:true}:null],null,true),model:{value:(_vm.newTag),callback:function ($$v) {_vm.newTag=$$v;},expression:"newTag"}},'b-autocomplete',_vm.$attrs,false)):_vm._e()],2),(_vm.hasCounter && (_vm.maxtags || _vm.maxlength))?_c('small',{staticClass:"help counter"},[(_vm.maxlength && _vm.valueLength > 0)?[_vm._v(" "+_vm._s(_vm.valueLength)+" / "+_vm._s(_vm.maxlength)+" ")]:(_vm.maxtags)?[_vm._v(" "+_vm._s(_vm.tagsLength)+" / "+_vm._s(_vm.maxtags)+" ")]:_vm._e()],2):_vm._e()])};
 var __vue_staticRenderFns__ = [];
 
   /* style */
@@ -28913,18 +29136,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-197ef742.js */ "./node_modules/buefy/dist/esm/chunk-197ef742.js");
-/* harmony import */ var _chunk_3852f5fd_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-3852f5fd.js */ "./node_modules/buefy/dist/esm/chunk-3852f5fd.js");
+/* harmony import */ var _chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-f647b5cb.js */ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js");
+/* harmony import */ var _chunk_0928016a_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-0928016a.js */ "./node_modules/buefy/dist/esm/chunk-0928016a.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_85a8ec35_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-85a8ec35.js */ "./node_modules/buefy/dist/esm/chunk-85a8ec35.js");
-/* harmony import */ var _chunk_56f84f22_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-56f84f22.js */ "./node_modules/buefy/dist/esm/chunk-56f84f22.js");
-/* harmony import */ var _chunk_10cf3f0e_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./chunk-10cf3f0e.js */ "./node_modules/buefy/dist/esm/chunk-10cf3f0e.js");
+/* harmony import */ var _chunk_b59d2948_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-b59d2948.js */ "./node_modules/buefy/dist/esm/chunk-b59d2948.js");
+/* harmony import */ var _chunk_e3b0b539_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chunk-e3b0b539.js */ "./node_modules/buefy/dist/esm/chunk-e3b0b539.js");
+/* harmony import */ var _chunk_1bad8473_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./chunk-1bad8473.js */ "./node_modules/buefy/dist/esm/chunk-1bad8473.js");
 /* harmony import */ var _chunk_42f463e6_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./chunk-42f463e6.js */ "./node_modules/buefy/dist/esm/chunk-42f463e6.js");
-/* harmony import */ var _chunk_5ccea041_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./chunk-5ccea041.js */ "./node_modules/buefy/dist/esm/chunk-5ccea041.js");
-/* harmony import */ var _chunk_722c2a14_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./chunk-722c2a14.js */ "./node_modules/buefy/dist/esm/chunk-722c2a14.js");
-/* harmony import */ var _chunk_3c26c4a0_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./chunk-3c26c4a0.js */ "./node_modules/buefy/dist/esm/chunk-3c26c4a0.js");
-/* harmony import */ var _chunk_5c7b2549_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./chunk-5c7b2549.js */ "./node_modules/buefy/dist/esm/chunk-5c7b2549.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BTimepicker", function() { return _chunk_5c7b2549_js__WEBPACK_IMPORTED_MODULE_13__["T"]; });
+/* harmony import */ var _chunk_f8007af2_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./chunk-f8007af2.js */ "./node_modules/buefy/dist/esm/chunk-f8007af2.js");
+/* harmony import */ var _chunk_5d5e2574_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./chunk-5d5e2574.js */ "./node_modules/buefy/dist/esm/chunk-5d5e2574.js");
+/* harmony import */ var _chunk_01bc3886_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./chunk-01bc3886.js */ "./node_modules/buefy/dist/esm/chunk-01bc3886.js");
+/* harmony import */ var _chunk_97298426_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./chunk-97298426.js */ "./node_modules/buefy/dist/esm/chunk-97298426.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BTimepicker", function() { return _chunk_97298426_js__WEBPACK_IMPORTED_MODULE_13__["T"]; });
 
 
 
@@ -28944,7 +29167,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var Plugin = {
   install: function install(Vue) {
-    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__["r"])(Vue, _chunk_5c7b2549_js__WEBPACK_IMPORTED_MODULE_13__["T"]);
+    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__["r"])(Vue, _chunk_97298426_js__WEBPACK_IMPORTED_MODULE_13__["T"]);
   }
 };
 Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_5__["u"])(Plugin);
@@ -28969,7 +29192,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_58668f16_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-58668f16.js */ "./node_modules/buefy/dist/esm/chunk-58668f16.js");
+/* harmony import */ var _chunk_9a266722_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-9a266722.js */ "./node_modules/buefy/dist/esm/chunk-9a266722.js");
 
 
 
@@ -28979,7 +29202,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 var script = {
   name: 'BToast',
-  mixins: [_chunk_58668f16_js__WEBPACK_IMPORTED_MODULE_4__["N"]],
+  mixins: [_chunk_9a266722_js__WEBPACK_IMPORTED_MODULE_4__["N"]],
   data: function data() {
     return {
       newDuration: this.duration || _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__["c"].defaultToastDuration
@@ -29090,8 +29313,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
-/* harmony import */ var _chunk_4939e2ec_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-4939e2ec.js */ "./node_modules/buefy/dist/esm/chunk-4939e2ec.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BTooltip", function() { return _chunk_4939e2ec_js__WEBPACK_IMPORTED_MODULE_4__["T"]; });
+/* harmony import */ var _chunk_7c7cf2b6_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-7c7cf2b6.js */ "./node_modules/buefy/dist/esm/chunk-7c7cf2b6.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BTooltip", function() { return _chunk_7c7cf2b6_js__WEBPACK_IMPORTED_MODULE_4__["T"]; });
 
 
 
@@ -29102,7 +29325,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var Plugin = {
   install: function install(Vue) {
-    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["r"])(Vue, _chunk_4939e2ec_js__WEBPACK_IMPORTED_MODULE_4__["T"]);
+    Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["r"])(Vue, _chunk_7c7cf2b6_js__WEBPACK_IMPORTED_MODULE_4__["T"]);
   }
 };
 Object(_chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_3__["u"])(Plugin);
@@ -29125,7 +29348,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chunk_1fafdf15_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-1fafdf15.js */ "./node_modules/buefy/dist/esm/chunk-1fafdf15.js");
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers.js */ "./node_modules/buefy/dist/esm/helpers.js");
 /* harmony import */ var _chunk_bd4264c6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-bd4264c6.js */ "./node_modules/buefy/dist/esm/chunk-bd4264c6.js");
-/* harmony import */ var _chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-197ef742.js */ "./node_modules/buefy/dist/esm/chunk-197ef742.js");
+/* harmony import */ var _chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-f647b5cb.js */ "./node_modules/buefy/dist/esm/chunk-f647b5cb.js");
 /* harmony import */ var _chunk_cca88db8_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-cca88db8.js */ "./node_modules/buefy/dist/esm/chunk-cca88db8.js");
 /* harmony import */ var _chunk_b9bdb0e4_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-b9bdb0e4.js */ "./node_modules/buefy/dist/esm/chunk-b9bdb0e4.js");
 
@@ -29138,7 +29361,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 var script = {
   name: 'BUpload',
-  mixins: [_chunk_197ef742_js__WEBPACK_IMPORTED_MODULE_3__["F"]],
+  mixins: [_chunk_f647b5cb_js__WEBPACK_IMPORTED_MODULE_3__["F"]],
   inheritAttrs: false,
   props: {
     value: {
@@ -29335,7 +29558,7 @@ exports = module.exports = __webpack_require__(/*! ../css-loader/lib/css-base.js
 
 
 // module
-exports.push([module.i, "\n@charset \"UTF-8\";\n/*!\n * animate.css - https://animate.style/\n * Version - 4.1.0\n * Licensed under the MIT license - http://opensource.org/licenses/MIT\n *\n * Copyright (c) 2020 Animate.css\n */\n:root {\n  --animate-duration: 1s;\n  --animate-delay: 1s;\n  --animate-repeat: 1;\n}\n.animate__animated {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-duration: var(--animate-duration);\n  animation-duration: var(--animate-duration);\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animate__animated.animate__infinite {\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n}\n.animate__animated.animate__repeat-1 {\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n  -webkit-animation-iteration-count: var(--animate-repeat);\n  animation-iteration-count: var(--animate-repeat);\n}\n.animate__animated.animate__repeat-2 {\n  -webkit-animation-iteration-count: calc(1 * 2);\n  animation-iteration-count: calc(1 * 2);\n  -webkit-animation-iteration-count: calc(var(--animate-repeat) * 2);\n  animation-iteration-count: calc(var(--animate-repeat) * 2);\n}\n.animate__animated.animate__repeat-3 {\n  -webkit-animation-iteration-count: calc(1 * 3);\n  animation-iteration-count: calc(1 * 3);\n  -webkit-animation-iteration-count: calc(var(--animate-repeat) * 3);\n  animation-iteration-count: calc(var(--animate-repeat) * 3);\n}\n.animate__animated.animate__delay-1s {\n  -webkit-animation-delay: 1s;\n  animation-delay: 1s;\n  -webkit-animation-delay: var(--animate-delay);\n  animation-delay: var(--animate-delay);\n}\n.animate__animated.animate__delay-2s {\n  -webkit-animation-delay: calc(1s * 2);\n  animation-delay: calc(1s * 2);\n  -webkit-animation-delay: calc(var(--animate-delay) * 2);\n  animation-delay: calc(var(--animate-delay) * 2);\n}\n.animate__animated.animate__delay-3s {\n  -webkit-animation-delay: calc(1s * 3);\n  animation-delay: calc(1s * 3);\n  -webkit-animation-delay: calc(var(--animate-delay) * 3);\n  animation-delay: calc(var(--animate-delay) * 3);\n}\n.animate__animated.animate__delay-4s {\n  -webkit-animation-delay: calc(1s * 4);\n  animation-delay: calc(1s * 4);\n  -webkit-animation-delay: calc(var(--animate-delay) * 4);\n  animation-delay: calc(var(--animate-delay) * 4);\n}\n.animate__animated.animate__delay-5s {\n  -webkit-animation-delay: calc(1s * 5);\n  animation-delay: calc(1s * 5);\n  -webkit-animation-delay: calc(var(--animate-delay) * 5);\n  animation-delay: calc(var(--animate-delay) * 5);\n}\n.animate__animated.animate__faster {\n  -webkit-animation-duration: calc(1s / 2);\n  animation-duration: calc(1s / 2);\n  -webkit-animation-duration: calc(var(--animate-duration) / 2);\n  animation-duration: calc(var(--animate-duration) / 2);\n}\n.animate__animated.animate__fast {\n  -webkit-animation-duration: calc(1s * 0.8);\n  animation-duration: calc(1s * 0.8);\n  -webkit-animation-duration: calc(var(--animate-duration) * 0.8);\n  animation-duration: calc(var(--animate-duration) * 0.8);\n}\n.animate__animated.animate__slow {\n  -webkit-animation-duration: calc(1s * 2);\n  animation-duration: calc(1s * 2);\n  -webkit-animation-duration: calc(var(--animate-duration) * 2);\n  animation-duration: calc(var(--animate-duration) * 2);\n}\n.animate__animated.animate__slower {\n  -webkit-animation-duration: calc(1s * 3);\n  animation-duration: calc(1s * 3);\n  -webkit-animation-duration: calc(var(--animate-duration) * 3);\n  animation-duration: calc(var(--animate-duration) * 3);\n}\n@media print, (prefers-reduced-motion: reduce) {\n  .animate__animated {\n    -webkit-animation-duration: 1ms !important;\n    animation-duration: 1ms !important;\n    -webkit-transition-duration: 1ms !important;\n    transition-duration: 1ms !important;\n    -webkit-animation-iteration-count: 1 !important;\n    animation-iteration-count: 1 !important;\n  }\n\n  .animate__animated[class*='Out'] {\n    opacity: 0;\n  }\n}\n/* Attention seekers  */\n@-webkit-keyframes bounce {\n  from,\n  20%,\n  53%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  40%,\n  43% {\n    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n    -webkit-transform: translate3d(0, -30px, 0) scaleY(1.1);\n    transform: translate3d(0, -30px, 0) scaleY(1.1);\n  }\n\n  70% {\n    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n    -webkit-transform: translate3d(0, -15px, 0) scaleY(1.05);\n    transform: translate3d(0, -15px, 0) scaleY(1.05);\n  }\n\n  80% {\n    -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    -webkit-transform: translate3d(0, 0, 0) scaleY(0.95);\n    transform: translate3d(0, 0, 0) scaleY(0.95);\n  }\n\n  90% {\n    -webkit-transform: translate3d(0, -4px, 0) scaleY(1.02);\n    transform: translate3d(0, -4px, 0) scaleY(1.02);\n  }\n}\n@keyframes bounce {\n  from,\n  20%,\n  53%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  40%,\n  43% {\n    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n    -webkit-transform: translate3d(0, -30px, 0) scaleY(1.1);\n    transform: translate3d(0, -30px, 0) scaleY(1.1);\n  }\n\n  70% {\n    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n    -webkit-transform: translate3d(0, -15px, 0) scaleY(1.05);\n    transform: translate3d(0, -15px, 0) scaleY(1.05);\n  }\n\n  80% {\n    -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    -webkit-transform: translate3d(0, 0, 0) scaleY(0.95);\n    transform: translate3d(0, 0, 0) scaleY(0.95);\n  }\n\n  90% {\n    -webkit-transform: translate3d(0, -4px, 0) scaleY(1.02);\n    transform: translate3d(0, -4px, 0) scaleY(1.02);\n  }\n}\n.animate__bounce {\n  -webkit-animation-name: bounce;\n  animation-name: bounce;\n  -webkit-transform-origin: center bottom;\n  transform-origin: center bottom;\n}\n@-webkit-keyframes flash {\n  from,\n  50%,\n  to {\n    opacity: 1;\n  }\n\n  25%,\n  75% {\n    opacity: 0;\n  }\n}\n@keyframes flash {\n  from,\n  50%,\n  to {\n    opacity: 1;\n  }\n\n  25%,\n  75% {\n    opacity: 0;\n  }\n}\n.animate__flash {\n  -webkit-animation-name: flash;\n  animation-name: flash;\n}\n/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */\n@-webkit-keyframes pulse {\n  from {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n\n  50% {\n    -webkit-transform: scale3d(1.05, 1.05, 1.05);\n    transform: scale3d(1.05, 1.05, 1.05);\n  }\n\n  to {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n}\n@keyframes pulse {\n  from {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n\n  50% {\n    -webkit-transform: scale3d(1.05, 1.05, 1.05);\n    transform: scale3d(1.05, 1.05, 1.05);\n  }\n\n  to {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n}\n.animate__pulse {\n  -webkit-animation-name: pulse;\n  animation-name: pulse;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n}\n@-webkit-keyframes rubberBand {\n  from {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n\n  30% {\n    -webkit-transform: scale3d(1.25, 0.75, 1);\n    transform: scale3d(1.25, 0.75, 1);\n  }\n\n  40% {\n    -webkit-transform: scale3d(0.75, 1.25, 1);\n    transform: scale3d(0.75, 1.25, 1);\n  }\n\n  50% {\n    -webkit-transform: scale3d(1.15, 0.85, 1);\n    transform: scale3d(1.15, 0.85, 1);\n  }\n\n  65% {\n    -webkit-transform: scale3d(0.95, 1.05, 1);\n    transform: scale3d(0.95, 1.05, 1);\n  }\n\n  75% {\n    -webkit-transform: scale3d(1.05, 0.95, 1);\n    transform: scale3d(1.05, 0.95, 1);\n  }\n\n  to {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n}\n@keyframes rubberBand {\n  from {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n\n  30% {\n    -webkit-transform: scale3d(1.25, 0.75, 1);\n    transform: scale3d(1.25, 0.75, 1);\n  }\n\n  40% {\n    -webkit-transform: scale3d(0.75, 1.25, 1);\n    transform: scale3d(0.75, 1.25, 1);\n  }\n\n  50% {\n    -webkit-transform: scale3d(1.15, 0.85, 1);\n    transform: scale3d(1.15, 0.85, 1);\n  }\n\n  65% {\n    -webkit-transform: scale3d(0.95, 1.05, 1);\n    transform: scale3d(0.95, 1.05, 1);\n  }\n\n  75% {\n    -webkit-transform: scale3d(1.05, 0.95, 1);\n    transform: scale3d(1.05, 0.95, 1);\n  }\n\n  to {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n}\n.animate__rubberBand {\n  -webkit-animation-name: rubberBand;\n  animation-name: rubberBand;\n}\n@-webkit-keyframes shakeX {\n  from,\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  10%,\n  30%,\n  50%,\n  70%,\n  90% {\n    -webkit-transform: translate3d(-10px, 0, 0);\n    transform: translate3d(-10px, 0, 0);\n  }\n\n  20%,\n  40%,\n  60%,\n  80% {\n    -webkit-transform: translate3d(10px, 0, 0);\n    transform: translate3d(10px, 0, 0);\n  }\n}\n@keyframes shakeX {\n  from,\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  10%,\n  30%,\n  50%,\n  70%,\n  90% {\n    -webkit-transform: translate3d(-10px, 0, 0);\n    transform: translate3d(-10px, 0, 0);\n  }\n\n  20%,\n  40%,\n  60%,\n  80% {\n    -webkit-transform: translate3d(10px, 0, 0);\n    transform: translate3d(10px, 0, 0);\n  }\n}\n.animate__shakeX {\n  -webkit-animation-name: shakeX;\n  animation-name: shakeX;\n}\n@-webkit-keyframes shakeY {\n  from,\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  10%,\n  30%,\n  50%,\n  70%,\n  90% {\n    -webkit-transform: translate3d(0, -10px, 0);\n    transform: translate3d(0, -10px, 0);\n  }\n\n  20%,\n  40%,\n  60%,\n  80% {\n    -webkit-transform: translate3d(0, 10px, 0);\n    transform: translate3d(0, 10px, 0);\n  }\n}\n@keyframes shakeY {\n  from,\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  10%,\n  30%,\n  50%,\n  70%,\n  90% {\n    -webkit-transform: translate3d(0, -10px, 0);\n    transform: translate3d(0, -10px, 0);\n  }\n\n  20%,\n  40%,\n  60%,\n  80% {\n    -webkit-transform: translate3d(0, 10px, 0);\n    transform: translate3d(0, 10px, 0);\n  }\n}\n.animate__shakeY {\n  -webkit-animation-name: shakeY;\n  animation-name: shakeY;\n}\n@-webkit-keyframes headShake {\n  0% {\n    -webkit-transform: translateX(0);\n    transform: translateX(0);\n  }\n\n  6.5% {\n    -webkit-transform: translateX(-6px) rotateY(-9deg);\n    transform: translateX(-6px) rotateY(-9deg);\n  }\n\n  18.5% {\n    -webkit-transform: translateX(5px) rotateY(7deg);\n    transform: translateX(5px) rotateY(7deg);\n  }\n\n  31.5% {\n    -webkit-transform: translateX(-3px) rotateY(-5deg);\n    transform: translateX(-3px) rotateY(-5deg);\n  }\n\n  43.5% {\n    -webkit-transform: translateX(2px) rotateY(3deg);\n    transform: translateX(2px) rotateY(3deg);\n  }\n\n  50% {\n    -webkit-transform: translateX(0);\n    transform: translateX(0);\n  }\n}\n@keyframes headShake {\n  0% {\n    -webkit-transform: translateX(0);\n    transform: translateX(0);\n  }\n\n  6.5% {\n    -webkit-transform: translateX(-6px) rotateY(-9deg);\n    transform: translateX(-6px) rotateY(-9deg);\n  }\n\n  18.5% {\n    -webkit-transform: translateX(5px) rotateY(7deg);\n    transform: translateX(5px) rotateY(7deg);\n  }\n\n  31.5% {\n    -webkit-transform: translateX(-3px) rotateY(-5deg);\n    transform: translateX(-3px) rotateY(-5deg);\n  }\n\n  43.5% {\n    -webkit-transform: translateX(2px) rotateY(3deg);\n    transform: translateX(2px) rotateY(3deg);\n  }\n\n  50% {\n    -webkit-transform: translateX(0);\n    transform: translateX(0);\n  }\n}\n.animate__headShake {\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-name: headShake;\n  animation-name: headShake;\n}\n@-webkit-keyframes swing {\n  20% {\n    -webkit-transform: rotate3d(0, 0, 1, 15deg);\n    transform: rotate3d(0, 0, 1, 15deg);\n  }\n\n  40% {\n    -webkit-transform: rotate3d(0, 0, 1, -10deg);\n    transform: rotate3d(0, 0, 1, -10deg);\n  }\n\n  60% {\n    -webkit-transform: rotate3d(0, 0, 1, 5deg);\n    transform: rotate3d(0, 0, 1, 5deg);\n  }\n\n  80% {\n    -webkit-transform: rotate3d(0, 0, 1, -5deg);\n    transform: rotate3d(0, 0, 1, -5deg);\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, 0deg);\n    transform: rotate3d(0, 0, 1, 0deg);\n  }\n}\n@keyframes swing {\n  20% {\n    -webkit-transform: rotate3d(0, 0, 1, 15deg);\n    transform: rotate3d(0, 0, 1, 15deg);\n  }\n\n  40% {\n    -webkit-transform: rotate3d(0, 0, 1, -10deg);\n    transform: rotate3d(0, 0, 1, -10deg);\n  }\n\n  60% {\n    -webkit-transform: rotate3d(0, 0, 1, 5deg);\n    transform: rotate3d(0, 0, 1, 5deg);\n  }\n\n  80% {\n    -webkit-transform: rotate3d(0, 0, 1, -5deg);\n    transform: rotate3d(0, 0, 1, -5deg);\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, 0deg);\n    transform: rotate3d(0, 0, 1, 0deg);\n  }\n}\n.animate__swing {\n  -webkit-transform-origin: top center;\n  transform-origin: top center;\n  -webkit-animation-name: swing;\n  animation-name: swing;\n}\n@-webkit-keyframes tada {\n  from {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n\n  10%,\n  20% {\n    -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);\n    transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);\n  }\n\n  30%,\n  50%,\n  70%,\n  90% {\n    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);\n    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);\n  }\n\n  40%,\n  60%,\n  80% {\n    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);\n    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);\n  }\n\n  to {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n}\n@keyframes tada {\n  from {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n\n  10%,\n  20% {\n    -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);\n    transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);\n  }\n\n  30%,\n  50%,\n  70%,\n  90% {\n    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);\n    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);\n  }\n\n  40%,\n  60%,\n  80% {\n    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);\n    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);\n  }\n\n  to {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n}\n.animate__tada {\n  -webkit-animation-name: tada;\n  animation-name: tada;\n}\n/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */\n@-webkit-keyframes wobble {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  15% {\n    -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);\n    transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);\n  }\n\n  30% {\n    -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);\n    transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);\n  }\n\n  45% {\n    -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);\n    transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);\n  }\n\n  60% {\n    -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);\n    transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);\n  }\n\n  75% {\n    -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);\n    transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes wobble {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  15% {\n    -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);\n    transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);\n  }\n\n  30% {\n    -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);\n    transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);\n  }\n\n  45% {\n    -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);\n    transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);\n  }\n\n  60% {\n    -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);\n    transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);\n  }\n\n  75% {\n    -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);\n    transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__wobble {\n  -webkit-animation-name: wobble;\n  animation-name: wobble;\n}\n@-webkit-keyframes jello {\n  from,\n  11.1%,\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  22.2% {\n    -webkit-transform: skewX(-12.5deg) skewY(-12.5deg);\n    transform: skewX(-12.5deg) skewY(-12.5deg);\n  }\n\n  33.3% {\n    -webkit-transform: skewX(6.25deg) skewY(6.25deg);\n    transform: skewX(6.25deg) skewY(6.25deg);\n  }\n\n  44.4% {\n    -webkit-transform: skewX(-3.125deg) skewY(-3.125deg);\n    transform: skewX(-3.125deg) skewY(-3.125deg);\n  }\n\n  55.5% {\n    -webkit-transform: skewX(1.5625deg) skewY(1.5625deg);\n    transform: skewX(1.5625deg) skewY(1.5625deg);\n  }\n\n  66.6% {\n    -webkit-transform: skewX(-0.78125deg) skewY(-0.78125deg);\n    transform: skewX(-0.78125deg) skewY(-0.78125deg);\n  }\n\n  77.7% {\n    -webkit-transform: skewX(0.390625deg) skewY(0.390625deg);\n    transform: skewX(0.390625deg) skewY(0.390625deg);\n  }\n\n  88.8% {\n    -webkit-transform: skewX(-0.1953125deg) skewY(-0.1953125deg);\n    transform: skewX(-0.1953125deg) skewY(-0.1953125deg);\n  }\n}\n@keyframes jello {\n  from,\n  11.1%,\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  22.2% {\n    -webkit-transform: skewX(-12.5deg) skewY(-12.5deg);\n    transform: skewX(-12.5deg) skewY(-12.5deg);\n  }\n\n  33.3% {\n    -webkit-transform: skewX(6.25deg) skewY(6.25deg);\n    transform: skewX(6.25deg) skewY(6.25deg);\n  }\n\n  44.4% {\n    -webkit-transform: skewX(-3.125deg) skewY(-3.125deg);\n    transform: skewX(-3.125deg) skewY(-3.125deg);\n  }\n\n  55.5% {\n    -webkit-transform: skewX(1.5625deg) skewY(1.5625deg);\n    transform: skewX(1.5625deg) skewY(1.5625deg);\n  }\n\n  66.6% {\n    -webkit-transform: skewX(-0.78125deg) skewY(-0.78125deg);\n    transform: skewX(-0.78125deg) skewY(-0.78125deg);\n  }\n\n  77.7% {\n    -webkit-transform: skewX(0.390625deg) skewY(0.390625deg);\n    transform: skewX(0.390625deg) skewY(0.390625deg);\n  }\n\n  88.8% {\n    -webkit-transform: skewX(-0.1953125deg) skewY(-0.1953125deg);\n    transform: skewX(-0.1953125deg) skewY(-0.1953125deg);\n  }\n}\n.animate__jello {\n  -webkit-animation-name: jello;\n  animation-name: jello;\n  -webkit-transform-origin: center;\n  transform-origin: center;\n}\n@-webkit-keyframes heartBeat {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n\n  14% {\n    -webkit-transform: scale(1.3);\n    transform: scale(1.3);\n  }\n\n  28% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n\n  42% {\n    -webkit-transform: scale(1.3);\n    transform: scale(1.3);\n  }\n\n  70% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n}\n@keyframes heartBeat {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n\n  14% {\n    -webkit-transform: scale(1.3);\n    transform: scale(1.3);\n  }\n\n  28% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n\n  42% {\n    -webkit-transform: scale(1.3);\n    transform: scale(1.3);\n  }\n\n  70% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n}\n.animate__heartBeat {\n  -webkit-animation-name: heartBeat;\n  animation-name: heartBeat;\n  -webkit-animation-duration: calc(1s * 1.3);\n  animation-duration: calc(1s * 1.3);\n  -webkit-animation-duration: calc(var(--animate-duration) * 1.3);\n  animation-duration: calc(var(--animate-duration) * 1.3);\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n}\n/* Back entrances */\n@-webkit-keyframes backInDown {\n  0% {\n    -webkit-transform: translateY(-1200px) scale(0.7);\n    transform: translateY(-1200px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  80% {\n    -webkit-transform: translateY(0px) scale(0.7);\n    transform: translateY(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes backInDown {\n  0% {\n    -webkit-transform: translateY(-1200px) scale(0.7);\n    transform: translateY(-1200px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  80% {\n    -webkit-transform: translateY(0px) scale(0.7);\n    transform: translateY(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n.animate__backInDown {\n  -webkit-animation-name: backInDown;\n  animation-name: backInDown;\n}\n@-webkit-keyframes backInLeft {\n  0% {\n    -webkit-transform: translateX(-2000px) scale(0.7);\n    transform: translateX(-2000px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  80% {\n    -webkit-transform: translateX(0px) scale(0.7);\n    transform: translateX(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes backInLeft {\n  0% {\n    -webkit-transform: translateX(-2000px) scale(0.7);\n    transform: translateX(-2000px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  80% {\n    -webkit-transform: translateX(0px) scale(0.7);\n    transform: translateX(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n.animate__backInLeft {\n  -webkit-animation-name: backInLeft;\n  animation-name: backInLeft;\n}\n@-webkit-keyframes backInRight {\n  0% {\n    -webkit-transform: translateX(2000px) scale(0.7);\n    transform: translateX(2000px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  80% {\n    -webkit-transform: translateX(0px) scale(0.7);\n    transform: translateX(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes backInRight {\n  0% {\n    -webkit-transform: translateX(2000px) scale(0.7);\n    transform: translateX(2000px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  80% {\n    -webkit-transform: translateX(0px) scale(0.7);\n    transform: translateX(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n.animate__backInRight {\n  -webkit-animation-name: backInRight;\n  animation-name: backInRight;\n}\n@-webkit-keyframes backInUp {\n  0% {\n    -webkit-transform: translateY(1200px) scale(0.7);\n    transform: translateY(1200px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  80% {\n    -webkit-transform: translateY(0px) scale(0.7);\n    transform: translateY(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes backInUp {\n  0% {\n    -webkit-transform: translateY(1200px) scale(0.7);\n    transform: translateY(1200px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  80% {\n    -webkit-transform: translateY(0px) scale(0.7);\n    transform: translateY(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n.animate__backInUp {\n  -webkit-animation-name: backInUp;\n  animation-name: backInUp;\n}\n/* Back exits */\n@-webkit-keyframes backOutDown {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  20% {\n    -webkit-transform: translateY(0px) scale(0.7);\n    transform: translateY(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: translateY(700px) scale(0.7);\n    transform: translateY(700px) scale(0.7);\n    opacity: 0.7;\n  }\n}\n@keyframes backOutDown {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  20% {\n    -webkit-transform: translateY(0px) scale(0.7);\n    transform: translateY(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: translateY(700px) scale(0.7);\n    transform: translateY(700px) scale(0.7);\n    opacity: 0.7;\n  }\n}\n.animate__backOutDown {\n  -webkit-animation-name: backOutDown;\n  animation-name: backOutDown;\n}\n@-webkit-keyframes backOutLeft {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  20% {\n    -webkit-transform: translateX(0px) scale(0.7);\n    transform: translateX(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: translateX(-2000px) scale(0.7);\n    transform: translateX(-2000px) scale(0.7);\n    opacity: 0.7;\n  }\n}\n@keyframes backOutLeft {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  20% {\n    -webkit-transform: translateX(0px) scale(0.7);\n    transform: translateX(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: translateX(-2000px) scale(0.7);\n    transform: translateX(-2000px) scale(0.7);\n    opacity: 0.7;\n  }\n}\n.animate__backOutLeft {\n  -webkit-animation-name: backOutLeft;\n  animation-name: backOutLeft;\n}\n@-webkit-keyframes backOutRight {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  20% {\n    -webkit-transform: translateX(0px) scale(0.7);\n    transform: translateX(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: translateX(2000px) scale(0.7);\n    transform: translateX(2000px) scale(0.7);\n    opacity: 0.7;\n  }\n}\n@keyframes backOutRight {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  20% {\n    -webkit-transform: translateX(0px) scale(0.7);\n    transform: translateX(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: translateX(2000px) scale(0.7);\n    transform: translateX(2000px) scale(0.7);\n    opacity: 0.7;\n  }\n}\n.animate__backOutRight {\n  -webkit-animation-name: backOutRight;\n  animation-name: backOutRight;\n}\n@-webkit-keyframes backOutUp {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  20% {\n    -webkit-transform: translateY(0px) scale(0.7);\n    transform: translateY(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: translateY(-700px) scale(0.7);\n    transform: translateY(-700px) scale(0.7);\n    opacity: 0.7;\n  }\n}\n@keyframes backOutUp {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  20% {\n    -webkit-transform: translateY(0px) scale(0.7);\n    transform: translateY(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: translateY(-700px) scale(0.7);\n    transform: translateY(-700px) scale(0.7);\n    opacity: 0.7;\n  }\n}\n.animate__backOutUp {\n  -webkit-animation-name: backOutUp;\n  animation-name: backOutUp;\n}\n/* Bouncing entrances  */\n@-webkit-keyframes bounceIn {\n  from,\n  20%,\n  40%,\n  60%,\n  80%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n\n  20% {\n    -webkit-transform: scale3d(1.1, 1.1, 1.1);\n    transform: scale3d(1.1, 1.1, 1.1);\n  }\n\n  40% {\n    -webkit-transform: scale3d(0.9, 0.9, 0.9);\n    transform: scale3d(0.9, 0.9, 0.9);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(1.03, 1.03, 1.03);\n    transform: scale3d(1.03, 1.03, 1.03);\n  }\n\n  80% {\n    -webkit-transform: scale3d(0.97, 0.97, 0.97);\n    transform: scale3d(0.97, 0.97, 0.97);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n}\n@keyframes bounceIn {\n  from,\n  20%,\n  40%,\n  60%,\n  80%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n\n  20% {\n    -webkit-transform: scale3d(1.1, 1.1, 1.1);\n    transform: scale3d(1.1, 1.1, 1.1);\n  }\n\n  40% {\n    -webkit-transform: scale3d(0.9, 0.9, 0.9);\n    transform: scale3d(0.9, 0.9, 0.9);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(1.03, 1.03, 1.03);\n    transform: scale3d(1.03, 1.03, 1.03);\n  }\n\n  80% {\n    -webkit-transform: scale3d(0.97, 0.97, 0.97);\n    transform: scale3d(0.97, 0.97, 0.97);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n}\n.animate__bounceIn {\n  -webkit-animation-duration: calc(1s * 0.75);\n  animation-duration: calc(1s * 0.75);\n  -webkit-animation-duration: calc(var(--animate-duration) * 0.75);\n  animation-duration: calc(var(--animate-duration) * 0.75);\n  -webkit-animation-name: bounceIn;\n  animation-name: bounceIn;\n}\n@-webkit-keyframes bounceInDown {\n  from,\n  60%,\n  75%,\n  90%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -3000px, 0) scaleY(3);\n    transform: translate3d(0, -3000px, 0) scaleY(3);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 25px, 0) scaleY(0.9);\n    transform: translate3d(0, 25px, 0) scaleY(0.9);\n  }\n\n  75% {\n    -webkit-transform: translate3d(0, -10px, 0) scaleY(0.95);\n    transform: translate3d(0, -10px, 0) scaleY(0.95);\n  }\n\n  90% {\n    -webkit-transform: translate3d(0, 5px, 0) scaleY(0.985);\n    transform: translate3d(0, 5px, 0) scaleY(0.985);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes bounceInDown {\n  from,\n  60%,\n  75%,\n  90%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -3000px, 0) scaleY(3);\n    transform: translate3d(0, -3000px, 0) scaleY(3);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 25px, 0) scaleY(0.9);\n    transform: translate3d(0, 25px, 0) scaleY(0.9);\n  }\n\n  75% {\n    -webkit-transform: translate3d(0, -10px, 0) scaleY(0.95);\n    transform: translate3d(0, -10px, 0) scaleY(0.95);\n  }\n\n  90% {\n    -webkit-transform: translate3d(0, 5px, 0) scaleY(0.985);\n    transform: translate3d(0, 5px, 0) scaleY(0.985);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__bounceInDown {\n  -webkit-animation-name: bounceInDown;\n  animation-name: bounceInDown;\n}\n@-webkit-keyframes bounceInLeft {\n  from,\n  60%,\n  75%,\n  90%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(-3000px, 0, 0) scaleX(3);\n    transform: translate3d(-3000px, 0, 0) scaleX(3);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(25px, 0, 0) scaleX(1);\n    transform: translate3d(25px, 0, 0) scaleX(1);\n  }\n\n  75% {\n    -webkit-transform: translate3d(-10px, 0, 0) scaleX(0.98);\n    transform: translate3d(-10px, 0, 0) scaleX(0.98);\n  }\n\n  90% {\n    -webkit-transform: translate3d(5px, 0, 0) scaleX(0.995);\n    transform: translate3d(5px, 0, 0) scaleX(0.995);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes bounceInLeft {\n  from,\n  60%,\n  75%,\n  90%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(-3000px, 0, 0) scaleX(3);\n    transform: translate3d(-3000px, 0, 0) scaleX(3);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(25px, 0, 0) scaleX(1);\n    transform: translate3d(25px, 0, 0) scaleX(1);\n  }\n\n  75% {\n    -webkit-transform: translate3d(-10px, 0, 0) scaleX(0.98);\n    transform: translate3d(-10px, 0, 0) scaleX(0.98);\n  }\n\n  90% {\n    -webkit-transform: translate3d(5px, 0, 0) scaleX(0.995);\n    transform: translate3d(5px, 0, 0) scaleX(0.995);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__bounceInLeft {\n  -webkit-animation-name: bounceInLeft;\n  animation-name: bounceInLeft;\n}\n@-webkit-keyframes bounceInRight {\n  from,\n  60%,\n  75%,\n  90%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(3000px, 0, 0) scaleX(3);\n    transform: translate3d(3000px, 0, 0) scaleX(3);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(-25px, 0, 0) scaleX(1);\n    transform: translate3d(-25px, 0, 0) scaleX(1);\n  }\n\n  75% {\n    -webkit-transform: translate3d(10px, 0, 0) scaleX(0.98);\n    transform: translate3d(10px, 0, 0) scaleX(0.98);\n  }\n\n  90% {\n    -webkit-transform: translate3d(-5px, 0, 0) scaleX(0.995);\n    transform: translate3d(-5px, 0, 0) scaleX(0.995);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes bounceInRight {\n  from,\n  60%,\n  75%,\n  90%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(3000px, 0, 0) scaleX(3);\n    transform: translate3d(3000px, 0, 0) scaleX(3);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(-25px, 0, 0) scaleX(1);\n    transform: translate3d(-25px, 0, 0) scaleX(1);\n  }\n\n  75% {\n    -webkit-transform: translate3d(10px, 0, 0) scaleX(0.98);\n    transform: translate3d(10px, 0, 0) scaleX(0.98);\n  }\n\n  90% {\n    -webkit-transform: translate3d(-5px, 0, 0) scaleX(0.995);\n    transform: translate3d(-5px, 0, 0) scaleX(0.995);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__bounceInRight {\n  -webkit-animation-name: bounceInRight;\n  animation-name: bounceInRight;\n}\n@-webkit-keyframes bounceInUp {\n  from,\n  60%,\n  75%,\n  90%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 3000px, 0) scaleY(5);\n    transform: translate3d(0, 3000px, 0) scaleY(5);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, -20px, 0) scaleY(0.9);\n    transform: translate3d(0, -20px, 0) scaleY(0.9);\n  }\n\n  75% {\n    -webkit-transform: translate3d(0, 10px, 0) scaleY(0.95);\n    transform: translate3d(0, 10px, 0) scaleY(0.95);\n  }\n\n  90% {\n    -webkit-transform: translate3d(0, -5px, 0) scaleY(0.985);\n    transform: translate3d(0, -5px, 0) scaleY(0.985);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes bounceInUp {\n  from,\n  60%,\n  75%,\n  90%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 3000px, 0) scaleY(5);\n    transform: translate3d(0, 3000px, 0) scaleY(5);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, -20px, 0) scaleY(0.9);\n    transform: translate3d(0, -20px, 0) scaleY(0.9);\n  }\n\n  75% {\n    -webkit-transform: translate3d(0, 10px, 0) scaleY(0.95);\n    transform: translate3d(0, 10px, 0) scaleY(0.95);\n  }\n\n  90% {\n    -webkit-transform: translate3d(0, -5px, 0) scaleY(0.985);\n    transform: translate3d(0, -5px, 0) scaleY(0.985);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__bounceInUp {\n  -webkit-animation-name: bounceInUp;\n  animation-name: bounceInUp;\n}\n/* Bouncing exits  */\n@-webkit-keyframes bounceOut {\n  20% {\n    -webkit-transform: scale3d(0.9, 0.9, 0.9);\n    transform: scale3d(0.9, 0.9, 0.9);\n  }\n\n  50%,\n  55% {\n    opacity: 1;\n    -webkit-transform: scale3d(1.1, 1.1, 1.1);\n    transform: scale3d(1.1, 1.1, 1.1);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n}\n@keyframes bounceOut {\n  20% {\n    -webkit-transform: scale3d(0.9, 0.9, 0.9);\n    transform: scale3d(0.9, 0.9, 0.9);\n  }\n\n  50%,\n  55% {\n    opacity: 1;\n    -webkit-transform: scale3d(1.1, 1.1, 1.1);\n    transform: scale3d(1.1, 1.1, 1.1);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n}\n.animate__bounceOut {\n  -webkit-animation-duration: calc(1s * 0.75);\n  animation-duration: calc(1s * 0.75);\n  -webkit-animation-duration: calc(var(--animate-duration) * 0.75);\n  animation-duration: calc(var(--animate-duration) * 0.75);\n  -webkit-animation-name: bounceOut;\n  animation-name: bounceOut;\n}\n@-webkit-keyframes bounceOutDown {\n  20% {\n    -webkit-transform: translate3d(0, 10px, 0) scaleY(0.985);\n    transform: translate3d(0, 10px, 0) scaleY(0.985);\n  }\n\n  40%,\n  45% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, -20px, 0) scaleY(0.9);\n    transform: translate3d(0, -20px, 0) scaleY(0.9);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 2000px, 0) scaleY(3);\n    transform: translate3d(0, 2000px, 0) scaleY(3);\n  }\n}\n@keyframes bounceOutDown {\n  20% {\n    -webkit-transform: translate3d(0, 10px, 0) scaleY(0.985);\n    transform: translate3d(0, 10px, 0) scaleY(0.985);\n  }\n\n  40%,\n  45% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, -20px, 0) scaleY(0.9);\n    transform: translate3d(0, -20px, 0) scaleY(0.9);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 2000px, 0) scaleY(3);\n    transform: translate3d(0, 2000px, 0) scaleY(3);\n  }\n}\n.animate__bounceOutDown {\n  -webkit-animation-name: bounceOutDown;\n  animation-name: bounceOutDown;\n}\n@-webkit-keyframes bounceOutLeft {\n  20% {\n    opacity: 1;\n    -webkit-transform: translate3d(20px, 0, 0) scaleX(0.9);\n    transform: translate3d(20px, 0, 0) scaleX(0.9);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-2000px, 0, 0) scaleX(2);\n    transform: translate3d(-2000px, 0, 0) scaleX(2);\n  }\n}\n@keyframes bounceOutLeft {\n  20% {\n    opacity: 1;\n    -webkit-transform: translate3d(20px, 0, 0) scaleX(0.9);\n    transform: translate3d(20px, 0, 0) scaleX(0.9);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-2000px, 0, 0) scaleX(2);\n    transform: translate3d(-2000px, 0, 0) scaleX(2);\n  }\n}\n.animate__bounceOutLeft {\n  -webkit-animation-name: bounceOutLeft;\n  animation-name: bounceOutLeft;\n}\n@-webkit-keyframes bounceOutRight {\n  20% {\n    opacity: 1;\n    -webkit-transform: translate3d(-20px, 0, 0) scaleX(0.9);\n    transform: translate3d(-20px, 0, 0) scaleX(0.9);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(2000px, 0, 0) scaleX(2);\n    transform: translate3d(2000px, 0, 0) scaleX(2);\n  }\n}\n@keyframes bounceOutRight {\n  20% {\n    opacity: 1;\n    -webkit-transform: translate3d(-20px, 0, 0) scaleX(0.9);\n    transform: translate3d(-20px, 0, 0) scaleX(0.9);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(2000px, 0, 0) scaleX(2);\n    transform: translate3d(2000px, 0, 0) scaleX(2);\n  }\n}\n.animate__bounceOutRight {\n  -webkit-animation-name: bounceOutRight;\n  animation-name: bounceOutRight;\n}\n@-webkit-keyframes bounceOutUp {\n  20% {\n    -webkit-transform: translate3d(0, -10px, 0) scaleY(0.985);\n    transform: translate3d(0, -10px, 0) scaleY(0.985);\n  }\n\n  40%,\n  45% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 20px, 0) scaleY(0.9);\n    transform: translate3d(0, 20px, 0) scaleY(0.9);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -2000px, 0) scaleY(3);\n    transform: translate3d(0, -2000px, 0) scaleY(3);\n  }\n}\n@keyframes bounceOutUp {\n  20% {\n    -webkit-transform: translate3d(0, -10px, 0) scaleY(0.985);\n    transform: translate3d(0, -10px, 0) scaleY(0.985);\n  }\n\n  40%,\n  45% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 20px, 0) scaleY(0.9);\n    transform: translate3d(0, 20px, 0) scaleY(0.9);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -2000px, 0) scaleY(3);\n    transform: translate3d(0, -2000px, 0) scaleY(3);\n  }\n}\n.animate__bounceOutUp {\n  -webkit-animation-name: bounceOutUp;\n  animation-name: bounceOutUp;\n}\n/* Fading entrances  */\n@-webkit-keyframes fadeIn {\n  from {\n    opacity: 0;\n  }\n\n  to {\n    opacity: 1;\n  }\n}\n@keyframes fadeIn {\n  from {\n    opacity: 0;\n  }\n\n  to {\n    opacity: 1;\n  }\n}\n.animate__fadeIn {\n  -webkit-animation-name: fadeIn;\n  animation-name: fadeIn;\n}\n@-webkit-keyframes fadeInDown {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInDown {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInDown {\n  -webkit-animation-name: fadeInDown;\n  animation-name: fadeInDown;\n}\n@-webkit-keyframes fadeInDownBig {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -2000px, 0);\n    transform: translate3d(0, -2000px, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInDownBig {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -2000px, 0);\n    transform: translate3d(0, -2000px, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInDownBig {\n  -webkit-animation-name: fadeInDownBig;\n  animation-name: fadeInDownBig;\n}\n@-webkit-keyframes fadeInLeft {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInLeft {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInLeft {\n  -webkit-animation-name: fadeInLeft;\n  animation-name: fadeInLeft;\n}\n@-webkit-keyframes fadeInLeftBig {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-2000px, 0, 0);\n    transform: translate3d(-2000px, 0, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInLeftBig {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-2000px, 0, 0);\n    transform: translate3d(-2000px, 0, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInLeftBig {\n  -webkit-animation-name: fadeInLeftBig;\n  animation-name: fadeInLeftBig;\n}\n@-webkit-keyframes fadeInRight {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInRight {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInRight {\n  -webkit-animation-name: fadeInRight;\n  animation-name: fadeInRight;\n}\n@-webkit-keyframes fadeInRightBig {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(2000px, 0, 0);\n    transform: translate3d(2000px, 0, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInRightBig {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(2000px, 0, 0);\n    transform: translate3d(2000px, 0, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInRightBig {\n  -webkit-animation-name: fadeInRightBig;\n  animation-name: fadeInRightBig;\n}\n@-webkit-keyframes fadeInUp {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 100%, 0);\n    transform: translate3d(0, 100%, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInUp {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 100%, 0);\n    transform: translate3d(0, 100%, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInUp {\n  -webkit-animation-name: fadeInUp;\n  animation-name: fadeInUp;\n}\n@-webkit-keyframes fadeInUpBig {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 2000px, 0);\n    transform: translate3d(0, 2000px, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInUpBig {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 2000px, 0);\n    transform: translate3d(0, 2000px, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInUpBig {\n  -webkit-animation-name: fadeInUpBig;\n  animation-name: fadeInUpBig;\n}\n@-webkit-keyframes fadeInTopLeft {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, -100%, 0);\n    transform: translate3d(-100%, -100%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInTopLeft {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, -100%, 0);\n    transform: translate3d(-100%, -100%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInTopLeft {\n  -webkit-animation-name: fadeInTopLeft;\n  animation-name: fadeInTopLeft;\n}\n@-webkit-keyframes fadeInTopRight {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, -100%, 0);\n    transform: translate3d(100%, -100%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInTopRight {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, -100%, 0);\n    transform: translate3d(100%, -100%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInTopRight {\n  -webkit-animation-name: fadeInTopRight;\n  animation-name: fadeInTopRight;\n}\n@-webkit-keyframes fadeInBottomLeft {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 100%, 0);\n    transform: translate3d(-100%, 100%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInBottomLeft {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 100%, 0);\n    transform: translate3d(-100%, 100%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInBottomLeft {\n  -webkit-animation-name: fadeInBottomLeft;\n  animation-name: fadeInBottomLeft;\n}\n@-webkit-keyframes fadeInBottomRight {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 100%, 0);\n    transform: translate3d(100%, 100%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInBottomRight {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 100%, 0);\n    transform: translate3d(100%, 100%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInBottomRight {\n  -webkit-animation-name: fadeInBottomRight;\n  animation-name: fadeInBottomRight;\n}\n/* Fading exits */\n@-webkit-keyframes fadeOut {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n  }\n}\n@keyframes fadeOut {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n  }\n}\n.animate__fadeOut {\n  -webkit-animation-name: fadeOut;\n  animation-name: fadeOut;\n}\n@-webkit-keyframes fadeOutDown {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 100%, 0);\n    transform: translate3d(0, 100%, 0);\n  }\n}\n@keyframes fadeOutDown {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 100%, 0);\n    transform: translate3d(0, 100%, 0);\n  }\n}\n.animate__fadeOutDown {\n  -webkit-animation-name: fadeOutDown;\n  animation-name: fadeOutDown;\n}\n@-webkit-keyframes fadeOutDownBig {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 2000px, 0);\n    transform: translate3d(0, 2000px, 0);\n  }\n}\n@keyframes fadeOutDownBig {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 2000px, 0);\n    transform: translate3d(0, 2000px, 0);\n  }\n}\n.animate__fadeOutDownBig {\n  -webkit-animation-name: fadeOutDownBig;\n  animation-name: fadeOutDownBig;\n}\n@-webkit-keyframes fadeOutLeft {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n  }\n}\n@keyframes fadeOutLeft {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n  }\n}\n.animate__fadeOutLeft {\n  -webkit-animation-name: fadeOutLeft;\n  animation-name: fadeOutLeft;\n}\n@-webkit-keyframes fadeOutLeftBig {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-2000px, 0, 0);\n    transform: translate3d(-2000px, 0, 0);\n  }\n}\n@keyframes fadeOutLeftBig {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-2000px, 0, 0);\n    transform: translate3d(-2000px, 0, 0);\n  }\n}\n.animate__fadeOutLeftBig {\n  -webkit-animation-name: fadeOutLeftBig;\n  animation-name: fadeOutLeftBig;\n}\n@-webkit-keyframes fadeOutRight {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n  }\n}\n@keyframes fadeOutRight {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n  }\n}\n.animate__fadeOutRight {\n  -webkit-animation-name: fadeOutRight;\n  animation-name: fadeOutRight;\n}\n@-webkit-keyframes fadeOutRightBig {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(2000px, 0, 0);\n    transform: translate3d(2000px, 0, 0);\n  }\n}\n@keyframes fadeOutRightBig {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(2000px, 0, 0);\n    transform: translate3d(2000px, 0, 0);\n  }\n}\n.animate__fadeOutRightBig {\n  -webkit-animation-name: fadeOutRightBig;\n  animation-name: fadeOutRightBig;\n}\n@-webkit-keyframes fadeOutUp {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n}\n@keyframes fadeOutUp {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n}\n.animate__fadeOutUp {\n  -webkit-animation-name: fadeOutUp;\n  animation-name: fadeOutUp;\n}\n@-webkit-keyframes fadeOutUpBig {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -2000px, 0);\n    transform: translate3d(0, -2000px, 0);\n  }\n}\n@keyframes fadeOutUpBig {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -2000px, 0);\n    transform: translate3d(0, -2000px, 0);\n  }\n}\n.animate__fadeOutUpBig {\n  -webkit-animation-name: fadeOutUpBig;\n  animation-name: fadeOutUpBig;\n}\n@-webkit-keyframes fadeOutTopLeft {\n  from {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, -100%, 0);\n    transform: translate3d(-100%, -100%, 0);\n  }\n}\n@keyframes fadeOutTopLeft {\n  from {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, -100%, 0);\n    transform: translate3d(-100%, -100%, 0);\n  }\n}\n.animate__fadeOutTopLeft {\n  -webkit-animation-name: fadeOutTopLeft;\n  animation-name: fadeOutTopLeft;\n}\n@-webkit-keyframes fadeOutTopRight {\n  from {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, -100%, 0);\n    transform: translate3d(100%, -100%, 0);\n  }\n}\n@keyframes fadeOutTopRight {\n  from {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, -100%, 0);\n    transform: translate3d(100%, -100%, 0);\n  }\n}\n.animate__fadeOutTopRight {\n  -webkit-animation-name: fadeOutTopRight;\n  animation-name: fadeOutTopRight;\n}\n@-webkit-keyframes fadeOutBottomRight {\n  from {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 100%, 0);\n    transform: translate3d(100%, 100%, 0);\n  }\n}\n@keyframes fadeOutBottomRight {\n  from {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 100%, 0);\n    transform: translate3d(100%, 100%, 0);\n  }\n}\n.animate__fadeOutBottomRight {\n  -webkit-animation-name: fadeOutBottomRight;\n  animation-name: fadeOutBottomRight;\n}\n@-webkit-keyframes fadeOutBottomLeft {\n  from {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 100%, 0);\n    transform: translate3d(-100%, 100%, 0);\n  }\n}\n@keyframes fadeOutBottomLeft {\n  from {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 100%, 0);\n    transform: translate3d(-100%, 100%, 0);\n  }\n}\n.animate__fadeOutBottomLeft {\n  -webkit-animation-name: fadeOutBottomLeft;\n  animation-name: fadeOutBottomLeft;\n}\n/* Flippers */\n@-webkit-keyframes flip {\n  from {\n    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, -360deg);\n    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, -360deg);\n    -webkit-animation-timing-function: ease-out;\n    animation-timing-function: ease-out;\n  }\n\n  40% {\n    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)\n      rotate3d(0, 1, 0, -190deg);\n    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)\n      rotate3d(0, 1, 0, -190deg);\n    -webkit-animation-timing-function: ease-out;\n    animation-timing-function: ease-out;\n  }\n\n  50% {\n    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)\n      rotate3d(0, 1, 0, -170deg);\n    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)\n      rotate3d(0, 1, 0, -170deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n\n  80% {\n    -webkit-transform: perspective(400px) scale3d(0.95, 0.95, 0.95) translate3d(0, 0, 0)\n      rotate3d(0, 1, 0, 0deg);\n    transform: perspective(400px) scale3d(0.95, 0.95, 0.95) translate3d(0, 0, 0)\n      rotate3d(0, 1, 0, 0deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n\n  to {\n    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, 0deg);\n    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, 0deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n}\n@keyframes flip {\n  from {\n    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, -360deg);\n    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, -360deg);\n    -webkit-animation-timing-function: ease-out;\n    animation-timing-function: ease-out;\n  }\n\n  40% {\n    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)\n      rotate3d(0, 1, 0, -190deg);\n    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)\n      rotate3d(0, 1, 0, -190deg);\n    -webkit-animation-timing-function: ease-out;\n    animation-timing-function: ease-out;\n  }\n\n  50% {\n    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)\n      rotate3d(0, 1, 0, -170deg);\n    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)\n      rotate3d(0, 1, 0, -170deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n\n  80% {\n    -webkit-transform: perspective(400px) scale3d(0.95, 0.95, 0.95) translate3d(0, 0, 0)\n      rotate3d(0, 1, 0, 0deg);\n    transform: perspective(400px) scale3d(0.95, 0.95, 0.95) translate3d(0, 0, 0)\n      rotate3d(0, 1, 0, 0deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n\n  to {\n    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, 0deg);\n    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, 0deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n}\n.animate__animated.animate__flip {\n  -webkit-backface-visibility: visible;\n  backface-visibility: visible;\n  -webkit-animation-name: flip;\n  animation-name: flip;\n}\n@-webkit-keyframes flipInX {\n  from {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n    opacity: 0;\n  }\n\n  40% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n\n  60% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);\n  }\n\n  to {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n}\n@keyframes flipInX {\n  from {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n    opacity: 0;\n  }\n\n  40% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n\n  60% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);\n  }\n\n  to {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n}\n.animate__flipInX {\n  -webkit-backface-visibility: visible !important;\n  backface-visibility: visible !important;\n  -webkit-animation-name: flipInX;\n  animation-name: flipInX;\n}\n@-webkit-keyframes flipInY {\n  from {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 90deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n    opacity: 0;\n  }\n\n  40% {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -20deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, -20deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n\n  60% {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 10deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -5deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, -5deg);\n  }\n\n  to {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n}\n@keyframes flipInY {\n  from {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 90deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n    opacity: 0;\n  }\n\n  40% {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -20deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, -20deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n\n  60% {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 10deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -5deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, -5deg);\n  }\n\n  to {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n}\n.animate__flipInY {\n  -webkit-backface-visibility: visible !important;\n  backface-visibility: visible !important;\n  -webkit-animation-name: flipInY;\n  animation-name: flipInY;\n}\n@-webkit-keyframes flipOutX {\n  from {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n\n  30% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    opacity: 0;\n  }\n}\n@keyframes flipOutX {\n  from {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n\n  30% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    opacity: 0;\n  }\n}\n.animate__flipOutX {\n  -webkit-animation-duration: calc(1s * 0.75);\n  animation-duration: calc(1s * 0.75);\n  -webkit-animation-duration: calc(var(--animate-duration) * 0.75);\n  animation-duration: calc(var(--animate-duration) * 0.75);\n  -webkit-animation-name: flipOutX;\n  animation-name: flipOutX;\n  -webkit-backface-visibility: visible !important;\n  backface-visibility: visible !important;\n}\n@-webkit-keyframes flipOutY {\n  from {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n\n  30% {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -15deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, -15deg);\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 90deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);\n    opacity: 0;\n  }\n}\n@keyframes flipOutY {\n  from {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n\n  30% {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -15deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, -15deg);\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 90deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);\n    opacity: 0;\n  }\n}\n.animate__flipOutY {\n  -webkit-animation-duration: calc(1s * 0.75);\n  animation-duration: calc(1s * 0.75);\n  -webkit-animation-duration: calc(var(--animate-duration) * 0.75);\n  animation-duration: calc(var(--animate-duration) * 0.75);\n  -webkit-backface-visibility: visible !important;\n  backface-visibility: visible !important;\n  -webkit-animation-name: flipOutY;\n  animation-name: flipOutY;\n}\n/* Lightspeed */\n@-webkit-keyframes lightSpeedInRight {\n  from {\n    -webkit-transform: translate3d(100%, 0, 0) skewX(-30deg);\n    transform: translate3d(100%, 0, 0) skewX(-30deg);\n    opacity: 0;\n  }\n\n  60% {\n    -webkit-transform: skewX(20deg);\n    transform: skewX(20deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: skewX(-5deg);\n    transform: skewX(-5deg);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes lightSpeedInRight {\n  from {\n    -webkit-transform: translate3d(100%, 0, 0) skewX(-30deg);\n    transform: translate3d(100%, 0, 0) skewX(-30deg);\n    opacity: 0;\n  }\n\n  60% {\n    -webkit-transform: skewX(20deg);\n    transform: skewX(20deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: skewX(-5deg);\n    transform: skewX(-5deg);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__lightSpeedInRight {\n  -webkit-animation-name: lightSpeedInRight;\n  animation-name: lightSpeedInRight;\n  -webkit-animation-timing-function: ease-out;\n  animation-timing-function: ease-out;\n}\n@-webkit-keyframes lightSpeedInLeft {\n  from {\n    -webkit-transform: translate3d(-100%, 0, 0) skewX(30deg);\n    transform: translate3d(-100%, 0, 0) skewX(30deg);\n    opacity: 0;\n  }\n\n  60% {\n    -webkit-transform: skewX(-20deg);\n    transform: skewX(-20deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: skewX(5deg);\n    transform: skewX(5deg);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes lightSpeedInLeft {\n  from {\n    -webkit-transform: translate3d(-100%, 0, 0) skewX(30deg);\n    transform: translate3d(-100%, 0, 0) skewX(30deg);\n    opacity: 0;\n  }\n\n  60% {\n    -webkit-transform: skewX(-20deg);\n    transform: skewX(-20deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: skewX(5deg);\n    transform: skewX(5deg);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__lightSpeedInLeft {\n  -webkit-animation-name: lightSpeedInLeft;\n  animation-name: lightSpeedInLeft;\n  -webkit-animation-timing-function: ease-out;\n  animation-timing-function: ease-out;\n}\n@-webkit-keyframes lightSpeedOutRight {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate3d(100%, 0, 0) skewX(30deg);\n    transform: translate3d(100%, 0, 0) skewX(30deg);\n    opacity: 0;\n  }\n}\n@keyframes lightSpeedOutRight {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate3d(100%, 0, 0) skewX(30deg);\n    transform: translate3d(100%, 0, 0) skewX(30deg);\n    opacity: 0;\n  }\n}\n.animate__lightSpeedOutRight {\n  -webkit-animation-name: lightSpeedOutRight;\n  animation-name: lightSpeedOutRight;\n  -webkit-animation-timing-function: ease-in;\n  animation-timing-function: ease-in;\n}\n@-webkit-keyframes lightSpeedOutLeft {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate3d(-100%, 0, 0) skewX(-30deg);\n    transform: translate3d(-100%, 0, 0) skewX(-30deg);\n    opacity: 0;\n  }\n}\n@keyframes lightSpeedOutLeft {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate3d(-100%, 0, 0) skewX(-30deg);\n    transform: translate3d(-100%, 0, 0) skewX(-30deg);\n    opacity: 0;\n  }\n}\n.animate__lightSpeedOutLeft {\n  -webkit-animation-name: lightSpeedOutLeft;\n  animation-name: lightSpeedOutLeft;\n  -webkit-animation-timing-function: ease-in;\n  animation-timing-function: ease-in;\n}\n/* Rotating entrances */\n@-webkit-keyframes rotateIn {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, -200deg);\n    transform: rotate3d(0, 0, 1, -200deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n@keyframes rotateIn {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, -200deg);\n    transform: rotate3d(0, 0, 1, -200deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n.animate__rotateIn {\n  -webkit-animation-name: rotateIn;\n  animation-name: rotateIn;\n  -webkit-transform-origin: center;\n  transform-origin: center;\n}\n@-webkit-keyframes rotateInDownLeft {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, -45deg);\n    transform: rotate3d(0, 0, 1, -45deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n@keyframes rotateInDownLeft {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, -45deg);\n    transform: rotate3d(0, 0, 1, -45deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n.animate__rotateInDownLeft {\n  -webkit-animation-name: rotateInDownLeft;\n  animation-name: rotateInDownLeft;\n  -webkit-transform-origin: left bottom;\n  transform-origin: left bottom;\n}\n@-webkit-keyframes rotateInDownRight {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, 45deg);\n    transform: rotate3d(0, 0, 1, 45deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n@keyframes rotateInDownRight {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, 45deg);\n    transform: rotate3d(0, 0, 1, 45deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n.animate__rotateInDownRight {\n  -webkit-animation-name: rotateInDownRight;\n  animation-name: rotateInDownRight;\n  -webkit-transform-origin: right bottom;\n  transform-origin: right bottom;\n}\n@-webkit-keyframes rotateInUpLeft {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, 45deg);\n    transform: rotate3d(0, 0, 1, 45deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n@keyframes rotateInUpLeft {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, 45deg);\n    transform: rotate3d(0, 0, 1, 45deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n.animate__rotateInUpLeft {\n  -webkit-animation-name: rotateInUpLeft;\n  animation-name: rotateInUpLeft;\n  -webkit-transform-origin: left bottom;\n  transform-origin: left bottom;\n}\n@-webkit-keyframes rotateInUpRight {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, -90deg);\n    transform: rotate3d(0, 0, 1, -90deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n@keyframes rotateInUpRight {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, -90deg);\n    transform: rotate3d(0, 0, 1, -90deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n.animate__rotateInUpRight {\n  -webkit-animation-name: rotateInUpRight;\n  animation-name: rotateInUpRight;\n  -webkit-transform-origin: right bottom;\n  transform-origin: right bottom;\n}\n/* Rotating exits */\n@-webkit-keyframes rotateOut {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, 200deg);\n    transform: rotate3d(0, 0, 1, 200deg);\n    opacity: 0;\n  }\n}\n@keyframes rotateOut {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, 200deg);\n    transform: rotate3d(0, 0, 1, 200deg);\n    opacity: 0;\n  }\n}\n.animate__rotateOut {\n  -webkit-animation-name: rotateOut;\n  animation-name: rotateOut;\n  -webkit-transform-origin: center;\n  transform-origin: center;\n}\n@-webkit-keyframes rotateOutDownLeft {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, 45deg);\n    transform: rotate3d(0, 0, 1, 45deg);\n    opacity: 0;\n  }\n}\n@keyframes rotateOutDownLeft {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, 45deg);\n    transform: rotate3d(0, 0, 1, 45deg);\n    opacity: 0;\n  }\n}\n.animate__rotateOutDownLeft {\n  -webkit-animation-name: rotateOutDownLeft;\n  animation-name: rotateOutDownLeft;\n  -webkit-transform-origin: left bottom;\n  transform-origin: left bottom;\n}\n@-webkit-keyframes rotateOutDownRight {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, -45deg);\n    transform: rotate3d(0, 0, 1, -45deg);\n    opacity: 0;\n  }\n}\n@keyframes rotateOutDownRight {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, -45deg);\n    transform: rotate3d(0, 0, 1, -45deg);\n    opacity: 0;\n  }\n}\n.animate__rotateOutDownRight {\n  -webkit-animation-name: rotateOutDownRight;\n  animation-name: rotateOutDownRight;\n  -webkit-transform-origin: right bottom;\n  transform-origin: right bottom;\n}\n@-webkit-keyframes rotateOutUpLeft {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, -45deg);\n    transform: rotate3d(0, 0, 1, -45deg);\n    opacity: 0;\n  }\n}\n@keyframes rotateOutUpLeft {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, -45deg);\n    transform: rotate3d(0, 0, 1, -45deg);\n    opacity: 0;\n  }\n}\n.animate__rotateOutUpLeft {\n  -webkit-animation-name: rotateOutUpLeft;\n  animation-name: rotateOutUpLeft;\n  -webkit-transform-origin: left bottom;\n  transform-origin: left bottom;\n}\n@-webkit-keyframes rotateOutUpRight {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, 90deg);\n    transform: rotate3d(0, 0, 1, 90deg);\n    opacity: 0;\n  }\n}\n@keyframes rotateOutUpRight {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, 90deg);\n    transform: rotate3d(0, 0, 1, 90deg);\n    opacity: 0;\n  }\n}\n.animate__rotateOutUpRight {\n  -webkit-animation-name: rotateOutUpRight;\n  animation-name: rotateOutUpRight;\n  -webkit-transform-origin: right bottom;\n  transform-origin: right bottom;\n}\n/* Specials */\n@-webkit-keyframes hinge {\n  0% {\n    -webkit-animation-timing-function: ease-in-out;\n    animation-timing-function: ease-in-out;\n  }\n\n  20%,\n  60% {\n    -webkit-transform: rotate3d(0, 0, 1, 80deg);\n    transform: rotate3d(0, 0, 1, 80deg);\n    -webkit-animation-timing-function: ease-in-out;\n    animation-timing-function: ease-in-out;\n  }\n\n  40%,\n  80% {\n    -webkit-transform: rotate3d(0, 0, 1, 60deg);\n    transform: rotate3d(0, 0, 1, 60deg);\n    -webkit-animation-timing-function: ease-in-out;\n    animation-timing-function: ease-in-out;\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 700px, 0);\n    transform: translate3d(0, 700px, 0);\n    opacity: 0;\n  }\n}\n@keyframes hinge {\n  0% {\n    -webkit-animation-timing-function: ease-in-out;\n    animation-timing-function: ease-in-out;\n  }\n\n  20%,\n  60% {\n    -webkit-transform: rotate3d(0, 0, 1, 80deg);\n    transform: rotate3d(0, 0, 1, 80deg);\n    -webkit-animation-timing-function: ease-in-out;\n    animation-timing-function: ease-in-out;\n  }\n\n  40%,\n  80% {\n    -webkit-transform: rotate3d(0, 0, 1, 60deg);\n    transform: rotate3d(0, 0, 1, 60deg);\n    -webkit-animation-timing-function: ease-in-out;\n    animation-timing-function: ease-in-out;\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 700px, 0);\n    transform: translate3d(0, 700px, 0);\n    opacity: 0;\n  }\n}\n.animate__hinge {\n  -webkit-animation-duration: calc(1s * 2);\n  animation-duration: calc(1s * 2);\n  -webkit-animation-duration: calc(var(--animate-duration) * 2);\n  animation-duration: calc(var(--animate-duration) * 2);\n  -webkit-animation-name: hinge;\n  animation-name: hinge;\n  -webkit-transform-origin: top left;\n  transform-origin: top left;\n}\n@-webkit-keyframes jackInTheBox {\n  from {\n    opacity: 0;\n    -webkit-transform: scale(0.1) rotate(30deg);\n    transform: scale(0.1) rotate(30deg);\n    -webkit-transform-origin: center bottom;\n    transform-origin: center bottom;\n  }\n\n  50% {\n    -webkit-transform: rotate(-10deg);\n    transform: rotate(-10deg);\n  }\n\n  70% {\n    -webkit-transform: rotate(3deg);\n    transform: rotate(3deg);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n}\n@keyframes jackInTheBox {\n  from {\n    opacity: 0;\n    -webkit-transform: scale(0.1) rotate(30deg);\n    transform: scale(0.1) rotate(30deg);\n    -webkit-transform-origin: center bottom;\n    transform-origin: center bottom;\n  }\n\n  50% {\n    -webkit-transform: rotate(-10deg);\n    transform: rotate(-10deg);\n  }\n\n  70% {\n    -webkit-transform: rotate(3deg);\n    transform: rotate(3deg);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n}\n.animate__jackInTheBox {\n  -webkit-animation-name: jackInTheBox;\n  animation-name: jackInTheBox;\n}\n/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */\n@-webkit-keyframes rollIn {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);\n    transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes rollIn {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);\n    transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__rollIn {\n  -webkit-animation-name: rollIn;\n  animation-name: rollIn;\n}\n/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */\n@-webkit-keyframes rollOut {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);\n    transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);\n  }\n}\n@keyframes rollOut {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);\n    transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);\n  }\n}\n.animate__rollOut {\n  -webkit-animation-name: rollOut;\n  animation-name: rollOut;\n}\n/* Zooming entrances */\n@-webkit-keyframes zoomIn {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n\n  50% {\n    opacity: 1;\n  }\n}\n@keyframes zoomIn {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n\n  50% {\n    opacity: 1;\n  }\n}\n.animate__zoomIn {\n  -webkit-animation-name: zoomIn;\n  animation-name: zoomIn;\n}\n@-webkit-keyframes zoomInDown {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n@keyframes zoomInDown {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n.animate__zoomInDown {\n  -webkit-animation-name: zoomInDown;\n  animation-name: zoomInDown;\n}\n@-webkit-keyframes zoomInLeft {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(-1000px, 0, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(-1000px, 0, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(10px, 0, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(10px, 0, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n@keyframes zoomInLeft {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(-1000px, 0, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(-1000px, 0, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(10px, 0, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(10px, 0, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n.animate__zoomInLeft {\n  -webkit-animation-name: zoomInLeft;\n  animation-name: zoomInLeft;\n}\n@-webkit-keyframes zoomInRight {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(1000px, 0, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(1000px, 0, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(-10px, 0, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(-10px, 0, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n@keyframes zoomInRight {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(1000px, 0, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(1000px, 0, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(-10px, 0, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(-10px, 0, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n.animate__zoomInRight {\n  -webkit-animation-name: zoomInRight;\n  animation-name: zoomInRight;\n}\n@-webkit-keyframes zoomInUp {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n@keyframes zoomInUp {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n.animate__zoomInUp {\n  -webkit-animation-name: zoomInUp;\n  animation-name: zoomInUp;\n}\n/* Zooming exits */\n@-webkit-keyframes zoomOut {\n  from {\n    opacity: 1;\n  }\n\n  50% {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n\n  to {\n    opacity: 0;\n  }\n}\n@keyframes zoomOut {\n  from {\n    opacity: 1;\n  }\n\n  50% {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n\n  to {\n    opacity: 0;\n  }\n}\n.animate__zoomOut {\n  -webkit-animation-name: zoomOut;\n  animation-name: zoomOut;\n}\n@-webkit-keyframes zoomOutDown {\n  40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 2000px, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 2000px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n@keyframes zoomOutDown {\n  40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 2000px, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 2000px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n.animate__zoomOutDown {\n  -webkit-animation-name: zoomOutDown;\n  animation-name: zoomOutDown;\n  -webkit-transform-origin: center bottom;\n  transform-origin: center bottom;\n}\n@-webkit-keyframes zoomOutLeft {\n  40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(42px, 0, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(42px, 0, 0);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale(0.1) translate3d(-2000px, 0, 0);\n    transform: scale(0.1) translate3d(-2000px, 0, 0);\n  }\n}\n@keyframes zoomOutLeft {\n  40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(42px, 0, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(42px, 0, 0);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale(0.1) translate3d(-2000px, 0, 0);\n    transform: scale(0.1) translate3d(-2000px, 0, 0);\n  }\n}\n.animate__zoomOutLeft {\n  -webkit-animation-name: zoomOutLeft;\n  animation-name: zoomOutLeft;\n  -webkit-transform-origin: left center;\n  transform-origin: left center;\n}\n@-webkit-keyframes zoomOutRight {\n  40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale(0.1) translate3d(2000px, 0, 0);\n    transform: scale(0.1) translate3d(2000px, 0, 0);\n  }\n}\n@keyframes zoomOutRight {\n  40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale(0.1) translate3d(2000px, 0, 0);\n    transform: scale(0.1) translate3d(2000px, 0, 0);\n  }\n}\n.animate__zoomOutRight {\n  -webkit-animation-name: zoomOutRight;\n  animation-name: zoomOutRight;\n  -webkit-transform-origin: right center;\n  transform-origin: right center;\n}\n@-webkit-keyframes zoomOutUp {\n  40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -2000px, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -2000px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n@keyframes zoomOutUp {\n  40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -2000px, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -2000px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n.animate__zoomOutUp {\n  -webkit-animation-name: zoomOutUp;\n  animation-name: zoomOutUp;\n  -webkit-transform-origin: center bottom;\n  transform-origin: center bottom;\n}\n/* Sliding entrances */\n@-webkit-keyframes slideInDown {\n  from {\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes slideInDown {\n  from {\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__slideInDown {\n  -webkit-animation-name: slideInDown;\n  animation-name: slideInDown;\n}\n@-webkit-keyframes slideInLeft {\n  from {\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes slideInLeft {\n  from {\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__slideInLeft {\n  -webkit-animation-name: slideInLeft;\n  animation-name: slideInLeft;\n}\n@-webkit-keyframes slideInRight {\n  from {\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes slideInRight {\n  from {\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__slideInRight {\n  -webkit-animation-name: slideInRight;\n  animation-name: slideInRight;\n}\n@-webkit-keyframes slideInUp {\n  from {\n    -webkit-transform: translate3d(0, 100%, 0);\n    transform: translate3d(0, 100%, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes slideInUp {\n  from {\n    -webkit-transform: translate3d(0, 100%, 0);\n    transform: translate3d(0, 100%, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__slideInUp {\n  -webkit-animation-name: slideInUp;\n  animation-name: slideInUp;\n}\n/* Sliding exits */\n@-webkit-keyframes slideOutDown {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(0, 100%, 0);\n    transform: translate3d(0, 100%, 0);\n  }\n}\n@keyframes slideOutDown {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(0, 100%, 0);\n    transform: translate3d(0, 100%, 0);\n  }\n}\n.animate__slideOutDown {\n  -webkit-animation-name: slideOutDown;\n  animation-name: slideOutDown;\n}\n@-webkit-keyframes slideOutLeft {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n  }\n}\n@keyframes slideOutLeft {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n  }\n}\n.animate__slideOutLeft {\n  -webkit-animation-name: slideOutLeft;\n  animation-name: slideOutLeft;\n}\n@-webkit-keyframes slideOutRight {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n  }\n}\n@keyframes slideOutRight {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n  }\n}\n.animate__slideOutRight {\n  -webkit-animation-name: slideOutRight;\n  animation-name: slideOutRight;\n}\n@-webkit-keyframes slideOutUp {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n}\n@keyframes slideOutUp {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n}\n.animate__slideOutUp {\n  -webkit-animation-name: slideOutUp;\n  animation-name: slideOutUp;\n}\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";/*!\n * animate.css - https://animate.style/\n * Version - 4.1.1\n * Licensed under the MIT license - http://opensource.org/licenses/MIT\n *\n * Copyright (c) 2020 Animate.css\n */\n:root {\n  --animate-duration: 1s;\n  --animate-delay: 1s;\n  --animate-repeat: 1;\n}\n.animate__animated {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-duration: var(--animate-duration);\n  animation-duration: var(--animate-duration);\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.animate__animated.animate__infinite {\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n}\n.animate__animated.animate__repeat-1 {\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n  -webkit-animation-iteration-count: var(--animate-repeat);\n  animation-iteration-count: var(--animate-repeat);\n}\n.animate__animated.animate__repeat-2 {\n  -webkit-animation-iteration-count: calc(1 * 2);\n  animation-iteration-count: calc(1 * 2);\n  -webkit-animation-iteration-count: calc(var(--animate-repeat) * 2);\n  animation-iteration-count: calc(var(--animate-repeat) * 2);\n}\n.animate__animated.animate__repeat-3 {\n  -webkit-animation-iteration-count: calc(1 * 3);\n  animation-iteration-count: calc(1 * 3);\n  -webkit-animation-iteration-count: calc(var(--animate-repeat) * 3);\n  animation-iteration-count: calc(var(--animate-repeat) * 3);\n}\n.animate__animated.animate__delay-1s {\n  -webkit-animation-delay: 1s;\n  animation-delay: 1s;\n  -webkit-animation-delay: var(--animate-delay);\n  animation-delay: var(--animate-delay);\n}\n.animate__animated.animate__delay-2s {\n  -webkit-animation-delay: calc(1s * 2);\n  animation-delay: calc(1s * 2);\n  -webkit-animation-delay: calc(var(--animate-delay) * 2);\n  animation-delay: calc(var(--animate-delay) * 2);\n}\n.animate__animated.animate__delay-3s {\n  -webkit-animation-delay: calc(1s * 3);\n  animation-delay: calc(1s * 3);\n  -webkit-animation-delay: calc(var(--animate-delay) * 3);\n  animation-delay: calc(var(--animate-delay) * 3);\n}\n.animate__animated.animate__delay-4s {\n  -webkit-animation-delay: calc(1s * 4);\n  animation-delay: calc(1s * 4);\n  -webkit-animation-delay: calc(var(--animate-delay) * 4);\n  animation-delay: calc(var(--animate-delay) * 4);\n}\n.animate__animated.animate__delay-5s {\n  -webkit-animation-delay: calc(1s * 5);\n  animation-delay: calc(1s * 5);\n  -webkit-animation-delay: calc(var(--animate-delay) * 5);\n  animation-delay: calc(var(--animate-delay) * 5);\n}\n.animate__animated.animate__faster {\n  -webkit-animation-duration: calc(1s / 2);\n  animation-duration: calc(1s / 2);\n  -webkit-animation-duration: calc(var(--animate-duration) / 2);\n  animation-duration: calc(var(--animate-duration) / 2);\n}\n.animate__animated.animate__fast {\n  -webkit-animation-duration: calc(1s * 0.8);\n  animation-duration: calc(1s * 0.8);\n  -webkit-animation-duration: calc(var(--animate-duration) * 0.8);\n  animation-duration: calc(var(--animate-duration) * 0.8);\n}\n.animate__animated.animate__slow {\n  -webkit-animation-duration: calc(1s * 2);\n  animation-duration: calc(1s * 2);\n  -webkit-animation-duration: calc(var(--animate-duration) * 2);\n  animation-duration: calc(var(--animate-duration) * 2);\n}\n.animate__animated.animate__slower {\n  -webkit-animation-duration: calc(1s * 3);\n  animation-duration: calc(1s * 3);\n  -webkit-animation-duration: calc(var(--animate-duration) * 3);\n  animation-duration: calc(var(--animate-duration) * 3);\n}\n@media print, (prefers-reduced-motion: reduce) {\n  .animate__animated {\n    -webkit-animation-duration: 1ms !important;\n    animation-duration: 1ms !important;\n    -webkit-transition-duration: 1ms !important;\n    transition-duration: 1ms !important;\n    -webkit-animation-iteration-count: 1 !important;\n    animation-iteration-count: 1 !important;\n  }\n\n  .animate__animated[class*='Out'] {\n    opacity: 0;\n  }\n}\n/* Attention seekers  */\n@-webkit-keyframes bounce {\n  from,\n  20%,\n  53%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  40%,\n  43% {\n    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n    -webkit-transform: translate3d(0, -30px, 0) scaleY(1.1);\n    transform: translate3d(0, -30px, 0) scaleY(1.1);\n  }\n\n  70% {\n    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n    -webkit-transform: translate3d(0, -15px, 0) scaleY(1.05);\n    transform: translate3d(0, -15px, 0) scaleY(1.05);\n  }\n\n  80% {\n    -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    -webkit-transform: translate3d(0, 0, 0) scaleY(0.95);\n    transform: translate3d(0, 0, 0) scaleY(0.95);\n  }\n\n  90% {\n    -webkit-transform: translate3d(0, -4px, 0) scaleY(1.02);\n    transform: translate3d(0, -4px, 0) scaleY(1.02);\n  }\n}\n@keyframes bounce {\n  from,\n  20%,\n  53%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  40%,\n  43% {\n    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n    -webkit-transform: translate3d(0, -30px, 0) scaleY(1.1);\n    transform: translate3d(0, -30px, 0) scaleY(1.1);\n  }\n\n  70% {\n    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n    -webkit-transform: translate3d(0, -15px, 0) scaleY(1.05);\n    transform: translate3d(0, -15px, 0) scaleY(1.05);\n  }\n\n  80% {\n    -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    -webkit-transform: translate3d(0, 0, 0) scaleY(0.95);\n    transform: translate3d(0, 0, 0) scaleY(0.95);\n  }\n\n  90% {\n    -webkit-transform: translate3d(0, -4px, 0) scaleY(1.02);\n    transform: translate3d(0, -4px, 0) scaleY(1.02);\n  }\n}\n.animate__bounce {\n  -webkit-animation-name: bounce;\n  animation-name: bounce;\n  -webkit-transform-origin: center bottom;\n  transform-origin: center bottom;\n}\n@-webkit-keyframes flash {\n  from,\n  50%,\n  to {\n    opacity: 1;\n  }\n\n  25%,\n  75% {\n    opacity: 0;\n  }\n}\n@keyframes flash {\n  from,\n  50%,\n  to {\n    opacity: 1;\n  }\n\n  25%,\n  75% {\n    opacity: 0;\n  }\n}\n.animate__flash {\n  -webkit-animation-name: flash;\n  animation-name: flash;\n}\n/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */\n@-webkit-keyframes pulse {\n  from {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n\n  50% {\n    -webkit-transform: scale3d(1.05, 1.05, 1.05);\n    transform: scale3d(1.05, 1.05, 1.05);\n  }\n\n  to {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n}\n@keyframes pulse {\n  from {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n\n  50% {\n    -webkit-transform: scale3d(1.05, 1.05, 1.05);\n    transform: scale3d(1.05, 1.05, 1.05);\n  }\n\n  to {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n}\n.animate__pulse {\n  -webkit-animation-name: pulse;\n  animation-name: pulse;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n}\n@-webkit-keyframes rubberBand {\n  from {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n\n  30% {\n    -webkit-transform: scale3d(1.25, 0.75, 1);\n    transform: scale3d(1.25, 0.75, 1);\n  }\n\n  40% {\n    -webkit-transform: scale3d(0.75, 1.25, 1);\n    transform: scale3d(0.75, 1.25, 1);\n  }\n\n  50% {\n    -webkit-transform: scale3d(1.15, 0.85, 1);\n    transform: scale3d(1.15, 0.85, 1);\n  }\n\n  65% {\n    -webkit-transform: scale3d(0.95, 1.05, 1);\n    transform: scale3d(0.95, 1.05, 1);\n  }\n\n  75% {\n    -webkit-transform: scale3d(1.05, 0.95, 1);\n    transform: scale3d(1.05, 0.95, 1);\n  }\n\n  to {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n}\n@keyframes rubberBand {\n  from {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n\n  30% {\n    -webkit-transform: scale3d(1.25, 0.75, 1);\n    transform: scale3d(1.25, 0.75, 1);\n  }\n\n  40% {\n    -webkit-transform: scale3d(0.75, 1.25, 1);\n    transform: scale3d(0.75, 1.25, 1);\n  }\n\n  50% {\n    -webkit-transform: scale3d(1.15, 0.85, 1);\n    transform: scale3d(1.15, 0.85, 1);\n  }\n\n  65% {\n    -webkit-transform: scale3d(0.95, 1.05, 1);\n    transform: scale3d(0.95, 1.05, 1);\n  }\n\n  75% {\n    -webkit-transform: scale3d(1.05, 0.95, 1);\n    transform: scale3d(1.05, 0.95, 1);\n  }\n\n  to {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n}\n.animate__rubberBand {\n  -webkit-animation-name: rubberBand;\n  animation-name: rubberBand;\n}\n@-webkit-keyframes shakeX {\n  from,\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  10%,\n  30%,\n  50%,\n  70%,\n  90% {\n    -webkit-transform: translate3d(-10px, 0, 0);\n    transform: translate3d(-10px, 0, 0);\n  }\n\n  20%,\n  40%,\n  60%,\n  80% {\n    -webkit-transform: translate3d(10px, 0, 0);\n    transform: translate3d(10px, 0, 0);\n  }\n}\n@keyframes shakeX {\n  from,\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  10%,\n  30%,\n  50%,\n  70%,\n  90% {\n    -webkit-transform: translate3d(-10px, 0, 0);\n    transform: translate3d(-10px, 0, 0);\n  }\n\n  20%,\n  40%,\n  60%,\n  80% {\n    -webkit-transform: translate3d(10px, 0, 0);\n    transform: translate3d(10px, 0, 0);\n  }\n}\n.animate__shakeX {\n  -webkit-animation-name: shakeX;\n  animation-name: shakeX;\n}\n@-webkit-keyframes shakeY {\n  from,\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  10%,\n  30%,\n  50%,\n  70%,\n  90% {\n    -webkit-transform: translate3d(0, -10px, 0);\n    transform: translate3d(0, -10px, 0);\n  }\n\n  20%,\n  40%,\n  60%,\n  80% {\n    -webkit-transform: translate3d(0, 10px, 0);\n    transform: translate3d(0, 10px, 0);\n  }\n}\n@keyframes shakeY {\n  from,\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  10%,\n  30%,\n  50%,\n  70%,\n  90% {\n    -webkit-transform: translate3d(0, -10px, 0);\n    transform: translate3d(0, -10px, 0);\n  }\n\n  20%,\n  40%,\n  60%,\n  80% {\n    -webkit-transform: translate3d(0, 10px, 0);\n    transform: translate3d(0, 10px, 0);\n  }\n}\n.animate__shakeY {\n  -webkit-animation-name: shakeY;\n  animation-name: shakeY;\n}\n@-webkit-keyframes headShake {\n  0% {\n    -webkit-transform: translateX(0);\n    transform: translateX(0);\n  }\n\n  6.5% {\n    -webkit-transform: translateX(-6px) rotateY(-9deg);\n    transform: translateX(-6px) rotateY(-9deg);\n  }\n\n  18.5% {\n    -webkit-transform: translateX(5px) rotateY(7deg);\n    transform: translateX(5px) rotateY(7deg);\n  }\n\n  31.5% {\n    -webkit-transform: translateX(-3px) rotateY(-5deg);\n    transform: translateX(-3px) rotateY(-5deg);\n  }\n\n  43.5% {\n    -webkit-transform: translateX(2px) rotateY(3deg);\n    transform: translateX(2px) rotateY(3deg);\n  }\n\n  50% {\n    -webkit-transform: translateX(0);\n    transform: translateX(0);\n  }\n}\n@keyframes headShake {\n  0% {\n    -webkit-transform: translateX(0);\n    transform: translateX(0);\n  }\n\n  6.5% {\n    -webkit-transform: translateX(-6px) rotateY(-9deg);\n    transform: translateX(-6px) rotateY(-9deg);\n  }\n\n  18.5% {\n    -webkit-transform: translateX(5px) rotateY(7deg);\n    transform: translateX(5px) rotateY(7deg);\n  }\n\n  31.5% {\n    -webkit-transform: translateX(-3px) rotateY(-5deg);\n    transform: translateX(-3px) rotateY(-5deg);\n  }\n\n  43.5% {\n    -webkit-transform: translateX(2px) rotateY(3deg);\n    transform: translateX(2px) rotateY(3deg);\n  }\n\n  50% {\n    -webkit-transform: translateX(0);\n    transform: translateX(0);\n  }\n}\n.animate__headShake {\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-name: headShake;\n  animation-name: headShake;\n}\n@-webkit-keyframes swing {\n  20% {\n    -webkit-transform: rotate3d(0, 0, 1, 15deg);\n    transform: rotate3d(0, 0, 1, 15deg);\n  }\n\n  40% {\n    -webkit-transform: rotate3d(0, 0, 1, -10deg);\n    transform: rotate3d(0, 0, 1, -10deg);\n  }\n\n  60% {\n    -webkit-transform: rotate3d(0, 0, 1, 5deg);\n    transform: rotate3d(0, 0, 1, 5deg);\n  }\n\n  80% {\n    -webkit-transform: rotate3d(0, 0, 1, -5deg);\n    transform: rotate3d(0, 0, 1, -5deg);\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, 0deg);\n    transform: rotate3d(0, 0, 1, 0deg);\n  }\n}\n@keyframes swing {\n  20% {\n    -webkit-transform: rotate3d(0, 0, 1, 15deg);\n    transform: rotate3d(0, 0, 1, 15deg);\n  }\n\n  40% {\n    -webkit-transform: rotate3d(0, 0, 1, -10deg);\n    transform: rotate3d(0, 0, 1, -10deg);\n  }\n\n  60% {\n    -webkit-transform: rotate3d(0, 0, 1, 5deg);\n    transform: rotate3d(0, 0, 1, 5deg);\n  }\n\n  80% {\n    -webkit-transform: rotate3d(0, 0, 1, -5deg);\n    transform: rotate3d(0, 0, 1, -5deg);\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, 0deg);\n    transform: rotate3d(0, 0, 1, 0deg);\n  }\n}\n.animate__swing {\n  -webkit-transform-origin: top center;\n  transform-origin: top center;\n  -webkit-animation-name: swing;\n  animation-name: swing;\n}\n@-webkit-keyframes tada {\n  from {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n\n  10%,\n  20% {\n    -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);\n    transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);\n  }\n\n  30%,\n  50%,\n  70%,\n  90% {\n    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);\n    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);\n  }\n\n  40%,\n  60%,\n  80% {\n    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);\n    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);\n  }\n\n  to {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n}\n@keyframes tada {\n  from {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n\n  10%,\n  20% {\n    -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);\n    transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);\n  }\n\n  30%,\n  50%,\n  70%,\n  90% {\n    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);\n    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);\n  }\n\n  40%,\n  60%,\n  80% {\n    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);\n    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);\n  }\n\n  to {\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n}\n.animate__tada {\n  -webkit-animation-name: tada;\n  animation-name: tada;\n}\n/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */\n@-webkit-keyframes wobble {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  15% {\n    -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);\n    transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);\n  }\n\n  30% {\n    -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);\n    transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);\n  }\n\n  45% {\n    -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);\n    transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);\n  }\n\n  60% {\n    -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);\n    transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);\n  }\n\n  75% {\n    -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);\n    transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes wobble {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  15% {\n    -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);\n    transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);\n  }\n\n  30% {\n    -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);\n    transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);\n  }\n\n  45% {\n    -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);\n    transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);\n  }\n\n  60% {\n    -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);\n    transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);\n  }\n\n  75% {\n    -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);\n    transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__wobble {\n  -webkit-animation-name: wobble;\n  animation-name: wobble;\n}\n@-webkit-keyframes jello {\n  from,\n  11.1%,\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  22.2% {\n    -webkit-transform: skewX(-12.5deg) skewY(-12.5deg);\n    transform: skewX(-12.5deg) skewY(-12.5deg);\n  }\n\n  33.3% {\n    -webkit-transform: skewX(6.25deg) skewY(6.25deg);\n    transform: skewX(6.25deg) skewY(6.25deg);\n  }\n\n  44.4% {\n    -webkit-transform: skewX(-3.125deg) skewY(-3.125deg);\n    transform: skewX(-3.125deg) skewY(-3.125deg);\n  }\n\n  55.5% {\n    -webkit-transform: skewX(1.5625deg) skewY(1.5625deg);\n    transform: skewX(1.5625deg) skewY(1.5625deg);\n  }\n\n  66.6% {\n    -webkit-transform: skewX(-0.78125deg) skewY(-0.78125deg);\n    transform: skewX(-0.78125deg) skewY(-0.78125deg);\n  }\n\n  77.7% {\n    -webkit-transform: skewX(0.390625deg) skewY(0.390625deg);\n    transform: skewX(0.390625deg) skewY(0.390625deg);\n  }\n\n  88.8% {\n    -webkit-transform: skewX(-0.1953125deg) skewY(-0.1953125deg);\n    transform: skewX(-0.1953125deg) skewY(-0.1953125deg);\n  }\n}\n@keyframes jello {\n  from,\n  11.1%,\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  22.2% {\n    -webkit-transform: skewX(-12.5deg) skewY(-12.5deg);\n    transform: skewX(-12.5deg) skewY(-12.5deg);\n  }\n\n  33.3% {\n    -webkit-transform: skewX(6.25deg) skewY(6.25deg);\n    transform: skewX(6.25deg) skewY(6.25deg);\n  }\n\n  44.4% {\n    -webkit-transform: skewX(-3.125deg) skewY(-3.125deg);\n    transform: skewX(-3.125deg) skewY(-3.125deg);\n  }\n\n  55.5% {\n    -webkit-transform: skewX(1.5625deg) skewY(1.5625deg);\n    transform: skewX(1.5625deg) skewY(1.5625deg);\n  }\n\n  66.6% {\n    -webkit-transform: skewX(-0.78125deg) skewY(-0.78125deg);\n    transform: skewX(-0.78125deg) skewY(-0.78125deg);\n  }\n\n  77.7% {\n    -webkit-transform: skewX(0.390625deg) skewY(0.390625deg);\n    transform: skewX(0.390625deg) skewY(0.390625deg);\n  }\n\n  88.8% {\n    -webkit-transform: skewX(-0.1953125deg) skewY(-0.1953125deg);\n    transform: skewX(-0.1953125deg) skewY(-0.1953125deg);\n  }\n}\n.animate__jello {\n  -webkit-animation-name: jello;\n  animation-name: jello;\n  -webkit-transform-origin: center;\n  transform-origin: center;\n}\n@-webkit-keyframes heartBeat {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n\n  14% {\n    -webkit-transform: scale(1.3);\n    transform: scale(1.3);\n  }\n\n  28% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n\n  42% {\n    -webkit-transform: scale(1.3);\n    transform: scale(1.3);\n  }\n\n  70% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n}\n@keyframes heartBeat {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n\n  14% {\n    -webkit-transform: scale(1.3);\n    transform: scale(1.3);\n  }\n\n  28% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n\n  42% {\n    -webkit-transform: scale(1.3);\n    transform: scale(1.3);\n  }\n\n  70% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n}\n.animate__heartBeat {\n  -webkit-animation-name: heartBeat;\n  animation-name: heartBeat;\n  -webkit-animation-duration: calc(1s * 1.3);\n  animation-duration: calc(1s * 1.3);\n  -webkit-animation-duration: calc(var(--animate-duration) * 1.3);\n  animation-duration: calc(var(--animate-duration) * 1.3);\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n}\n/* Back entrances */\n@-webkit-keyframes backInDown {\n  0% {\n    -webkit-transform: translateY(-1200px) scale(0.7);\n    transform: translateY(-1200px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  80% {\n    -webkit-transform: translateY(0px) scale(0.7);\n    transform: translateY(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes backInDown {\n  0% {\n    -webkit-transform: translateY(-1200px) scale(0.7);\n    transform: translateY(-1200px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  80% {\n    -webkit-transform: translateY(0px) scale(0.7);\n    transform: translateY(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n.animate__backInDown {\n  -webkit-animation-name: backInDown;\n  animation-name: backInDown;\n}\n@-webkit-keyframes backInLeft {\n  0% {\n    -webkit-transform: translateX(-2000px) scale(0.7);\n    transform: translateX(-2000px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  80% {\n    -webkit-transform: translateX(0px) scale(0.7);\n    transform: translateX(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes backInLeft {\n  0% {\n    -webkit-transform: translateX(-2000px) scale(0.7);\n    transform: translateX(-2000px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  80% {\n    -webkit-transform: translateX(0px) scale(0.7);\n    transform: translateX(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n.animate__backInLeft {\n  -webkit-animation-name: backInLeft;\n  animation-name: backInLeft;\n}\n@-webkit-keyframes backInRight {\n  0% {\n    -webkit-transform: translateX(2000px) scale(0.7);\n    transform: translateX(2000px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  80% {\n    -webkit-transform: translateX(0px) scale(0.7);\n    transform: translateX(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes backInRight {\n  0% {\n    -webkit-transform: translateX(2000px) scale(0.7);\n    transform: translateX(2000px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  80% {\n    -webkit-transform: translateX(0px) scale(0.7);\n    transform: translateX(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n.animate__backInRight {\n  -webkit-animation-name: backInRight;\n  animation-name: backInRight;\n}\n@-webkit-keyframes backInUp {\n  0% {\n    -webkit-transform: translateY(1200px) scale(0.7);\n    transform: translateY(1200px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  80% {\n    -webkit-transform: translateY(0px) scale(0.7);\n    transform: translateY(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes backInUp {\n  0% {\n    -webkit-transform: translateY(1200px) scale(0.7);\n    transform: translateY(1200px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  80% {\n    -webkit-transform: translateY(0px) scale(0.7);\n    transform: translateY(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n.animate__backInUp {\n  -webkit-animation-name: backInUp;\n  animation-name: backInUp;\n}\n/* Back exits */\n@-webkit-keyframes backOutDown {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  20% {\n    -webkit-transform: translateY(0px) scale(0.7);\n    transform: translateY(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: translateY(700px) scale(0.7);\n    transform: translateY(700px) scale(0.7);\n    opacity: 0.7;\n  }\n}\n@keyframes backOutDown {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  20% {\n    -webkit-transform: translateY(0px) scale(0.7);\n    transform: translateY(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: translateY(700px) scale(0.7);\n    transform: translateY(700px) scale(0.7);\n    opacity: 0.7;\n  }\n}\n.animate__backOutDown {\n  -webkit-animation-name: backOutDown;\n  animation-name: backOutDown;\n}\n@-webkit-keyframes backOutLeft {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  20% {\n    -webkit-transform: translateX(0px) scale(0.7);\n    transform: translateX(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: translateX(-2000px) scale(0.7);\n    transform: translateX(-2000px) scale(0.7);\n    opacity: 0.7;\n  }\n}\n@keyframes backOutLeft {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  20% {\n    -webkit-transform: translateX(0px) scale(0.7);\n    transform: translateX(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: translateX(-2000px) scale(0.7);\n    transform: translateX(-2000px) scale(0.7);\n    opacity: 0.7;\n  }\n}\n.animate__backOutLeft {\n  -webkit-animation-name: backOutLeft;\n  animation-name: backOutLeft;\n}\n@-webkit-keyframes backOutRight {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  20% {\n    -webkit-transform: translateX(0px) scale(0.7);\n    transform: translateX(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: translateX(2000px) scale(0.7);\n    transform: translateX(2000px) scale(0.7);\n    opacity: 0.7;\n  }\n}\n@keyframes backOutRight {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  20% {\n    -webkit-transform: translateX(0px) scale(0.7);\n    transform: translateX(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: translateX(2000px) scale(0.7);\n    transform: translateX(2000px) scale(0.7);\n    opacity: 0.7;\n  }\n}\n.animate__backOutRight {\n  -webkit-animation-name: backOutRight;\n  animation-name: backOutRight;\n}\n@-webkit-keyframes backOutUp {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  20% {\n    -webkit-transform: translateY(0px) scale(0.7);\n    transform: translateY(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: translateY(-700px) scale(0.7);\n    transform: translateY(-700px) scale(0.7);\n    opacity: 0.7;\n  }\n}\n@keyframes backOutUp {\n  0% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  20% {\n    -webkit-transform: translateY(0px) scale(0.7);\n    transform: translateY(0px) scale(0.7);\n    opacity: 0.7;\n  }\n\n  100% {\n    -webkit-transform: translateY(-700px) scale(0.7);\n    transform: translateY(-700px) scale(0.7);\n    opacity: 0.7;\n  }\n}\n.animate__backOutUp {\n  -webkit-animation-name: backOutUp;\n  animation-name: backOutUp;\n}\n/* Bouncing entrances  */\n@-webkit-keyframes bounceIn {\n  from,\n  20%,\n  40%,\n  60%,\n  80%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n\n  20% {\n    -webkit-transform: scale3d(1.1, 1.1, 1.1);\n    transform: scale3d(1.1, 1.1, 1.1);\n  }\n\n  40% {\n    -webkit-transform: scale3d(0.9, 0.9, 0.9);\n    transform: scale3d(0.9, 0.9, 0.9);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(1.03, 1.03, 1.03);\n    transform: scale3d(1.03, 1.03, 1.03);\n  }\n\n  80% {\n    -webkit-transform: scale3d(0.97, 0.97, 0.97);\n    transform: scale3d(0.97, 0.97, 0.97);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n}\n@keyframes bounceIn {\n  from,\n  20%,\n  40%,\n  60%,\n  80%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n\n  20% {\n    -webkit-transform: scale3d(1.1, 1.1, 1.1);\n    transform: scale3d(1.1, 1.1, 1.1);\n  }\n\n  40% {\n    -webkit-transform: scale3d(0.9, 0.9, 0.9);\n    transform: scale3d(0.9, 0.9, 0.9);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(1.03, 1.03, 1.03);\n    transform: scale3d(1.03, 1.03, 1.03);\n  }\n\n  80% {\n    -webkit-transform: scale3d(0.97, 0.97, 0.97);\n    transform: scale3d(0.97, 0.97, 0.97);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: scale3d(1, 1, 1);\n    transform: scale3d(1, 1, 1);\n  }\n}\n.animate__bounceIn {\n  -webkit-animation-duration: calc(1s * 0.75);\n  animation-duration: calc(1s * 0.75);\n  -webkit-animation-duration: calc(var(--animate-duration) * 0.75);\n  animation-duration: calc(var(--animate-duration) * 0.75);\n  -webkit-animation-name: bounceIn;\n  animation-name: bounceIn;\n}\n@-webkit-keyframes bounceInDown {\n  from,\n  60%,\n  75%,\n  90%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -3000px, 0) scaleY(3);\n    transform: translate3d(0, -3000px, 0) scaleY(3);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 25px, 0) scaleY(0.9);\n    transform: translate3d(0, 25px, 0) scaleY(0.9);\n  }\n\n  75% {\n    -webkit-transform: translate3d(0, -10px, 0) scaleY(0.95);\n    transform: translate3d(0, -10px, 0) scaleY(0.95);\n  }\n\n  90% {\n    -webkit-transform: translate3d(0, 5px, 0) scaleY(0.985);\n    transform: translate3d(0, 5px, 0) scaleY(0.985);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes bounceInDown {\n  from,\n  60%,\n  75%,\n  90%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -3000px, 0) scaleY(3);\n    transform: translate3d(0, -3000px, 0) scaleY(3);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 25px, 0) scaleY(0.9);\n    transform: translate3d(0, 25px, 0) scaleY(0.9);\n  }\n\n  75% {\n    -webkit-transform: translate3d(0, -10px, 0) scaleY(0.95);\n    transform: translate3d(0, -10px, 0) scaleY(0.95);\n  }\n\n  90% {\n    -webkit-transform: translate3d(0, 5px, 0) scaleY(0.985);\n    transform: translate3d(0, 5px, 0) scaleY(0.985);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__bounceInDown {\n  -webkit-animation-name: bounceInDown;\n  animation-name: bounceInDown;\n}\n@-webkit-keyframes bounceInLeft {\n  from,\n  60%,\n  75%,\n  90%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(-3000px, 0, 0) scaleX(3);\n    transform: translate3d(-3000px, 0, 0) scaleX(3);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(25px, 0, 0) scaleX(1);\n    transform: translate3d(25px, 0, 0) scaleX(1);\n  }\n\n  75% {\n    -webkit-transform: translate3d(-10px, 0, 0) scaleX(0.98);\n    transform: translate3d(-10px, 0, 0) scaleX(0.98);\n  }\n\n  90% {\n    -webkit-transform: translate3d(5px, 0, 0) scaleX(0.995);\n    transform: translate3d(5px, 0, 0) scaleX(0.995);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes bounceInLeft {\n  from,\n  60%,\n  75%,\n  90%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(-3000px, 0, 0) scaleX(3);\n    transform: translate3d(-3000px, 0, 0) scaleX(3);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(25px, 0, 0) scaleX(1);\n    transform: translate3d(25px, 0, 0) scaleX(1);\n  }\n\n  75% {\n    -webkit-transform: translate3d(-10px, 0, 0) scaleX(0.98);\n    transform: translate3d(-10px, 0, 0) scaleX(0.98);\n  }\n\n  90% {\n    -webkit-transform: translate3d(5px, 0, 0) scaleX(0.995);\n    transform: translate3d(5px, 0, 0) scaleX(0.995);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__bounceInLeft {\n  -webkit-animation-name: bounceInLeft;\n  animation-name: bounceInLeft;\n}\n@-webkit-keyframes bounceInRight {\n  from,\n  60%,\n  75%,\n  90%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(3000px, 0, 0) scaleX(3);\n    transform: translate3d(3000px, 0, 0) scaleX(3);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(-25px, 0, 0) scaleX(1);\n    transform: translate3d(-25px, 0, 0) scaleX(1);\n  }\n\n  75% {\n    -webkit-transform: translate3d(10px, 0, 0) scaleX(0.98);\n    transform: translate3d(10px, 0, 0) scaleX(0.98);\n  }\n\n  90% {\n    -webkit-transform: translate3d(-5px, 0, 0) scaleX(0.995);\n    transform: translate3d(-5px, 0, 0) scaleX(0.995);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes bounceInRight {\n  from,\n  60%,\n  75%,\n  90%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(3000px, 0, 0) scaleX(3);\n    transform: translate3d(3000px, 0, 0) scaleX(3);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(-25px, 0, 0) scaleX(1);\n    transform: translate3d(-25px, 0, 0) scaleX(1);\n  }\n\n  75% {\n    -webkit-transform: translate3d(10px, 0, 0) scaleX(0.98);\n    transform: translate3d(10px, 0, 0) scaleX(0.98);\n  }\n\n  90% {\n    -webkit-transform: translate3d(-5px, 0, 0) scaleX(0.995);\n    transform: translate3d(-5px, 0, 0) scaleX(0.995);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__bounceInRight {\n  -webkit-animation-name: bounceInRight;\n  animation-name: bounceInRight;\n}\n@-webkit-keyframes bounceInUp {\n  from,\n  60%,\n  75%,\n  90%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 3000px, 0) scaleY(5);\n    transform: translate3d(0, 3000px, 0) scaleY(5);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, -20px, 0) scaleY(0.9);\n    transform: translate3d(0, -20px, 0) scaleY(0.9);\n  }\n\n  75% {\n    -webkit-transform: translate3d(0, 10px, 0) scaleY(0.95);\n    transform: translate3d(0, 10px, 0) scaleY(0.95);\n  }\n\n  90% {\n    -webkit-transform: translate3d(0, -5px, 0) scaleY(0.985);\n    transform: translate3d(0, -5px, 0) scaleY(0.985);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes bounceInUp {\n  from,\n  60%,\n  75%,\n  90%,\n  to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 3000px, 0) scaleY(5);\n    transform: translate3d(0, 3000px, 0) scaleY(5);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, -20px, 0) scaleY(0.9);\n    transform: translate3d(0, -20px, 0) scaleY(0.9);\n  }\n\n  75% {\n    -webkit-transform: translate3d(0, 10px, 0) scaleY(0.95);\n    transform: translate3d(0, 10px, 0) scaleY(0.95);\n  }\n\n  90% {\n    -webkit-transform: translate3d(0, -5px, 0) scaleY(0.985);\n    transform: translate3d(0, -5px, 0) scaleY(0.985);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__bounceInUp {\n  -webkit-animation-name: bounceInUp;\n  animation-name: bounceInUp;\n}\n/* Bouncing exits  */\n@-webkit-keyframes bounceOut {\n  20% {\n    -webkit-transform: scale3d(0.9, 0.9, 0.9);\n    transform: scale3d(0.9, 0.9, 0.9);\n  }\n\n  50%,\n  55% {\n    opacity: 1;\n    -webkit-transform: scale3d(1.1, 1.1, 1.1);\n    transform: scale3d(1.1, 1.1, 1.1);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n}\n@keyframes bounceOut {\n  20% {\n    -webkit-transform: scale3d(0.9, 0.9, 0.9);\n    transform: scale3d(0.9, 0.9, 0.9);\n  }\n\n  50%,\n  55% {\n    opacity: 1;\n    -webkit-transform: scale3d(1.1, 1.1, 1.1);\n    transform: scale3d(1.1, 1.1, 1.1);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n}\n.animate__bounceOut {\n  -webkit-animation-duration: calc(1s * 0.75);\n  animation-duration: calc(1s * 0.75);\n  -webkit-animation-duration: calc(var(--animate-duration) * 0.75);\n  animation-duration: calc(var(--animate-duration) * 0.75);\n  -webkit-animation-name: bounceOut;\n  animation-name: bounceOut;\n}\n@-webkit-keyframes bounceOutDown {\n  20% {\n    -webkit-transform: translate3d(0, 10px, 0) scaleY(0.985);\n    transform: translate3d(0, 10px, 0) scaleY(0.985);\n  }\n\n  40%,\n  45% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, -20px, 0) scaleY(0.9);\n    transform: translate3d(0, -20px, 0) scaleY(0.9);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 2000px, 0) scaleY(3);\n    transform: translate3d(0, 2000px, 0) scaleY(3);\n  }\n}\n@keyframes bounceOutDown {\n  20% {\n    -webkit-transform: translate3d(0, 10px, 0) scaleY(0.985);\n    transform: translate3d(0, 10px, 0) scaleY(0.985);\n  }\n\n  40%,\n  45% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, -20px, 0) scaleY(0.9);\n    transform: translate3d(0, -20px, 0) scaleY(0.9);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 2000px, 0) scaleY(3);\n    transform: translate3d(0, 2000px, 0) scaleY(3);\n  }\n}\n.animate__bounceOutDown {\n  -webkit-animation-name: bounceOutDown;\n  animation-name: bounceOutDown;\n}\n@-webkit-keyframes bounceOutLeft {\n  20% {\n    opacity: 1;\n    -webkit-transform: translate3d(20px, 0, 0) scaleX(0.9);\n    transform: translate3d(20px, 0, 0) scaleX(0.9);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-2000px, 0, 0) scaleX(2);\n    transform: translate3d(-2000px, 0, 0) scaleX(2);\n  }\n}\n@keyframes bounceOutLeft {\n  20% {\n    opacity: 1;\n    -webkit-transform: translate3d(20px, 0, 0) scaleX(0.9);\n    transform: translate3d(20px, 0, 0) scaleX(0.9);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-2000px, 0, 0) scaleX(2);\n    transform: translate3d(-2000px, 0, 0) scaleX(2);\n  }\n}\n.animate__bounceOutLeft {\n  -webkit-animation-name: bounceOutLeft;\n  animation-name: bounceOutLeft;\n}\n@-webkit-keyframes bounceOutRight {\n  20% {\n    opacity: 1;\n    -webkit-transform: translate3d(-20px, 0, 0) scaleX(0.9);\n    transform: translate3d(-20px, 0, 0) scaleX(0.9);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(2000px, 0, 0) scaleX(2);\n    transform: translate3d(2000px, 0, 0) scaleX(2);\n  }\n}\n@keyframes bounceOutRight {\n  20% {\n    opacity: 1;\n    -webkit-transform: translate3d(-20px, 0, 0) scaleX(0.9);\n    transform: translate3d(-20px, 0, 0) scaleX(0.9);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(2000px, 0, 0) scaleX(2);\n    transform: translate3d(2000px, 0, 0) scaleX(2);\n  }\n}\n.animate__bounceOutRight {\n  -webkit-animation-name: bounceOutRight;\n  animation-name: bounceOutRight;\n}\n@-webkit-keyframes bounceOutUp {\n  20% {\n    -webkit-transform: translate3d(0, -10px, 0) scaleY(0.985);\n    transform: translate3d(0, -10px, 0) scaleY(0.985);\n  }\n\n  40%,\n  45% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 20px, 0) scaleY(0.9);\n    transform: translate3d(0, 20px, 0) scaleY(0.9);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -2000px, 0) scaleY(3);\n    transform: translate3d(0, -2000px, 0) scaleY(3);\n  }\n}\n@keyframes bounceOutUp {\n  20% {\n    -webkit-transform: translate3d(0, -10px, 0) scaleY(0.985);\n    transform: translate3d(0, -10px, 0) scaleY(0.985);\n  }\n\n  40%,\n  45% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 20px, 0) scaleY(0.9);\n    transform: translate3d(0, 20px, 0) scaleY(0.9);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -2000px, 0) scaleY(3);\n    transform: translate3d(0, -2000px, 0) scaleY(3);\n  }\n}\n.animate__bounceOutUp {\n  -webkit-animation-name: bounceOutUp;\n  animation-name: bounceOutUp;\n}\n/* Fading entrances  */\n@-webkit-keyframes fadeIn {\n  from {\n    opacity: 0;\n  }\n\n  to {\n    opacity: 1;\n  }\n}\n@keyframes fadeIn {\n  from {\n    opacity: 0;\n  }\n\n  to {\n    opacity: 1;\n  }\n}\n.animate__fadeIn {\n  -webkit-animation-name: fadeIn;\n  animation-name: fadeIn;\n}\n@-webkit-keyframes fadeInDown {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInDown {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInDown {\n  -webkit-animation-name: fadeInDown;\n  animation-name: fadeInDown;\n}\n@-webkit-keyframes fadeInDownBig {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -2000px, 0);\n    transform: translate3d(0, -2000px, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInDownBig {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -2000px, 0);\n    transform: translate3d(0, -2000px, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInDownBig {\n  -webkit-animation-name: fadeInDownBig;\n  animation-name: fadeInDownBig;\n}\n@-webkit-keyframes fadeInLeft {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInLeft {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInLeft {\n  -webkit-animation-name: fadeInLeft;\n  animation-name: fadeInLeft;\n}\n@-webkit-keyframes fadeInLeftBig {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-2000px, 0, 0);\n    transform: translate3d(-2000px, 0, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInLeftBig {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-2000px, 0, 0);\n    transform: translate3d(-2000px, 0, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInLeftBig {\n  -webkit-animation-name: fadeInLeftBig;\n  animation-name: fadeInLeftBig;\n}\n@-webkit-keyframes fadeInRight {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInRight {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInRight {\n  -webkit-animation-name: fadeInRight;\n  animation-name: fadeInRight;\n}\n@-webkit-keyframes fadeInRightBig {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(2000px, 0, 0);\n    transform: translate3d(2000px, 0, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInRightBig {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(2000px, 0, 0);\n    transform: translate3d(2000px, 0, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInRightBig {\n  -webkit-animation-name: fadeInRightBig;\n  animation-name: fadeInRightBig;\n}\n@-webkit-keyframes fadeInUp {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 100%, 0);\n    transform: translate3d(0, 100%, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInUp {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 100%, 0);\n    transform: translate3d(0, 100%, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInUp {\n  -webkit-animation-name: fadeInUp;\n  animation-name: fadeInUp;\n}\n@-webkit-keyframes fadeInUpBig {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 2000px, 0);\n    transform: translate3d(0, 2000px, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInUpBig {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 2000px, 0);\n    transform: translate3d(0, 2000px, 0);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInUpBig {\n  -webkit-animation-name: fadeInUpBig;\n  animation-name: fadeInUpBig;\n}\n@-webkit-keyframes fadeInTopLeft {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, -100%, 0);\n    transform: translate3d(-100%, -100%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInTopLeft {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, -100%, 0);\n    transform: translate3d(-100%, -100%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInTopLeft {\n  -webkit-animation-name: fadeInTopLeft;\n  animation-name: fadeInTopLeft;\n}\n@-webkit-keyframes fadeInTopRight {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, -100%, 0);\n    transform: translate3d(100%, -100%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInTopRight {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, -100%, 0);\n    transform: translate3d(100%, -100%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInTopRight {\n  -webkit-animation-name: fadeInTopRight;\n  animation-name: fadeInTopRight;\n}\n@-webkit-keyframes fadeInBottomLeft {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 100%, 0);\n    transform: translate3d(-100%, 100%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInBottomLeft {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 100%, 0);\n    transform: translate3d(-100%, 100%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInBottomLeft {\n  -webkit-animation-name: fadeInBottomLeft;\n  animation-name: fadeInBottomLeft;\n}\n@-webkit-keyframes fadeInBottomRight {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 100%, 0);\n    transform: translate3d(100%, 100%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes fadeInBottomRight {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 100%, 0);\n    transform: translate3d(100%, 100%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__fadeInBottomRight {\n  -webkit-animation-name: fadeInBottomRight;\n  animation-name: fadeInBottomRight;\n}\n/* Fading exits */\n@-webkit-keyframes fadeOut {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n  }\n}\n@keyframes fadeOut {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n  }\n}\n.animate__fadeOut {\n  -webkit-animation-name: fadeOut;\n  animation-name: fadeOut;\n}\n@-webkit-keyframes fadeOutDown {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 100%, 0);\n    transform: translate3d(0, 100%, 0);\n  }\n}\n@keyframes fadeOutDown {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 100%, 0);\n    transform: translate3d(0, 100%, 0);\n  }\n}\n.animate__fadeOutDown {\n  -webkit-animation-name: fadeOutDown;\n  animation-name: fadeOutDown;\n}\n@-webkit-keyframes fadeOutDownBig {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 2000px, 0);\n    transform: translate3d(0, 2000px, 0);\n  }\n}\n@keyframes fadeOutDownBig {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 2000px, 0);\n    transform: translate3d(0, 2000px, 0);\n  }\n}\n.animate__fadeOutDownBig {\n  -webkit-animation-name: fadeOutDownBig;\n  animation-name: fadeOutDownBig;\n}\n@-webkit-keyframes fadeOutLeft {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n  }\n}\n@keyframes fadeOutLeft {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n  }\n}\n.animate__fadeOutLeft {\n  -webkit-animation-name: fadeOutLeft;\n  animation-name: fadeOutLeft;\n}\n@-webkit-keyframes fadeOutLeftBig {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-2000px, 0, 0);\n    transform: translate3d(-2000px, 0, 0);\n  }\n}\n@keyframes fadeOutLeftBig {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-2000px, 0, 0);\n    transform: translate3d(-2000px, 0, 0);\n  }\n}\n.animate__fadeOutLeftBig {\n  -webkit-animation-name: fadeOutLeftBig;\n  animation-name: fadeOutLeftBig;\n}\n@-webkit-keyframes fadeOutRight {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n  }\n}\n@keyframes fadeOutRight {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n  }\n}\n.animate__fadeOutRight {\n  -webkit-animation-name: fadeOutRight;\n  animation-name: fadeOutRight;\n}\n@-webkit-keyframes fadeOutRightBig {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(2000px, 0, 0);\n    transform: translate3d(2000px, 0, 0);\n  }\n}\n@keyframes fadeOutRightBig {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(2000px, 0, 0);\n    transform: translate3d(2000px, 0, 0);\n  }\n}\n.animate__fadeOutRightBig {\n  -webkit-animation-name: fadeOutRightBig;\n  animation-name: fadeOutRightBig;\n}\n@-webkit-keyframes fadeOutUp {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n}\n@keyframes fadeOutUp {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n}\n.animate__fadeOutUp {\n  -webkit-animation-name: fadeOutUp;\n  animation-name: fadeOutUp;\n}\n@-webkit-keyframes fadeOutUpBig {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -2000px, 0);\n    transform: translate3d(0, -2000px, 0);\n  }\n}\n@keyframes fadeOutUpBig {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -2000px, 0);\n    transform: translate3d(0, -2000px, 0);\n  }\n}\n.animate__fadeOutUpBig {\n  -webkit-animation-name: fadeOutUpBig;\n  animation-name: fadeOutUpBig;\n}\n@-webkit-keyframes fadeOutTopLeft {\n  from {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, -100%, 0);\n    transform: translate3d(-100%, -100%, 0);\n  }\n}\n@keyframes fadeOutTopLeft {\n  from {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, -100%, 0);\n    transform: translate3d(-100%, -100%, 0);\n  }\n}\n.animate__fadeOutTopLeft {\n  -webkit-animation-name: fadeOutTopLeft;\n  animation-name: fadeOutTopLeft;\n}\n@-webkit-keyframes fadeOutTopRight {\n  from {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, -100%, 0);\n    transform: translate3d(100%, -100%, 0);\n  }\n}\n@keyframes fadeOutTopRight {\n  from {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, -100%, 0);\n    transform: translate3d(100%, -100%, 0);\n  }\n}\n.animate__fadeOutTopRight {\n  -webkit-animation-name: fadeOutTopRight;\n  animation-name: fadeOutTopRight;\n}\n@-webkit-keyframes fadeOutBottomRight {\n  from {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 100%, 0);\n    transform: translate3d(100%, 100%, 0);\n  }\n}\n@keyframes fadeOutBottomRight {\n  from {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 100%, 0);\n    transform: translate3d(100%, 100%, 0);\n  }\n}\n.animate__fadeOutBottomRight {\n  -webkit-animation-name: fadeOutBottomRight;\n  animation-name: fadeOutBottomRight;\n}\n@-webkit-keyframes fadeOutBottomLeft {\n  from {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 100%, 0);\n    transform: translate3d(-100%, 100%, 0);\n  }\n}\n@keyframes fadeOutBottomLeft {\n  from {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 100%, 0);\n    transform: translate3d(-100%, 100%, 0);\n  }\n}\n.animate__fadeOutBottomLeft {\n  -webkit-animation-name: fadeOutBottomLeft;\n  animation-name: fadeOutBottomLeft;\n}\n/* Flippers */\n@-webkit-keyframes flip {\n  from {\n    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, -360deg);\n    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, -360deg);\n    -webkit-animation-timing-function: ease-out;\n    animation-timing-function: ease-out;\n  }\n\n  40% {\n    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)\n      rotate3d(0, 1, 0, -190deg);\n    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)\n      rotate3d(0, 1, 0, -190deg);\n    -webkit-animation-timing-function: ease-out;\n    animation-timing-function: ease-out;\n  }\n\n  50% {\n    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)\n      rotate3d(0, 1, 0, -170deg);\n    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)\n      rotate3d(0, 1, 0, -170deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n\n  80% {\n    -webkit-transform: perspective(400px) scale3d(0.95, 0.95, 0.95) translate3d(0, 0, 0)\n      rotate3d(0, 1, 0, 0deg);\n    transform: perspective(400px) scale3d(0.95, 0.95, 0.95) translate3d(0, 0, 0)\n      rotate3d(0, 1, 0, 0deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n\n  to {\n    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, 0deg);\n    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, 0deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n}\n@keyframes flip {\n  from {\n    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, -360deg);\n    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, -360deg);\n    -webkit-animation-timing-function: ease-out;\n    animation-timing-function: ease-out;\n  }\n\n  40% {\n    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)\n      rotate3d(0, 1, 0, -190deg);\n    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)\n      rotate3d(0, 1, 0, -190deg);\n    -webkit-animation-timing-function: ease-out;\n    animation-timing-function: ease-out;\n  }\n\n  50% {\n    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)\n      rotate3d(0, 1, 0, -170deg);\n    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)\n      rotate3d(0, 1, 0, -170deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n\n  80% {\n    -webkit-transform: perspective(400px) scale3d(0.95, 0.95, 0.95) translate3d(0, 0, 0)\n      rotate3d(0, 1, 0, 0deg);\n    transform: perspective(400px) scale3d(0.95, 0.95, 0.95) translate3d(0, 0, 0)\n      rotate3d(0, 1, 0, 0deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n\n  to {\n    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, 0deg);\n    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, 0deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n}\n.animate__animated.animate__flip {\n  -webkit-backface-visibility: visible;\n  backface-visibility: visible;\n  -webkit-animation-name: flip;\n  animation-name: flip;\n}\n@-webkit-keyframes flipInX {\n  from {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n    opacity: 0;\n  }\n\n  40% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n\n  60% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);\n  }\n\n  to {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n}\n@keyframes flipInX {\n  from {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n    opacity: 0;\n  }\n\n  40% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n\n  60% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);\n  }\n\n  to {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n}\n.animate__flipInX {\n  -webkit-backface-visibility: visible !important;\n  backface-visibility: visible !important;\n  -webkit-animation-name: flipInX;\n  animation-name: flipInX;\n}\n@-webkit-keyframes flipInY {\n  from {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 90deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n    opacity: 0;\n  }\n\n  40% {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -20deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, -20deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n\n  60% {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 10deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -5deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, -5deg);\n  }\n\n  to {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n}\n@keyframes flipInY {\n  from {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 90deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n    opacity: 0;\n  }\n\n  40% {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -20deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, -20deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n\n  60% {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 10deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -5deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, -5deg);\n  }\n\n  to {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n}\n.animate__flipInY {\n  -webkit-backface-visibility: visible !important;\n  backface-visibility: visible !important;\n  -webkit-animation-name: flipInY;\n  animation-name: flipInY;\n}\n@-webkit-keyframes flipOutX {\n  from {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n\n  30% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    opacity: 0;\n  }\n}\n@keyframes flipOutX {\n  from {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n\n  30% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    opacity: 0;\n  }\n}\n.animate__flipOutX {\n  -webkit-animation-duration: calc(1s * 0.75);\n  animation-duration: calc(1s * 0.75);\n  -webkit-animation-duration: calc(var(--animate-duration) * 0.75);\n  animation-duration: calc(var(--animate-duration) * 0.75);\n  -webkit-animation-name: flipOutX;\n  animation-name: flipOutX;\n  -webkit-backface-visibility: visible !important;\n  backface-visibility: visible !important;\n}\n@-webkit-keyframes flipOutY {\n  from {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n\n  30% {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -15deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, -15deg);\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 90deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);\n    opacity: 0;\n  }\n}\n@keyframes flipOutY {\n  from {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n\n  30% {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -15deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, -15deg);\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 90deg);\n    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);\n    opacity: 0;\n  }\n}\n.animate__flipOutY {\n  -webkit-animation-duration: calc(1s * 0.75);\n  animation-duration: calc(1s * 0.75);\n  -webkit-animation-duration: calc(var(--animate-duration) * 0.75);\n  animation-duration: calc(var(--animate-duration) * 0.75);\n  -webkit-backface-visibility: visible !important;\n  backface-visibility: visible !important;\n  -webkit-animation-name: flipOutY;\n  animation-name: flipOutY;\n}\n/* Lightspeed */\n@-webkit-keyframes lightSpeedInRight {\n  from {\n    -webkit-transform: translate3d(100%, 0, 0) skewX(-30deg);\n    transform: translate3d(100%, 0, 0) skewX(-30deg);\n    opacity: 0;\n  }\n\n  60% {\n    -webkit-transform: skewX(20deg);\n    transform: skewX(20deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: skewX(-5deg);\n    transform: skewX(-5deg);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes lightSpeedInRight {\n  from {\n    -webkit-transform: translate3d(100%, 0, 0) skewX(-30deg);\n    transform: translate3d(100%, 0, 0) skewX(-30deg);\n    opacity: 0;\n  }\n\n  60% {\n    -webkit-transform: skewX(20deg);\n    transform: skewX(20deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: skewX(-5deg);\n    transform: skewX(-5deg);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__lightSpeedInRight {\n  -webkit-animation-name: lightSpeedInRight;\n  animation-name: lightSpeedInRight;\n  -webkit-animation-timing-function: ease-out;\n  animation-timing-function: ease-out;\n}\n@-webkit-keyframes lightSpeedInLeft {\n  from {\n    -webkit-transform: translate3d(-100%, 0, 0) skewX(30deg);\n    transform: translate3d(-100%, 0, 0) skewX(30deg);\n    opacity: 0;\n  }\n\n  60% {\n    -webkit-transform: skewX(-20deg);\n    transform: skewX(-20deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: skewX(5deg);\n    transform: skewX(5deg);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes lightSpeedInLeft {\n  from {\n    -webkit-transform: translate3d(-100%, 0, 0) skewX(30deg);\n    transform: translate3d(-100%, 0, 0) skewX(30deg);\n    opacity: 0;\n  }\n\n  60% {\n    -webkit-transform: skewX(-20deg);\n    transform: skewX(-20deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: skewX(5deg);\n    transform: skewX(5deg);\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__lightSpeedInLeft {\n  -webkit-animation-name: lightSpeedInLeft;\n  animation-name: lightSpeedInLeft;\n  -webkit-animation-timing-function: ease-out;\n  animation-timing-function: ease-out;\n}\n@-webkit-keyframes lightSpeedOutRight {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate3d(100%, 0, 0) skewX(30deg);\n    transform: translate3d(100%, 0, 0) skewX(30deg);\n    opacity: 0;\n  }\n}\n@keyframes lightSpeedOutRight {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate3d(100%, 0, 0) skewX(30deg);\n    transform: translate3d(100%, 0, 0) skewX(30deg);\n    opacity: 0;\n  }\n}\n.animate__lightSpeedOutRight {\n  -webkit-animation-name: lightSpeedOutRight;\n  animation-name: lightSpeedOutRight;\n  -webkit-animation-timing-function: ease-in;\n  animation-timing-function: ease-in;\n}\n@-webkit-keyframes lightSpeedOutLeft {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate3d(-100%, 0, 0) skewX(-30deg);\n    transform: translate3d(-100%, 0, 0) skewX(-30deg);\n    opacity: 0;\n  }\n}\n@keyframes lightSpeedOutLeft {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate3d(-100%, 0, 0) skewX(-30deg);\n    transform: translate3d(-100%, 0, 0) skewX(-30deg);\n    opacity: 0;\n  }\n}\n.animate__lightSpeedOutLeft {\n  -webkit-animation-name: lightSpeedOutLeft;\n  animation-name: lightSpeedOutLeft;\n  -webkit-animation-timing-function: ease-in;\n  animation-timing-function: ease-in;\n}\n/* Rotating entrances */\n@-webkit-keyframes rotateIn {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, -200deg);\n    transform: rotate3d(0, 0, 1, -200deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n@keyframes rotateIn {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, -200deg);\n    transform: rotate3d(0, 0, 1, -200deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n.animate__rotateIn {\n  -webkit-animation-name: rotateIn;\n  animation-name: rotateIn;\n  -webkit-transform-origin: center;\n  transform-origin: center;\n}\n@-webkit-keyframes rotateInDownLeft {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, -45deg);\n    transform: rotate3d(0, 0, 1, -45deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n@keyframes rotateInDownLeft {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, -45deg);\n    transform: rotate3d(0, 0, 1, -45deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n.animate__rotateInDownLeft {\n  -webkit-animation-name: rotateInDownLeft;\n  animation-name: rotateInDownLeft;\n  -webkit-transform-origin: left bottom;\n  transform-origin: left bottom;\n}\n@-webkit-keyframes rotateInDownRight {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, 45deg);\n    transform: rotate3d(0, 0, 1, 45deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n@keyframes rotateInDownRight {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, 45deg);\n    transform: rotate3d(0, 0, 1, 45deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n.animate__rotateInDownRight {\n  -webkit-animation-name: rotateInDownRight;\n  animation-name: rotateInDownRight;\n  -webkit-transform-origin: right bottom;\n  transform-origin: right bottom;\n}\n@-webkit-keyframes rotateInUpLeft {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, 45deg);\n    transform: rotate3d(0, 0, 1, 45deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n@keyframes rotateInUpLeft {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, 45deg);\n    transform: rotate3d(0, 0, 1, 45deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n.animate__rotateInUpLeft {\n  -webkit-animation-name: rotateInUpLeft;\n  animation-name: rotateInUpLeft;\n  -webkit-transform-origin: left bottom;\n  transform-origin: left bottom;\n}\n@-webkit-keyframes rotateInUpRight {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, -90deg);\n    transform: rotate3d(0, 0, 1, -90deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n@keyframes rotateInUpRight {\n  from {\n    -webkit-transform: rotate3d(0, 0, 1, -90deg);\n    transform: rotate3d(0, 0, 1, -90deg);\n    opacity: 0;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n    opacity: 1;\n  }\n}\n.animate__rotateInUpRight {\n  -webkit-animation-name: rotateInUpRight;\n  animation-name: rotateInUpRight;\n  -webkit-transform-origin: right bottom;\n  transform-origin: right bottom;\n}\n/* Rotating exits */\n@-webkit-keyframes rotateOut {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, 200deg);\n    transform: rotate3d(0, 0, 1, 200deg);\n    opacity: 0;\n  }\n}\n@keyframes rotateOut {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, 200deg);\n    transform: rotate3d(0, 0, 1, 200deg);\n    opacity: 0;\n  }\n}\n.animate__rotateOut {\n  -webkit-animation-name: rotateOut;\n  animation-name: rotateOut;\n  -webkit-transform-origin: center;\n  transform-origin: center;\n}\n@-webkit-keyframes rotateOutDownLeft {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, 45deg);\n    transform: rotate3d(0, 0, 1, 45deg);\n    opacity: 0;\n  }\n}\n@keyframes rotateOutDownLeft {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, 45deg);\n    transform: rotate3d(0, 0, 1, 45deg);\n    opacity: 0;\n  }\n}\n.animate__rotateOutDownLeft {\n  -webkit-animation-name: rotateOutDownLeft;\n  animation-name: rotateOutDownLeft;\n  -webkit-transform-origin: left bottom;\n  transform-origin: left bottom;\n}\n@-webkit-keyframes rotateOutDownRight {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, -45deg);\n    transform: rotate3d(0, 0, 1, -45deg);\n    opacity: 0;\n  }\n}\n@keyframes rotateOutDownRight {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, -45deg);\n    transform: rotate3d(0, 0, 1, -45deg);\n    opacity: 0;\n  }\n}\n.animate__rotateOutDownRight {\n  -webkit-animation-name: rotateOutDownRight;\n  animation-name: rotateOutDownRight;\n  -webkit-transform-origin: right bottom;\n  transform-origin: right bottom;\n}\n@-webkit-keyframes rotateOutUpLeft {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, -45deg);\n    transform: rotate3d(0, 0, 1, -45deg);\n    opacity: 0;\n  }\n}\n@keyframes rotateOutUpLeft {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, -45deg);\n    transform: rotate3d(0, 0, 1, -45deg);\n    opacity: 0;\n  }\n}\n.animate__rotateOutUpLeft {\n  -webkit-animation-name: rotateOutUpLeft;\n  animation-name: rotateOutUpLeft;\n  -webkit-transform-origin: left bottom;\n  transform-origin: left bottom;\n}\n@-webkit-keyframes rotateOutUpRight {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, 90deg);\n    transform: rotate3d(0, 0, 1, 90deg);\n    opacity: 0;\n  }\n}\n@keyframes rotateOutUpRight {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: rotate3d(0, 0, 1, 90deg);\n    transform: rotate3d(0, 0, 1, 90deg);\n    opacity: 0;\n  }\n}\n.animate__rotateOutUpRight {\n  -webkit-animation-name: rotateOutUpRight;\n  animation-name: rotateOutUpRight;\n  -webkit-transform-origin: right bottom;\n  transform-origin: right bottom;\n}\n/* Specials */\n@-webkit-keyframes hinge {\n  0% {\n    -webkit-animation-timing-function: ease-in-out;\n    animation-timing-function: ease-in-out;\n  }\n\n  20%,\n  60% {\n    -webkit-transform: rotate3d(0, 0, 1, 80deg);\n    transform: rotate3d(0, 0, 1, 80deg);\n    -webkit-animation-timing-function: ease-in-out;\n    animation-timing-function: ease-in-out;\n  }\n\n  40%,\n  80% {\n    -webkit-transform: rotate3d(0, 0, 1, 60deg);\n    transform: rotate3d(0, 0, 1, 60deg);\n    -webkit-animation-timing-function: ease-in-out;\n    animation-timing-function: ease-in-out;\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 700px, 0);\n    transform: translate3d(0, 700px, 0);\n    opacity: 0;\n  }\n}\n@keyframes hinge {\n  0% {\n    -webkit-animation-timing-function: ease-in-out;\n    animation-timing-function: ease-in-out;\n  }\n\n  20%,\n  60% {\n    -webkit-transform: rotate3d(0, 0, 1, 80deg);\n    transform: rotate3d(0, 0, 1, 80deg);\n    -webkit-animation-timing-function: ease-in-out;\n    animation-timing-function: ease-in-out;\n  }\n\n  40%,\n  80% {\n    -webkit-transform: rotate3d(0, 0, 1, 60deg);\n    transform: rotate3d(0, 0, 1, 60deg);\n    -webkit-animation-timing-function: ease-in-out;\n    animation-timing-function: ease-in-out;\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 700px, 0);\n    transform: translate3d(0, 700px, 0);\n    opacity: 0;\n  }\n}\n.animate__hinge {\n  -webkit-animation-duration: calc(1s * 2);\n  animation-duration: calc(1s * 2);\n  -webkit-animation-duration: calc(var(--animate-duration) * 2);\n  animation-duration: calc(var(--animate-duration) * 2);\n  -webkit-animation-name: hinge;\n  animation-name: hinge;\n  -webkit-transform-origin: top left;\n  transform-origin: top left;\n}\n@-webkit-keyframes jackInTheBox {\n  from {\n    opacity: 0;\n    -webkit-transform: scale(0.1) rotate(30deg);\n    transform: scale(0.1) rotate(30deg);\n    -webkit-transform-origin: center bottom;\n    transform-origin: center bottom;\n  }\n\n  50% {\n    -webkit-transform: rotate(-10deg);\n    transform: rotate(-10deg);\n  }\n\n  70% {\n    -webkit-transform: rotate(3deg);\n    transform: rotate(3deg);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n}\n@keyframes jackInTheBox {\n  from {\n    opacity: 0;\n    -webkit-transform: scale(0.1) rotate(30deg);\n    transform: scale(0.1) rotate(30deg);\n    -webkit-transform-origin: center bottom;\n    transform-origin: center bottom;\n  }\n\n  50% {\n    -webkit-transform: rotate(-10deg);\n    transform: rotate(-10deg);\n  }\n\n  70% {\n    -webkit-transform: rotate(3deg);\n    transform: rotate(3deg);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n}\n.animate__jackInTheBox {\n  -webkit-animation-name: jackInTheBox;\n  animation-name: jackInTheBox;\n}\n/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */\n@-webkit-keyframes rollIn {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);\n    transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes rollIn {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);\n    transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);\n  }\n\n  to {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__rollIn {\n  -webkit-animation-name: rollIn;\n  animation-name: rollIn;\n}\n/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */\n@-webkit-keyframes rollOut {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);\n    transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);\n  }\n}\n@keyframes rollOut {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);\n    transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);\n  }\n}\n.animate__rollOut {\n  -webkit-animation-name: rollOut;\n  animation-name: rollOut;\n}\n/* Zooming entrances */\n@-webkit-keyframes zoomIn {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n\n  50% {\n    opacity: 1;\n  }\n}\n@keyframes zoomIn {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n\n  50% {\n    opacity: 1;\n  }\n}\n.animate__zoomIn {\n  -webkit-animation-name: zoomIn;\n  animation-name: zoomIn;\n}\n@-webkit-keyframes zoomInDown {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n@keyframes zoomInDown {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n.animate__zoomInDown {\n  -webkit-animation-name: zoomInDown;\n  animation-name: zoomInDown;\n}\n@-webkit-keyframes zoomInLeft {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(-1000px, 0, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(-1000px, 0, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(10px, 0, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(10px, 0, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n@keyframes zoomInLeft {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(-1000px, 0, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(-1000px, 0, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(10px, 0, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(10px, 0, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n.animate__zoomInLeft {\n  -webkit-animation-name: zoomInLeft;\n  animation-name: zoomInLeft;\n}\n@-webkit-keyframes zoomInRight {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(1000px, 0, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(1000px, 0, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(-10px, 0, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(-10px, 0, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n@keyframes zoomInRight {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(1000px, 0, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(1000px, 0, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(-10px, 0, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(-10px, 0, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n.animate__zoomInRight {\n  -webkit-animation-name: zoomInRight;\n  animation-name: zoomInRight;\n}\n@-webkit-keyframes zoomInUp {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n@keyframes zoomInUp {\n  from {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n.animate__zoomInUp {\n  -webkit-animation-name: zoomInUp;\n  animation-name: zoomInUp;\n}\n/* Zooming exits */\n@-webkit-keyframes zoomOut {\n  from {\n    opacity: 1;\n  }\n\n  50% {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n\n  to {\n    opacity: 0;\n  }\n}\n@keyframes zoomOut {\n  from {\n    opacity: 1;\n  }\n\n  50% {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n    transform: scale3d(0.3, 0.3, 0.3);\n  }\n\n  to {\n    opacity: 0;\n  }\n}\n.animate__zoomOut {\n  -webkit-animation-name: zoomOut;\n  animation-name: zoomOut;\n}\n@-webkit-keyframes zoomOutDown {\n  40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 2000px, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 2000px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n@keyframes zoomOutDown {\n  40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 2000px, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 2000px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n.animate__zoomOutDown {\n  -webkit-animation-name: zoomOutDown;\n  animation-name: zoomOutDown;\n  -webkit-transform-origin: center bottom;\n  transform-origin: center bottom;\n}\n@-webkit-keyframes zoomOutLeft {\n  40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(42px, 0, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(42px, 0, 0);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale(0.1) translate3d(-2000px, 0, 0);\n    transform: scale(0.1) translate3d(-2000px, 0, 0);\n  }\n}\n@keyframes zoomOutLeft {\n  40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(42px, 0, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(42px, 0, 0);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale(0.1) translate3d(-2000px, 0, 0);\n    transform: scale(0.1) translate3d(-2000px, 0, 0);\n  }\n}\n.animate__zoomOutLeft {\n  -webkit-animation-name: zoomOutLeft;\n  animation-name: zoomOutLeft;\n  -webkit-transform-origin: left center;\n  transform-origin: left center;\n}\n@-webkit-keyframes zoomOutRight {\n  40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale(0.1) translate3d(2000px, 0, 0);\n    transform: scale(0.1) translate3d(2000px, 0, 0);\n  }\n}\n@keyframes zoomOutRight {\n  40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale(0.1) translate3d(2000px, 0, 0);\n    transform: scale(0.1) translate3d(2000px, 0, 0);\n  }\n}\n.animate__zoomOutRight {\n  -webkit-animation-name: zoomOutRight;\n  animation-name: zoomOutRight;\n  -webkit-transform-origin: right center;\n  transform-origin: right center;\n}\n@-webkit-keyframes zoomOutUp {\n  40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -2000px, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -2000px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n@keyframes zoomOutUp {\n  40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);\n    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -2000px, 0);\n    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -2000px, 0);\n    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);\n  }\n}\n.animate__zoomOutUp {\n  -webkit-animation-name: zoomOutUp;\n  animation-name: zoomOutUp;\n  -webkit-transform-origin: center bottom;\n  transform-origin: center bottom;\n}\n/* Sliding entrances */\n@-webkit-keyframes slideInDown {\n  from {\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes slideInDown {\n  from {\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__slideInDown {\n  -webkit-animation-name: slideInDown;\n  animation-name: slideInDown;\n}\n@-webkit-keyframes slideInLeft {\n  from {\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes slideInLeft {\n  from {\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__slideInLeft {\n  -webkit-animation-name: slideInLeft;\n  animation-name: slideInLeft;\n}\n@-webkit-keyframes slideInRight {\n  from {\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes slideInRight {\n  from {\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__slideInRight {\n  -webkit-animation-name: slideInRight;\n  animation-name: slideInRight;\n}\n@-webkit-keyframes slideInUp {\n  from {\n    -webkit-transform: translate3d(0, 100%, 0);\n    transform: translate3d(0, 100%, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes slideInUp {\n  from {\n    -webkit-transform: translate3d(0, 100%, 0);\n    transform: translate3d(0, 100%, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n.animate__slideInUp {\n  -webkit-animation-name: slideInUp;\n  animation-name: slideInUp;\n}\n/* Sliding exits */\n@-webkit-keyframes slideOutDown {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(0, 100%, 0);\n    transform: translate3d(0, 100%, 0);\n  }\n}\n@keyframes slideOutDown {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(0, 100%, 0);\n    transform: translate3d(0, 100%, 0);\n  }\n}\n.animate__slideOutDown {\n  -webkit-animation-name: slideOutDown;\n  animation-name: slideOutDown;\n}\n@-webkit-keyframes slideOutLeft {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n  }\n}\n@keyframes slideOutLeft {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(-100%, 0, 0);\n    transform: translate3d(-100%, 0, 0);\n  }\n}\n.animate__slideOutLeft {\n  -webkit-animation-name: slideOutLeft;\n  animation-name: slideOutLeft;\n}\n@-webkit-keyframes slideOutRight {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n  }\n}\n@keyframes slideOutRight {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0);\n  }\n}\n.animate__slideOutRight {\n  -webkit-animation-name: slideOutRight;\n  animation-name: slideOutRight;\n}\n@-webkit-keyframes slideOutUp {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n}\n@keyframes slideOutUp {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n}\n.animate__slideOutUp {\n  -webkit-animation-name: slideOutUp;\n  animation-name: slideOutUp;\n}\n", ""]);
 
 // exports
 
@@ -29488,7 +29711,7 @@ function toComment(sourceMap) {
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.15';
+  var VERSION = '4.17.20';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -33195,8 +33418,21 @@ function toComment(sourceMap) {
      * @returns {Array} Returns the new sorted array.
      */
     function baseOrderBy(collection, iteratees, orders) {
+      if (iteratees.length) {
+        iteratees = arrayMap(iteratees, function(iteratee) {
+          if (isArray(iteratee)) {
+            return function(value) {
+              return baseGet(value, iteratee.length === 1 ? iteratee[0] : iteratee);
+            }
+          }
+          return iteratee;
+        });
+      } else {
+        iteratees = [identity];
+      }
+
       var index = -1;
-      iteratees = arrayMap(iteratees.length ? iteratees : [identity], baseUnary(getIteratee()));
+      iteratees = arrayMap(iteratees, baseUnary(getIteratee()));
 
       var result = baseMap(collection, function(value, key, collection) {
         var criteria = arrayMap(iteratees, function(iteratee) {
@@ -33453,6 +33689,10 @@ function toComment(sourceMap) {
         var key = toKey(path[index]),
             newValue = value;
 
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+          return object;
+        }
+
         if (index != lastIndex) {
           var objValue = nested[key];
           newValue = customizer ? customizer(objValue, key, nested) : undefined;
@@ -33605,11 +33845,14 @@ function toComment(sourceMap) {
      *  into `array`.
      */
     function baseSortedIndexBy(array, value, iteratee, retHighest) {
-      value = iteratee(value);
-
       var low = 0,
-          high = array == null ? 0 : array.length,
-          valIsNaN = value !== value,
+          high = array == null ? 0 : array.length;
+      if (high === 0) {
+        return 0;
+      }
+
+      value = iteratee(value);
+      var valIsNaN = value !== value,
           valIsNull = value === null,
           valIsSymbol = isSymbol(value),
           valIsUndefined = value === undefined;
@@ -35094,10 +35337,11 @@ function toComment(sourceMap) {
       if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
         return false;
       }
-      // Assume cyclic values are equal.
-      var stacked = stack.get(array);
-      if (stacked && stack.get(other)) {
-        return stacked == other;
+      // Check that cyclic values are equal.
+      var arrStacked = stack.get(array);
+      var othStacked = stack.get(other);
+      if (arrStacked && othStacked) {
+        return arrStacked == other && othStacked == array;
       }
       var index = -1,
           result = true,
@@ -35259,10 +35503,11 @@ function toComment(sourceMap) {
           return false;
         }
       }
-      // Assume cyclic values are equal.
-      var stacked = stack.get(object);
-      if (stacked && stack.get(other)) {
-        return stacked == other;
+      // Check that cyclic values are equal.
+      var objStacked = stack.get(object);
+      var othStacked = stack.get(other);
+      if (objStacked && othStacked) {
+        return objStacked == other && othStacked == object;
       }
       var result = true;
       stack.set(object, other);
@@ -38643,6 +38888,10 @@ function toComment(sourceMap) {
      * // The `_.property` iteratee shorthand.
      * _.filter(users, 'active');
      * // => objects for ['barney']
+     *
+     * // Combining several predicates using `_.overEvery` or `_.overSome`.
+     * _.filter(users, _.overSome([{ 'age': 36 }, ['age', 40]]));
+     * // => objects for ['fred', 'barney']
      */
     function filter(collection, predicate) {
       var func = isArray(collection) ? arrayFilter : baseFilter;
@@ -39392,15 +39641,15 @@ function toComment(sourceMap) {
      * var users = [
      *   { 'user': 'fred',   'age': 48 },
      *   { 'user': 'barney', 'age': 36 },
-     *   { 'user': 'fred',   'age': 40 },
+     *   { 'user': 'fred',   'age': 30 },
      *   { 'user': 'barney', 'age': 34 }
      * ];
      *
      * _.sortBy(users, [function(o) { return o.user; }]);
-     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
+     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 30]]
      *
      * _.sortBy(users, ['user', 'age']);
-     * // => objects for [['barney', 34], ['barney', 36], ['fred', 40], ['fred', 48]]
+     * // => objects for [['barney', 34], ['barney', 36], ['fred', 30], ['fred', 48]]
      */
     var sortBy = baseRest(function(collection, iteratees) {
       if (collection == null) {
@@ -44275,11 +44524,11 @@ function toComment(sourceMap) {
 
       // Use a sourceURL for easier debugging.
       // The sourceURL gets injected into the source that's eval-ed, so be careful
-      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
-      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
+      // to normalize all kinds of whitespace, so e.g. newlines (and unicode versions of it) can't sneak in
+      // and escape the comment, thus injecting code that gets evaled.
       var sourceURL = '//# sourceURL=' +
         (hasOwnProperty.call(options, 'sourceURL')
-          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
+          ? (options.sourceURL + '').replace(/\s/g, ' ')
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -44312,8 +44561,6 @@ function toComment(sourceMap) {
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      // Like with sourceURL, we take care to not check the option's prototype,
-      // as this configuration is a code injection vector.
       var variable = hasOwnProperty.call(options, 'variable') && options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
@@ -45020,6 +45267,9 @@ function toComment(sourceMap) {
      * values against any array or object value, respectively. See `_.isEqual`
      * for a list of supported value comparisons.
      *
+     * **Note:** Multiple values can be checked by combining several matchers
+     * using `_.overSome`
+     *
      * @static
      * @memberOf _
      * @since 3.0.0
@@ -45035,6 +45285,10 @@ function toComment(sourceMap) {
      *
      * _.filter(objects, _.matches({ 'a': 4, 'c': 6 }));
      * // => [{ 'a': 4, 'b': 5, 'c': 6 }]
+     *
+     * // Checking for several possible values
+     * _.filter(objects, _.overSome([_.matches({ 'a': 1 }), _.matches({ 'a': 4 })]));
+     * // => [{ 'a': 1, 'b': 2, 'c': 3 }, { 'a': 4, 'b': 5, 'c': 6 }]
      */
     function matches(source) {
       return baseMatches(baseClone(source, CLONE_DEEP_FLAG));
@@ -45048,6 +45302,9 @@ function toComment(sourceMap) {
      * **Note:** Partial comparisons will match empty array and empty object
      * `srcValue` values against any array or object value, respectively. See
      * `_.isEqual` for a list of supported value comparisons.
+     *
+     * **Note:** Multiple values can be checked by combining several matchers
+     * using `_.overSome`
      *
      * @static
      * @memberOf _
@@ -45065,6 +45322,10 @@ function toComment(sourceMap) {
      *
      * _.find(objects, _.matchesProperty('a', 4));
      * // => { 'a': 4, 'b': 5, 'c': 6 }
+     *
+     * // Checking for several possible values
+     * _.filter(objects, _.overSome([_.matchesProperty('a', 1), _.matchesProperty('a', 4)]));
+     * // => [{ 'a': 1, 'b': 2, 'c': 3 }, { 'a': 4, 'b': 5, 'c': 6 }]
      */
     function matchesProperty(path, srcValue) {
       return baseMatchesProperty(path, baseClone(srcValue, CLONE_DEEP_FLAG));
@@ -45288,6 +45549,10 @@ function toComment(sourceMap) {
      * Creates a function that checks if **all** of the `predicates` return
      * truthy when invoked with the arguments it receives.
      *
+     * Following shorthands are possible for providing predicates.
+     * Pass an `Object` and it will be used as an parameter for `_.matches` to create the predicate.
+     * Pass an `Array` of parameters for `_.matchesProperty` and the predicate will be created using them.
+     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -45314,6 +45579,10 @@ function toComment(sourceMap) {
      * Creates a function that checks if **any** of the `predicates` return
      * truthy when invoked with the arguments it receives.
      *
+     * Following shorthands are possible for providing predicates.
+     * Pass an `Object` and it will be used as an parameter for `_.matches` to create the predicate.
+     * Pass an `Array` of parameters for `_.matchesProperty` and the predicate will be created using them.
+     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -45333,6 +45602,9 @@ function toComment(sourceMap) {
      *
      * func(NaN);
      * // => false
+     *
+     * var matchesFunc = _.overSome([{ 'a': 1 }, { 'a': 2 }])
+     * var matchesPropertyFunc = _.overSome([['a', 1], ['a', 2]])
      */
     var overSome = createOver(arraySome);
 
@@ -50495,7 +50767,12 @@ function normalizeComponent (
     options._ssrRegister = hook
   } else if (injectStyles) {
     hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      ? function () {
+        injectStyles.call(
+          this,
+          (options.functional ? this.parent : this).$root.$options.shadowRoot
+        )
+      }
       : injectStyles
   }
 
@@ -50504,7 +50781,7 @@ function normalizeComponent (
       // for template-only hot-reload because in that case the render fn doesn't
       // go through the normalizer
       options._injectStyles = hook
-      // register for functioal component in vue file
+      // register for functional component in vue file
       var originalRender = options.render
       options.render = function renderWithStyleInjection (h, context) {
         hook.call(context)
@@ -50613,7 +50890,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /*!
-  * vue-router v3.3.2
+  * vue-router v3.4.8
   * (c) 2020 Evan You
   * @license MIT
   */
@@ -50631,171 +50908,11 @@ function warn (condition, message) {
   }
 }
 
-function isError (err) {
-  return Object.prototype.toString.call(err).indexOf('Error') > -1
-}
-
-function isRouterError (err, errorType) {
-  return isError(err) && err._isRouter && (errorType == null || err.type === errorType)
-}
-
 function extend (a, b) {
   for (var key in b) {
     a[key] = b[key];
   }
   return a
-}
-
-var View = {
-  name: 'RouterView',
-  functional: true,
-  props: {
-    name: {
-      type: String,
-      default: 'default'
-    }
-  },
-  render: function render (_, ref) {
-    var props = ref.props;
-    var children = ref.children;
-    var parent = ref.parent;
-    var data = ref.data;
-
-    // used by devtools to display a router-view badge
-    data.routerView = true;
-
-    // directly use parent context's createElement() function
-    // so that components rendered by router-view can resolve named slots
-    var h = parent.$createElement;
-    var name = props.name;
-    var route = parent.$route;
-    var cache = parent._routerViewCache || (parent._routerViewCache = {});
-
-    // determine current view depth, also check to see if the tree
-    // has been toggled inactive but kept-alive.
-    var depth = 0;
-    var inactive = false;
-    while (parent && parent._routerRoot !== parent) {
-      var vnodeData = parent.$vnode ? parent.$vnode.data : {};
-      if (vnodeData.routerView) {
-        depth++;
-      }
-      if (vnodeData.keepAlive && parent._directInactive && parent._inactive) {
-        inactive = true;
-      }
-      parent = parent.$parent;
-    }
-    data.routerViewDepth = depth;
-
-    // render previous view if the tree is inactive and kept-alive
-    if (inactive) {
-      var cachedData = cache[name];
-      var cachedComponent = cachedData && cachedData.component;
-      if (cachedComponent) {
-        // #2301
-        // pass props
-        if (cachedData.configProps) {
-          fillPropsinData(cachedComponent, data, cachedData.route, cachedData.configProps);
-        }
-        return h(cachedComponent, data, children)
-      } else {
-        // render previous empty view
-        return h()
-      }
-    }
-
-    var matched = route.matched[depth];
-    var component = matched && matched.components[name];
-
-    // render empty node if no matched route or no config component
-    if (!matched || !component) {
-      cache[name] = null;
-      return h()
-    }
-
-    // cache component
-    cache[name] = { component: component };
-
-    // attach instance registration hook
-    // this will be called in the instance's injected lifecycle hooks
-    data.registerRouteInstance = function (vm, val) {
-      // val could be undefined for unregistration
-      var current = matched.instances[name];
-      if (
-        (val && current !== vm) ||
-        (!val && current === vm)
-      ) {
-        matched.instances[name] = val;
-      }
-    }
-
-    // also register instance in prepatch hook
-    // in case the same component instance is reused across different routes
-    ;(data.hook || (data.hook = {})).prepatch = function (_, vnode) {
-      matched.instances[name] = vnode.componentInstance;
-    };
-
-    // register instance in init hook
-    // in case kept-alive component be actived when routes changed
-    data.hook.init = function (vnode) {
-      if (vnode.data.keepAlive &&
-        vnode.componentInstance &&
-        vnode.componentInstance !== matched.instances[name]
-      ) {
-        matched.instances[name] = vnode.componentInstance;
-      }
-    };
-
-    var configProps = matched.props && matched.props[name];
-    // save route and configProps in cachce
-    if (configProps) {
-      extend(cache[name], {
-        route: route,
-        configProps: configProps
-      });
-      fillPropsinData(component, data, route, configProps);
-    }
-
-    return h(component, data, children)
-  }
-};
-
-function fillPropsinData (component, data, route, configProps) {
-  // resolve props
-  var propsToPass = data.props = resolveProps(route, configProps);
-  if (propsToPass) {
-    // clone to prevent mutation
-    propsToPass = data.props = extend({}, propsToPass);
-    // pass non-declared props as attrs
-    var attrs = data.attrs = data.attrs || {};
-    for (var key in propsToPass) {
-      if (!component.props || !(key in component.props)) {
-        attrs[key] = propsToPass[key];
-        delete propsToPass[key];
-      }
-    }
-  }
-}
-
-function resolveProps (route, config) {
-  switch (typeof config) {
-    case 'undefined':
-      return
-    case 'object':
-      return config
-    case 'function':
-      return config(route)
-    case 'boolean':
-      return config ? route.params : undefined
-    default:
-      if (true) {
-        warn(
-          false,
-          "props in \"" + (route.path) + "\" is a " + (typeof config) + ", " +
-          "expecting an object, function or boolean."
-        );
-      }
-  }
 }
 
 /*  */
@@ -50808,10 +50925,19 @@ var commaRE = /%2C/g;
 // - escapes [!'()*]
 // - preserve commas
 var encode = function (str) { return encodeURIComponent(str)
-  .replace(encodeReserveRE, encodeReserveReplacer)
-  .replace(commaRE, ','); };
+    .replace(encodeReserveRE, encodeReserveReplacer)
+    .replace(commaRE, ','); };
 
-var decode = decodeURIComponent;
+function decode (str) {
+  try {
+    return decodeURIComponent(str)
+  } catch (err) {
+    if (true) {
+      warn(false, ("Error decoding \"" + str + "\". Leaving it intact."));
+    }
+  }
+  return str
+}
 
 function resolveQuery (
   query,
@@ -50829,10 +50955,15 @@ function resolveQuery (
     parsedQuery = {};
   }
   for (var key in extraQuery) {
-    parsedQuery[key] = extraQuery[key];
+    var value = extraQuery[key];
+    parsedQuery[key] = Array.isArray(value)
+      ? value.map(castQueryParamValue)
+      : castQueryParamValue(value);
   }
   return parsedQuery
 }
+
+var castQueryParamValue = function (value) { return (value == null || typeof value === 'object' ? value : String(value)); };
 
 function parseQuery (query) {
   var res = {};
@@ -50846,9 +50977,7 @@ function parseQuery (query) {
   query.split('&').forEach(function (param) {
     var parts = param.replace(/\+/g, ' ').split('=');
     var key = decode(parts.shift());
-    var val = parts.length > 0
-      ? decode(parts.join('='))
-      : null;
+    var val = parts.length > 0 ? decode(parts.join('=')) : null;
 
     if (res[key] === undefined) {
       res[key] = val;
@@ -50863,34 +50992,39 @@ function parseQuery (query) {
 }
 
 function stringifyQuery (obj) {
-  var res = obj ? Object.keys(obj).map(function (key) {
-    var val = obj[key];
+  var res = obj
+    ? Object.keys(obj)
+      .map(function (key) {
+        var val = obj[key];
 
-    if (val === undefined) {
-      return ''
-    }
-
-    if (val === null) {
-      return encode(key)
-    }
-
-    if (Array.isArray(val)) {
-      var result = [];
-      val.forEach(function (val2) {
-        if (val2 === undefined) {
-          return
+        if (val === undefined) {
+          return ''
         }
-        if (val2 === null) {
-          result.push(encode(key));
-        } else {
-          result.push(encode(key) + '=' + encode(val2));
-        }
-      });
-      return result.join('&')
-    }
 
-    return encode(key) + '=' + encode(val)
-  }).filter(function (x) { return x.length > 0; }).join('&') : null;
+        if (val === null) {
+          return encode(key)
+        }
+
+        if (Array.isArray(val)) {
+          var result = [];
+          val.forEach(function (val2) {
+            if (val2 === undefined) {
+              return
+            }
+            if (val2 === null) {
+              result.push(encode(key));
+            } else {
+              result.push(encode(key) + '=' + encode(val2));
+            }
+          });
+          return result.join('&')
+        }
+
+        return encode(key) + '=' + encode(val)
+      })
+      .filter(function (x) { return x.length > 0; })
+      .join('&')
+    : null;
   return res ? ("?" + res) : ''
 }
 
@@ -50996,14 +51130,18 @@ function isObjectEqual (a, b) {
 
   // handle null value #1566
   if (!a || !b) { return a === b }
-  var aKeys = Object.keys(a);
-  var bKeys = Object.keys(b);
+  var aKeys = Object.keys(a).sort();
+  var bKeys = Object.keys(b).sort();
   if (aKeys.length !== bKeys.length) {
     return false
   }
-  return aKeys.every(function (key) {
+  return aKeys.every(function (key, i) {
     var aVal = a[key];
+    var bKey = bKeys[i];
+    if (bKey !== key) { return false }
     var bVal = b[key];
+    // query values can be null and undefined
+    if (aVal == null || bVal == null) { return aVal === bVal }
     // check nested equality
     if (typeof aVal === 'object' && typeof bVal === 'object') {
       return isObjectEqual(aVal, bVal)
@@ -51029,6 +51167,178 @@ function queryIncludes (current, target) {
     }
   }
   return true
+}
+
+function handleRouteEntered (route) {
+  for (var i = 0; i < route.matched.length; i++) {
+    var record = route.matched[i];
+    for (var name in record.instances) {
+      var instance = record.instances[name];
+      var cbs = record.enteredCbs[name];
+      if (!instance || !cbs) { continue }
+      delete record.enteredCbs[name];
+      for (var i$1 = 0; i$1 < cbs.length; i$1++) {
+        if (!instance._isBeingDestroyed) { cbs[i$1](instance); }
+      }
+    }
+  }
+}
+
+var View = {
+  name: 'RouterView',
+  functional: true,
+  props: {
+    name: {
+      type: String,
+      default: 'default'
+    }
+  },
+  render: function render (_, ref) {
+    var props = ref.props;
+    var children = ref.children;
+    var parent = ref.parent;
+    var data = ref.data;
+
+    // used by devtools to display a router-view badge
+    data.routerView = true;
+
+    // directly use parent context's createElement() function
+    // so that components rendered by router-view can resolve named slots
+    var h = parent.$createElement;
+    var name = props.name;
+    var route = parent.$route;
+    var cache = parent._routerViewCache || (parent._routerViewCache = {});
+
+    // determine current view depth, also check to see if the tree
+    // has been toggled inactive but kept-alive.
+    var depth = 0;
+    var inactive = false;
+    while (parent && parent._routerRoot !== parent) {
+      var vnodeData = parent.$vnode ? parent.$vnode.data : {};
+      if (vnodeData.routerView) {
+        depth++;
+      }
+      if (vnodeData.keepAlive && parent._directInactive && parent._inactive) {
+        inactive = true;
+      }
+      parent = parent.$parent;
+    }
+    data.routerViewDepth = depth;
+
+    // render previous view if the tree is inactive and kept-alive
+    if (inactive) {
+      var cachedData = cache[name];
+      var cachedComponent = cachedData && cachedData.component;
+      if (cachedComponent) {
+        // #2301
+        // pass props
+        if (cachedData.configProps) {
+          fillPropsinData(cachedComponent, data, cachedData.route, cachedData.configProps);
+        }
+        return h(cachedComponent, data, children)
+      } else {
+        // render previous empty view
+        return h()
+      }
+    }
+
+    var matched = route.matched[depth];
+    var component = matched && matched.components[name];
+
+    // render empty node if no matched route or no config component
+    if (!matched || !component) {
+      cache[name] = null;
+      return h()
+    }
+
+    // cache component
+    cache[name] = { component: component };
+
+    // attach instance registration hook
+    // this will be called in the instance's injected lifecycle hooks
+    data.registerRouteInstance = function (vm, val) {
+      // val could be undefined for unregistration
+      var current = matched.instances[name];
+      if (
+        (val && current !== vm) ||
+        (!val && current === vm)
+      ) {
+        matched.instances[name] = val;
+      }
+    }
+
+    // also register instance in prepatch hook
+    // in case the same component instance is reused across different routes
+    ;(data.hook || (data.hook = {})).prepatch = function (_, vnode) {
+      matched.instances[name] = vnode.componentInstance;
+    };
+
+    // register instance in init hook
+    // in case kept-alive component be actived when routes changed
+    data.hook.init = function (vnode) {
+      if (vnode.data.keepAlive &&
+        vnode.componentInstance &&
+        vnode.componentInstance !== matched.instances[name]
+      ) {
+        matched.instances[name] = vnode.componentInstance;
+      }
+
+      // if the route transition has already been confirmed then we weren't
+      // able to call the cbs during confirmation as the component was not
+      // registered yet, so we call it here.
+      handleRouteEntered(route);
+    };
+
+    var configProps = matched.props && matched.props[name];
+    // save route and configProps in cache
+    if (configProps) {
+      extend(cache[name], {
+        route: route,
+        configProps: configProps
+      });
+      fillPropsinData(component, data, route, configProps);
+    }
+
+    return h(component, data, children)
+  }
+};
+
+function fillPropsinData (component, data, route, configProps) {
+  // resolve props
+  var propsToPass = data.props = resolveProps(route, configProps);
+  if (propsToPass) {
+    // clone to prevent mutation
+    propsToPass = data.props = extend({}, propsToPass);
+    // pass non-declared props as attrs
+    var attrs = data.attrs = data.attrs || {};
+    for (var key in propsToPass) {
+      if (!component.props || !(key in component.props)) {
+        attrs[key] = propsToPass[key];
+        delete propsToPass[key];
+      }
+    }
+  }
+}
+
+function resolveProps (route, config) {
+  switch (typeof config) {
+    case 'undefined':
+      return
+    case 'object':
+      return config
+    case 'function':
+      return config(route)
+    case 'boolean':
+      return config ? route.params : undefined
+    default:
+      if (true) {
+        warn(
+          false,
+          "props in \"" + (route.path) + "\" is a " + (typeof config) + ", " +
+          "expecting an object, function or boolean."
+        );
+      }
+  }
 }
 
 /*  */
@@ -51961,6 +52271,7 @@ function addRouteRecord (
     regex: compileRouteRegex(normalizedPath, pathToRegexpOptions),
     components: route.components || { default: route.component },
     instances: {},
+    enteredCbs: {},
     name: name,
     parent: parent,
     matchAs: matchAs,
@@ -52250,6 +52561,14 @@ function matchRoute (
   path,
   params
 ) {
+  try {
+    path = decodeURI(path);
+  } catch (err) {
+    if (true) {
+      warn(false, ("Error decoding \"" + path + "\". Leaving it intact."));
+    }
+  }
+
   var m = path.match(regex);
 
   if (!m) {
@@ -52260,10 +52579,9 @@ function matchRoute (
 
   for (var i = 1, len = m.length; i < len; ++i) {
     var key = regex.keys[i - 1];
-    var val = typeof m[i] === 'string' ? decodeURIComponent(m[i]) : m[i];
     if (key) {
       // Fix #1994: using * with props: true generates a param named 0
-      params[key.name || 'pathMatch'] = val;
+      params[key.name || 'pathMatch'] = m[i];
     }
   }
 
@@ -52453,7 +52771,17 @@ function scrollToPosition (shouldScroll, position) {
   }
 
   if (position) {
-    window.scrollTo(position.x, position.y);
+    // $flow-disable-line
+    if ('scrollBehavior' in document.documentElement.style) {
+      window.scrollTo({
+        left: position.x,
+        top: position.y,
+        // $flow-disable-line
+        behavior: shouldScroll.behavior
+      });
+    } else {
+      window.scrollTo(position.x, position.y);
+    }
   }
 }
 
@@ -52516,6 +52844,89 @@ function runQueue (queue, fn, cb) {
     }
   };
   step(0);
+}
+
+// When changing thing, also edit router.d.ts
+var NavigationFailureType = {
+  redirected: 2,
+  aborted: 4,
+  cancelled: 8,
+  duplicated: 16
+};
+
+function createNavigationRedirectedError (from, to) {
+  return createRouterError(
+    from,
+    to,
+    NavigationFailureType.redirected,
+    ("Redirected when going from \"" + (from.fullPath) + "\" to \"" + (stringifyRoute(
+      to
+    )) + "\" via a navigation guard.")
+  )
+}
+
+function createNavigationDuplicatedError (from, to) {
+  var error = createRouterError(
+    from,
+    to,
+    NavigationFailureType.duplicated,
+    ("Avoided redundant navigation to current location: \"" + (from.fullPath) + "\".")
+  );
+  // backwards compatible with the first introduction of Errors
+  error.name = 'NavigationDuplicated';
+  return error
+}
+
+function createNavigationCancelledError (from, to) {
+  return createRouterError(
+    from,
+    to,
+    NavigationFailureType.cancelled,
+    ("Navigation cancelled from \"" + (from.fullPath) + "\" to \"" + (to.fullPath) + "\" with a new navigation.")
+  )
+}
+
+function createNavigationAbortedError (from, to) {
+  return createRouterError(
+    from,
+    to,
+    NavigationFailureType.aborted,
+    ("Navigation aborted from \"" + (from.fullPath) + "\" to \"" + (to.fullPath) + "\" via a navigation guard.")
+  )
+}
+
+function createRouterError (from, to, type, message) {
+  var error = new Error(message);
+  error._isRouter = true;
+  error.from = from;
+  error.to = to;
+  error.type = type;
+
+  return error
+}
+
+var propertiesToLog = ['params', 'query', 'hash'];
+
+function stringifyRoute (to) {
+  if (typeof to === 'string') { return to }
+  if ('path' in to) { return to.path }
+  var location = {};
+  propertiesToLog.forEach(function (key) {
+    if (key in to) { location[key] = to[key]; }
+  });
+  return JSON.stringify(location, null, 2)
+}
+
+function isError (err) {
+  return Object.prototype.toString.call(err).indexOf('Error') > -1
+}
+
+function isNavigationFailure (err, errorType) {
+  return (
+    isError(err) &&
+    err._isRouter &&
+    (errorType == null || err.type === errorType)
+  )
 }
 
 /*  */
@@ -52627,71 +53038,6 @@ function once (fn) {
   }
 }
 
-var NavigationFailureType = {
-  redirected: 1,
-  aborted: 2,
-  cancelled: 3,
-  duplicated: 4
-};
-
-function createNavigationRedirectedError (from, to) {
-  return createRouterError(
-    from,
-    to,
-    NavigationFailureType.redirected,
-    ("Redirected from \"" + (from.fullPath) + "\" to \"" + (stringifyRoute(to)) + "\" via a navigation guard.")
-  )
-}
-
-function createNavigationDuplicatedError (from, to) {
-  return createRouterError(
-    from,
-    to,
-    NavigationFailureType.duplicated,
-    ("Avoided redundant navigation to current location: \"" + (from.fullPath) + "\".")
-  )
-}
-
-function createNavigationCancelledError (from, to) {
-  return createRouterError(
-    from,
-    to,
-    NavigationFailureType.cancelled,
-    ("Navigation cancelled from \"" + (from.fullPath) + "\" to \"" + (to.fullPath) + "\" with a new navigation.")
-  )
-}
-
-function createNavigationAbortedError (from, to) {
-  return createRouterError(
-    from,
-    to,
-    NavigationFailureType.aborted,
-    ("Navigation aborted from \"" + (from.fullPath) + "\" to \"" + (to.fullPath) + "\" via a navigation guard.")
-  )
-}
-
-function createRouterError (from, to, type, message) {
-  var error = new Error(message);
-  error._isRouter = true;
-  error.from = from;
-  error.to = to;
-  error.type = type;
-
-  return error
-}
-
-var propertiesToLog = ['params', 'query', 'hash'];
-
-function stringifyRoute (to) {
-  if (typeof to === 'string') { return to }
-  if ('path' in to) { return to.path }
-  var location = {};
-  propertiesToLog.forEach(function (key) {
-    if (key in to) { location[key] = to[key]; }
-  });
-  return JSON.stringify(location, null, 2)
-}
-
 /*  */
 
 var History = function History (router, base) {
@@ -52733,11 +53079,21 @@ History.prototype.transitionTo = function transitionTo (
 ) {
     var this$1 = this;
 
-  var route = this.router.match(location, this.current);
+  var route;
+  // catch redirect option https://github.com/vuejs/vue-router/issues/3201
+  try {
+    route = this.router.match(location, this.current);
+  } catch (e) {
+    this.errorCbs.forEach(function (cb) {
+      cb(e);
+    });
+    // Exception should still be thrown
+    throw e
+  }
+  var prev = this.current;
   this.confirmTransition(
     route,
     function () {
-      var prev = this$1.current;
       this$1.updateRoute(route);
       onComplete && onComplete(route);
       this$1.ensureURL();
@@ -52758,10 +53114,16 @@ History.prototype.transitionTo = function transitionTo (
         onAbort(err);
       }
       if (err && !this$1.ready) {
-        this$1.ready = true;
-        this$1.readyErrorCbs.forEach(function (cb) {
-          cb(err);
-        });
+        // Initial redirection should not mark the history as ready yet
+        // because it's triggered by the redirection instead
+        // https://github.com/vuejs/vue-router/issues/3225
+        // https://github.com/vuejs/vue-router/issues/3331
+        if (!isNavigationFailure(err, NavigationFailureType.redirected) || prev !== START) {
+          this$1.ready = true;
+          this$1.readyErrorCbs.forEach(function (cb) {
+            cb(err);
+          });
+        }
       }
     }
   );
@@ -52771,11 +53133,12 @@ History.prototype.confirmTransition = function confirmTransition (route, onCompl
     var this$1 = this;
 
   var current = this.current;
+  this.pending = route;
   var abort = function (err) {
     // changed after adding errors with
     // https://github.com/vuejs/vue-router/pull/3047 before that change,
     // redirect and aborted navigation would produce an err == null
-    if (!isRouterError(err) && isError(err)) {
+    if (!isNavigationFailure(err) && isError(err)) {
       if (this$1.errorCbs.length) {
         this$1.errorCbs.forEach(function (cb) {
           cb(err);
@@ -52787,10 +53150,13 @@ History.prototype.confirmTransition = function confirmTransition (route, onCompl
     }
     onAbort && onAbort(err);
   };
+  var lastRouteIndex = route.matched.length - 1;
+  var lastCurrentIndex = current.matched.length - 1;
   if (
     isSameRoute(route, current) &&
     // in the case the route map has been dynamically appended to
-    route.matched.length === current.matched.length
+    lastRouteIndex === lastCurrentIndex &&
+    route.matched[lastRouteIndex] === current.matched[lastCurrentIndex]
   ) {
     this.ensureURL();
     return abort(createNavigationDuplicatedError(current, route))
@@ -52817,7 +53183,6 @@ History.prototype.confirmTransition = function confirmTransition (route, onCompl
     resolveAsyncComponents(activated)
   );
 
-  this.pending = route;
   var iterator = function (hook, next) {
     if (this$1.pending !== route) {
       return abort(createNavigationCancelledError(current, route))
@@ -52854,11 +53219,9 @@ History.prototype.confirmTransition = function confirmTransition (route, onCompl
   };
 
   runQueue(queue, iterator, function () {
-    var postEnterCbs = [];
-    var isValid = function () { return this$1.current === route; };
     // wait until async components are resolved before
     // extracting in-component enter guards
-    var enterGuards = extractEnterGuards(activated, postEnterCbs, isValid);
+    var enterGuards = extractEnterGuards(activated);
     var queue = enterGuards.concat(this$1.router.resolveHooks);
     runQueue(queue, iterator, function () {
       if (this$1.pending !== route) {
@@ -52868,9 +53231,7 @@ History.prototype.confirmTransition = function confirmTransition (route, onCompl
       onComplete(route);
       if (this$1.router.app) {
         this$1.router.app.$nextTick(function () {
-          postEnterCbs.forEach(function (cb) {
-            cb();
-          });
+          handleRouteEntered(route);
         });
       }
     });
@@ -52886,11 +53247,18 @@ History.prototype.setupListeners = function setupListeners () {
   // Default implementation is empty
 };
 
-History.prototype.teardownListeners = function teardownListeners () {
+History.prototype.teardown = function teardown () {
+  // clean up event listeners
+  // https://github.com/vuejs/vue-router/issues/2341
   this.listeners.forEach(function (cleanupListener) {
     cleanupListener();
   });
   this.listeners = [];
+
+  // reset current history route
+  // https://github.com/vuejs/vue-router/issues/3294
+  this.current = START;
+  this.pending = null;
 };
 
 function normalizeBase (base) {
@@ -52976,15 +53344,13 @@ function bindGuard (guard, instance) {
 }
 
 function extractEnterGuards (
-  activated,
-  cbs,
-  isValid
+  activated
 ) {
   return extractGuards(
     activated,
     'beforeRouteEnter',
     function (guard, _, match, key) {
-      return bindEnterGuard(guard, match, key, cbs, isValid)
+      return bindEnterGuard(guard, match, key)
     }
   )
 }
@@ -52992,42 +53358,18 @@ function extractEnterGuards (
 function bindEnterGuard (
   guard,
   match,
-  key,
-  cbs,
-  isValid
+  key
 ) {
   return function routeEnterGuard (to, from, next) {
     return guard(to, from, function (cb) {
       if (typeof cb === 'function') {
-        cbs.push(function () {
-          // #750
-          // if a router-view is wrapped with an out-in transition,
-          // the instance may not have been registered at this time.
-          // we will need to poll for registration until current route
-          // is no longer valid.
-          poll(cb, match.instances, key, isValid);
-        });
+        if (!match.enteredCbs[key]) {
+          match.enteredCbs[key] = [];
+        }
+        match.enteredCbs[key].push(cb);
       }
       next(cb);
     })
-  }
-}
-
-function poll (
-  cb, // somehow flow cannot infer this is a function
-  instances,
-  key,
-  isValid
-) {
-  if (
-    instances[key] &&
-    !instances[key]._isBeingDestroyed // do not reuse being destroyed instance
-  ) {
-    cb(instances[key]);
-  } else if (isValid()) {
-    setTimeout(function () {
-      poll(cb, instances, key, isValid);
-    }, 16);
   }
 }
 
@@ -53124,7 +53466,7 @@ var HTML5History = /*@__PURE__*/(function (History) {
 }(History));
 
 function getLocation (base) {
-  var path = decodeURI(window.location.pathname);
+  var path = window.location.pathname;
   if (base && path.toLowerCase().indexOf(base.toLowerCase()) === 0) {
     path = path.slice(base.length);
   }
@@ -53264,18 +53606,6 @@ function getHash () {
   if (index < 0) { return '' }
 
   href = href.slice(index + 1);
-  // decode the hash but not the search or hash
-  // as search(query) is already decoded
-  // https://github.com/vuejs/vue-router/issues/2708
-  var searchIndex = href.indexOf('?');
-  if (searchIndex < 0) {
-    var hashIndex = href.indexOf('#');
-    if (hashIndex > -1) {
-      href = decodeURI(href.slice(0, hashIndex)) + href.slice(hashIndex);
-    } else { href = decodeURI(href); }
-  } else {
-    href = decodeURI(href.slice(0, searchIndex)) + href.slice(searchIndex);
-  }
 
   return href
 }
@@ -53354,11 +53684,15 @@ var AbstractHistory = /*@__PURE__*/(function (History) {
     this.confirmTransition(
       route,
       function () {
+        var prev = this$1.current;
         this$1.index = targetIndex;
         this$1.updateRoute(route);
+        this$1.router.afterHooks.forEach(function (hook) {
+          hook && hook(route, prev);
+        });
       },
       function (err) {
-        if (isRouterError(err, NavigationFailureType.duplicated)) {
+        if (isNavigationFailure(err, NavigationFailureType.duplicated)) {
           this$1.index = targetIndex;
         }
       }
@@ -53379,8 +53713,6 @@ var AbstractHistory = /*@__PURE__*/(function (History) {
 
 /*  */
 
-
-
 var VueRouter = function VueRouter (options) {
   if ( options === void 0 ) options = {};
 
@@ -53393,7 +53725,8 @@ var VueRouter = function VueRouter (options) {
   this.matcher = createMatcher(options.routes || [], this);
 
   var mode = options.mode || 'hash';
-  this.fallback = mode === 'history' && !supportsPushState && options.fallback !== false;
+  this.fallback =
+    mode === 'history' && !supportsPushState && options.fallback !== false;
   if (this.fallback) {
     mode = 'hash';
   }
@@ -53421,11 +53754,7 @@ var VueRouter = function VueRouter (options) {
 
 var prototypeAccessors = { currentRoute: { configurable: true } };
 
-VueRouter.prototype.match = function match (
-  raw,
-  current,
-  redirectedFrom
-) {
+VueRouter.prototype.match = function match (raw, current, redirectedFrom) {
   return this.matcher.match(raw, current, redirectedFrom)
 };
 
@@ -53436,11 +53765,12 @@ prototypeAccessors.currentRoute.get = function () {
 VueRouter.prototype.init = function init (app /* Vue component instance */) {
     var this$1 = this;
 
-   true && assert(
-    install.installed,
-    "not installed. Make sure to call `Vue.use(VueRouter)` " +
-    "before creating root instance."
-  );
+   true &&
+    assert(
+      install.installed,
+      "not installed. Make sure to call `Vue.use(VueRouter)` " +
+        "before creating root instance."
+    );
 
   this.apps.push(app);
 
@@ -53454,11 +53784,7 @@ VueRouter.prototype.init = function init (app /* Vue component instance */) {
     // we do not release the router so it can be reused
     if (this$1.app === app) { this$1.app = this$1.apps[0] || null; }
 
-    if (!this$1.app) {
-      // clean up event listeners
-      // https://github.com/vuejs/vue-router/issues/2341
-      this$1.history.teardownListeners();
-    }
+    if (!this$1.app) { this$1.history.teardown(); }
   });
 
   // main app previously initialized
@@ -53472,10 +53798,24 @@ VueRouter.prototype.init = function init (app /* Vue component instance */) {
   var history = this.history;
 
   if (history instanceof HTML5History || history instanceof HashHistory) {
-    var setupListeners = function () {
-      history.setupListeners();
+    var handleInitialScroll = function (routeOrError) {
+      var from = history.current;
+      var expectScroll = this$1.options.scrollBehavior;
+      var supportsScroll = supportsPushState && expectScroll;
+
+      if (supportsScroll && 'fullPath' in routeOrError) {
+        handleScroll(this$1, routeOrError, from, false);
+      }
     };
-    history.transitionTo(history.getCurrentLocation(), setupListeners, setupListeners);
+    var setupListeners = function (routeOrError) {
+      history.setupListeners();
+      handleInitialScroll(routeOrError);
+    };
+    history.transitionTo(
+      history.getCurrentLocation(),
+      setupListeners,
+      setupListeners
+    );
   }
 
   history.listen(function (route) {
@@ -53552,11 +53892,14 @@ VueRouter.prototype.getMatchedComponents = function getMatchedComponents (to) {
   if (!route) {
     return []
   }
-  return [].concat.apply([], route.matched.map(function (m) {
-    return Object.keys(m.components).map(function (key) {
-      return m.components[key]
+  return [].concat.apply(
+    [],
+    route.matched.map(function (m) {
+      return Object.keys(m.components).map(function (key) {
+        return m.components[key]
+      })
     })
-  }))
+  )
 };
 
 VueRouter.prototype.resolve = function resolve (
@@ -53565,12 +53908,7 @@ VueRouter.prototype.resolve = function resolve (
   append
 ) {
   current = current || this.history.current;
-  var location = normalizeLocation(
-    to,
-    current,
-    append,
-    this
-  );
+  var location = normalizeLocation(to, current, append, this);
   var route = this.match(location, current);
   var fullPath = route.redirectedFrom || route.fullPath;
   var base = this.history.base;
@@ -53608,7 +53946,9 @@ function createHref (base, fullPath, mode) {
 }
 
 VueRouter.install = install;
-VueRouter.version = '3.3.2';
+VueRouter.version = '3.4.8';
+VueRouter.isNavigationFailure = isNavigationFailure;
+VueRouter.NavigationFailureType = NavigationFailureType;
 
 if (inBrowser && window.Vue) {
   window.Vue.use(VueRouter);
@@ -53628,8 +53968,8 @@ if (inBrowser && window.Vue) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.6.11
- * (c) 2014-2019 Evan You
+ * Vue.js v2.6.12
+ * (c) 2014-2020 Evan You
  * Released under the MIT License.
  */
 
@@ -59068,7 +59408,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.6.11';
+Vue.version = '2.6.12';
 
 /*  */
 
@@ -61274,7 +61614,7 @@ function updateDOMProps (oldVnode, vnode) {
       // skip the update if old and new VDOM state is the same.
       // `value` is handled separately because the DOM value may be temporarily
       // out of sync with VDOM state due to focus, composition and modifiers.
-      // This  #4521 by skipping the unnecesarry `checked` update.
+      // This  #4521 by skipping the unnecessary `checked` update.
       cur !== oldProps[key]
     ) {
       // some property updates can throw
@@ -63519,7 +63859,7 @@ function parse (
       }
     },
     comment: function comment (text, start, end) {
-      // adding anyting as a sibling to the root node is forbidden
+      // adding anything as a sibling to the root node is forbidden
       // comments should still be allowed, but ignored
       if (currentParent) {
         var child = {
@@ -66062,8 +66402,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_map_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../style-loader!../../../css-loader??ref--6-1!../../../vue-loader/lib/loaders/stylePostLoader.js!../../../postcss-loader/src??ref--6-2!../../../vue-loader/lib??vue-loader-options!./map.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/vue2-google-maps/dist/components/map.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_map_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_map_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_map_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_map_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_map_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_map_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_map_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
 
 /***/ }),
 
@@ -66679,7 +67019,7 @@ exports.default = (0, _mapElementFactory2.default)({
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _placeInput_vue_vue_type_template_id_c1ab87be___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./placeInput.vue?vue&type=template&id=c1ab87be& */ "./node_modules/vue2-google-maps/dist/components/placeInput.vue?vue&type=template&id=c1ab87be&");
 /* harmony import */ var _placeInputImpl_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./placeInputImpl.js?vue&type=script&lang=js& */ "./node_modules/vue2-google-maps/dist/components/placeInputImpl.js?vue&type=script&lang=js&?bfef");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _placeInputImpl_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _placeInputImpl_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _placeInputImpl_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _placeInputImpl_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -66846,7 +67186,7 @@ exports.default = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _placeInputImpl_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./placeInputImpl.js?vue&type=script&lang=js& */ "./node_modules/vue2-google-maps/dist/components/placeInputImpl.js?vue&type=script&lang=js&?0c5e");
 /* harmony import */ var _placeInputImpl_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_placeInputImpl_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _placeInputImpl_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _placeInputImpl_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _placeInputImpl_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _placeInputImpl_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
  /* harmony default export */ __webpack_exports__["default"] = (_placeInputImpl_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
@@ -67214,8 +67554,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_streetViewPanorama_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../style-loader!../../../css-loader??ref--6-1!../../../vue-loader/lib/loaders/stylePostLoader.js!../../../postcss-loader/src??ref--6-2!../../../vue-loader/lib??vue-loader-options!./streetViewPanorama.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/vue2-google-maps/dist/components/streetViewPanorama.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_streetViewPanorama_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_streetViewPanorama_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_streetViewPanorama_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_streetViewPanorama_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_streetViewPanorama_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_streetViewPanorama_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _style_loader_index_js_css_loader_index_js_ref_6_1_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_src_index_js_ref_6_2_vue_loader_lib_index_js_vue_loader_options_streetViewPanorama_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
 
 /***/ }),
 
@@ -68467,7 +68807,7 @@ var Register = function Register() {
 };
 
 var Dashboard = function Dashboard() {
-  return Promise.all(/*! import() | chunks/dashboard */[__webpack_require__.e("vendors~chunks/capacity/charts/projectionChart~chunks/capacity/gaugeChart~chunks/dashboard~chunks/he~c20aef62"), __webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks/ma~66c43816"), __webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload"), __webpack_require__.e("vendors~chunks/capacityPlanning~chunks/dashboard"), __webpack_require__.e("chunks/dashboard")]).then(__webpack_require__.bind(null, /*! ./components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
+  return Promise.all(/*! import() | chunks/dashboard */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~54cb6b07"), __webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks/ma~66c43816"), __webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload"), __webpack_require__.e("vendors~chunks/capacityPlanning~chunks/dashboard"), __webpack_require__.e("chunks/dashboard")]).then(__webpack_require__.bind(null, /*! ./components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
 };
 
 var PopTable = function PopTable() {

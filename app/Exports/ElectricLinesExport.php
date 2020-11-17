@@ -97,7 +97,7 @@ class ElectricLinesExport implements FromCollection, WithTitle, ShouldAutoSize, 
             foreach ($ids as $id) {
                 array_push($popsIds, $id);
             }
-            $electricLine = ElectricLine::with('pop.comuna.zona.crm', 'pop.sites', 'electric_line_type', 'phase_type')
+            $electricLine = ElectricLine::with('pop.comuna.zona.crm', 'pop.sites', 'electric_line_type', 'phase_type', 'postation_type', 'ferreteria_type', 'terrain_type', 'vegetation_type')
             ->whereIn('pop_id', $popsIds)
             ->get();
         } else {
@@ -245,7 +245,7 @@ class ElectricLinesExport implements FromCollection, WithTitle, ShouldAutoSize, 
     	       //  ->get();
 
 
-            $electricLine = ElectricLine::with('pop.comuna.zona.crm', 'pop.sites', 'electric_line_type', 'phase_type')
+            $electricLine = ElectricLine::with('pop.comuna.zona.crm', 'pop.sites', 'electric_line_type', 'phase_type', 'postation_type', 'ferreteria_type', 'terrain_type', 'vegetation_type')
                 ->whereHas('pop.sites', function($a) use($condition_core) {
                     $a->whereRaw($condition_core);
                 })
@@ -285,7 +285,14 @@ class ElectricLinesExport implements FromCollection, WithTitle, ShouldAutoSize, 
             'FASE',
             'DISTANCIA',
             'VOLTAJE',
+            'RECONECTADOR',
             'NUMERO SERIE',
+
+            'Q POSTACIONES',
+            'TIPO POSTACION',
+            'TIPO FERRETERIA',
+            'TIPO TERRENO CIRCUNDANTE',
+            'TIPO VEGETACION'
 
 	        // 'AÑO INSTALACION'
 
@@ -311,7 +318,14 @@ class ElectricLinesExport implements FromCollection, WithTitle, ShouldAutoSize, 
 
             $electricLine->distance,
             $electricLine->volt,
+            $electricLine->recloser == 1 ? 'SI' : 'NO',
             $electricLine->serial_number,
+
+            $electricLine->q_postations,
+            $electricLine->postation_type ? $electricLine->postation_type->postation_type : null,
+            $electricLine->ferreteria_type ? $electricLine->ferreteria_type->ferreteria_type : null,
+            $electricLine->terrain_type ? $electricLine->terrain_type->terrain_type : null,
+            $electricLine->vegetation_type ? $electricLine->vegetation_type->vegetation_type : null
             // Carbon::createFromFormat('Y-m-d', $electricLine->installed_at)->year
   		];
   	}
@@ -358,7 +372,7 @@ class ElectricLinesExport implements FromCollection, WithTitle, ShouldAutoSize, 
         );
 
         $event->sheet->styleCells(
-            'G1:K1',
+            'G1:M1',
             [
                 'font' => [
                     'size' => 11,
@@ -377,6 +391,30 @@ class ElectricLinesExport implements FromCollection, WithTitle, ShouldAutoSize, 
                 'fill' => [
                     'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => ['argb' => 'c04f4d']
+                ]
+            ]
+        );
+
+        $event->sheet->styleCells(
+            'N1:Q1',
+            [
+                'font' => [
+                    'size' => 11,
+                    // 'name' => 'Arial',
+                    'bold' => true,
+                    'italic' => false,
+                    // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+                    'strikethrough' => false,
+                    'color' => ['argb' => 'FFFFFF']
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'wrapText' => true,
+                ],
+                'fill' => [
+                    'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => ['argb' => '9cbb59']
                 ]
             ]
         );

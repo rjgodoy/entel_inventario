@@ -33,7 +33,8 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
     protected $mpls;
     protected $olt;
     protected $olt_3play;
-    // protected $red_minima;
+    protected $red_minima_n1;
+    protected $red_minima_n2;
     protected $lloo;
     protected $ranco;
     protected $bafi;

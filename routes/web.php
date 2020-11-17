@@ -20,6 +20,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/api_pops', 'HomeController@apiPops');
     Route::get('/room_planes', 'HomeController@roomPlanes');
     Route::get('/create_pop_rooms', 'HomeController@createPopRooms');
+    Route::get('/insert_new_pop', 'HomeController@insertNewPops');
 
 	Route::get('/', function () {
 	    return redirect('/dashboard');

@@ -292,10 +292,10 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faHome, faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, faCamera } from "@fortawesome/free-solid-svg-icons";
+    import { faHome, faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, faCamera, faUserTie } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     import { faCheckCircle as farCheckCircle, faTimesCircle as farTimesCircle } from '@fortawesome/free-regular-svg-icons'
-    library.add(faHome, faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle, faCamera)
+    library.add(faHome, faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle, faCamera, faUserTie)
     export default {
         components: {
             Location: () => import(/* webpackChunkName: "chunks/pop/location"*/'./Location'),
@@ -309,6 +309,7 @@
             Infrastructure: () => import(/* webpackChunkName: "chunks/pop/infrastructure/infrastructure"*/'./infrastructure/Infrastructure'),
             Eco: () => import(/* webpackChunkName: "chunks/pop/eco"*/'./Eco'),
             Comsite: () => import(/* webpackChunkName: "chunks/pop/comsite"*/'./Comsite'),
+            Clients: () => import(/* webpackChunkName: "chunks/pop/clients"*/'./Clients'),
             Documents: () => import(/* webpackChunkName: "chunks/pop/documents/documents"*/'./documents/Documents'),
             Log: () => import(/* webpackChunkName: "chunks/pop/logs"*/'./Log'),
         },

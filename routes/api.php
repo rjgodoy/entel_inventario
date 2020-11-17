@@ -28,6 +28,7 @@ Route::get('/user', function (Request $request) {
 Route::post('/registerRequest', 'Api\AdminController@registerRequest');
 
 Route::middleware('auth:api')->group(function () {
+	// Route::get('dashboard', 'LoginController@index');
 
 	### CAPACITY PLANNING ######################################################################
 	Route::group(['middleware' => 'role:developer,admin,engineer,engineer-admin,super-viewer'], function() {
@@ -135,6 +136,10 @@ Route::middleware('auth:api')->group(function () {
 
 	// Clients Connection
 		Route::apiResource('junctions','Api\JunctionController');
+		Route::get('junctionsExport', 'Api\JunctionController@export');
+		Route::get('junctionData/{core}','Api\JunctionController@junctionData');
+		Route::get('junctionDataCrm/{crm_id}/{core}','Api\JunctionController@junctionDataCrm');
+		Route::get('junctionDataZona/{zona_id}/{core}','Api\JunctionController@junctionDataZona');
 		Route::apiResource('junctionTypes','Api\JunctionTypeController');
 		
 		Route::get('junctionConnections','Api\JunctionController@junctionConnections');

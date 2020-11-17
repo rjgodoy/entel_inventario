@@ -294,7 +294,7 @@
                                     <div class="tile is-child box">
                                         <div class="is-size-6 has-text-weight-semibold title">Nuevos Sitios</div>
                                         <div style="margin: auto 32px auto 32px" class="has-text-centered">
-                                            <div class="is-size-3 has-text-weight-normal">{{ last_data_counters && last_data_counters.sites_news_month }}</div>
+                                            <div class="has-text-weight-semibold" style="font-size: 2.1rem">{{ last_data_counters && last_data_counters.sites_news_month }}</div>
                                             <div class="is-size-6 has-text-weight-light">Sitios nuevos ingresados este mes</div>
                                         </div>
                                         
@@ -318,7 +318,7 @@
                                     <div class="tile is-child box">
                                         <div class="is-size-6 has-text-weight-semibold title">Nuevas Tecnologías</div>
                                         <div style="margin: auto 32px auto 32px" class="has-text-centered">
-                                            <div class="is-size-3 has-text-weight-normal">{{ last_data_counters && last_data_counters.technologies_news_month }}</div>
+                                            <div class="has-text-weight-semibold" style="font-size: 2.1rem">{{ last_data_counters && last_data_counters.technologies_news_month }}</div>
                                             <div class="is-size-6 has-text-weight-light">Tecnologías nuevas ingresados este mes</div>
                                         </div>
 
@@ -399,6 +399,16 @@
             <!-- <div class="title">Equipamiento</div> -->
             <div class="columns is-multiline">
                 <electric-lines-data
+                    :user="user"
+                    :bodyBackground="bodyBackground"
+                    :boxBackground="boxBackground"
+                    :primaryText="primaryText"
+                    :secondaryText="secondaryText"
+                    :selectedCrm="this.selectedCrm"
+                    :selectedZona="this.selectedZona"
+                    :core="core"
+                />
+                <junctions-data
                     :user="user"
                     :bodyBackground="bodyBackground"
                     :boxBackground="boxBackground"
@@ -505,6 +515,7 @@
             // RedCoreChart,
 
             // ###### Equipment #####
+            JunctionsData: () => import(/* webpackChunkName: "chunks/dashboard/junctions"*/'./JunctionsData'),
             ElectricLinesData: () => import(/* webpackChunkName: "chunks/dashboard/electricLines"*/'./ElectricLinesData'),
             GeneratorSetsData: () => import(/* webpackChunkName: "chunks/dashboard/generatorSets"*/'./GeneratorSetsData'),
             PowerRectifiersData: () => import(/* webpackChunkName: "chunks/dashboard/powerRectifiers"*/'./PowerRectifiersData'),

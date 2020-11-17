@@ -35,18 +35,21 @@
             }
         },
 
-        watch: {
-
-        },
-
         created() {
+            this.$eventBus.$on('generator-set-deleted', this.close)
         },
 
         mounted() {
         },
 
         methods: {
-            
+            close() {
+                this.$parent.close()
+            }
+        },
+
+        beforeDestroy() {
+            this.$eventBus.$off('generator-set-deleted')
         }
     }
 </script>

@@ -113,6 +113,11 @@
                     <font-awesome-icon :icon="['fas', 'edit']"/>
                     &nbsp;&nbsp;{{ isEditMode ? 'Modo Edición' : 'Editar parámetros de Grupo' }}
                 </b-button>
+
+                <b-button v-if="isEditMode" type="is-danger" size="is-small" @click="deletePowerRectifier()" class="is-pulled-right">
+                    <font-awesome-icon :icon="['fas', 'trash']"/>
+                    &nbsp;&nbsp; Eliminar
+                </b-button>
             </div>
         </div>
     <!-- </section> -->
@@ -216,7 +221,23 @@
                         this.$eventBus.$emit('power-rectifier-updated');
                     })
                 }
-            }       
+            },
+
+            deletePowerRectifier() {
+                console.log(this.powerRectifier)
+                this.$buefy.dialog.confirm({
+                    message: `Confirma la eliminación de la Planta Rectificadora de la sala?`,
+                    type: 'is-link',
+                    onConfirm: () => {
+                        axios.delete(`/api/powerRectifiers/${this.powerRectifier.id}`)
+                        .then(response => {
+                            // console.log(response.data)
+                            this.$eventBus.$emit('power-rectifier-deleted')
+                            this.$eventBus.$emit('room-data')
+                        })
+                    }
+                })
+            }      
         }
     }
 </script>

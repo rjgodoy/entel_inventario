@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Imports\CellsImport;
 use App\Imports\JunctionsImport;
 use App\Models\AirConditioner;
+use App\Models\Autonomy;
 use App\Models\Crm;
 use App\Models\File;
 use App\Models\Folder;
@@ -34,6 +35,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -297,7 +299,6 @@ class HomeController extends Controller
 
         (new CellsImport)->import('file.csv');
         dd('success');
-
     }
 
     /**
@@ -330,7 +331,6 @@ class HomeController extends Controller
             }            
         }
         dd('done');
-
     }
 
     /**
@@ -354,8 +354,103 @@ class HomeController extends Controller
             ]);
         }
         dd('done');
-
     }
 
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function insertNewPops(Request $request)
+    {
+        $roles = Role::pluck('slug')->toArray();
+        $request->user()->authorizeRoles($roles);
+
+        $newSites = DB::table('entel_pops.sites_new')
+            ->leftJoin('entel_pops.comunas', 'sites_new.comuna', '=', 'comunas.nombre_comuna')
+            ->leftJoin('entel_g_redes_inventario.electric_companies', 'sites_new.electrica', '=', 'electric_companies.name')
+            ->whereRaw('sites_new.nem_site not in (SELECT nem_tech from entel_pops.technologies)')
+            ->select(
+                'sites_new.nombre',
+                'sites_new.direccion',
+                'sites_new.dependencia',
+                'comunas.id as comuna_id',
+                'sites_new.vip',
+
+                'sites_new.nem_site',
+                'sites_new.state_id',
+                'sites_new.site_type_id',
+                'sites_new.classification_type_id',
+                'sites_new.category_type_id',
+                'sites_new.attention_type_id',
+                'sites_new.attention_priority_type_id',
+
+                'sites_new.autonomia',
+
+                'electric_companies.id as electric_company_id',
+                'sites_new.client_number'
+            )
+        ->get();
+
+        dd($newSites);
+
+        $i = 1;
+        $j = 1;
+
+        foreach ($newSites as $newPop) {
+            // Insert POP
+            $pop = Pop::create(
+                [
+                    'nombre' => $newPop->nombre, 
+                    'direccion' => $newPop->direccion, 
+                    'comuna_id' => $newPop->comuna_id, 
+                    'latitude' => -33.4446550 + ($i/1000000), 
+                    'longitude' => -70.6561690 + ($j/1000000), 
+                    'dependences' => $newPop->dependencia,
+                    'vip' => $newPop->vip
+                ]
+            );
+            $i++;
+            $j++;
+
+            // Insert Site
+            $site = Site::insertOrIgnore([
+                [
+                    'nem_site' => $newPop->nem_site,
+                    'pop_id' => $pop->id, 
+                    'nombre' => $newPop->nombre, 
+                    'site_type_id' => $newPop->site_type_id,
+                    'classification_type_id' => $newPop->classification_type_id,
+                    'category_type_id' => $newPop->category_type_id,
+                    'attention_type_id' => $newPop->attention_type_id, 
+                    'attention_priority_type_id' => $newPop->attention_priority_type_id, 
+                    'state_id' => $newPop->state_id,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]
+            ]);
+
+            // Insert Autonomy
+            $autonomy = Autonomy::create([
+                'pop_id' => $pop->id,
+                'theoretical' => $newPop->autonomia
+            ]);
+
+            // // Insert Autonomy
+            // $junction = Junction::insertOrIgnore([
+            //     [
+            //         'pop_id' => $pop->id,
+            //         'client_number' => $newPop->client_number,
+            //         'electric_company_id' => $newPop->electric_company_id,
+            //         'created_at' => Carbon::now(),
+            //         'updated_at' => Carbon::now()
+            //     ],
+            // ]);
+            
+        }
+
+        return redirect('/');
+
+    }
     
 }

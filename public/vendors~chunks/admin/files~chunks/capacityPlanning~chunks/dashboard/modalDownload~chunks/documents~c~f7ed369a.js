@@ -163,6 +163,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faWindowMaximize", function() { return faWindowMaximize; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faWindowMinimize", function() { return faWindowMinimize; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "faWindowRestore", function() { return faWindowRestore; });
+/*!
+ * Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
 var prefix = "far";
 var faAddressBook = {
   prefix: 'far',

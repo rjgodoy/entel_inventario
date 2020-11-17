@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exports\JunctionsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Junction as JunctionResource;
 use App\Http\Resources\JunctionCollection;
@@ -12,8 +13,8 @@ use App\Models\JunctionMeasurement;
 use App\Models\JunctionProtection;
 use App\Models\JunctionType;
 use App\Models\Log;
+use DB;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 
 class JunctionController extends Controller
 {
@@ -25,6 +26,130 @@ class JunctionController extends Controller
     public function index()
     {
         //
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function junctionData($core)
+    {
+        // if (Cache::has('junctionsData_core'.$core)) {
+        //     $junctionsQuantity = Cache::get('junctionsData_core'.$core);
+        // } else {
+            // $junctionsQuantity = Cache::remember('junctionsData_core'.$core, $this->seconds, function () use ($core) {
+
+                $condition = $core ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1)' : '';
+                $junctionsQuantity = DB::select(DB::raw("
+                    SELECT
+                    @crm_id:=id AS id,
+                    @crm:=nombre_crm AS nombre,
+
+                    @q_info:=(SELECT count(DISTINCT J.pop_id) 
+                            FROM entel_g_redes_inventario.junctions J 
+                            INNER JOIN entel_pops.pops P ON J.pop_id = P.id
+                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
+                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+                            $condition
+                            ) AS q_info,
+
+                    @q_junctions:=(SELECT count(DISTINCT J.id) 
+                            FROM entel_g_redes_inventario.junctions J 
+                            INNER JOIN entel_pops.pops P ON J.pop_id = P.id
+                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
+                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+                            $condition
+                            ) AS q_junctions
+
+                    FROM entel_pops.crms
+                "));
+        //         return $junctionsQuantity;
+        //     });
+        // }
+        return new JunctionResource($junctionsQuantity);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function junctionDataCrm($crm_id, $core)
+    {
+        // if (Cache::has('junctionsData_crm'.$crm_id.'_core'.$core)) {
+        //     $junctionsQuantity = Cache::get('junctionsData_crm'.$crm_id.'_core'.$core);
+        // } else {
+        //     $junctionsQuantity = Cache::remember('junctionsData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
+
+                $condition = $core ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1)' : '';
+                $junctionsQuantity = DB::select(DB::raw("
+                    SELECT
+                    @zona_id:=id AS id,
+                    @zona:=nombre_zona AS nombre,
+
+                    @q_info:=(SELECT count(DISTINCT J.pop_id) 
+                            FROM entel_g_redes_inventario.junctions J 
+                            INNER JOIN entel_pops.pops P ON J.pop_id = P.id
+                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+                            $condition
+                            ) AS q_info,
+
+                    @q_junctions:=(SELECT count(DISTINCT J.id) 
+                            FROM entel_g_redes_inventario.junctions J 
+                            INNER JOIN entel_pops.pops P ON J.pop_id = P.id
+                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+                            $condition
+                            ) AS q_junctions
+
+                    FROM entel_pops.zonas
+                    WHERE crm_id = $crm_id
+                "));
+        //         return $junctionsQuantity;
+        //     });
+        // }
+        return new JunctionResource($junctionsQuantity);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function junctionDataZona($zona_id, $core)
+    {
+        // if (Cache::has('junctionsData_zona'.$zona_id.'_core'.$core)) {
+        //     $junctionsQuantity = Cache::get('junctionsData_zona'.$zona_id.'_core'.$core);
+        // } else {
+        //     $junctionsQuantity = Cache::remember('junctionsData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
+
+                $condition = $core ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1)' : '';
+                $junctionsQuantity = DB::select(DB::raw("
+                    SELECT
+                    @comuna_id:=id AS id,
+                    @comuna:=nombre_comuna AS nombre,
+
+                    @q_info:=(SELECT count(DISTINCT J.pop_id) 
+                            FROM entel_g_redes_inventario.junctions J 
+                            INNER JOIN entel_pops.pops P ON J.pop_id = P.id
+                            $condition
+                            WHERE P.comuna_id = @comuna_id
+                            ) AS q_info,
+
+                    @q_junctions:=(SELECT count(DISTINCT J.id) 
+                            FROM entel_g_redes_inventario.junctions J
+                            INNER JOIN entel_pops.pops P ON J.pop_id = P.id 
+                            $condition
+                            WHERE P.comuna_id = @comuna_id
+                            ) AS q_junctions
+
+                    FROM entel_pops.comunas
+                    WHERE zona_id = $zona_id
+                "));
+        //         return $junctionsQuantity;
+        //     });
+        // }
+        return new JunctionResource($junctionsQuantity);
     }
 
     /**
@@ -188,5 +313,16 @@ class JunctionController extends Controller
     {
         $junctionConnections = JunctionConnection::all();
         return new JunctionCollection($junctionConnections);
+    }
+
+    /**
+     * Download all data from Pops (Dashboard).
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function export(Request $request)
+    {
+        return (new JunctionsExport($request))->download('empalmes.xlsx');
     }
 }

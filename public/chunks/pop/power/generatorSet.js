@@ -529,9 +529,9 @@ __webpack_require__.r(__webpack_exports__);
         onConfirm: function onConfirm() {
           axios["delete"]("/api/generatorSets/".concat(_this12.generatorSet.id)).then(function (response) {
             // console.log(response.data)
-            _this12.$parent.close();
+            _this12.$eventBus.$emit('generator-set-deleted');
 
-            _this12.$eventBus.$emit('generator-set-capacities-updated');
+            _this12.$eventBus.$emit('room-data');
           });
         }
       });

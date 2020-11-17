@@ -16,6 +16,26 @@ class ElectricLine extends Model
         return $this->belongsTo(ElectricLineType::class);
     }
 
+    public function postation_type() 
+    {
+        return $this->belongsTo(PostationType::class);
+    }
+
+    public function ferreteria_type() 
+    {
+        return $this->belongsTo(FerreteriaType::class);
+    }
+
+    public function terrain_type() 
+    {
+        return $this->belongsTo(TerrainType::class);
+    }
+
+    public function vegetation_type() 
+    {
+        return $this->belongsTo(VegetationType::class);
+    }
+
     public function phase_type() 
     {
         return $this->belongsTo(PhaseType::class);

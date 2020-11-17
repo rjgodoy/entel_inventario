@@ -93,6 +93,11 @@ export default {
                 ],
             },
             chartOptions: {
+                legend: {
+                    onHover: function(event, legendItem) {
+                        log('onHover: ' + legendItem.text);
+                    },
+                },
                 responsive: true,
                 maintainAspectRatio: false,
                 animation: {
@@ -117,7 +122,7 @@ export default {
                     }
                 },
                 hover: {
-                    mode: 'nearest',
+                    mode: 'dataset',
                     intersect: true
                 },
                 scales: {
@@ -212,6 +217,9 @@ export default {
             .then(response => {
                 if (response.data) {
                     this.projectionData = response.data
+                    let i = -1
+
+                    // All Data
                     Object.keys(this.projectionData).forEach(element => {
                         this.chartData.labels.push(this.projectionData[element].created_at)
                         this.chartData.datasets[0].data.push(this.projectionData[element].junction_available * 100 / this.projectionData[element].junction_total)
@@ -221,7 +229,21 @@ export default {
                         this.chartData.datasets[4].data.push(this.projectionData[element].climate_available * 100 / this.projectionData[element].climate_total)
                         this.chartData.datasets[5].data.push(this.projectionData[element].distribution_available * 100 / this.projectionData[element].distribution_total)
                         this.chartData.datasets[6].data.push(this.projectionData[element].surface_available * 100 / this.projectionData[element].surface_total)
+                        i++
                     })
+
+                    // TODAY Data
+                    this.chartData.labels.push(Date.now())
+                    this.chartData.datasets[0].data.push(this.projectionData[i].junction_available * 100 / this.projectionData[i].junction_total)
+                    this.chartData.datasets[1].data.push(this.projectionData[i].generator_set_available * 100 / this.projectionData[i].generator_set_total)
+                    this.chartData.datasets[2].data.push(this.projectionData[i].power_rectifier_available * 100 / this.projectionData[i].power_rectifier_total)
+                    this.chartData.datasets[3].data.push(this.projectionData[i].battery_available * 100 / this.projectionData[i].battery_total)
+                    this.chartData.datasets[4].data.push(this.projectionData[i].climate_available * 100 / this.projectionData[i].climate_total)
+                    this.chartData.datasets[5].data.push(this.projectionData[i].distribution_available * 100 / this.projectionData[i].distribution_total)
+                    this.chartData.datasets[6].data.push(this.projectionData[i].surface_available * 100 / this.projectionData[i].surface_total)
+
+                    // PROJECTION Data
+
                 }
                 this.renderChart(this.chartData, this.chartOptions)
             })

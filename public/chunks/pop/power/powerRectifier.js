@@ -129,6 +129,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['powerRectifier', 'canEdit', 'user'],
@@ -214,6 +219,23 @@ __webpack_require__.r(__webpack_exports__);
           _this4.$eventBus.$emit('power-rectifier-updated');
         });
       }
+    },
+    deletePowerRectifier: function deletePowerRectifier() {
+      var _this5 = this;
+
+      console.log(this.powerRectifier);
+      this.$buefy.dialog.confirm({
+        message: "Confirma la eliminaci\xF3n de la Planta Rectificadora de la sala?",
+        type: 'is-link',
+        onConfirm: function onConfirm() {
+          axios["delete"]("/api/powerRectifiers/".concat(_this5.powerRectifier.id)).then(function (response) {
+            // console.log(response.data)
+            _this5.$eventBus.$emit('power-rectifier-deleted');
+
+            _this5.$eventBus.$emit('room-data');
+          });
+        }
+      });
     }
   }
 });
@@ -546,7 +568,29 @@ var render = function() {
                 )
               ],
               1
-            )
+            ),
+            _vm._v(" "),
+            _vm.isEditMode
+              ? _c(
+                  "b-button",
+                  {
+                    staticClass: "is-pulled-right",
+                    attrs: { type: "is-danger", size: "is-small" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deletePowerRectifier()
+                      }
+                    }
+                  },
+                  [
+                    _c("font-awesome-icon", {
+                      attrs: { icon: ["fas", "trash"] }
+                    }),
+                    _vm._v("\n                   Eliminar\n            ")
+                  ],
+                  1
+                )
+              : _vm._e()
           ],
           1
         )

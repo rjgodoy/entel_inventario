@@ -531,8 +531,8 @@
                         axios.delete(`/api/generatorSets/${this.generatorSet.id}`)
                         .then(response => {
                             // console.log(response.data)
-                            this.$parent.close()
-                            this.$eventBus.$emit('generator-set-capacities-updated')
+                            this.$eventBus.$emit('generator-set-deleted')
+                            this.$eventBus.$emit('room-data')
                         })
                     }
                 })

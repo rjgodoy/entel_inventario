@@ -1,5 +1,5 @@
 <template>
-    <div class="column is-4">
+    <div class="column is-3">
         <article class="tile is-child box is-bold has-background" :class="boxBackground">
             <div class="is-box-background is-transparent-light">
                 <font-awesome-icon 

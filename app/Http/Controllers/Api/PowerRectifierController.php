@@ -391,7 +391,8 @@ class PowerRectifierController extends Controller
      */
     public function destroy($id)
     {
-        PowerRectifier::find($id)->delete();
+        $pr = PowerRectifier::find($id);
+        $pr->delete();
         return 'deleted';
     }
 

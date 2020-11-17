@@ -33,12 +33,12 @@ class ElectricLineController extends Controller
      */
     public function electricLineData($core)
     {
-        if (Cache::has('electricLinesData_core'.$core)) {
-            $electricLinesQuantity = Cache::get('electricLinesData_core'.$core);
-        } else {
-            $electricLinesQuantity = Cache::remember('electricLinesData_core'.$core, $this->seconds, function () use ($core) {
+        // if (Cache::has('electricLinesData_core'.$core)) {
+        //     $electricLinesQuantity = Cache::get('electricLinesData_core'.$core);
+        // } else {
+            // $electricLinesQuantity = Cache::remember('electricLinesData_core'.$core, $this->seconds, function () use ($core) {
 
-                $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1) AND S.state_id = 1' : '';
+                $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1)' : '';
                 $electricLinesQuantity = DB::select(DB::raw("
                     SELECT
                     @crm_id:=id AS id,
@@ -62,9 +62,9 @@ class ElectricLineController extends Controller
 
                     FROM entel_pops.crms
                 "));
-                return $electricLinesQuantity;
-            });
-        }
+        //         return $electricLinesQuantity;
+        //     });
+        // }
         return new ElectricLineResource($electricLinesQuantity);
     }
 
@@ -75,12 +75,12 @@ class ElectricLineController extends Controller
      */
     public function electricLineDataCrm($crm_id, $core)
     {
-        if (Cache::has('electricLinesData_crm'.$crm_id.'_core'.$core)) {
-            $electricLinesQuantity = Cache::get('electricLinesData_crm'.$crm_id.'_core'.$core);
-        } else {
-            $electricLinesQuantity = Cache::remember('electricLinesData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
+        // if (Cache::has('electricLinesData_crm'.$crm_id.'_core'.$core)) {
+        //     $electricLinesQuantity = Cache::get('electricLinesData_crm'.$crm_id.'_core'.$core);
+        // } else {
+        //     $electricLinesQuantity = Cache::remember('electricLinesData_crm'.$crm_id.'_core'.$core, $this->seconds, function () use ($crm_id, $core) {
 
-                $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1) AND S.state_id = 1' : '';
+                $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1)' : '';
                 $electricLinesQuantity = DB::select(DB::raw("
                     SELECT
                     @zona_id:=id AS id,
@@ -103,9 +103,9 @@ class ElectricLineController extends Controller
                     FROM entel_pops.zonas
                     WHERE crm_id = $crm_id
                 "));
-                return $electricLinesQuantity;
-            });
-        }
+        //         return $electricLinesQuantity;
+        //     });
+        // }
         return new ElectricLineResource($electricLinesQuantity);
     }
 
@@ -116,12 +116,12 @@ class ElectricLineController extends Controller
      */
     public function electricLineDataZona($zona_id, $core)
     {
-        if (Cache::has('electricLinesData_zona'.$zona_id.'_core'.$core)) {
-            $electricLinesQuantity = Cache::get('electricLinesData_zona'.$zona_id.'_core'.$core);
-        } else {
-            $electricLinesQuantity = Cache::remember('electricLinesData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
+        // if (Cache::has('electricLinesData_zona'.$zona_id.'_core'.$core)) {
+        //     $electricLinesQuantity = Cache::get('electricLinesData_zona'.$zona_id.'_core'.$core);
+        // } else {
+        //     $electricLinesQuantity = Cache::remember('electricLinesData_zona'.$zona_id.'_core'.$core, $this->seconds, function () use ($zona_id, $core) {
 
-                $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1) AND S.state_id = 1' : '';
+                $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1)' : '';
                 $electricLinesQuantity = DB::select(DB::raw("
                     SELECT
                     @comuna_id:=id AS id,
@@ -144,9 +144,9 @@ class ElectricLineController extends Controller
                     FROM entel_pops.comunas
                     WHERE zona_id = $zona_id
                 "));
-                return $electricLinesQuantity;
-            });
-        }
+        //         return $electricLinesQuantity;
+        //     });
+        // }
         return new ElectricLineResource($electricLinesQuantity);
     }
 

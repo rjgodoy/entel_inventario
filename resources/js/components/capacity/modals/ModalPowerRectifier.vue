@@ -40,13 +40,20 @@
         },
 
         created() {
+            this.$eventBus.$on('power-rectifier-deleted', this.close)
         },
 
         mounted() {
         },
 
         methods: {
-            
+            close() {
+                this.$parent.close()
+            }
+        },
+
+        beforeDestroy() {
+            this.$eventBus.$off('power-rectifier-deleted')
         }
     }
 </script>

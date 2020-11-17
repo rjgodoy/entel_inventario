@@ -42,6 +42,17 @@
                     </div>
                 </div>
             </div>
+
+            <!-- <div class="column">
+                <div class="box">
+                    <div class="columns">
+                        <div class="column is-size-5 has-text-weight-semibold has-text-left">GRAFICO DE USO</div>
+                    </div>
+                    <PolarChart
+                        :room=room
+                    />
+                </div>
+            </div> -->
             
         </div>
         <div class="columns">
@@ -74,7 +85,9 @@ export default {
     components: {
         RoomLights: () => import(/* webpackChunkName: "chunks/capacity/roomLights"*/'../RoomLights'),
         GaugeChart: () => import(/* webpackChunkName: "chunks/capacity/gaugeChart"*/'../charts/GaugeChart'),
-        ProjectionChart: () => import(/* webpackChunkName: "chunks/capacity/charts/projectionChart"*/'../charts/ProjectionChart')
+        ProjectionChart: () => import(/* webpackChunkName: "chunks/capacity/charts/projectionChart"*/'../charts/ProjectionChart'),
+        PolarChart: () => import(/* webpackChunkName: "chunks/capacity/charts/polarChart"*/'../charts/PolarChart')
+
     },
 
     props : [ 

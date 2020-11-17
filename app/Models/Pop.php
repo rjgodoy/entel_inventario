@@ -73,6 +73,16 @@ class Pop extends Model
      *
      * @var array
      */
+    public function client_companies() 
+    {
+        return $this->hasMany(ClientCompany::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function junctions() 
     {
         return $this->hasMany(Junction::class);

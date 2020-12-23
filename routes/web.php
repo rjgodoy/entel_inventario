@@ -13,6 +13,8 @@
 
 Auth::routes();
 
+Route::get('/outside/bridge/{username}/{password}', 'Auth\LoginController@showLoginFormOutside')->name('bridge');
+
 Route::middleware(['auth'])->group(function () {
 
     // Route::get('/separate_folders', 'Api\FolderController@separateFolders');

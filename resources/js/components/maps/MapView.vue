@@ -1,6 +1,6 @@
 <template>
     <GmapMap
-        style="height: 100%; padding-bottom: -14px"
+        style="height: 95%; padding-bottom: 0px"
         ref="map"
         :center="center"
         :zoom="zoom"

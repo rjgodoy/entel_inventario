@@ -152,6 +152,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalGenerator: function ModalGenerator() {
@@ -161,7 +162,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() | chunks/capacity/modals/new/newGeneratorSet */ "chunks/capacity/modals/new/newGeneratorSet").then(__webpack_require__.bind(null, /*! ../modals/new/ModalNewGeneratorSet */ "./resources/js/components/capacity/modals/new/ModalNewGeneratorSet.vue"));
     }
   },
-  props: ['user', 'pop', 'generatorSets', 'canEditGeneratorSets', 'totalGeneratorSetsCapacity', 'totalGeneratorSetsUsedCapacity', 'totalAvailableGeneratorSetsCapacity', 'totalGeneratorSetsCapacityA', 'totalGeneratorSetsCapacityB', 'usedGeneratorSetsCapacityA', 'usedGeneratorSetsCapacityB', 'availableGeneratorSetsCapacityA', 'availableGeneratorSetsCapacityB'],
+  props: ['user', 'pop', 'room', 'generatorSets', 'canEditGeneratorSets', 'totalGeneratorSetsCapacity', 'totalGeneratorSetsUsedCapacity', 'totalAvailableGeneratorSetsCapacity', 'totalGeneratorSetsCapacityA', 'totalGeneratorSetsCapacityB', 'usedGeneratorSetsCapacityA', 'usedGeneratorSetsCapacityB', 'availableGeneratorSetsCapacityA', 'availableGeneratorSetsCapacityB'],
   data: function data() {
     return {
       generatorSetSelected: null,
@@ -778,53 +779,57 @@ var render = function() {
                     "div",
                     { staticClass: "columns tile is-multiline" },
                     _vm._l(_vm.generatorSets, function(generatorSet) {
-                      return _c(
-                        "div",
-                        {
-                          key: generatorSet.id,
-                          staticClass: "column tile is-parent is-6"
-                        },
-                        [
-                          _c(
-                            "a",
+                      return (generatorSet.room_id &&
+                        generatorSet.room_id == _vm.room.id) ||
+                        !generatorSet.room_id
+                        ? _c(
+                            "div",
                             {
-                              staticClass:
-                                "tile box is-dark is-bold has-text-warning has-background",
-                              on: {
-                                click: function($event) {
-                                  _vm.isGeneratorModalActive = true
-                                  _vm.generatorSetSelected = generatorSet
-                                }
-                              }
+                              key: generatorSet.id,
+                              staticClass: "column tile is-parent is-6"
                             },
                             [
                               _c(
-                                "div",
+                                "a",
                                 {
                                   staticClass:
-                                    "is-box-background is-transparent"
+                                    "tile box is-dark is-bold has-text-warning has-background",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.isGeneratorModalActive = true
+                                      _vm.generatorSetSelected = generatorSet
+                                    }
+                                  }
                                 },
                                 [
-                                  _c("font-awesome-icon", {
-                                    staticClass: "is-pulled-right",
-                                    staticStyle: {
-                                      "margin-top": "-10px",
-                                      "margin-right": "15px"
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "is-box-background is-transparent"
                                     },
-                                    attrs: {
-                                      icon: ["fas", "charging-station"],
-                                      size: "4x"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _vm._m(1, true)
+                                    [
+                                      _c("font-awesome-icon", {
+                                        staticClass: "is-pulled-right",
+                                        staticStyle: {
+                                          "margin-top": "-10px",
+                                          "margin-right": "15px"
+                                        },
+                                        attrs: {
+                                          icon: ["fas", "charging-station"],
+                                          size: "4x"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._m(1, true)
+                                ]
+                              )
                             ]
                           )
-                        ]
-                      )
+                        : _vm._e()
                     }),
                     0
                   )
@@ -886,7 +891,7 @@ var render = function() {
         },
         [
           _c("modal-new-generator-set", {
-            attrs: { user: _vm.user, pop: _vm.pop }
+            attrs: { user: _vm.user, pop: _vm.pop, room: _vm.room }
           })
         ],
         1

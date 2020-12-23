@@ -184,4 +184,24 @@ class Room extends Model
         return $this->hasMany(AirConditionerCapacity::class);
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function junctions()
+    {
+        return $this->hasMany(Junction::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function generator_sets()
+    {
+        return $this->hasMany(GeneratorSet::class);
+    }
+
 }

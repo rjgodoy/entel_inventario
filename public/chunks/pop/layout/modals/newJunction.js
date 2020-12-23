@@ -45,15 +45,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrashAlt"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['pop', 'user'],
+  props: ['pop', 'user', 'room'],
   data: function data() {
     return {
       electricCompanies: Array,
-      electric_company_id: null
+      electric_company_id: null,
+      isOnlyRoom: false
     };
   },
   mounted: function mounted() {
@@ -72,7 +78,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       var params = {
         'pop_id': this.pop.id,
-        'electric_company_id': this.electric_company_id
+        'electric_company_id': this.electric_company_id,
+        'room_id': this.room.id,
+        'is_only_room': this.isOnlyRoom
       };
       axios.post("/api/junctions", params).then(function (response) {
         console.log(response.data); // this.getPopPowerRectifiersWithoutRoom()
@@ -145,12 +153,35 @@ var render = function() {
                     )
                   }),
                   0
-                ),
-                _vm._v(
-                  "\n                        " +
-                    _vm._s(_vm.electric_company_id) +
-                    "\n                    "
                 )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "column" }, [
+            _c(
+              "div",
+              { staticClass: "field" },
+              [
+                _c(
+                  "div",
+                  { staticClass: "is-size-6 has-text-weight-normal field" },
+                  [
+                    _vm._v("Propio de la sala "),
+                    _c("strong", [_vm._v(_vm._s(_vm.room.name))])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("b-switch", {
+                  model: {
+                    value: _vm.isOnlyRoom,
+                    callback: function($$v) {
+                      _vm.isOnlyRoom = $$v
+                    },
+                    expression: "isOnlyRoom"
+                  }
+                })
               ],
               1
             )

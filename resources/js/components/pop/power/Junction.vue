@@ -82,6 +82,23 @@
                                     <b-input class="has-text-weight-bold is-size-5" v-model="useFactor"/>
                                 </div>
                             </div>
+
+                            <div class="field" v-if="isEditMode">
+                                <div class="has-text-weight-light is-size-7">Propio de la sala</div>
+                                <div class="field">
+                                    <b-switch v-model="isOnlyRoom"></b-switch>
+                                </div>
+                                <div v-if="isOnlyRoom">
+                                    <b-select placeholder="Select a name" v-model="junctionRoom">
+                                        <option
+                                            v-for="option in rooms"
+                                            :value="option.id"
+                                            :key="option.id">
+                                            {{ option.name }}
+                                        </option>
+                                    </b-select>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="column">
@@ -460,12 +477,14 @@
                 junctionConnections: [],
 
                 // current_junction_total: this.junction.pop.room && this.junction.pop.room[0].current_room_capacity.junction_total,
-
+                rooms: this.junction.pop && this.junction.pop.rooms,
                 isEditJunctionModalActive: false,
                 isEditMode: false,
                 clientNumber: this.junction.client_number,
                 junctionNumber: this.junction.junction_number,
                 useFactor: this.junction.use_factor,
+                junctionRoom: this.junction.room_id,
+                isOnlyRoom: this.junction.room_id ? true : false,
                 punctualConsumption: this.junction.latest_measurement ? this.junction.latest_measurement.punctual_consumption : 0
             }
         },
@@ -473,7 +492,8 @@
         watch: {
             junction(val) {
                 if (this.junction.pop && this.junction.pop.rooms) {
-                    console.log(this.junction.pop.rooms[0].current_room_capacity)
+                    // console.log(this.junction.pop.rooms[0].current_room_capacity)
+                    this.rooms = this.junction.pop.rooms
                 }
                 this.junctionTypeId = val.junction_type_id,
                 this.junctionConnectionId = val.junction_connection_id,
@@ -685,10 +705,13 @@
                         'junction_number': this.junctionNumber,
                         'junction_type_id': this.junctionTypeId,
                         'junction_connection_id': this.junctionConnectionId,
-                        'use_factor': parseFloat(this.useFactor)
+                        'use_factor': parseFloat(this.useFactor),
+                        'is_only_room': this.isOnlyRoom,
+                        'room_id': this.junctionRoom
                     }
                     axios.put(`/api/junctionUpdateTypes/${this.junction.id}`, params).then(response => {
                         console.log(response.data)
+                        this.$eventBus.$emit('new-junction')
                     })
 
                     // Si el total, usado y disponible es distinto de lo que está en el original, guardar

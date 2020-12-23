@@ -175,11 +175,11 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faClipboardList, faEnvelope, faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust } from "@fortawesome/free-solid-svg-icons";
+    import { faClipboardList, faEnvelope, faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust, faChargingStation } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-    library.add(faClipboardList, faEnvelope, faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust);
+    library.add(faClipboardList, faEnvelope, faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust, faChargingStation);
 
     export default {
         components: {

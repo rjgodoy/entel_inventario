@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Cache;
-
-use App\Http\Resources\Zona as ZonaResource;
 use App\Models\Zona;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
+use App\Http\Resources\ZonaCollection;
+use App\Http\Resources\Zona as ZonaResource;
 
 class ZonaController extends Controller
 {
@@ -21,7 +20,15 @@ class ZonaController extends Controller
      */
     public function index()
     {
-        //
+        if (Cache::has('zonas')) {
+            $zonas = Cache::get('zonas');
+        } else {
+            $zonas = Cache::rememberForever('zonas', function () {
+                $zonas = Zona::with('comunas', 'responsable')->get();
+                return $zonas;
+            });
+        }
+        return new ZonaCollection($zonas);
     }
 
     /**

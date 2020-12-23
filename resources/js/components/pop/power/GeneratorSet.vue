@@ -95,6 +95,29 @@
                             </b-select>
                         </div>
                     </div>
+
+                    <div class="field" v-if="!isEditMode">
+                        <div class="has-text-weight-light is-size-7">Propio de Sala</div>
+                        <div class="has-text-weight-bold is-size-6" :class="generatorSet.room_id && 'has-text-success'">{{generatorSet.room_id ? 'SI' : 'NO'}}</div>
+                    </div>
+
+                    <div class="field" v-if="isEditMode">
+                        <div class="has-text-weight-light is-size-7">Propio de la sala</div>
+                        <div class="field">
+                            <b-switch v-model="isOnlyRoom"></b-switch>
+                        </div>
+                        <div v-if="isOnlyRoom">
+                            <b-select placeholder="Select a name" v-model="generatorRoom">
+                                <option
+                                    v-for="option in rooms"
+                                    :value="option.id"
+                                    :key="option.id">
+                                    {{ option.name }}
+                                </option>
+                            </b-select>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="column has-text-right">
@@ -324,6 +347,10 @@
                 currentGeneratorSetType: 'Sin Información',
                 currentGeneratorSetModel: 'Sin Información',
 
+                rooms: this.generatorSet.pop && this.generatorSet.pop.rooms,
+                generatorRoom: this.generatorSet.room_id,
+                isOnlyRoom: this.generatorSet.room_id ? true : false,
+
                 maintainer_id: this.generatorSet.current_maintainer ? this.generatorSet.current_maintainer.telecom_company_id : null,
                 responsable_area_id: this.generatorSet.current_generator_responsable ? this.generatorSet.current_generator_responsable.generator_set_responsable_area_id : null,
                 topology_id: this.generatorSet.generator_set_topology_type_id,
@@ -375,7 +402,10 @@
 
         watch: {
             generatorSet(val) {
-                // console.log(val)
+                // if (this.generatorSet.pop && this.generatorSet.pop.rooms) {
+                //     // console.log(this.generatorSet.pop.rooms[0].current_room_capacity)
+                //     this.rooms = this.generatorSet.pop.rooms
+                // }
             },
 
             maintainer_id(val) {
@@ -497,12 +527,13 @@
                 // console.log(this.currentGeneratorResponsableAreaId)
                 if (!this.isEditMode && 
                     (this.primeCapacity != this.newPrimeCapacity || 
-                    this.usedCapacity != this.newUsedCapacity || 
-                    this.generatorSet.current_maintainer.telecom_company_id != this.maintainer_id ||
+                    (this.usedCapacity != this.newUsedCapacity) || 
+                    (this.generatorSet.current_maintainer && this.generatorSet.current_maintainer.telecom_company_id != this.maintainer_id) ||
                     this.generatorSet.generator_set_topology_type_id != this.topology_id ||
                     this.generatorSet.generator_set_level_type_id != this.level_id ||
                     this.generatorSet.generator_set_type_id != this.generator_set_type_id ||
-                    this.currentGeneratorResponsableAreaId != this.responsable_area_id)) {
+                    this.currentGeneratorResponsableAreaId != this.responsable_area_id) ||
+                    this.generatorRoom != this.generatorSet.room_id) {
                     // console.log(this.currentGeneratorResponsableAreaId)
                     let params = {
                         'user_id': parseFloat(this.user.id),
@@ -513,7 +544,9 @@
                         'generator_set_responsable_area_id': parseFloat(this.responsable_area_id),
                         'generator_set_topology_type_id': parseFloat(this.topology_id),
                         'generator_set_level_type_id': parseFloat(this.level_id),
-                        'generator_set_type_id': parseFloat(this.generator_set_type_id)
+                        'generator_set_type_id': parseFloat(this.generator_set_type_id),
+                        'is_only_room': this.isOnlyRoom,
+                        'room_id': this.generatorRoom
                     }
                     // console.log(params)
                     axios.put(`/api/generatorSets/${this.generatorSet.id}`, params).then(response => {

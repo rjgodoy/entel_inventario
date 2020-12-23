@@ -36,6 +36,7 @@
                     <div class="tile is-4">
                         <Junctions 
                             :pop="pop"
+                            :room="room"
                             :junctions="junctions"
                             :canEditJunctions="canEditJunctions"
                             :user="user"
@@ -47,6 +48,7 @@
                     <div class="tile">
                         <GeneratorSets 
                             :pop="pop"
+                            :room="room"
                             :generatorSets="generatorSets"
                             :canEditGeneratorSets="canEditGeneratorSets"
                             :user="user"

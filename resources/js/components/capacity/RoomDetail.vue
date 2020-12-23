@@ -266,6 +266,8 @@
             this.$eventBus.$on('junction-measurements-updated', this.getRoomData)
             this.$eventBus.$on('generator-set-capacities-updated', this.getRoomData)
             this.$eventBus.$on('battery-autonomy', this.getRoomData)
+            this.$eventBus.$on('battery-bank-deleted', this.getRoomData)
+            this.$eventBus.$on('generator-set-deleted', this.getRoomData)
         },
 
         mounted() {
@@ -409,7 +411,9 @@
                     let sum = 0
                     if (this.junctions.length) {
                         Object.keys(this.junctions).forEach(element => {
-                            sum = sum + (this.powerA(this.junctions[element]) + this.powerB(this.junctions[element])) * this.junctions[element].use_factor + this.photovoltaicCapacity(this.junctions[element])
+                            if(!this.junctions[element].room_id || (this.junctions[element].room_id && this.junctions[element].room_id == this.room.id)) {
+                                sum = sum + (this.powerA(this.junctions[element]) + this.powerB(this.junctions[element])) * this.junctions[element].use_factor + this.photovoltaicCapacity(this.junctions[element])
+                            }
                         })
                     }
                     return sum
@@ -420,8 +424,10 @@
                     let punctualConsumption = 0
                     if (this.junctions.length) {
                         Object.keys(this.junctions).forEach(element => {
-                            if(this.junctions[element].latest_measurement) {
-                                punctualConsumption += this.junctions[element].latest_measurement.punctual_consumption
+                            if(!this.junctions[element].room_id || (this.junctions[element].room_id && this.junctions[element].room_id == this.room.id)) {
+                                if(this.junctions[element].latest_measurement) {
+                                    punctualConsumption += this.junctions[element].latest_measurement.punctual_consumption
+                                }
                             }
                         })
                     }
@@ -431,7 +437,9 @@
                     let sum = 0
                     if (this.junctions.length) {
                         Object.keys(this.junctions).forEach(element => {
-                            sum = sum + this.powerUsedA(this.junctions[element]) + this.powerUsedB(this.junctions[element]) + this.averageConsumptionPerPhotovoltaicGroup
+                            if(!this.junctions[element].room_id || (this.junctions[element].room_id && this.junctions[element].room_id == this.room.id)) {
+                                sum = sum + this.powerUsedA(this.junctions[element]) + this.powerUsedB(this.junctions[element]) + this.averageConsumptionPerPhotovoltaicGroup
+                            }
                         })
                     }
                     return sum
@@ -487,23 +495,26 @@
                     let sum = 0; let res = 0; let div = 1; 
                     if (this.generatorSets.length) {
                         Object.keys(this.generatorSets).forEach(element => {
-                            let primeCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.prime_capacity : 0
-                            let capacity = primeCapacity * 0.8
+                            if(!this.generatorSets[element].room_id || (this.generatorSets[element].room_id && this.generatorSets[element].room_id == this.room.id)) {
 
-                            switch(this.generatorSets[element].generator_set_topology_type_id) {
-                                case 1:
-                                    sum = sum + capacity
-                                    break
-                                case 2:
-                                    sum = sum + capacity
-                                    res = res + capacity
-                                    div = div++
-                                    break
-                                case 3:
-                                    sum = this.generatorSets[element].generator_set_level_type_id == 2 ? sum + capacity : sum
-                                    break
-                                default:
-                                    break
+                                let primeCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.prime_capacity : 0
+                                let capacity = primeCapacity * 0.8
+
+                                switch(this.generatorSets[element].generator_set_topology_type_id) {
+                                    case 1:
+                                        sum = sum + capacity
+                                        break
+                                    case 2:
+                                        sum = sum + capacity
+                                        res = res + capacity
+                                        div = div++
+                                        break
+                                    case 3:
+                                        sum = this.generatorSets[element].generator_set_level_type_id == 2 ? sum + capacity : sum
+                                        break
+                                    default:
+                                        break
+                                }
                             }
                         })
                     }
@@ -513,17 +524,19 @@
                     let sum = 0
                     if (this.generatorSets.length) {
                         Object.keys(this.generatorSets).forEach(element => {
-                            let primeCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.prime_capacity : 0
-                            let capacity = primeCapacity * 0.8
+                            if(!this.generatorSets[element].room_id || (this.generatorSets[element].room_id && this.generatorSets[element].room_id == this.room.id)) {
+                                let primeCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.prime_capacity : 0
+                                let capacity = primeCapacity * 0.8
 
-                            switch(this.generatorSets[element].generator_set_topology_type_id) {
-                                case 1:
-                                case 2:
-                                default:
-                                    break
-                                case 3:
-                                    sum = this.generatorSets[element].generator_set_level_type_id == 3 ? sum + capacity : sum
-                                    break
+                                switch(this.generatorSets[element].generator_set_topology_type_id) {
+                                    case 1:
+                                    case 2:
+                                    default:
+                                        break
+                                    case 3:
+                                        sum = this.generatorSets[element].generator_set_level_type_id == 3 ? sum + capacity : sum
+                                        break
+                                }
                             }
                         })
                     }
@@ -577,18 +590,20 @@
                     let sum = 0
                     if (this.generatorSets.length) {
                         Object.keys(this.generatorSets).forEach(element => {
-                            let usedCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.used_capacity : 0
+                            if(!this.generatorSets[element].room_id || (this.generatorSets[element].room_id && this.generatorSets[element].room_id == this.room.id)) {
+                                let usedCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.used_capacity : 0
 
-                            switch(this.generatorSets[element].generator_set_topology_type_id) {
-                                case 1:
-                                case 2:
-                                    sum = sum + usedCapacity
-                                    break
-                                case 3:
-                                    sum = this.generatorSets[element].generator_set_level_type_id == 2 ? sum + usedCapacity : sum
-                                    break
-                                default:
-                                    break
+                                switch(this.generatorSets[element].generator_set_topology_type_id) {
+                                    case 1:
+                                    case 2:
+                                        sum = sum + usedCapacity
+                                        break
+                                    case 3:
+                                        sum = this.generatorSets[element].generator_set_level_type_id == 2 ? sum + usedCapacity : sum
+                                        break
+                                    default:
+                                        break
+                                }
                             }
                         })
                     }
@@ -598,16 +613,18 @@
                     let sum = 0
                     if (this.generatorSets.length) {
                         Object.keys(this.generatorSets).forEach(element => {
-                            let usedCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.used_capacity : 0
+                            if(!this.generatorSets[element].room_id || (this.generatorSets[element].room_id && this.generatorSets[element].room_id == this.room.id)) {
+                                let usedCapacity = this.generatorSets[element].current_generator_set_capacity ? this.generatorSets[element].current_generator_set_capacity.used_capacity : 0
 
-                            switch(this.generatorSets[element].generator_set_topology_type_id) {
-                                case 1:
-                                case 2:
-                                default:
-                                    break
-                                case 3:
-                                    sum = this.generatorSets[element].generator_set_level_type_id == 3 ? sum + usedCapacity : sum
-                                    break
+                                switch(this.generatorSets[element].generator_set_topology_type_id) {
+                                    case 1:
+                                    case 2:
+                                    default:
+                                        break
+                                    case 3:
+                                        sum = this.generatorSets[element].generator_set_level_type_id == 3 ? sum + usedCapacity : sum
+                                        break
+                                }
                             }
                         })
                     }
@@ -1397,6 +1414,8 @@
             this.$eventBus.$off('air-conditioner-capacity');
             this.$eventBus.$off('new-solar-panel')
             this.$eventBus.$off('battery-autonomy')
+            this.$eventBus.$off('battery-bank-deleted')
+            this.$eventBus.$off('generator-set-deleted')
         }
     }
 </script>

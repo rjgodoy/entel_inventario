@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"chunks/admin":"chunks/admin","chunks/comsite":"chunks/comsite","chunks/helpers/notFound":"chunks/helpers/notFound","chunks/login":"chunks/login","chunks/passwordEmail":"chunks/passwordEmail","chunks/passwordReset":"chunks/passwordReset","chunks/pops":"chunks/pops","chunks/register":"chunks/register","chunks/reports":"chunks/reports","vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~f7ed369a":"vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~f7ed369a","chunks/documents":"chunks/documents","chunks/eco":"chunks/eco","chunks/pop":"chunks/pop","vendors~chunks/capacityPlanning~chunks/dashboard":"vendors~chunks/capacityPlanning~chunks/dashboard","chunks/capacityPlanning":"chunks/capacityPlanning","vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~54cb6b07":"vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~54cb6b07","chunks/helpers":"chunks/helpers","chunks/layouts/footer":"chunks/layouts/footer","vendors~chunks/capacity/projection~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks/ma~66c43816":"vendors~chunks/capacity/projection~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks/ma~66c43816","vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload":"vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload","chunks/dashboard":"chunks/dashboard","chunks/admin/massive":"chunks/admin/massive","chunks/admin/tps":"chunks/admin/tps","chunks/admin/usersPermissions":"chunks/admin/usersPermissions","chunks/admin/files":"chunks/admin/files","chunks/admin/pops":"chunks/admin/pops","chunks/helpers/vuePagination":"chunks/helpers/vuePagination","chunks/dashboard/modalDownload":"chunks/dashboard/modalDownload","chunks/maps/mapView":"chunks/maps/mapView","chunks/documents/modals/newFolder":"chunks/documents/modals/newFolder","chunks/documents/modals/newRootFolder":"chunks/documents/modals/newRootFolder","chunks/documents/modals/upload":"chunks/documents/modals/upload","chunks/eco/documents":"chunks/eco/documents","chunks/eco/popProtectedZones":"chunks/eco/popProtectedZones","chunks/eco/protectedZones":"chunks/eco/protectedZones","chunks/eco/rcas":"chunks/eco/rcas","chunks/eco/temporaryStorages":"chunks/eco/temporaryStorages","chunks/maps/ecoMap":"chunks/maps/ecoMap","chunks/pop/characteristics":"chunks/pop/characteristics","chunks/pop/climate/airConditioner":"chunks/pop/climate/airConditioner","chunks/pop/climate/climate":"chunks/pop/climate/climate","chunks/pop/documents/documents":"chunks/pop/documents/documents","chunks/pop/eco":"chunks/pop/eco","chunks/pop/infrastructure/infrastructure":"chunks/pop/infrastructure/infrastructure","chunks/pop/layout/layout":"chunks/pop/layout/layout","chunks/pop/power/power":"chunks/pop/power/power","chunks/pop/sites":"chunks/pop/sites","chunks/pop/clients":"chunks/pop/clients","chunks/pop/comsite":"chunks/pop/comsite","chunks/pop/location":"chunks/pop/location","chunks/pop/logs":"chunks/pop/logs","chunks/pop/vision":"chunks/pop/vision","chunks/capacity/capacity":"chunks/capacity/capacity","chunks/capacity/distribution":"chunks/capacity/distribution","chunks/capacity/layout":"chunks/capacity/layout","chunks/capacity/modals/new/newRoom":"chunks/capacity/modals/new/newRoom","chunks/capacity/roomsTable":"chunks/capacity/roomsTable","chunks/capacity/projection":"chunks/capacity/projection","chunks/layouts/modals/info":"chunks/layouts/modals/info","chunks/dashboard/airConditioners":"chunks/dashboard/airConditioners","chunks/dashboard/albaPopsData":"chunks/dashboard/albaPopsData","chunks/dashboard/criticPopsData":"chunks/dashboard/criticPopsData","chunks/dashboard/electricLines":"chunks/dashboard/electricLines","chunks/dashboard/generatorSets":"chunks/dashboard/generatorSets","chunks/dashboard/infrastructures":"chunks/dashboard/infrastructures","chunks/dashboard/junctions":"chunks/dashboard/junctions","chunks/dashboard/popsData":"chunks/dashboard/popsData","chunks/dashboard/powerRectifiers":"chunks/dashboard/powerRectifiers","chunks/dashboard/sitesData":"chunks/dashboard/sitesData","chunks/dashboard/technologyData":"chunks/dashboard/technologyData","chunks/dashboard/verticalStructures":"chunks/dashboard/verticalStructures","chunks/maps/mapView/":"chunks/maps/mapView/","vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart":"vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart","chunks/dashboard/pretDataChart":"chunks/dashboard/pretDataChart","chunks/admin/modals/modalInfoCircle":"chunks/admin/modals/modalInfoCircle","chunks/admin/adminTpsTable":"chunks/admin/adminTpsTable","chunks/eco/modals/upload":"chunks/eco/modals/upload","chunks/eco/modals/newStorage":"chunks/eco/modals/newStorage","chunks/pop/documents/modals/newFolder":"chunks/pop/documents/modals/newFolder","chunks/pop/documents/modals/upload":"chunks/pop/documents/modals/upload","chunks/capacity/modals/airConditioner":"chunks/capacity/modals/airConditioner","chunks/capacity/modals/generator":"chunks/capacity/modals/generator","chunks/capacity/modals/junction":"chunks/capacity/modals/junction","chunks/capacity/modals/powerRectifier":"chunks/capacity/modals/powerRectifier","chunks/pop/power/electricLines":"chunks/pop/power/electricLines","chunks/pop/power/generatorSets":"chunks/pop/power/generatorSets","chunks/pop/power/junctions":"chunks/pop/power/junctions","chunks/pop/power/powerRectifiers":"chunks/pop/power/powerRectifiers","chunks/pop/modals/editParameter":"chunks/pop/modals/editParameter","chunks/maps/popMapView":"chunks/maps/popMapView","chunks/capacity/roomLights":"chunks/capacity/roomLights","vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart":"vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart","chunks/capacity/charts/polarChart":"chunks/capacity/charts/polarChart","chunks/capacity/charts/projectionChart":"chunks/capacity/charts/projectionChart","chunks/capacity/gaugeChart":"chunks/capacity/gaugeChart","chunks/capacity/blocks/equipment":"chunks/capacity/blocks/equipment","chunks/capacity/blocks/generator":"chunks/capacity/blocks/generator","chunks/capacity/blocks/junction":"chunks/capacity/blocks/junction","chunks/capacity/blocks/solarPanels":"chunks/capacity/blocks/solarPanels","chunks/pop/power/generatorSet":"chunks/pop/power/generatorSet","chunks/pop/power/junction":"chunks/pop/power/junction","chunks/pop/power/batteryBank":"chunks/pop/power/batteryBank","chunks/pop/power/powerRectifier":"chunks/pop/power/powerRectifier","chunks/capacity/modals/editPlane":"chunks/capacity/modals/editPlane","chunks/capacity/modals/new/newAirConditioner":"chunks/capacity/modals/new/newAirConditioner","chunks/capacity/modals/new/newBatteryBank":"chunks/capacity/modals/new/newBatteryBank","chunks/capacity/modals/new/newPowerRectifier":"chunks/capacity/modals/new/newPowerRectifier","chunks/capacity/surface":"chunks/capacity/surface","chunks/capacity/modals/new/newGeneratorSet":"chunks/capacity/modals/new/newGeneratorSet","chunks/pop/layout/modals/newJunction":"chunks/pop/layout/modals/newJunction","chunks/capacity/modals/new/newSolarPanel":"chunks/capacity/modals/new/newSolarPanel","chunks/pop/power/modals/editJunction":"chunks/pop/power/modals/editJunction","chunks/capacity/modals/distribution":"chunks/capacity/modals/distribution","chunks/capacity/modals/surface":"chunks/capacity/modals/surface"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"chunks/admin":"chunks/admin","chunks/bridge":"chunks/bridge","chunks/comsite":"chunks/comsite","chunks/helpers/notFound":"chunks/helpers/notFound","chunks/login":"chunks/login","chunks/passwordEmail":"chunks/passwordEmail","chunks/passwordReset":"chunks/passwordReset","chunks/pops":"chunks/pops","chunks/register":"chunks/register","chunks/reports":"chunks/reports","vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~d94cc1ca":"vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~d94cc1ca","chunks/documents":"chunks/documents","chunks/eco":"chunks/eco","chunks/pop":"chunks/pop","vendors~chunks/capacityPlanning~chunks/dashboard":"vendors~chunks/capacityPlanning~chunks/dashboard","chunks/capacityPlanning":"chunks/capacityPlanning","vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~9dc0bd9b":"vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~9dc0bd9b","chunks/helpers":"chunks/helpers","chunks/layouts/footer":"chunks/layouts/footer","vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators~chunks/maps/ecoMap~chunks/maps~439c6c37":"vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators~chunks/maps/ecoMap~chunks/maps~439c6c37","chunks/generators":"chunks/generators","vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload":"vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload","chunks/dashboard":"chunks/dashboard","chunks/admin/massive":"chunks/admin/massive","chunks/admin/tps":"chunks/admin/tps","chunks/admin/usersPermissions":"chunks/admin/usersPermissions","chunks/admin/files":"chunks/admin/files","chunks/admin/pops":"chunks/admin/pops","chunks/helpers/vuePagination":"chunks/helpers/vuePagination","chunks/dashboard/modalDownload":"chunks/dashboard/modalDownload","chunks/maps/mapView":"chunks/maps/mapView","chunks/documents/modals/newFolder":"chunks/documents/modals/newFolder","chunks/documents/modals/newRootFolder":"chunks/documents/modals/newRootFolder","chunks/documents/modals/upload":"chunks/documents/modals/upload","chunks/eco/documents":"chunks/eco/documents","chunks/eco/popProtectedZones":"chunks/eco/popProtectedZones","chunks/eco/protectedZones":"chunks/eco/protectedZones","chunks/eco/rcas":"chunks/eco/rcas","chunks/eco/temporaryStorages":"chunks/eco/temporaryStorages","chunks/maps/ecoMap":"chunks/maps/ecoMap","chunks/pop/characteristics":"chunks/pop/characteristics","chunks/pop/climate/airConditioner":"chunks/pop/climate/airConditioner","chunks/pop/climate/climate":"chunks/pop/climate/climate","chunks/pop/documents/documents":"chunks/pop/documents/documents","chunks/pop/eco":"chunks/pop/eco","chunks/pop/infrastructure/infrastructure":"chunks/pop/infrastructure/infrastructure","chunks/pop/layout/layout":"chunks/pop/layout/layout","chunks/pop/power/power":"chunks/pop/power/power","chunks/pop/sites":"chunks/pop/sites","chunks/pop/clients":"chunks/pop/clients","chunks/pop/comsite":"chunks/pop/comsite","chunks/pop/location":"chunks/pop/location","chunks/pop/logs":"chunks/pop/logs","chunks/pop/vision":"chunks/pop/vision","chunks/capacity/capacity":"chunks/capacity/capacity","chunks/capacity/distribution":"chunks/capacity/distribution","chunks/capacity/layout":"chunks/capacity/layout","chunks/capacity/modals/new/newRoom":"chunks/capacity/modals/new/newRoom","chunks/capacity/roomsTable":"chunks/capacity/roomsTable","chunks/capacity/projection":"chunks/capacity/projection","chunks/layouts/modals/info":"chunks/layouts/modals/info","chunks/generators/generatorSlot":"chunks/generators/generatorSlot","chunks/dashboard/airConditioners":"chunks/dashboard/airConditioners","chunks/dashboard/albaPopsData":"chunks/dashboard/albaPopsData","chunks/dashboard/criticPopsData":"chunks/dashboard/criticPopsData","chunks/dashboard/electricLines":"chunks/dashboard/electricLines","chunks/dashboard/generatorSets":"chunks/dashboard/generatorSets","chunks/dashboard/infrastructures":"chunks/dashboard/infrastructures","chunks/dashboard/junctions":"chunks/dashboard/junctions","chunks/dashboard/popsData":"chunks/dashboard/popsData","chunks/dashboard/powerRectifiers":"chunks/dashboard/powerRectifiers","chunks/dashboard/sitesData":"chunks/dashboard/sitesData","chunks/dashboard/technologyData":"chunks/dashboard/technologyData","chunks/dashboard/verticalStructures":"chunks/dashboard/verticalStructures","chunks/maps/mapView/":"chunks/maps/mapView/","vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart":"vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart","chunks/dashboard/pretDataChart":"chunks/dashboard/pretDataChart","chunks/admin/modals/modalInfoCircle":"chunks/admin/modals/modalInfoCircle","chunks/admin/adminTpsTable":"chunks/admin/adminTpsTable","chunks/eco/modals/upload":"chunks/eco/modals/upload","chunks/eco/modals/newStorage":"chunks/eco/modals/newStorage","chunks/pop/documents/modals/newFolder":"chunks/pop/documents/modals/newFolder","chunks/pop/documents/modals/upload":"chunks/pop/documents/modals/upload","chunks/capacity/modals/airConditioner":"chunks/capacity/modals/airConditioner","chunks/capacity/modals/generator":"chunks/capacity/modals/generator","chunks/capacity/modals/junction":"chunks/capacity/modals/junction","chunks/capacity/modals/powerRectifier":"chunks/capacity/modals/powerRectifier","chunks/pop/power/electricLines":"chunks/pop/power/electricLines","chunks/pop/power/generatorSets":"chunks/pop/power/generatorSets","chunks/pop/power/junctions":"chunks/pop/power/junctions","chunks/pop/power/powerRectifiers":"chunks/pop/power/powerRectifiers","chunks/pop/modals/editParameter":"chunks/pop/modals/editParameter","chunks/maps/popMapView":"chunks/maps/popMapView","chunks/capacity/roomLights":"chunks/capacity/roomLights","vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart":"vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart","chunks/capacity/charts/polarChart":"chunks/capacity/charts/polarChart","chunks/capacity/charts/projectionChart":"chunks/capacity/charts/projectionChart","chunks/capacity/gaugeChart":"chunks/capacity/gaugeChart","chunks/capacity/blocks/equipment":"chunks/capacity/blocks/equipment","chunks/capacity/blocks/generator":"chunks/capacity/blocks/generator","chunks/capacity/blocks/junction":"chunks/capacity/blocks/junction","chunks/capacity/blocks/solarPanels":"chunks/capacity/blocks/solarPanels","chunks/generators/modals/generatorDetail":"chunks/generators/modals/generatorDetail","chunks/pop/power/generatorSet":"chunks/pop/power/generatorSet","chunks/pop/power/junction":"chunks/pop/power/junction","chunks/pop/power/batteryBank":"chunks/pop/power/batteryBank","chunks/pop/power/powerRectifier":"chunks/pop/power/powerRectifier","chunks/capacity/modals/editPlane":"chunks/capacity/modals/editPlane","chunks/capacity/modals/new/newAirConditioner":"chunks/capacity/modals/new/newAirConditioner","chunks/capacity/modals/new/newBatteryBank":"chunks/capacity/modals/new/newBatteryBank","chunks/capacity/modals/new/newPowerRectifier":"chunks/capacity/modals/new/newPowerRectifier","chunks/capacity/surface":"chunks/capacity/surface","chunks/capacity/modals/new/newGeneratorSet":"chunks/capacity/modals/new/newGeneratorSet","chunks/pop/layout/modals/newJunction":"chunks/pop/layout/modals/newJunction","chunks/capacity/modals/new/newSolarPanel":"chunks/capacity/modals/new/newSolarPanel","chunks/pop/power/modals/editJunction":"chunks/pop/power/modals/editJunction","chunks/capacity/modals/distribution":"chunks/capacity/modals/distribution","chunks/capacity/modals/surface":"chunks/capacity/modals/surface"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -12338,14 +12338,14 @@ __webpack_require__.r(__webpack_exports__);
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faClipboardList"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEnvelope"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faThLarge"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCogs"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAngleDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSeedling"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faWarehouse"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBell"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCog"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignOutAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAdjust"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faClipboardList"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEnvelope"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faThLarge"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCogs"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAngleDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSeedling"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faWarehouse"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBell"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCog"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignOutAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAdjust"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faChargingStation"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Clock: function Clock() {
-      return Promise.all(/*! import() | chunks/helpers */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~54cb6b07"), __webpack_require__.e("chunks/helpers")]).then(__webpack_require__.bind(null, /*! ./helpers/Clock */ "./resources/js/components/helpers/Clock.vue"));
+      return Promise.all(/*! import() | chunks/helpers */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~9dc0bd9b"), __webpack_require__.e("chunks/helpers")]).then(__webpack_require__.bind(null, /*! ./helpers/Clock */ "./resources/js/components/helpers/Clock.vue"));
     },
     Footer: function Footer() {
-      return Promise.all(/*! import() | chunks/layouts/footer */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~54cb6b07"), __webpack_require__.e("chunks/layouts/footer")]).then(__webpack_require__.bind(null, /*! ./layouts/Footer */ "./resources/js/components/layouts/Footer.vue"));
+      return Promise.all(/*! import() | chunks/layouts/footer */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~9dc0bd9b"), __webpack_require__.e("chunks/layouts/footer")]).then(__webpack_require__.bind(null, /*! ./layouts/Footer */ "./resources/js/components/layouts/Footer.vue"));
     }
   },
   props: ['user', 'user_permissions', 'app_name', 'last_data_counters', 'last_updated_data', 'is_dark_mode'],
@@ -12426,6 +12426,30 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       e.preventDefault();
     }
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Outside.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Outside.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['username', 'password']
 });
 
 /***/ }),
@@ -50563,6 +50587,38 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Outside.vue?vue&type=template&id=482b048a&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Outside.vue?vue&type=template&id=482b048a& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("router-view", {
+        attrs: { username: _vm.username, password: _vm.password }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Welcome.vue?vue&type=template&id=51777872&":
 /*!**********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Welcome.vue?vue&type=template&id=51777872& ***!
@@ -68707,6 +68763,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Outside.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/components/Outside.vue ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Outside_vue_vue_type_template_id_482b048a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Outside.vue?vue&type=template&id=482b048a& */ "./resources/js/components/Outside.vue?vue&type=template&id=482b048a&");
+/* harmony import */ var _Outside_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Outside.vue?vue&type=script&lang=js& */ "./resources/js/components/Outside.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Outside_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Outside_vue_vue_type_template_id_482b048a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Outside_vue_vue_type_template_id_482b048a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Outside.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Outside.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/Outside.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Outside_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Outside.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Outside.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Outside_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Outside.vue?vue&type=template&id=482b048a&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/Outside.vue?vue&type=template&id=482b048a& ***!
+  \****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Outside_vue_vue_type_template_id_482b048a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Outside.vue?vue&type=template&id=482b048a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Outside.vue?vue&type=template&id=482b048a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Outside_vue_vue_type_template_id_482b048a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Outside_vue_vue_type_template_id_482b048a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Welcome.vue":
 /*!*********************************************!*\
   !*** ./resources/js/components/Welcome.vue ***!
@@ -68787,6 +68912,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var _components_Welcome_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Welcome.vue */ "./resources/js/components/Welcome.vue");
 /* harmony import */ var _components_App_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/App.vue */ "./resources/js/components/App.vue");
+/* harmony import */ var _components_Outside_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Outside.vue */ "./resources/js/components/Outside.vue");
+
 
 
 
@@ -68807,7 +68934,7 @@ var Register = function Register() {
 };
 
 var Dashboard = function Dashboard() {
-  return Promise.all(/*! import() | chunks/dashboard */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~54cb6b07"), __webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks/ma~66c43816"), __webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload"), __webpack_require__.e("vendors~chunks/capacityPlanning~chunks/dashboard"), __webpack_require__.e("chunks/dashboard")]).then(__webpack_require__.bind(null, /*! ./components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
+  return Promise.all(/*! import() | chunks/dashboard */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~9dc0bd9b"), __webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators~chunks/maps/ecoMap~chunks/maps~439c6c37"), __webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload"), __webpack_require__.e("vendors~chunks/capacityPlanning~chunks/dashboard"), __webpack_require__.e("chunks/dashboard")]).then(__webpack_require__.bind(null, /*! ./components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
 };
 
 var PopTable = function PopTable() {
@@ -68815,19 +68942,19 @@ var PopTable = function PopTable() {
 };
 
 var Pop = function Pop() {
-  return Promise.all(/*! import() | chunks/pop */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~f7ed369a"), __webpack_require__.e("chunks/pop")]).then(__webpack_require__.bind(null, /*! ./components/pop/Pop.vue */ "./resources/js/components/pop/Pop.vue"));
+  return Promise.all(/*! import() | chunks/pop */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~d94cc1ca"), __webpack_require__.e("chunks/pop")]).then(__webpack_require__.bind(null, /*! ./components/pop/Pop.vue */ "./resources/js/components/pop/Pop.vue"));
 };
 
 var CapacityPlanning = function CapacityPlanning() {
-  return Promise.all(/*! import() | chunks/capacityPlanning */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~f7ed369a"), __webpack_require__.e("vendors~chunks/capacityPlanning~chunks/dashboard"), __webpack_require__.e("chunks/capacityPlanning")]).then(__webpack_require__.bind(null, /*! ./components/capacity/CapacityPlanning.vue */ "./resources/js/components/capacity/CapacityPlanning.vue"));
+  return Promise.all(/*! import() | chunks/capacityPlanning */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~d94cc1ca"), __webpack_require__.e("vendors~chunks/capacityPlanning~chunks/dashboard"), __webpack_require__.e("chunks/capacityPlanning")]).then(__webpack_require__.bind(null, /*! ./components/capacity/CapacityPlanning.vue */ "./resources/js/components/capacity/CapacityPlanning.vue"));
 };
 
 var RoomDetail = function RoomDetail() {
-  return Promise.all(/*! import() | chunks/capacityPlanning */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~f7ed369a"), __webpack_require__.e("vendors~chunks/capacityPlanning~chunks/dashboard"), __webpack_require__.e("chunks/capacityPlanning")]).then(__webpack_require__.bind(null, /*! ./components/capacity/RoomDetail.vue */ "./resources/js/components/capacity/RoomDetail.vue"));
+  return Promise.all(/*! import() | chunks/capacityPlanning */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~d94cc1ca"), __webpack_require__.e("vendors~chunks/capacityPlanning~chunks/dashboard"), __webpack_require__.e("chunks/capacityPlanning")]).then(__webpack_require__.bind(null, /*! ./components/capacity/RoomDetail.vue */ "./resources/js/components/capacity/RoomDetail.vue"));
 };
 
 var Eco = function Eco() {
-  return Promise.all(/*! import() | chunks/eco */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~f7ed369a"), __webpack_require__.e("chunks/eco")]).then(__webpack_require__.bind(null, /*! ./components/eco/Eco.vue */ "./resources/js/components/eco/Eco.vue"));
+  return Promise.all(/*! import() | chunks/eco */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~d94cc1ca"), __webpack_require__.e("chunks/eco")]).then(__webpack_require__.bind(null, /*! ./components/eco/Eco.vue */ "./resources/js/components/eco/Eco.vue"));
 };
 
 var Comsite = function Comsite() {
@@ -68835,7 +68962,7 @@ var Comsite = function Comsite() {
 };
 
 var Documents = function Documents() {
-  return Promise.all(/*! import() | chunks/documents */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~f7ed369a"), __webpack_require__.e("chunks/documents")]).then(__webpack_require__.bind(null, /*! ./components/documents/Documents.vue */ "./resources/js/components/documents/Documents.vue"));
+  return Promise.all(/*! import() | chunks/documents */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~d94cc1ca"), __webpack_require__.e("chunks/documents")]).then(__webpack_require__.bind(null, /*! ./components/documents/Documents.vue */ "./resources/js/components/documents/Documents.vue"));
 };
 
 var Admin = function Admin() {
@@ -68848,6 +68975,14 @@ var Reports = function Reports() {
 
 var NotFound = function NotFound() {
   return __webpack_require__.e(/*! import() | chunks/helpers/notFound */ "chunks/helpers/notFound").then(__webpack_require__.bind(null, /*! ./components/helpers/NotFound */ "./resources/js/components/helpers/NotFound.vue"));
+};
+
+var Bridge = function Bridge() {
+  return __webpack_require__.e(/*! import() | chunks/bridge */ "chunks/bridge").then(__webpack_require__.bind(null, /*! ./components/auth/Bridge.vue */ "./resources/js/components/auth/Bridge.vue"));
+};
+
+var Generators = function Generators() {
+  return Promise.all(/*! import() | chunks/generators */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~9dc0bd9b"), __webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~d94cc1ca"), __webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators~chunks/maps/ecoMap~chunks/maps~439c6c37"), __webpack_require__.e("chunks/generators")]).then(__webpack_require__.bind(null, /*! ./components/generators/Generators.vue */ "./resources/js/components/generators/Generators.vue"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -68880,6 +69015,15 @@ var NotFound = function NotFound() {
       path: '/password/reset/:token',
       name: 'Password Reset',
       component: PasswordReset
+    }]
+  }, {
+    path: '/outside',
+    name: 'outside',
+    component: _components_Outside_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    children: [{
+      path: 'bridge/:username/:password',
+      name: 'Bridge',
+      component: Bridge
     }]
   }, {
     path: '/',
@@ -68925,6 +69069,10 @@ var NotFound = function NotFound() {
       path: '/reports',
       name: 'Reportes',
       component: Reports
+    }, {
+      path: '/generators',
+      name: 'Generadores',
+      component: Generators
     }]
   }]
 });

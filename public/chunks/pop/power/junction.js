@@ -451,6 +451,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     EditJunctionParameters: function EditJunctionParameters() {
@@ -465,18 +482,22 @@ __webpack_require__.r(__webpack_exports__);
       junctionConnectionId: this.junction.junction_connection_id,
       junctionConnections: [],
       // current_junction_total: this.junction.pop.room && this.junction.pop.room[0].current_room_capacity.junction_total,
+      rooms: this.junction.pop && this.junction.pop.rooms,
       isEditJunctionModalActive: false,
       isEditMode: false,
       clientNumber: this.junction.client_number,
       junctionNumber: this.junction.junction_number,
       useFactor: this.junction.use_factor,
+      junctionRoom: this.junction.room_id,
+      isOnlyRoom: this.junction.room_id ? true : false,
       punctualConsumption: this.junction.latest_measurement ? this.junction.latest_measurement.punctual_consumption : 0
     };
   },
   watch: {
     junction: function junction(val) {
       if (this.junction.pop && this.junction.pop.rooms) {
-        console.log(this.junction.pop.rooms[0].current_room_capacity);
+        // console.log(this.junction.pop.rooms[0].current_room_capacity)
+        this.rooms = this.junction.pop.rooms;
       }
 
       this.junctionTypeId = val.junction_type_id, this.junctionConnectionId = val.junction_connection_id, this.clientNumber = val.client_number, this.junctionNumber = val.junction_number, this.useFactor = val.use_factor, this.punctualConsumption = val.latest_measurement ? val.latest_measurement.punctual_consumption : 0;
@@ -682,6 +703,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     saveChanges: function saveChanges() {
+      var _this6 = this;
+
       if (!this.isEditMode) {
         var params = {
           'user_id': this.user.id,
@@ -689,10 +712,14 @@ __webpack_require__.r(__webpack_exports__);
           'junction_number': this.junctionNumber,
           'junction_type_id': this.junctionTypeId,
           'junction_connection_id': this.junctionConnectionId,
-          'use_factor': parseFloat(this.useFactor)
+          'use_factor': parseFloat(this.useFactor),
+          'is_only_room': this.isOnlyRoom,
+          'room_id': this.junctionRoom
         };
         axios.put("/api/junctionUpdateTypes/".concat(this.junction.id), params).then(function (response) {
           console.log(response.data);
+
+          _this6.$eventBus.$emit('new-junction');
         }); // Si el total, usado y disponible es distinto de lo que está en el original, guardar
         // if ()
       } else {
@@ -1001,7 +1028,73 @@ var render = function() {
                         1
                       )
                     : _vm._e()
-                ])
+                ]),
+                _vm._v(" "),
+                _vm.isEditMode
+                  ? _c("div", { staticClass: "field" }, [
+                      _c(
+                        "div",
+                        { staticClass: "has-text-weight-light is-size-7" },
+                        [_vm._v("Propio de la sala")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "field" },
+                        [
+                          _c("b-switch", {
+                            model: {
+                              value: _vm.isOnlyRoom,
+                              callback: function($$v) {
+                                _vm.isOnlyRoom = $$v
+                              },
+                              expression: "isOnlyRoom"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _vm.isOnlyRoom
+                        ? _c(
+                            "div",
+                            [
+                              _c(
+                                "b-select",
+                                {
+                                  attrs: { placeholder: "Select a name" },
+                                  model: {
+                                    value: _vm.junctionRoom,
+                                    callback: function($$v) {
+                                      _vm.junctionRoom = $$v
+                                    },
+                                    expression: "junctionRoom"
+                                  }
+                                },
+                                _vm._l(_vm.rooms, function(option) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: option.id,
+                                      domProps: { value: option.id }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(option.name) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  )
+                                }),
+                                0
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e()
+                    ])
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "column" }, [

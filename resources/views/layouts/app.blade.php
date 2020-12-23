@@ -62,7 +62,14 @@
                 :is_dark_mode="'{{ $darkMode }}'"
             ></router-view>
         @else
-            <router-view :app_name="'{{ config('app.name') }}'"></router-view>
+             @if(isset($username))
+                <router-view 
+                    :username='@json($username)' 
+                    :password='@json($password)'>
+                </router-view>
+            @else
+                <router-view :app_name="'{{ config('app.name') }}'"></router-view>
+            @endif
         @endauth
     </div>
 </body>

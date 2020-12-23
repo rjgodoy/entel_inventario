@@ -61,7 +61,8 @@
 
                     <div class="tile is-parent">
                         <div class="columns tile">
-                            <div class="column tile is-parent is-6" v-for="junction in junctions" :key="junction.id">
+                            <div class="column tile is-parent is-6" v-for="junction in junctions" :key="junction.id" 
+                                v-if="(junction.room_id && junction.room_id == room.id) || !junction.room_id">
                                 <a class="box tile is-dark is-bold has-text-warning has-background" 
                                     @click="isJunctionModalActive = true; junctionSelected = junction">
                                     <div class="is-box-background is-transparent">
@@ -106,6 +107,7 @@
             <modal-new-junction 
                 :user="user"
                 :pop="pop"
+                :room="room"
                 />
         </b-modal>
     </div>
@@ -122,6 +124,7 @@
             'canEditJunctions',
             'user',
             'pop',
+            'room',
             'junctions',
             'totalJunctionsCapacity',
             'totalUsedJunctionsCapacity',

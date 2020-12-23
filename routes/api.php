@@ -71,6 +71,7 @@ Route::middleware('auth:api')->group(function () {
 	// POP DATA
 		Route::apiResource('dashboard','Api\DashboardApiController');
 		Route::apiResource('crms','Api\CrmController');
+		Route::apiResource('zonas','Api\ZonaController');
 
 		Route::get('lastUpdate', 'Api\DashboardApiController@lastData');
 		Route::get('counters', 'Api\DashboardApiController@counters');
@@ -157,6 +158,10 @@ Route::middleware('auth:api')->group(function () {
 		Route::get('generatorSetData', 'Api\GeneratorSetController@generatorSetData');
 		Route::get('generatorSetDataCrm', 'Api\GeneratorSetController@generatorSetDataCrm');
 		Route::get('generatorSetDataZona', 'Api\GeneratorSetController@generatorSetDataZona');
+
+		Route::get('generatorsPlatform', 'Api\GeneratorSetController@generatorPlatformData');
+		// Route::get('generatorLastValues/{generator_id}', 'Api\GeneratorSetController@generatorLastValues');
+		Route::get('generatorLastDay', 'Api\GeneratorSetController@generatorLastDay');
 
 		Route::apiResource('telecomCompanies','Api\TelecomCompanyController');
 		Route::apiResource('generatorSetTopologyTypes','Api\GeneratorSetTopologyTypeController');

@@ -78,6 +78,7 @@ class BatteryBankController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $batteryBank = BatteryBank::find($id);
+        $batteryBank->delete();
     }
 }

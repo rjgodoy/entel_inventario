@@ -160,10 +160,18 @@ class JunctionController extends Controller
      */
     public function store(Request $request)
     {
-        Junction::create([
-            'pop_id' => $request->pop_id,
-            'electric_company_id' => $request->electric_company_id
-        ]);
+        if ($request->is_only_room) {
+            Junction::create([
+                'pop_id' => $request->pop_id,
+                'electric_company_id' => $request->electric_company_id,
+                'room_id' => $request->room_id
+            ]);
+        } else {
+            Junction::create([
+                'pop_id' => $request->pop_id,
+                'electric_company_id' => $request->electric_company_id
+            ]);
+        }
 
         return 'junction created';
     }
@@ -176,7 +184,7 @@ class JunctionController extends Controller
      */
     public function show($id)
     {
-        $junctions = Junction::with('electric_company', 'junction_type', 'junction_connection', 'latest_measurement', 'latest_protection', 'solar_panels')
+        $junctions = Junction::with('electric_company', 'junction_type', 'junction_connection', 'latest_measurement', 'latest_protection', 'solar_panels', 'pop.rooms')
         ->where('pop_id', $id)
         ->get();
 
@@ -191,7 +199,7 @@ class JunctionController extends Controller
      */
     public function popJunctions($pop_id)
     {
-        $junctions = Junction::with('electric_company', 'junction_type', 'junction_connection', 'latest_measurement', 'latest_protection', 'solar_panels')
+        $junctions = Junction::with('electric_company', 'junction_type', 'junction_connection', 'latest_measurement', 'latest_protection', 'solar_panels', 'pop.rooms')
         ->where('pop_id', $pop_id)
         ->get();
 
@@ -257,13 +265,26 @@ class JunctionController extends Controller
     public function updateTypes(Request $request, $id)
     {
         $junction = Junction::find($id);
-        $junction->update([
-            'client_number' => $request->client_number,
-            'junction_number' => $request->junction_number,
-            'junction_type_id' => $request->junction_type_id,
-            'junction_connection_id' => $request->junction_connection_id,
-            'use_factor' => $request->use_factor
-        ]);
+        if ($request->is_only_room) {
+            $junction->update([
+                'client_number' => $request->client_number,
+                'junction_number' => $request->junction_number,
+                'junction_type_id' => $request->junction_type_id,
+                'junction_connection_id' => $request->junction_connection_id,
+                'use_factor' => $request->use_factor,
+                'room_id' => $request->room_id
+            ]);
+        } else {
+            $junction->update([
+                'client_number' => $request->client_number,
+                'junction_number' => $request->junction_number,
+                'junction_type_id' => $request->junction_type_id,
+                'junction_connection_id' => $request->junction_connection_id,
+                'use_factor' => $request->use_factor,
+                'room_id' => null
+            ]);
+        }
+        
 
 
         Log::create([

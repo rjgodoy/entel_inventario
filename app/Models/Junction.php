@@ -19,6 +19,11 @@ class Junction extends Model
         return $this->belongsTo(Pop::class);
     }
 
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
+
     public function electric_company()
     {
         return $this->belongsTo(ElectricCompany::class);

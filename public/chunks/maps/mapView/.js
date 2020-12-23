@@ -1029,7 +1029,7 @@ var render = function() {
     "GmapMap",
     {
       ref: "map",
-      staticStyle: { height: "100%", "padding-bottom": "-14px" },
+      staticStyle: { height: "95%", "padding-bottom": "0px" },
       attrs: {
         center: _vm.center,
         zoom: _vm.zoom,

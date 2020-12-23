@@ -342,12 +342,30 @@
                         
                         <div class="tile is-parent is-vertical is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only">
                             <div class="tile is-child card" style="border: solid 4px white" :class="boxBackground">
-                                <map-view
-                                    :user="user"
-                                    :pops="pops"
-                                    :map_attributes="map_attributes"
-                                    :darkMode="darkMode"
-                                />   
+                                <b-tabs type="is-toggle" size="is-small" expanded v-model="tabShow" class="is-marginless">
+                                    <b-tab-item label="POP"></b-tab-item>
+                                    <b-tab-item label="Clima"></b-tab-item>
+                                </b-tabs>
+                                <keep-alive>
+                                    <!-- <map-view
+                                        v-if="tabShow == 0"
+                                        :user="user"
+                                        :pops="pops"
+                                        :map_attributes="map_attributes"
+                                        :darkMode="darkMode"
+                                    />  -->
+                                    <map-view
+                                        style="margin-top: -27px;"
+                                        v-if="tabShow == 0"
+                                        :user="user"
+                                        :pops="pops"
+                                        :map_attributes="map_attributes"
+                                        :darkMode="darkMode"
+                                    /> 
+                                </keep-alive>
+                                <keep-alive>
+                                    <iframe style="margin-top: -27px; padding-bottom: 0" v-if="tabShow == 1" width="100%" height="95%" src="https://embed.windy.com/embed2.html?lat=-33.500&lon=-70.667&detailLat=-33.500&detailLon=-70.667&width=650&height=450&zoom=5&level=surface&overlay=temp&product=gfs&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1" frameborder="0"></iframe>
+                                </keep-alive>
                             </div>                               
                         </div>
 
@@ -551,6 +569,7 @@
                 zonas: [],
 
                 crms: Array,
+                tabShow: 0,
 
                 isFetching: false,
                 selected: null,

@@ -2,22 +2,25 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Exports\GeneratorSetsExport;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\GeneratorSet as GeneratorSetResource;
+use DB;
+use App\Models\Log;
+use App\Models\GeneratorSet;
+use App\Models\GeneratorTta;
+use Illuminate\Http\Request;
+use App\Models\GeneratorTank;
 use App\Models\GeneratorGroup;
 use App\Models\GeneratorMotor;
-use App\Models\GeneratorSet;
+use App\Models\TelecomCompany;
+use App\Exports\GeneratorSetsExport;
+use App\Http\Controllers\Controller;
 use App\Models\GeneratorSetCapacity;
+use Illuminate\Support\Facades\Cache;
 use App\Models\GeneratorSetMaintainer;
 use App\Models\GeneratorSetResponsable;
-use App\Models\GeneratorTank;
-use App\Models\GeneratorTta;
-use App\Models\Log;
-use App\Models\TelecomCompany;
-use DB;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
+use App\Models\GeneratorsPlatformValues;
+use App\Models\GeneratorsPlatformGenerator;
+use App\Http\Resources\GeneratorPlatformValuesCollection;
+use App\Http\Resources\GeneratorSet as GeneratorSetResource;
 
 class GeneratorSetController extends Controller
 {
@@ -200,10 +203,18 @@ class GeneratorSetController extends Controller
      */
     public function store(Request $request)
     {
-        $generatorSet = GeneratorSet::create([
-            'pop_id' => $request->pop_id,
-            'generator_set_type_id' => $request->generator_set_type_id
-        ]);
+        if ($request->is_only_room) {
+            $generatorSet = GeneratorSet::create([
+                'pop_id' => $request->pop_id,
+                'generator_set_type_id' => $request->generator_set_type_id,
+                'room_id' => $request->room_id
+            ]);
+        } else {
+            $generatorSet = GeneratorSet::create([
+                'pop_id' => $request->pop_id,
+                'generator_set_type_id' => $request->generator_set_type_id
+            ]);
+        }
 
         $generatorGroup = GeneratorGroup::create([
             'generator_set_id' => $generatorSet->id
@@ -246,7 +257,8 @@ class GeneratorSetController extends Controller
             'current_maintainer.telecom_company',
             'current_generator_set_capacity',
             'generator_set_topology_type',
-            'generator_set_level_type'
+            'generator_set_level_type',
+            'pop.rooms'
 
              )->where('pop_id', $id)->get();
         return new GeneratorSetResource($generatorSets);
@@ -334,6 +346,16 @@ class GeneratorSetController extends Controller
             ]);
         }
 
+        if($request->is_only_room && $generatorSet->room_id != $request->room_id) {
+            $generatorSet->update([
+                'room_id' => $request->room_id
+            ]);
+        } else {
+            $generatorSet->update([
+                'room_id' => null
+            ]);
+        }
+
         return;
     }
 
@@ -371,4 +393,94 @@ class GeneratorSetController extends Controller
     {
         return (new GeneratorSetsExport($request))->download('grupos_electrógenos.xlsx');
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function generatorPlatformData(Request $request)
+    {
+        $text = $request->text;
+        $crm_id = $request->crm_id;
+        $zona_id = $request->zona_id;
+
+        $data = GeneratorsPlatformGenerator::
+        with(
+            'g_zone.g_sector'
+            ,'g_model.g_brand'
+            ,'g_model.g_fuel_pond'
+        //     ,'g_maintances.g_maintance_type'
+        //     ,'g_maintances.g_maintance_status'
+        //     ,'g_maintances.g_generator_records.g_maintance_status'
+            ,'g_last_maintance.g_maintance_status'
+        )
+        // ->where(function($p) use ($text) {
+        //     $p->where('name', 'LIKE', "%$text%")
+        //         ->orWhere('mobile_code', 'LIKE', "%$text%")
+        //         ->orWhereHas('g_model.g_brand', function($r) use($text) {
+        //             $r->where('name', 'LIKE', "%$text%");
+        //         });
+        // })
+        ->whereHas('g_zone', function($q) use ($crm_id, $zona_id) {
+            $crm_id != 0 ? $q->where('sector_id', $crm_id) : $q->where('sector_id', '!=', $crm_id);
+            $zona_id != 0 ? $q->where('id', $zona_id) : $q->where('id', '!=', $zona_id);
+        })
+        ->orderBy('zone_id', 'asc')
+        ->get();
+
+        return $data;     
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function generatorLastValues(Request $request, $generator_id)
+    {
+        $data = GeneratorsPlatformValues::with('g_generator'
+                // ,'g_zone.g_sector'
+                // ,'g_model.g_brand'
+                // ,'g_model.g_fuel_pond'
+                // ,'g_maintances.g_maintance_type'
+                // ,'g_maintances.g_maintance_status'
+                // ,'g_maintances.g_generator_records.g_maintance_status'
+                // ,'g_last_maintance.g_last_maintance_record'
+            )
+            ->where('generator_id', $generator_id)
+            ->latest('created')
+            ->first();
+
+        return $data;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function generatorLastDay(Request $request)
+    {
+        $latest = GeneratorsPlatformValues::with('g_generator')
+            ->where('generator_id', $request->generator_id)
+            ->latest('created')
+            ->first();
+
+        if ($latest) {
+            $date = date_format($latest->created, "Y-m-d");
+            $data = GeneratorsPlatformValues::
+                whereRaw('DATE(created) = "'.$date.'"')
+                ->where('generator_id', $request->generator_id)
+                ->where('hourmeter_consumption', '!=', -1)
+                ->where('fuel_consumption', '<', 75)
+                ->orderBy('created', 'desc')
+                ->get();
+            return $data;
+        }
+
+        return $latest;
+        
+    }
+
 }

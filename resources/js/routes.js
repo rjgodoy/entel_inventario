@@ -1,6 +1,7 @@
 
 import Welcome from './components/Welcome.vue'
 import App from './components/App.vue'
+import Outside from './components/Outside.vue'
 
 let Login = () => import(/* webpackChunkName: "chunks/login"*/'./components/auth/Login.vue')
 let PasswordEmail = () => import(/* webpackChunkName: "chunks/passwordEmail"*/'./components/auth/PasswordEmail.vue')
@@ -18,6 +19,8 @@ let Documents = () => import(/* webpackChunkName: "chunks/documents"*/'./compone
 let Admin = () => import(/* webpackChunkName: "chunks/admin"*/'./components/admin/Admin.vue')
 let Reports = () => import(/* webpackChunkName: "chunks/reports"*/'./components/reports/Reports.vue')
 let NotFound = () => import(/* webpackChunkName: "chunks/helpers/notFound"*/ './components/helpers/NotFound');
+let Bridge = () => import(/* webpackChunkName: "chunks/bridge"*/'./components/auth/Bridge.vue')
+let Generators = () => import(/* webpackChunkName: "chunks/generators"*/'./components/generators/Generators.vue')
 
 export default {
     mode: 'history',
@@ -40,6 +43,14 @@ export default {
                 { path: '/password/reset/:token', name: 'Password Reset', component: PasswordReset },
             ]
         },
+        { 
+            path: '/outside', 
+            name: 'outside', 
+            component: Outside, 
+            children: [
+                { path: 'bridge/:username/:password', name: 'Bridge', component: Bridge },
+            ]
+        },
         {
             path: '/', 
             name: 'app', 
@@ -55,6 +66,7 @@ export default {
                 { path: '/docs', name: 'Documentos', component: Documents },
                 { path: '/admin', name: 'Administración', component: Admin },
                 { path: '/reports', name: 'Reportes', component: Reports },
+                { path: '/generators', name: 'Generadores', component: Generators },
             ]
         }
     ]

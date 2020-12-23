@@ -312,7 +312,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Location: function Location() {
-      return Promise.all(/*! import() | chunks/pop/location */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~54cb6b07"), __webpack_require__.e("chunks/pop/location")]).then(__webpack_require__.bind(null, /*! ./Location */ "./resources/js/components/pop/Location.vue"));
+      return Promise.all(/*! import() | chunks/pop/location */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~9dc0bd9b"), __webpack_require__.e("chunks/pop/location")]).then(__webpack_require__.bind(null, /*! ./Location */ "./resources/js/components/pop/Location.vue"));
     },
     Sites: function Sites() {
       return __webpack_require__.e(/*! import() | chunks/pop/sites */ "chunks/pop/sites").then(__webpack_require__.bind(null, /*! ./Sites */ "./resources/js/components/pop/Sites.vue"));
@@ -325,7 +325,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/pop/layout/layout */ "chunks/pop/layout/layout").then(__webpack_require__.bind(null, /*! ./layout/Layout */ "./resources/js/components/pop/layout/Layout.vue"));
     },
     Vision: function Vision() {
-      return Promise.all(/*! import() | chunks/pop/vision */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~54cb6b07"), __webpack_require__.e("chunks/pop/vision")]).then(__webpack_require__.bind(null, /*! ./Vision */ "./resources/js/components/pop/Vision.vue"));
+      return Promise.all(/*! import() | chunks/pop/vision */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~9dc0bd9b"), __webpack_require__.e("chunks/pop/vision")]).then(__webpack_require__.bind(null, /*! ./Vision */ "./resources/js/components/pop/Vision.vue"));
     },
     Power: function Power() {
       return __webpack_require__.e(/*! import() | chunks/pop/power/power */ "chunks/pop/power/power").then(__webpack_require__.bind(null, /*! ./power/Power */ "./resources/js/components/pop/power/Power.vue"));
@@ -340,16 +340,16 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/pop/eco */ "chunks/pop/eco").then(__webpack_require__.bind(null, /*! ./Eco */ "./resources/js/components/pop/Eco.vue"));
     },
     Comsite: function Comsite() {
-      return Promise.all(/*! import() | chunks/pop/comsite */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~54cb6b07"), __webpack_require__.e("chunks/pop/comsite")]).then(__webpack_require__.bind(null, /*! ./Comsite */ "./resources/js/components/pop/Comsite.vue"));
+      return Promise.all(/*! import() | chunks/pop/comsite */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~9dc0bd9b"), __webpack_require__.e("chunks/pop/comsite")]).then(__webpack_require__.bind(null, /*! ./Comsite */ "./resources/js/components/pop/Comsite.vue"));
     },
     Clients: function Clients() {
-      return Promise.all(/*! import() | chunks/pop/clients */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~54cb6b07"), __webpack_require__.e("chunks/pop/clients")]).then(__webpack_require__.bind(null, /*! ./Clients */ "./resources/js/components/pop/Clients.vue"));
+      return Promise.all(/*! import() | chunks/pop/clients */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~9dc0bd9b"), __webpack_require__.e("chunks/pop/clients")]).then(__webpack_require__.bind(null, /*! ./Clients */ "./resources/js/components/pop/Clients.vue"));
     },
     Documents: function Documents() {
       return __webpack_require__.e(/*! import() | chunks/pop/documents/documents */ "chunks/pop/documents/documents").then(__webpack_require__.bind(null, /*! ./documents/Documents */ "./resources/js/components/pop/documents/Documents.vue"));
     },
     Log: function Log() {
-      return Promise.all(/*! import() | chunks/pop/logs */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~54cb6b07"), __webpack_require__.e("chunks/pop/logs")]).then(__webpack_require__.bind(null, /*! ./Log */ "./resources/js/components/pop/Log.vue"));
+      return Promise.all(/*! import() | chunks/pop/logs */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~9dc0bd9b"), __webpack_require__.e("chunks/pop/logs")]).then(__webpack_require__.bind(null, /*! ./Log */ "./resources/js/components/pop/Log.vue"));
     }
   },
   props: ['user'],

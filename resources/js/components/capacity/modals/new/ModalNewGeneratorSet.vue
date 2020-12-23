@@ -19,16 +19,12 @@
                             </b-select>
                         </b-field>
                     </div>
-                    <!-- <div class="column is-4">
-                        <b-field label="Cantidad paneles">
-                            <b-input
-                                type="quantity"
-                                v-model="quantity"
-                                placeholder="Cantidad paneles"
-                                required>
-                            </b-input>
-                        </b-field>
-                    </div> -->
+                    <div class="column">
+                        <div class="field">
+                            <div class="is-size-6 has-text-weight-normal field">Propio de la sala <strong>{{ room.name }}</strong></div>
+                            <b-switch v-model="isOnlyRoom"></b-switch>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -47,13 +43,15 @@
     export default {
         props : [
             'pop',
-            'user'
+            'user',
+            'room'
         ],
 
         data() {
             return {
                 generatorSetTypes: Array,
                 generatorSetType: null,
+                isOnlyRoom: false
             }
         },
 
@@ -80,7 +78,9 @@
                 const params = {
                     'generator_set_type_id': this.generatorSetType.id,
                     'user_id': this.user.id,
-                    'pop_id': this.pop.id
+                    'pop_id': this.pop.id,
+                    'room_id': this.room.id,
+                    'is_only_room': this.isOnlyRoom
                 }
 
                 axios.post('/api/generatorSets', params).then(response => {

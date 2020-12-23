@@ -18,7 +18,12 @@
                                     {{ option.name }}
                                 </option>
                             </b-select>
-                            {{ electric_company_id }}
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="field">
+                            <div class="is-size-6 has-text-weight-normal field">Propio de la sala <strong>{{ room.name }}</strong></div>
+                            <b-switch v-model="isOnlyRoom"></b-switch>
                         </div>
                     </div>
                 </div>
@@ -39,13 +44,15 @@
     export default {
         props : [
             'pop',
-            'user'
+            'user',
+            'room'
         ],
 
         data() {
             return {
                 electricCompanies: Array,
-                electric_company_id: null
+                electric_company_id: null,
+                isOnlyRoom: false
             }
         },
 
@@ -64,9 +71,10 @@
             newJunction() {
                 let params = {
                     'pop_id': this.pop.id,
-                    'electric_company_id': this.electric_company_id
+                    'electric_company_id': this.electric_company_id,
+                    'room_id': this.room.id,
+                    'is_only_room': this.isOnlyRoom
                 }
-
                 axios.post(`/api/junctions`, params)
                 .then(response => {
                     console.log(response.data)

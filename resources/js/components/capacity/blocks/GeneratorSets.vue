@@ -90,7 +90,7 @@
 
                     <div class="tile is-parent">
                         <div class="columns tile is-multiline">
-                            <div class="column tile is-parent is-6" v-for="generatorSet in generatorSets" :key="generatorSet.id">
+                            <div class="column tile is-parent is-6" v-for="generatorSet in generatorSets" :key="generatorSet.id" v-if="(generatorSet.room_id && generatorSet.room_id == room.id) || !generatorSet.room_id">
                                 <a class="tile box is-dark is-bold has-text-warning has-background" 
                                     @click="isGeneratorModalActive = true; generatorSetSelected = generatorSet">
                                     <div class="is-box-background is-transparent">
@@ -136,6 +136,7 @@
             <modal-new-generator-set 
                 :user="user"
                 :pop="pop"
+                :room="room"
                 />
         </b-modal>
     </div> 
@@ -151,6 +152,7 @@
         props : [
             'user',
             'pop',
+            'room',
             'generatorSets',
             'canEditGeneratorSets',
             'totalGeneratorSetsCapacity',

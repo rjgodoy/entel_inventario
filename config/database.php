@@ -101,7 +101,7 @@ return [
             ]),
         ],
 
-        'mysql_sgc' => [
+        'mysql_generators' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST_4', '127.0.0.1'),
             'port' => env('DB_PORT_4', '3306'),

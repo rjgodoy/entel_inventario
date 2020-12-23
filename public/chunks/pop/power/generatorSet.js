@@ -309,6 +309,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['canEditGeneratorSets', 'generatorSet', 'user'],
@@ -325,6 +348,9 @@ __webpack_require__.r(__webpack_exports__);
       currentLevelType: 'Sin Información',
       currentGeneratorSetType: 'Sin Información',
       currentGeneratorSetModel: 'Sin Información',
+      rooms: this.generatorSet.pop && this.generatorSet.pop.rooms,
+      generatorRoom: this.generatorSet.room_id,
+      isOnlyRoom: this.generatorSet.room_id ? true : false,
       maintainer_id: this.generatorSet.current_maintainer ? this.generatorSet.current_maintainer.telecom_company_id : null,
       responsable_area_id: this.generatorSet.current_generator_responsable ? this.generatorSet.current_generator_responsable.generator_set_responsable_area_id : null,
       topology_id: this.generatorSet.generator_set_topology_type_id,
@@ -366,7 +392,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   watch: {
-    generatorSet: function generatorSet(val) {// console.log(val)
+    generatorSet: function generatorSet(val) {// if (this.generatorSet.pop && this.generatorSet.pop.rooms) {
+      //     // console.log(this.generatorSet.pop.rooms[0].current_room_capacity)
+      //     this.rooms = this.generatorSet.pop.rooms
+      // }
     },
     maintainer_id: function maintainer_id(val) {
       var _this = this;
@@ -500,7 +529,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this11 = this;
 
       // console.log(this.currentGeneratorResponsableAreaId)
-      if (!this.isEditMode && (this.primeCapacity != this.newPrimeCapacity || this.usedCapacity != this.newUsedCapacity || this.generatorSet.current_maintainer.telecom_company_id != this.maintainer_id || this.generatorSet.generator_set_topology_type_id != this.topology_id || this.generatorSet.generator_set_level_type_id != this.level_id || this.generatorSet.generator_set_type_id != this.generator_set_type_id || this.currentGeneratorResponsableAreaId != this.responsable_area_id)) {
+      if (!this.isEditMode && (this.primeCapacity != this.newPrimeCapacity || this.usedCapacity != this.newUsedCapacity || this.generatorSet.current_maintainer && this.generatorSet.current_maintainer.telecom_company_id != this.maintainer_id || this.generatorSet.generator_set_topology_type_id != this.topology_id || this.generatorSet.generator_set_level_type_id != this.level_id || this.generatorSet.generator_set_type_id != this.generator_set_type_id || this.currentGeneratorResponsableAreaId != this.responsable_area_id) || this.generatorRoom != this.generatorSet.room_id) {
         // console.log(this.currentGeneratorResponsableAreaId)
         var params = {
           'user_id': parseFloat(this.user.id),
@@ -511,7 +540,9 @@ __webpack_require__.r(__webpack_exports__);
           'generator_set_responsable_area_id': parseFloat(this.responsable_area_id),
           'generator_set_topology_type_id': parseFloat(this.topology_id),
           'generator_set_level_type_id': parseFloat(this.level_id),
-          'generator_set_type_id': parseFloat(this.generator_set_type_id)
+          'generator_set_type_id': parseFloat(this.generator_set_type_id),
+          'is_only_room': this.isOnlyRoom,
+          'room_id': this.generatorRoom
         }; // console.log(params)
 
         axios.put("/api/generatorSets/".concat(this.generatorSet.id), params).then(function (response) {
@@ -827,7 +858,92 @@ var render = function() {
                     1
                   )
                 : _vm._e()
-            ])
+            ]),
+            _vm._v(" "),
+            !_vm.isEditMode
+              ? _c("div", { staticClass: "field" }, [
+                  _c(
+                    "div",
+                    { staticClass: "has-text-weight-light is-size-7" },
+                    [_vm._v("Propio de Sala")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "has-text-weight-bold is-size-6",
+                      class: _vm.generatorSet.room_id && "has-text-success"
+                    },
+                    [_vm._v(_vm._s(_vm.generatorSet.room_id ? "SI" : "NO"))]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.isEditMode
+              ? _c("div", { staticClass: "field" }, [
+                  _c(
+                    "div",
+                    { staticClass: "has-text-weight-light is-size-7" },
+                    [_vm._v("Propio de la sala")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "field" },
+                    [
+                      _c("b-switch", {
+                        model: {
+                          value: _vm.isOnlyRoom,
+                          callback: function($$v) {
+                            _vm.isOnlyRoom = $$v
+                          },
+                          expression: "isOnlyRoom"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm.isOnlyRoom
+                    ? _c(
+                        "div",
+                        [
+                          _c(
+                            "b-select",
+                            {
+                              attrs: { placeholder: "Select a name" },
+                              model: {
+                                value: _vm.generatorRoom,
+                                callback: function($$v) {
+                                  _vm.generatorRoom = $$v
+                                },
+                                expression: "generatorRoom"
+                              }
+                            },
+                            _vm._l(_vm.rooms, function(option) {
+                              return _c(
+                                "option",
+                                {
+                                  key: option.id,
+                                  domProps: { value: option.id }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(option.name) +
+                                      "\n                            "
+                                  )
+                                ]
+                              )
+                            }),
+                            0
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e()
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "column has-text-right" }, [

@@ -122,6 +122,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalJunction: function ModalJunction() {
@@ -131,7 +133,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() | chunks/pop/layout/modals/newJunction */ "chunks/pop/layout/modals/newJunction").then(__webpack_require__.bind(null, /*! ../modals/new/ModalNewJunction */ "./resources/js/components/capacity/modals/new/ModalNewJunction.vue"));
     }
   },
-  props: ['canEditJunctions', 'user', 'pop', 'junctions', 'totalJunctionsCapacity', 'totalUsedJunctionsCapacity', 'totalAvailableJunctionsCapacity'],
+  props: ['canEditJunctions', 'user', 'pop', 'room', 'junctions', 'totalJunctionsCapacity', 'totalUsedJunctionsCapacity', 'totalAvailableJunctionsCapacity'],
   data: function data() {
     return {
       junctionSelected: null,
@@ -601,50 +603,57 @@ var render = function() {
                     "div",
                     { staticClass: "columns tile" },
                     _vm._l(_vm.junctions, function(junction) {
-                      return _c(
-                        "div",
-                        {
-                          key: junction.id,
-                          staticClass: "column tile is-parent is-6"
-                        },
-                        [
-                          _c(
-                            "a",
+                      return (junction.room_id &&
+                        junction.room_id == _vm.room.id) ||
+                        !junction.room_id
+                        ? _c(
+                            "div",
                             {
-                              staticClass:
-                                "box tile is-dark is-bold has-text-warning has-background",
-                              on: {
-                                click: function($event) {
-                                  _vm.isJunctionModalActive = true
-                                  _vm.junctionSelected = junction
-                                }
-                              }
+                              key: junction.id,
+                              staticClass: "column tile is-parent is-6"
                             },
                             [
                               _c(
-                                "div",
+                                "a",
                                 {
                                   staticClass:
-                                    "is-box-background is-transparent"
+                                    "box tile is-dark is-bold has-text-warning has-background",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.isJunctionModalActive = true
+                                      _vm.junctionSelected = junction
+                                    }
+                                  }
                                 },
                                 [
-                                  _c("font-awesome-icon", {
-                                    staticClass: "is-pulled-right",
-                                    staticStyle: {
-                                      "margin-top": "-10px",
-                                      "margin-right": "15px"
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "is-box-background is-transparent"
                                     },
-                                    attrs: { icon: ["fas", "bolt"], size: "4x" }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _vm._m(1, true)
+                                    [
+                                      _c("font-awesome-icon", {
+                                        staticClass: "is-pulled-right",
+                                        staticStyle: {
+                                          "margin-top": "-10px",
+                                          "margin-right": "15px"
+                                        },
+                                        attrs: {
+                                          icon: ["fas", "bolt"],
+                                          size: "4x"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._m(1, true)
+                                ]
+                              )
                             ]
                           )
-                        ]
-                      )
+                        : _vm._e()
                     }),
                     0
                   )
@@ -704,7 +713,11 @@ var render = function() {
             }
           }
         },
-        [_c("modal-new-junction", { attrs: { user: _vm.user, pop: _vm.pop } })],
+        [
+          _c("modal-new-junction", {
+            attrs: { user: _vm.user, pop: _vm.pop, room: _vm.room }
+          })
+        ],
         1
       )
     ],

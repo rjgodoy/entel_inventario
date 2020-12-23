@@ -31,6 +31,7 @@
                         </span>
                     </p>
                 </div>
+                
                 <table class="table is-fullwidth" :class="boxBackground">
                     <thead>
                         <tr>
@@ -86,6 +87,7 @@
                         </tr>    
                     </tbody>
                 </table>
+
                 <div class="level">
                     <nav class="level-left pagination" role="navigation" aria-label="pagination">
                         <vue-pagination  
@@ -95,16 +97,6 @@
                             :primaryText="primaryText">
                         </vue-pagination>
                     </nav>
-                               
-                <!-- <b-button v-if="comsiteData.can.create"
-                    :loading="buttonLoading ? true : false"
-                    type="is-link"
-                    size="is-small"
-                    @click="syncComsite">
-                    <font-awesome-icon icon="sync-alt"/>
-                    &nbsp;
-                    Sincronizar
-                </b-button> -->
                     <div class="level-right has-text-right">
                         <div class="is-size-7 " :class="secondaryText">Fecha ultima actualización: {{ last_updated.formatted }}</div>
                     </div>

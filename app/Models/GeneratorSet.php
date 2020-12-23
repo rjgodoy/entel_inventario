@@ -19,6 +19,11 @@ class GeneratorSet extends Model
         return $this->belongsTo(Pop::class)->withTrashed();;
     }
 
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
+
     public function current_generator_set_capacity() 
     {
         return $this->hasOne(GeneratorSetCapacity::class)->latest();

@@ -323,7 +323,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/capacity/capacity */ "chunks/capacity/capacity").then(__webpack_require__.bind(null, /*! ./tabs/Capacity */ "./resources/js/components/capacity/tabs/Capacity.vue"));
     },
     Projection: function Projection() {
-      return Promise.all(/*! import() | chunks/capacity/projection */[__webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/maps/ecoMap~chunks/maps/mapView~chunks/ma~66c43816"), __webpack_require__.e("chunks/capacity/projection")]).then(__webpack_require__.bind(null, /*! ./tabs/Projection */ "./resources/js/components/capacity/tabs/Projection.vue"));
+      return Promise.all(/*! import() | chunks/capacity/projection */[__webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators~chunks/maps/ecoMap~chunks/maps~439c6c37"), __webpack_require__.e("chunks/capacity/projection")]).then(__webpack_require__.bind(null, /*! ./tabs/Projection */ "./resources/js/components/capacity/tabs/Projection.vue"));
     },
     // Requests: () => import(/* webpackChunkName: "chunks/capacity/requests"*/'./tabs/Requests'),
     Distribution: function Distribution() {
@@ -410,6 +410,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.$eventBus.$on('junction-measurements-updated', this.getRoomData);
     this.$eventBus.$on('generator-set-capacities-updated', this.getRoomData);
     this.$eventBus.$on('battery-autonomy', this.getRoomData);
+    this.$eventBus.$on('battery-bank-deleted', this.getRoomData);
+    this.$eventBus.$on('generator-set-deleted', this.getRoomData);
   },
   mounted: function mounted() {
     this.getRoomData();
@@ -536,7 +538,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       if (this.junctions.length) {
         Object.keys(this.junctions).forEach(function (element) {
-          sum = sum + (_this.powerA(_this.junctions[element]) + _this.powerB(_this.junctions[element])) * _this.junctions[element].use_factor + _this.photovoltaicCapacity(_this.junctions[element]);
+          if (!_this.junctions[element].room_id || _this.junctions[element].room_id && _this.junctions[element].room_id == _this.room.id) {
+            sum = sum + (_this.powerA(_this.junctions[element]) + _this.powerB(_this.junctions[element])) * _this.junctions[element].use_factor + _this.photovoltaicCapacity(_this.junctions[element]);
+          }
         });
       }
 
@@ -550,8 +554,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       if (this.junctions.length) {
         Object.keys(this.junctions).forEach(function (element) {
-          if (_this2.junctions[element].latest_measurement) {
-            punctualConsumption += _this2.junctions[element].latest_measurement.punctual_consumption;
+          if (!_this2.junctions[element].room_id || _this2.junctions[element].room_id && _this2.junctions[element].room_id == _this2.room.id) {
+            if (_this2.junctions[element].latest_measurement) {
+              punctualConsumption += _this2.junctions[element].latest_measurement.punctual_consumption;
+            }
           }
         });
       }
@@ -565,7 +571,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       if (this.junctions.length) {
         Object.keys(this.junctions).forEach(function (element) {
-          sum = sum + _this3.powerUsedA(_this3.junctions[element]) + _this3.powerUsedB(_this3.junctions[element]) + _this3.averageConsumptionPerPhotovoltaicGroup;
+          if (!_this3.junctions[element].room_id || _this3.junctions[element].room_id && _this3.junctions[element].room_id == _this3.room.id) {
+            sum = sum + _this3.powerUsedA(_this3.junctions[element]) + _this3.powerUsedB(_this3.junctions[element]) + _this3.averageConsumptionPerPhotovoltaicGroup;
+          }
         });
       }
 
@@ -631,26 +639,28 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       if (this.generatorSets.length) {
         Object.keys(this.generatorSets).forEach(function (element) {
-          var primeCapacity = _this6.generatorSets[element].current_generator_set_capacity ? _this6.generatorSets[element].current_generator_set_capacity.prime_capacity : 0;
-          var capacity = primeCapacity * 0.8;
+          if (!_this6.generatorSets[element].room_id || _this6.generatorSets[element].room_id && _this6.generatorSets[element].room_id == _this6.room.id) {
+            var primeCapacity = _this6.generatorSets[element].current_generator_set_capacity ? _this6.generatorSets[element].current_generator_set_capacity.prime_capacity : 0;
+            var capacity = primeCapacity * 0.8;
 
-          switch (_this6.generatorSets[element].generator_set_topology_type_id) {
-            case 1:
-              sum = sum + capacity;
-              break;
+            switch (_this6.generatorSets[element].generator_set_topology_type_id) {
+              case 1:
+                sum = sum + capacity;
+                break;
 
-            case 2:
-              sum = sum + capacity;
-              res = res + capacity;
-              div = div++;
-              break;
+              case 2:
+                sum = sum + capacity;
+                res = res + capacity;
+                div = div++;
+                break;
 
-            case 3:
-              sum = _this6.generatorSets[element].generator_set_level_type_id == 2 ? sum + capacity : sum;
-              break;
+              case 3:
+                sum = _this6.generatorSets[element].generator_set_level_type_id == 2 ? sum + capacity : sum;
+                break;
 
-            default:
-              break;
+              default:
+                break;
+            }
           }
         });
       }
@@ -664,18 +674,20 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       if (this.generatorSets.length) {
         Object.keys(this.generatorSets).forEach(function (element) {
-          var primeCapacity = _this7.generatorSets[element].current_generator_set_capacity ? _this7.generatorSets[element].current_generator_set_capacity.prime_capacity : 0;
-          var capacity = primeCapacity * 0.8;
+          if (!_this7.generatorSets[element].room_id || _this7.generatorSets[element].room_id && _this7.generatorSets[element].room_id == _this7.room.id) {
+            var primeCapacity = _this7.generatorSets[element].current_generator_set_capacity ? _this7.generatorSets[element].current_generator_set_capacity.prime_capacity : 0;
+            var capacity = primeCapacity * 0.8;
 
-          switch (_this7.generatorSets[element].generator_set_topology_type_id) {
-            case 1:
-            case 2:
-            default:
-              break;
+            switch (_this7.generatorSets[element].generator_set_topology_type_id) {
+              case 1:
+              case 2:
+              default:
+                break;
 
-            case 3:
-              sum = _this7.generatorSets[element].generator_set_level_type_id == 3 ? sum + capacity : sum;
-              break;
+              case 3:
+                sum = _this7.generatorSets[element].generator_set_level_type_id == 3 ? sum + capacity : sum;
+                break;
+            }
           }
         });
       }
@@ -742,20 +754,22 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       if (this.generatorSets.length) {
         Object.keys(this.generatorSets).forEach(function (element) {
-          var usedCapacity = _this10.generatorSets[element].current_generator_set_capacity ? _this10.generatorSets[element].current_generator_set_capacity.used_capacity : 0;
+          if (!_this10.generatorSets[element].room_id || _this10.generatorSets[element].room_id && _this10.generatorSets[element].room_id == _this10.room.id) {
+            var usedCapacity = _this10.generatorSets[element].current_generator_set_capacity ? _this10.generatorSets[element].current_generator_set_capacity.used_capacity : 0;
 
-          switch (_this10.generatorSets[element].generator_set_topology_type_id) {
-            case 1:
-            case 2:
-              sum = sum + usedCapacity;
-              break;
+            switch (_this10.generatorSets[element].generator_set_topology_type_id) {
+              case 1:
+              case 2:
+                sum = sum + usedCapacity;
+                break;
 
-            case 3:
-              sum = _this10.generatorSets[element].generator_set_level_type_id == 2 ? sum + usedCapacity : sum;
-              break;
+              case 3:
+                sum = _this10.generatorSets[element].generator_set_level_type_id == 2 ? sum + usedCapacity : sum;
+                break;
 
-            default:
-              break;
+              default:
+                break;
+            }
           }
         });
       }
@@ -769,17 +783,19 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       if (this.generatorSets.length) {
         Object.keys(this.generatorSets).forEach(function (element) {
-          var usedCapacity = _this11.generatorSets[element].current_generator_set_capacity ? _this11.generatorSets[element].current_generator_set_capacity.used_capacity : 0;
+          if (!_this11.generatorSets[element].room_id || _this11.generatorSets[element].room_id && _this11.generatorSets[element].room_id == _this11.room.id) {
+            var usedCapacity = _this11.generatorSets[element].current_generator_set_capacity ? _this11.generatorSets[element].current_generator_set_capacity.used_capacity : 0;
 
-          switch (_this11.generatorSets[element].generator_set_topology_type_id) {
-            case 1:
-            case 2:
-            default:
-              break;
+            switch (_this11.generatorSets[element].generator_set_topology_type_id) {
+              case 1:
+              case 2:
+              default:
+                break;
 
-            case 3:
-              sum = _this11.generatorSets[element].generator_set_level_type_id == 3 ? sum + usedCapacity : sum;
-              break;
+              case 3:
+                sum = _this11.generatorSets[element].generator_set_level_type_id == 3 ? sum + usedCapacity : sum;
+                break;
+            }
           }
         });
       }
@@ -1551,6 +1567,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.$eventBus.$off('air-conditioner-capacity');
     this.$eventBus.$off('new-solar-panel');
     this.$eventBus.$off('battery-autonomy');
+    this.$eventBus.$off('battery-bank-deleted');
+    this.$eventBus.$off('generator-set-deleted');
   }
 });
 

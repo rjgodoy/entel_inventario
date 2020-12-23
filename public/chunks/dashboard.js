@@ -510,6 +510,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
  // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -571,7 +589,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       return __webpack_require__.e(/*! import() | chunks/dashboard/infrastructures */ "chunks/dashboard/infrastructures").then(__webpack_require__.bind(null, /*! ./InfrastructuresData */ "./resources/js/components/dashboard/InfrastructuresData.vue"));
     },
     ModalDownload: function ModalDownload() {
-      return Promise.all(/*! import() | chunks/dashboard/modalDownload */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~f7ed369a"), __webpack_require__.e("chunks/dashboard/modalDownload")]).then(__webpack_require__.bind(null, /*! ./ModalDownload */ "./resources/js/components/dashboard/ModalDownload.vue"));
+      return Promise.all(/*! import() | chunks/dashboard/modalDownload */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~d94cc1ca"), __webpack_require__.e("chunks/dashboard/modalDownload")]).then(__webpack_require__.bind(null, /*! ./ModalDownload */ "./resources/js/components/dashboard/ModalDownload.vue"));
     }
   },
   props: ['user', 'last_data_counters', 'darkMode'],
@@ -592,6 +610,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       pops: [],
       zonas: [],
       crms: Array,
+      tabShow: 0,
       isFetching: false,
       selected: null,
       page: 1,
@@ -2735,14 +2754,66 @@ var render = function() {
                           staticStyle: { border: "solid 4px white" }
                         },
                         [
-                          _c("map-view", {
-                            attrs: {
-                              user: _vm.user,
-                              pops: _vm.pops,
-                              map_attributes: _vm.map_attributes,
-                              darkMode: _vm.darkMode
-                            }
-                          })
+                          _c(
+                            "b-tabs",
+                            {
+                              staticClass: "is-marginless",
+                              attrs: {
+                                type: "is-toggle",
+                                size: "is-small",
+                                expanded: ""
+                              },
+                              model: {
+                                value: _vm.tabShow,
+                                callback: function($$v) {
+                                  _vm.tabShow = $$v
+                                },
+                                expression: "tabShow"
+                              }
+                            },
+                            [
+                              _c("b-tab-item", { attrs: { label: "POP" } }),
+                              _vm._v(" "),
+                              _c("b-tab-item", { attrs: { label: "Clima" } })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "keep-alive",
+                            [
+                              _vm.tabShow == 0
+                                ? _c("map-view", {
+                                    staticStyle: { "margin-top": "-27px" },
+                                    attrs: {
+                                      user: _vm.user,
+                                      pops: _vm.pops,
+                                      map_attributes: _vm.map_attributes,
+                                      darkMode: _vm.darkMode
+                                    }
+                                  })
+                                : _vm._e()
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("keep-alive", [
+                            _vm.tabShow == 1
+                              ? _c("iframe", {
+                                  staticStyle: {
+                                    "margin-top": "-27px",
+                                    "padding-bottom": "0"
+                                  },
+                                  attrs: {
+                                    width: "100%",
+                                    height: "95%",
+                                    src:
+                                      "https://embed.windy.com/embed2.html?lat=-33.500&lon=-70.667&detailLat=-33.500&detailLon=-70.667&width=650&height=450&zoom=5&level=surface&overlay=temp&product=gfs&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1",
+                                    frameborder: "0"
+                                  }
+                                })
+                              : _vm._e()
+                          ])
                         ],
                         1
                       )

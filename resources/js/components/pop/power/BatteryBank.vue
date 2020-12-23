@@ -22,9 +22,9 @@
                     </div>
 
                     <div class="column">
-                        <div class="has-text-weight-light is-size-7" style="margin-top: 5px;">Capacidad total</div>
+                        <div class="has-text-weight-light is-size-7" style="margin-top: 5px;">Capacidad total (AH)</div>
                         <div class="has-text-weight-semibold is-size-5" v-if="!isEditMode">
-                            {{ newBatteryBankCapacity | numeral('0,0.0') }} <span class="is-size-7">kW</span>
+                            {{ newBatteryBankCapacity | numeral('0,0.0') }} <span class="is-size-7">AH</span>
                         </div>
                         <b-input v-if="isEditMode" type="number" class="has-text-weight-bold is-size-5" v-model="newBatteryBankCapacity"/>
                     </div>
@@ -37,6 +37,11 @@
             <b-button :type="isEditMode ? 'is-info' : 'is-link is-outlined'" size="is-small" @click="isEditMode=!isEditMode; saveChanges()">
                 <font-awesome-icon :icon="['fas', 'edit']"/>
                 &nbsp;&nbsp;{{ isEditMode ? 'Modo Edición' : 'Editar parámetros de Grupo' }}
+            </b-button>
+
+            <b-button v-if="isEditMode" type="is-danger" size="is-small" @click="deleteBatteryBank()" class="is-pulled-right">
+                <font-awesome-icon :icon="['fas', 'trash']"/>
+                &nbsp;&nbsp; Eliminar
             </b-button>
         </div>
     </div>
@@ -94,7 +99,23 @@
                         this.$eventBus.$emit('power-rectifier-updated');
                     })
                 }
-            }       
+            },
+
+            deleteBatteryBank() {
+                console.log(this.batteryBank)
+                this.$buefy.dialog.confirm({
+                    message: `Confirma la eliminación del banco de baterías de la sala?`,
+                    type: 'is-link',
+                    onConfirm: () => {
+                        axios.delete(`/api/batteryBanks/${this.batteryBank.id}`)
+                        .then(response => {
+                            // console.log(response.data)
+                            this.$eventBus.$emit('battery-bank-deleted')
+                            this.$eventBus.$emit('room-data')
+                        })
+                    }
+                })
+            }  
         }
     }
 </script>

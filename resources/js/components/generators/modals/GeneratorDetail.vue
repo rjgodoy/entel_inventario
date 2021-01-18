@@ -12,7 +12,7 @@
                 <div class="column">
                     <div class="columns is-multiline">
                         <div class="column is-6" v-for="data in boxes">
-                            <div class="box p-3" :class="data.color">
+                            <div class="box p-3 has-text-left" :class="data.color">
                                 <div class="is-size-7">{{ data.title }}</div>
                                 <div class="is-size-5 has-text-weight-semibold">{{ data.info }}</div>
                             </div>
@@ -20,7 +20,13 @@
                     </div>
                 </div>
                 <div class="column is-8">
-                    
+                    <GeneratorCharts :generator="generator"/>
+                </div>
+            </div>
+
+            <div class="columns">
+                <div class="column">
+                    <GeneratorData :generator="generator"/>
                 </div>
             </div>
             
@@ -36,7 +42,8 @@
     var numeral = require('numeral');
     export default {
         components: {
-            // AirConditioner: () => import(/* webpackChunkName: "chunks/pop/climate/airConditioner"*/'../../pop/climate/AirConditioner')
+            GeneratorCharts: () => import(/* webpackChunkName: "chunks/generators/modals/generatorCharts"*/'./GeneratorCharts'),
+            GeneratorData: () => import(/* webpackChunkName: "chunks/generators/modals/generatorData"*/'./GeneratorData'),
         },
         props : [
             'generator',
@@ -67,7 +74,7 @@
                     },
                     {
                         "title": "Nivel combustible (%)",
-                        "info": this.last_data ? this.last_data.fuel_level_percentage * 100 + '%' : 'N/A',
+                        "info": this.last_data ? numeral(this.last_data.fuel_level_percentage * 100).format('0,0.0') + '%' : 'N/A',
                     },
                     {
                         "title": "Nivel combustible",
@@ -79,7 +86,7 @@
                     },
                     {
                         "title": "Promedio consumo lts./día",
-                        "info": this.fuel_consumption ? this.fuel_consumption : 'N/A',
+                        "info": this.fuel_consumption ? numeral(this.fuel_consumption).format('0,0.0') : 'N/A',
                     },
                     {
                         "title": "Última medición",
@@ -116,7 +123,6 @@
                         "color": "has-background-warning"
                     },
                 ]
-                
             }
         },
 

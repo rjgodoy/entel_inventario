@@ -252,6 +252,7 @@
                         <detail :is="currentTabComponent"
                             :user="user"
                             :pop="pop"
+                            :layout="pop.layout"
                             :popClassification="popClassification"
                             :popCritical="popCritical"
                             :bodyBackground="bodyBackground"
@@ -292,10 +293,10 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faHome, faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, faCamera, faUserTie } from "@fortawesome/free-solid-svg-icons";
+    import { faHome, faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, faCamera, faUserTie, faVideo, faStreetView } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     import { faCheckCircle as farCheckCircle, faTimesCircle as farTimesCircle } from '@fortawesome/free-regular-svg-icons'
-    library.add(faHome, faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle, faCamera, faUserTie)
+    library.add(faHome, faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle, faCamera, faUserTie, faVideo, faStreetView)
     export default {
         components: {
             Location: () => import(/* webpackChunkName: "chunks/pop/location"*/'./Location'),
@@ -304,6 +305,7 @@
             // CharacteristicsSide: () => import(/* webpackChunkName: "chunks/pop/characteristicsSide"*/'./CharacteristicsSide'),
             Layout: () => import(/* webpackChunkName: "chunks/pop/layout/layout"*/'./layout/Layout'),
             Vision: () => import(/* webpackChunkName: "chunks/pop/vision"*/'./Vision'),
+            Drone: () => import(/* webpackChunkName: "chunks/pop/drone"*/'./Drone'),
             Power: () => import(/* webpackChunkName: "chunks/pop/power/power"*/'./power/Power'),
             Climate: () => import(/* webpackChunkName: "chunks/pop/climate/climate"*/'./climate/Climate'),
             Infrastructure: () => import(/* webpackChunkName: "chunks/pop/infrastructure/infrastructure"*/'./infrastructure/Infrastructure'),
@@ -625,16 +627,23 @@
 
             getTabs() {
                 axios.get(`/api/popMenu`).then((response) => {
-                    // console.log(response.data.data)
                     this.tabs = response.data.data
                 })
             },
 
             showTab(tab) {
+                // Layout
                 if (tab.component == 'layout' && this.popCritical == 0) {
                     return false
                 }
-                if (tab.component == 'vision' && this.pop.id != 42) {
+
+                // Visopn 3D
+                if (tab.component == 'vision' && (!this.pop.layout || !this.pop.layout.iframe)) {
+                    return false
+                }
+
+                // Dron
+                if (tab.component == 'drone' && (!this.pop.layout || !this.pop.layout.drone_footage)) {
                     return false
                 }
                 return true

@@ -12,7 +12,7 @@
                                 <abbr title="Sala">SALA</abbr>
                             </div>
                             <div class="column has-text-centered">
-                                <abbr title="Estado / Disponibilidad">Estado / Disponibilidad</abbr>
+                                <abbr title="Estado / Disponibilidad">ESTADO / DISPONIBILIDAD</abbr>
                             </div>
                         </div>
                     </th>

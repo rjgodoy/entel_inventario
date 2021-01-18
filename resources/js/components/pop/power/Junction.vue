@@ -370,7 +370,7 @@
 
                                 <button v-if="canEditJunctions & isEditMode" 
                                     @click="isEditJunctionModalActive = true"
-                                    class="button is-size-7 is-small is-fullwidth" 
+                                    class="button is-size-7 is-small is-fullwidth is-link is-outlined" 
                                     style="padding-top: 0px; padding-bottom: 0px;">
                                     Editar parámetros
                                 </button>
@@ -445,9 +445,13 @@
                     </b-progress>
 
                     <div class="field has-text-centered" v-if="canEditJunctions">
-                        <b-button :type="isEditMode ? 'is-info' : 'is-link is-outlined'" size="is-small" @click="isEditMode=!isEditMode; saveChanges()">
+                        <b-button :type="isEditMode ? 'is-link' : 'is-link is-outlined'" size="is-small" @click="isEditMode=!isEditMode; saveChanges()">
                             <font-awesome-icon :icon="['fas', 'edit']"/>
-                            &nbsp;&nbsp;{{ isEditMode ? 'Modo Edición' : 'Editar parámetros de Empalme' }}
+                            &nbsp;&nbsp;{{ isEditMode ? 'Guardar' : 'Editar parámetros de Empalme' }}
+                        </b-button>
+                        <b-button v-if="isEditMode" type="is-danger" size="is-small" @click="deleteJunction()" class="is-pulled-right">
+                            <font-awesome-icon :icon="['fas', 'trash']"/>
+                            &nbsp;&nbsp; Eliminar
                         </b-button>
                     </div>
                     
@@ -719,7 +723,25 @@
                 } else {
                     console.log('change what you want!')
                 }
-            }        
+            },
+
+            deleteJunction() {
+                console.log(this.junction)
+                this.$buefy.dialog.confirm({
+                    message: `Confirma la eliminación del Empalme del POP?`,
+                    type: 'is-link',
+                    onConfirm: () => {
+                        axios.delete(`/api/junctions/${this.junction.id}`)
+                        .then(response => {
+                            // console.log(response.data)
+                            this.$eventBus.$emit('junction-deleted')
+                            this.$eventBus.$emit('room-data')
+                        })
+
+                    }
+                })
+
+            }      
         }
     }
 </script>

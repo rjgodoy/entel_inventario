@@ -29,14 +29,14 @@
                     <div class="columns">
                         <div class="column">
                             <div class="box">
-                                <GaugeChart 
+                                <!-- <GaugeChart 
                                     :totalEnergy="totalEnergy"
                                     :totalClimate="totalClimate"
                                     :totalSurface="totalSurface"
                                     :availableEnergy="availableEnergy"
                                     :availableClimate="availableClimate"
                                     :availableSurface="availableSurface"
-                                />
+                                /> -->
                             </div>
                         </div>
                     </div>

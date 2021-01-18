@@ -143,7 +143,8 @@ class RoomController extends Controller
             'current_room_distribution',
             'current_room_surface',
             'current_air_conditioner_capacity',
-            'current_room_capacity'
+            'current_room_capacity',
+            'layout'
         )->where('id', $id)->first();
 
         return new RoomResource($room);

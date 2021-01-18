@@ -264,20 +264,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCircle"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faExternalLinkAlt"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     EditParameter: function EditParameter() {
@@ -895,7 +886,7 @@ var render = function() {
                       _c(
                         "div",
                         { staticClass: "is-size-7 has-text-weight-normal" },
-                        [_vm._v("Nemonico")]
+                        [_vm._v("Nemonico Sitio")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -910,13 +901,15 @@ var render = function() {
                           staticClass: "is-size-7 has-text-weight-normal",
                           staticStyle: { "padding-top": "4px" }
                         },
-                        [_vm._v("Nombre")]
+                        [_vm._v("Nombre Sitio")]
                       ),
                       _vm._v(" "),
                       site.nombre
                         ? _c(
                             "div",
-                            { staticClass: "is-size-5 has-text-weight-light" },
+                            {
+                              staticClass: "is-size-5 has-text-weight-semibold"
+                            },
                             [_vm._v(_vm._s(site.nombre))]
                           )
                         : _vm._e()
@@ -1263,37 +1256,136 @@ var render = function() {
                     site.technologies.length
                       ? _c(
                           "div",
-                          { staticClass: "columns is-multiline" },
+                          { staticClass: "columns is-multiline tile" },
                           _vm._l(site.technologies, function(tech) {
                             return _c(
                               "div",
-                              { staticClass: "column is-4 has-text-centered" },
+                              { staticClass: "column is-6 tile is-parent" },
                               [
                                 _c(
                                   "div",
-                                  {
-                                    staticClass:
-                                      "is-size-6 has-text-weight-bold box"
-                                  },
+                                  { staticClass: "box tile is-child" },
                                   [
-                                    _vm._v(
-                                      _vm._s(tech.nem_tech) +
-                                        "\n                                    "
-                                    ),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "subtitle is-size-6 has-text-weight-light"
-                                      },
-                                      [
-                                        _vm._v(
-                                          _vm._s(tech.technology_type.type) +
-                                            " - " +
-                                            _vm._s(tech.frequency)
-                                        )
-                                      ]
-                                    )
+                                    _c("div", { staticClass: "columns" }, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "column is-6 has-text-left"
+                                        },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "is-size-7 has-text-weight-light"
+                                            },
+                                            [_vm._v("Nemeonico Tecnología")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-bold"
+                                            },
+                                            [_vm._v(_vm._s(tech.nem_tech))]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "column is-6 has-text-right"
+                                        },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "is-size-7 has-text-weight-light"
+                                            },
+                                            [_vm._v("Frecuencia")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "has-text-weight-bold"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                                " +
+                                                  _vm._s(
+                                                    tech.technology_type.type
+                                                  ) +
+                                                  " - " +
+                                                  _vm._s(tech.frequency) +
+                                                  "\n                                            "
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", {}, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "is-size-7 has-text-weight-light"
+                                        },
+                                        [_vm._v("Nombre")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "is-size-6 has-text-weight-normal"
+                                        },
+                                        [_vm._v(_vm._s(tech.ran_device_name))]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "columns pt-2" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "column" },
+                                        [
+                                          _c(
+                                            "b-tooltip",
+                                            {
+                                              attrs: {
+                                                label: _vm.tec3g900
+                                                  ? _vm.tec3g900.state.state
+                                                  : "Sin Tecnología",
+                                                position: "is-bottom",
+                                                type: _vm.tec3g900
+                                                  ? "is-dark"
+                                                  : "is-white"
+                                              }
+                                            },
+                                            [
+                                              _c("font-awesome-icon", {
+                                                class: _vm.tec3g900
+                                                  ? _vm.tec3g900.state.style
+                                                  : "has-text-white",
+                                                attrs: {
+                                                  icon: ["fas", "circle"]
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ])
                                   ]
                                 )
                               ]

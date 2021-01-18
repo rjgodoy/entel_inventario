@@ -64,11 +64,11 @@
                                     :value="data.available * 100 / data.total" 
                                     show-value format="percent" 
                                     size="is-small"
-                                    :type="data.available <= data.thresholds.critical ? 'is-danger' : (data.available <= data.thresholds.warning ? 'is-warning': 'is-success')">
+                                    :type="data.available / data.total <= data.thresholds.critical ? 'is-danger' : (data.available / data.total <= data.thresholds.warning ? 'is-warning': 'is-success')">
                                 </b-progress>
                             </div>
                         </div>
-                        <b-loading :is-full-page="false" :active.sync="data.isLoading" :can-cancel="true"></b-loading>
+                        <!-- <b-loading :is-full-page="false" :active.sync="data.isLoading" :can-cancel="true"></b-loading> -->
                     </div>
                 </div>
                 
@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="column" style="padding-left: 48px;">
-                    <keep-alive>
+                    <!-- <keep-alive> -->
                         <component :is="currentTabComponent"
                             :user="user"
                             :room="room"
@@ -144,7 +144,7 @@
                             :availableDistributionCapacity=availableDistributionCapacity
 
                         ></component>
-                    </keep-alive>
+                    <!-- </keep-alive> -->
                 </div>
 
             </div>
@@ -165,10 +165,10 @@
 
 <script>   
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, faPlus, faEdit, faPencilAlt, faCheck, faEllipsisV, faEllipsisH, faSignInAlt, faSortUp, faRandom, faBolt, faSolarPanel, faShieldAlt, faCarBattery, faFire, faMap, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+    import { faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, faPlus, faEdit, faPencilAlt, faCheck, faEllipsisV, faEllipsisH, faSignInAlt, faSortUp, faRandom, faBolt, faSolarPanel, faShieldAlt, faCarBattery, faFire, faMap, faExclamationTriangle, faThumbtack } from "@fortawesome/free-solid-svg-icons";
     import { faSuperpowers } from "@fortawesome/free-brands-svg-icons";
     import { faFolderOpen as farFolderOpen, faMap as farMap } from '@fortawesome/free-regular-svg-icons'
-    library.add(faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, farFolderOpen, faPlus, faEdit, faPencilAlt, faCheck, faEllipsisV, faEllipsisH, faSignInAlt, faSortUp, faSuperpowers, faRandom, faBolt, faSolarPanel, faShieldAlt, faCarBattery, faFire, faMap, farMap, faExclamationTriangle); 
+    library.add(faInfoCircle, faTrafficLight, faChartLine, faFileInvoice, faBezierCurve, faCalculator, farFolderOpen, faPlus, faEdit, faPencilAlt, faCheck, faEllipsisV, faEllipsisH, faSignInAlt, faSortUp, faSuperpowers, faRandom, faBolt, faSolarPanel, faShieldAlt, faCarBattery, faFire, faMap, farMap, faExclamationTriangle, faThumbtack); 
 
     export default {
         components: {
@@ -361,7 +361,7 @@
                     "available": this.availableSurface,
                     "isLoading": this.totalSurface && !this.usedSurface ? true : false,
                     "thresholds": this.thresholds.surface,
-                    "unit": "m2"
+                    "unit": "un"
                 }]
             },
 
@@ -805,32 +805,32 @@
             thresholds() {
                 return {
                     'junctions': {
-                        'critical': 5,
-                        'warning': 15
+                        'critical': 0.1,
+                        'warning': 0.2
                     },
                     'generatorSets': {
-                        'critical': 5,
-                        'warning': 15
+                        'critical': 0.1,
+                        'warning': 0.2
                     },
                     'powerRectifiers': {
-                        'critical': 5,
-                        'warning': 15
+                        'critical': 0.1,
+                        'warning': 0.2
                     },
                     'batteries': {
-                        'critical': 5,
-                        'warning': 15
+                        'critical': 0.1,
+                        'warning': 0.2
                     },
                     'climate': {
-                        'critical': 5,
-                        'warning': 15
+                        'critical': 0.1,
+                        'warning': 0.2
                     },
                     'disponibility': {
-                        'critical': 5,
-                        'warning': 15
+                        'critical': 0.1,
+                        'warning': 0.2
                     },
                     'surface': {
-                        'critical': 5,
-                        'warning': 15
+                        'critical': 0.1,
+                        'warning': 0.2
                     }
                 }
             },
@@ -952,6 +952,7 @@
             getRoomData() {
                 axios.get(`/api/rooms/${this.$route.params.id}`)
                 .then(response => {
+                    // console.log(response.data)
                     this.room = response.data.room
                     this.planeTypeId = this.room.current_room_delegation ? this.room.current_room_delegation.plane_delegation_type_id : null
 
@@ -967,7 +968,7 @@
             getJunctions() {
                 axios.get(`/api/popJunctions/${this.pop.id}`)
                 .then((response) => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.junctions = response.data.junctions
                     this.canEditJunctions = response.data.can.update
                 })
@@ -1041,7 +1042,7 @@
                     }
                     axios.post('/api/roomCapacities', params)
                     .then(response => {
-                        console.log(response.data)
+                        // console.log(response.data)
                     })
                 }
             },
@@ -1244,10 +1245,19 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
                                     available = this.availableBatteryCapacityPlane(plane)
                                     break
                                 case 5:
                                 case 6:
+                                case 20:
+                                case 21:
+                                case 22:
                                     if(available > this.availableBatteryCapacityPlane(plane)) {
                                         available = this.availableBatteryCapacityPlane(plane)
                                     }
@@ -1262,7 +1272,7 @@
                                     }
                                     available = availableA + availableB
                                     break
-                                case 8:
+                                case 30:
                                 default:
                                     break
                             }
@@ -1274,14 +1284,23 @@
                             case 2:
                             case 3:
                             case 4:
+                            case 8:
+                            case 9:
+                            case 10:
+                            case 11:
+                            case 12:
+                            case 13:
                                 available = available
                                 break
                             case 5:
                             case 6:
                             case 7:
+                            case 20:
+                            case 21:
+                            case 22:
                                 available = available * 2
                                 break
-                            case 8:
+                            case 30:
                             default:
                                 break
                         }

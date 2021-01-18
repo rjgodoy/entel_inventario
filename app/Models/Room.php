@@ -204,4 +204,14 @@ class Room extends Model
         return $this->hasMany(GeneratorSet::class);
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function layout() 
+    {
+        return $this->hasOne(PopLayout::class)->latest();
+    }
+
 }

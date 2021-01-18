@@ -437,20 +437,31 @@ class GeneratorSetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function generatorLastValues(Request $request, $generator_id)
+    public function generatorValues(Request $request, $generator_id)
     {
-        $data = GeneratorsPlatformValues::with('g_generator'
-                // ,'g_zone.g_sector'
-                // ,'g_model.g_brand'
-                // ,'g_model.g_fuel_pond'
-                // ,'g_maintances.g_maintance_type'
-                // ,'g_maintances.g_maintance_status'
-                // ,'g_maintances.g_generator_records.g_maintance_status'
-                // ,'g_last_maintance.g_last_maintance_record'
-            )
-            ->where('generator_id', $generator_id)
-            ->latest('created')
-            ->first();
+        switch ($request->unit) {
+            case 'day':
+                $order = 'YEAR(created), MONTH(created), DAY(created)';
+                break;
+            case 'month':
+                $order = 'YEAR(created), MONTH(created)';
+                break;
+            case 'year':
+                $order = 'YEAR(created)';
+                break;
+            default:
+                $order = 'YEAR(created), MONTH(created)';
+                break;
+        }
+        
+        $data = GeneratorsPlatformValues::where('generator_id', $generator_id)
+            ->where('hourmeter_consumption', '!=', -1)
+            // ->where('hourmeter_consumption', '<', 75)
+            // ->selectRaw('*')
+            ->groupByRaw($order)
+            ->orderBy('created', 'desc')
+            // ->limit(8)
+            ->get();
 
         return $data;
     }

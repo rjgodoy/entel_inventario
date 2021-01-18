@@ -316,7 +316,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faInfoCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faChartLine"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileInvoice"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCalculator"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faPencilAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEllipsisV"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEllipsisH"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignInAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSortUp"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faSuperpowers"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faRandom"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSolarPanel"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faShieldAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCarBattery"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFire"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMap"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faMap"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faExclamationTriangle"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faInfoCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faChartLine"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileInvoice"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCalculator"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faPencilAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEllipsisV"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEllipsisH"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignInAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSortUp"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faSuperpowers"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faRandom"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSolarPanel"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faShieldAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCarBattery"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFire"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMap"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faMap"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faExclamationTriangle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faThumbtack"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Capacity: function Capacity() {
@@ -490,7 +490,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         "available": this.availableSurface,
         "isLoading": this.totalSurface && !this.usedSurface ? true : false,
         "thresholds": this.thresholds.surface,
-        "unit": "m2"
+        "unit": "un"
       }];
     },
     pop: function pop() {
@@ -972,32 +972,32 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     thresholds: function thresholds() {
       return {
         'junctions': {
-          'critical': 5,
-          'warning': 15
+          'critical': 0.1,
+          'warning': 0.2
         },
         'generatorSets': {
-          'critical': 5,
-          'warning': 15
+          'critical': 0.1,
+          'warning': 0.2
         },
         'powerRectifiers': {
-          'critical': 5,
-          'warning': 15
+          'critical': 0.1,
+          'warning': 0.2
         },
         'batteries': {
-          'critical': 5,
-          'warning': 15
+          'critical': 0.1,
+          'warning': 0.2
         },
         'climate': {
-          'critical': 5,
-          'warning': 15
+          'critical': 0.1,
+          'warning': 0.2
         },
         'disponibility': {
-          'critical': 5,
-          'warning': 15
+          'critical': 0.1,
+          'warning': 0.2
         },
         'surface': {
-          'critical': 5,
-          'warning': 15
+          'critical': 0.1,
+          'warning': 0.2
         }
       };
     },
@@ -1091,6 +1091,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this17 = this;
 
       axios.get("/api/rooms/".concat(this.$route.params.id)).then(function (response) {
+        // console.log(response.data)
         _this17.room = response.data.room;
         _this17.planeTypeId = _this17.room.current_room_delegation ? _this17.room.current_room_delegation.plane_delegation_type_id : null;
 
@@ -1111,7 +1112,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this18 = this;
 
       axios.get("/api/popJunctions/".concat(this.pop.id)).then(function (response) {
-        console.log(response.data);
+        // console.log(response.data)
         _this18.junctions = response.data.junctions;
         _this18.canEditJunctions = response.data.can.update;
       })["catch"](function (error) {
@@ -1183,8 +1184,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
           'surface_used': this.usedSurface,
           'surface_available': this.availableSurface
         };
-        axios.post('/api/roomCapacities', params).then(function (response) {
-          console.log(response.data);
+        axios.post('/api/roomCapacities', params).then(function (response) {// console.log(response.data)
         });
       }
     },
@@ -1397,11 +1397,20 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
             case 2:
             case 3:
             case 4:
+            case 8:
+            case 9:
+            case 10:
+            case 11:
+            case 12:
+            case 13:
               available = _this25.availableBatteryCapacityPlane(plane);
               break;
 
             case 5:
             case 6:
+            case 20:
+            case 21:
+            case 22:
               if (available > _this25.availableBatteryCapacityPlane(plane)) {
                 available = _this25.availableBatteryCapacityPlane(plane);
               }
@@ -1420,7 +1429,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
               available = availableA + availableB;
               break;
 
-            case 8:
+            case 30:
             default:
               break;
           }
@@ -1431,16 +1440,25 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
           case 2:
           case 3:
           case 4:
+          case 8:
+          case 9:
+          case 10:
+          case 11:
+          case 12:
+          case 13:
             available = available;
             break;
 
           case 5:
           case 6:
           case 7:
+          case 20:
+          case 21:
+          case 22:
             available = available * 2;
             break;
 
-          case 8:
+          case 30:
           default:
             break;
         }
@@ -2011,9 +2029,11 @@ var render = function() {
                               format: "percent",
                               size: "is-small",
                               type:
-                                data.available <= data.thresholds.critical
+                                data.available / data.total <=
+                                data.thresholds.critical
                                   ? "is-danger"
-                                  : data.available <= data.thresholds.warning
+                                  : data.available / data.total <=
+                                    data.thresholds.warning
                                   ? "is-warning"
                                   : "is-success"
                             }
@@ -2021,22 +2041,8 @@ var render = function() {
                         ],
                         1
                       )
-                    ]),
-                    _vm._v(" "),
-                    _c("b-loading", {
-                      attrs: {
-                        "is-full-page": false,
-                        active: data.isLoading,
-                        "can-cancel": true
-                      },
-                      on: {
-                        "update:active": function($event) {
-                          return _vm.$set(data, "isLoading", $event)
-                        }
-                      }
-                    })
-                  ],
-                  1
+                    ])
+                  ]
                 )
               }),
               0
@@ -2128,63 +2134,52 @@ var render = function() {
                 staticStyle: { "padding-left": "48px" }
               },
               [
-                _c(
-                  "keep-alive",
-                  [
-                    _c(_vm.currentTabComponent, {
-                      tag: "component",
-                      attrs: {
-                        user: _vm.user,
-                        room: _vm.room,
-                        pop: _vm.room.pop,
-                        junctions: _vm.junctions,
-                        generatorSets: _vm.generatorSets,
-                        planes: _vm.planes,
-                        planeTypes: _vm.planeTypes,
-                        airConditioners: _vm.airConditioners,
-                        canEditJunctions: _vm.canEditJunctions,
-                        canEditGeneratorSets: _vm.canEditGeneratorSets,
-                        canEditPowerRectifiers: _vm.canEditPowerRectifiers,
-                        canEditAirConditioners: _vm.canEditAirConditioners,
-                        canEditSurface: _vm.canEditSurface,
-                        canEditDistribution: _vm.canEditDistribution,
-                        canEditPlaneTypes: _vm.canEditPlaneTypes,
-                        totalJunctionsCapacity: _vm.totalJunctionsCapacity,
-                        totalUsedJunctionsCapacity:
-                          _vm.totalUsedJunctionsCapacity,
-                        totalAvailableJunctionsCapacity:
-                          _vm.totalAvailableJunctionsCapacity,
-                        totalGeneratorSetsCapacity:
-                          _vm.totalGeneratorSetsCapacity,
-                        totalGeneratorSetsUsedCapacity:
-                          _vm.totalGeneratorSetsUsedCapacity,
-                        totalAvailableGeneratorSetsCapacity:
-                          _vm.totalAvailableGeneratorSetsCapacity,
-                        totalGeneratorSetsCapacityA:
-                          _vm.totalGeneratorSetsCapacityA,
-                        totalGeneratorSetsCapacityB:
-                          _vm.totalGeneratorSetsCapacityB,
-                        usedGeneratorSetsCapacityA:
-                          _vm.usedGeneratorSetsCapacityA,
-                        usedGeneratorSetsCapacityB:
-                          _vm.usedGeneratorSetsCapacityB,
-                        availableGeneratorSetsCapacityA:
-                          _vm.availableGeneratorSetsCapacityA,
-                        availableGeneratorSetsCapacityB:
-                          _vm.availableGeneratorSetsCapacityB,
-                        totalSurface: _vm.totalSurface,
-                        usedSurface: _vm.usedSurface,
-                        availableSurface: _vm.availableSurface,
-                        totalDistributionCapacity:
-                          _vm.totalDistributionCapacity,
-                        usedDistributionCapacity: _vm.usedDistributionCapacity,
-                        availableDistributionCapacity:
-                          _vm.availableDistributionCapacity
-                      }
-                    })
-                  ],
-                  1
-                )
+                _c(_vm.currentTabComponent, {
+                  tag: "component",
+                  attrs: {
+                    user: _vm.user,
+                    room: _vm.room,
+                    pop: _vm.room.pop,
+                    junctions: _vm.junctions,
+                    generatorSets: _vm.generatorSets,
+                    planes: _vm.planes,
+                    planeTypes: _vm.planeTypes,
+                    airConditioners: _vm.airConditioners,
+                    canEditJunctions: _vm.canEditJunctions,
+                    canEditGeneratorSets: _vm.canEditGeneratorSets,
+                    canEditPowerRectifiers: _vm.canEditPowerRectifiers,
+                    canEditAirConditioners: _vm.canEditAirConditioners,
+                    canEditSurface: _vm.canEditSurface,
+                    canEditDistribution: _vm.canEditDistribution,
+                    canEditPlaneTypes: _vm.canEditPlaneTypes,
+                    totalJunctionsCapacity: _vm.totalJunctionsCapacity,
+                    totalUsedJunctionsCapacity: _vm.totalUsedJunctionsCapacity,
+                    totalAvailableJunctionsCapacity:
+                      _vm.totalAvailableJunctionsCapacity,
+                    totalGeneratorSetsCapacity: _vm.totalGeneratorSetsCapacity,
+                    totalGeneratorSetsUsedCapacity:
+                      _vm.totalGeneratorSetsUsedCapacity,
+                    totalAvailableGeneratorSetsCapacity:
+                      _vm.totalAvailableGeneratorSetsCapacity,
+                    totalGeneratorSetsCapacityA:
+                      _vm.totalGeneratorSetsCapacityA,
+                    totalGeneratorSetsCapacityB:
+                      _vm.totalGeneratorSetsCapacityB,
+                    usedGeneratorSetsCapacityA: _vm.usedGeneratorSetsCapacityA,
+                    usedGeneratorSetsCapacityB: _vm.usedGeneratorSetsCapacityB,
+                    availableGeneratorSetsCapacityA:
+                      _vm.availableGeneratorSetsCapacityA,
+                    availableGeneratorSetsCapacityB:
+                      _vm.availableGeneratorSetsCapacityB,
+                    totalSurface: _vm.totalSurface,
+                    usedSurface: _vm.usedSurface,
+                    availableSurface: _vm.availableSurface,
+                    totalDistributionCapacity: _vm.totalDistributionCapacity,
+                    usedDistributionCapacity: _vm.usedDistributionCapacity,
+                    availableDistributionCapacity:
+                      _vm.availableDistributionCapacity
+                  }
+                })
               ],
               1
             )

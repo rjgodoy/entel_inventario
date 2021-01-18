@@ -95,13 +95,12 @@
                     <div class="tile is-child box">
                         <div class="columns">
                             <div class="column is-8">
-                                <div class="is-size-7 has-text-weight-normal">Nemonico</div>
+                                <div class="is-size-7 has-text-weight-normal">Nemonico Sitio</div>
                                 <div class="is-size-4 has-text-weight-bold">{{ site.nem_site }}</div>
-                                <div class="is-size-7 has-text-weight-normal" style="padding-top: 4px;">Nombre</div>
-                                <div class="is-size-5 has-text-weight-light" v-if="site.nombre">{{ site.nombre }}</div>
+                                <div class="is-size-7 has-text-weight-normal" style="padding-top: 4px;">Nombre Sitio</div>
+                                <div class="is-size-5 has-text-weight-semibold" v-if="site.nombre">{{ site.nombre }}</div>
                             </div>
                             <div class="column">
-
                                 <div class="field">
                                     <div class="control">
                                         <div class="tags has-addons is-right">
@@ -115,19 +114,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- <b-taglist attached class="is-right">
-                                    <b-tag type="is-dark" class="has-text-weight-normal">
-                                        Tipo Sitio
-                                    </b-tag>
-                                    <b-tag 
-                                        class="has-text-weight-bold has-text-white"
-                                        :class="site.site_type_id == 1 ? 'is-smart' : 
-                                            (site.site_type_id == 2 ? 'is-positive' : 
-                                                (site.site_type_id == 3 ? 'is-eco' : 'is-warning'))">
-                                        {{ site.site_type.site_type.toUpperCase() }}
-                                    </b-tag>
-                                </b-taglist> -->
 
                                 <div class="field">
                                     <div class="control">
@@ -151,29 +137,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- <b-taglist attached class="is-right">
-                                    <b-tag type="is-dark" class="has-text-weight-normal" v-if="!isEditMode || site.site_type_id == 2">
-                                        Estado
-                                    </b-tag>
-                                    <b-tag v-if="isEditMode && site.site_type_id != 2" 
-                                        type="is-info" 
-                                        @click="isEditParameterModalActive = true; 
-                                            parameter = 'classification_type_id'; 
-                                            selectedSite = site;
-                                            parameter_id = site.classification_type_id" 
-                                        style="border: solid 0.5px grey;">
-                                        <div  class="title is-size-4 has-text-weight-bold">{{ site.classification_type.classification_type }}</div>
-                                        Editar Estado
-                                    </b-tag>
-                                    <b-tag 
-                                        class="has-text-weight-bold has-text-white"
-                                        :class="status(site).id == 1 ? 'is-success' : 
-                                            (status(site).id == 2 ? 'is-danger' : 
-                                                (status(site).id == 0 ? 'has-text-dark' : 'is-warning'))">
-                                        {{ status(site).state.toUpperCase() }}
-                                    </b-tag>
-                                </b-taglist> -->
                             </div>
                         </div>
 
@@ -225,10 +188,38 @@
                         <div class="is-divider" data-content="TECNOLOGIAS" style="margin: 10px auto 10px auto"></div>
 
                         <div class="" style="padding-top: 20px;">
-                            <div class="columns is-multiline" v-if="site.technologies.length">
-                                <div v-for="tech in site.technologies" class="column is-4 has-text-centered">
-                                    <div class="is-size-6 has-text-weight-bold box">{{ tech.nem_tech }}
-                                        <div class="subtitle is-size-6 has-text-weight-light">{{ tech.technology_type.type }} - {{ tech.frequency }}</div>
+                            <div class="columns is-multiline tile" v-if="site.technologies.length">
+                                <div v-for="tech in site.technologies" class="column is-6 tile is-parent">
+                                    <div class="box tile is-child">
+                                        <div class="columns">
+                                            <div class="column is-6 has-text-left">
+                                                <div class="is-size-7 has-text-weight-light">Nemeonico Tecnología</div>
+                                                <div class="has-text-weight-bold">{{ tech.nem_tech }}</div>
+                                            </div>
+                                            <div class="column is-6 has-text-right">
+                                                <div class="is-size-7 has-text-weight-light">Frecuencia</div>
+                                                <div class="has-text-weight-bold">
+                                                    {{ tech.technology_type.type }} - {{ tech.frequency }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <div class="is-size-7 has-text-weight-light">Nombre</div>
+                                            <div class="is-size-6 has-text-weight-normal">{{ tech.ran_device_name }}</div>
+                                        </div>
+                                        <div class="columns pt-2">
+                                            <div class="column">
+                                                <b-tooltip :label="tec3g900 ? tec3g900.state.state : 'Sin Tecnología'" position="is-bottom" :type="tec3g900 ? 'is-dark' : 'is-white'">
+                                                    <font-awesome-icon :icon="['fas', 'circle']" :class="tec3g900 ? tec3g900.state.style : 'has-text-white'"/>
+                                                </b-tooltip>
+                                            </div>
+                                            <!-- <div class="column has-text-right">
+                                                <a href="http://172.29.64.101/php_sup/basic_sitio.php?sitio=29671&III_G=2" class="is-size-7 has-text-weight-semibold">
+                                                    PSG&nbsp;&nbsp;
+                                                    <font-awesome-icon :icon="['fas', 'external-link-alt']"/>
+                                                </a>
+                                            </div> -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -262,10 +253,10 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faCircle } from "@fortawesome/free-solid-svg-icons";
+    import { faCircle, faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
-    library.add(faCircle);
+    library.add(faCircle, faExternalLinkAlt);
     export default {
         components: {
             EditParameter: () => import(/* webpackChunkName: "chunks/pop/modals/editParameter"*/'./modals/EditParameter'),

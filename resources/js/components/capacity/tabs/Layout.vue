@@ -7,16 +7,14 @@
         <div class="" style="padding-top: 24px;">
             <div class="">
                 <div class="">
-                    <div class="box" style="min-height: 960px">
-                        <iframe :src="'/storage/' + layoutPath" width="100%" style="height: 960px"></iframe>
+                    <div class="box" :style="showLayout ? 'min-height: 640px' : 'min-height: 960px'">
+                        <vision v-if="showLayout" :layout="this.pop.layout && this.pop.layout.iframe"/>
+                        <iframe v-if="!showLayout" :src="'/storage/' + layoutPath" width="100%" style="height: 960px"></iframe>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </section>
-        
 </template>
 
 <script>
@@ -32,6 +30,7 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
             GeneratorSets: () => import(/* webpackChunkName: "chunks/capacity/blocks/generator"*/'../blocks/GeneratorSets'),
             SolarPanels: () => import(/* webpackChunkName: "chunks/capacity/blocks/solarPanels"*/'../blocks/SolarPanels'),
             Equipment: () => import(/* webpackChunkName: "chunks/capacity/blocks/equipment"*/'../blocks/Equipment'),
+            Vision: () => import(/* webpackChunkName: "chunks/pop/vision"*/'../../pop/Vision'),
         },
 
         props : [
@@ -77,7 +76,7 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
             return {
                 isEditMode: false,
                 newTheoreticalAutonomy: this.pop && this.pop.current_battery_bank_autonomy ? this.pop.current_battery_bank_autonomy.theoretical : 0,
-                
+                iframe: null
             }
         },
 
@@ -87,8 +86,15 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
             },
 
             layoutPath() {
-                return this.pop.layout && this.pop.layout.file_path
-            }
+                return this.room.layout ? this.room.layout.file_path : (this.pop.layout && this.pop.layout.file_path)
+            },
+
+            showLayout() {
+                if (this.pop.layout && this.pop.layout.iframe) {
+                    return true
+                }
+                return false
+            },
         },
 
         watch: {

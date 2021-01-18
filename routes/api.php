@@ -160,7 +160,7 @@ Route::middleware('auth:api')->group(function () {
 		Route::get('generatorSetDataZona', 'Api\GeneratorSetController@generatorSetDataZona');
 
 		Route::get('generatorsPlatform', 'Api\GeneratorSetController@generatorPlatformData');
-		// Route::get('generatorLastValues/{generator_id}', 'Api\GeneratorSetController@generatorLastValues');
+		Route::get('generatorValues/{generator_id}', 'Api\GeneratorSetController@generatorValues');
 		Route::get('generatorLastDay', 'Api\GeneratorSetController@generatorLastDay');
 
 		Route::apiResource('telecomCompanies','Api\TelecomCompanyController');
@@ -172,7 +172,7 @@ Route::middleware('auth:api')->group(function () {
 	// Power Rectifiers
 		Route::apiResource('planes','Api\PlaneController');
 		Route::get('planeTypes','Api\PlaneController@planeTypes');
-		Route::get('planeDelegationTypes','Api\PlaneController@planeDelegationTypes');
+		Route::get('planeDelegationTypes/{pop_id}','Api\PlaneController@planeDelegationTypes');
 		Route::put('roomPlaneDelegationType/{room_id}','Api\PlaneController@updateRoomPlaneDelegationType');
 		Route::get('roomPlanes/{room_id}','Api\PlaneController@roomPlanes');
 
@@ -285,6 +285,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('createRootFolder', 'Api\FolderController@createRootFolder');
 
     Route::put('vipEntel/{id}', 'Api\PopController@updateVipEntel');
+
+    Route::get('iframeLayout/{pop_id}', 'Api\PopController@getIframeLayout');
 		
 	##############################################################################################
 

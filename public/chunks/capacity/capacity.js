@@ -99,13 +99,13 @@ var numeral = __webpack_require__(/*! numeral */ "./node_modules/numeral/numeral
       return __webpack_require__.e(/*! import() | chunks/capacity/roomLights */ "chunks/capacity/roomLights").then(__webpack_require__.bind(null, /*! ../RoomLights */ "./resources/js/components/capacity/RoomLights.vue"));
     },
     GaugeChart: function GaugeChart() {
-      return Promise.all(/*! import() | chunks/capacity/gaugeChart */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~9dc0bd9b"), __webpack_require__.e("vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart"), __webpack_require__.e("chunks/capacity/gaugeChart")]).then(__webpack_require__.bind(null, /*! ../charts/GaugeChart */ "./resources/js/components/capacity/charts/GaugeChart.vue"));
+      return Promise.all(/*! import() | chunks/capacity/gaugeChart */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~b50b88cc"), __webpack_require__.e("vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart"), __webpack_require__.e("chunks/capacity/gaugeChart")]).then(__webpack_require__.bind(null, /*! ../charts/GaugeChart */ "./resources/js/components/capacity/charts/GaugeChart.vue"));
     },
     ProjectionChart: function ProjectionChart() {
-      return Promise.all(/*! import() | chunks/capacity/charts/projectionChart */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~9dc0bd9b"), __webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart"), __webpack_require__.e("chunks/capacity/charts/projectionChart")]).then(__webpack_require__.bind(null, /*! ../charts/ProjectionChart */ "./resources/js/components/capacity/charts/ProjectionChart.vue"));
+      return Promise.all(/*! import() | chunks/capacity/charts/projectionChart */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~b50b88cc"), __webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/generators/m~ab4f93ad"), __webpack_require__.e("chunks/capacity/charts/projectionChart")]).then(__webpack_require__.bind(null, /*! ../charts/ProjectionChart */ "./resources/js/components/capacity/charts/ProjectionChart.vue"));
     },
     PolarChart: function PolarChart() {
-      return Promise.all(/*! import() | chunks/capacity/charts/polarChart */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~9dc0bd9b"), __webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart"), __webpack_require__.e("chunks/capacity/charts/polarChart")]).then(__webpack_require__.bind(null, /*! ../charts/PolarChart */ "./resources/js/components/capacity/charts/PolarChart.vue"));
+      return Promise.all(/*! import() | chunks/capacity/charts/polarChart */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~b50b88cc"), __webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/generators/m~ab4f93ad"), __webpack_require__.e("chunks/capacity/charts/polarChart")]).then(__webpack_require__.bind(null, /*! ../charts/PolarChart */ "./resources/js/components/capacity/charts/PolarChart.vue"));
     }
   },
   props: ['totalEnergy', 'totalClimate', 'totalSurface', 'availableEnergy', 'availableClimate', 'availableSurface', 'user', 'room'],
@@ -182,27 +182,7 @@ var render = function() {
           [
             _c("RoomLights", { attrs: { room: _vm.room, user: _vm.user } }),
             _vm._v(" "),
-            _c("div", { staticClass: "columns" }, [
-              _c("div", { staticClass: "column" }, [
-                _c(
-                  "div",
-                  { staticClass: "box" },
-                  [
-                    _c("GaugeChart", {
-                      attrs: {
-                        totalEnergy: _vm.totalEnergy,
-                        totalClimate: _vm.totalClimate,
-                        totalSurface: _vm.totalSurface,
-                        availableEnergy: _vm.availableEnergy,
-                        availableClimate: _vm.availableClimate,
-                        availableSurface: _vm.availableSurface
-                      }
-                    })
-                  ],
-                  1
-                )
-              ])
-            ])
+            _vm._m(1)
           ],
           1
         )
@@ -215,7 +195,7 @@ var render = function() {
           "div",
           { staticClass: "box" },
           [
-            _vm._m(1),
+            _vm._m(2),
             _vm._v(" "),
             _c("ProjectionChart", { attrs: { room: _vm.room } })
           ],
@@ -239,6 +219,14 @@ var staticRenderFns = [
         },
         [_vm._v("Dashobard")]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "columns" }, [
+      _c("div", { staticClass: "column" }, [_c("div", { staticClass: "box" })])
     ])
   },
   function() {

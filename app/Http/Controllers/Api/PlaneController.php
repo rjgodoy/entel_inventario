@@ -113,9 +113,19 @@ class PlaneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function planeDelegationTypes()
+    public function planeDelegationTypes(Request $request, $pop_id)
     {
-        $planeDelegationTypes = PlaneDelegationType::all();
+        $planes = Plane::where('pop_id', $pop_id)->first();
+        if($planes) {
+            $planeDelegationTypes = PlaneDelegationType::whereHas('plane_types', function($q) use($pop_id) {
+                $q->whereHas('planes', function($p) use($pop_id) {
+                    $p->where('pop_id', $pop_id);
+                });
+            })->get();
+        } else {
+            $planeDelegationTypes = PlaneDelegationType::all();
+        }
+
         return new PlaneCollection($planeDelegationTypes);
     }
 
@@ -132,21 +142,22 @@ class PlaneController extends Controller
             'plane_delegation_type_id' => $request->plane_delegation_type_id
         ]);
 
-        $room_id = 7;
-        $planes = Plane::whereHas('rooms', function($q) use($room_id) {
-            $q->whereHas('pop', function($p) {
-                $p->whereHas('room', function($r) {
-                    $r->where('id', $room_id);
-                });
-            })
-            ->where('id', $room_id);
-        })
-        ->get();
-
+        $plane_delegation_type_id = $request->plane_delegation_type_id;
 
         $room = Room::find($room_id);
-        $room->planes()->attach($plane_id);
+        $pop_id = $room->pop_id;
 
+        $planes = Plane::where('pop_id', $pop_id)->whereHas('plane_type', function($q) use($plane_delegation_type_id) {
+            $q->whereHas('plane_delegation_types', function($p) use($plane_delegation_type_id) {
+                $p->where('plane_delegation_type_id', $plane_delegation_type_id);
+            });
+        })->get();
+            
+        $room->planes()->detach();
+        foreach ($planes as $plane) {
+            $room->planes()->attach($plane->id);
+        }
+        
         return $roomDelegation;
     }
     

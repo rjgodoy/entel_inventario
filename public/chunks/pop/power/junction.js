@@ -468,6 +468,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     EditJunctionParameters: function EditJunctionParameters() {
@@ -725,6 +729,23 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         console.log('change what you want!');
       }
+    },
+    deleteJunction: function deleteJunction() {
+      var _this7 = this;
+
+      console.log(this.junction);
+      this.$buefy.dialog.confirm({
+        message: "Confirma la eliminaci\xF3n del Empalme del POP?",
+        type: 'is-link',
+        onConfirm: function onConfirm() {
+          axios["delete"]("/api/junctions/".concat(_this7.junction.id)).then(function (response) {
+            // console.log(response.data)
+            _this7.$eventBus.$emit('junction-deleted');
+
+            _this7.$eventBus.$emit('room-data');
+          });
+        }
+      });
     }
   }
 });
@@ -2065,7 +2086,7 @@ var render = function() {
                           "button",
                           {
                             staticClass:
-                              "button is-size-7 is-small is-fullwidth",
+                              "button is-size-7 is-small is-fullwidth is-link is-outlined",
                             staticStyle: {
                               "padding-top": "0px",
                               "padding-bottom": "0px"
@@ -2213,7 +2234,7 @@ var render = function() {
                       {
                         attrs: {
                           type: _vm.isEditMode
-                            ? "is-info"
+                            ? "is-link"
                             : "is-link is-outlined",
                           size: "is-small"
                         },
@@ -2232,14 +2253,38 @@ var render = function() {
                           "\n                          " +
                             _vm._s(
                               _vm.isEditMode
-                                ? "Modo Edición"
+                                ? "Guardar"
                                 : "Editar parámetros de Empalme"
                             ) +
                             "\n                    "
                         )
                       ],
                       1
-                    )
+                    ),
+                    _vm._v(" "),
+                    _vm.isEditMode
+                      ? _c(
+                          "b-button",
+                          {
+                            staticClass: "is-pulled-right",
+                            attrs: { type: "is-danger", size: "is-small" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteJunction()
+                              }
+                            }
+                          },
+                          [
+                            _c("font-awesome-icon", {
+                              attrs: { icon: ["fas", "trash"] }
+                            }),
+                            _vm._v(
+                              "\n                           Eliminar\n                    "
+                            )
+                          ],
+                          1
+                        )
+                      : _vm._e()
                   ],
                   1
                 )

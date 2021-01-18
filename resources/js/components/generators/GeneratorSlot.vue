@@ -71,16 +71,18 @@
         props : [
             'user',
             'generator',
-            'data_type'
+            'data_type',
+            'last_data',
+            'last_day_data'
         ],
 
         data() {
             return {
-                last_data: Array,
-                last_day_data: Object,
+                // last_data: Array,
+                // last_day_data: Object,
                 isGeneratorDetailModalActive: false,
                 generatorSelected: null,
-
+                isLoading: false
             }
         },
 
@@ -88,10 +90,12 @@
             hourmeter_consumption() {
                 let data = null
                 let i = 0
-                Object.keys(this.last_day_data).forEach(element => {
-                    data = data + this.last_day_data[element].hourmeter_consumption
-                    i++
-                })
+                if(this.last_day_data) {
+                    Object.keys(this.last_day_data).forEach(element => {
+                        data = data + this.last_day_data[element].hourmeter_consumption
+                        i++
+                    })
+                }
 
                 return data ? data / i : 'N/A'
             },
@@ -99,38 +103,40 @@
             fuel_consumption() {
                 let data = null
                 let i = 0
-                Object.keys(this.last_day_data).forEach(element => {
-                    data = data + this.last_day_data[element].fuel_consumption
-                    i++
-                })
+                if(this.last_day_data) {
+                    Object.keys(this.last_day_data).forEach(element => {
+                        data = data + this.last_day_data[element].fuel_consumption
+                        i++
+                    })
+                }
 
                 return data ? data / i : 'N/A'
             }
         },
 
         watch: {
-            generator() {
-                this.getLastDayData(this.generator.id)
-            }
+        
         },
 
         mounted() {
-            this.getLastDayData(this.generator.id)
+            // this.getLastDayData(this.generator.id)
         },
 
         methods: {
-            async getLastDayData(generator_id) {
-                let params = {
-                    'generator_id': parseInt(generator_id)
-                }
+            // async getLastDayData(generator_id) {
+            //     this.isLoading = true
+            //     let params = {
+            //         'generator_id': parseInt(generator_id)
+            //     }
 
-                await axios.get('/api/generatorLastDay', { params: params })
-                .then((response) => {
-                    this.last_day_data = response.data
-                    console.log(response.data[0])
-                    this.last_data = response.data[0]
-                })
-            },
+            //     await axios.get('/api/generatorLastDay', { params: params })
+            //     .then((response) => {
+            //         this.last_day_data = response.data
+            //         // console.log(response.data[0])
+            //         this.last_data = response.data[0]
+            //         this.isLoading = false
+            //     })
+            // },
         }
     }
 </script>

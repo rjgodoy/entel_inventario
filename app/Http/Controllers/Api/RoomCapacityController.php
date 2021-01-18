@@ -75,12 +75,14 @@ class RoomCapacityController extends Controller
         //     )
         // "));
 
-        $data = RoomCapacity::whereIn('created_at', [
+        $data = RoomCapacity::where('room_id', $id)
+        ->whereIn('created_at', [
             \DB::raw('SELECT MAX(created_at) 
                 FROM entel_g_redes_inventario.room_capacities
                 WHERE room_id = '.$id.'
                 GROUP BY DATE(created_at)')
-        ])->get();
+        ])
+        ->orderBy('created_at', 'asc')->get();
 
         return $data;
     }

@@ -31,8 +31,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -52,13 +50,17 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     },
     Equipment: function Equipment() {
       return __webpack_require__.e(/*! import() | chunks/capacity/blocks/equipment */ "chunks/capacity/blocks/equipment").then(__webpack_require__.bind(null, /*! ../blocks/Equipment */ "./resources/js/components/capacity/blocks/Equipment.vue"));
+    },
+    Vision: function Vision() {
+      return __webpack_require__.e(/*! import() | chunks/pop/vision */ "chunks/pop/vision").then(__webpack_require__.bind(null, /*! ../../pop/Vision */ "./resources/js/components/pop/Vision.vue"));
     }
   },
   props: ['user', 'room', 'junctions', 'generatorSets', 'planes', 'planeTypes', 'airConditioners', 'canEditJunctions', 'canEditGeneratorSets', 'canEditPowerRectifiers', 'canEditAirConditioners', 'canEditSurface', 'canEditDistribution', 'canEditPlaneTypes', 'totalJunctionsCapacity', 'totalUsedJunctionsCapacity', 'totalAvailableJunctionsCapacity', 'totalGeneratorSetsCapacity', 'totalGeneratorSetsUsedCapacity', 'totalAvailableGeneratorSetsCapacity', 'totalGeneratorSetsCapacityA', 'totalGeneratorSetsCapacityB', 'usedGeneratorSetsCapacityA', 'usedGeneratorSetsCapacityB', 'availableGeneratorSetsCapacityA', 'availableGeneratorSetsCapacityB', 'totalSurface', 'usedSurface', 'availableSurface', 'totalDistributionCapacity', 'usedDistributionCapacity', 'availableDistributionCapacity'],
   data: function data() {
     return {
       isEditMode: false,
-      newTheoreticalAutonomy: this.pop && this.pop.current_battery_bank_autonomy ? this.pop.current_battery_bank_autonomy.theoretical : 0
+      newTheoreticalAutonomy: this.pop && this.pop.current_battery_bank_autonomy ? this.pop.current_battery_bank_autonomy.theoretical : 0,
+      iframe: null
     };
   },
   computed: {
@@ -66,7 +68,14 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return this.room && this.room.pop;
     },
     layoutPath: function layoutPath() {
-      return this.pop.layout && this.pop.layout.file_path;
+      return this.room.layout ? this.room.layout.file_path : this.pop.layout && this.pop.layout.file_path;
+    },
+    showLayout: function showLayout() {
+      if (this.pop.layout && this.pop.layout.iframe) {
+        return true;
+      }
+
+      return false;
     }
   },
   watch: {
@@ -117,13 +126,25 @@ var render = function() {
         _c("div", {}, [
           _c(
             "div",
-            { staticClass: "box", staticStyle: { "min-height": "960px" } },
+            {
+              staticClass: "box",
+              style: _vm.showLayout ? "min-height: 640px" : "min-height: 960px"
+            },
             [
-              _c("iframe", {
-                staticStyle: { height: "960px" },
-                attrs: { src: "/storage/" + _vm.layoutPath, width: "100%" }
-              })
-            ]
+              _vm.showLayout
+                ? _c("vision", {
+                    attrs: { layout: this.pop.layout && this.pop.layout.iframe }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.showLayout
+                ? _c("iframe", {
+                    staticStyle: { height: "960px" },
+                    attrs: { src: "/storage/" + _vm.layoutPath, width: "100%" }
+                  })
+                : _vm._e()
+            ],
+            1
           )
         ])
       ])

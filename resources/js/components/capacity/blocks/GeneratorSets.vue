@@ -28,27 +28,28 @@
                 </div>
 
                 <div class="tile is-vertical" v-if="generatorSets.length">
-                    <div class="tile is-parent">
+                    <div class="tile">
                         <div class="tile is-parent" v-if="totalGeneratorSetsCapacityA">
                             <b-field label="CAPACIDADES PLANO A" label-position="on-border" class="tile">
-                                <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black; background-color: rgba(255, 255, 255, 0.8)">
-                                    <div class="level tile">
-                                        <div class="level-item">
-                                            <div class="has-text-centered">
+                                <div class="tile box is-shadowless is-paddingless" style="border: solid 0.05rem black; background-color: rgba(255, 255, 255, 0.8)">
+
+                                    <div class="tile">
+                                        <div class="tile is-parent">
+                                            <div class="has-text-centered tile is-child">
                                                 <div class="has-text-weight-semibold is-size-6">{{ totalGeneratorSetsCapacityA | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
                                                 <div class="has-text-weight-normal is-size-7">Total</div>
                                             </div>
                                         </div>
                                         
-                                        <div class="level-item">
-                                            <div class="has-text-centered">
+                                        <div class="tile is-parent">
+                                            <div class="has-text-centered tile is-child">
                                                 <div class="has-text-weight-semibold is-size-6">{{ usedGeneratorSetsCapacityA | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
                                                 <div class="has-text-weight-normal is-size-7">Utilizada</div>
                                             </div>
                                         </div>
                                         
-                                        <div class="level-item">
-                                            <div class="has-text-centered">
+                                        <div class="tile is-parent">
+                                            <div class="has-text-centered tile is-child">
                                                 <div class="has-text-weight-semibold is-size-6">{{ availableGeneratorSetsCapacityA | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
                                                 <div class="has-text-weight-normal is-size-7">Disponible</div>
                                             </div>
@@ -60,24 +61,25 @@
 
                         <div class="tile is-parent" v-if="totalGeneratorSetsCapacityB">
                             <b-field label="CAPACIDADES PLANO B" label-position="on-border" class="tile">
-                                <div class="tile is-parent box is-shadowless" style="border: solid 0.05rem black; background-color: rgba(255, 255, 255, 0.8)">
-                                    <div class="level tile">
-                                        <div class="level-item">
-                                            <div class="has-text-centered">
+                                <div class="tile box is-shadowless is-paddingless" style="border: solid 0.05rem black; background-color: rgba(255, 255, 255, 0.8)">
+
+                                    <div class="tile">
+                                        <div class="tile is-parent">
+                                            <div class="has-text-centered tile is-child">
                                                 <div class="has-text-weight-semibold is-size-6">{{ totalGeneratorSetsCapacityB | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
                                                 <div class="has-text-weight-normal is-size-7">Total</div>
                                             </div>
                                         </div>
                                         
-                                        <div class="level-item">
-                                            <div class="has-text-centered">
+                                        <div class="tile is-parent">
+                                            <div class="has-text-centered tile is-child">
                                                 <div class="has-text-weight-semibold is-size-6">{{ usedGeneratorSetsCapacityB | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
                                                 <div class="has-text-weight-normal is-size-7">Utilizada</div>
                                             </div>
                                         </div>
                                         
-                                        <div class="level-item">
-                                            <div class="has-text-centered">
+                                        <div class="tile is-parent">
+                                            <div class="has-text-centered tile is-child">
                                                 <div class="has-text-weight-semibold is-size-6">{{ availableGeneratorSetsCapacityB | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
                                                 <div class="has-text-weight-normal is-size-7">Disponible</div>
                                             </div>

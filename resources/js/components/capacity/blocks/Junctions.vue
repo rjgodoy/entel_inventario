@@ -60,19 +60,34 @@
                     </div>
 
                     <div class="tile is-parent">
-                        <div class="columns tile">
+                        <div class="columns is-multiline tile">
                             <div class="column tile is-parent is-6" v-for="junction in junctions" :key="junction.id" 
                                 v-if="(junction.room_id && junction.room_id == room.id) || !junction.room_id">
                                 <a class="box tile is-dark is-bold has-text-warning has-background" 
                                     @click="isJunctionModalActive = true; junctionSelected = junction">
-                                    <div class="is-box-background is-transparent">
-                                        <font-awesome-icon :icon="['fas', 'bolt']" size="4x" class="is-pulled-right" style="margin-top: -10px; margin-right: 15px"/>
-                                    </div>
-                                    <div class="columns">
-                                        <div class="column">
-                                            <div class="has-text-weight-semibold is-size-6">Empalme</div>
+                                    <div class="tile is-vertical">
+                                        <div class="tile">
+                                            <div class="is-box-background is-transparent">
+                                                <font-awesome-icon :icon="['fas', 'bolt']" size="4x" class="is-pulled-right" style="margin-top: -10px; margin-right: 15px"/>
+                                            </div>
+                                            <div class="columns">
+                                                <div class="column">
+                                                    <div class="has-text-weight-semibold is-size-6">Empalme</div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>   
+                                        <div class="tile pt-3">
+                                            <b-tooltip
+                                                label="Empalme propio de la sala."
+                                                size="is-small"
+                                                type="is-light"
+                                                position="is-right"
+                                                class=""
+                                                multilined>
+                                                <font-awesome-icon :icon="['fas', 'thumbtack']" />
+                                            </b-tooltip>
+                                        </div>
+                                    </div> 
                                 </a>
                             </div>
                         </div>

@@ -261,7 +261,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("div", { staticClass: "column has-text-centered" }, [
                 _c("abbr", { attrs: { title: "Estado / Disponibilidad" } }, [
-                  _vm._v("Estado / Disponibilidad")
+                  _vm._v("ESTADO / DISPONIBILIDAD")
                 ])
               ])
             ])

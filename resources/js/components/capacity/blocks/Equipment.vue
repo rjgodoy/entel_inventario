@@ -4,18 +4,18 @@
 
             <div class="tile">
                 <div class="tile is-parent">
-                    <div class="tile is-child is-size-5 has-text-weight-bold">{{ room.name }} - {{ room.old_name }}</div>
+                    <div class="tile is-child is-size-4 has-text-weight-bold">{{ room.name }} - {{ room.old_name }}</div>
                 </div>
                 <div class="tile is-parent">
                     <div class="tile is-child has-text-right">
                         <div class="has-text-weight-light is-size-7">Tipo Alimentación</div>
-                        <div v-if="!isEditMode">
-                            <div class="has-text-weight-bold is-size-5">{{ planeDelegationType && planeDelegationType.type }}</div>
-                        </div>
+                        <div class="tile is-vertical is-pulled-right">
+                            <div v-if="!isEditMode" class="tile">
+                                <div class="has-text-weight-bold is-size-4">{{ planeDelegationType && planeDelegationType.type }}</div>
+                            </div>
 
-                        <div v-if="isEditMode">
-                            <div class="is-pulled-right">
-                                <b-select placeholder="Select a name" v-model="planeDelegationType" @input="updatePlaneDelegationType(room)">
+                            <div v-if="isEditMode" class="tile is-pulled-right">
+                                <b-select v-model="planeDelegationType" @input="updatePlaneDelegationType(room); isEditMode = false">
                                     <option
                                         v-for="option in planeDelegationTypes"
                                         :value="option"
@@ -24,13 +24,14 @@
                                     </option>
                                 </b-select>
                             </div>
-                        </div>
-                        <div class="field">
-                            <a @click="isEditMode=!isEditMode">
-                                <b-tag v-if="canEditPlaneTypes" :type="isEditMode ? 'is-info' : 'is-link is-outlined'" size="is-small">
-                                    {{ isEditMode ? 'Guardar' : 'Editar' }}
-                                </b-tag>
-                            </a>
+
+                            <div class="tile is-pulled-right">
+                                <a @click="isEditMode=!isEditMode">
+                                    <b-tag v-if="canEditPlaneTypes" :type="isEditMode ? 'is-info' : 'is-link is-outlined'" size="is-small">
+                                        {{ isEditMode ? 'Cancelar' : 'Editar' }}
+                                    </b-tag>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -135,24 +136,24 @@
                                                                     <button class="button is-default is-small has-text-link">
                                                                         <font-awesome-icon :icon="['fas', 'info-circle']" />
                                                                     </button>
-                                                                    <template v-slot:content>
-                                                                        <div class="has-text-left" style="padding: 4">
-                                                                            <div class="is-size-7">Capacidad nominal: {{ nominalCapacity(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                                            <div class="is-size-7">Capacidad instalada: {{ installedCapacity(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                                            <div class="is-size-7">Potencia real de carga: {{ chargeRealPower(plane) | numeral('0.0') }} <span class="is-size-7">%</span></div>
-                                                                            <div class="is-size-7">Corriente recarga: {{ rechargeCurrent(plane) | numeral('0,0.0') }} <span class="is-size-7">A</span></div>
-                                                                            <div class="is-size-7">Potencia recarga baterías: {{ batteryRechargePower(plane) | numeral('0,0.0') }} <span class="is-size-7">%</span></div>
-                                                                            <div class="is-size-7">Corriente total carga + baterías: {{ totalCurrent(plane) | numeral('0,0.0') }} <span class="is-size-7">A</span></div>
-                                                                            <div class="is-size-7">Potencia total carga + baterías: {{ totalPower(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                                            <div class="is-size-7">Capacidad real: {{ realPlaneCapacity(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                                            <div class="is-size-7">Capacidad disponible: {{ availablePlaneCapacity(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                                            <div class="is-size-7">Porcentaje Uso: {{ usePercentPlane(plane) | numeral('0,0.0%') }} <span class="is-size-7"></span></div>
+<template v-slot:content>
+    <div class="is-size-7" style="padding: 4">
+        <div class="has-text-weight-normal has-text-left">Capacidad nominal: <span class="has-text-weight-bold has-text-right">{{ nominalCapacity(plane) | numeral('0,0.0') }} kW</span></div>
+        <div class="has-text-weight-normal has-text-left">Capacidad instalada: <span class="has-text-weight-bold has-text-right">{{ installedCapacity(plane) | numeral('0,0.0') }} kW</span></div>
+        <div class="has-text-weight-normal has-text-left">Potencia real de carga: <span class="has-text-weight-bold has-text-right"> {{ chargeRealPower(plane) | numeral('0.0') }} %</span></div>
+        <div class="has-text-weight-normal has-text-left">Corriente recarga: <span class="has-text-weight-bold has-text-right">{{ rechargeCurrent(plane) | numeral('0,0.0') }} A</span></div>
+        <div class="has-text-weight-normal has-text-left">Potencia recarga baterías: <span class="has-text-weight-bold has-text-right">{{ batteryRechargePower(plane) | numeral('0,0.0') }} %</span></div>
+        <div class="has-text-weight-normal has-text-left">Corriente total carga + baterías: <span class="has-text-weight-bold has-text-right">{{ totalCurrent(plane) | numeral('0,0.0') }} A</span></div>
+        <div class="has-text-weight-normal has-text-left">Potencia total carga + baterías: <span class="has-text-weight-bold has-text-right">{{ totalPower(plane) | numeral('0,0.0') }} kW</span></div>
+        <div class="has-text-weight-normal has-text-left">Capacidad real: <span class="has-text-weight-bold has-text-right">{{ realPlaneCapacity(plane) | numeral('0,0.0') }} kW</span></div>
+        <div class="has-text-weight-normal has-text-left">Capacidad disponible: <span class="has-text-weight-bold has-text-right">{{ availablePlaneCapacity(plane) | numeral('0,0.0') }} kW</span></div>
+        <div class="has-text-weight-normal has-text-left">Porcentaje Uso: <span class="has-text-weight-bold has-text-right">{{ usePercentPlane(plane) | numeral('0,0.0%') }} </span></div>
 
-                                                                            <div class="is-size-7">Capacidad baterias: {{ batteryTotalCapacityPlane(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                                            <div class="is-size-7">Utilizado baterias: {{ chargeRealPower(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                                            <div class="is-size-7">Disponible baterias: {{ availableBatteryCapacityPlane(plane) | numeral('0,0.0') }} <span class="is-size-7">kW</span></div>
-                                                                        </div>
-                                                                    </template>
+        <div class="has-text-weight-normal has-text-left">Capacidad baterias: <span class="has-text-weight-bold has-text-right">{{ batteryTotalCapacityPlane(plane) | numeral('0,0.0') }} kW</span></div>
+        <div class="has-text-weight-normal has-text-left">Utilizado baterias: <span class="has-text-weight-bold has-text-right">{{ chargeRealPower(plane) | numeral('0,0.0') }} kW</span></div>
+        <div class="has-text-weight-normal has-text-left">Disponible baterias: <span class="has-text-weight-bold has-text-right">{{ availableBatteryCapacityPlane(plane) | numeral('0,0.0') }} kW</span></div>
+    </div>
+</template>
                                                                 </b-tooltip>
                                                             </div>
                                                             <b-dropdown v-if="canEditPowerRectifiers" aria-role="list" position="is-bottom-left">
@@ -376,13 +377,13 @@
                                 </div>
                             </div>
 
-                            <div class="tile is-parent columns is-vcentered" v-if="!hasAirConditioners(room)">
+                            <!-- <div class="tile is-parent columns is-vcentered" v-if="!hasAirConditioners(room)">
                                 <div class="column">
                                     <div class="has-text-centered has-text-weight-light has-text-grey is-size-7">
                                         <div class="">NO TIENE EQUIPOS DE CLIMA</div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -712,7 +713,7 @@
             },
 
             getPlaneDelegationTypes() {
-                axios.get(`/api/planeDelegationTypes`).then(response => {
+                axios.get(`/api/planeDelegationTypes/${this.pop.id}`).then(response => {
                     this.planeDelegationTypes = response.data.planes
                 })
             },
@@ -891,10 +892,19 @@
                             case 2:
                             case 3:
                             case 4:
+                            case 8:
+                            case 9:
+                            case 10:
+                            case 11:
+                            case 12:
+                            case 13:
                                 availableRoomCapacity = this.availablePlaneCapacity(plane)
                                 break
                             case 5:
                             case 6:
+                            case 20:
+                            case 21:
+                            case 22:
                                 if(availableRoomCapacity > this.availablePlaneCapacity(plane)) {
                                     availableRoomCapacity = this.availablePlaneCapacity(plane)
                                 }
@@ -910,7 +920,7 @@
                                 }
                                 availableRoomCapacity = availableRoomCapacityA + availableRoomCapacityB
                                 break
-                            case 8:
+                            case 30:
                             default:
                                 break
                         }
@@ -965,10 +975,19 @@
                             case 2:
                             case 3:
                             case 4:
+                            case 8:
+                            case 9:
+                            case 10:
+                            case 11:
+                            case 12:
+                            case 13:
                                 available = this.availableBatteryCapacityPlane(plane)
                                 break
                             case 5:
                             case 6:
+                            case 20:
+                            case 21:
+                            case 22:
                                 if(available > this.availableBatteryCapacityPlane(plane)) {
                                     available = this.availableBatteryCapacityPlane(plane)
                                 }
@@ -983,7 +1002,7 @@
                                 }
                                 available = availableA + availableB
                                 break
-                            case 8:
+                            case 30:
                             default:
                                 break
                         }
@@ -994,19 +1013,28 @@
                         case 2:
                         case 3:
                         case 4:
+                        case 8:
+                        case 9:
+                        case 10:
+                        case 11:
+                        case 12:
+                        case 13:
                             available = available
                             break
                         case 5:
                         case 6:
                         case 7:
+                        case 20:
+                        case 21:
+                        case 22:
                             available = available * 2
                             break
-                        case 8:
+                        case 30:
                         default:
                             break
                     }
                 }
-                
+                available = available < 10000000 ? available : 0
                 this.availableBatteryCapacity = available
                 return available
             },
@@ -1020,9 +1048,12 @@
                 axios.put(`/api/roomPlaneDelegationType/${this.room.id}`, params)
                 .then(response => {
                     // console.log(response.data)
+                    this.$eventBus.$emit('junction-measurements-updated');
+                    // setTimeout(function() {
+                    //      this.$eventBus.$emit('new-junction');
+                    // }, 10);
                 })
-                // this.$parent.close()
-                // this.$eventBus.$emit('junction-measurements-updated');
+                
             },
 
             reload() {

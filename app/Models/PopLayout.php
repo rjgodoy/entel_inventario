@@ -24,6 +24,16 @@ class PopLayout extends Model
      *
      * @var array
      */
+    public function room() 
+    {
+        return $this->belongsTo(Room::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function file() 
     {
         return $this->belongsTo(File::class);

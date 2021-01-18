@@ -305,7 +305,8 @@ class JunctionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $junction = Junction::find($id);
+        $junction->delete();
     }
 
     /**

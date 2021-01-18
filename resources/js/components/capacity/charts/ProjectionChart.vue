@@ -19,9 +19,9 @@ export default {
                         borderColor: '#FA5252',
                         fill: false,
                         data: [],
-                        borderWidth: 2,
+                        borderWidth: 1,
                         pointStyle: 'rectRot',
-                        pointRadius: 3,
+                        pointRadius: 2,
                         // pointBorderColor: 'rgb(0, 0, 0)'
                     },
                     {
@@ -30,9 +30,9 @@ export default {
                         borderColor: '#BE4BDB',
                         fill: false,
                         data: [],
-                        borderWidth: 2,
+                        borderWidth: 1,
                         pointStyle: 'rectRot',
-                        pointRadius: 3,
+                        pointRadius: 2,
                         // pointBorderColor: 'rgb(0, 0, 0)'
                     },
                     {
@@ -41,9 +41,9 @@ export default {
                         borderColor: '#7950F2',
                         fill: false,
                         data: [],
-                        borderWidth: 2,
+                        borderWidth: 1,
                         pointStyle: 'rectRot',
-                        pointRadius: 3,
+                        pointRadius: 2,
                         // pointBorderColor: 'rgb(0, 0, 0)'
                     },
                     {
@@ -52,9 +52,9 @@ export default {
                         borderColor: '#228BE6',
                         fill: false,
                         data: [],
-                        borderWidth: 2,
+                        borderWidth: 1,
                         pointStyle: 'rectRot',
-                        pointRadius: 3,
+                        pointRadius: 2,
                         // pointBorderColor: 'rgb(0, 0, 0)'
                     },
                     {
@@ -63,9 +63,9 @@ export default {
                         borderColor: '#10B885',
                         fill: false,
                         data: [],
-                        borderWidth: 2,
+                        borderWidth: 1,
                         pointStyle: 'rectRot',
-                        pointRadius: 3,
+                        pointRadius: 2,
                         // pointBorderColor: 'rgb(0, 0, 0)'
                     },
                     {
@@ -74,9 +74,9 @@ export default {
                         borderColor: '#FAB006',
                         fill: false,
                         data: [],
-                        borderWidth: 2,
+                        borderWidth: 1,
                         pointStyle: 'rectRot',
-                        pointRadius: 3,
+                        pointRadius: 2,
                         // pointBorderColor: 'rgb(0, 0, 0)'
                     },
                     {
@@ -85,9 +85,9 @@ export default {
                         borderColor: '#FD7E14',
                         fill: false,
                         data: [],
-                        borderWidth: 2,
+                        borderWidth: 1,
                         pointStyle: 'rectRot',
-                        pointRadius: 3,
+                        pointRadius: 2,
                         // pointBorderColor: 'rgb(0, 0, 0)'
                     }
                 ],
@@ -95,7 +95,7 @@ export default {
             chartOptions: {
                 legend: {
                     onHover: function(event, legendItem) {
-                        log('onHover: ' + legendItem.text);
+                        // log('onHover: ' + legendItem.text);
                     },
                 },
                 responsive: true,
@@ -174,11 +174,11 @@ export default {
                         },
                         gridLines: {
                             drawBorder: false,
-                            color: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'orange', 'red']
+                            color: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto']
                         },
                         ticks: {
-                            // min: 0,
-                            // max: 100,
+                            min: 0,
+                            max: 100,
 
                             // forces step size to be 5 units
                             // stepSize: 5
@@ -213,42 +213,44 @@ export default {
 
     methods: {
         getChartData() {
-            axios.get(`/api/roomCapacities/${this.room.id}`)
-            .then(response => {
-                if (response.data) {
-                    this.projectionData = response.data
-                    let i = -1
+            if(this.room.id){
+                axios.get(`/api/roomCapacities/${this.room.id}`)
+                .then(response => {
+                    if (response.data) {
+                        this.projectionData = response.data
+                        let i = -1
 
-                    // All Data
-                    Object.keys(this.projectionData).forEach(element => {
-                        this.chartData.labels.push(this.projectionData[element].created_at)
-                        this.chartData.datasets[0].data.push(this.projectionData[element].junction_available * 100 / this.projectionData[element].junction_total)
-                        this.chartData.datasets[1].data.push(this.projectionData[element].generator_set_available * 100 / this.projectionData[element].generator_set_total)
-                        this.chartData.datasets[2].data.push(this.projectionData[element].power_rectifier_available * 100 / this.projectionData[element].power_rectifier_total)
-                        this.chartData.datasets[3].data.push(this.projectionData[element].battery_available * 100 / this.projectionData[element].battery_total)
-                        this.chartData.datasets[4].data.push(this.projectionData[element].climate_available * 100 / this.projectionData[element].climate_total)
-                        this.chartData.datasets[5].data.push(this.projectionData[element].distribution_available * 100 / this.projectionData[element].distribution_total)
-                        this.chartData.datasets[6].data.push(this.projectionData[element].surface_available * 100 / this.projectionData[element].surface_total)
-                        i++
-                    })
+                        // All Data
+                        Object.keys(this.projectionData).forEach(element => {
+                            this.chartData.labels.push(this.projectionData[element].created_at)
+                            this.chartData.datasets[0].data.push(this.projectionData[element].junction_available * 100 / this.projectionData[element].junction_total)
+                            this.chartData.datasets[1].data.push(this.projectionData[element].generator_set_available * 100 / this.projectionData[element].generator_set_total)
+                            this.chartData.datasets[2].data.push(this.projectionData[element].power_rectifier_available * 100 / this.projectionData[element].power_rectifier_total)
+                            this.chartData.datasets[3].data.push(this.projectionData[element].battery_available * 100 / this.projectionData[element].battery_total)
+                            this.chartData.datasets[4].data.push(this.projectionData[element].climate_available * 100 / this.projectionData[element].climate_total)
+                            this.chartData.datasets[5].data.push(this.projectionData[element].distribution_available * 100 / this.projectionData[element].distribution_total)
+                            this.chartData.datasets[6].data.push(this.projectionData[element].surface_available * 100 / this.projectionData[element].surface_total)
+                            i++
+                        })
 
-                    // TODAY Data
-                    if(this.projectionData[i]) {
-                        this.chartData.labels.push(Date.now())
-                        this.chartData.datasets[0].data.push(this.projectionData[i].junction_available * 100 / this.projectionData[i].junction_total)
-                        this.chartData.datasets[1].data.push(this.projectionData[i].generator_set_available * 100 / this.projectionData[i].generator_set_total)
-                        this.chartData.datasets[2].data.push(this.projectionData[i].power_rectifier_available * 100 / this.projectionData[i].power_rectifier_total)
-                        this.chartData.datasets[3].data.push(this.projectionData[i].battery_available * 100 / this.projectionData[i].battery_total)
-                        this.chartData.datasets[4].data.push(this.projectionData[i].climate_available * 100 / this.projectionData[i].climate_total)
-                        this.chartData.datasets[5].data.push(this.projectionData[i].distribution_available * 100 / this.projectionData[i].distribution_total)
-                        this.chartData.datasets[6].data.push(this.projectionData[i].surface_available * 100 / this.projectionData[i].surface_total)
+                        // TODAY Data
+                        if(this.projectionData[i]) {
+                            this.chartData.labels.push(Date.now())
+                            this.chartData.datasets[0].data.push(this.projectionData[i].junction_available * 100 / this.projectionData[i].junction_total)
+                            this.chartData.datasets[1].data.push(this.projectionData[i].generator_set_available * 100 / this.projectionData[i].generator_set_total)
+                            this.chartData.datasets[2].data.push(this.projectionData[i].power_rectifier_available * 100 / this.projectionData[i].power_rectifier_total)
+                            this.chartData.datasets[3].data.push(this.projectionData[i].battery_available * 100 / this.projectionData[i].battery_total)
+                            this.chartData.datasets[4].data.push(this.projectionData[i].climate_available * 100 / this.projectionData[i].climate_total)
+                            this.chartData.datasets[5].data.push(this.projectionData[i].distribution_available * 100 / this.projectionData[i].distribution_total)
+                            this.chartData.datasets[6].data.push(this.projectionData[i].surface_available * 100 / this.projectionData[i].surface_total)
+                        }
+
+                        // PROJECTION Data
+
                     }
-
-                    // PROJECTION Data
-
-                }
-                this.renderChart(this.chartData, this.chartOptions)
-            })
+                    this.renderChart(this.chartData, this.chartOptions)
+                })
+            }
         },
     }
 }  

@@ -124,6 +124,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalJunction: function ModalJunction() {
@@ -601,7 +616,7 @@ var render = function() {
                 _c("div", { staticClass: "tile is-parent" }, [
                   _c(
                     "div",
-                    { staticClass: "columns tile" },
+                    { staticClass: "columns is-multiline tile" },
                     _vm._l(_vm.junctions, function(junction) {
                       return (junction.room_id &&
                         junction.room_id == _vm.room.id) ||
@@ -628,27 +643,64 @@ var render = function() {
                                 [
                                   _c(
                                     "div",
-                                    {
-                                      staticClass:
-                                        "is-box-background is-transparent"
-                                    },
+                                    { staticClass: "tile is-vertical" },
                                     [
-                                      _c("font-awesome-icon", {
-                                        staticClass: "is-pulled-right",
-                                        staticStyle: {
-                                          "margin-top": "-10px",
-                                          "margin-right": "15px"
-                                        },
-                                        attrs: {
-                                          icon: ["fas", "bolt"],
-                                          size: "4x"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _vm._m(1, true)
+                                      _c("div", { staticClass: "tile" }, [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "is-box-background is-transparent"
+                                          },
+                                          [
+                                            _c("font-awesome-icon", {
+                                              staticClass: "is-pulled-right",
+                                              staticStyle: {
+                                                "margin-top": "-10px",
+                                                "margin-right": "15px"
+                                              },
+                                              attrs: {
+                                                icon: ["fas", "bolt"],
+                                                size: "4x"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _vm._m(1, true)
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "tile pt-3" },
+                                        [
+                                          _c(
+                                            "b-tooltip",
+                                            {
+                                              attrs: {
+                                                label:
+                                                  "Empalme propio de la sala.",
+                                                size: "is-small",
+                                                type: "is-light",
+                                                position: "is-right",
+                                                multilined: ""
+                                              }
+                                            },
+                                            [
+                                              _c("font-awesome-icon", {
+                                                attrs: {
+                                                  icon: ["fas", "thumbtack"]
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ]
+                                  )
                                 ]
                               )
                             ]

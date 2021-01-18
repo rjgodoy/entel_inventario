@@ -274,7 +274,8 @@ class PopController extends Controller
             'current_office',
             'current_autonomy',
             'current_battery_bank_autonomy',
-            'client_companies.access_type'
+            'client_companies.access_type',
+            'layout'
             )
             ->where('id', $id)
             ->first();

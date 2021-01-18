@@ -115,6 +115,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // import { library } from "@fortawesome/fontawesome-svg-core";
 // import { faCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
 // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
@@ -125,24 +137,44 @@ __webpack_require__.r(__webpack_exports__);
   props: ['user', 'room'],
   data: function data() {
     return {
+      totalJunctionsTotalCapacity: this.room.current_room_capacity ? this.room.current_room_capacity.junction_total : 0,
+      totalGeneratorSetTotalCapacity: this.room.current_room_capacity ? this.room.current_room_capacity.generator_set_total : 0,
+      totalPowerRectifiersCapacity: this.room.current_room_capacity ? this.room.current_room_capacity.power_rectifier_total : 0,
+      totalBatteriesCapacity: this.room.current_room_capacity ? this.room.current_room_capacity.battery_total : 0,
+      totalDistributionCapacity: this.room.current_room_capacity ? this.room.current_room_capacity.distribution_total : 0,
+      totalClmateCapacity: this.room.current_room_capacity ? this.room.current_room_capacity.climate_total : 0,
+      totaSurfaceCapacity: this.room.current_room_capacity ? this.room.current_room_capacity.surface_total : 0,
       junctionsTotalAvailableCapacity: this.room.current_room_capacity ? this.room.current_room_capacity.junction_available : 0,
       generatorSetTotalAvailableCapacity: this.room.current_room_capacity ? this.room.current_room_capacity.generator_set_available : 0,
       powerRectifiersAvailableCapacity: this.room.current_room_capacity ? this.room.current_room_capacity.power_rectifier_available : 0,
       batteriesAvailableCapacity: this.room.current_room_capacity ? this.room.current_room_capacity.battery_available : 0,
       distributionAvailableCapacity: this.room.current_room_capacity ? this.room.current_room_capacity.distribution_available : 0,
       totalAvailableClimateCapacity: this.room.current_room_capacity ? this.room.current_room_capacity.climate_available : 0,
-      totalAvailableSurface: this.room.current_room_capacity ? this.room.current_room_capacity.surface_available : 0
+      totalAvailableSurfaceCapacity: this.room.current_room_capacity ? this.room.current_room_capacity.surface_available : 0,
+      energy_treshold_danger: 0.1,
+      energy_treshold_warning: 0.2,
+      climate_treshold_danger: 0.1,
+      climate_treshold_warning: 0.2,
+      surface_treshold_danger: 0.1,
+      surface_treshold_warning: 0.2
     };
   },
   watch: {
     room: function room(val) {
+      this.totalJunctionsTotalCapacity = val.current_room_capacity ? val.current_room_capacity.junction_total : 0;
+      this.totalGeneratorSetTotalCapacity = val.current_room_capacity ? val.current_room_capacity.generator_set_total : 0;
+      this.totalPowerRectifiersCapacity = val.current_room_capacity ? val.current_room_capacity.power_rectifier_total : 0;
+      this.totalBatteriesCapacity = val.current_room_capacity ? val.current_room_capacity.battery_total : 0;
+      this.totalDistributionCapacity = val.current_room_capacity ? val.current_room_capacity.distribution_total : 0;
+      this.totalClmateCapacity = val.current_room_capacity ? val.current_room_capacity.climate_total : 0;
+      this.totaSurfaceCapacity = val.current_room_capacity ? val.current_room_capacity.surface_total : 0;
       this.junctionsTotalAvailableCapacity = val.current_room_capacity ? val.current_room_capacity.junction_available : 0;
       this.generatorSetTotalAvailableCapacity = val.current_room_capacity ? val.current_room_capacity.generator_set_available : 0;
       this.powerRectifiersAvailableCapacity = val.current_room_capacity ? val.current_room_capacity.power_rectifier_available : 0;
       this.batteriesAvailableCapacity = val.current_room_capacity ? val.current_room_capacity.battery_available : 0;
       this.distributionAvailableCapacity = val.current_room_capacity ? val.current_room_capacity.distribution_available : 0;
       this.totalAvailableClimateCapacity = val.current_room_capacity ? val.current_room_capacity.climate_available : 0;
-      this.totalAvailableSurface = val.current_room_capacity ? val.current_room_capacity.surface_available : 0;
+      this.totalAvailableSurfaceCapacity = val.current_room_capacity ? val.current_room_capacity.surface_available : 0;
     }
   },
   computed: {
@@ -163,6 +195,84 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return 0;
+    },
+    totalCapacityEnergyPercentage: function totalCapacityEnergyPercentage() {
+      var color = 'info';
+      var total_energy = Math.min(this.totalJunctionsTotalCapacity > 0 ? this.junctionsTotalAvailableCapacity / this.totalJunctionsTotalCapacity : null, this.totalGeneratorSetTotalCapacity > 0 ? this.generatorSetTotalAvailableCapacity / this.totalGeneratorSetTotalCapacity : null, this.totalPowerRectifiersCapacity > 0 ? this.powerRectifiersAvailableCapacity / this.totalPowerRectifiersCapacity : null, this.totalBatteriesCapacity > 0 ? this.batteriesAvailableCapacity / this.totalBatteriesCapacity : null, this.totalDistributionCapacity > 0 ? this.distributionAvailableCapacity / this.totalDistributionCapacity : null);
+
+      if (total_energy) {
+        if (total_energy <= this.energy_treshold_danger) {
+          color = 'info';
+        } else if (total_energy <= this.energy_treshold_warning) {
+          color = 'warning';
+        } else if (total_energy > this.energy_treshold_warning) {
+          color = 'success';
+        }
+      }
+
+      return {
+        'percentage': total_energy,
+        'color': color
+      };
+    },
+    totalCapacityClimatePercentage: function totalCapacityClimatePercentage() {
+      var color = 'info';
+      var total_climate = this.totalClmateCapacity > 0 ? this.totalAvailableClimateCapacity / this.totalClmateCapacity : 0;
+
+      if (total_climate) {
+        if (total_climate <= this.climate_treshold_danger) {
+          color = 'info';
+        } else if (total_climate <= this.climate_treshold_warning) {
+          color = 'warning';
+        } else if (total_climate > this.climate_treshold_warning) {
+          color = 'success';
+        }
+      }
+
+      return {
+        'percentage': total_climate,
+        'color': color
+      };
+    },
+    totalCapacitySurfacePercentage: function totalCapacitySurfacePercentage() {
+      var color = 'info';
+      var total_surface = this.totaSurfaceCapacity ? this.totalAvailableSurfaceCapacity / this.totaSurfaceCapacity : 0;
+
+      if (total_surface) {
+        if (total_surface <= this.surface_treshold_danger) {
+          color = 'info';
+        } else if (total_surface <= this.surface_treshold_warning) {
+          color = 'warning';
+        } else if (total_surface > this.surface_treshold_warning) {
+          color = 'success';
+        }
+      }
+
+      return {
+        'percentage': total_surface,
+        'color': color
+      };
+    },
+    totalCapacityPercentage: function totalCapacityPercentage() {
+      var color = 'info';
+      var total_energy = this.totalCapacityEnergyPercentage.percentage;
+      var total_climate = this.totalCapacityClimatePercentage.percentage;
+
+      if (total_energy && total_climate) {
+        if (total_energy <= this.energy_treshold_danger || total_climate <= this.climate_treshold_danger) {
+          color = 'info';
+        } else if (total_energy <= this.energy_treshold_warning || total_climate <= this.climate_treshold_warning) {
+          color = 'warning';
+        } else if (total_energy > this.energy_treshold_warning || total_energy > this.energy_treshold_warning) {
+          color = 'success';
+        }
+      }
+
+      return {
+        'energy_percentage': total_energy,
+        'climate_percentage': total_climate,
+        'color': color
+      };
     },
     canViewClimate: function canViewClimate() {
       return this.user.roles[0].slug == 'engineer-admin' || this.user.roles[0].slug == 'admin' || this.user.roles[0].slug == 'developer' || this.user.roles[0].slug == 'super-viewer' ? true : false;
@@ -212,46 +322,52 @@ var render = function() {
           _c("div", { staticStyle: { padding: "4px" } }, [
             _c(
               "div",
-              {},
+              { staticClass: "pb-1" },
               [
                 _c("font-awesome-icon", {
-                  class:
-                    _vm.totalAvailableEnergyCapacity <= 5 ||
-                    _vm.totalAvailableClimateCapacity <= 5
-                      ? "has-text-info"
-                      : (_vm.totalAvailableEnergyCapacity > 5 &&
-                          _vm.totalAvailableEnergyCapacity <= 10) ||
-                        (_vm.totalAvailableClimateCapacity > 5 &&
-                          _vm.totalAvailableClimateCapacity <= 10)
-                      ? "has-text-warning"
-                      : "has-text-success",
+                  class: "has-text-" + _vm.totalCapacityPercentage.color,
                   attrs: { icon: "circle", size: "2x" }
                 }),
                 _vm._v(" "),
-                _c(
-                  "b-tooltip",
-                  {
-                    attrs: {
-                      label: "Tener en cuenta capacidad de espacio.",
-                      size: "is-small",
-                      type: "is-light",
-                      position: "is-right",
-                      multilined: ""
-                    }
-                  },
-                  [
-                    _vm.totalAvailableSurface <= 10 && _vm.totalCapacity > 10
-                      ? _c("font-awesome-icon", {
+                _vm.totalCapacitySurfacePercentage.percentage <=
+                  _vm.surface_treshold_warning &&
+                _vm.totalCapacityPercentage.energy_percentage >
+                  _vm.energy_treshold_warning
+                  ? _c(
+                      "b-tooltip",
+                      {
+                        staticClass: "pl-1",
+                        attrs: {
+                          label: "Tener en cuenta capacidad de espacio.",
+                          size: "is-small",
+                          type: "is-light",
+                          position: "is-right",
+                          multilined: ""
+                        }
+                      },
+                      [
+                        _c("font-awesome-icon", {
                           staticClass: "has-text-warning",
                           attrs: { icon: "exclamation-triangle", size: "1x" }
                         })
-                      : _vm._e()
-                  ],
-                  1
-                )
+                      ],
+                      1
+                    )
+                  : _vm._e()
               ],
               1
             ),
+            _vm._v(" "),
+            _c("div", { staticClass: "is-size-7 has-text-weight-semibold" }, [
+              _vm._v(
+                _vm._s(
+                  _vm._f("numeral")(
+                    _vm.totalCapacityPercentage.energy_percentage,
+                    "0,0.0%"
+                  )
+                )
+              )
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "has-text-centered has-text-white" }, [
               _c("div", { staticClass: " is-size-5 has-text-weight-bold" }, [
@@ -310,20 +426,108 @@ var render = function() {
                 staticStyle: { position: "relative" }
               },
               [
-                _c(
-                  "div",
-                  {},
-                  [
-                    _c("font-awesome-icon", {
-                      class:
-                        _vm.totalAvailableEnergyCapacity <= 5
-                          ? "has-text-info"
-                          : _vm.totalAvailableEnergyCapacity > 5 &&
-                            _vm.totalAvailableEnergyCapacity <= 10
-                          ? "has-text-warning"
-                          : "has-text-success",
-                      attrs: { icon: "circle", size: "2x" }
-                    }),
+                _c("div", {}, [
+                  _c(
+                    "div",
+                    { staticClass: "pb-1" },
+                    [
+                      _c("font-awesome-icon", {
+                        class:
+                          "has-text-" + _vm.totalCapacityEnergyPercentage.color,
+                        attrs: { icon: "circle", size: "2x" }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "is-size-7 has-text-weight-semibold" },
+                    [
+                      _vm._v(
+                        _vm._s(
+                          _vm._f("numeral")(
+                            _vm.totalCapacityEnergyPercentage.percentage,
+                            "0,0.0%"
+                          )
+                        )
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "has-text-centered has-text-white" },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: " is-size-5 has-text-weight-bold" },
+                        [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                _vm._f("numeral")(
+                                  _vm.canViewClimate
+                                    ? _vm.totalAvailableEnergyCapacity
+                                    : Math.min(
+                                        _vm.totalAvailableEnergyCapacity,
+                                        _vm.totalAvailableClimateCapacity
+                                      ),
+                                  "0,0.0"
+                                )
+                              ) +
+                              "\n                                "
+                          ),
+                          _c(
+                            "span",
+                            { staticClass: "is-size-6 has-text-weight-light" },
+                            [_vm._v("kW")]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        { staticClass: "has-text-weight-light is-size-7" },
+                        [_vm._v("Disponibles")]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _vm.canViewClimate
+              ? _c("div", { staticClass: "level-item" }, [
+                  _c("div", {}, [
+                    _c(
+                      "div",
+                      { staticClass: "pb-1" },
+                      [
+                        _c("font-awesome-icon", {
+                          class:
+                            "has-text-" +
+                            _vm.totalCapacityClimatePercentage.color,
+                          attrs: { icon: "circle", size: "2x" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "is-size-7 has-text-weight-semibold" },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("numeral")(
+                              _vm.totalCapacityClimatePercentage.percentage,
+                              "0,0.0%"
+                            )
+                          )
+                        )
+                      ]
+                    ),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -334,19 +538,12 @@ var render = function() {
                           { staticClass: " is-size-5 has-text-weight-bold" },
                           [
                             _vm._v(
-                              "\n                                " +
-                                _vm._s(
-                                  _vm._f("numeral")(
-                                    _vm.canViewClimate
-                                      ? _vm.totalAvailableEnergyCapacity
-                                      : Math.min(
-                                          _vm.totalAvailableEnergyCapacity,
-                                          _vm.totalAvailableClimateCapacity
-                                        ),
-                                    "0,0.0"
-                                  )
-                                ) +
-                                "\n                                "
+                              _vm._s(
+                                _vm._f("numeral")(
+                                  _vm.totalAvailableClimateCapacity,
+                                  "0,0.0"
+                                )
+                              ) + "\n                            "
                             ),
                             _c(
                               "span",
@@ -365,113 +562,61 @@ var render = function() {
                         )
                       ]
                     )
-                  ],
-                  1
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _vm.canViewClimate
-              ? _c("div", { staticClass: "level-item" }, [
-                  _c(
-                    "div",
-                    {},
-                    [
-                      _c("font-awesome-icon", {
-                        class:
-                          _vm.totalAvailableClimateCapacity <= 5
-                            ? "has-text-info"
-                            : _vm.totalAvailableClimateCapacity > 5 &&
-                              _vm.totalAvailableClimateCapacity <= 10
-                            ? "has-text-warning"
-                            : "has-text-success",
-                        attrs: { icon: "circle", size: "2x" }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "has-text-centered has-text-white" },
-                        [
-                          _c(
-                            "div",
-                            { staticClass: " is-size-5 has-text-weight-bold" },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("numeral")(
-                                    _vm.totalAvailableClimateCapacity,
-                                    "0,0.0"
-                                  )
-                                ) + "\n                            "
-                              ),
-                              _c(
-                                "span",
-                                {
-                                  staticClass: "is-size-6 has-text-weight-light"
-                                },
-                                [_vm._v("kW")]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "p",
-                            { staticClass: "has-text-weight-light is-size-7" },
-                            [_vm._v("Disponibles")]
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
+                  ])
                 ])
               : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "level-item" }, [
-              _c(
-                "div",
-                {},
-                [
-                  _c("font-awesome-icon", {
-                    class:
-                      _vm.totalAvailableSurface <= 5
-                        ? "has-text-info"
-                        : _vm.totalAvailableSurface > 5 &&
-                          _vm.totalAvailableSurface <= 10
-                        ? "has-text-warning"
-                        : "has-text-success",
-                    attrs: { icon: "circle", size: "2x" }
-                  }),
-                  _vm._v(" "),
+              _c("div", {}, [
+                _c(
+                  "div",
+                  { staticClass: "pb-1" },
+                  [
+                    _c("font-awesome-icon", {
+                      class:
+                        "has-text-" + _vm.totalCapacitySurfacePercentage.color,
+                      attrs: { icon: "circle", size: "2x" }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "is-size-7 has-text-weight-semibold" },
+                  [
+                    _vm._v(
+                      _vm._s(
+                        _vm._f("numeral")(
+                          _vm.totalCapacitySurfacePercentage.percentage,
+                          "0,0.0%"
+                        )
+                      )
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "has-text-centered has-text-white" }, [
                   _c(
                     "div",
-                    { staticClass: "has-text-centered has-text-white" },
+                    { staticClass: " is-size-5 has-text-weight-bold" },
                     [
-                      _c(
-                        "div",
-                        { staticClass: " is-size-5 has-text-weight-bold" },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("numeral")(
-                                _vm.totalAvailableSurface,
-                                "0,0.0"
-                              )
-                            )
+                      _vm._v(
+                        _vm._s(
+                          _vm._f("numeral")(
+                            _vm.totalAvailableSurfaceCapacity,
+                            "0,0.0"
                           )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "p",
-                        { staticClass: "has-text-weight-light is-size-7" },
-                        [_vm._v("Disponibles")]
+                        )
                       )
                     ]
-                  )
-                ],
-                1
-              )
+                  ),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "has-text-weight-light is-size-7" }, [
+                    _vm._v("Disponibles")
+                  ])
+                ])
+              ])
             ])
           ])
         ]

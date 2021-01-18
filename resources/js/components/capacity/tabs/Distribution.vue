@@ -1,7 +1,7 @@
 <template>
     <section class="">
         <div class="">
-            <div class="has-text-weight-semibold has-text-dark is-size-3 has-text-left">Layout</div>
+            <div class="has-text-weight-semibold has-text-dark is-size-3 has-text-left">Distribución de la Sala</div>
         </div>
 
         <div class="tile is-ancestor" style="padding-top: 24px;">

@@ -179,7 +179,7 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
                     }
                     axios.post(`/api/batteryBankAutonomies`, params)
                     .then(response => {
-                        this.$eventBus.$emit('battery-autonomy')
+                        this.$eventBus.$emit('reload-data')
                         // console.log(response.data)
                     })
                 }

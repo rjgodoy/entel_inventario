@@ -190,17 +190,17 @@
                 if (!this.selectedCrm) {
                     axios.get(`/api/technologyData?core=${this.core}`)
                     .then((response) => {
-                        this.technologyData = response.data.data;
+                        this.technologyData = response.data.pop;
                     })
                 } else if (!this.selectedZona){
                     axios.get(`/api/technologyDataCrm?crm_id=${this.selectedCrm.id}&core=${this.core}`)
                     .then((response) => {
-                        this.technologyData = response.data.data;
+                        this.technologyData = response.data.pop;
                     })
                 } else {
                     axios.get(`/api/technologyDataZona?zona_id=${this.selectedZona.id}&core=${this.core}`)
                     .then((response) => {
-                        this.technologyData = response.data.data;
+                        this.technologyData = response.data.pop;
                     })
                 }
             },

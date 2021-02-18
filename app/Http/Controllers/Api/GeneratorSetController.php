@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use DB;
+use Carbon\Carbon;
 use App\Models\Log;
+use App\Models\Site;
 use App\Models\GeneratorSet;
 use App\Models\GeneratorTta;
 use Illuminate\Http\Request;
@@ -17,6 +19,7 @@ use App\Models\GeneratorSetCapacity;
 use Illuminate\Support\Facades\Cache;
 use App\Models\GeneratorSetMaintainer;
 use App\Models\GeneratorSetResponsable;
+use App\Models\GeneratorsPlatformBrand;
 use App\Models\GeneratorsPlatformValues;
 use App\Models\GeneratorsPlatformGenerator;
 use App\Http\Resources\GeneratorPlatformValuesCollection;
@@ -404,6 +407,10 @@ class GeneratorSetController extends Controller
         $text = $request->text;
         $crm_id = $request->crm_id;
         $zona_id = $request->zona_id;
+        $brand_id = $request->brand_id;
+        $core = $request->core;
+        $critic = $request->critic;
+        $vip = $request->vip;
 
         $data = GeneratorsPlatformGenerator::
         with(
@@ -415,19 +422,28 @@ class GeneratorSetController extends Controller
         //     ,'g_maintances.g_generator_records.g_maintance_status'
             ,'g_last_maintance.g_maintance_status'
         )
-        // ->where(function($p) use ($text) {
-        //     $p->where('name', 'LIKE', "%$text%")
-        //         ->orWhere('mobile_code', 'LIKE', "%$text%")
-        //         ->orWhereHas('g_model.g_brand', function($r) use($text) {
-        //             $r->where('name', 'LIKE', "%$text%");
-        //         });
-        // })
+        ->where(function($q) use($text) {
+            if($text) {
+                $q->where('name', 'LIKE', "%$text%")
+                ->orWhereHas('pop.sites', function($p) use($text) {
+                    if ($text) {
+                        $p->where('nem_site', 'LIKE', "%$text%")->orWhere('nombre', 'LIKE', "%$text%");
+                    }
+                });
+            }
+        })
+        
+        ->whereHas('g_model', function($p) use($brand_id) {
+            if ($brand_id) {
+                $p->where('brand_id', $brand_id);
+            }
+        })
         ->whereHas('g_zone', function($q) use ($crm_id, $zona_id) {
             $crm_id != 0 ? $q->where('sector_id', $crm_id) : $q->where('sector_id', '!=', $crm_id);
             $zona_id != 0 ? $q->where('id', $zona_id) : $q->where('id', '!=', $zona_id);
         })
         ->orderBy('zone_id', 'asc')
-        ->get();
+        ->paginate(15);
 
         return $data;     
     }
@@ -439,6 +455,21 @@ class GeneratorSetController extends Controller
      */
     public function generatorValues(Request $request, $generator_id)
     {
+        $startDate = $request->start_date; $endDate = $request->end_date;
+        if($request->start_date && $request->end_date) {
+            $startDate = new Carbon($request->start_date);
+            $endDate = new Carbon($request->end_date);
+            $startDate = $startDate->isoFormat('YYYY-MM-DD');
+            $endDate = $endDate->isoFormat('YYYY-MM-DD');
+            // $d = DateTime::createFromFormat('d-m-Y H:i:s', $startDate);
+            // if ($d === false) {
+            //     return("Incorrect date string");
+            // } else {
+            //     echo $d->getTimestamp();
+            // }
+            // return $startDate.' - '.$endDate;
+        }
+
         switch ($request->unit) {
             case 'day':
                 $order = 'YEAR(created), MONTH(created), DAY(created)';
@@ -454,14 +485,27 @@ class GeneratorSetController extends Controller
                 break;
         }
         
-        $data = GeneratorsPlatformValues::where('generator_id', $generator_id)
-            ->where('hourmeter_consumption', '!=', -1)
-            // ->where('hourmeter_consumption', '<', 75)
-            // ->selectRaw('*')
-            ->groupByRaw($order)
-            ->orderBy('created', 'desc')
-            // ->limit(8)
-            ->get();
+        if($request->start_date && $request->end_date) {
+            $data = GeneratorsPlatformValues::where('generator_id', $generator_id)
+                ->where('hourmeter_consumption', '!=', -1)
+                ->where('hourmeter_consumption', '<', 75)
+                ->where(function($q) use($startDate, $endDate) {
+                    if($startDate && $endDate) {
+                        $q->whereBetween('created', [date($startDate), date($endDate)]);
+                    }
+                })
+                ->groupByRaw($order)
+                ->orderBy('created', 'desc')
+                ->get();
+        } else {
+            $data = GeneratorsPlatformValues::where('generator_id', $generator_id)
+                ->where('hourmeter_consumption', '!=', -1)
+                ->where('hourmeter_consumption', '<', 75)
+                ->groupByRaw($order)
+                ->orderBy('created', 'desc')
+                ->limit(7)
+                ->get();
+        }
 
         return $data;
     }
@@ -493,5 +537,37 @@ class GeneratorSetController extends Controller
         return $latest;
         
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function generatorPlatformBrands()
+    {
+        $data = GeneratorsPlatformBrand::all();
+        return $data;     
+    }
+
+    // /**
+    //  * Display a listing of the resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function generatorPlatformDataCapacity(Request $request)
+    // {
+    //     $pop_id = $request->pop_id;
+    //     $latest = GeneratorsPlatformValues::with('g_generator')
+    //         ->whereHas('g_generator', function($q) use($pop_id) {
+    //             $q->where('pop_id', $pop_id);
+    //         })
+    //         ->latest('created')
+    //         ->first();
+
+    //     return $latest;
+        
+    // }
+
+    
 
 }

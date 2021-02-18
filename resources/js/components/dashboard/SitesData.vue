@@ -140,7 +140,7 @@
                 if (!this.selectedCrm) {                             
                     axios.get(`/api/sitesData?core=${this.core}`)
                     .then((response) => {
-                        this.sitesData = response.data.data;
+                        this.sitesData = response.data.pop;
                         // this.$eventBus.$emit('getSitesData', this.sitesData)
                     }).finally(() => {
                         // this.$eventBus.$emit('getSitesData', this.sitesData)
@@ -150,7 +150,7 @@
                 else if (!this.selectedZona){
                     axios.get(`/api/sitesDataCrm?crm_id=${this.selectedCrm.id}&core=${this.core}`)
                     .then((response) => {
-                        this.sitesData = response.data.data;
+                        this.sitesData = response.data.pop;
                         // this.$eventBus.$emit('getSitesData', this.sitesData)
                     }).finally(() => {
                         // this.$eventBus.$emit('getSitesData', this.sitesData)
@@ -160,7 +160,7 @@
                 else {
                     axios.get(`/api/sitesDataZona?zona_id=${this.selectedZona.id}&core=${this.core}`)
                     .then((response) => {
-                        this.sitesData = response.data.data;
+                        this.sitesData = response.data.pop;
                         // this.$eventBus.$emit('getSitesData', this.sitesData)
                     }).finally(() => {
                         // this.$eventBus.$emit('getSitesData', this.sitesData)

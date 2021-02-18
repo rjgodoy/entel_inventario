@@ -323,7 +323,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/capacity/capacity */ "chunks/capacity/capacity").then(__webpack_require__.bind(null, /*! ./tabs/Capacity */ "./resources/js/components/capacity/tabs/Capacity.vue"));
     },
     Projection: function Projection() {
-      return Promise.all(/*! import() | chunks/capacity/projection */[__webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators~chunks/maps/ecoMap~chunks/maps~439c6c37"), __webpack_require__.e("chunks/capacity/projection")]).then(__webpack_require__.bind(null, /*! ./tabs/Projection */ "./resources/js/components/capacity/tabs/Projection.vue"));
+      return Promise.all(/*! import() | chunks/capacity/projection */[__webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators/generatorSlot~chunks/maps/ecoM~7428b83f"), __webpack_require__.e("chunks/capacity/projection")]).then(__webpack_require__.bind(null, /*! ./tabs/Projection */ "./resources/js/components/capacity/tabs/Projection.vue"));
     },
     // Requests: () => import(/* webpackChunkName: "chunks/capacity/requests"*/'./tabs/Requests'),
     Distribution: function Distribution() {
@@ -405,11 +405,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.$eventBus.$on('new-battery-bank', this.getRoomData);
     this.$eventBus.$on('new-generator-set', this.getRoomData);
     this.$eventBus.$on('new-room', this.getRoomData);
-    this.$eventBus.$on('air-conditioner-capacity', this.getRoomData);
     this.$eventBus.$on('new-solar-panel', this.getRoomData);
     this.$eventBus.$on('junction-measurements-updated', this.getRoomData);
     this.$eventBus.$on('generator-set-capacities-updated', this.getRoomData);
-    this.$eventBus.$on('battery-autonomy', this.getRoomData);
+    this.$eventBus.$on('reload-data', this.getRoomData);
     this.$eventBus.$on('battery-bank-deleted', this.getRoomData);
     this.$eventBus.$on('generator-set-deleted', this.getRoomData);
   },
@@ -550,6 +549,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     totalUsedJunctionsCapacity: function totalUsedJunctionsCapacity() {
       var _this2 = this;
 
+      var roomJunction = 0;
+      var batteryRechargeCapacity = 0;
       var punctualConsumption = 0;
 
       if (this.junctions.length) {
@@ -558,11 +559,21 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
             if (_this2.junctions[element].latest_measurement) {
               punctualConsumption += _this2.junctions[element].latest_measurement.punctual_consumption;
             }
+
+            if (!roomJunction) {
+              roomJunction = _this2.junctions[element].room_id && _this2.junctions[element].room_id == _this2.room.id ? 1 : 0;
+            }
+          }
+
+          if (roomJunction) {
+            batteryRechargeCapacity = 0;
+          } else {
+            batteryRechargeCapacity = _this2.batteriesRecharge;
           }
         });
       }
 
-      return this.withoutBatteriesCapacity + this.batteriesRecharge + punctualConsumption;
+      return this.withoutBatteriesCapacity + batteryRechargeCapacity + punctualConsumption;
     },
     withoutBatteriesCapacity: function withoutBatteriesCapacity() {
       var _this3 = this;
@@ -943,6 +954,18 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
           });
           break;
 
+        case 9:
+          Object.keys(this.planeTypes).forEach(function (item) {
+            type = _this15.planeTypes[item].id == 9 && type == 'Sin Información' ? _this15.planeTypes[item].type : type;
+          });
+          break;
+
+        case 10:
+          Object.keys(this.planeTypes).forEach(function (item) {
+            type = _this15.planeTypes[item].id == 10 && type == 'Sin Información' ? _this15.planeTypes[item].type : type;
+          });
+          break;
+
         default:
           break;
       }
@@ -1075,8 +1098,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       var newCapacities = [Math.round(this.pop.current_battery_bank_autonomy && this.pop.current_battery_bank_autonomy.theoretical, 3), Math.round(this.totalJunctionsCapacity, 3), Math.round(this.totalUsedJunctionsCapacity, 3), Math.round(this.totalAvailableJunctionsCapacity, 3), Math.round(this.totalGeneratorSetsCapacity, 3), Math.round(this.totalGeneratorSetsUsedCapacity, 3), Math.round(this.totalAvailableGeneratorSetsCapacity, 3), Math.round(this.totalCapacityRoom, 3), Math.round(this.usedCapacityRoom, 3), Math.round(this.availableCapacityRoom(this.room), 3), Math.round(this.totalCapacityBatteries(this.room), 3), Math.round(this.usedCapacityBatteries(this.room), 3), Math.round(this.availableCapacityBatteries(this.room), 3), Math.round(this.totalClimateCapacity, 3), Math.round(this.usedClimateCapacity, 3), Math.round(this.totalAvailableClimateCapacity, 3), Math.round(this.totalDistributionCapacity, 3), Math.round(this.usedDistributionCapacity, 3), Math.round(this.availableDistributionCapacity, 3), Math.round(this.totalSurface, 3), Math.round(this.usedSurface, 3), Math.round(this.availableSurface, 3)];
       var sumCurrentCapacities = currentCapacities.length ? currentCapacities.reduce(reducer) : 0;
-      var sumNewCapacities = newCapacities.reduce(reducer);
-      console.log(this.room.current_room_capacity);
+      var sumNewCapacities = newCapacities.reduce(reducer); // console.log(this.room.current_room_capacity)
 
       if (!this.room.current_room_capacity || this.room.current_room_capacity && sumCurrentCapacities != sumNewCapacities) {
         return true;
@@ -1299,11 +1321,20 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
             case 2:
             case 3:
             case 4:
+            case 8:
+            case 9:
+            case 10:
+            case 11:
+            case 12:
+            case 13:
               availableRoomCapacity = _this23.availablePlaneCapacity(plane);
               break;
 
             case 5:
             case 6:
+            case 20:
+            case 21:
+            case 22:
               if (availableRoomCapacity > _this23.availablePlaneCapacity(plane)) {
                 availableRoomCapacity = _this23.availablePlaneCapacity(plane);
               }
@@ -1322,7 +1353,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
               availableRoomCapacity = availableRoomCapacityA + availableRoomCapacityB;
               break;
 
-            case 8:
+            case 30:
             default:
               break;
           }
@@ -1582,9 +1613,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.$eventBus.$off('new-battery-bank');
     this.$eventBus.$off('new-generator-set');
     this.$eventBus.$off('new-room');
-    this.$eventBus.$off('air-conditioner-capacity');
     this.$eventBus.$off('new-solar-panel');
-    this.$eventBus.$off('battery-autonomy');
+    this.$eventBus.$off('reload-data');
     this.$eventBus.$off('battery-bank-deleted');
     this.$eventBus.$off('generator-set-deleted');
   }

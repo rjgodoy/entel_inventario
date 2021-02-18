@@ -2,40 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\CellsImport;
-use App\Imports\JunctionsImport;
-use App\Models\AirConditioner;
-use App\Models\Autonomy;
+use Carbon\Carbon;
 use App\Models\Crm;
-use App\Models\File;
-use App\Models\Folder;
-use App\Models\GeneratorGroup;
-use App\Models\GeneratorMotor;
-use App\Models\GeneratorSet;
-use App\Models\GeneratorSetMaintainer;
-use App\Models\GeneratorTank;
-use App\Models\GeneratorTta;
-use App\Models\Junction;
-use App\Models\Menu;
-use App\Models\Plane;
 use App\Models\Pop;
-use App\Models\PowerRectifier;
-use App\Models\PsgTp;
+use App\Models\File;
+use App\Models\Menu;
 use App\Models\Role;
 use App\Models\Room;
 use App\Models\Site;
-use App\Models\Technology;
 use App\Models\User;
-use Carbon\Carbon;
+use App\Models\Plane;
+use App\Models\PsgTp;
+use App\Models\Folder;
+use App\Models\Autonomy;
+use App\Models\Junction;
+use App\Models\Technology;
+use Illuminate\Support\Str;
+use App\Imports\CellsImport;
+use App\Models\GeneratorSet;
+use App\Models\GeneratorTta;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
+use App\Models\GeneratorTank;
+use App\Models\AirConditioner;
+use App\Models\GeneratorGroup;
+use App\Models\GeneratorMotor;
+use App\Models\PowerRectifier;
+use App\Imports\JunctionsImport;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Http;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {

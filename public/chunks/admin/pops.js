@@ -769,1063 +769,1055 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.user.roles[0].id == 1 || _vm.user.roles[0].id == 2
-    ? _c("div", [
-        _c(
-          "section",
-          {
-            staticClass: "section tile is-ancestor",
-            staticStyle: { "padding-bottom": "0px" }
-          },
-          [
-            _c("div", { staticClass: "columns tile is-parent" }, [
-              _c("div", { staticClass: "tile is-parent column" }, [
-                _c("div", { staticClass: "tile is-child box" }, [
+  return _c("div", [
+    _c(
+      "section",
+      {
+        staticClass: "section tile is-ancestor",
+        staticStyle: { "padding-bottom": "0px" }
+      },
+      [
+        _c("div", { staticClass: "columns tile is-parent" }, [
+          _c("div", { staticClass: "tile is-parent column" }, [
+            _c("div", { staticClass: "tile is-child box" }, [
+              _c(
+                "div",
+                { staticClass: "field is-size-5 has-text-weight-semibold" },
+                [_vm._v("Datos del PoP")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "block has-text-centered",
+                  staticStyle: { "padding-top": "12px" }
+                },
+                [
                   _c(
-                    "div",
-                    { staticClass: "field is-size-5 has-text-weight-semibold" },
-                    [_vm._v("Datos del PoP")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
+                    "button",
                     {
-                      staticClass: "block has-text-centered",
-                      staticStyle: { "padding-top": "12px" }
+                      staticClass: "button",
+                      class: _vm.newPop && "is-link",
+                      on: {
+                        click: function($event) {
+                          return _vm.isNewPop(true)
+                        }
+                      }
                     },
-                    [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "button",
-                          class: _vm.newPop && "is-link",
-                          on: {
-                            click: function($event) {
-                              return _vm.isNewPop(true)
-                            }
-                          }
-                        },
-                        [_vm._v("Nuevo PoP")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "button",
-                          class: !_vm.newPop && "is-link",
-                          on: {
-                            click: function($event) {
-                              return _vm.isNewPop(false)
-                            }
-                          }
-                        },
-                        [_vm._v("PoP Existente")]
-                      )
-                    ]
+                    [_vm._v("Nuevo PoP")]
                   ),
                   _vm._v(" "),
-                  !_vm.newPop
-                    ? _c("div", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "button",
+                      class: !_vm.newPop && "is-link",
+                      on: {
+                        click: function($event) {
+                          return _vm.isNewPop(false)
+                        }
+                      }
+                    },
+                    [_vm._v("PoP Existente")]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              !_vm.newPop
+                ? _c("div", [
+                    _c(
+                      "div",
+                      { staticClass: "block has-text-centered" },
+                      [
                         _c(
-                          "div",
-                          { staticClass: "block has-text-centered" },
-                          [
-                            _c(
-                              "b-autocomplete",
-                              {
-                                attrs: {
-                                  autofocus: "",
-                                  data: _vm.pops,
-                                  "icon-pack": "fas",
-                                  icon: "search",
-                                  placeholder:
-                                    "Buscar el PoP por nemónico, nombre o direccion del sitio...",
-                                  "keep-first": true,
-                                  "open-on-focus": _vm.text ? true : true,
-                                  loading: _vm.isFetching,
-                                  "check-infinite-scroll": true,
-                                  "custom-formatter": _vm.searchFormat,
-                                  clearable: ""
-                                },
-                                on: {
-                                  typing: _vm.getAsyncData,
-                                  select: function(option) {
-                                    return (_vm.selectedPop = option)
-                                  },
-                                  "infinite-scroll": _vm.getMoreAsyncData
-                                },
-                                scopedSlots: _vm._u(
-                                  [
-                                    {
-                                      key: "default",
-                                      fn: function(props) {
-                                        return [
+                          "b-autocomplete",
+                          {
+                            attrs: {
+                              autofocus: "",
+                              data: _vm.pops,
+                              "icon-pack": "fas",
+                              icon: "search",
+                              placeholder:
+                                "Buscar el PoP por nemónico, nombre o direccion del sitio...",
+                              "keep-first": true,
+                              "open-on-focus": _vm.text ? true : true,
+                              loading: _vm.isFetching,
+                              "check-infinite-scroll": true,
+                              "custom-formatter": _vm.searchFormat,
+                              clearable: ""
+                            },
+                            on: {
+                              typing: _vm.getAsyncData,
+                              select: function(option) {
+                                return (_vm.selectedPop = option)
+                              },
+                              "infinite-scroll": _vm.getMoreAsyncData
+                            },
+                            scopedSlots: _vm._u(
+                              [
+                                {
+                                  key: "default",
+                                  fn: function(props) {
+                                    return [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "field",
+                                          staticStyle: { padding: "10px" }
+                                        },
+                                        [
                                           _c(
                                             "div",
                                             {
-                                              staticClass: "field",
-                                              staticStyle: { padding: "10px" }
+                                              staticClass:
+                                                "is-size-6 has-text-weight-semibold"
                                             },
                                             [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "is-size-6 has-text-weight-semibold"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                            " +
-                                                      _vm._s(
-                                                        props.option
-                                                          ? props.option.nombre
-                                                          : ""
-                                                      ) +
-                                                      "\n                                        "
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "is-size-7 has-text-weight-normal"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                            " +
-                                                      _vm._s(
-                                                        props.option
-                                                          ? props.option.comuna
-                                                              .nombre_comuna
-                                                          : ""
-                                                      ) +
-                                                      "\n                                        "
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "is-size-7 has-text-weight-normal"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                            " +
-                                                      _vm._s(
-                                                        props.option
-                                                          ? "Zona " +
-                                                              props.option
-                                                                .comuna.zona
-                                                                .nombre_zona
-                                                          : ""
-                                                      ) +
-                                                      " - " +
-                                                      _vm._s(
-                                                        props.option
-                                                          ? "CRM " +
-                                                              props.option
-                                                                .comuna.zona.crm
-                                                                .nombre_crm
-                                                          : ""
-                                                      ) +
-                                                      "\n                                        "
-                                                  )
-                                                ]
+                                              _vm._v(
+                                                "\n                                            " +
+                                                  _vm._s(
+                                                    props.option
+                                                      ? props.option.nombre
+                                                      : ""
+                                                  ) +
+                                                  "\n                                        "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "is-size-7 has-text-weight-normal"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            " +
+                                                  _vm._s(
+                                                    props.option
+                                                      ? props.option.comuna
+                                                          .nombre_comuna
+                                                      : ""
+                                                  ) +
+                                                  "\n                                        "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "is-size-7 has-text-weight-normal"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            " +
+                                                  _vm._s(
+                                                    props.option
+                                                      ? "Zona " +
+                                                          props.option.comuna
+                                                            .zona.nombre_zona
+                                                      : ""
+                                                  ) +
+                                                  " - " +
+                                                  _vm._s(
+                                                    props.option
+                                                      ? "CRM " +
+                                                          props.option.comuna
+                                                            .zona.crm.nombre_crm
+                                                      : ""
+                                                  ) +
+                                                  "\n                                        "
                                               )
                                             ]
                                           )
                                         ]
-                                      }
+                                      )
+                                    ]
+                                  }
+                                }
+                              ],
+                              null,
+                              false,
+                              4193998065
+                            )
+                          },
+                          [
+                            _vm._v(" "),
+                            _c("template", { slot: "footer" }, [
+                              _c(
+                                "span",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: _vm.page > _vm.totalPages,
+                                      expression: "page > totalPages"
                                     }
                                   ],
-                                  null,
-                                  false,
-                                  4193998065
-                                )
-                              },
-                              [
-                                _vm._v(" "),
-                                _c("template", { slot: "footer" }, [
-                                  _c(
-                                    "span",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "show",
-                                          rawName: "v-show",
-                                          value: _vm.page > _vm.totalPages,
-                                          expression: "page > totalPages"
-                                        }
-                                      ],
-                                      staticClass: "has-text-grey"
-                                    },
-                                    [_vm._v(" No hay mas PoPs que mostrar. ")]
-                                  )
-                                ])
-                              ],
-                              2
-                            )
+                                  staticClass: "has-text-grey"
+                                },
+                                [_vm._v(" No hay mas PoPs que mostrar. ")]
+                              )
+                            ])
                           ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _vm.selectedPop
-                          ? _c("div", { staticClass: "box" }, [
+                          2
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm.selectedPop
+                      ? _c("div", { staticClass: "box" }, [
+                          _c(
+                            "div",
+                            { staticClass: "field  has-text-centered" },
+                            [
                               _c(
                                 "div",
-                                { staticClass: "field  has-text-centered" },
+                                {
+                                  staticClass:
+                                    "is-size-6 has-text-weight-semibold"
+                                },
                                 [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "is-size-6 has-text-weight-semibold"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                    " +
-                                          _vm._s(
-                                            _vm.selectedPop
-                                              ? _vm.selectedPop.nombre
-                                              : ""
-                                          ) +
-                                          "\n                                "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "is-size-7 has-text-weight-normal"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                    " +
-                                          _vm._s(
-                                            _vm.selectedPop
-                                              ? _vm.selectedPop.comuna
-                                                  .nombre_comuna
-                                              : ""
-                                          ) +
-                                          "\n                                "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "is-size-7 has-text-weight-normal"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                    " +
-                                          _vm._s(
-                                            _vm.selectedPop
-                                              ? "Zona " +
-                                                  _vm.selectedPop.comuna.zona
-                                                    .nombre_zona
-                                              : ""
-                                          ) +
-                                          " - " +
-                                          _vm._s(
-                                            _vm.selectedPop
-                                              ? "CRM " +
-                                                  _vm.selectedPop.comuna.zona
-                                                    .crm.nombre_crm
-                                              : ""
-                                          ) +
-                                          "\n                                "
-                                      )
-                                    ]
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(
+                                        _vm.selectedPop
+                                          ? _vm.selectedPop.nombre
+                                          : ""
+                                      ) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "is-size-7 has-text-weight-normal"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(
+                                        _vm.selectedPop
+                                          ? _vm.selectedPop.comuna.nombre_comuna
+                                          : ""
+                                      ) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "is-size-7 has-text-weight-normal"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(
+                                        _vm.selectedPop
+                                          ? "Zona " +
+                                              _vm.selectedPop.comuna.zona
+                                                .nombre_zona
+                                          : ""
+                                      ) +
+                                      " - " +
+                                      _vm._s(
+                                        _vm.selectedPop
+                                          ? "CRM " +
+                                              _vm.selectedPop.comuna.zona.crm
+                                                .nombre_crm
+                                          : ""
+                                      ) +
+                                      "\n                                "
                                   )
                                 ]
                               )
-                            ])
-                          : _vm._e()
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.newPop
-                    ? _c(
-                        "div",
+                            ]
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.newPop
+                ? _c(
+                    "div",
+                    [
+                      _c(
+                        "b-field",
+                        [
+                          _c("b-input", {
+                            attrs: {
+                              placeholder: "Nombre",
+                              type: "text",
+                              required: ""
+                            },
+                            model: {
+                              value: _vm.nombre,
+                              callback: function($$v) {
+                                _vm.nombre = $$v
+                              },
+                              expression: "nombre"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-field",
+                        [
+                          _c("b-input", {
+                            attrs: {
+                              placeholder: "Dirección",
+                              type: "text",
+                              required: ""
+                            },
+                            model: {
+                              value: _vm.direccion,
+                              callback: function($$v) {
+                                _vm.direccion = $$v
+                              },
+                              expression: "direccion"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-field",
                         [
                           _c(
-                            "b-field",
-                            [
-                              _c("b-input", {
-                                attrs: {
-                                  placeholder: "Nombre",
-                                  type: "text",
-                                  required: ""
-                                },
-                                model: {
-                                  value: _vm.nombre,
-                                  callback: function($$v) {
-                                    _vm.nombre = $$v
-                                  },
-                                  expression: "nombre"
+                            "b-autocomplete",
+                            {
+                              attrs: {
+                                placeholder: "Comuna",
+                                "keep-first": false,
+                                "open-on-focus": false,
+                                data: _vm.filteredComunasArray,
+                                "use-html5-validation": true,
+                                field: "nombre_comuna",
+                                clearable: "",
+                                required: ""
+                              },
+                              on: {
+                                select: function(option) {
+                                  return (_vm.selectedComuna = option)
                                 }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-field",
-                            [
-                              _c("b-input", {
-                                attrs: {
-                                  placeholder: "Dirección",
-                                  type: "text",
-                                  required: ""
+                              },
+                              model: {
+                                value: _vm.name,
+                                callback: function($$v) {
+                                  _vm.name = $$v
                                 },
-                                model: {
-                                  value: _vm.direccion,
-                                  callback: function($$v) {
-                                    _vm.direccion = $$v
-                                  },
-                                  expression: "direccion"
+                                expression: "name"
+                              }
+                            },
+                            [
+                              _c("template", { slot: "empty" }, [
+                                _vm._v("No results found")
+                              ])
+                            ],
+                            2
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-field",
+                        [
+                          _c("b-input", {
+                            attrs: {
+                              placeholder: "Latitud",
+                              type: "text",
+                              required: ""
+                            },
+                            model: {
+                              value: _vm.lat,
+                              callback: function($$v) {
+                                _vm.lat = $$v
+                              },
+                              expression: "lat"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-field",
+                        [
+                          _c("b-input", {
+                            attrs: {
+                              placeholder: "Longitude",
+                              type: "text",
+                              required: ""
+                            },
+                            model: {
+                              value: _vm.lon,
+                              callback: function($$v) {
+                                _vm.lon = $$v
+                              },
+                              expression: "lon"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-field",
+                        [
+                          _c(
+                            "b-autocomplete",
+                            {
+                              attrs: {
+                                placeholder: "Tipo PoP",
+                                "keep-first": "",
+                                "open-on-focus": "",
+                                data: _vm.filteredPopTypesArray,
+                                "use-html5-validation": false,
+                                field: "type",
+                                required: ""
+                              },
+                              on: {
+                                select: function(option) {
+                                  return (_vm.selectedPopType = option)
                                 }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-field",
-                            [
-                              _c(
-                                "b-autocomplete",
-                                {
-                                  attrs: {
-                                    placeholder: "Comuna",
-                                    "keep-first": false,
-                                    "open-on-focus": false,
-                                    data: _vm.filteredComunasArray,
-                                    "use-html5-validation": true,
-                                    field: "nombre_comuna",
-                                    clearable: "",
-                                    required: ""
-                                  },
-                                  on: {
-                                    select: function(option) {
-                                      return (_vm.selectedComuna = option)
-                                    }
-                                  },
-                                  model: {
-                                    value: _vm.name,
-                                    callback: function($$v) {
-                                      _vm.name = $$v
-                                    },
-                                    expression: "name"
-                                  }
+                              },
+                              model: {
+                                value: _vm.popType,
+                                callback: function($$v) {
+                                  _vm.popType = $$v
                                 },
-                                [
-                                  _c("template", { slot: "empty" }, [
-                                    _vm._v("No results found")
-                                  ])
-                                ],
-                                2
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-field",
+                                expression: "popType"
+                              }
+                            },
                             [
-                              _c("b-input", {
-                                attrs: {
-                                  placeholder: "Latitud",
-                                  type: "text",
-                                  required: ""
-                                },
-                                model: {
-                                  value: _vm.lat,
-                                  callback: function($$v) {
-                                    _vm.lat = $$v
-                                  },
-                                  expression: "lat"
+                              _c("template", { slot: "empty" }, [
+                                _vm._v("No results found")
+                              ])
+                            ],
+                            2
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-field",
+                        [
+                          _c(
+                            "b-autocomplete",
+                            {
+                              attrs: {
+                                placeholder: "Tipo Red",
+                                "keep-first": "",
+                                "open-on-focus": "",
+                                data: _vm.filteredNetTypesArray,
+                                "use-html5-validation": false,
+                                field: "type",
+                                required: ""
+                              },
+                              on: {
+                                select: function(option) {
+                                  return (_vm.selectedNetType = option)
                                 }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-field",
-                            [
-                              _c("b-input", {
-                                attrs: {
-                                  placeholder: "Longitude",
-                                  type: "text",
-                                  required: ""
+                              },
+                              model: {
+                                value: _vm.netType,
+                                callback: function($$v) {
+                                  _vm.netType = $$v
                                 },
-                                model: {
-                                  value: _vm.lon,
-                                  callback: function($$v) {
-                                    _vm.lon = $$v
-                                  },
-                                  expression: "lon"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-field",
+                                expression: "netType"
+                              }
+                            },
                             [
-                              _c(
-                                "b-autocomplete",
-                                {
-                                  attrs: {
-                                    placeholder: "Tipo PoP",
-                                    "keep-first": "",
-                                    "open-on-focus": "",
-                                    data: _vm.filteredPopTypesArray,
-                                    "use-html5-validation": false,
-                                    field: "type",
-                                    required: ""
-                                  },
-                                  on: {
-                                    select: function(option) {
-                                      return (_vm.selectedPopType = option)
-                                    }
-                                  },
-                                  model: {
-                                    value: _vm.popType,
-                                    callback: function($$v) {
-                                      _vm.popType = $$v
-                                    },
-                                    expression: "popType"
-                                  }
-                                },
-                                [
-                                  _c("template", { slot: "empty" }, [
-                                    _vm._v("No results found")
-                                  ])
-                                ],
-                                2
-                              )
+                              _c("template", { slot: "empty" }, [
+                                _vm._v("No results found")
+                              ])
                             ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-field",
-                            [
-                              _c(
-                                "b-autocomplete",
-                                {
-                                  attrs: {
-                                    placeholder: "Tipo Red",
-                                    "keep-first": "",
-                                    "open-on-focus": "",
-                                    data: _vm.filteredNetTypesArray,
-                                    "use-html5-validation": false,
-                                    field: "type",
-                                    required: ""
-                                  },
-                                  on: {
-                                    select: function(option) {
-                                      return (_vm.selectedNetType = option)
-                                    }
-                                  },
-                                  model: {
-                                    value: _vm.netType,
-                                    callback: function($$v) {
-                                      _vm.netType = $$v
-                                    },
-                                    expression: "netType"
-                                  }
-                                },
-                                [
-                                  _c("template", { slot: "empty" }, [
-                                    _vm._v("No results found")
-                                  ])
-                                ],
-                                2
-                              )
-                            ],
-                            1
+                            2
                           )
                         ],
                         1
                       )
-                    : _vm._e()
-                ])
-              ]),
+                    ],
+                    1
+                  )
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "tile is-parent column" }, [
+            _c("div", { staticClass: "tile is-child box" }, [
+              _c(
+                "div",
+                { staticClass: "field is-size-5 has-text-weight-semibold" },
+                [_vm._v("Datos del Sitio")]
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "tile is-parent column" }, [
-                _c("div", { staticClass: "tile is-child box" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "block has-text-centered",
+                  staticStyle: { "padding-top": "12px" }
+                },
+                [
                   _c(
-                    "div",
-                    { staticClass: "field is-size-5 has-text-weight-semibold" },
-                    [_vm._v("Datos del Sitio")]
+                    "b-tabs",
+                    {
+                      attrs: { type: "is-toggle", expanded: "" },
+                      model: {
+                        value: _vm.site_type_tab_id,
+                        callback: function($$v) {
+                          _vm.site_type_tab_id = $$v
+                        },
+                        expression: "site_type_tab_id"
+                      }
+                    },
+                    _vm._l(_vm.siteTypes, function(site_type) {
+                      return _c("b-tab-item", {
+                        key: site_type.id,
+                        attrs: { label: site_type.label }
+                      })
+                    }),
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                [
+                  _c(
+                    "b-field",
+                    [
+                      _c("b-input", {
+                        attrs: {
+                          placeholder: "Nemónico",
+                          type: "text",
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.nem,
+                          callback: function($$v) {
+                            _vm.nem = $$v
+                          },
+                          expression: "nem"
+                        }
+                      })
+                    ],
+                    1
                   ),
                   _vm._v(" "),
                   _c(
-                    "div",
-                    {
-                      staticClass: "block has-text-centered",
-                      staticStyle: { "padding-top": "12px" }
-                    },
+                    "b-field",
+                    [
+                      _c("b-input", {
+                        attrs: {
+                          placeholder: "Nombre Sitio",
+                          type: "text",
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.siteName,
+                          callback: function($$v) {
+                            _vm.siteName = $$v
+                          },
+                          expression: "siteName"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-field",
                     [
                       _c(
-                        "b-tabs",
+                        "b-autocomplete",
                         {
-                          attrs: { type: "is-toggle", expanded: "" },
+                          attrs: {
+                            placeholder: "Categoría",
+                            "keep-first": "",
+                            "open-on-focus": "",
+                            data: _vm.filteredClassificationsArray,
+                            "use-html5-validation": false,
+                            field: "classification_type",
+                            required: ""
+                          },
+                          on: {
+                            select: function(option) {
+                              return (_vm.selectedClassificationType = option)
+                            }
+                          },
                           model: {
-                            value: _vm.site_type_tab_id,
+                            value: _vm.classificationType,
                             callback: function($$v) {
-                              _vm.site_type_tab_id = $$v
+                              _vm.classificationType = $$v
                             },
-                            expression: "site_type_tab_id"
+                            expression: "classificationType"
                           }
                         },
-                        _vm._l(_vm.siteTypes, function(site_type) {
-                          return _c("b-tab-item", {
-                            key: site_type.id,
-                            attrs: { label: site_type.label }
-                          })
-                        }),
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    [
-                      _c(
-                        "b-field",
                         [
-                          _c("b-input", {
-                            attrs: {
-                              placeholder: "Nemónico",
-                              type: "text",
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.nem,
-                              callback: function($$v) {
-                                _vm.nem = $$v
-                              },
-                              expression: "nem"
-                            }
-                          })
+                          _c("template", { slot: "empty" }, [
+                            _vm._v("No results found")
+                          ])
                         ],
-                        1
+                        2
                       ),
                       _vm._v(" "),
                       _c(
-                        "b-field",
-                        [
-                          _c("b-input", {
-                            attrs: {
-                              placeholder: "Nombre Sitio",
-                              type: "text",
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.siteName,
-                              callback: function($$v) {
-                                _vm.siteName = $$v
-                              },
-                              expression: "siteName"
+                        "b-autocomplete",
+                        {
+                          attrs: {
+                            placeholder: "Prioridad atención",
+                            "keep-first": "",
+                            "open-on-focus": "",
+                            data: _vm.filteredAttentionPrioritiesArray,
+                            "use-html5-validation": false,
+                            field: "attention_priority_type",
+                            required: ""
+                          },
+                          on: {
+                            select: function(option) {
+                              return (_vm.selectedAttentionPriorityType = option)
                             }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-field",
+                          },
+                          model: {
+                            value: _vm.attentionPriorityType,
+                            callback: function($$v) {
+                              _vm.attentionPriorityType = $$v
+                            },
+                            expression: "attentionPriorityType"
+                          }
+                        },
                         [
-                          _c(
-                            "b-autocomplete",
-                            {
-                              attrs: {
-                                placeholder: "Categoría",
-                                "keep-first": "",
-                                "open-on-focus": "",
-                                data: _vm.filteredClassificationsArray,
-                                "use-html5-validation": false,
-                                field: "classification_type",
-                                required: ""
-                              },
-                              on: {
-                                select: function(option) {
-                                  return (_vm.selectedClassificationType = option)
-                                }
-                              },
-                              model: {
-                                value: _vm.classificationType,
-                                callback: function($$v) {
-                                  _vm.classificationType = $$v
-                                },
-                                expression: "classificationType"
-                              }
-                            },
-                            [
-                              _c("template", { slot: "empty" }, [
-                                _vm._v("No results found")
-                              ])
-                            ],
-                            2
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-autocomplete",
-                            {
-                              attrs: {
-                                placeholder: "Prioridad atención",
-                                "keep-first": "",
-                                "open-on-focus": "",
-                                data: _vm.filteredAttentionPrioritiesArray,
-                                "use-html5-validation": false,
-                                field: "attention_priority_type",
-                                required: ""
-                              },
-                              on: {
-                                select: function(option) {
-                                  return (_vm.selectedAttentionPriorityType = option)
-                                }
-                              },
-                              model: {
-                                value: _vm.attentionPriorityType,
-                                callback: function($$v) {
-                                  _vm.attentionPriorityType = $$v
-                                },
-                                expression: "attentionPriorityType"
-                              }
-                            },
-                            [
-                              _c("template", { slot: "empty" }, [
-                                _vm._v("No results found")
-                              ])
-                            ],
-                            2
-                          )
+                          _c("template", { slot: "empty" }, [
+                            _vm._v("No results found")
+                          ])
                         ],
-                        1
+                        2
                       )
                     ],
                     1
                   )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "tile is-parent column" }, [
-                _c("div", { staticClass: "tile is-child box" }, [
-                  _c(
-                    "div",
-                    { staticClass: "field is-size-5 has-text-weight-semibold" },
-                    [_vm._v("Datos de servicios")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "block",
-                      staticStyle: { "padding-top": "12px" }
-                    },
-                    [
-                      _c("div", { staticClass: "columns" }, [
-                        _c(
-                          "div",
-                          { staticClass: "column" },
-                          [
-                            _c(
-                              "b-checkbox",
-                              {
-                                attrs: { type: "is-link" },
-                                model: {
-                                  value: _vm.pe_3g,
-                                  callback: function($$v) {
-                                    _vm.pe_3g = $$v
-                                  },
-                                  expression: "pe_3g"
-                                }
-                              },
-                              [
-                                _c("div", { staticClass: "is-size-6" }, [
-                                  _vm._v("PE 3G")
-                                ])
-                              ]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "column" },
-                          [
-                            _c(
-                              "b-checkbox",
-                              {
-                                attrs: { type: "is-link" },
-                                model: {
-                                  value: _vm.mpls,
-                                  callback: function($$v) {
-                                    _vm.mpls = $$v
-                                  },
-                                  expression: "mpls"
-                                }
-                              },
-                              [
-                                _c("div", { staticClass: "is-size-6" }, [
-                                  _vm._v("MPLS")
-                                ])
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "columns" }, [
-                        _c(
-                          "div",
-                          { staticClass: "column" },
-                          [
-                            _c(
-                              "b-checkbox",
-                              {
-                                attrs: { type: "is-link" },
-                                model: {
-                                  value: _vm.olt,
-                                  callback: function($$v) {
-                                    _vm.olt = $$v
-                                  },
-                                  expression: "olt"
-                                }
-                              },
-                              [
-                                _c("div", { staticClass: "is-size-6" }, [
-                                  _vm._v("OLT")
-                                ])
-                              ]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "column" },
-                          [
-                            _c(
-                              "b-checkbox",
-                              {
-                                attrs: { type: "is-link" },
-                                model: {
-                                  value: _vm.olt_3play,
-                                  callback: function($$v) {
-                                    _vm.olt_3play = $$v
-                                  },
-                                  expression: "olt_3play"
-                                }
-                              },
-                              [
-                                _c("div", { staticClass: "is-size-6" }, [
-                                  _vm._v("OLT 3Play")
-                                ])
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "columns" }, [
-                        _c(
-                          "div",
-                          { staticClass: "column" },
-                          [
-                            _c(
-                              "b-checkbox",
-                              {
-                                attrs: { type: "is-link" },
-                                model: {
-                                  value: _vm.red_minima_n1,
-                                  callback: function($$v) {
-                                    _vm.red_minima_n1 = $$v
-                                  },
-                                  expression: "red_minima_n1"
-                                }
-                              },
-                              [
-                                _c("div", { staticClass: "is-size-6" }, [
-                                  _vm._v("Red Mínima N1")
-                                ])
-                              ]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "column" },
-                          [
-                            _c(
-                              "b-checkbox",
-                              {
-                                attrs: { type: "is-link" },
-                                model: {
-                                  value: _vm.red_minima_n2,
-                                  callback: function($$v) {
-                                    _vm.red_minima_n2 = $$v
-                                  },
-                                  expression: "red_minima_n2"
-                                }
-                              },
-                              [
-                                _c("div", { staticClass: "is-size-6" }, [
-                                  _vm._v("Red Mínima N2")
-                                ])
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "columns" }, [
-                        _c(
-                          "div",
-                          { staticClass: "column" },
-                          [
-                            _c(
-                              "b-checkbox",
-                              {
-                                attrs: { type: "is-link" },
-                                model: {
-                                  value: _vm.core,
-                                  callback: function($$v) {
-                                    _vm.core = $$v
-                                  },
-                                  expression: "core"
-                                }
-                              },
-                              [
-                                _c("div", { staticClass: "is-size-6" }, [
-                                  _vm._v("Core")
-                                ])
-                              ]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "column" },
-                          [
-                            _c(
-                              "b-checkbox",
-                              {
-                                attrs: { type: "is-link" },
-                                model: {
-                                  value: _vm.vip,
-                                  callback: function($$v) {
-                                    _vm.vip = $$v
-                                  },
-                                  expression: "vip"
-                                }
-                              },
-                              [
-                                _c("div", { staticClass: "is-size-6" }, [
-                                  _vm._v("VIP")
-                                ])
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "columns" }, [
-                        _c(
-                          "div",
-                          { staticClass: "column" },
-                          [
-                            _c(
-                              "b-checkbox",
-                              {
-                                attrs: { type: "is-link" },
-                                model: {
-                                  value: _vm.localidad_obligatoria,
-                                  callback: function($$v) {
-                                    _vm.localidad_obligatoria = $$v
-                                  },
-                                  expression: "localidad_obligatoria"
-                                }
-                              },
-                              [
-                                _c("div", { staticClass: "is-size-6" }, [
-                                  _vm._v("Localidad Obligatoria")
-                                ])
-                              ]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "column" },
-                          [
-                            _c(
-                              "b-checkbox",
-                              {
-                                attrs: { type: "is-link" },
-                                model: {
-                                  value: _vm.ranco,
-                                  callback: function($$v) {
-                                    _vm.ranco = $$v
-                                  },
-                                  expression: "ranco"
-                                }
-                              },
-                              [
-                                _c("div", { staticClass: "is-size-6" }, [
-                                  _vm._v("Ranco")
-                                ])
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "columns" }, [
-                        _c(
-                          "div",
-                          { staticClass: "column" },
-                          [
-                            _c(
-                              "b-checkbox",
-                              {
-                                attrs: { type: "is-link" },
-                                model: {
-                                  value: _vm.energy_system,
-                                  callback: function($$v) {
-                                    _vm.energy_system = $$v
-                                  },
-                                  expression: "energy_system"
-                                }
-                              },
-                              [
-                                _c("div", { staticClass: "is-size-6" }, [
-                                  _vm._v("Offgrid")
-                                ])
-                              ]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "column" },
-                          [
-                            _c(
-                              "b-checkbox",
-                              {
-                                attrs: { type: "is-link" },
-                                model: {
-                                  value: _vm.solar,
-                                  callback: function($$v) {
-                                    _vm.solar = $$v
-                                  },
-                                  expression: "solar"
-                                }
-                              },
-                              [
-                                _c("div", { staticClass: "is-size-6" }, [
-                                  _vm._v("Solar")
-                                ])
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "columns" }, [
-                        _c(
-                          "div",
-                          { staticClass: "column" },
-                          [
-                            _c(
-                              "b-checkbox",
-                              {
-                                attrs: { type: "is-link" },
-                                model: {
-                                  value: _vm.eolica,
-                                  callback: function($$v) {
-                                    _vm.eolica = $$v
-                                  },
-                                  expression: "eolica"
-                                }
-                              },
-                              [
-                                _c("div", { staticClass: "is-size-6" }, [
-                                  _vm._v("Eólica")
-                                ])
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ])
-                    ]
-                  )
-                ])
-              ])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "section columns",
-            staticStyle: { "padding-top": "0" }
-          },
-          [
-            _c("div", { staticClass: "column" }),
-            _vm._v(" "),
-            _c("div", { staticClass: "column has-text-centered" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "button is-link",
-                  attrs: { disabled: _vm.isDisabled },
-                  on: { click: _vm.postNewPop }
-                },
-                [_vm._v("Crear nuevo Sitio")]
+                ],
+                1
               )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "column" })
-          ]
-        )
-      ])
-    : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "tile is-parent column" }, [
+            _c("div", { staticClass: "tile is-child box" }, [
+              _c(
+                "div",
+                { staticClass: "field is-size-5 has-text-weight-semibold" },
+                [_vm._v("Datos de servicios")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "block",
+                  staticStyle: { "padding-top": "12px" }
+                },
+                [
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-checkbox",
+                          {
+                            attrs: { type: "is-link" },
+                            model: {
+                              value: _vm.pe_3g,
+                              callback: function($$v) {
+                                _vm.pe_3g = $$v
+                              },
+                              expression: "pe_3g"
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "is-size-6" }, [
+                              _vm._v("PE 3G")
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-checkbox",
+                          {
+                            attrs: { type: "is-link" },
+                            model: {
+                              value: _vm.mpls,
+                              callback: function($$v) {
+                                _vm.mpls = $$v
+                              },
+                              expression: "mpls"
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "is-size-6" }, [
+                              _vm._v("MPLS")
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-checkbox",
+                          {
+                            attrs: { type: "is-link" },
+                            model: {
+                              value: _vm.olt,
+                              callback: function($$v) {
+                                _vm.olt = $$v
+                              },
+                              expression: "olt"
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "is-size-6" }, [
+                              _vm._v("OLT")
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-checkbox",
+                          {
+                            attrs: { type: "is-link" },
+                            model: {
+                              value: _vm.olt_3play,
+                              callback: function($$v) {
+                                _vm.olt_3play = $$v
+                              },
+                              expression: "olt_3play"
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "is-size-6" }, [
+                              _vm._v("OLT 3Play")
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-checkbox",
+                          {
+                            attrs: { type: "is-link" },
+                            model: {
+                              value: _vm.red_minima_n1,
+                              callback: function($$v) {
+                                _vm.red_minima_n1 = $$v
+                              },
+                              expression: "red_minima_n1"
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "is-size-6" }, [
+                              _vm._v("Red Mínima N1")
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-checkbox",
+                          {
+                            attrs: { type: "is-link" },
+                            model: {
+                              value: _vm.red_minima_n2,
+                              callback: function($$v) {
+                                _vm.red_minima_n2 = $$v
+                              },
+                              expression: "red_minima_n2"
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "is-size-6" }, [
+                              _vm._v("Red Mínima N2")
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-checkbox",
+                          {
+                            attrs: { type: "is-link" },
+                            model: {
+                              value: _vm.core,
+                              callback: function($$v) {
+                                _vm.core = $$v
+                              },
+                              expression: "core"
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "is-size-6" }, [
+                              _vm._v("Core")
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-checkbox",
+                          {
+                            attrs: { type: "is-link" },
+                            model: {
+                              value: _vm.vip,
+                              callback: function($$v) {
+                                _vm.vip = $$v
+                              },
+                              expression: "vip"
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "is-size-6" }, [
+                              _vm._v("VIP")
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-checkbox",
+                          {
+                            attrs: { type: "is-link" },
+                            model: {
+                              value: _vm.localidad_obligatoria,
+                              callback: function($$v) {
+                                _vm.localidad_obligatoria = $$v
+                              },
+                              expression: "localidad_obligatoria"
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "is-size-6" }, [
+                              _vm._v("Localidad Obligatoria")
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-checkbox",
+                          {
+                            attrs: { type: "is-link" },
+                            model: {
+                              value: _vm.ranco,
+                              callback: function($$v) {
+                                _vm.ranco = $$v
+                              },
+                              expression: "ranco"
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "is-size-6" }, [
+                              _vm._v("Ranco")
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-checkbox",
+                          {
+                            attrs: { type: "is-link" },
+                            model: {
+                              value: _vm.energy_system,
+                              callback: function($$v) {
+                                _vm.energy_system = $$v
+                              },
+                              expression: "energy_system"
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "is-size-6" }, [
+                              _vm._v("Offgrid")
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-checkbox",
+                          {
+                            attrs: { type: "is-link" },
+                            model: {
+                              value: _vm.solar,
+                              callback: function($$v) {
+                                _vm.solar = $$v
+                              },
+                              expression: "solar"
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "is-size-6" }, [
+                              _vm._v("Solar")
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-checkbox",
+                          {
+                            attrs: { type: "is-link" },
+                            model: {
+                              value: _vm.eolica,
+                              callback: function($$v) {
+                                _vm.eolica = $$v
+                              },
+                              expression: "eolica"
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "is-size-6" }, [
+                              _vm._v("Eólica")
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]
+              )
+            ])
+          ])
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "section columns", staticStyle: { "padding-top": "0" } },
+      [
+        _c("div", { staticClass: "column" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "column has-text-centered" }, [
+          _c(
+            "button",
+            {
+              staticClass: "button is-link",
+              attrs: { disabled: _vm.isDisabled },
+              on: { click: _vm.postNewPop }
+            },
+            [_vm._v("Crear nuevo Sitio")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "column" })
+      ]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

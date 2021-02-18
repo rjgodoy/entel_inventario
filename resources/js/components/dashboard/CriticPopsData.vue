@@ -111,7 +111,7 @@
                 axios.get(`/api/criticPopList?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&page=${this.data.current_page}`)
                 .then((response) => {
                     // console.log(response.data)
-                    this.data = response.data;
+                    this.data = response.data.pop;
                     // if(true) {
                     //     this.$emit('clicked', this.data)
                     // }

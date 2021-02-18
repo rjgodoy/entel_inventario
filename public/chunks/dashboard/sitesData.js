@@ -147,19 +147,19 @@ __webpack_require__.r(__webpack_exports__);
       // Si no hay un CRM seleccionado
       if (!this.selectedCrm) {
         axios.get("/api/sitesData?core=".concat(this.core)).then(function (response) {
-          _this.sitesData = response.data.data; // this.$eventBus.$emit('getSitesData', this.sitesData)
+          _this.sitesData = response.data.pop; // this.$eventBus.$emit('getSitesData', this.sitesData)
         })["finally"](function () {// this.$eventBus.$emit('getSitesData', this.sitesData)
         });
       } //Si hay un CRM seleccionado, pero no hay zona seleccionada
       else if (!this.selectedZona) {
           axios.get("/api/sitesDataCrm?crm_id=".concat(this.selectedCrm.id, "&core=").concat(this.core)).then(function (response) {
-            _this.sitesData = response.data.data; // this.$eventBus.$emit('getSitesData', this.sitesData)
+            _this.sitesData = response.data.pop; // this.$eventBus.$emit('getSitesData', this.sitesData)
           })["finally"](function () {// this.$eventBus.$emit('getSitesData', this.sitesData)
           });
         } // Si hay una zona seleccionada
         else {
             axios.get("/api/sitesDataZona?zona_id=".concat(this.selectedZona.id, "&core=").concat(this.core)).then(function (response) {
-              _this.sitesData = response.data.data; // this.$eventBus.$emit('getSitesData', this.sitesData)
+              _this.sitesData = response.data.pop; // this.$eventBus.$emit('getSitesData', this.sitesData)
             })["finally"](function () {// this.$eventBus.$emit('getSitesData', this.sitesData)
             });
           }

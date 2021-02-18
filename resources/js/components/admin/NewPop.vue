@@ -1,5 +1,5 @@
 <template>
-    <div v-if="user.roles[0].id == 1 || user.roles[0].id == 2">
+    <div>
         <section class="section tile is-ancestor" style="padding-bottom: 0px">
             <div class="columns tile is-parent">
                 <div class="tile is-parent column">

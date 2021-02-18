@@ -205,15 +205,15 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!this.selectedCrm) {
         axios.get("/api/technologyData?core=".concat(this.core)).then(function (response) {
-          _this.technologyData = response.data.data;
+          _this.technologyData = response.data.pop;
         });
       } else if (!this.selectedZona) {
         axios.get("/api/technologyDataCrm?crm_id=".concat(this.selectedCrm.id, "&core=").concat(this.core)).then(function (response) {
-          _this.technologyData = response.data.data;
+          _this.technologyData = response.data.pop;
         });
       } else {
         axios.get("/api/technologyDataZona?zona_id=".concat(this.selectedZona.id, "&core=").concat(this.core)).then(function (response) {
-          _this.technologyData = response.data.data;
+          _this.technologyData = response.data.pop;
         });
       }
     } // downloadTechnologies() {

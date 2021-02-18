@@ -153,7 +153,7 @@
 
                     axios.get(`/api/popData?core=${this.core}`)
                     .then((response) => {
-                        this.popsData = response.data.data
+                        this.popsData = response.data.pop
                         // this.$eventBus.$emit('graphData', this.popsData)
                     })
                 } 
@@ -161,7 +161,7 @@
                 else if (!this.selectedZona){
                     axios.get(`/api/popDataCrm?crm_id=${this.selectedCrm.id}&core=${this.core}`)
                     .then((response) => {
-                        this.popsData = response.data.data
+                        this.popsData = response.data.pop
                         // this.$eventBus.$emit('graphData', this.popsData)
                     })
                 } 
@@ -169,7 +169,7 @@
                 else {
                     axios.get(`/api/popDataZona?zona_id=${this.selectedZona.id}&core=${this.core}`)
                     .then((response) => {
-                        this.popsData = response.data.data
+                        this.popsData = response.data.pop
                         // this.$eventBus.$emit('graphData', this.popsData)
                     })
                 }

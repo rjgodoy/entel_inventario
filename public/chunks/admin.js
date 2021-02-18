@@ -47,6 +47,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     AdminPops: function AdminPops() {
@@ -67,11 +85,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   props: ['user'],
-  created: function created() {
-    this.getTabs();
-    this.styleMode();
+  created: function created() {// this.styleMode()
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.getTabs();
+  },
   data: function data() {
     return {
       darkMode: 0,
@@ -83,39 +101,112 @@ __webpack_require__.r(__webpack_exports__);
       selectedPrimaryBoxText: 'has-text-white',
       selectedSecondaryBoxText: 'has-text-light',
       tabs: null,
+      canCreatePop: false,
+      canUpdateEfizity: false,
+      canEditPermissions: false,
+      canUploadFiles: false,
       currentTab: this.$route.hash != '' ? this.$route.hash.split('#')[1] : 'pops'
     };
   },
-  methods: {
-    // Style mode
-    styleMode: function styleMode() {
-      if (this.darkMode == 1) {
-        // dark mode
-        this.bodyBackground = 'has-background-black-ter';
-        this.boxBackground = 'has-background-dark';
-        this.primaryText = 'has-text-white';
-        this.secondaryText = 'has-text-grey-light';
-        this.searchBodyBackground = 'has-background-dark';
-      } else {
-        // light mode
-        this.bodyBackground = 'has-background-light';
-        this.boxBackground = 'has-background-white';
-        this.primaryText = 'has-text-dark';
-        this.secondaryText = 'has-text-grey';
-        this.searchBodyBackground = 'has-background-white';
+  computed: {
+    hasPermissions: function hasPermissions() {
+      var bool = false;
+
+      switch (this.currentTab) {
+        case 'pops':
+          bool = this.canCreatePop;
+          break;
+
+        case 'tps':
+          bool = true;
+          break;
+
+        case 'massive':
+          bool = this.canUpdateEfizity;
+          break;
+
+        case 'users':
+          bool = this.canEditPermissions;
+          break;
+
+        case 'files':
+          bool = this.canUploadFiles;
+          break;
+
+        default:
+          bool = false;
       }
+
+      return bool;
     },
+    currentTabComponent: function currentTabComponent() {
+      return 'admin-' + this.currentTab;
+    }
+  },
+  methods: {
+    canClick: function canClick(tab) {
+      var bool = false;
+
+      switch (tab) {
+        case 'pops':
+          bool = this.canCreatePop;
+          break;
+
+        case 'tps':
+          bool = true;
+          break;
+
+        case 'massive':
+          bool = this.canUpdateEfizity;
+          break;
+
+        case 'users':
+          bool = this.canEditPermissions;
+          break;
+
+        case 'files':
+          bool = this.canUploadFiles;
+          break;
+
+        default:
+          bool = false;
+      }
+
+      return bool;
+    },
+    // Style mode
+    // styleMode(){
+    //     if (this.darkMode == 1) {
+    //         // dark mode
+    //         this.bodyBackground = 'has-background-black-ter'
+    //         this.boxBackground = 'has-background-dark'
+    //         this.primaryText = 'has-text-white'
+    //         this.secondaryText = 'has-text-grey-light'
+    //         this.searchBodyBackground = 'has-background-dark'
+    //     } else {
+    //         // light mode
+    //         this.bodyBackground = 'has-background-light'
+    //         this.boxBackground = 'has-background-white'
+    //         this.primaryText = 'has-text-dark'
+    //         this.secondaryText = 'has-text-grey'
+    //         this.searchBodyBackground = 'has-background-white'
+    //     }
+    // },
     getTabs: function getTabs() {
       var _this = this;
 
       axios.get("/api/tabs").then(function (response) {
-        _this.tabs = response.data.data;
+        console.log(response);
+
+        if (response.data.can.viewAdmin) {
+          _this.tabs = response.data.admin;
+        }
+
+        _this.canCreatePop = response.data.can.createPop;
+        _this.canUpdateEfizity = response.data.can.updateEfizity;
+        _this.canEditPermissions = response.data.can.editPermissions;
+        _this.canUploadFiles = response.data.can.uploadFiles;
       });
-    }
-  },
-  computed: {
-    currentTabComponent: function currentTabComponent() {
-      return 'admin-' + this.currentTab;
     }
   }
 });
@@ -154,64 +245,109 @@ var render = function() {
                   "div",
                   { key: tab.id, staticClass: "tile is-parent" },
                   [
-                    _c(
-                      "a",
-                      {
-                        key: tab.component,
-                        staticClass: "tile is-child box",
-                        class:
-                          _vm.currentTab === tab.component
-                            ? "has-background-link"
-                            : _vm.boxBackground,
-                        on: {
-                          click: function($event) {
-                            _vm.currentTab = tab.component
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "div",
+                    _vm.canClick(tab.component)
+                      ? _c(
+                          "a",
                           {
+                            key: tab.component,
+                            staticClass: "tile is-child box",
                             class:
                               _vm.currentTab === tab.component
-                                ? _vm.selectedSecondaryBoxText
-                                : _vm.secondaryText
+                                ? "has-background-link"
+                                : _vm.boxBackground,
+                            on: {
+                              click: function($event) {
+                                _vm.currentTab = tab.component
+                              }
+                            }
                           },
                           [
                             _c(
                               "div",
                               {
-                                staticClass:
-                                  "is-size-6 has-text-weight-semibold"
+                                class:
+                                  _vm.currentTab === tab.component
+                                    ? _vm.selectedSecondaryBoxText
+                                    : _vm.secondaryText
                               },
-                              [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(tab.title) +
-                                    "\n                            "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticStyle: { "padding-top": "10px" } },
                               [
                                 _c(
                                   "div",
                                   {
                                     staticClass:
-                                      "is-size-7 has-text-weight-light"
+                                      "is-size-6 has-text-weight-semibold"
                                   },
-                                  [_vm._v(_vm._s(tab.description))]
+                                  [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(tab.title) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticStyle: { "padding-top": "10px" } },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "is-size-7 has-text-weight-light"
+                                      },
+                                      [_vm._v(_vm._s(tab.description))]
+                                    )
+                                  ]
                                 )
                               ]
                             )
                           ]
                         )
-                      ]
-                    )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.canClick(tab.component)
+                      ? _c(
+                          "div",
+                          {
+                            staticClass:
+                              "tile is-child box has-background-light"
+                          },
+                          [
+                            _c("div", { staticClass: "has-text-grey-light" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "is-size-6 has-text-weight-semibold"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(tab.title) +
+                                      "\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticStyle: { "padding-top": "10px" } },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "is-size-7 has-text-weight-light"
+                                    },
+                                    [_vm._v(_vm._s(tab.description))]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      : _vm._e()
                   ]
                 )
               }),
@@ -224,16 +360,18 @@ var render = function() {
       _c(
         "keep-alive",
         [
-          _c(_vm.currentTabComponent, {
-            tag: "admin-content",
-            attrs: {
-              user: _vm.user,
-              bodyBackground: _vm.bodyBackground,
-              boxBackground: _vm.boxBackground,
-              primaryText: _vm.primaryText,
-              secondaryText: _vm.secondaryText
-            }
-          })
+          _vm.hasPermissions
+            ? _c(_vm.currentTabComponent, {
+                tag: "admin-content",
+                attrs: {
+                  user: _vm.user,
+                  bodyBackground: _vm.bodyBackground,
+                  boxBackground: _vm.boxBackground,
+                  primaryText: _vm.primaryText,
+                  secondaryText: _vm.secondaryText
+                }
+              })
+            : _vm._e()
         ],
         1
       )

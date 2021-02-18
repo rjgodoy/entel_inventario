@@ -32,7 +32,7 @@
 
                 <!-- LINKS DE MODULOS -->
                 <!-- ################## -->
-                <div class="column is-8" style="padding-left: 64px; padding-right: 64px;">
+                <div class="column is-8 pt-4" style="padding-left: 64px; padding-right: 64px;">
                     <div class="columns">
                         <div class="column is-1"></div>
                         <div class="column">
@@ -41,12 +41,12 @@
 
                                     <router-link :to="menu.path" :class="currentRoute.toLowerCase() === menu.path ? (menu.path == '/eco' ? 'has-text-eco' : 'has-text-link') : ''">
                                         <font-awesome-icon
-                                            class="is-size-4"
+                                            class=""
                                             size="2x"
                                             :icon="[menu.icon_type, menu.icon]" 
                                             :class="currentRoute.toLowerCase().includes(menu.path) ? (menu.path == '/eco' ? 'has-text-eco' : 'has-text-link') : 'has-text-grey-light'"
                                         />
-                                        <div class="is-size-7" :class="currentRoute.toLowerCase().includes(menu.path) ? 'has-text-white' : 'has-text-grey-light'">{{ menu.title }}</div>
+                                        <div class="pt-1" :class="currentRoute.toLowerCase().includes(menu.path) ? 'has-text-white has-text-weight-bold' : 'has-text-grey has-text-weight-semibold'" style="font-size: 0.65rem">{{ menu.title.toUpperCase() }}</div>
 
                                         <div v-if="currentRoute.toLowerCase().includes(menu.path)" :class="menu.path == '/eco' ? 'has-text-eco' : 'has-text-link'" style="border-bottom: 3px solid; padding-top: 5px;"></div>
                                     </router-link>
@@ -240,7 +240,7 @@
             },
 
             canView(path) {
-                if (path !== '/capacity' && path !== '/admin') {
+                if (path !== '/capacity' && path !== '/admin' && path !== '/generators') {
                     return true
                 } else if (path == '/capacity' && 
                     (this.user.roles[0].name == 'developer' 
@@ -252,9 +252,16 @@
                         )) {
                     return true
                 } else if (path == '/admin' && 
-                    (this.user.roles[0].name == 'developer' 
-                        || this.user.roles[0].name == 'admin' 
+                    (this.user.roles[0].slug == 'developer' 
+                        || this.user.roles[0].slug == 'admin' 
+                        || this.user.roles[0].slug == 'monitoring-analyst' 
                         || this.user_permissions.find(element => element.slug == 'view-admin'
+                        ))) {
+                    return true
+                } else if (path == '/generators' && 
+                    (this.user.roles[0].slug == 'developer' 
+                        || this.user.roles[0].slug == 'admin' 
+                        || this.user_permissions.find(element => element.slug == 'view-generator-path'
                         ))) {
                     return true
                 } else {

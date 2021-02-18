@@ -43,7 +43,7 @@ Route::middleware('auth:api')->group(function () {
 	##############################################################################################
 
 	### ADMIN ######################################################################
-	Route::group(['middleware' => 'role:developer,admin'], function() {
+	Route::group(['middleware' => 'role:developer,admin,monitoring-analyst'], function() {
         Route::apiResource('users','Api\UserController');
         Route::apiResource('comunas','Api\ComunaController');
 		Route::apiResource('popTypes','Api\PopTypeController');
@@ -162,6 +162,9 @@ Route::middleware('auth:api')->group(function () {
 		Route::get('generatorsPlatform', 'Api\GeneratorSetController@generatorPlatformData');
 		Route::get('generatorValues/{generator_id}', 'Api\GeneratorSetController@generatorValues');
 		Route::get('generatorLastDay', 'Api\GeneratorSetController@generatorLastDay');
+		Route::get('genplaBrands', 'Api\GeneratorSetController@generatorPlatformBrands');
+		// Route::get('generatorSetDataCapacity', 'Api\GeneratorSetController@generatorPlatformDataCapacity');
+
 
 		Route::apiResource('telecomCompanies','Api\TelecomCompanyController');
 		Route::apiResource('generatorSetTopologyTypes','Api\GeneratorSetTopologyTypeController');

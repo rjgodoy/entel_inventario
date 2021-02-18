@@ -332,6 +332,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['canEditGeneratorSets', 'generatorSet', 'user'],
@@ -358,7 +359,8 @@ __webpack_require__.r(__webpack_exports__);
       generator_set_type_id: this.generatorSet.generator_set_type_id,
       newPrimeCapacity: this.generatorSet.current_generator_set_capacity ? this.generatorSet.current_generator_set_capacity.prime_capacity : 0,
       newUsedCapacity: this.generatorSet.current_generator_set_capacity ? this.generatorSet.current_generator_set_capacity.used_capacity : 0,
-      isEditMode: false
+      isEditMode: false,
+      generatorSetHorometer: null
     };
   },
   mounted: function mounted() {
@@ -367,6 +369,7 @@ __webpack_require__.r(__webpack_exports__);
     this.getTopologyTypes();
     this.getLevelTypes();
     this.getGeneratorSetTypes();
+    this.getGeneratorSetDataOnline();
   },
   computed: {
     currentGeneratorGroup: function currentGeneratorGroup() {
@@ -525,6 +528,16 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    // async getGeneratorSetDataOnline() {
+    //     let params = {
+    //         'pop_id': this.generatorSet.pop_id
+    //     }
+    //     await axios.get(`/api/generatorSetDataCapacity`, { params: params })
+    //     .then(response => {
+    //         console.log(response.data)
+    //         this.generatorSetDataCapacity = response.data
+    //     })
+    // },
     saveChanges: function saveChanges() {
       var _this11 = this;
 

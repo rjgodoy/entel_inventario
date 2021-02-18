@@ -7,7 +7,11 @@
             <div class="container">
                 <div class="tile is-ancestor">
                     <div class="tile is-parent" v-for="tab in tabs" :key="tab.id">
-                        <a class="tile is-child box" :key="tab.component" :class="currentTab === tab.component ? 'has-background-link' : boxBackground" @click="currentTab = tab.component">
+                        <a class="tile is-child box" 
+                            v-if="canClick(tab.component)"
+                            :key="tab.component" 
+                            :class="currentTab === tab.component ? 'has-background-link' : boxBackground" 
+                            @click="currentTab = tab.component">
                             <div :class="currentTab === tab.component ? selectedSecondaryBoxText : secondaryText"> 
                                 <div class="is-size-6 has-text-weight-semibold">
                                     {{ tab.title }}
@@ -18,6 +22,19 @@
                                 </div>
                             </div>
                         </a>
+
+                        <div class="tile is-child box has-background-light" v-if="!canClick(tab.component)">
+                            <div class="has-text-grey-light"> 
+                                <div class="is-size-6 has-text-weight-semibold">
+                                    {{ tab.title }}
+                                </div>
+
+                                <div style="padding-top: 10px;">
+                                    <div class="is-size-7 has-text-weight-light">{{ tab.description }}</div> 
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -26,6 +43,7 @@
         <keep-alive>
             <admin-content :is="currentTabComponent"
                 :user="user"
+                v-if="hasPermissions"
                 :bodyBackground="bodyBackground"
                 :boxBackground="boxBackground"
                 :primaryText="primaryText"
@@ -50,10 +68,10 @@
             'user',
         ],
         created() {
-            this.getTabs()
-            this.styleMode()
+            // this.styleMode()
         },
         mounted() {
+            this.getTabs()
         },
         data() {
             return {
@@ -65,40 +83,103 @@
                 searchBodyBackground: '',
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',
+
                 tabs: null,
+                canCreatePop: false,
+                canUpdateEfizity: false,
+                canEditPermissions: false,
+                canUploadFiles: false,
+
                 currentTab: this.$route.hash != '' ? this.$route.hash.split('#')[1] : 'pops'
             }
         },
-        methods: {
-            // Style mode
-            styleMode(){
-                if (this.darkMode == 1) {
-                    // dark mode
-                    this.bodyBackground = 'has-background-black-ter'
-                    this.boxBackground = 'has-background-dark'
-                    this.primaryText = 'has-text-white'
-                    this.secondaryText = 'has-text-grey-light'
-                    this.searchBodyBackground = 'has-background-dark'
-                } else {
-                    // light mode
-                    this.bodyBackground = 'has-background-light'
-                    this.boxBackground = 'has-background-white'
-                    this.primaryText = 'has-text-dark'
-                    this.secondaryText = 'has-text-grey'
-                    this.searchBodyBackground = 'has-background-white'
+
+        computed: {
+            hasPermissions() {
+                let bool = false
+                switch (this.currentTab) {
+                    case 'pops':
+                        bool = this.canCreatePop
+                        break
+                    case 'tps':
+                        bool = true
+                        break
+                    case 'massive':
+                        bool = this.canUpdateEfizity
+                        break
+                    case 'users':
+                        bool = this.canEditPermissions
+                        break
+                    case 'files':
+                        bool = this.canUploadFiles
+                        break
+                    default:
+                        bool = false
                 }
+                return bool
             },
+
+            currentTabComponent: function () {
+                return 'admin-' + this.currentTab
+            }
+        },
+
+        methods: {
+            canClick(tab) {
+                let bool = false
+                switch (tab) {
+                    case 'pops':
+                        bool = this.canCreatePop
+                        break
+                    case 'tps':
+                        bool = true
+                        break
+                    case 'massive':
+                        bool = this.canUpdateEfizity
+                        break
+                    case 'users':
+                        bool = this.canEditPermissions
+                        break
+                    case 'files':
+                        bool = this.canUploadFiles
+                        break
+                    default:
+                        bool = false
+                }
+                return bool
+            },
+            
+            // Style mode
+            // styleMode(){
+            //     if (this.darkMode == 1) {
+            //         // dark mode
+            //         this.bodyBackground = 'has-background-black-ter'
+            //         this.boxBackground = 'has-background-dark'
+            //         this.primaryText = 'has-text-white'
+            //         this.secondaryText = 'has-text-grey-light'
+            //         this.searchBodyBackground = 'has-background-dark'
+            //     } else {
+            //         // light mode
+            //         this.bodyBackground = 'has-background-light'
+            //         this.boxBackground = 'has-background-white'
+            //         this.primaryText = 'has-text-dark'
+            //         this.secondaryText = 'has-text-grey'
+            //         this.searchBodyBackground = 'has-background-white'
+            //     }
+            // },
 
             getTabs() {
                 axios.get(`/api/tabs`)
                 .then((response) => {
-                    this.tabs = response.data.data
+                    console.log(response)
+                    if(response.data.can.viewAdmin) {
+                        this.tabs = response.data.admin
+                    }
+                    this.canCreatePop = response.data.can.createPop
+                    this.canUpdateEfizity = response.data.can.updateEfizity
+                    this.canEditPermissions = response.data.can.editPermissions
+                    this.canUploadFiles = response.data.can.uploadFiles
                 })
-            }
-        },
-        computed: {
-            currentTabComponent: function () {
-                return 'admin-' + this.currentTab
             }
         }
     }

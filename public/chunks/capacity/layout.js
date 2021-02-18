@@ -93,7 +93,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
           'theoretical_autonomy': parseFloat(this.newTheoreticalAutonomy)
         };
         axios.post("/api/batteryBankAutonomies", params).then(function (response) {
-          _this.$eventBus.$emit('battery-autonomy'); // console.log(response.data)
+          _this.$eventBus.$emit('reload-data'); // console.log(response.data)
 
         });
       }
@@ -132,8 +132,15 @@ var render = function() {
             },
             [
               _vm.showLayout
-                ? _c("vision", {
-                    attrs: { layout: this.pop.layout && this.pop.layout.iframe }
+                ? _c("iframe", {
+                    staticStyle: { width: "100%" },
+                    attrs: {
+                      height: "610",
+                      src: this.pop.layout && this.pop.layout.iframe,
+                      frameborder: "0",
+                      allowfullscreen: "",
+                      allow: "xr-spatial-tracking"
+                    }
                   })
                 : _vm._e(),
               _vm._v(" "),
@@ -143,8 +150,7 @@ var render = function() {
                     attrs: { src: "/storage/" + _vm.layoutPath, width: "100%" }
                   })
                 : _vm._e()
-            ],
-            1
+            ]
           )
         ])
       ])

@@ -6,7 +6,7 @@
                 <div class="tile is-child box">
 
                     <div class="columns">
-                        <div class="column is-4">
+                        <div class="column">
                             <div class="has-text-weight-semibold is-size-4">{{ junction.electric_company ? junction.electric_company.name : 'Sin información' }}</div>
                             <div class="has-text-weight-light is-size-7">Distribuidora</div>
 
@@ -101,7 +101,7 @@
                             </div>
                         </div>
 
-                        <div class="column">
+                        <div class="column is-8" v-if="hasAProtections || hasBProtections || canEditJunctions">
                             <div class="box">
                                 <div class="title has-text-centered is-size-5 has-text-weight-semibold">Tablero Empalme</div>
                                 <div class="is-divider" data-content="Protecciones" style="margin-bottom: 24px;"></div>
@@ -387,67 +387,58 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- <div>Power A: {{ powerA }}</div>
-                    <div>Power B: {{ powerB }}</div>
-
-                    <div>Power Used A: {{ powerUsedA }}</div>
-                    <div>Power Used B: {{ powerUsedB }}</div>
-
-                    <div>Potencia disponible A: {{ powerA * useFactor - powerUsedA }}</div>
-                    <div>Potencia disponible B: {{ powerB * useFactor - powerUsedB }}</div>
-
-                    <div>Without Batteries Capacity: {{ withoutBatteriesCapacity }}</div>
-                    <div>Without Batteries Disponibility: {{ withoutBatteriesDisponibility }}</div>
-
-                    <div>Puntual Consumption: {{ junction.latest_measurement.punctual_consumption }}</div> -->
                     
+                    <div class="field" v-if="totalCapacity">
+                        <div class="is-divider" data-content="Capacidades"></div>
 
-                    <div class="is-divider" data-content="Capacidades"></div>
+                        <div class="level">
+                            <div class="level-item">
+                                <div class="has-text-centered">
+                                    <div class="is-size-6">Capacidad total</div>
+                                    <div class="has-text-weight-semibold is-size-4">{{ totalCapacity | numeral(0,0) }} 
+                                        <span class="is-size-6">kW</span>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="level">
-                        <div class="level-item">
-                            <div class="has-text-centered">
-                                <div class="is-size-6">Capacidad total</div>
-                                <div class="has-text-weight-semibold is-size-4">{{ totalCapacity | numeral(0,0) }} 
-                                    <span class="is-size-6">kW</span>
+                            <div class="level-item">
+                                <div class="has-text-centered">
+                                    <div class="is-size-6">Capacidad utilizada</div>
+                                    <div class="has-text-weight-semibold is-size-4">{{ totalUsedCapacity | numeral(0,0) }} 
+                                        <span class="is-size-6">kW</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="level-item">
+                                <div class="has-text-centered">
+                                    <div class="is-size-6">Capacidad disponible</div>
+                                    <div class="has-text-weight-semibold is-size-4">{{ totalDisponibility | numeral(0,0) }} 
+                                        <span class="is-size-6">kW</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="level-item">
-                            <div class="has-text-centered">
-                                <div class="is-size-6">Capacidad utilizada</div>
-                                <div class="has-text-weight-semibold is-size-4">{{ totalUsedCapacity | numeral(0,0) }} 
-                                    <span class="is-size-6">kW</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="level-item">
-                            <div class="has-text-centered">
-                                <div class="is-size-6">Capacidad disponible</div>
-                                <div class="has-text-weight-semibold is-size-4">{{ totalDisponibility | numeral(0,0) }} 
-                                    <span class="is-size-6">kW</span>
-                                </div>
-                            </div>
-                        </div>
+                        <b-progress 
+                            :value="usagePercent * 100" 
+                            size="is-large" 
+                            type="is-success" 
+                            show-value>
+                            Capacidad utilizada: <span class="has-text-success">
+                                {{ usagePercent | numeral('0.[00]%') }}
+                            </span>
+                        </b-progress>
                     </div>
-
-                    <b-progress 
-                        :value="usagePercent * 100" 
-                        size="is-large" 
-                        type="is-success" 
-                        show-value>
-                        Capacidad utilizada: <span class="has-text-success">
-                            {{ usagePercent | numeral('0.[00]%') }}
-                        </span>
-                    </b-progress>
 
                     <div class="field has-text-centered" v-if="canEditJunctions">
                         <b-button :type="isEditMode ? 'is-link' : 'is-link is-outlined'" size="is-small" @click="isEditMode=!isEditMode; saveChanges()">
                             <font-awesome-icon :icon="['fas', 'edit']"/>
                             &nbsp;&nbsp;{{ isEditMode ? 'Guardar' : 'Editar parámetros de Empalme' }}
+                        </b-button>
+                        <b-button v-if="isEditMode" type="is-link is-outlined" size="is-small" @click="isEditMode=!isEditMode">
+                            <!-- <font-awesome-icon :icon="['fas', 'edit']"/> -->
+                            &nbsp;&nbsp;Cancelar
                         </b-button>
                         <b-button v-if="isEditMode" type="is-danger" size="is-small" @click="deleteJunction()" class="is-pulled-right">
                             <font-awesome-icon :icon="['fas', 'trash']"/>

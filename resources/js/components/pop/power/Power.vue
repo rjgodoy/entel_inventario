@@ -46,10 +46,10 @@
 
 <script>
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPlug, faChargingStation,faRandom, faMicrochip, faGasPump, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { faPlug, faChargingStation,faRandom, faMicrochip, faGasPump, faExclamationTriangle, faTrash } from "@fortawesome/free-solid-svg-icons";
 // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
-library.add(faPlug, faChargingStation,faRandom, faMicrochip, faGasPump, faExclamationTriangle);
+library.add(faPlug, faChargingStation,faRandom, faMicrochip, faGasPump, faExclamationTriangle, faTrash);
     export default {
         components: {
             ElectricLines: () => import(/* webpackChunkName: "chunks/pop/power/electricLines"*/'./ElectricLines'),

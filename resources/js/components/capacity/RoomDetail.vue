@@ -261,11 +261,10 @@
             this.$eventBus.$on('new-battery-bank', this.getRoomData)
             this.$eventBus.$on('new-generator-set', this.getRoomData)
             this.$eventBus.$on('new-room', this.getRoomData)
-            this.$eventBus.$on('air-conditioner-capacity', this.getRoomData);
             this.$eventBus.$on('new-solar-panel', this.getRoomData)
             this.$eventBus.$on('junction-measurements-updated', this.getRoomData)
             this.$eventBus.$on('generator-set-capacities-updated', this.getRoomData)
-            this.$eventBus.$on('battery-autonomy', this.getRoomData)
+            this.$eventBus.$on('reload-data', this.getRoomData)
             this.$eventBus.$on('battery-bank-deleted', this.getRoomData)
             this.$eventBus.$on('generator-set-deleted', this.getRoomData)
         },
@@ -421,6 +420,8 @@
 
                 // Used
                 totalUsedJunctionsCapacity() {
+                    let roomJunction = 0
+                    let batteryRechargeCapacity = 0
                     let punctualConsumption = 0
                     if (this.junctions.length) {
                         Object.keys(this.junctions).forEach(element => {
@@ -428,10 +429,20 @@
                                 if(this.junctions[element].latest_measurement) {
                                     punctualConsumption += this.junctions[element].latest_measurement.punctual_consumption
                                 }
+                                if (!roomJunction) {
+                                    roomJunction = this.junctions[element].room_id && this.junctions[element].room_id == this.room.id ? 1 : 0
+                                }
+                            }
+
+                            if (roomJunction) {
+                                batteryRechargeCapacity = 0
+                            } else {
+                                batteryRechargeCapacity = this.batteriesRecharge
                             }
                         })
                     }
-                    return this.withoutBatteriesCapacity + this.batteriesRecharge + punctualConsumption
+                    
+                    return this.withoutBatteriesCapacity + batteryRechargeCapacity + punctualConsumption
                 },
                 withoutBatteriesCapacity() {
                     let sum = 0
@@ -771,6 +782,16 @@
                            type = this.planeTypes[item].id == 8 && type == 'Sin Información' ? this.planeTypes[item].type : type
                         })
                         break
+                    case 9:
+                        Object.keys(this.planeTypes).forEach(item => {
+                           type = this.planeTypes[item].id == 9 && type == 'Sin Información' ? this.planeTypes[item].type : type
+                        })
+                        break
+                    case 10:
+                        Object.keys(this.planeTypes).forEach(item => {
+                           type = this.planeTypes[item].id == 10 && type == 'Sin Información' ? this.planeTypes[item].type : type
+                        })
+                        break
                     default:
                         break
                 }
@@ -938,7 +959,7 @@
                 const sumCurrentCapacities = currentCapacities.length ? currentCapacities.reduce(reducer) : 0
                 const sumNewCapacities = newCapacities.reduce(reducer)
 
-                console.log(this.room.current_room_capacity)
+                // console.log(this.room.current_room_capacity)
 
                 if (!this.room.current_room_capacity || (this.room.current_room_capacity && (sumCurrentCapacities != sumNewCapacities))) {
                     return true
@@ -1156,10 +1177,19 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
                                     availableRoomCapacity = this.availablePlaneCapacity(plane)
                                     break
                                 case 5:
                                 case 6:
+                                case 20:
+                                case 21:
+                                case 22:
                                     if(availableRoomCapacity > this.availablePlaneCapacity(plane)) {
                                         availableRoomCapacity = this.availablePlaneCapacity(plane)
                                     }
@@ -1175,7 +1205,7 @@
                                     }
                                     availableRoomCapacity = availableRoomCapacityA + availableRoomCapacityB
                                     break
-                                case 8:
+                                case 30:
                                 default:
                                     break
                             }
@@ -1430,9 +1460,8 @@
             this.$eventBus.$off('new-battery-bank')
             this.$eventBus.$off('new-generator-set')
             this.$eventBus.$off('new-room')
-            this.$eventBus.$off('air-conditioner-capacity');
             this.$eventBus.$off('new-solar-panel')
-            this.$eventBus.$off('battery-autonomy')
+            this.$eventBus.$off('reload-data')
             this.$eventBus.$off('battery-bank-deleted')
             this.$eventBus.$off('generator-set-deleted')
         }

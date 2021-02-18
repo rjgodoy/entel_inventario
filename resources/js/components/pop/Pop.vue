@@ -24,12 +24,12 @@
 
                         <div class="column is-5">
                             <div class="is-size-4">
-                                <h1 class="title" v-if="!isEditMode || !noMovil">{{ pop.nombre }}</h1>
+                                <h1 class="title" v-if="!canEditName || !isEditMode || !noMovil">{{ pop.nombre }}</h1>
 
-                                <b-input class="is-size-5 has-text-weight-semibold" v-model="popName" v-if="isEditMode && noMovil"></b-input>
+                                <b-input class="is-size-5 has-text-weight-semibold has-background-dark" size="is-large" v-model="popName" v-if="canEditName && (isEditMode && noMovil)"></b-input>
 
-                                <h2 class="subtitle" style="margin-bottom: 4px;">{{ popNems }}
-                                    <span class="is-size-5" v-if="pop.sites && pop.sites.length > 2"> y <a class="has-text-smart" @click="currentTab = 'sites'">{{ pop.sites.length - 2 }} sitios</a> más.
+                                <h2 class="subtitle has-text-weight-semibold has-text-grey-light" style="margin-bottom: 4px;">{{ popNems }}
+                                    <span class="is-size-5 " v-if="pop.sites && pop.sites.length > 2"> y <a class="has-text-smart" @click="currentTab = 'sites'">{{ pop.sites.length - 2 }} sitios</a> más.
                                     </span>
                                 </h2>
                                 <div v-if="pop.current_office || pop.alba_project">
@@ -59,10 +59,10 @@
                         </div>
 
                         <div class="column is-2" style="padding: 0px">
-                            <p class="is-size-6 has-text-weight-light">Zona</p>
-                            <p class="is-size-5 has-text-weight-semibold">{{ pop.comuna ? pop.comuna.zona.nombre_zona : '' }}</p>
-                            <p class="is-size-6 has-text-weight-light" style="margin-top: 10px;">CRM</p>
-                            <p class="is-size-5 has-text-weight-semibold">{{ pop.comuna ? pop.comuna.zona.crm.nombre_crm : '' }}</p>
+                            <p class="is-size-6 has-text-weight-semibold has-text-grey-light">Zona</p>
+                            <p class="is-size-5 has-text-weight-bold">{{ pop.comuna ? pop.comuna.zona.nombre_zona : '' }}</p>
+                            <p class="is-size-6 has-text-weight-semibold has-text-grey-light" style="margin-top: 10px;">CRM</p>
+                            <p class="is-size-5 has-text-weight-bold">{{ pop.comuna ? pop.comuna.zona.crm.nombre_crm : '' }}</p>
                         </div>
 
                         <div class="column is-3">
@@ -70,40 +70,40 @@
                                 <div class="column is-6">
                                     <div class="control">
                                         <b-taglist attached>
-                                            <b-tag size="is-medium" :type="popClassification.id == 1 ? 'is-eco' : 'is-positive'" class="has-text-white">
+                                            <b-tag size="is-medium" :type="popClassification.id == 1 ? 'is-eco' : 'has-background-grey-light has-text-grey'" class="has-text-white">
                                                 <font-awesome-icon :icon="popClassification.id == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
                                             </b-tag>
-                                            <b-tag size="is-medium" type="is-black">CORE</b-tag>
+                                            <b-tag size="is-medium" :type="popClassification.id == 1 ? 'is-dark has-text-weight-bold' : 'has-background-grey has-text-grey-light'">CORE</b-tag>
                                         </b-taglist>
                                     </div>
                                 </div>
                                 <div class="column is-6">
                                     <div class="control">
                                         <b-taglist attached>
-                                            <b-tag size="is-medium" :type="popCritical == 1 ? 'is-eco' : 'is-positive'" class="has-text-white">
+                                            <b-tag size="is-medium" :type="popCritical == 1 ? 'is-eco' : 'has-background-grey-light has-text-grey'" class="has-text-white">
                                                 <font-awesome-icon :icon="popCritical == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
                                             </b-tag>
-                                            <b-tag size="is-medium" type="is-black">Crítico</b-tag>
+                                            <b-tag size="is-medium" :type="popCritical == 1 ? 'is-dark has-text-weight-bold' : 'has-background-grey has-text-grey-light'">Crítico</b-tag>
                                         </b-taglist>
                                     </div>
                                 </div>
                                 <div class="column is-6">
                                     <div class="control">
                                         <b-taglist attached>
-                                            <b-tag size="is-medium" :type="pop.vip == 1 ? 'is-eco' : 'is-positive'" class="has-text-white">
+                                            <b-tag size="is-medium" :type="pop.vip == 1 ? 'is-eco' : 'has-background-grey-light has-text-grey'" class="has-text-white">
                                                 <font-awesome-icon :icon="pop.vip == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
                                             </b-tag>
-                                            <b-tag size="is-medium" type="is-black">{{ pop.current_entel_vip ? 'VIP Entel' : 'VIP' }}</b-tag>
+                                            <b-tag size="is-medium" :type="pop.vip == 1 ? 'is-dark has-text-weight-bold' : 'has-background-grey has-text-grey-light'">{{ pop.current_entel_vip ? 'VIP Entel' : 'VIP' }}</b-tag>
                                         </b-taglist>
                                     </div>
                                 </div>
                                 <div class="column is-6">
                                     <div class="control">
                                         <b-taglist attached>
-                                            <b-tag size="is-medium" :type="pop.alba_project ? 'is-eco' : 'is-positive'" class="has-text-white">
+                                            <b-tag size="is-medium" :type="pop.alba_project ? 'is-eco' : 'has-background-grey-light has-text-grey'" class="has-text-white">
                                                 <font-awesome-icon :icon="pop.alba_project ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
                                             </b-tag>
-                                            <b-tag size="is-medium" type="is-black">Proyecto Alba</b-tag>
+                                            <b-tag size="is-medium" :type="pop.alba_project ? 'is-dark has-text-weight-bold' : 'has-background-grey has-text-grey-light'">Proyecto Alba</b-tag>
                                         </b-taglist>
                                     </div>
                                 </div>
@@ -143,17 +143,17 @@
                 <nav class="level">
                     <div class="level-item has-text-centered">
                         <div>
-                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold">{{ popAttentionPriority }}</b-tag>
+                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold is-size-5">{{ popAttentionPriority }}</b-tag>
                             <div style="padding-top: 4px;">
-                                <div class="is-size-7 has-text-weight-semibold">PRIORIDAD ATENCION</div>
+                                <div class="is-size-6 has-text-weight-semibold">PRIORIDAD ATENCION</div>
                             </div>
                         </div>
                     </div>
                     <div class="level-item has-text-centered">
                         <div>
-                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold">{{ popDependences }}</b-tag>
+                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold is-size-5">{{ popDependences }}</b-tag>
                             <div style="padding-top: 4px;">
-                                <div class="is-size-7 has-text-weight-semibold">DEPENDENCIAS DIRECTAS</div>
+                                <div class="is-size-6 has-text-weight-semibold">DEPENDENCIAS DIRECTAS</div>
                             </div>
                         </div>
                     </div>
@@ -165,30 +165,30 @@
                     </div> -->
                     <div class="level-item has-text-centered">
                         <div>
-                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold">{{ popCategory ? popCategory : '-' }}</b-tag>
+                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold is-size-5">{{ popCategory ? popCategory : '-' }}</b-tag>
                             <div style="padding-top: 4px;">
-                                <div class="is-size-7 has-text-weight-semibold">CLASIFICACION PLANIFICACION</div>
+                                <div class="is-size-6 has-text-weight-semibold">CLASIFICACION PLANIFICACION</div>
                             </div>
                         </div>
                     </div>
                     <div class="level-item has-text-centered">
                         <div>
-                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold">{{ popAttentionType }}</b-tag>
+                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold is-size-5">{{ popAttentionType }}</b-tag>
                             <div style="padding-top: 4px;">
-                                <div class="is-size-7 has-text-weight-semibold">TIPO ATENCION</div>
+                                <div class="is-size-6 has-text-weight-semibold">TIPO ATENCION</div>
                             </div>
                         </div>
                     </div>
                     <div class="level-item has-text-centered">
                         <div>
-                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold">{{ pop.current_autonomy ? pop.current_autonomy.theoretical : '-' }} <span class="is-size-6">hrs.</span></b-tag>
+                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold is-size-5">{{ pop.current_autonomy ? pop.current_autonomy.theoretical : '-' }} <span class="is-size-6">hrs.</span></b-tag>
                             <div style="padding-top: 4px;">
-                                <div class="is-size-7 has-text-weight-semibold">AUTONOMIA TEORICA</div>
+                                <div class="is-size-6 has-text-weight-semibold">AUTONOMIA TEORICA</div>
                             </div>
                         </div>
                     </div>
                     <b-tooltip 
-                        v-if="canEdit"
+                        v-if="canEditPop"
                         :label="isEditMode ? 'Salir del modo edición' : 'Entrar en modo edición'" 
                         position="is-left"
                         type="is-link"
@@ -217,11 +217,16 @@
                 <div class="column is-2 has-background-white is-paddingless" style="border-right: solid 0.5px rgba(0,0,0,0.1)">
                     <!-- <section class="section"> -->
                         <div class="columns is-multiline" style="padding: 24px">
-                            <div class="column is-block-desktop-only is-block-tablet-only is-block-mobile tile is-parent" :class="!isMobile() && 'is-6'" v-if="showTab(tab)" :label="tab.title" type="is-dark"
+                            <div class="column is-block-desktop-only is-block-tablet-only is-block-mobile tile is-parent" 
+                                :class="!isMobile() && 'is-6'" 
+                                :label="tab.title" 
+                                type="is-dark"
                                 v-for="tab in tabs" 
                                 :key="tab.component"
                                 style="padding: 8px">
+
                                 <a class="box is-bold tile is-child has-text-centered columns is-vcentered" 
+                                    v-if="showTab(tab)" 
                                     :style="!tab.title.includes(' ') && 'padding-right: 8px; padding-left: 8px'"
                                     @click="currentTab = tab.component" 
                                     :class="currentTab === tab.component && (currentTab == 'eco' ? 'is-eco is-bold' : 'is-bold is-link')">
@@ -240,6 +245,24 @@
                                         </div>
                                     </div>
                                 </a>
+
+                                <div class="box is-bold tile is-child has-text-centered columns is-vcentered has-background-light" 
+                                    v-if="!showTab(tab)" 
+                                    :style="!tab.title.includes(' ') && 'padding-right: 8px; padding-left: 8px'">
+                                    <div class="column is-paddingless has-text-grey-light">
+                                        <font-awesome-icon 
+                                            :icon="[tab.icon_type, tab.icon]"
+                                            size="2x"/>
+
+                                        <div class="is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only is-hidden-widescreen-only" 
+                                            style="padding-top: 12px;"> 
+                                            <div class="is-size-7 has-text-weight-semibold">
+                                                {{ tab.title.toUpperCase() }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     <!-- </section> -->
@@ -349,7 +372,11 @@
                 isHoverable: true,
                 isFocusable: false,
                 isLoading: false,
-                hasMobileCards: true
+                hasMobileCards: true,
+
+                canEditPop: false,
+                canViewLog: false,
+                canEditName: false
             }
         },
 
@@ -383,20 +410,20 @@
                 return i > 0 && i == m ? bool : true
             },
 
-            canViewLog() {
-                return this.user.roles[0].id == 1 
-                    || this.user.roles[0].id == 2
-                    || this.user.roles[0].id == 4
-                    || this.user.roles[0].id == 6
-                    || this.user.roles[0].id == 7
-                    || this.user.roles[0].id == 8 ? true : false
-            },
+            // canViewLog() {
+            //     return this.user.roles[0].id == 1 
+            //         || this.user.roles[0].id == 2
+            //         || this.user.roles[0].id == 4
+            //         || this.user.roles[0].id == 6
+            //         || this.user.roles[0].id == 7
+            //         || this.user.roles[0].id == 8 ? true : false
+            // },
 
-            canEdit() {
-                return this.user.roles[0].id == 1 
-                    || this.user.roles[0].id == 2
-                    || this.user.roles[0].id == 8 ? true : false
-            },
+            // canEditName() {
+            //     return this.user.roles[0].id == 1 
+            //         || this.user.roles[0].id == 2
+            //         || this.user.roles[0].id == 8 ? true : false
+            // },
 
             popClassification() {
                 var id = 6; var classification
@@ -557,9 +584,9 @@
             // tec4g2600() {
             //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 7) : null
             // },
-            tec4g3500() {
-                return this.technologies ? this.technologies.find(element => element.technology_type_id == 8) : null
-            },
+            // tec4g3500() {
+            //     return this.technologies ? this.technologies.find(element => element.technology_type_id == 8) : null
+            // },
 
             popCritical() {
                 var criticity = 0;
@@ -627,7 +654,8 @@
 
             getTabs() {
                 axios.get(`/api/popMenu`).then((response) => {
-                    this.tabs = response.data.data
+                    console.log(response)
+                    this.tabs = response.data.pop
                 })
             },
 
@@ -646,14 +674,29 @@
                 if (tab.component == 'drone' && (!this.pop.layout || !this.pop.layout.drone_footage)) {
                     return false
                 }
+
+                // Comsite
+                if (tab.component == 'comsite' && !this.pop.comsites.length) {
+                    return false
+                }
+
+                // Clientes empresa
+                if (tab.component == 'clients' && !this.pop.client_companies.length) {
+                    return false
+                }
+
                 return true
             },
 
             getAllData() {
                 axios.get(`/api/pop/${this.$route.params.id}`)
                 .then((response) => {
-                    this.pop = response.data.data
+                    console.log(response.data)
+                    this.pop = response.data.pop
                     this.popName = this.pop.nombre
+                    this.canEditPop = response.data.can.editPop
+                    this.canViewLog = response.data.can.viewLog
+                    this.canEditName = response.data.can.editName
                 })
             },
 
@@ -707,3 +750,10 @@
         }
     }
 </script>
+<style type="text/css">
+    .has-background-dark input[type="text"] {
+        background-color : #333;
+        color: #ccc; 
+        font-weight: 600;  
+    }
+</style>

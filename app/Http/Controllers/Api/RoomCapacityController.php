@@ -74,6 +74,11 @@ class RoomCapacityController extends Controller
         //         GROUP BY DATE(created_at)
         //     )
         // "));
+        $graphDates = [];
+        $dates = RoomCapacity::where('room_id', $id)->groupByRaw('DATE(created_at)')->orderBy('created_at', 'asc')->get();
+        foreach ($dates as $date) {
+            array_push($graphDates, $date->created_at);
+        }
 
         $data = RoomCapacity::where('room_id', $id)
         ->whereIn('created_at', [

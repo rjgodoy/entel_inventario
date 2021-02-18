@@ -104,7 +104,7 @@
                     // console.log(params)
                     axios.post(`/api/airConditionerCapacities`, params).then(response => {
                         console.log(response.data)
-                        this.$eventBus.$emit('air-conditioner-capacity');
+                        this.$eventBus.$emit('reload-data');
                     })
                 }
             }

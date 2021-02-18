@@ -159,6 +159,7 @@
 
                     <div class="block" :style="isEditMode ? 'padding-top: 24px;' : ''">
                         <div class="has-text-weight-light is-size-7">Horómetro</div>
+                        <!-- <div class="has-text-weight-semibold is-size-6">{{ generatorSetHorometer ? generatorSetHorometer : 'No' }}</div> -->
                         <div class="has-text-weight-semibold is-size-6">{{ generatorSet.horometer == 1 ? 'Si' : 'No' }}</div>
                     </div>
                 </div>
@@ -361,6 +362,8 @@
                 newUsedCapacity: this.generatorSet.current_generator_set_capacity ? this.generatorSet.current_generator_set_capacity.used_capacity : 0,
                 isEditMode: false,
 
+                generatorSetHorometer: null
+
             }
         },
 
@@ -370,6 +373,7 @@
             this.getTopologyTypes()
             this.getLevelTypes()
             this.getGeneratorSetTypes()
+            this.getGeneratorSetDataOnline()
         },
 
         computed: {
@@ -522,6 +526,17 @@
                     }
                 })
             },
+
+            // async getGeneratorSetDataOnline() {
+            //     let params = {
+            //         'pop_id': this.generatorSet.pop_id
+            //     }
+            //     await axios.get(`/api/generatorSetDataCapacity`, { params: params })
+            //     .then(response => {
+            //         console.log(response.data)
+            //         this.generatorSetDataCapacity = response.data
+            //     })
+            // },
 
             saveChanges() {
                 // console.log(this.currentGeneratorResponsableAreaId)

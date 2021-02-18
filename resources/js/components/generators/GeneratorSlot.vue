@@ -15,11 +15,11 @@
             <div v-if="data_type == 'fuel_level'">
                 <b-progress :value="last_data.fuel_level_percentage * 100" size="is-medium" show-value 
                 :type="last_data.fuel_level_percentage <= 0.2 ? 'is-danger' : (last_data.fuel_level_percentage > 0.2 && last_data.fuel_level_percentage <= 0.5 ? 'is-warning' : 'is-success')">
-                    <span class="">
+                    <span class="has-text-dark">
                         {{ last_data.fuel_level_percentage * 100 | numeral('0,0.0') }}%
                     </span>
                     &nbsp;
-                    <span v-if="generator.g_model.g_fuel_pond" class="has-text-weight-normal">
+                    <span v-if="generator.g_model.g_fuel_pond" class="has-text-dark has-text-weight-normal">
                         {{ last_data.fuel_level + '/' + generator.g_model.g_fuel_pond.capacity }}
                     </span>
                 </b-progress>
@@ -39,9 +39,9 @@
                 <font-awesome-icon :icon="['far','clipboard']"/>
             </button>
 
-            <button type="button" class="button is-small is-link tooltip" data-tooltip="Tooltip Text">
+            <!-- <button type="button" class="button is-small is-link tooltip" data-tooltip="Tooltip Text">
                 <font-awesome-icon icon="bars"/>
-            </button>
+            </button> -->
             
         </div>
         <b-modal :active.sync="isGeneratorDetailModalActive"
@@ -59,6 +59,7 @@
                 :user="user"
                 />
         </b-modal>
+
     </div>
 </template>
 
@@ -71,15 +72,13 @@
         props : [
             'user',
             'generator',
-            'data_type',
-            'last_data',
-            'last_day_data'
+            'data_type'
         ],
 
         data() {
             return {
-                // last_data: Array,
-                // last_day_data: Object,
+                last_data: null,
+                last_day_data: null,
                 isGeneratorDetailModalActive: false,
                 generatorSelected: null,
                 isLoading: false
@@ -115,28 +114,31 @@
         },
 
         watch: {
-        
+            generator(newVal) {
+                this.getLastDayData(newVal.id)
+            }
         },
 
         mounted() {
-            // this.getLastDayData(this.generator.id)
+            // console.log(this.last_day_data)
+            this.getLastDayData(this.generator.id)
         },
 
         methods: {
-            // async getLastDayData(generator_id) {
-            //     this.isLoading = true
-            //     let params = {
-            //         'generator_id': parseInt(generator_id)
-            //     }
+            async getLastDayData(generator_id) {
+                this.isLoading = true
+                let params = {
+                    'generator_id': parseInt(generator_id)
+                }
 
-            //     await axios.get('/api/generatorLastDay', { params: params })
-            //     .then((response) => {
-            //         this.last_day_data = response.data
-            //         // console.log(response.data[0])
-            //         this.last_data = response.data[0]
-            //         this.isLoading = false
-            //     })
-            // },
+                await axios.get('/api/generatorLastDay', { params: params })
+                .then((response) => {
+                    this.last_day_data = response.data
+                    // console.log(response.data[0])
+                    this.last_data = response.data[0]
+                    this.isLoading = false
+                })
+            },
         }
     }
 </script>

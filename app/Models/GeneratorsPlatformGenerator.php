@@ -42,4 +42,9 @@ class GeneratorsPlatformGenerator extends Model
         return $this->belongsTo(GeneratorsPlatformModel::class, 'model_id');
     }
 
+    public function pop() 
+    {
+        return $this->belongsTo(Pop::class);
+    }
+
 }

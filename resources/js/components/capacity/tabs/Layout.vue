@@ -8,7 +8,7 @@
             <div class="">
                 <div class="">
                     <div class="box" :style="showLayout ? 'min-height: 640px' : 'min-height: 960px'">
-                        <vision v-if="showLayout" :layout="this.pop.layout && this.pop.layout.iframe"/>
+                        <iframe v-if="showLayout" height='610' :src="this.pop.layout && this.pop.layout.iframe" frameborder='0' allowfullscreen allow='xr-spatial-tracking' style="width: 100%;"></iframe>
                         <iframe v-if="!showLayout" :src="'/storage/' + layoutPath" width="100%" style="height: 960px"></iframe>
                     </div>
                 </div>
@@ -112,7 +112,7 @@ library.add(faRandom, faMicrochip, faChargingStation, faGasPump, faEdit, farChec
                     }
                     axios.post(`/api/batteryBankAutonomies`, params)
                     .then(response => {
-                        this.$eventBus.$emit('battery-autonomy')
+                        this.$eventBus.$emit('reload-data')
                         // console.log(response.data)
                     })
                 }

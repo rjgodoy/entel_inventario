@@ -127,7 +127,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/api/albaPopList?core=".concat(this.core, "&crm_id=").concat(this.selectedCrm ? this.selectedCrm.id : 0, "&zona_id=").concat(this.selectedZona ? this.selectedZona.id : 0, "&page=").concat(this.data.current_page)).then(function (response) {
         // console.log(response.data)
-        _this.data = response.data; // if(true) {
+        _this.data = response.data.pop; // if(true) {
         //     this.$emit('clicked', this.data)
         // }
       });

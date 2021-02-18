@@ -113,7 +113,7 @@ class PopController extends Controller
                 ->orderBy('pops.id')
                 ->paginate(10);
 
-        return new PopResource($pops);
+        return new PopCollection($pops);
     }
 
     /**
@@ -164,7 +164,7 @@ class PopController extends Controller
                 ->orderBy('pops.id')
                 ->paginate(10);
 
-        return new PopResource($pops);
+        return new PopCollection($pops);
     }
 
     /**
@@ -275,7 +275,8 @@ class PopController extends Controller
             'current_autonomy',
             'current_battery_bank_autonomy',
             'client_companies.access_type',
-            'layout'
+            'layout',
+            'comsites'
             )
             ->where('id', $id)
             ->first();

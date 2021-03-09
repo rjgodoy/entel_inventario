@@ -160,8 +160,9 @@
 
     export default {
         components: {
-            ModalPermissions: () => import(/* webpackChunkName: "chunks/admin/modals/modalInfoCircle"*/'./modals/ModalPermissions'),
+            ModalPermissions: () => import(/* webpackChunkName: "chunks/admin/modals/modalPermissions"*/'../modals/ModalPermissions'),
         },
+
         props : [
             'user',
             'bodyBackground',
@@ -169,12 +170,12 @@
             'primaryText',
             'secondaryText',
         ],
-        created() {
-        },
+
         mounted() {
             this.getUsers()
             this.getRoles()
         },
+
         data() {
             return {
                 selectedRole: 0,
@@ -200,6 +201,7 @@
                 isModalPermissionsActive: false
             }
         },
+
         methods: {
             getUsers() {
                 var params = {
@@ -207,7 +209,7 @@
                 }
                 axios.get('/api/users', { params: params })
                 .then(response => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.users = response.data.users
                 })
             },
@@ -225,7 +227,7 @@
                 }
                 axios.put(`/api/users/${user_id}?role_id=${role_id}`)
                 .then(response => {
-                    console.log(response)
+                    // console.log(response)
                     // this.roles = response.data.data
                 })
             }

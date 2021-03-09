@@ -166,17 +166,13 @@
                         }
                         axios.post('/api/newUserAccepted', params )
                         .then(response => {
-                            console.log(response.data)
-
+                            console.log(response)
                             this.$buefy.toast.open({
                                 message: response.data.message,
                                 type: 'is-success',
                             })
-
                             this.getUserRequests()
-                            
                         })
-                        
                     }
                 })
             },
@@ -195,15 +191,11 @@
                         }
                         axios.post('api/newUserRejected', params )
                         .then(response => {
-                            console.log(response.data)
-
                             this.$buefy.toast.open({
                                 message: response.data.message,
                                 type: 'is-warning',
                             })
-
                             this.getUserRequests()
-                            
                         })
                     }
                 })

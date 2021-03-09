@@ -5,19 +5,29 @@
                 <div class="tile is-ancestor" style="margin: -40px 0 -40px 0;">
                     <div class="tile is-parent">
                         <a class="tile is-child box" 
-                            :class="currentTab === 'AdminRoles' ? 'has-background-link' : boxBackground" @click="currentTab = 'AdminRoles'">
-                            <div :class="currentTab === 'AdminRoles' ? selectedSecondaryBoxText : secondaryText"> 
+                            :class="currentTab === 'RoleUsers' ? 'has-background-link' : boxBackground" @click="currentTab = 'RoleUsers'">
+                            <div :class="currentTab === 'RoleUsers' ? selectedSecondaryBoxText : secondaryText"> 
                                 <div class="is-size-6 has-text-weight-semibold">
-                                    Roles de Usuario
+                                    Roles de usuario
                                 </div>
                             </div>
                         </a>
                     </div>
                     <div class="tile is-parent">
-                        <a class="tile is-child box" :class="currentTab === 'AdminUserRequests' ? 'has-background-link' : boxBackground" @click="currentTab = 'AdminUserRequests'">
-                            <div :class="currentTab === 'AdminUserRequests' ? selectedSecondaryBoxText : secondaryText"> 
+                        <a class="tile is-child box" :class="currentTab === 'UserRequests' ? 'has-background-link' : boxBackground" @click="currentTab = 'UserRequests'">
+                            <div :class="currentTab === 'UserRequests' ? selectedSecondaryBoxText : secondaryText"> 
                                 <div class="is-size-6 has-text-weight-semibold">
-                                    Solicitudes de Nuevos Usuarios
+                                    Solicitudes de registro
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="tile is-parent">
+                        <a class="tile is-child box" 
+                            :class="currentTab === 'PermissionRoles' ? 'has-background-link' : boxBackground" @click="currentTab = 'PermissionRoles'">
+                            <div :class="currentTab === 'PermissionRoles' ? selectedSecondaryBoxText : secondaryText"> 
+                                <div class="is-size-6 has-text-weight-semibold">
+                                    Roles y permisos
                                 </div>
                             </div>
                         </a>
@@ -39,12 +49,11 @@
 </template>
 
 <script>
-    import AdminRoles from './AdminRoles.vue';
-    import AdminUserRequests from './AdminUserRequests.vue';
     export default {
         components: {
-            AdminRoles,
-            AdminUserRequests,
+            RoleUsers: () => import(/* webpackChunkName: "chunks/admin/roleUsers"*/"./user/RoleUsers"),
+            UserRequests: () => import(/* webpackChunkName: "chunks/admin/userRequests"*/"./user/UserRequests"),
+            PermissionRoles: () => import(/* webpackChunkName: "chunks/admin/permissionRoles"*/"./user/PermissionRoles"),
         },
         props : [
             'user',
@@ -65,7 +74,7 @@
             return {
                 selectedPrimaryBoxText: 'has-text-white',
                 selectedSecondaryBoxText: 'has-text-light',
-                currentTab: 'AdminRoles'
+                currentTab: 'RoleUsers'
             }
         },
         methods: {

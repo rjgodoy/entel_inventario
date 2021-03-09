@@ -93,6 +93,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 // const RadialChart = () => ({
 //     // The component to load (should be a Promise)
 //     component: import('../RadialChart.vue'),
@@ -112,13 +113,15 @@ __webpack_require__.r(__webpack_exports__);
   props: ['user', 'selectedCrm', 'selectedZona', 'core', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'last_updated'],
   data: function data() {
     return {
-      technologyData: [] // buttonLoading: 0
+      technologyData: [],
+      isLoading: false // buttonLoading: 0
 
     };
   },
   created: function created() {},
   mounted: function mounted() {
     this.getTechnologyData();
+    this.isLoading = true;
   },
   watch: {
     selectedCrm: function selectedCrm(newValue, oldValue) {
@@ -206,14 +209,17 @@ __webpack_require__.r(__webpack_exports__);
       if (!this.selectedCrm) {
         axios.get("/api/technologyData?core=".concat(this.core)).then(function (response) {
           _this.technologyData = response.data.pop;
+          _this.isLoading = false;
         });
       } else if (!this.selectedZona) {
         axios.get("/api/technologyDataCrm?crm_id=".concat(this.selectedCrm.id, "&core=").concat(this.core)).then(function (response) {
           _this.technologyData = response.data.pop;
+          _this.isLoading = false;
         });
       } else {
         axios.get("/api/technologyDataZona?zona_id=".concat(this.selectedZona.id, "&core=").concat(this.core)).then(function (response) {
           _this.technologyData = response.data.pop;
+          _this.isLoading = false;
         });
       }
     } // downloadTechnologies() {
@@ -253,130 +259,229 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "columns" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "column is-size-5 has-text-weight-semibold has-text-left",
-          class: _vm.primaryText
-        },
-        [_vm._v("TECNOLOGÍAS")]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "column is-size-4 has-text-weight-semibold has-text-right",
-          class: _vm.primaryText
-        },
-        [_vm._v(_vm._s(_vm._f("numeral")(this.totalTechnologies, "0,0")))]
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "table",
-      {
-        staticClass: "table is-fullwidth",
-        staticStyle: { "background-color": "rgba(0,0,0,0)" }
-      },
-      [
-        _c("thead", [
-          _c("tr", { staticClass: "is-size-7" }, [
-            _c("th", { class: _vm.secondaryText }, [
-              _vm._v(
-                _vm._s(
-                  _vm.selectedCrm == null
-                    ? "CRM"
-                    : _vm.selectedZona == null
-                    ? "Zona"
-                    : "Comuna"
-                )
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [_c("abbr", { attrs: { title: "2G" } }, [_vm._v("2G")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [_c("abbr", { attrs: { title: "3G 900" } }, [_vm._v("3G")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [_c("abbr", { attrs: { title: "LTE 700" } }, [_vm._v("LTE 700")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "LTE 1900" } }, [
-                  _vm._v("LTE 1900")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "LTE 2600" } }, [
-                  _vm._v("LTE 2600")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "LTE 3500" } }, [
-                  _vm._v("LTE 3500")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "LTE 3500" } }, [
-                  _vm._v("LTE 5800")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [_c("abbr", { attrs: { title: "Total" } }, [_vm._v("Total")])]
-            )
-          ])
-        ]),
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "columns" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "column is-size-5 has-text-weight-semibold has-text-left",
+            class: _vm.primaryText
+          },
+          [_vm._v("TECNOLOGÍAS")]
+        ),
         _vm._v(" "),
         _c(
-          "tbody",
-          [
-            _vm._l(this.technologyData, function(crm) {
-              return _c("tr", { key: crm.id, staticClass: "is-size-7" }, [
-                _c("td", {}, [
+          "div",
+          {
+            staticClass:
+              "column is-size-4 has-text-weight-semibold has-text-right",
+            class: _vm.primaryText
+          },
+          [_vm._v(_vm._s(_vm._f("numeral")(this.totalTechnologies, "0,0")))]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "table",
+        {
+          staticClass: "table is-fullwidth",
+          staticStyle: { "background-color": "rgba(0,0,0,0)" }
+        },
+        [
+          _c("thead", [
+            _c("tr", { staticClass: "is-size-7" }, [
+              _c("th", { class: _vm.secondaryText }, [
+                _vm._v(
+                  _vm._s(
+                    _vm.selectedCrm == null
+                      ? "CRM"
+                      : _vm.selectedZona == null
+                      ? "Zona"
+                      : "Comuna"
+                  )
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [_c("abbr", { attrs: { title: "2G" } }, [_vm._v("2G")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [_c("abbr", { attrs: { title: "3G 900" } }, [_vm._v("3G")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [
+                  _c("abbr", { attrs: { title: "LTE 700" } }, [
+                    _vm._v("LTE 700")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [
+                  _c("abbr", { attrs: { title: "LTE 1900" } }, [
+                    _vm._v("LTE 1900")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [
+                  _c("abbr", { attrs: { title: "LTE 2600" } }, [
+                    _vm._v("LTE 2600")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [
+                  _c("abbr", { attrs: { title: "LTE 3500" } }, [
+                    _vm._v("LTE 3500")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [
+                  _c("abbr", { attrs: { title: "LTE 3500" } }, [
+                    _vm._v("LTE 5800")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [_c("abbr", { attrs: { title: "Total" } }, [_vm._v("Total")])]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            [
+              _vm._l(this.technologyData, function(crm) {
+                return _c("tr", { key: crm.id, staticClass: "is-size-7" }, [
+                  _c("td", {}, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "has-text-weight-bold",
+                        class: _vm.secondaryText,
+                        attrs: { href: "", title: "CRM Norte" }
+                      },
+                      [_vm._v(_vm._s(crm.nombre))]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [
+                      _vm._v(
+                        _vm._s(
+                          _vm._f("numeral")(crm.tec2g900 + crm.tec2g1900, "0,0")
+                        )
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [
+                      _vm._v(
+                        _vm._s(
+                          _vm._f("numeral")(crm.tec3g900 + crm.tec3g1900, "0,0")
+                        )
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [_vm._v(_vm._s(_vm._f("numeral")(crm.tecLTE700, "0,0")))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [_vm._v(_vm._s(_vm._f("numeral")(crm.tecLTE1900, "0,0")))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [_vm._v(_vm._s(_vm._f("numeral")(crm.tecLTE2600, "0,0")))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [_vm._v(_vm._s(_vm._f("numeral")(crm.tecLTE3500, "0,0")))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [_vm._v(_vm._s(_vm._f("numeral")(crm.tecLTE5800, "0,0")))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "has-text-right has-text-weight-bold",
+                      class: _vm.primaryText
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(
+                          _vm._f("numeral")(
+                            crm.tec2g1900 +
+                              crm.tec3g900 +
+                              crm.tec3g1900 +
+                              crm.tecLTE700 +
+                              crm.tecLTE1900 +
+                              crm.tecLTE2600 +
+                              crm.tecLTE3500 +
+                              crm.tecLTE5800,
+                            "0,0"
+                          )
+                        )
+                      )
+                    ]
+                  )
+                ])
+              }),
+              _vm._v(" "),
+              _c("tr", { staticClass: "is-size-7 has-text-weight-bold" }, [
+                _c("td", [
                   _c(
                     "a",
                     {
-                      staticClass: "has-text-weight-bold",
                       class: _vm.secondaryText,
-                      attrs: { href: "", title: "CRM Norte" }
+                      attrs: { href: "", title: "Total" }
                     },
-                    [_vm._v(_vm._s(crm.nombre))]
+                    [_vm._v("Total")]
                   )
                 ]),
                 _vm._v(" "),
@@ -386,179 +491,107 @@ var render = function() {
                   [
                     _vm._v(
                       _vm._s(
-                        _vm._f("numeral")(crm.tec2g900 + crm.tec2g1900, "0,0")
-                      )
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "has-text-right", class: _vm.primaryText },
-                  [
-                    _vm._v(
-                      _vm._s(
-                        _vm._f("numeral")(crm.tec3g900 + crm.tec3g1900, "0,0")
-                      )
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(crm.tecLTE700, "0,0")))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(crm.tecLTE1900, "0,0")))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(crm.tecLTE2600, "0,0")))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(crm.tecLTE3500, "0,0")))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(crm.tecLTE5800, "0,0")))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  {
-                    staticClass: "has-text-right has-text-weight-bold",
-                    class: _vm.primaryText
-                  },
-                  [
-                    _vm._v(
-                      _vm._s(
                         _vm._f("numeral")(
-                          crm.tec2g1900 +
-                            crm.tec3g900 +
-                            crm.tec3g1900 +
-                            crm.tecLTE700 +
-                            crm.tecLTE1900 +
-                            crm.tecLTE2600 +
-                            crm.tecLTE3500 +
-                            crm.tecLTE5800,
+                          _vm.total2G900 + _vm.total2G1900,
                           "0,0"
                         )
                       )
                     )
                   ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "has-text-right", class: _vm.primaryText },
+                  [
+                    _vm._v(
+                      _vm._s(
+                        _vm._f("numeral")(
+                          _vm.total3G900 + _vm.total3G1900,
+                          "0,0"
+                        )
+                      )
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "has-text-right", class: _vm.primaryText },
+                  [_vm._v(_vm._s(_vm._f("numeral")(_vm.totalLTE700, "0,0")))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "has-text-right", class: _vm.primaryText },
+                  [_vm._v(_vm._s(_vm._f("numeral")(_vm.totalLTE1900, "0,0")))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "has-text-right", class: _vm.primaryText },
+                  [_vm._v(_vm._s(_vm._f("numeral")(_vm.totalLTE2600, "0,0")))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "has-text-right", class: _vm.primaryText },
+                  [_vm._v(_vm._s(_vm._f("numeral")(_vm.totalLTE3500, "0,0")))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "has-text-right", class: _vm.primaryText },
+                  [_vm._v(_vm._s(_vm._f("numeral")(_vm.totalLTE5800, "0,0")))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "has-text-right", class: _vm.primaryText },
+                  [
+                    _vm._v(
+                      _vm._s(_vm._f("numeral")(_vm.totalTechnologies, "0,0"))
+                    )
+                  ]
                 )
               ])
-            }),
-            _vm._v(" "),
-            _c("tr", { staticClass: "is-size-7 has-text-weight-bold" }, [
-              _c("td", [
-                _c(
-                  "a",
-                  {
-                    class: _vm.secondaryText,
-                    attrs: { href: "", title: "Total" }
-                  },
-                  [_vm._v("Total")]
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [
-                  _vm._v(
-                    _vm._s(
-                      _vm._f("numeral")(_vm.total2G900 + _vm.total2G1900, "0,0")
-                    )
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [
-                  _vm._v(
-                    _vm._s(
-                      _vm._f("numeral")(_vm.total3G900 + _vm.total3G1900, "0,0")
-                    )
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(_vm.totalLTE700, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(_vm.totalLTE1900, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(_vm.totalLTE2600, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(_vm.totalLTE3500, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(_vm.totalLTE5800, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [
-                  _vm._v(
-                    _vm._s(_vm._f("numeral")(_vm.totalTechnologies, "0,0"))
-                  )
-                ]
-              )
-            ])
-          ],
-          2
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "columns" }, [
-      _c("div", { staticClass: "column" }),
+            ],
+            2
+          )
+        ]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "column is-right" }, [
-        _c(
-          "div",
-          {
-            staticClass: "is-size-7 has-text-right",
-            class: _vm.secondaryText,
-            staticStyle: { "margin-top": "10px" }
-          },
-          [_vm._v("Ultima actualización: " + _vm._s(_vm.last_updated))]
-        )
-      ])
-    ])
-  ])
+      _c("div", { staticClass: "columns" }, [
+        _c("div", { staticClass: "column" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "column is-right" }, [
+          _c(
+            "div",
+            {
+              staticClass: "is-size-7 has-text-right",
+              class: _vm.secondaryText,
+              staticStyle: { "margin-top": "10px" }
+            },
+            [_vm._v("Ultima actualización: " + _vm._s(_vm.last_updated))]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("b-loading", {
+        attrs: {
+          "is-full-page": false,
+          active: _vm.isLoading,
+          "can-cancel": true
+        },
+        on: {
+          "update:active": function($event) {
+            _vm.isLoading = $event
+          }
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

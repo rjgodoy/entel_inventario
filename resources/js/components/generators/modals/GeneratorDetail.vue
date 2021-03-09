@@ -3,7 +3,7 @@
         <header class="modal-card-head has-text-centered">
             <div class="modal-card-title">
                 <div class="is-size-4 has-text-weight-semibold">Datos generador {{ generator.name }}<br/>
-                    <div class="is-size-5 has-text-weight-normal p-2">CRM {{ generator.g_zone.g_sector.name }} - {{ generator.g_zone.name }}</div>
+                    <div class="is-size-5 has-text-weight-normal p-2">CRM {{ generator.g_zona.g_sector.name }} - {{ generator.g_zona.zona }} - {{ generator.g_zona.name }}</div>
                 </div>
             </div>
         </header>
@@ -45,14 +45,13 @@
             GeneratorCharts: () => import(/* webpackChunkName: "chunks/generators/modals/generatorCharts"*/'./GeneratorCharts'),
             GeneratorData: () => import(/* webpackChunkName: "chunks/generators/modals/generatorData"*/'./GeneratorData'),
         },
+
         props : [
             'generator',
             'last_data',
-            'last_day_data',
-            'hourmeter_consumption',
-            'fuel_consumption',            
-            'user'
+            'last_day_data'
         ],
+
         data() {
             return {
                 boxes: [
@@ -92,42 +91,64 @@
                         "title": "Última medición",
                         "info": this.generator.g_last_maintance ? this.generator.g_last_maintance.created : 'N/A',
                     },
-                    {
-                        "title": "Horas de funcionamiento entre visitas",
-                        "info": this.generator.mobile_code,
-                        "color": "has-background-warning"
-                    },
-                    {
-                        "title": "Días nivel crítico",
-                        "info": this.generator.mobile_code,
-                        "color": "has-background-warning"
-                    },
-                    {
-                        "title": "Fecha proxima recarga",
-                        "info": this.generator.mobile_code,
-                        "color": "has-background-warning"
-                    },
-                    {
-                        "title": "Mantenciones correctivas",
-                        "info": this.generator.mobile_code,
-                        "color": "has-background-warning"
-                    },
-                    {
-                        "title": "Mantenciones preventivas",
-                        "info": this.generator.mobile_code,
-                        "color": "has-background-warning"
-                    },
-                    {
-                        "title": "Combustible utilizado lts. (recargas)",
-                        "info": this.generator.mobile_code,
-                        "color": "has-background-warning"
-                    },
+                    // {
+                    //     "title": "Horas de funcionamiento entre visitas",
+                    //     "info": this.generator.mobile_code,
+                    //     "color": "has-background-warning"
+                    // },
+                    // {
+                    //     "title": "Días nivel crítico",
+                    //     "info": this.generator.mobile_code,
+                    //     "color": "has-background-warning"
+                    // },
+                    // {
+                    //     "title": "Fecha proxima recarga",
+                    //     "info": this.generator.mobile_code,
+                    //     "color": "has-background-warning"
+                    // },
+                    // {
+                    //     "title": "Mantenciones correctivas",
+                    //     "info": this.generator.mobile_code,
+                    //     "color": "has-background-warning"
+                    // },
+                    // {
+                    //     "title": "Mantenciones preventivas",
+                    //     "info": this.generator.mobile_code,
+                    //     "color": "has-background-warning"
+                    // },
+                    // {
+                    //     "title": "Combustible utilizado lts. (recargas)",
+                    //     "info": this.generator.mobile_code,
+                    //     "color": "has-background-warning"
+                    // },
                 ]
             }
         },
 
-        watch: {
+        computed: {
+            hourmeter_consumption() {
+                let data = null
+                let i = 0
+                if(this.last_day_data) {
+                    Object.keys(this.last_day_data).forEach(element => {
+                        data = data + this.last_day_data[element].hourmeter_consumption
+                        i++
+                    })
+                }
+                return data ? data / i : data
+            },
 
+            fuel_consumption() {
+                let data = null
+                let i = 0
+                if(this.last_day_data) {
+                    Object.keys(this.last_day_data).forEach(element => {
+                        data = data + this.last_day_data[element].fuel_consumption
+                        i++
+                    })
+                }
+                return data ? data / i : data
+            }
         },
 
         created() {

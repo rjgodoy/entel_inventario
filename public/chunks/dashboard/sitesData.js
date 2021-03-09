@@ -59,36 +59,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['user', 'selectedCrm', 'selectedZona', 'core', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'last_updated'],
   data: function data() {
     return {
       sitesData: [],
-      buttonLoading: 0
+      buttonLoading: 0,
+      isLoading: false
     };
   },
   created: function created() {
     this.getData();
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.isLoading = true;
+  },
   watch: {
     selectedCrm: function selectedCrm(newValue, oldValue) {
       this.getData();
@@ -147,39 +133,23 @@ __webpack_require__.r(__webpack_exports__);
       // Si no hay un CRM seleccionado
       if (!this.selectedCrm) {
         axios.get("/api/sitesData?core=".concat(this.core)).then(function (response) {
-          _this.sitesData = response.data.pop; // this.$eventBus.$emit('getSitesData', this.sitesData)
-        })["finally"](function () {// this.$eventBus.$emit('getSitesData', this.sitesData)
+          _this.sitesData = response.data.pop;
+          _this.isLoading = false;
         });
       } //Si hay un CRM seleccionado, pero no hay zona seleccionada
       else if (!this.selectedZona) {
           axios.get("/api/sitesDataCrm?crm_id=".concat(this.selectedCrm.id, "&core=").concat(this.core)).then(function (response) {
-            _this.sitesData = response.data.pop; // this.$eventBus.$emit('getSitesData', this.sitesData)
-          })["finally"](function () {// this.$eventBus.$emit('getSitesData', this.sitesData)
+            _this.sitesData = response.data.pop;
+            _this.isLoading = false;
           });
         } // Si hay una zona seleccionada
         else {
             axios.get("/api/sitesDataZona?zona_id=".concat(this.selectedZona.id, "&core=").concat(this.core)).then(function (response) {
-              _this.sitesData = response.data.pop; // this.$eventBus.$emit('getSitesData', this.sitesData)
-            })["finally"](function () {// this.$eventBus.$emit('getSitesData', this.sitesData)
+              _this.sitesData = response.data.pop;
+              _this.isLoading = false;
             });
           }
-    } // downloadSites() {
-    //     this.buttonLoading = 1
-    //     axios.get(`/pop/export?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}`, {
-    //         responseType: 'blob',
-    //     })
-    //     .then((response) => {
-    //         console.log(response.data)
-    //         const blob = new Blob([response.data], { type: 'application/xls' })
-    //         // const objectUrl = window.URL.createObjectURL(blob)
-    //         let link = document.createElement('a')
-    //         link.href = window.URL.createObjectURL(blob)
-    //         link.download = 'test.xlsx'
-    //         link.click()
-    //         this.buttonLoading = 0
-    //     })
-    // }
-
+    }
   }
 });
 
@@ -200,233 +170,252 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "columns" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "column is-size-5 has-text-weight-semibold has-text-left",
-          class: _vm.primaryText
-        },
-        [_vm._v("SITIOS")]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "column is-size-4 has-text-weight-semibold has-text-right",
-          class: _vm.primaryText
-        },
-        [_vm._v(_vm._s(_vm._f("numeral")(this.totalSites, "0,0")))]
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "table",
-      {
-        staticClass: "table is-fullwidth",
-        staticStyle: { "background-color": "rgba(0,0,0,0)" }
-      },
-      [
-        _c("thead", [
-          _c("tr", { staticClass: "is-size-7" }, [
-            _c("th", { class: _vm.secondaryText }, [
-              _vm._v(
-                _vm._s(
-                  _vm.selectedCrm == null
-                    ? "CRM"
-                    : _vm.selectedZona == null
-                    ? "Zona"
-                    : "Comuna"
-                )
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [_c("abbr", { attrs: { title: "Fijo" } }, [_vm._v("Fijo")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [_c("abbr", { attrs: { title: "Móvil" } }, [_vm._v("Móvil")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [_c("abbr", { attrs: { title: "Switch" } }, [_vm._v("Switch")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [_c("abbr", { attrs: { title: "Phone" } }, [_vm._v("Phone")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "Repetidor" } }, [
-                  _vm._v("Repetidor")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [_c("abbr", { attrs: { title: "Total" } }, [_vm._v("Total")])]
-            )
-          ])
-        ]),
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "columns" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "column is-size-5 has-text-weight-semibold has-text-left",
+            class: _vm.primaryText
+          },
+          [_vm._v("SITIOS")]
+        ),
         _vm._v(" "),
         _c(
-          "tbody",
-          [
-            _vm._l(_vm.sitesData, function(item) {
-              return _c("tr", { key: item.id, staticClass: "is-size-7" }, [
+          "div",
+          {
+            staticClass:
+              "column is-size-4 has-text-weight-semibold has-text-right",
+            class: _vm.primaryText
+          },
+          [_vm._v(_vm._s(_vm._f("numeral")(this.totalSites, "0,0")))]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "table",
+        {
+          staticClass: "table is-fullwidth",
+          staticStyle: { "background-color": "rgba(0,0,0,0)" }
+        },
+        [
+          _c("thead", [
+            _c("tr", { staticClass: "is-size-7" }, [
+              _c("th", { class: _vm.secondaryText }, [
+                _vm._v(
+                  _vm._s(
+                    _vm.selectedCrm == null
+                      ? "CRM"
+                      : _vm.selectedZona == null
+                      ? "Zona"
+                      : "Comuna"
+                  )
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [_c("abbr", { attrs: { title: "Fijo" } }, [_vm._v("Fijo")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [_c("abbr", { attrs: { title: "Móvil" } }, [_vm._v("Móvil")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [_c("abbr", { attrs: { title: "Switch" } }, [_vm._v("Switch")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [_c("abbr", { attrs: { title: "Phone" } }, [_vm._v("Phone")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [
+                  _c("abbr", { attrs: { title: "Repetidor" } }, [
+                    _vm._v("Repetidor")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [_c("abbr", { attrs: { title: "Total" } }, [_vm._v("Total")])]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            [
+              _vm._l(_vm.sitesData, function(item) {
+                return _c("tr", { key: item.id, staticClass: "is-size-7" }, [
+                  _c("td", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "has-text-weight-bold",
+                        class: _vm.secondaryText,
+                        attrs: { href: "", title: "CRM Norte" }
+                      },
+                      [_vm._v(_vm._s(item.nombre))]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [_vm._v(_vm._s(_vm._f("numeral")(item.fijo, "0,0")))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [_vm._v(_vm._s(_vm._f("numeral")(item.movil, "0,0")))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [_vm._v(_vm._s(_vm._f("numeral")(item.switch, "0,0")))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [_vm._v(_vm._s(_vm._f("numeral")(item.phone, "0,0")))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [_vm._v(_vm._s(_vm._f("numeral")(item.repetidor, "0,0")))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "has-text-right has-text-weight-bold",
+                      class: _vm.primaryText
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(
+                          _vm._f("numeral")(
+                            item.fijo +
+                              item.movil +
+                              item.switch +
+                              item.phone +
+                              item.repetidor,
+                            "0,0"
+                          )
+                        )
+                      )
+                    ]
+                  )
+                ])
+              }),
+              _vm._v(" "),
+              _c("tr", { staticClass: "is-size-7 has-text-weight-bold" }, [
                 _c("td", [
                   _c(
                     "a",
                     {
-                      staticClass: "has-text-weight-bold",
                       class: _vm.secondaryText,
-                      attrs: { href: "", title: "CRM Norte" }
+                      attrs: { href: "", title: "Total" }
                     },
-                    [_vm._v(_vm._s(item.nombre))]
+                    [_vm._v("Total")]
                   )
                 ]),
                 _vm._v(" "),
                 _c(
                   "td",
                   { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(item.fijo, "0,0")))]
+                  [_vm._v(_vm._s(_vm._f("numeral")(this.totalFijo, "0,0")))]
                 ),
                 _vm._v(" "),
                 _c(
                   "td",
                   { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(item.movil, "0,0")))]
+                  [_vm._v(_vm._s(_vm._f("numeral")(this.totalMovil, "0,0")))]
                 ),
                 _vm._v(" "),
                 _c(
                   "td",
                   { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(item.switch, "0,0")))]
+                  [_vm._v(_vm._s(_vm._f("numeral")(this.totalSwitch, "0,0")))]
                 ),
                 _vm._v(" "),
                 _c(
                   "td",
                   { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(item.phone, "0,0")))]
+                  [_vm._v(_vm._s(_vm._f("numeral")(this.totalPhone, "0,0")))]
                 ),
                 _vm._v(" "),
                 _c(
                   "td",
                   { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(item.repetidor, "0,0")))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  {
-                    staticClass: "has-text-right has-text-weight-bold",
-                    class: _vm.primaryText
-                  },
                   [
                     _vm._v(
-                      _vm._s(
-                        _vm._f("numeral")(
-                          item.fijo +
-                            item.movil +
-                            item.switch +
-                            item.phone +
-                            item.repetidor,
-                          "0,0"
-                        )
-                      )
+                      _vm._s(_vm._f("numeral")(this.totalRepetidor, "0,0"))
                     )
                   ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "has-text-right", class: _vm.primaryText },
+                  [_vm._v(_vm._s(_vm._f("numeral")(this.totalSites, "0,0")))]
                 )
               ])
-            }),
-            _vm._v(" "),
-            _c("tr", { staticClass: "is-size-7 has-text-weight-bold" }, [
-              _c("td", [
-                _c(
-                  "a",
-                  {
-                    class: _vm.secondaryText,
-                    attrs: { href: "", title: "Total" }
-                  },
-                  [_vm._v("Total")]
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalFijo, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalMovil, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalSwitch, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalPhone, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalRepetidor, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalSites, "0,0")))]
-              )
-            ])
-          ],
-          2
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "columns" }, [
-      _c("div", { staticClass: "column" }),
+            ],
+            2
+          )
+        ]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "column is-right" }, [
-        _c(
-          "div",
-          {
-            staticClass: "is-size-7 has-text-right",
-            class: _vm.secondaryText,
-            staticStyle: { "margin-top": "10px" }
-          },
-          [_vm._v("Ultima actualización: " + _vm._s(_vm.last_updated))]
-        )
-      ])
-    ])
-  ])
+      _c("div", { staticClass: "columns" }, [
+        _c("div", { staticClass: "column is-right" }, [
+          _c(
+            "div",
+            {
+              staticClass: "is-size-7 has-text-right",
+              class: _vm.secondaryText,
+              staticStyle: { "margin-top": "10px" }
+            },
+            [_vm._v("Ultima actualización: " + _vm._s(_vm.last_updated))]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("b-loading", {
+        attrs: {
+          "is-full-page": false,
+          active: _vm.isLoading,
+          "can-cancel": true
+        },
+        on: {
+          "update:active": function($event) {
+            _vm.isLoading = $event
+          }
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

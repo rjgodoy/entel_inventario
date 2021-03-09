@@ -73,6 +73,7 @@
                 <div class="is-size-7 has-text-right" style="margin-top: 10px" :class="secondaryText">Ultima actualización: {{ last_updated }}</div>
             </div>
         </div>
+        <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
 
 
 <!--         <chart
@@ -116,13 +117,15 @@
         data() {
             return {
                 technologyData: [],
+                isLoading: false
                 // buttonLoading: 0
             }
         },
         created() {
         },
         mounted() {   
-            this.getTechnologyData()         
+            this.getTechnologyData()    
+            this.isLoading = true      
         },
         watch: {
             selectedCrm(newValue, oldValue) {
@@ -191,16 +194,19 @@
                     axios.get(`/api/technologyData?core=${this.core}`)
                     .then((response) => {
                         this.technologyData = response.data.pop;
+                        this.isLoading = false
                     })
                 } else if (!this.selectedZona){
                     axios.get(`/api/technologyDataCrm?crm_id=${this.selectedCrm.id}&core=${this.core}`)
                     .then((response) => {
                         this.technologyData = response.data.pop;
+                        this.isLoading = false
                     })
                 } else {
                     axios.get(`/api/technologyDataZona?zona_id=${this.selectedZona.id}&core=${this.core}`)
                     .then((response) => {
                         this.technologyData = response.data.pop;
+                        this.isLoading = false
                     })
                 }
             },

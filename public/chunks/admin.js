@@ -67,21 +67,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    AdminPops: function AdminPops() {
-      return Promise.all(/*! import() | chunks/admin/pops */[__webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload"), __webpack_require__.e("chunks/admin/pops")]).then(__webpack_require__.bind(null, /*! ./AdminPops */ "./resources/js/components/admin/AdminPops.vue"));
+    PopsTab: function PopsTab() {
+      return Promise.all(/*! import() | chunks/admin/pops */[__webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload"), __webpack_require__.e("chunks/admin/pops")]).then(__webpack_require__.bind(null, /*! ./PopsTab */ "./resources/js/components/admin/PopsTab.vue"));
     },
-    AdminTps: function AdminTps() {
-      return __webpack_require__.e(/*! import() | chunks/admin/tps */ "chunks/admin/tps").then(__webpack_require__.bind(null, /*! ./AdminTps */ "./resources/js/components/admin/AdminTps.vue"));
+    TpsTab: function TpsTab() {
+      return __webpack_require__.e(/*! import() | chunks/admin/tps */ "chunks/admin/tps").then(__webpack_require__.bind(null, /*! ./TpsTab */ "./resources/js/components/admin/TpsTab.vue"));
     },
     // AdminApprove: () => import(/* webpackChunkName: "chunks/admin/approve"*/"./AdminApprove"),
-    AdminMassive: function AdminMassive() {
-      return __webpack_require__.e(/*! import() | chunks/admin/massive */ "chunks/admin/massive").then(__webpack_require__.bind(null, /*! ./AdminMassive */ "./resources/js/components/admin/AdminMassive.vue"));
+    BulkLoadTab: function BulkLoadTab() {
+      return __webpack_require__.e(/*! import() | chunks/admin/bulkLoad */ "chunks/admin/bulkLoad").then(__webpack_require__.bind(null, /*! ./BulkLoadTab */ "./resources/js/components/admin/BulkLoadTab.vue"));
     },
-    AdminUsers: function AdminUsers() {
-      return __webpack_require__.e(/*! import() | chunks/admin/usersPermissions */ "chunks/admin/usersPermissions").then(__webpack_require__.bind(null, /*! ./AdminUsers */ "./resources/js/components/admin/AdminUsers.vue"));
+    RoleUsersTab: function RoleUsersTab() {
+      return __webpack_require__.e(/*! import() | chunks/admin/roleUsers */ "chunks/admin/roleUsers").then(__webpack_require__.bind(null, /*! ./RoleUsersTab */ "./resources/js/components/admin/RoleUsersTab.vue"));
     },
-    AdminFiles: function AdminFiles() {
-      return Promise.all(/*! import() | chunks/admin/files */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~d94cc1ca"), __webpack_require__.e("chunks/admin/files")]).then(__webpack_require__.bind(null, /*! ./AdminFiles */ "./resources/js/components/admin/AdminFiles.vue"));
+    HelperFilesTab: function HelperFilesTab() {
+      return Promise.all(/*! import() | chunks/admin/helperFiles */[__webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~ad5cfa06"), __webpack_require__.e("chunks/admin/helperFiles")]).then(__webpack_require__.bind(null, /*! ./HelperFilesTab */ "./resources/js/components/admin/HelperFilesTab.vue"));
     }
   },
   props: ['user'],
@@ -121,15 +121,15 @@ __webpack_require__.r(__webpack_exports__);
           bool = true;
           break;
 
-        case 'massive':
+        case 'bulkLoad':
           bool = this.canUpdateEfizity;
           break;
 
-        case 'users':
+        case 'roleUsers':
           bool = this.canEditPermissions;
           break;
 
-        case 'files':
+        case 'helperFiles':
           bool = this.canUploadFiles;
           break;
 
@@ -140,7 +140,7 @@ __webpack_require__.r(__webpack_exports__);
       return bool;
     },
     currentTabComponent: function currentTabComponent() {
-      return 'admin-' + this.currentTab;
+      return this.currentTab + '-tab';
     }
   },
   methods: {
@@ -156,15 +156,15 @@ __webpack_require__.r(__webpack_exports__);
           bool = true;
           break;
 
-        case 'massive':
+        case 'bulkLoad':
           bool = this.canUpdateEfizity;
           break;
 
-        case 'users':
+        case 'roleUsers':
           bool = this.canEditPermissions;
           break;
 
-        case 'files':
+        case 'helperFiles':
           bool = this.canUploadFiles;
           break;
 
@@ -196,12 +196,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/api/tabs").then(function (response) {
-        console.log(response);
-
         if (response.data.can.viewAdmin) {
           _this.tabs = response.data.admin;
         }
 
+        console.log(response.data);
         _this.canCreatePop = response.data.can.createPop;
         _this.canUpdateEfizity = response.data.can.updateEfizity;
         _this.canEditPermissions = response.data.can.editPermissions;

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class GeneratorsPlatformMaintanceStatus extends Model
 {
     protected $connection = 'mysql_generators';
-    protected $table = 'maintance_statuses';
+    protected $table = 'entel.maintance_statuses';
 
     public function g_maintances() 
     {

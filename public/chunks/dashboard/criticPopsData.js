@@ -55,24 +55,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     VuePagination: function VuePagination() {
@@ -89,12 +71,14 @@ __webpack_require__.r(__webpack_exports__);
         to: 0,
         current_page: 1
       },
-      buttonLoading: 0
+      buttonLoading: 0,
+      isLoading: false
     };
   },
   created: function created() {},
   mounted: function mounted() {
     this.getData();
+    this.isLoading = true;
   },
   watch: {
     selectedCrm: function selectedCrm(newValue, oldValue) {
@@ -112,10 +96,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/api/criticPopList?core=".concat(this.core, "&crm_id=").concat(this.selectedCrm ? this.selectedCrm.id : 0, "&zona_id=").concat(this.selectedZona ? this.selectedZona.id : 0, "&page=").concat(this.data.current_page)).then(function (response) {
-        // console.log(response.data)
-        _this.data = response.data.pop; // if(true) {
-        //     this.$emit('clicked', this.data)
-        // }
+        _this.data = response.data.pop;
+        _this.isLoading = false;
       });
     },
     popClassification: function popClassification(pop) {
@@ -156,156 +138,177 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "columns" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "column is-size-5 has-text-weight-semibold has-text-left",
-          class: _vm.primaryText
-        },
-        [_vm._v("POP Críticos")]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "column is-size-4 has-text-weight-semibold has-text-right",
-          class: _vm.primaryText
-        },
-        [_vm._v(_vm._s(_vm._f("numeral")(_vm.data.total, "0,0")))]
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "table",
-      {
-        staticClass: "table is-fullwidth",
-        staticStyle: { "background-color": "rgba(0,0,0,0)" }
-      },
-      [
-        _c("thead", [
-          _c("tr", { staticClass: "is-size-7" }, [
-            _c(
-              "th",
-              { staticClass: "has-text-left", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "Nombre y dirección del POP" } }, [
-                  _vm._v("Nombre / Dirección")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-left", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "Nemónico" } }, [
-                  _vm._v("Nemónico")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-left", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "Categoría" } }, [
-                  _vm._v("Categoría")
-                ])
-              ]
-            )
-          ])
-        ]),
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "columns" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "column is-size-5 has-text-weight-semibold has-text-left",
+            class: _vm.primaryText
+          },
+          [_vm._v("POP Críticos")]
+        ),
         _vm._v(" "),
         _c(
-          "tbody",
-          _vm._l(_vm.data.data, function(item) {
-            return _c("tr", { key: item.id, staticClass: "is-size-7" }, [
+          "div",
+          {
+            staticClass:
+              "column is-size-4 has-text-weight-semibold has-text-right",
+            class: _vm.primaryText
+          },
+          [_vm._v(_vm._s(_vm._f("numeral")(_vm.data.total, "0,0")))]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "table",
+        {
+          staticClass: "table is-fullwidth",
+          staticStyle: { "background-color": "rgba(0,0,0,0)" }
+        },
+        [
+          _c("thead", [
+            _c("tr", { staticClass: "is-size-7" }, [
               _c(
-                "td",
-                { staticClass: "has-text-left", class: _vm.primaryText },
+                "th",
+                { staticClass: "has-text-left", class: _vm.secondaryText },
                 [
-                  _c("div", [_vm._v(_vm._s(item.pop.nombre))]),
-                  _vm._v(" "),
-                  _c("div", [_vm._v(_vm._s(item.pop.direccion))])
+                  _c(
+                    "abbr",
+                    { attrs: { title: "Nombre y dirección del POP" } },
+                    [_vm._v("Nombre / Dirección")]
+                  )
                 ]
               ),
               _vm._v(" "),
               _c(
-                "td",
-                { staticClass: "has-text-left", class: _vm.primaryText },
+                "th",
+                { staticClass: "has-text-left", class: _vm.secondaryText },
                 [
-                  _c(
-                    "router-link",
-                    { attrs: { to: "/pop/" + item.pop.id, target: "_blank" } },
-                    [_vm._v(_vm._s(item.name))]
-                  )
-                ],
-                1
+                  _c("abbr", { attrs: { title: "Nemónico" } }, [
+                    _vm._v("Nemónico")
+                  ])
+                ]
               ),
               _vm._v(" "),
               _c(
-                "td",
-                { staticClass: "has-text-centered", class: _vm.primaryText },
+                "th",
+                { staticClass: "has-text-left", class: _vm.secondaryText },
                 [
-                  _c(
-                    "b-tag",
-                    {
-                      attrs: {
-                        type:
-                          _vm.popClassification(item.pop).id == 1
-                            ? "is-info"
-                            : _vm.popClassification(item.pop).id == 2
-                            ? "is-warning"
-                            : _vm.popClassification(item.pop).id == 3
-                            ? "is-smart"
-                            : _vm.popClassification(item.pop).id == 4
-                            ? "is-success"
-                            : "is-link"
-                      }
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(_vm.popClassification(item.pop).classification)
-                      )
-                    ]
-                  )
-                ],
-                1
+                  _c("abbr", { attrs: { title: "Categoría" } }, [
+                    _vm._v("Categoría")
+                  ])
+                ]
               )
             ])
-          }),
-          0
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "nav",
-      {
-        staticClass: "pagination",
-        attrs: { role: "navigation", "aria-label": "pagination" }
-      },
-      [
-        _c("vue-pagination", {
-          attrs: {
-            pagination: _vm.data,
-            offset: 4,
-            primaryText: _vm.primaryText
-          },
-          on: {
-            paginate: function($event) {
-              return _vm.getData()
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.data.data, function(item) {
+              return _c("tr", { key: item.id, staticClass: "is-size-7" }, [
+                _c(
+                  "td",
+                  { staticClass: "has-text-left", class: _vm.primaryText },
+                  [
+                    _c("div", [_vm._v(_vm._s(item.pop.nombre))]),
+                    _vm._v(" "),
+                    _c("div", [_vm._v(_vm._s(item.pop.direccion))])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "has-text-left", class: _vm.primaryText },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        attrs: { to: "/pop/" + item.pop.id, target: "_blank" }
+                      },
+                      [_vm._v(_vm._s(item.name))]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "has-text-centered", class: _vm.primaryText },
+                  [
+                    _c(
+                      "b-tag",
+                      {
+                        attrs: {
+                          type:
+                            _vm.popClassification(item.pop).id == 1
+                              ? "is-info"
+                              : _vm.popClassification(item.pop).id == 2
+                              ? "is-warning"
+                              : _vm.popClassification(item.pop).id == 3
+                              ? "is-smart"
+                              : _vm.popClassification(item.pop).id == 4
+                              ? "is-success"
+                              : "is-link"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(_vm.popClassification(item.pop).classification)
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ])
+            }),
+            0
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "nav",
+        {
+          staticClass: "pagination",
+          attrs: { role: "navigation", "aria-label": "pagination" }
+        },
+        [
+          _c("vue-pagination", {
+            attrs: {
+              pagination: _vm.data,
+              offset: 4,
+              primaryText: _vm.primaryText
+            },
+            on: {
+              paginate: function($event) {
+                return _vm.getData()
+              }
             }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("b-loading", {
+        attrs: {
+          "is-full-page": false,
+          active: _vm.isLoading,
+          "can-cancel": true
+        },
+        on: {
+          "update:active": function($event) {
+            _vm.isLoading = $event
           }
-        })
-      ],
-      1
-    )
-  ])
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

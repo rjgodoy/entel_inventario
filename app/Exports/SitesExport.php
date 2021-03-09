@@ -147,7 +147,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            $site = Site::withTrashed()->with('pop.comuna.zona.crm', 'state', 'classification_type', 'attention_priority_type', 'category_type', 'attention_type',  'pop.current_entel_vip', 'pop.vertical_structures.beacons.beacon_type', 'pop.protected_zones', 'technologies', 'pop.comsites', 'pop.energy_system', 'pop.energy_responsable')
+            $site = Site::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'state', 'classification_type', 'attention_priority_type', 'category_type', 'attention_type',  'pop.current_entel_vip', 'pop.vertical_structures.beacons.beacon_type', 'pop.protected_zones', 'technologies', 'pop.comsites', 'pop.energy_system', 'pop.energy_responsable')
             	->where(function($p) use($text) {
                     if ($text) {
                         $p->where('nem_site', 'LIKE', "%$text%")
@@ -165,7 +165,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
                         $q->whereRaw('1 = 1');
                     }
                 })
-    	        ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+    	        ->whereHas('pop.zona', function($q) use($condition_crm, $condition_zona) {
     	            $q->whereRaw($condition_crm)
                     ->whereRaw($condition_zona);
     	        })
@@ -338,9 +338,9 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             $site->pop->comuna->nombre_comuna,
             $site->pop->comuna->region->cod_region,
             $site->pop->comuna->region->nombre_region,
-            $site->pop->comuna->zona->cod_zona,
-            $site->pop->comuna->zona->nombre_zona,
-            $site->pop->comuna->zona->crm->nombre_crm,
+            $site->pop->zona->cod_zona,
+            $site->pop->zona->nombre_zona,
+            $site->pop->zona->crm->nombre_crm,
             $site->pop->latitude,
             $site->pop->longitude,
 

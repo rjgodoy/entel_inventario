@@ -29,7 +29,7 @@
                                 {{ props.option ? props.option.comuna.nombre_comuna : '' }}
                             </div>
                             <div class="is-size-7 has-text-weight-normal">
-                                {{ props.option ? 'Zona ' + props.option.comuna.zona.nombre_zona : '' }} - {{ props.option ? 'CRM ' + props.option.comuna.zona.crm.nombre_crm : '' }}
+                                {{ props.option ? 'Zona ' + props.option.zona.nombre_zona : '' }} - {{ props.option ? 'CRM ' + props.option.zona.crm.nombre_crm : '' }}
                             </div>
                         </div>
                     </template>
@@ -48,7 +48,7 @@
                         {{ selected ? selected.comuna.nombre_comuna : '' }}
                     </div>
                     <div class="is-size-7 has-text-weight-normal">
-                        {{ selected ? 'Zona ' + selected.comuna.zona.nombre_zona : '' }} - {{ selected ? 'CRM ' + selected.comuna.zona.crm.nombre_crm : '' }}
+                        {{ selected ? 'Zona ' + selected.zona.nombre_zona : '' }} - {{ selected ? 'CRM ' + selected.zona.crm.nombre_crm : '' }}
                     </div>
                 </div>
             </div>
@@ -152,7 +152,7 @@
                 } else {
                     var params = {
                         'pop_id': this.selected.id,
-                        'zona_id': this.selected.comuna.zona_id,
+                        'zona_id': this.selected.zona_id,
                         'user_id': this.user.id
                     }
                     axios.post('/api/newStorage', params)

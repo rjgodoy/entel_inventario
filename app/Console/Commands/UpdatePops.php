@@ -82,6 +82,8 @@ class UpdatePops extends Command
 
         foreach ($aessData as $newPop) {
 
+            $zona_id = Comuna::where('id', $newPop->comuna_id)->first()->zona_id;
+
             // Insert POP
             $pop = Pop::insertOrIgnore([
                 [
@@ -89,6 +91,7 @@ class UpdatePops extends Command
                     'nombre' => $newPop->pop_name, 
                     'direccion' => $newPop->address, 
                     'comuna_id' => $newPop->comuna_id, 
+                    'zona_id' => $zona_id,
                     'latitude' => $newPop->lat_wgs84, 
                     'longitude' => $newPop->lon_wgs84, 
                     'created_at' => Carbon::now(),

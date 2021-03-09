@@ -159,7 +159,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       } else {
         var params = {
           'pop_id': this.selected.id,
-          'zona_id': this.selected.comuna.zona_id,
+          'zona_id': this.selected.zona_id,
           'user_id': this.user.id
         };
         axios.post('/api/newStorage', params).then(function (response) {
@@ -292,15 +292,14 @@ var render = function() {
                                     _vm._s(
                                       props.option
                                         ? "Zona " +
-                                            props.option.comuna.zona.nombre_zona
+                                            props.option.zona.nombre_zona
                                         : ""
                                     ) +
                                     " - " +
                                     _vm._s(
                                       props.option
                                         ? "CRM " +
-                                            props.option.comuna.zona.crm
-                                              .nombre_crm
+                                            props.option.zona.crm.nombre_crm
                                         : ""
                                     ) +
                                     "\n                        "
@@ -388,14 +387,13 @@ var render = function() {
                           "\n                    " +
                             _vm._s(
                               _vm.selected
-                                ? "Zona " + _vm.selected.comuna.zona.nombre_zona
+                                ? "Zona " + _vm.selected.zona.nombre_zona
                                 : ""
                             ) +
                             " - " +
                             _vm._s(
                               _vm.selected
-                                ? "CRM " +
-                                    _vm.selected.comuna.zona.crm.nombre_crm
+                                ? "CRM " + _vm.selected.zona.crm.nombre_crm
                                 : ""
                             ) +
                             "\n                "

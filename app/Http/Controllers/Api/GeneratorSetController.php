@@ -6,6 +6,7 @@ use DB;
 use Carbon\Carbon;
 use App\Models\Log;
 use App\Models\Site;
+use App\Models\Zona;
 use App\Models\GeneratorSet;
 use App\Models\GeneratorTta;
 use Illuminate\Http\Request;
@@ -21,7 +22,10 @@ use App\Models\GeneratorSetMaintainer;
 use App\Models\GeneratorSetResponsable;
 use App\Models\GeneratorsPlatformBrand;
 use App\Models\GeneratorsPlatformValues;
+use App\Models\GeneratorsPlatformSubZone;
 use App\Models\GeneratorsPlatformGenerator;
+use App\Models\GeneratorsPlatformMaintance;
+use App\Models\GeneratorsPlatformGeneratorType;
 use App\Http\Resources\GeneratorPlatformValuesCollection;
 use App\Http\Resources\GeneratorSet as GeneratorSetResource;
 
@@ -247,6 +251,7 @@ class GeneratorSetController extends Controller
     {
         $generatorSets = GeneratorSet::with(
             'generator_set_type',
+            'generator_set_model.generator_set_brand',
             'current_generator_group.generator_group_type',
             // 'generator_groups.generator_group_type', 
             'current_generator_motor.generator_motor_type',
@@ -408,42 +413,61 @@ class GeneratorSetController extends Controller
         $crm_id = $request->crm_id;
         $zona_id = $request->zona_id;
         $brand_id = $request->brand_id;
+        $group_type_id = $request->group_type_id;
+        $sub_zone_id= $request->sub_zone_id;
         $core = $request->core;
         $critic = $request->critic;
         $vip = $request->vip;
 
         $data = GeneratorsPlatformGenerator::
-        with(
-            'g_zone.g_sector'
-            ,'g_model.g_brand'
-            ,'g_model.g_fuel_pond'
-        //     ,'g_maintances.g_maintance_type'
-        //     ,'g_maintances.g_maintance_status'
-        //     ,'g_maintances.g_generator_records.g_maintance_status'
-            ,'g_last_maintance.g_maintance_status'
-        )
-        ->where(function($q) use($text) {
-            if($text) {
-                $q->where('name', 'LIKE', "%$text%")
-                ->orWhereHas('pop.sites', function($p) use($text) {
-                    if ($text) {
-                        $p->where('nem_site', 'LIKE', "%$text%")->orWhere('nombre', 'LIKE', "%$text%");
+            with(
+                'g_zona.g_sector'
+                ,'generator_set_model.generator_set_brand'
+                ,'g_model.g_brand'
+                ,'g_model.g_fuel_pond'
+                ,'g_type'
+                ,'g_last_maintance.g_maintance_status'
+            )
+            ->where(function($q) use($text) {
+                if($text) {
+                    $q->where('name', 'LIKE', "%$text%")
+                    ->orWhere('mobile_code', 'LIKE', "%$text%");
+                    // ->orWhereHas('pop.sites', function($p) use($text) {
+                    //     if ($text) {
+                    //         $p->where('nem_site', 'LIKE', "%$text%")->orWhere('nombre', 'LIKE', "%$text%");
+                    //     }
+                    // });
+                }
+            })
+            ->where(function($q) use($crm_id, $zona_id) {
+                if ($crm_id) {
+                    if($zona_id) {
+                        $q->where('zone_id', $zona_id);
+                    } else {
+                        $q->whereHas('g_zona', function($p) use($crm_id) {
+                            $p->where('sector_id', $crm_id);
+                        });
                     }
-                });
-            }
-        })
-        
-        ->whereHas('g_model', function($p) use($brand_id) {
-            if ($brand_id) {
-                $p->where('brand_id', $brand_id);
-            }
-        })
-        ->whereHas('g_zone', function($q) use ($crm_id, $zona_id) {
-            $crm_id != 0 ? $q->where('sector_id', $crm_id) : $q->where('sector_id', '!=', $crm_id);
-            $zona_id != 0 ? $q->where('id', $zona_id) : $q->where('id', '!=', $zona_id);
-        })
-        ->orderBy('zone_id', 'asc')
-        ->paginate(15);
+                }
+            })
+            ->where(function($q) use($group_type_id) {
+                if($group_type_id) {
+                    $q->where('group_type_id', $group_type_id);
+                }
+            })
+            ->whereHas('g_model', function($p) use($brand_id) {
+                if ($brand_id) {
+                    $p->where('brand_id', $brand_id);
+                }
+            })
+
+            ->where(function($q) use($sub_zone_id) {
+                if($sub_zone_id) {
+                    $q->where('sub_zone_id', $sub_zone_id);
+                }
+            })
+            ->orderBy('zone_id', 'asc')
+            ->paginate(15);
 
         return $data;     
     }
@@ -535,7 +559,6 @@ class GeneratorSetController extends Controller
         }
 
         return $latest;
-        
     }
 
     /**
@@ -549,24 +572,40 @@ class GeneratorSetController extends Controller
         return $data;     
     }
 
-    // /**
-    //  * Display a listing of the resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function generatorPlatformDataCapacity(Request $request)
-    // {
-    //     $pop_id = $request->pop_id;
-    //     $latest = GeneratorsPlatformValues::with('g_generator')
-    //         ->whereHas('g_generator', function($q) use($pop_id) {
-    //             $q->where('pop_id', $pop_id);
-    //         })
-    //         ->latest('created')
-    //         ->first();
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function generatorPlatformTypes()
+    {
+        $data = GeneratorsPlatformGeneratorType::all();
+        return $data;     
+    }
 
-    //     return $latest;
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function generatorPlatformSubZones()
+    {
+        $data = GeneratorsPlatformSubZone::all();
+        return $data;     
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getGeneratorMaintenances(Request $request, $id)
+    {
+        $maintenances = GeneratorsPlatformMaintance::with('g_maintance_type', 'g_maintance_status', 'g_last_maintance_record', 'g_generator_records')
+            ->where('generator_id', $id)->orderBy('created', 'desc')->get();
+        return $maintenances;
         
-    // }
+    }
 
     
 

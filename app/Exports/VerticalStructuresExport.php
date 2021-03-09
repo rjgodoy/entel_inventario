@@ -97,7 +97,7 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
             foreach ($ids as $id) {
                 array_push($popsIds, $id);
             }
-            $verticalStructure = VerticalStructure::withTrashed()->with('pop.comuna.zona.crm', 'pop.sites', 'vertical_structure_type')
+            $verticalStructure = VerticalStructure::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'vertical_structure_type')
             ->whereIn('pop_id', $popsIds)
             ->get();
         } else {
@@ -148,7 +148,7 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            // $verticalStructure = VerticalStructure::withTrashed()->with('pop.comuna.zona.crm', 'pop.sites', 'vertical_structure_type', 'beacons.beacon_type')
+            // $verticalStructure = VerticalStructure::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'vertical_structure_type', 'beacons.beacon_type')
             // 	->whereHas('pop.sites', function($a) use($text, $condition_bafi, $bafi, $condition_core, $condition_pe_3g, $condition_mpls, $condition_olt, $condition_olt_3play, $condition_lloo, $condition_ranco) {
             // 		$a->where(function($p) use($text, $condition_bafi) {
 	           //          $p->where(function($w) use($text) {
@@ -199,7 +199,7 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
 	           //      ->whereRaw($condition_lloo)
 	           //      ->whereRaw($condition_ranco);
             // 	})
-    	       //  ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+    	       //  ->whereHas('pop.zona', function($q) use($condition_crm, $condition_zona) {
     	       //      $q->whereRaw($condition_crm)
             //         ->whereRaw($condition_zona);
     	       //  })
@@ -244,11 +244,11 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
             //     ->orderBy('pop_id', 'asc')
     	       //  ->get();
 
-            $verticalStructure = VerticalStructure::with('pop.comuna.zona.crm', 'pop.sites', 'vertical_structure_type', 'beacons.beacon_type')
+            $verticalStructure = VerticalStructure::with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'vertical_structure_type', 'beacons.beacon_type')
                 ->whereHas('pop.sites', function($a) use($condition_core) {
                     $a->whereRaw($condition_core);
                 })
-                ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+                ->whereHas('pop.zona', function($q) use($condition_crm, $condition_zona) {
                     $q->whereRaw($condition_crm)
                     ->whereRaw($condition_zona);
                 })
@@ -300,8 +300,8 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
             $verticalStructure->pop->id,
             $verticalStructure->pop->sites ? $verticalStructure->pop->sites[0]->nem_site : null,
             $verticalStructure->pop->nombre,
-            $verticalStructure->pop->comuna->zona->nombre_zona,
-            $verticalStructure->pop->comuna->zona->crm->nombre_crm,
+            $verticalStructure->pop->zona->nombre_zona,
+            $verticalStructure->pop->zona->crm->nombre_crm,
 
             $verticalStructure->vertical_structure_type ? $verticalStructure->vertical_structure_type->type : null,
             $verticalStructure->height,

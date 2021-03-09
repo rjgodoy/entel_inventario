@@ -375,7 +375,7 @@ var render = function() {
                                             _vm._s(
                                               props.option
                                                 ? "Zona " +
-                                                    props.option.comuna.zona
+                                                    props.option.zona
                                                       .nombre_zona
                                                 : ""
                                             ) +
@@ -383,7 +383,7 @@ var render = function() {
                                             _vm._s(
                                               props.option
                                                 ? "CRM " +
-                                                    props.option.comuna.zona.crm
+                                                    props.option.zona.crm
                                                       .nombre_crm
                                                 : ""
                                             ) +
@@ -399,7 +399,7 @@ var render = function() {
                         ],
                         null,
                         false,
-                        1467354034
+                        2563636146
                       )
                     },
                     [
@@ -556,11 +556,9 @@ var render = function() {
                                             ? _vm.selected.comuna
                                                 .nombre_comuna +
                                                 " - Zona " +
-                                                _vm.selected.comuna.zona
-                                                  .nombre_zona +
+                                                _vm.selected.zona.nombre_zona +
                                                 " - CRM " +
-                                                _vm.selected.comuna.zona.crm
-                                                  .nombre_crm
+                                                _vm.selected.zona.crm.nombre_crm
                                             : ""
                                         ) +
                                         "\n                        "

@@ -62,7 +62,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     PopMap: function PopMap() {
-      return Promise.all(/*! import() | chunks/maps/popMapView */[__webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators/generatorSlot~chunks/maps/ecoM~7428b83f"), __webpack_require__.e("chunks/maps/popMapView")]).then(__webpack_require__.bind(null, /*! ../maps/PopMapView */ "./resources/js/components/maps/PopMapView.vue"));
+      return Promise.all(/*! import() | chunks/maps/popMapView */[__webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators/modals/generatorCharts~chunks/~06d98356"), __webpack_require__.e("chunks/maps/popMapView")]).then(__webpack_require__.bind(null, /*! ../maps/PopMapView */ "./resources/js/components/maps/PopMapView.vue"));
     }
   },
   props: ['user', 'pop', 'isEditMode', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
@@ -561,13 +561,9 @@ var render = function() {
               _c("div", { staticClass: "is-size-7 has-text-weight-normal" }, [
                 _vm._v(
                   "\n                        Zona " +
-                    _vm._s(
-                      _vm.pop.comuna ? _vm.pop.comuna.zona.nombre_zona : ""
-                    ) +
+                    _vm._s(_vm.pop.zona ? _vm.pop.zona.nombre_zona : "") +
                     " - CRM " +
-                    _vm._s(
-                      _vm.pop.comuna ? _vm.pop.comuna.zona.crm.nombre_crm : ""
-                    ) +
+                    _vm._s(_vm.pop.zona ? _vm.pop.zona.crm.nombre_crm : "") +
                     "\n                    "
                 )
               ])

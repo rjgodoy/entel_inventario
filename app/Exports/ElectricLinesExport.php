@@ -97,7 +97,7 @@ class ElectricLinesExport implements FromCollection, WithTitle, ShouldAutoSize, 
             foreach ($ids as $id) {
                 array_push($popsIds, $id);
             }
-            $electricLine = ElectricLine::with('pop.comuna.zona.crm', 'pop.sites', 'electric_line_type', 'phase_type', 'postation_type', 'ferreteria_type', 'terrain_type', 'vegetation_type')
+            $electricLine = ElectricLine::with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'electric_line_type', 'phase_type', 'postation_type', 'ferreteria_type', 'terrain_type', 'vegetation_type')
             ->whereIn('pop_id', $popsIds)
             ->get();
         } else {
@@ -148,7 +148,7 @@ class ElectricLinesExport implements FromCollection, WithTitle, ShouldAutoSize, 
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            // $electricLine = ElectricLine::with('pop.comuna.zona.crm', 'pop.sites', 'electric_line_type', 'phase_type')
+            // $electricLine = ElectricLine::with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'electric_line_type', 'phase_type')
             // 	->whereHas('pop.sites', function($a) use($text, $condition_bafi, $bafi, $condition_core, $condition_pe_3g, $condition_mpls, $condition_olt, $condition_olt_3play, $condition_lloo, $condition_ranco) {
             // 		$a->withTrashed()->where(function($p) use($text, $condition_bafi) {
 	           //          $p->where(function($w) use($text) {
@@ -199,7 +199,7 @@ class ElectricLinesExport implements FromCollection, WithTitle, ShouldAutoSize, 
 	           //      ->whereRaw($condition_lloo)
 	           //      ->whereRaw($condition_ranco);
             // 	})
-    	       //  ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+    	       //  ->whereHas('pop.zona', function($q) use($condition_crm, $condition_zona) {
     	       //      $q->whereRaw($condition_crm)
             //         ->whereRaw($condition_zona);
     	       //  })
@@ -245,11 +245,11 @@ class ElectricLinesExport implements FromCollection, WithTitle, ShouldAutoSize, 
     	       //  ->get();
 
 
-            $electricLine = ElectricLine::with('pop.comuna.zona.crm', 'pop.sites', 'electric_line_type', 'phase_type', 'postation_type', 'ferreteria_type', 'terrain_type', 'vegetation_type')
+            $electricLine = ElectricLine::with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'electric_line_type', 'phase_type', 'postation_type', 'ferreteria_type', 'terrain_type', 'vegetation_type')
                 ->whereHas('pop.sites', function($a) use($condition_core) {
                     $a->whereRaw($condition_core);
                 })
-                ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+                ->whereHas('pop.zona', function($q) use($condition_crm, $condition_zona) {
                     $q->whereRaw($condition_crm)
                     ->whereRaw($condition_zona);
                 })
@@ -310,8 +310,8 @@ class ElectricLinesExport implements FromCollection, WithTitle, ShouldAutoSize, 
             $electricLine->pop->id,
             $electricLine->pop->sites ? $electricLine->pop->sites[0]->nem_site : null,
             $electricLine->pop->nombre,
-            $electricLine->pop->comuna->zona->nombre_zona,
-            $electricLine->pop->comuna->zona->crm->nombre_crm,
+            $electricLine->pop->zona->nombre_zona,
+            $electricLine->pop->zona->crm->nombre_crm,
 
             $electricLine->electric_line_type ? $electricLine->electric_line_type->electric_line_type : null,
             $electricLine->phase_type ? $electricLine->phase_type->phase_type : null,

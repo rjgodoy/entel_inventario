@@ -179,7 +179,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
                 ->whereHas('rooms', function ($r) use ($condition_critic) {
                     $r->whereRaw($condition_critic);
                 })
-                ->whereHas('comuna.zona', function ($q) use ($condition_crm, $condition_zona) {
+                ->whereHas('zona', function ($q) use ($condition_crm, $condition_zona) {
                     $q->whereRaw($condition_crm)
                     ->whereRaw($condition_zona);
                 })

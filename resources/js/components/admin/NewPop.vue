@@ -39,7 +39,7 @@
                                                 {{ props.option ? props.option.comuna.nombre_comuna : '' }}
                                             </div>
                                             <div class="is-size-7 has-text-weight-normal">
-                                                {{ props.option ? 'Zona ' + props.option.comuna.zona.nombre_zona : '' }} - {{ props.option ? 'CRM ' + props.option.comuna.zona.crm.nombre_crm : '' }}
+                                                {{ props.option ? 'Zona ' + props.option.zona.nombre_zona : '' }} - {{ props.option ? 'CRM ' + props.option.zona.crm.nombre_crm : '' }}
                                             </div>
                                         </div>
                                     </template>
@@ -58,7 +58,7 @@
                                         {{ selectedPop ? selectedPop.comuna.nombre_comuna : '' }}
                                     </div>
                                     <div class="is-size-7 has-text-weight-normal">
-                                        {{ selectedPop ? 'Zona ' + selectedPop.comuna.zona.nombre_zona : '' }} - {{ selectedPop ? 'CRM ' + selectedPop.comuna.zona.crm.nombre_crm : '' }}
+                                        {{ selectedPop ? 'Zona ' + selectedPop.zona.nombre_zona : '' }} - {{ selectedPop ? 'CRM ' + selectedPop.zona.crm.nombre_crm : '' }}
                                     </div>
                                 </div>
                             </div>

@@ -450,13 +450,13 @@ var render = function() {
                               "\n                                " +
                                 _vm._s(
                                   data.pop
-                                    ? "Zona: " + data.pop.comuna.zona.nombre
+                                    ? "Zona: " + data.pop.zona.nombre
                                     : ""
                                 ) +
                                 " - " +
                                 _vm._s(
                                   data.pop
-                                    ? "CRM: " + data.pop.comuna.zona.crm.nombre
+                                    ? "CRM: " + data.pop.zona.crm.nombre
                                     : ""
                                 ) +
                                 "\n                            "

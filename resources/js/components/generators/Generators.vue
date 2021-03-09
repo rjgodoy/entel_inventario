@@ -49,8 +49,8 @@
                                     <div class="field" style="margin: 1px;">
                                         <a class="is-fullwidth button" :class="selectedZona == zona ? 'is-link' : 'is-black-ter'" @click="selectZona(zona); generatorsData.current_page = 1">
                                             <div :class="selectedZona == zona ? selectedSecondaryBoxText : secondaryText"> 
-                                                <!-- <div class="is-size-7 has-text-weight-normal">Zona</div> -->
                                                 <div class="is-size-7 has-text-weight-normal has-text-light">{{ zona.nombre_zona }}</div>
+                                                <div class="subtitle is-size-7 has-text-weight-normal has-text-light">{{ zona.cod_zona }}</div>
                                             </div>
                                         </a>
                                     </div>
@@ -108,46 +108,38 @@
                             </div>
                         </div>
 
-                        <!-- <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div> -->
-
-                        <!-- Filtros CARACTERISTICAS -->
-                        <!-- <div class="column is-4">
-                            <div class="is-size-6 has-text-weight-normal has-text-centered has-text-grey-light" style="padding-bottom: 8px;">CARACTERISTICAS</div>
+                        <!-- Filtros Tipos -->
+                        <div class="column is-2">
+                            <div class="is-size-6 has-text-weight-normal has-text-centered has-text-grey-light" style="padding-bottom: 8px;">TIPO</div>
                             <div class="columns is-multiline is-gapless">
-
-                                <div class="column is-3" v-for="characteristic in characteristics">
+                                <div class="column is-6" v-for="type in types">
                                     <div class="field" style="margin: 1px;">
-                                        <a class="tile is-child button" :class="characteristic.selected ? 'is-link' : 'is-black-ter'" @click="changeCharacteristic(characteristic)" >
+                                        <a class="is-fullwidth button" :class="selectedType == type ? 'is-link' : 'is-black-ter'" @click="selectedType = selectedType != type ? type : null; generatorsData.current_page = 1">
                                             <div :class="secondaryText"> 
-                                                <div class="is-size-7 has-text-weight-normal has-text-light">{{ characteristic.label }}</div>
+                                                <div class="is-size-7 has-text-weight-normal has-text-light">{{ type.name }}</div>
                                             </div>
                                         </a>
                                     </div>
                                 </div>
-
                             </div>
-                        </div> -->
+                        </div>
 
-                        <!-- <div class="is-divider-vertical" style="margin-left: -20px; margin-right: -20px;"></div> -->
-
-                        <!-- Filtros EQUIPAMIENTO -->
-                        <!-- <div class="column is-3">
-                            <div class="is-size-6 has-text-weight-normal has-text-centered has-text-grey-light" style="padding-bottom: 8px;">EQUIPAMIENTO</div>
+                        <!-- Filtros SubZonas -->
+                        <div class="column is-1">
+                            <div class="is-size-6 has-text-weight-normal has-text-centered has-text-grey-light" style="padding-bottom: 8px;">SUB ZONA</div>
                             <div class="columns is-multiline is-gapless">
-
-                                <div class="column is-4" v-for="equipment in equipments">
+                                <div class="column" v-for="subZone in subZones">
                                     <div class="field" style="margin: 1px;">
-                                        <a class="tile is-child button" 
-                                            :class="equipment.selected ? 'is-link' : 'is-black-ter'" @click="changeEquipment(equipment)">
+                                        <a class="is-fullwidth button" :class="selectedSubZone == subZone ? 'is-link' : 'is-black-ter'" @click="selectedSubZone = selectedSubZone != subZone ? subZone : null; generatorsData.current_page = 1">
                                             <div :class="secondaryText"> 
-                                                <div class="is-size-7 has-text-weight-normal has-text-light">{{ equipment.label }}</div>
+                                                <div class="is-size-7 has-text-weight-normal has-text-light">{{ subZone.name }}</div>
                                             </div>
                                         </a>
                                     </div>
                                 </div>
-
                             </div>
-                        </div> -->
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -182,78 +174,28 @@
                                 </p>
                             </div>
 
-                            <table class="table is-fullwidth">
+                            <table class="table is-fullwidth is-striped is-hoverable is-bordered">
                                 <thead>
-                                    <tr>
-                                        <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Ubicación">Ubicación</abbr></th>
-                                        <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Nombre">Nombre</abbr></th>
-                                        <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Nemónico">Nemónico</abbr></th>
-                                        <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Marca">Marca Contratos</abbr></th>
-                                        <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="HF Día">HF Día</abbr></th>
-                                        <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Prom. Consumo">Prom. Consumo</abbr></th>
-                                        <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Niv. Combustible">Niv. Combustible</abbr></th>
-                                        <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Horometro">Horometro</abbr></th>
-                                        <th class="is-size-7 has-text-weight-semibold" :class="secondaryText"><abbr title="Mantención">Mantención</abbr></th>
-                                        <th class="is-size-7 has-text-weight-semibold has-text-centered">Fichas</th>
+                                    <tr class="">
+                                        <th class="is-size-6 has-text-weight-semibold"><abbr title="Ubicación">Ubicación</abbr></th>
+                                        <th class="is-size-6 has-text-weight-semibold"><abbr title="Nombre">Nombre</abbr></th>
+                                        <!-- <th class="is-size-7 has-text-weight-semibold"><abbr title="Nemónico">Nemónico</abbr></th> -->
+                                        <th class="is-size-6 has-text-weight-semibold"><abbr title="Marca">Marca</abbr></th>
+                                        <th class="is-size-6 has-text-weight-semibold"><abbr title="Tipo">Tipo</abbr></th>
+                                        <th class="is-size-6 has-text-weight-semibold"><abbr title="HF Día">HF Día</abbr></th>
+                                        <th class="is-size-6 has-text-weight-semibold"><abbr title="Prom. Consumo">Prom. Consumo</abbr></th>
+                                        <th class="is-size-6 has-text-weight-semibold"><abbr title="Niv. Combustible">Niv. Combustible</abbr></th>
+                                        <th class="is-size-6 has-text-weight-semibold"><abbr title="Horometro">Horometro</abbr></th>
+                                        <th class="is-size-6 has-text-weight-semibold"><abbr title="Mantención">Mantención</abbr></th>
+                                        <th class="is-size-6 has-text-weight-semibold has-text-centered">Fichas</th>
                                     </tr>
                                 </thead>
                                 
                                 <tbody>
-                                    <tr class="is-size-6" v-for="data in generatorsData.data">
-                                        <td class="has-text-weight-bold">{{ data.g_zone ? data.g_zone.name : '' }}</td>
-                                        <td class="">
-                                            <div class="is-size-6 has-text-weight-normal">
-                                                {{ data.name }}
-                                            </div>
-                                            <!-- <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                                {{ data.pop ? data.pop.comuna.nombre : '' }}
-                                            </div>
-                                            <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                                {{ data.pop ? 'Zona: ' + data.pop.comuna.zona.nombre : '' }} - {{ data.pop ? 'CRM: ' + data.pop.comuna.zona.crm.nombre : '' }}
-                                            </div> -->
-                                        </td>
-                                        <td class="is-size-6 has-text-weight-light has-text-centered">{{ data.mobile_code }}</td>
-
-                                        <td class="">
-                                            <div class="is-size-6 has-text-weight-normal" :class="secondaryText">
-                                                {{ data.g_model && data.g_model.g_brand ? data.g_model.g_brand.name : 'N/A' }}
-                                            </div>
-                                        </td>
-
-                                        <td class="is-size-6 has-text-weight-light has-text-centered">
-                                            <generator-slot :generator="data" :data_type="'hf'"/>
-                                        </td>
-
-                                        <td class="is-size-6 has-text-weight-light has-text-centered">
-                                            <generator-slot :generator="data" :data_type="'average_consumption'"/>
-                                        </td>
-
-                                        <td class="is-size-6 has-text-weight-light has-text-centered">
-                                            <generator-slot :generator="data" :data_type="'fuel_level'"/>
-                                        </td>
-
-                                        <td class="is-size-6 has-text-weight-light has-text-centered">
-                                            <generator-slot :generator="data" :data_type="'hourmeter'"/>
-                                        </td>
-
-                                        <td class="has-text-weight-light has-text-centered">
-                                            <div class="is-size-6">
-                                                {{ data.g_last_maintance ? data.g_last_maintance.created : 'N/A' }}
-                                            </div>
-                                            <div class="is-size-7" v-if="data.g_last_maintance">
-                                                <span class="tag is-default">
-                                                    {{ data.g_last_maintance ? data.g_last_maintance.g_maintance_status.code : 'N/A' }}
-                                                </span>
-                                            </div>
-                                        </td>
-
-                                        <td class="has-text-weight-light has-text-centered">
-                                            <generator-slot :generator="data" :data_type="'fichas'" :user="user"/>
-                                            <!-- <generator-detail-button :generator="data" :data_type="'fichas'" :user="user"/> -->
-                                        </td>
-                                    </tr>    
+                                    <GeneratorTable class="is-size-6" v-for="data in generatorsData.data" :key="data.id" :generator="data" />
                                 </tbody>
                             </table>
+
 
                             <div class="level">
                                 <nav class="level-left pagination" role="navigation" aria-label="pagination">
@@ -267,133 +209,9 @@
                                     <!-- <div class="is-size-7 " :class="secondaryText">Fecha ultima actualización: {{ last_updated.formatted }}</div> -->
                                 </div>
                             </div>
+
+                            <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
                                
-                                <!-- <b-table
-                                    :data="generatorsData.data"
-                                    :paginated="isPaginated"
-                                    :per-page="perPage"
-                                    :current-page.sync="currentPage"
-                                    :pagination-simple="isPaginationSimple"
-                                    :pagination-position="paginationPosition"
-                                    :default-sort-direction="defaultSortDirection"
-                                    :pagination-rounded="isPaginationRounded"
-                                    :sort-icon="sortIcon"
-                                    :sort-icon-size="sortIconSize"
-                                    :loading="isLoading"
-                                    :row-class="(row, index) => rowData(row)"
-                                    default-sort="user.first_name"
-                                    aria-next-label="Next page"
-                                    aria-previous-label="Previous page"
-                                    aria-page-label="Page"
-                                    aria-current-label="Current page">
-
-                                    <b-table-column field="g_zone.name" label="Ubicación"  sortable>
-                                        <template v-slot:header="{ column }">
-                                            <div class="is-size-6">{{ column.label }}</div>
-                                        </template>
-                                        <template v-slot="props">
-                                            <div class="is-size-6">
-                                                {{ props.row.g_zone.name }}
-                                            </div>
-                                        </template>
-                                    </b-table-column>
-
-                                    <b-table-column field="name" label="Nombre"  sortable searchable>
-                                        <template v-slot:header="{ column }">
-                                            <div class="is-size-6">{{ column.label }}</div>
-                                        </template>
-                                        <template v-slot="props">
-                                            <div class="is-size-6">
-                                                {{ props.row.name }}
-                                            </div>
-                                        </template>
-                                    </b-table-column>
-
-                                    <b-table-column field="mobile_code" label="Nemónico"  sortable searchable>
-                                        <template v-slot:header="{ column }">
-                                            <div class="is-size-6">{{ column.label }}</div>
-                                        </template>
-                                        <template v-slot="props">
-                                            <div class="is-size-6">
-                                                {{ props.row.mobile_code }}
-                                            </div>
-                                        </template>
-                                    </b-table-column>
-
-                                    <b-table-column field="g_model.g_brand.name" label="Marca"  sortable searchable>
-                                        <template v-slot:header="{ column }">
-                                            <div class="is-size-6">{{ column.label }}</div>
-                                        </template>
-                                        <template v-slot="props">
-                                            <div class="is-size-6">
-                                                {{ props.row.g_model && props.row.g_model.g_brand ? props.row.g_model.g_brand.name : 'N/A' }}
-                                            </div>
-                                        </template>
-                                    </b-table-column>
-
-                                    <b-table-column field="name" label="HF Día"  sortable numeric>
-                                        <template v-slot:header="{ column }">
-                                            <div class="is-size-6">{{ column.label }}</div>
-                                        </template>
-                                        <template v-slot="props">
-                                            <generator-slot :lastData="last_data" :generator="props.row" :data_type="'hf'"/>
-                                        </template>
-                                    </b-table-column>
-
-                                    <b-table-column field="name" label="Prom. Consumo"  sortable numeric>
-                                        <template v-slot:header="{ column }">
-                                            <div class="is-size-6">{{ column.label }}</div>
-                                        </template>
-                                        <template v-slot="props">
-                                            <generator-slot :lastData="last_data" :generator="props.row" :data_type="'average_consumption'"/>
-                                        </template>
-                                    </b-table-column>
-
-                                    <b-table-column field="name" label="Niv. Combustible" width="180" centered loading>
-                                        <template v-slot:header="{ column }">
-                                            <div class="is-size-6">{{ column.label }}</div>
-                                        </template>
-                                        <template v-slot="props">
-                                            <generator-slot :lastData="last_data" :generator="props.row" :data_type="'fuel_level'"/>
-                                        </template>
-                                    </b-table-column>
-
-                                    <b-table-column field="name" label="Horometro"  sortable numeric>
-                                        <template v-slot:header="{ column }">
-                                            <div class="is-size-6">{{ column.label }}</div>
-                                        </template>
-                                        <template v-slot="props">
-                                            <generator-slot :lastData="last_data" :generator="props.row" :data_type="'hourmeter'"/>
-                                        </template>
-                                    </b-table-column>
-
-                                    <b-table-column field="name" label="Mantención"  sortable>
-                                        <template v-slot:header="{ column }">
-                                            <div class="is-size-6">{{ column.label }}</div>
-                                        </template>
-                                        <template v-slot="props">
-                                            <div class="is-size-6">
-                                                {{ props.row.g_last_maintance ? props.row.g_last_maintance.created : 'N/A' }}
-                                            </div>
-                                            <div class="is-size-7" v-if="props.row.g_last_maintance">
-                                                <span class="tag is-default">
-                                                    {{ props.row.g_last_maintance ? props.row.g_last_maintance.g_maintance_status.code : 'N/A' }}
-                                                </span>
-                                            </div>
-                                        </template>
-                                    </b-table-column>
-
-                                    <b-table-column field="date" label="Fichas" width="100" centered>
-                                        <template v-slot:header="{ column }">
-                                            <div class="is-size-6">{{ column.label }}</div>
-                                        </template>
-                                        <template v-slot="props">
-                                            <generator-slot :lastData="last_data" :generator="props.row" :data_type="'fichas'" :user="user"/>
-                                        </template>
-                                    </b-table-column>
-                                </b-table> -->
-
-                            </div>
                         </div>
                     </div>
 
@@ -415,9 +233,7 @@
     export default {
         components: {
             VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../helpers/VuePagination'),
-            // GeneratorDetailButton: () => import(/* webpackChunkName: "chunks/generators/generatorDetailButton"*/'./GeneratorDetailButton'),
-            GeneratorSlot: () => import(/* webpackChunkName: "chunks/generators/generatorSlot"*/'./GeneratorSlot'),
-            // TableColumns: () => import(/* webpackChunkName: "chunks/generators/tableColumns"*/'./TableColumns'),
+            GeneratorTable: () => import(/* webpackChunkName: "chunks/generators/generatorTable"*/'./GeneratorTable'),
         },
 
         props : [
@@ -429,6 +245,8 @@
                 crms: Array,
                 zonas: Array,
                 brands: Array,
+                types: Array,
+                subZones: Array,
                 searchText: '',
 
                 generatorsData: {
@@ -443,6 +261,8 @@
                 selectedCrm: null,
                 selectedZona: null,
                 selectedBrand: null,
+                selectedType: null,
+                selectedSubZone: null,
                 core: 0,
                 critic: 0,
                 vip: 0,
@@ -457,23 +277,27 @@
             }
         },
 
-        computed: {
-            selectedZonaId() {
-                return this.currentZonaId && this.currentZonaId.id
-            }
-        },
-
         watch: {
             selectedCrm(newValue) {
-                this.getGeneratorsData()
+                // this.getGeneratorsData()
                 this.selectedZona = null
             },
 
             selectedZona(newValue) {
-                this.getGeneratorsData()
+                // this.getGeneratorsData()
             },
 
             selectedBrand(newValue) {
+                this.getGeneratorsData()
+                this.generatorsData.current_page = 1
+            },
+
+            selectedType(newValue) {
+                this.getGeneratorsData()
+                this.generatorsData.current_page = 1
+            },
+
+            selectedSubZone() {
                 this.getGeneratorsData()
                 this.generatorsData.current_page = 1
             },
@@ -494,6 +318,8 @@
         mounted() {
             this.getCrms()
             this.getBrands()
+            this.getTypes()
+            this.getSubZones()
             this.getGeneratorsData()
         },
 
@@ -512,6 +338,20 @@
                 })
             },
 
+            getTypes() {
+                axios.get(`/api/genplaTypes`)
+                .then((response) => {
+                    this.types = response.data
+                })
+            },
+
+            getSubZones() {
+                axios.get(`/api/genplaSubZones`)
+                .then((response) => {
+                    this.subZones = response.data
+                })
+            },
+
             selectCrm(crm) {
                 // Si el boton del CRM no estaba seleccionado, la variable selectedCrm ahora es el nuevo crm y
                 // si había una zona seleccionada, la variable selectedZona será null.
@@ -522,6 +362,7 @@
             },
 
             selectZona(zona) {
+                console.log(zona)
                 this.selectedZona = this.selectedZona != zona ? zona : null
                 this.getGeneratorsData()
             },
@@ -534,14 +375,17 @@
                     'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
                     'zona_id': this.selectedZona ? this.selectedZona.id : 0,
                     'brand_id': this.selectedBrand ? this.selectedBrand.id : 0,
+                    'group_type_id': this.selectedType ? this.selectedType.id : 0,
+                    'sub_zone_id': this.selectedSubZone ? this.selectedSubZone.id : 0,
                     'core': this.core,
                     'critic': this.critic,
                     'vip': this.vip
                 }
+                console.log(params)
                 axios.get('/api/generatorsPlatform', { params: params })
                 .then((response) => {
+                    // console.log(response)
                     this.generatorsData = response.data
-                    console.log(response)
                     this.isLoading = false
                 })
             },
@@ -549,23 +393,7 @@
             clearSearch() {
                 this.searchText = ''
                 this.getGeneratorsData()
-            },
-
-
-
-            // getLastDayData(generator_id) {
-            //     let params = {
-            //         'generator_id': parseInt(generator_id)
-            //     }
-
-            //     axios.get('/api/generatorLastDay', { params: params })
-            //     .then((response) => {
-            //         this.last_day_data = response.data
-            //         this.last_data = response.data[0]
-            //     })
-            // },
-
-            
+            },         
 
         }
     }

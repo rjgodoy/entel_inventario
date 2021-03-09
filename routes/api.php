@@ -163,7 +163,9 @@ Route::middleware('auth:api')->group(function () {
 		Route::get('generatorValues/{generator_id}', 'Api\GeneratorSetController@generatorValues');
 		Route::get('generatorLastDay', 'Api\GeneratorSetController@generatorLastDay');
 		Route::get('genplaBrands', 'Api\GeneratorSetController@generatorPlatformBrands');
-		// Route::get('generatorSetDataCapacity', 'Api\GeneratorSetController@generatorPlatformDataCapacity');
+		Route::get('genplaTypes', 'Api\GeneratorSetController@generatorPlatformTypes');
+		Route::get('genplaSubZones', 'Api\GeneratorSetController@generatorPlatformSubZones');
+		Route::get('getGeneratorMaintenances/{id}', 'Api\GeneratorSetController@getGeneratorMaintenances');
 
 
 		Route::apiResource('telecomCompanies','Api\TelecomCompanyController');
@@ -236,8 +238,8 @@ Route::middleware('auth:api')->group(function () {
 	### POPS ######################################################################
 	Route::apiResource('pop','Api\PopController');
 
-	Route::get('popsCrm','Api\PopController@popsCrm');
-	Route::get('popsZona','Api\PopController@popsZona');
+	// Route::get('popsCrm','Api\PopController@popsCrm');
+	// Route::get('popsZona','Api\PopController@popsZona');
 	Route::get('filterPops', 'Api\PopController@filterPops');
 	Route::get('popsMap', 'Api\PopController@popsMap');
 	Route::get('filters', 'Api\PopController@filters');

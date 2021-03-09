@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\PermissionCollection;
+use App\Models\User;
 use App\Models\Permission;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\PermissionCollection;
 
 class PermissionController extends Controller
 {
@@ -50,7 +51,15 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($request->user_id);
+
+        if($request->can) {
+            $user->permissions()->attach($id);
+        } else {
+            $user->permissions()->detach($id);
+        }
+        
+        return $request;
     }
 
     /**

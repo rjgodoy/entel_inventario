@@ -39,25 +39,7 @@
             </vue-pagination>
         </nav>
 
-        <!-- <div class="field has-addons">
-            <p class="control">
-                <b-button 
-                    :loading="buttonLoading ? true : false"
-                    type="is-link"
-                    size="is-small"
-                    @click="downloadPops">
-                    <font-awesome-icon icon="download"/> 
-                    &nbsp;&nbsp;Listado de POPs
-                </b-button>
-            </p>
-            <p class="control">
-                <b-tooltip label="Tooltip Text" position="is-right">
-                    <a href="/pop" type="button" class="button is-small is-link" data-tooltip="">
-                        <font-awesome-icon icon="bars"/>
-                    </a>
-                </b-tooltip>
-            </p>
-        </div> -->
+        <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
 
     </div>
 </template>
@@ -67,6 +49,7 @@
         components: {
             VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../helpers/VuePagination'),
         },
+        
         props : [
             'user',
             'selectedCrm',
@@ -77,6 +60,7 @@
             'secondaryText',
             'core'
         ],
+
         data() {
             return {
                 data: {
@@ -87,13 +71,18 @@
                     current_page: 1
                 },
                 buttonLoading: 0,
+                isLoading: false
             }
         },
+
         created(){  
         },
+
         mounted() {   
-            this.getData()   
+            this.getData()  
+            this.isLoading = true 
         },
+
         watch: {
             selectedCrm(newValue, oldValue) {
                 this.getData()
@@ -110,11 +99,8 @@
             getData() {                          
                 axios.get(`/api/criticPopList?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&page=${this.data.current_page}`)
                 .then((response) => {
-                    // console.log(response.data)
                     this.data = response.data.pop;
-                    // if(true) {
-                    //     this.$emit('clicked', this.data)
-                    // }
+                    this.isLoading = false 
                 })
             },
 

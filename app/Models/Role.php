@@ -11,6 +11,8 @@ class Role extends Model
 	protected $connection = 'mysql';
 	protected $table = 'entel_g_redes_inventario.roles'; 
 
+    protected $guarded = [];
+
 	/**
      * The attributes that are mass assignable.
      *

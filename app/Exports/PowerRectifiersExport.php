@@ -97,7 +97,7 @@ class PowerRectifiersExport implements FromCollection, WithTitle, ShouldAutoSize
             foreach ($ids as $id) {
                 array_push($popsIds, $id);
             }
-            $powerRectifier = PowerRectifier::withTrashed()->with('pop.comuna.zona.crm', 'pop.sites', 'power_rectifier_type')
+            $powerRectifier = PowerRectifier::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'power_rectifier_type')
             ->whereIn('pop_id', $popsIds)
             ->get();
         } else {
@@ -148,7 +148,7 @@ class PowerRectifiersExport implements FromCollection, WithTitle, ShouldAutoSize
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            // $powerRectifier = PowerRectifier::withTrashed()->with('pop.comuna.zona.crm', 'pop.sites', 'power_rectifier_type')
+            // $powerRectifier = PowerRectifier::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'power_rectifier_type')
             // 	->whereHas('pop.sites', function($a) use($text, $condition_bafi, $bafi, $condition_core, $condition_pe_3g, $condition_mpls, $condition_olt, $condition_olt_3play, $condition_lloo, $condition_ranco) {
             // 		$a->where(function($p) use($text, $condition_bafi) {
 	           //          $p->where(function($w) use($text) {
@@ -199,7 +199,7 @@ class PowerRectifiersExport implements FromCollection, WithTitle, ShouldAutoSize
 	           //      ->whereRaw($condition_lloo)
 	           //      ->whereRaw($condition_ranco);
             // 	})
-    	       //  ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+    	       //  ->whereHas('pop.zona', function($q) use($condition_crm, $condition_zona) {
     	       //      $q->whereRaw($condition_crm)
             //         ->whereRaw($condition_zona);
     	       //  })
@@ -244,11 +244,11 @@ class PowerRectifiersExport implements FromCollection, WithTitle, ShouldAutoSize
             //     ->orderBy('pop_id', 'asc')
     	       //  ->get();
 
-            $powerRectifier = PowerRectifier::withTrashed()->with('pop.comuna.zona.crm', 'pop.sites', 'power_rectifier_type')
+            $powerRectifier = PowerRectifier::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'power_rectifier_type')
                 ->whereHas('pop.sites', function($a) use($condition_core) {
                     $a->whereRaw($condition_core);
                 })
-                ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+                ->whereHas('pop.zona', function($q) use($condition_crm, $condition_zona) {
                     $q->whereRaw($condition_crm)
                     ->whereRaw($condition_zona);
                 })
@@ -302,8 +302,8 @@ class PowerRectifiersExport implements FromCollection, WithTitle, ShouldAutoSize
             $powerRectifier->pop->id,
             $powerRectifier->pop->sites ? $powerRectifier->pop->sites[0]->nem_site : null,
             $powerRectifier->pop->nombre,
-            $powerRectifier->pop->comuna->zona->nombre_zona,
-            $powerRectifier->pop->comuna->zona->crm->nombre_crm,
+            $powerRectifier->pop->zona->nombre_zona,
+            $powerRectifier->pop->zona->crm->nombre_crm,
 
             $powerRectifier->power_rectifier_type ? $powerRectifier->power_rectifier_type->type : null,
             $powerRectifier->power_rectifier_type ? $powerRectifier->power_rectifier_type->model : null,

@@ -57,12 +57,12 @@
 <script>
     export default {
         components: {
-            AdminPops: () => import(/* webpackChunkName: "chunks/admin/pops"*/"./AdminPops"),
-            AdminTps: () => import(/* webpackChunkName: "chunks/admin/tps"*/"./AdminTps"),
+            PopsTab: () => import(/* webpackChunkName: "chunks/admin/pops"*/"./PopsTab"),
+            TpsTab: () => import(/* webpackChunkName: "chunks/admin/tps"*/"./TpsTab"),
             // AdminApprove: () => import(/* webpackChunkName: "chunks/admin/approve"*/"./AdminApprove"),
-            AdminMassive: () => import(/* webpackChunkName: "chunks/admin/massive"*/"./AdminMassive"),
-            AdminUsers: () => import(/* webpackChunkName: "chunks/admin/usersPermissions"*/"./AdminUsers"),
-            AdminFiles: () => import(/* webpackChunkName: "chunks/admin/files"*/"./AdminFiles"),
+            BulkLoadTab: () => import(/* webpackChunkName: "chunks/admin/bulkLoad"*/"./BulkLoadTab"),
+            RoleUsersTab: () => import(/* webpackChunkName: "chunks/admin/roleUsers"*/"./RoleUsersTab"),
+            HelperFilesTab: () => import(/* webpackChunkName: "chunks/admin/helperFiles"*/"./HelperFilesTab"),
         },
         props : [
             'user',
@@ -104,13 +104,13 @@
                     case 'tps':
                         bool = true
                         break
-                    case 'massive':
+                    case 'bulkLoad':
                         bool = this.canUpdateEfizity
                         break
-                    case 'users':
+                    case 'roleUsers':
                         bool = this.canEditPermissions
                         break
-                    case 'files':
+                    case 'helperFiles':
                         bool = this.canUploadFiles
                         break
                     default:
@@ -120,7 +120,7 @@
             },
 
             currentTabComponent: function () {
-                return 'admin-' + this.currentTab
+                return this.currentTab + '-tab'
             }
         },
 
@@ -134,13 +134,13 @@
                     case 'tps':
                         bool = true
                         break
-                    case 'massive':
+                    case 'bulkLoad':
                         bool = this.canUpdateEfizity
                         break
-                    case 'users':
+                    case 'roleUsers':
                         bool = this.canEditPermissions
                         break
-                    case 'files':
+                    case 'helperFiles':
                         bool = this.canUploadFiles
                         break
                     default:
@@ -171,10 +171,10 @@
             getTabs() {
                 axios.get(`/api/tabs`)
                 .then((response) => {
-                    console.log(response)
                     if(response.data.can.viewAdmin) {
                         this.tabs = response.data.admin
                     }
+                    console.log(response.data)
                     this.canCreatePop = response.data.can.createPop
                     this.canUpdateEfizity = response.data.can.updateEfizity
                     this.canEditPermissions = response.data.can.editPermissions

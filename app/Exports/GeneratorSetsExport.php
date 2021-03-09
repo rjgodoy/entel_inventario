@@ -97,7 +97,7 @@ class GeneratorSetsExport implements FromCollection, WithTitle, ShouldAutoSize, 
             foreach ($ids as $id) {
                 array_push($popsIds, $id);
             }
-            $generatorSet = GeneratorSet::withTrashed()->with('pop.comuna.zona.crm', 'pop.sites', 'generator_set_type', 'current_generator_group.generator_group_type', 'current_generator_group.phase_type', 'current_generator_motor.generator_motor_type', 'current_generator_tank.generator_tank_type', 'current_generator_tta.generator_tta_type', 'current_maintainer')
+            $generatorSet = GeneratorSet::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'generator_set_type', 'current_generator_group.generator_group_type', 'current_generator_group.phase_type', 'current_generator_motor.generator_motor_type', 'current_generator_tank.generator_tank_type', 'current_generator_tta.generator_tta_type', 'current_maintainer')
             ->whereIn('pop_id', $popsIds)
             ->get();
         } else {
@@ -148,7 +148,7 @@ class GeneratorSetsExport implements FromCollection, WithTitle, ShouldAutoSize, 
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            // $generatorSet = GeneratorSet::withTrashed()->with('pop.comuna.zona.crm', 'pop.sites', 'generator_set_type', 'current_generator_group.generator_group_type', 'current_generator_group.phase_type', 'current_generator_motor.generator_motor_type', 'current_generator_tank.generator_tank_type', 'current_generator_tta.generator_tta_type', 'current_maintainer')
+            // $generatorSet = GeneratorSet::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'generator_set_type', 'current_generator_group.generator_group_type', 'current_generator_group.phase_type', 'current_generator_motor.generator_motor_type', 'current_generator_tank.generator_tank_type', 'current_generator_tta.generator_tta_type', 'current_maintainer')
             // 	->whereHas('pop.sites', function($a) use($text, $condition_bafi, $bafi, $condition_core, $condition_pe_3g, $condition_mpls, $condition_olt, $condition_olt_3play, $condition_lloo, $condition_ranco) {
             // 		$a->where(function($p) use($text, $condition_bafi) {
 	           //          $p->where(function($w) use($text) {
@@ -200,7 +200,7 @@ class GeneratorSetsExport implements FromCollection, WithTitle, ShouldAutoSize, 
 	           //      ->whereRaw($condition_ranco)
             //         ->withTrashed();
             // 	})
-    	       //  ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+    	       //  ->whereHas('pop.zona', function($q) use($condition_crm, $condition_zona) {
     	       //      $q->whereRaw($condition_crm)
             //         ->whereRaw($condition_zona);
     	       //  })
@@ -245,11 +245,11 @@ class GeneratorSetsExport implements FromCollection, WithTitle, ShouldAutoSize, 
             //     ->orderBy('pop_id', 'asc')
     	       //  ->get();
 
-            $generatorSet = GeneratorSet::withTrashed()->with('pop.comuna.zona.crm', 'pop.sites', 'generator_set_type', 'current_generator_group.generator_group_type', 'current_generator_group.phase_type', 'current_generator_motor.generator_motor_type', 'current_generator_tank.generator_tank_type', 'current_generator_tta.generator_tta_type', 'current_maintainer')
+            $generatorSet = GeneratorSet::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'generator_set_type', 'current_generator_group.generator_group_type', 'current_generator_group.phase_type', 'current_generator_motor.generator_motor_type', 'current_generator_tank.generator_tank_type', 'current_generator_tta.generator_tta_type', 'current_maintainer')
                 ->whereHas('pop.sites', function($a) use($condition_core) {
                     $a->whereRaw($condition_core);
                 })
-                ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+                ->whereHas('pop.zona', function($q) use($condition_crm, $condition_zona) {
                     $q->whereRaw($condition_crm)
                     ->whereRaw($condition_zona);
                 })
@@ -330,8 +330,8 @@ class GeneratorSetsExport implements FromCollection, WithTitle, ShouldAutoSize, 
             $generatorSet->pop->sites ? $generatorSet->pop->sites[0]->nem_site : null,
             count($generatorSet->pop->sites) > 1 ? $generatorSet->pop->sites[1]->nem_site : null,
             $generatorSet->pop->nombre,
-            $generatorSet->pop->comuna->zona->nombre_zona,
-            $generatorSet->pop->comuna->zona->crm->nombre_crm,
+            $generatorSet->pop->zona->nombre_zona,
+            $generatorSet->pop->zona->crm->nombre_crm,
 
             $generatorSet->generator_set_type ? $generatorSet->generator_set_type->type : null,
             $generatorSet->generator_set_type ? $generatorSet->generator_set_type->model : null,

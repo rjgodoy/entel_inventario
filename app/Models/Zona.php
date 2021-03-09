@@ -14,6 +14,11 @@ class Zona extends Model
         return $this->belongsTo(Crm::class);
     }
 
+    public function pops() 
+    {
+        return $this->hasMany(Pop::class);
+    }
+
     public function comunas() 
     {
         return $this->hasMany(Comuna::class);
@@ -27,6 +32,11 @@ class Zona extends Model
     public function temporary_storages() 
     {
         return $this->hasMany(User::class);
+    }
+
+    public function g_generators() 
+    {
+        return $this->hasMany(GeneratorsPlatformGenerator::class, 'zone_id');
     }
 
 }

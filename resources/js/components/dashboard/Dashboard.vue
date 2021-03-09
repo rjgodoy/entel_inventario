@@ -109,7 +109,7 @@
                                     {{ props.option ? props.option.pop.comuna.nombre_comuna : '' }}
                                 </div>
                                 <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                    {{ props.option ? 'Zona ' + props.option.pop.comuna.zona.nombre_zona : '' }} - {{ props.option ? 'CRM ' + props.option.pop.comuna.zona.crm.nombre_crm : '' }}
+                                    {{ props.option ? 'Zona ' + props.option.pop.zona.nombre_zona : '' }} - {{ props.option ? 'CRM ' + props.option.pop.zona.crm.nombre_crm : '' }}
                                 </div>
                             </div>
 
@@ -281,8 +281,8 @@
                                                 {{ last_data_counters.last_site.nem_site }} - {{ last_data_counters.last_site.nombre }}
                                             </router-link>
                                             <div class="is-size-7">
-                                                <p>{{ last_data_counters.last_site.pop.comuna.zona.nombre_zona }}</p>
-                                                <p class="has-text-weight-light">CRM {{ last_data_counters.last_site.pop.comuna.zona.crm.nombre_crm }}</p>
+                                                <p>{{ last_data_counters.last_site.pop.zona.nombre_zona }}</p>
+                                                <p class="has-text-weight-light">CRM {{ last_data_counters.last_site.pop.zona.crm.nombre_crm }}</p>
                                             </div>
                                         </div>
 
@@ -306,7 +306,7 @@
                                                 {{ last_data_counters.last_site.nem_site }} - {{ last_data_counters.last_site.nombre }}
                                             </router-link>
                                             <div class="is-size-7 has-text-weight-light">
-                                                <div>Zona {{ last_data_counters.last_site.pop.comuna.zona.nombre_zona }} - <span class="has-text-weight-light">CRM {{ last_data_counters.last_site.pop.comuna.zona.crm.nombre_crm }}</span></div>
+                                                <div>Zona {{ last_data_counters.last_site.pop.zona.nombre_zona }} - <span class="has-text-weight-light">CRM {{ last_data_counters.last_site.pop.zona.crm.nombre_crm }}</span></div>
                                             </div>
                                         </div>
 
@@ -330,7 +330,7 @@
                                                 {{ last_data_counters.last_technology.nem_tech }} - {{ last_data_counters.last_technology.ran_device_name }}
                                             </router-link>
                                             <div class="is-size-7 has-text-weight-light">
-                                                <div>Zona {{ last_data_counters.last_technology.site.pop.comuna.zona.nombre_zona }} - <span class="has-text-weight-light">CRM {{ last_data_counters.last_technology.site.pop.comuna.zona.crm.nombre_crm }}</span></div>
+                                                <div>Zona {{ last_data_counters.last_technology.site.pop.zona.nombre_zona }} - <span class="has-text-weight-light">CRM {{ last_data_counters.last_technology.site.pop.zona.crm.nombre_crm }}</span></div>
                                             </div>
                                         </div>
 
@@ -776,7 +776,7 @@
 
                 axios.get(`/api/criticPopsMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
                     // console.log(response.data)
-                    this.pops = response.data.data
+                    this.pops = response.data.pop
 
                 })
                 this.criticPopsSwitch = this.criticPopsSwitch == 0 ? 1 : 0
@@ -790,7 +790,7 @@
 
                 axios.get(`/api/albaPopsMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`).then((response) => {
                     // console.log(response.data)
-                    this.pops = response.data.data
+                    this.pops = response.data.pop
                 })
                 this.albaPopsSwitch = this.albaPopsSwitch == 0 ? 1 : 0
             },

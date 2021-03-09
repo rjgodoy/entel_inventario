@@ -348,10 +348,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     MapView: function MapView() {
-      return Promise.all(/*! import() | chunks/maps/mapView */[__webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators/generatorSlot~chunks/maps/ecoM~7428b83f"), __webpack_require__.e("chunks/maps/mapView")]).then(__webpack_require__.bind(null, /*! ../maps/PopsMapView.vue */ "./resources/js/components/maps/PopsMapView.vue"));
+      return Promise.all(/*! import() | chunks/maps/mapView */[__webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators/modals/generatorCharts~chunks/~06d98356"), __webpack_require__.e("chunks/maps/mapView")]).then(__webpack_require__.bind(null, /*! ../maps/PopsMapView.vue */ "./resources/js/components/maps/PopsMapView.vue"));
     },
     ModalDownload: function ModalDownload() {
-      return Promise.all(/*! import() | chunks/dashboard/modalDownload */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~d94cc1ca"), __webpack_require__.e("chunks/dashboard/modalDownload")]).then(__webpack_require__.bind(null, /*! ../dashboard/ModalDownload */ "./resources/js/components/dashboard/ModalDownload.vue"));
+      return Promise.all(/*! import() | chunks/dashboard/modalDownload */[__webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~ad5cfa06"), __webpack_require__.e("chunks/dashboard/modalDownload")]).then(__webpack_require__.bind(null, /*! ../dashboard/ModalDownload */ "./resources/js/components/dashboard/ModalDownload.vue"));
     },
     VuePagination: function VuePagination() {
       return __webpack_require__.e(/*! import() | chunks/helpers/vuePagination */ "chunks/helpers/vuePagination").then(__webpack_require__.bind(null, /*! ../helpers/VuePagination */ "./resources/js/components/helpers/VuePagination.vue"));

@@ -328,6 +328,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -646,14 +647,14 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     responsableZona: function responsableZona() {
       var array = [];
 
-      if (this.pop.comuna) {
+      if (this.pop.zona) {
         array = {
-          'nombre': this.pop.comuna.zona.responsable.nombre,
-          'apellido': this.pop.comuna.zona.responsable.apellido,
-          'email': this.pop.comuna.zona.responsable.email,
-          'telefono_movil': this.pop.comuna.zona.responsable.telefono_movil,
-          'anexo_fono': this.pop.comuna.zona.responsable.anexo_fono,
-          'nombre_cargo_especifico': this.pop.comuna.zona.responsable.nombre_cargo_especifico
+          'nombre': this.pop.zona.responsable.nombre,
+          'apellido': this.pop.zona.responsable.apellido,
+          'email': this.pop.zona.responsable.email,
+          'telefono_movil': this.pop.zona.responsable.telefono_movil,
+          'anexo_fono': this.pop.zona.responsable.anexo_fono,
+          'nombre_cargo_especifico': this.pop.zona.responsable.nombre_cargo_especifico
         };
       }
 
@@ -1096,11 +1097,7 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("p", { staticClass: "is-size-5 has-text-weight-bold" }, [
-                    _vm._v(
-                      _vm._s(
-                        _vm.pop.comuna ? _vm.pop.comuna.zona.nombre_zona : ""
-                      )
-                    )
+                    _vm._v(_vm._s(_vm.pop.zona ? _vm.pop.zona.nombre_zona : ""))
                   ]),
                   _vm._v(" "),
                   _c(
@@ -1115,9 +1112,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("p", { staticClass: "is-size-5 has-text-weight-bold" }, [
                     _vm._v(
-                      _vm._s(
-                        _vm.pop.comuna ? _vm.pop.comuna.zona.crm.nombre_crm : ""
-                      )
+                      _vm._s(_vm.pop.zona ? _vm.pop.zona.crm.nombre_crm : "")
                     )
                   ])
                 ]
@@ -1451,7 +1446,7 @@ var render = function() {
                             "has-text-link has-text-weight-bold is-size-5",
                           attrs: { type: "is-white", size: "is-large" }
                         },
-                        [_vm._v(_vm._s(_vm.popDependences))]
+                        [_vm._v(_vm._s(_vm.pop.dependences))]
                       ),
                       _vm._v(" "),
                       _vm._m(2)
@@ -1885,7 +1880,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticStyle: { "padding-top": "4px" } }, [
       _c("div", { staticClass: "is-size-6 has-text-weight-semibold" }, [
-        _vm._v("DEPENDENCIAS DIRECTAS")
+        _vm._v("DEPENDENCIAS")
       ])
     ])
   },

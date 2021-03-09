@@ -151,13 +151,9 @@ var render = function() {
                     [
                       _vm._v(
                         "\n                            " +
-                          _vm._s(
-                            pop ? "Zona: " + pop.comuna.zona.nombre_zona : ""
-                          ) +
+                          _vm._s(pop ? "Zona: " + pop.zona.nombre_zona : "") +
                           " - " +
-                          _vm._s(
-                            pop ? "CRM: " + pop.comuna.zona.crm.nombre_crm : ""
-                          ) +
+                          _vm._s(pop ? "CRM: " + pop.zona.crm.nombre_crm : "") +
                           "\n                        "
                       )
                     ]

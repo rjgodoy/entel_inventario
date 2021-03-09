@@ -16,7 +16,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return new RoleCollection(Role::all());
+        $roles = Role::with('permissions')->get();
+        return new RoleCollection($roles);
     }
 
     /**
@@ -27,7 +28,12 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $role = Role::create([
+            'name' => $request->name,
+            'slug' => $request->slug
+        ]);
+        $role = Role::with('permissions')->where('id', $role->id)->first();
+        return $role;
     }
 
     /**
@@ -50,7 +56,15 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $role = Role::find($id);
+        if($request->can) {
+            $role->permissions()->attach($request->permission_id);
+        } else {
+            $role->permissions()->detach($request->permission_id);
+        }
+        
+        return $request;
+
     }
 
     /**

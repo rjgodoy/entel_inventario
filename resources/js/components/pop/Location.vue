@@ -22,7 +22,7 @@
 
                         <div class="is-size-6 has-text-weight-normal">Comuna de {{ pop.comuna ? pop.comuna.nombre_comuna : '' }}</div>
                         <div class="is-size-7 has-text-weight-normal">
-                            Zona {{ pop.comuna ? pop.comuna.zona.nombre_zona : '' }} - CRM {{ pop.comuna ? pop.comuna.zona.crm.nombre_crm : '' }}
+                            Zona {{ pop.zona ? pop.zona.nombre_zona : '' }} - CRM {{ pop.zona ? pop.zona.crm.nombre_crm : '' }}
                         </div>
                     </div>
 

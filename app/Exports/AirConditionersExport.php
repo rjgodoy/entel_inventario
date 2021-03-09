@@ -97,7 +97,7 @@ class AirConditionersExport implements FromCollection, WithTitle, ShouldAutoSize
             foreach ($ids as $id) {
                 array_push($popsIds, $id);
             }
-            $airConditioner = AirConditioner::withTrashed()->with('pop.comuna.zona.crm', 'pop.sites', 'air_conditioner_brand.air_conditioner_type', 'air_conditioner_condensers', 'air_conditioner_chillers', 'current_consumption')
+            $airConditioner = AirConditioner::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'air_conditioner_brand.air_conditioner_type', 'air_conditioner_condensers', 'air_conditioner_chillers', 'current_consumption')
             ->whereIn('pop_id', $popsIds)
             ->get();
         } else {
@@ -148,7 +148,7 @@ class AirConditionersExport implements FromCollection, WithTitle, ShouldAutoSize
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            // $airConditioner = AirConditioner::withTrashed()->with('pop.comuna.zona.crm', 'pop.sites', 'air_conditioner_brand.air_conditioner_type', 'air_conditioner_condensers', 'air_conditioner_chillers', 'current_consumption')
+            // $airConditioner = AirConditioner::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'air_conditioner_brand.air_conditioner_type', 'air_conditioner_condensers', 'air_conditioner_chillers', 'current_consumption')
             // 	->whereHas('pop.sites', function($a) use($text, $condition_bafi, $bafi, $condition_core, $condition_pe_3g, $condition_mpls, $condition_olt, $condition_olt_3play, $condition_lloo, $condition_ranco) {
             // 		$a->where(function($p) use($text, $condition_bafi) {
 	           //          $p->where(function($w) use($text) {
@@ -199,7 +199,7 @@ class AirConditionersExport implements FromCollection, WithTitle, ShouldAutoSize
 	           //      ->whereRaw($condition_lloo)
 	           //      ->whereRaw($condition_ranco);
             // 	})
-    	       //  ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+    	       //  ->whereHas('pop.zona', function($q) use($condition_crm, $condition_zona) {
     	       //      $q->whereRaw($condition_crm)
             //         ->whereRaw($condition_zona);
     	       //  })
@@ -244,11 +244,11 @@ class AirConditionersExport implements FromCollection, WithTitle, ShouldAutoSize
             //     ->orderBy('pop_id', 'asc')
     	       //  ->get();
 
-            $airConditioner = AirConditioner::withTrashed()->with('pop.comuna.zona.crm', 'pop.sites', 'air_conditioner_brand.air_conditioner_type', 'air_conditioner_condensers', 'air_conditioner_chillers', 'current_consumption')
+            $airConditioner = AirConditioner::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'air_conditioner_brand.air_conditioner_type', 'air_conditioner_condensers', 'air_conditioner_chillers', 'current_consumption')
                 ->whereHas('pop.sites', function($a) use($condition_core) {
                     $a->whereRaw($condition_core);
                 })
-                ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+                ->whereHas('pop.zona', function($q) use($condition_crm, $condition_zona) {
                     $q->whereRaw($condition_crm)
                     ->whereRaw($condition_zona);
                 })
@@ -302,8 +302,8 @@ class AirConditionersExport implements FromCollection, WithTitle, ShouldAutoSize
             $airConditioner->pop->id,
             $airConditioner->pop->sites ? $airConditioner->pop->sites[0]->nem_site : null,
             $airConditioner->pop->nombre,
-            $airConditioner->pop->comuna->zona->nombre_zona,
-            $airConditioner->pop->comuna->zona->crm->nombre_crm,
+            $airConditioner->pop->zona->nombre_zona,
+            $airConditioner->pop->zona->crm->nombre_crm,
 
             $airConditioner->air_conditioner_brand ? $airConditioner->air_conditioner_brand->air_conditioner_type->type : null,
             $airConditioner->air_conditioner_brand ? $airConditioner->air_conditioner_brand->brand : null,

@@ -40,28 +40,11 @@
         </table>
 
         <div class="columns">
-            <div class="column">
-                <!-- <b-field>
-                    <b-button 
-                        :loading="buttonLoading ? true : false"
-                        type="is-link"
-                        size="is-small"
-                        @click="downloadSites">
-                        <font-awesome-icon icon="download"/> 
-                        &nbsp;&nbsp;Listado de Sitios
-                    </b-button>
-                    <b-tooltip label="Tooltip Text" position="is-right">
-                        <a href="/sites" type="button" class="button is-small is-link" data-tooltip="">
-                            <font-awesome-icon icon="bars"/>
-                        </a>
-                    </b-tooltip>
-                </b-field> -->
-            </div>
             <div class="column is-right">
                 <div class="is-size-7 has-text-right" style="margin-top: 10px" :class="secondaryText">Ultima actualización: {{ last_updated }}</div>
             </div>
-
         </div>
+        <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
     </div>
 </template>
 
@@ -86,12 +69,14 @@
             return {
                 sitesData: [],
                 buttonLoading: 0,
+                isLoading: false
             }
         },
         created(){
             this.getData()
         },
-        mounted() {      
+        mounted() {   
+            this.isLoading = true    
         },
         watch: {
             selectedCrm(newValue, oldValue) {
@@ -141,9 +126,7 @@
                     axios.get(`/api/sitesData?core=${this.core}`)
                     .then((response) => {
                         this.sitesData = response.data.pop;
-                        // this.$eventBus.$emit('getSitesData', this.sitesData)
-                    }).finally(() => {
-                        // this.$eventBus.$emit('getSitesData', this.sitesData)
+                        this.isLoading = false
                     })
                 } 
                 //Si hay un CRM seleccionado, pero no hay zona seleccionada
@@ -151,9 +134,7 @@
                     axios.get(`/api/sitesDataCrm?crm_id=${this.selectedCrm.id}&core=${this.core}`)
                     .then((response) => {
                         this.sitesData = response.data.pop;
-                        // this.$eventBus.$emit('getSitesData', this.sitesData)
-                    }).finally(() => {
-                        // this.$eventBus.$emit('getSitesData', this.sitesData)
+                        this.isLoading = false
                     })
                 } 
                 // Si hay una zona seleccionada
@@ -161,31 +142,11 @@
                     axios.get(`/api/sitesDataZona?zona_id=${this.selectedZona.id}&core=${this.core}`)
                     .then((response) => {
                         this.sitesData = response.data.pop;
-                        // this.$eventBus.$emit('getSitesData', this.sitesData)
-                    }).finally(() => {
-                        // this.$eventBus.$emit('getSitesData', this.sitesData)
+                        this.isLoading = false
                     })
                 }
                 
             },
-            // downloadSites() {
-            //     this.buttonLoading = 1
-
-            //     axios.get(`/pop/export?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}`, {
-            //         responseType: 'blob',
-            //     })
-            //     .then((response) => {
-            //         console.log(response.data)
-            //         const blob = new Blob([response.data], { type: 'application/xls' })
-            //         // const objectUrl = window.URL.createObjectURL(blob)
-
-            //         let link = document.createElement('a')
-            //         link.href = window.URL.createObjectURL(blob)
-            //         link.download = 'test.xlsx'
-            //         link.click()
-            //         this.buttonLoading = 0
-            //     })
-            // }
         }
     }
 </script>

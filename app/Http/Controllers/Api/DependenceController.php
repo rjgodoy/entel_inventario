@@ -40,7 +40,7 @@ class DependenceController extends Controller
     public function show($id)
     {
         $dependences = Dependence::with(
-                            'dependence.pop.comuna.zona.crm',
+                            'dependence.pop.comuna', 'dependence.pop.zona.crm',
                             'dependence.classification_type'
                         )->whereHas('site.pop', function($q) use($id) {
                             $q->where('id', $id);

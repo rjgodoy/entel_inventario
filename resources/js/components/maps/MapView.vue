@@ -200,11 +200,11 @@ export default {
         // })
     },
     watch: {
-        pops(newValue, oldValue) {
+        pops(newValue) {
             newValue.length == 1 ? this.setPop() : this.setPops()
         },
 
-        criticPopsSwitch(newValue, oldValue) {
+        criticPopsSwitch(newValue) {
             this.setPops()
         },
     },
@@ -262,7 +262,7 @@ export default {
                             <div class="media-content">
                                 <p class="has-text-weight-bold is-size-4">${pop.nombre}</p>
                                 <p class="has-text-weight-normal is-size-6">${pop.direccion ? pop.direccion : 'Sin dirección registrada'}, ${pop.comuna.nombre_comuna}</p>
-                                <p class="has-text-weight-light is-size-6">Zona ${pop.comuna.zona.nombre_zona}, CRM ${pop.comuna.zona.crm.nombre_crm}</p>
+                                <p class="has-text-weight-light is-size-6">Zona ${pop.zona.nombre_zona}, CRM ${pop.zona.crm.nombre_crm}</p>
                             </div>
                         </div>
 
@@ -303,7 +303,7 @@ export default {
             //                 <div class="media-content">
             //                     <p class="has-text-weight-bold is-size-4">${pop.nombre}</p>
             //                     <p class="has-text-weight-normal is-size-6">${pop.direccion ? pop.direccion : 'Sin dirección registrada'}, ${pop.comuna.nombre_comuna}</p>
-            //                     <p class="has-text-weight-light is-size-6">Zona ${pop.comuna.zona.nombre_zona}, CRM ${pop.comuna.zona.crm.nombre_crm}</p>
+            //                     <p class="has-text-weight-light is-size-6">Zona ${pop.zona.nombre_zona}, CRM ${pop.zona.crm.nombre_crm}</p>
             //                 </div>
             //             </div>
 

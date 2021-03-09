@@ -253,7 +253,7 @@
                                             {{ pop.comuna ? pop.comuna.nombre_comuna : '' }}
                                         </div>
                                         <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                            {{ pop.comuna.zona ? 'Zona: ' + pop.comuna.zona.nombre_zona : '' }} - {{ pop.comuna.zona.crm ? 'CRM: ' + pop.comuna.zona.crm.nombre_crm : '' }}
+                                            {{ pop.zona ? 'Zona: ' + pop.zona.nombre_zona : '' }} - {{ pop.zona.crm ? 'CRM: ' + pop.zona.crm.nombre_crm : '' }}
                                         </div>
                                     </td> -->
 

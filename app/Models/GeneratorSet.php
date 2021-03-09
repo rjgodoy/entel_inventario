@@ -84,6 +84,11 @@ class GeneratorSet extends Model
         return $this->belongsTo(GeneratorSetType::class);
     }
 
+    public function generator_set_model()
+    {
+        return $this->belongsTo(GeneratorSetModel::class);
+    }
+
     public function generator_groups() 
     {
         return $this->hasMany(GeneratorGroup::class);

@@ -209,11 +209,7 @@ var render = function() {
           _vm._v(" "),
           _c("b-table-column", {
             staticClass: "is-size-6",
-            attrs: {
-              field: "comuna.zona.nombre_zona",
-              label: "Zona",
-              sortable: ""
-            },
+            attrs: { field: "zona.nombre_zona", label: "Zona", sortable: "" },
             scopedSlots: _vm._u([
               {
                 key: "header",
@@ -248,7 +244,7 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c("div", { staticClass: "is-size-7" }, [
-                      _vm._v(_vm._s(props.row.comuna.zona.nombre_zona))
+                      _vm._v(_vm._s(props.row.zona.nombre_zona))
                     ])
                   ]
                 }

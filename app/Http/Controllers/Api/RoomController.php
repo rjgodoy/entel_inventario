@@ -27,7 +27,8 @@ class RoomController extends Controller
         $condition_crm = $crm_id != 0 ? 'crm_id = '.$crm_id : 'crm_id != '.$crm_id;
 
         $pops = Pop::with(
-                'comuna.zona.crm', 
+                'comuna',
+                'zona.crm', 
                 'sites', 
                 'rooms.current_room_capacity'                
             )
@@ -37,7 +38,7 @@ class RoomController extends Controller
                     ->orWhere('nombre', 'LIKE', "%$text%");
                 }
             })
-            ->whereHas('comuna.zona', function($r) use($condition_crm) {
+            ->whereHas('zona', function($r) use($condition_crm) {
                 $r->whereRaw($condition_crm);
             })
             ->whereHas('rooms', function($p) {

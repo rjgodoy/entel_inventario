@@ -66,34 +66,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['user', 'selectedCrm', 'selectedZona', 'core', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'last_updated'],
   data: function data() {
     return {
       popsData: [],
-      buttonLoading: 0
+      buttonLoading: 0,
+      isLoading: false
     };
   },
   created: function created() {},
   mounted: function mounted() {
     this.getData();
+    this.isLoading = true;
   },
   watch: {
     selectedCrm: function selectedCrm(newValue, oldValue) {
@@ -160,17 +146,20 @@ __webpack_require__.r(__webpack_exports__);
       // Si no hay un CRM seleccionado
       if (!this.selectedCrm) {
         axios.get("/api/popData?core=".concat(this.core)).then(function (response) {
-          _this.popsData = response.data.pop; // this.$eventBus.$emit('graphData', this.popsData)
+          _this.popsData = response.data.pop;
+          _this.isLoading = false; // this.$eventBus.$emit('graphData', this.popsData)
         });
       } //Si hay un CRM seleccionado, pero no hay zona seleccionada
       else if (!this.selectedZona) {
           axios.get("/api/popDataCrm?crm_id=".concat(this.selectedCrm.id, "&core=").concat(this.core)).then(function (response) {
-            _this.popsData = response.data.pop; // this.$eventBus.$emit('graphData', this.popsData)
+            _this.popsData = response.data.pop;
+            _this.isLoading = false; // this.$eventBus.$emit('graphData', this.popsData)
           });
         } // Si hay una zona seleccionada
         else {
             axios.get("/api/popDataZona?zona_id=".concat(this.selectedZona.id, "&core=").concat(this.core)).then(function (response) {
-              _this.popsData = response.data.pop; // this.$eventBus.$emit('graphData', this.popsData)
+              _this.popsData = response.data.pop;
+              _this.isLoading = false; // this.$eventBus.$emit('graphData', this.popsData)
             });
           }
     }
@@ -194,270 +183,293 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "columns" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "column is-size-5 has-text-weight-semibold has-text-left",
-          class: _vm.primaryText
-        },
-        [_vm._v("POP")]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "column is-size-4 has-text-weight-semibold has-text-right",
-          class: _vm.primaryText
-        },
-        [_vm._v(_vm._s(_vm._f("numeral")(this.totalPops, "0,0")))]
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "table",
-      {
-        staticClass: "table is-fullwidth",
-        staticStyle: { "background-color": "rgba(0,0,0,0)" }
-      },
-      [
-        _c("thead", [
-          _c("tr", { staticClass: "is-size-7" }, [
-            _c("th", { class: _vm.secondaryText }, [
-              _vm._v(
-                _vm._s(
-                  _vm.selectedCrm == null
-                    ? "CRM"
-                    : _vm.selectedZona == null
-                    ? "Zona"
-                    : "Comuna"
-                )
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "Opto Estación" } }, [
-                  _vm._v("Opto Estación")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "Radio Estación" } }, [
-                  _vm._v("Radio Estación")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "Repetidor" } }, [
-                  _vm._v("Repetidor")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [_c("abbr", { attrs: { title: "Indoor" } }, [_vm._v("Indoor")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [_c("abbr", { attrs: { title: "Outdoor" } }, [_vm._v("Outdoor")])]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [
-                _c("abbr", { attrs: { title: "Pole Site" } }, [
-                  _vm._v("Pole Site")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticClass: "has-text-right", class: _vm.secondaryText },
-              [_c("abbr", { attrs: { title: "Total" } }, [_vm._v("Total")])]
-            )
-          ])
-        ]),
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "columns" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "column is-size-5 has-text-weight-semibold has-text-left",
+            class: _vm.primaryText
+          },
+          [_vm._v("POP")]
+        ),
         _vm._v(" "),
         _c(
-          "tbody",
-          [
-            _vm._l(_vm.popsData, function(item) {
-              return _c("tr", { key: item.id, staticClass: "is-size-7" }, [
+          "div",
+          {
+            staticClass:
+              "column is-size-4 has-text-weight-semibold has-text-right",
+            class: _vm.primaryText
+          },
+          [_vm._v(_vm._s(_vm._f("numeral")(this.totalPops, "0,0")))]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "table",
+        {
+          staticClass: "table is-fullwidth",
+          staticStyle: { "background-color": "rgba(0,0,0,0)" }
+        },
+        [
+          _c("thead", [
+            _c("tr", { staticClass: "is-size-7" }, [
+              _c("th", { class: _vm.secondaryText }, [
+                _vm._v(
+                  _vm._s(
+                    _vm.selectedCrm == null
+                      ? "CRM"
+                      : _vm.selectedZona == null
+                      ? "Zona"
+                      : "Comuna"
+                  )
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [
+                  _c("abbr", { attrs: { title: "Opto Estación" } }, [
+                    _vm._v("Opto Estación")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [
+                  _c("abbr", { attrs: { title: "Radio Estación" } }, [
+                    _vm._v("Radio Estación")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [
+                  _c("abbr", { attrs: { title: "Repetidor" } }, [
+                    _vm._v("Repetidor")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [_c("abbr", { attrs: { title: "Indoor" } }, [_vm._v("Indoor")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [
+                  _c("abbr", { attrs: { title: "Outdoor" } }, [
+                    _vm._v("Outdoor")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [
+                  _c("abbr", { attrs: { title: "Pole Site" } }, [
+                    _vm._v("Pole Site")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticClass: "has-text-right", class: _vm.secondaryText },
+                [_c("abbr", { attrs: { title: "Total" } }, [_vm._v("Total")])]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            [
+              _vm._l(_vm.popsData, function(item) {
+                return _c("tr", { key: item.id, staticClass: "is-size-7" }, [
+                  _c("td", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "has-text-weight-bold",
+                        class: _vm.secondaryText,
+                        attrs: { href: "", title: "CRM Norte" }
+                      },
+                      [_vm._v(_vm._s(item.nombre))]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [_vm._v(_vm._s(_vm._f("numeral")(item.opto, "0,0")))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [_vm._v(_vm._s(_vm._f("numeral")(item.radio, "0,0")))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [_vm._v(_vm._s(_vm._f("numeral")(item.repetidor, "0,0")))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [_vm._v(_vm._s(_vm._f("numeral")(item.indoor, "0,0")))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [_vm._v(_vm._s(_vm._f("numeral")(item.outdoor, "0,0")))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "has-text-right", class: _vm.primaryText },
+                    [_vm._v(_vm._s(_vm._f("numeral")(item.pole_site, "0,0")))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    {
+                      staticClass: "has-text-right has-text-weight-bold",
+                      class: _vm.primaryText
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(
+                          _vm._f("numeral")(
+                            item.opto +
+                              item.radio +
+                              item.repetidor +
+                              item.indoor +
+                              item.outdoor +
+                              item.pole_site,
+                            "0,0"
+                          )
+                        )
+                      )
+                    ]
+                  )
+                ])
+              }),
+              _vm._v(" "),
+              _c("tr", { staticClass: "is-size-7 has-text-weight-bold" }, [
                 _c("td", [
                   _c(
                     "a",
                     {
-                      staticClass: "has-text-weight-bold",
                       class: _vm.secondaryText,
-                      attrs: { href: "", title: "CRM Norte" }
+                      attrs: { href: "", title: "Total" }
                     },
-                    [_vm._v(_vm._s(item.nombre))]
+                    [_vm._v("Total")]
                   )
                 ]),
                 _vm._v(" "),
                 _c(
                   "td",
                   { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(item.opto, "0,0")))]
+                  [_vm._v(_vm._s(_vm._f("numeral")(this.totalOpto, "0,0")))]
                 ),
                 _vm._v(" "),
                 _c(
                   "td",
                   { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(item.radio, "0,0")))]
+                  [_vm._v(_vm._s(_vm._f("numeral")(this.totalRadio, "0,0")))]
                 ),
                 _vm._v(" "),
                 _c(
                   "td",
                   { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(item.repetidor, "0,0")))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(item.indoor, "0,0")))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(item.outdoor, "0,0")))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "has-text-right", class: _vm.primaryText },
-                  [_vm._v(_vm._s(_vm._f("numeral")(item.pole_site, "0,0")))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  {
-                    staticClass: "has-text-right has-text-weight-bold",
-                    class: _vm.primaryText
-                  },
                   [
                     _vm._v(
-                      _vm._s(
-                        _vm._f("numeral")(
-                          item.opto +
-                            item.radio +
-                            item.repetidor +
-                            item.indoor +
-                            item.outdoor +
-                            item.pole_site,
-                          "0,0"
-                        )
-                      )
+                      _vm._s(_vm._f("numeral")(this.totalRepetidor, "0,0"))
                     )
                   ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "has-text-right", class: _vm.primaryText },
+                  [_vm._v(_vm._s(_vm._f("numeral")(this.totalIndoor, "0,0")))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "has-text-right", class: _vm.primaryText },
+                  [_vm._v(_vm._s(_vm._f("numeral")(this.totalOutdoor, "0,0")))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "has-text-right", class: _vm.primaryText },
+                  [_vm._v(_vm._s(_vm._f("numeral")(this.totalPoleSite, "0,0")))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "has-text-right", class: _vm.primaryText },
+                  [_vm._v(_vm._s(_vm._f("numeral")(this.totalPops, "0,0")))]
                 )
               ])
-            }),
-            _vm._v(" "),
-            _c("tr", { staticClass: "is-size-7 has-text-weight-bold" }, [
-              _c("td", [
-                _c(
-                  "a",
-                  {
-                    class: _vm.secondaryText,
-                    attrs: { href: "", title: "Total" }
-                  },
-                  [_vm._v("Total")]
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalOpto, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalRadio, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalRepetidor, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalIndoor, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalOutdoor, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalPoleSite, "0,0")))]
-              ),
-              _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "has-text-right", class: _vm.primaryText },
-                [_vm._v(_vm._s(_vm._f("numeral")(this.totalPops, "0,0")))]
-              )
-            ])
-          ],
-          2
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "columns" }, [
-      _c("div", { staticClass: "column" }),
+            ],
+            2
+          )
+        ]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "column is-right" }, [
-        _c(
-          "div",
-          {
-            staticClass: "is-size-7 has-text-right",
-            class: _vm.secondaryText,
-            staticStyle: { "margin-top": "10px" }
-          },
-          [
-            _vm._v(
-              "\n                Ultima actualización: " +
-                _vm._s(_vm.last_updated) +
-                "\n            "
-            )
-          ]
-        )
-      ])
-    ])
-  ])
+      _c("div", { staticClass: "columns" }, [
+        _c("div", { staticClass: "column is-right" }, [
+          _c(
+            "div",
+            {
+              staticClass: "is-size-7 has-text-right",
+              class: _vm.secondaryText,
+              staticStyle: { "margin-top": "10px" }
+            },
+            [
+              _vm._v(
+                "\n                Ultima actualización: " +
+                  _vm._s(_vm.last_updated) +
+                  "\n            "
+              )
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("b-loading", {
+        attrs: {
+          "is-full-page": false,
+          active: _vm.isLoading,
+          "can-cancel": true
+        },
+        on: {
+          "update:active": function($event) {
+            _vm.isLoading = $event
+          }
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

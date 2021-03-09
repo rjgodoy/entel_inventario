@@ -44,7 +44,7 @@
                                 {{ props.option ? props.option.nombre : '' }}
                             </div>
                             <div class="is-size-7 has-text-weight-normal">
-                                {{ props.option ? props.option.comuna.nombre_comuna : '' }} - {{ props.option ? 'Zona ' + props.option.comuna.zona.nombre_zona : '' }} - {{ props.option ? 'CRM ' + props.option.comuna.zona.crm.nombre_crm : '' }}
+                                {{ props.option ? props.option.comuna.nombre_comuna : '' }} - {{ props.option ? 'Zona ' + props.option.zona.nombre_zona : '' }} - {{ props.option ? 'CRM ' + props.option.zona.crm.nombre_crm : '' }}
                             </div>
                         </div>
                     </template>
@@ -84,7 +84,7 @@
                                 {{ selected ? selected.nombre : '' }}
                             </div>
                             <div class="is-size-7 has-text-weight-normal">
-                                {{ selected ? selected.comuna.nombre_comuna + ' - Zona ' + selected.comuna.zona.nombre_zona + ' - CRM ' + selected.comuna.zona.crm.nombre_crm : '' }}
+                                {{ selected ? selected.comuna.nombre_comuna + ' - Zona ' + selected.zona.nombre_zona + ' - CRM ' + selected.zona.crm.nombre_crm : '' }}
                             </div>
                         </b-notification>                        
                     </div>

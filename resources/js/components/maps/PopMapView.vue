@@ -199,7 +199,7 @@
                                     <p class="has-text-weight-semibold is-size-6 has-text-info">${thisPop.nem_site}</p>
                                     <p class="has-text-weight-bold is-size-4">${thisPop.nombre}</p>
                                     <p class="has-text-weight-normal is-size-6">${pop.direccion ? pop.direccion : 'Sin dirección registrada'}, ${pop.comuna.nombre_comuna}</p>
-                                    <p class="has-text-weight-light is-size-6">Zona ${pop.comuna.zona.nombre_zona}, CRM ${pop.comuna.zona.crm.nombre_crm}</p>
+                                    <p class="has-text-weight-light is-size-6">Zona ${pop.zona.nombre_zona}, CRM ${pop.zona.crm.nombre_crm}</p>
                                 </div>
                             </div>
 

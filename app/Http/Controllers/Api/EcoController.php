@@ -26,7 +26,7 @@ class EcoController extends Controller
      */
     public function index()
     {
-        $protectedZonesPops = Pop::with('protected_zones', 'comuna.zona', 'sites')->has('protected_zones')->get();
+        $protectedZonesPops = Pop::with('protected_zones', 'comuna', 'zona', 'sites')->has('protected_zones')->get();
         return new EcoResource($protectedZonesPops);
     }
 
@@ -126,7 +126,7 @@ class EcoController extends Controller
      */
     public function storage(Request $request, $pop_id)
     {
-        $zona_id = Pop::with('comuna.zona')->where('id', $pop_id)->first()->comuna->zona->id;
+        $zona_id = Pop::with('comuna', 'zona')->where('id', $pop_id)->first()->zona->id;
         
         $storages = TemporaryStorage::with('pop')->where('zona_id', $zona_id)->get();
         
@@ -218,7 +218,7 @@ class EcoController extends Controller
      */
     public function storages(Request $request)
     {
-        $storageZones = Pop::with('temporary_storage', 'comuna.zona', 'sites')->whereHas('temporary_storage')->get();
+        $storageZones = Pop::with('temporary_storage', 'comuna', 'zona', 'sites')->whereHas('temporary_storage')->get();
         return new EcoResource($storageZones);
     }
 

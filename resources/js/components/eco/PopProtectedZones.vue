@@ -33,7 +33,7 @@
                 </template>
             </b-table-column>
 
-            <b-table-column class="is-size-6" field="comuna.zona.nombre_zona" label="Zona" sortable>
+            <b-table-column class="is-size-6" field="zona.nombre_zona" label="Zona" sortable>
                 <template v-slot:header="{ column }">
                     <b-tooltip :label="column.label" class="is-size-6">
                         {{ column.label }}
@@ -41,7 +41,7 @@
                 </template>
                 <template v-slot="props">
                     <div class="is-size-6 has-text-weight-semibold">{{ props.row.protected_zones[0].cod_zone }}</div>
-                    <div class="is-size-7">{{ props.row.comuna.zona.nombre_zona }}</div>
+                    <div class="is-size-7">{{ props.row.zona.nombre_zona }}</div>
                 </template>
             </b-table-column>
 

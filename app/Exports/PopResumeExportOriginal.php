@@ -151,7 +151,7 @@ class PopResumeExportOriginal implements FromCollection, WithTitle, ShouldAutoSi
             $infrastructure = $this->infrastructure;
             $condition_infrastructures = 'pops.id IN (SELECT infrastructures.pop_id from entel_g_redes_inventario.infrastructures)';
 
-            $pop = Pop::withTrashed()->with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip', 'vertical_structures.beacons.beacon_type', 'protected_zones')
+            $pop = Pop::withTrashed()->with('comuna', 'zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip', 'vertical_structures.beacons.beacon_type', 'protected_zones')
                 ->whereHas('sites', function ($q) use ($text, $condition_core, $condition_bafi, $bafi) {
                     $q->withTrashed()->where(function ($p) use ($text) {
                         if ($text) {
@@ -175,7 +175,7 @@ class PopResumeExportOriginal implements FromCollection, WithTitle, ShouldAutoSi
                 ->whereHas('rooms', function ($r) use ($condition_critic) {
                     $r->whereRaw($condition_critic);
                 })
-                ->whereHas('comuna.zona', function ($q) use ($condition_crm, $condition_zona) {
+                ->whereHas('zona', function ($q) use ($condition_crm, $condition_zona) {
                     $q->whereRaw($condition_crm)
                     ->whereRaw($condition_zona);
                 })

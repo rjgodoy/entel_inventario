@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class GeneratorsPlatformValues extends Model
 {
     protected $connection = 'mysql_generators';
-    protected $table = 'generator_values';
+    protected $table = 'entel.generator_values';
 
     const CREATED_AT = 'created';
 

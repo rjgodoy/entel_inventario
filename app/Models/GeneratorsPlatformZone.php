@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class GeneratorsPlatformZone extends Model
 {
     protected $connection = 'mysql_generators';
-    protected $table = 'zones';
+    protected $table = 'entel.zones';
 
     public function g_generators() 
     {
@@ -18,4 +18,5 @@ class GeneratorsPlatformZone extends Model
     {
         return $this->belongsTo(GeneratorsPlatformSector::class, 'sector_id');
     }
+
 }

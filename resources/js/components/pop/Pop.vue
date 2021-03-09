@@ -60,9 +60,9 @@
 
                         <div class="column is-2" style="padding: 0px">
                             <p class="is-size-6 has-text-weight-semibold has-text-grey-light">Zona</p>
-                            <p class="is-size-5 has-text-weight-bold">{{ pop.comuna ? pop.comuna.zona.nombre_zona : '' }}</p>
+                            <p class="is-size-5 has-text-weight-bold">{{ pop.zona ? pop.zona.nombre_zona : '' }}</p>
                             <p class="is-size-6 has-text-weight-semibold has-text-grey-light" style="margin-top: 10px;">CRM</p>
-                            <p class="is-size-5 has-text-weight-bold">{{ pop.comuna ? pop.comuna.zona.crm.nombre_crm : '' }}</p>
+                            <p class="is-size-5 has-text-weight-bold">{{ pop.zona ? pop.zona.crm.nombre_crm : '' }}</p>
                         </div>
 
                         <div class="column is-3">
@@ -151,9 +151,10 @@
                     </div>
                     <div class="level-item has-text-centered">
                         <div>
-                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold is-size-5">{{ popDependences }}</b-tag>
+                            <!-- <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold is-size-5">{{ popDependences }}</b-tag> -->
+                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold is-size-5">{{ pop.dependences }}</b-tag>
                             <div style="padding-top: 4px;">
-                                <div class="is-size-6 has-text-weight-semibold">DEPENDENCIAS DIRECTAS</div>
+                                <div class="is-size-6 has-text-weight-semibold">DEPENDENCIAS</div>
                             </div>
                         </div>
                     </div>
@@ -602,14 +603,14 @@
 
             responsableZona() {
                 var array = []
-                if (this.pop.comuna) {
+                if (this.pop.zona) {
                     array = {
-                        'nombre': this.pop.comuna.zona.responsable.nombre,
-                        'apellido': this.pop.comuna.zona.responsable.apellido,
-                        'email': this.pop.comuna.zona.responsable.email,
-                        'telefono_movil': this.pop.comuna.zona.responsable.telefono_movil,
-                        'anexo_fono': this.pop.comuna.zona.responsable.anexo_fono,
-                        'nombre_cargo_especifico': this.pop.comuna.zona.responsable.nombre_cargo_especifico
+                        'nombre': this.pop.zona.responsable.nombre,
+                        'apellido': this.pop.zona.responsable.apellido,
+                        'email': this.pop.zona.responsable.email,
+                        'telefono_movil': this.pop.zona.responsable.telefono_movil,
+                        'anexo_fono': this.pop.zona.responsable.anexo_fono,
+                        'nombre_cargo_especifico': this.pop.zona.responsable.nombre_cargo_especifico
                     }
                 }
                 return array

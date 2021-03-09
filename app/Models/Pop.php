@@ -73,6 +73,16 @@ class Pop extends Model
      *
      * @var array
      */
+    public function zona() 
+    {
+        return $this->belongsTo(Zona::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function client_companies() 
     {
         return $this->hasMany(ClientCompany::class);
@@ -306,6 +316,16 @@ class Pop extends Model
     public function vertical_structures() 
     {
         return $this->hasMany(VerticalStructure::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function generators_platform() 
+    {
+        return $this->hasMany(GeneratorPlatform::class, 'pop_id');
     }
 
 }

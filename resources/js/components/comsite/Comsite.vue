@@ -56,7 +56,7 @@
                                     {{ data.pop ? data.pop.comuna.nombre : '' }}
                                 </div>
                                 <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
-                                    {{ data.pop ? 'Zona: ' + data.pop.comuna.zona.nombre : '' }} - {{ data.pop ? 'CRM: ' + data.pop.comuna.zona.crm.nombre : '' }}
+                                    {{ data.pop ? 'Zona: ' + data.pop.zona.nombre : '' }} - {{ data.pop ? 'CRM: ' + data.pop.zona.crm.nombre : '' }}
                                 </div>
                             </td>
                             <td class="has-text-weight-light has-text-centered" :class="primaryText">{{ data.operador }}</td>

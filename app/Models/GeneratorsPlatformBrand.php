@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class GeneratorsPlatformBrand extends Model
 {
     protected $connection = 'mysql_generators';
-    protected $table = 'brands';
+    protected $table = 'entel.brands';
 
     public function g_models() 
     {

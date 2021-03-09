@@ -589,7 +589,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       return __webpack_require__.e(/*! import() | chunks/dashboard/infrastructures */ "chunks/dashboard/infrastructures").then(__webpack_require__.bind(null, /*! ./InfrastructuresData */ "./resources/js/components/dashboard/InfrastructuresData.vue"));
     },
     ModalDownload: function ModalDownload() {
-      return Promise.all(/*! import() | chunks/dashboard/modalDownload */[__webpack_require__.e("vendors~chunks/admin/files~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/documents~c~d94cc1ca"), __webpack_require__.e("chunks/dashboard/modalDownload")]).then(__webpack_require__.bind(null, /*! ./ModalDownload */ "./resources/js/components/dashboard/ModalDownload.vue"));
+      return Promise.all(/*! import() | chunks/dashboard/modalDownload */[__webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~ad5cfa06"), __webpack_require__.e("chunks/dashboard/modalDownload")]).then(__webpack_require__.bind(null, /*! ./ModalDownload */ "./resources/js/components/dashboard/ModalDownload.vue"));
     }
   },
   props: ['user', 'last_data_counters', 'darkMode'],
@@ -798,7 +798,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
                 zona_id = _this3.selectedZona ? _this3.selectedZona.id : 0;
                 axios.get("/api/criticPopsMap?core=".concat(_this3.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
                   // console.log(response.data)
-                  _this3.pops = response.data.data;
+                  _this3.pops = response.data.pop;
                 });
                 _this3.criticPopsSwitch = _this3.criticPopsSwitch == 0 ? 1 : 0;
 
@@ -824,7 +824,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
                 zona_id = _this4.selectedZona ? _this4.selectedZona.id : 0;
                 axios.get("/api/albaPopsMap?core=".concat(_this4.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
                   // console.log(response.data)
-                  _this4.pops = response.data.data;
+                  _this4.pops = response.data.pop;
                 });
                 _this4.albaPopsSwitch = _this4.albaPopsSwitch == 0 ? 1 : 0;
 
@@ -1867,7 +1867,7 @@ var render = function() {
                                         _vm._s(
                                           props.option
                                             ? "Zona " +
-                                                props.option.pop.comuna.zona
+                                                props.option.pop.zona
                                                   .nombre_zona
                                             : ""
                                         ) +
@@ -1875,7 +1875,7 @@ var render = function() {
                                         _vm._s(
                                           props.option
                                             ? "CRM " +
-                                                props.option.pop.comuna.zona.crm
+                                                props.option.pop.zona.crm
                                                   .nombre_crm
                                             : ""
                                         ) +
@@ -2577,7 +2577,7 @@ var render = function() {
                                       "Zona " +
                                         _vm._s(
                                           _vm.last_data_counters.last_site.pop
-                                            .comuna.zona.nombre_zona
+                                            .zona.nombre_zona
                                         ) +
                                         " - "
                                     ),
@@ -2589,7 +2589,7 @@ var render = function() {
                                           "CRM " +
                                             _vm._s(
                                               _vm.last_data_counters.last_site
-                                                .pop.comuna.zona.crm.nombre_crm
+                                                .pop.zona.crm.nombre_crm
                                             )
                                         )
                                       ]
@@ -2710,7 +2710,7 @@ var render = function() {
                                       "Zona " +
                                         _vm._s(
                                           _vm.last_data_counters.last_technology
-                                            .site.pop.comuna.zona.nombre_zona
+                                            .site.pop.zona.nombre_zona
                                         ) +
                                         " - "
                                     ),
@@ -2722,8 +2722,8 @@ var render = function() {
                                           "CRM " +
                                             _vm._s(
                                               _vm.last_data_counters
-                                                .last_technology.site.pop.comuna
-                                                .zona.crm.nombre_crm
+                                                .last_technology.site.pop.zona
+                                                .crm.nombre_crm
                                             )
                                         )
                                       ]

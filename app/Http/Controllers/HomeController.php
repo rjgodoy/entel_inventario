@@ -11,6 +11,7 @@ use App\Models\Role;
 use App\Models\Room;
 use App\Models\Site;
 use App\Models\User;
+use App\Models\Zona;
 use App\Models\Plane;
 use App\Models\PsgTp;
 use App\Models\Folder;
@@ -35,6 +36,7 @@ use Illuminate\Support\Facades\Http;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use App\Models\GeneratorsPlatformGenerator;
 
 class HomeController extends Controller
 {
@@ -244,8 +246,8 @@ class HomeController extends Controller
         //     AirConditioner::whereMonth('created_at', Carbon::now()->format('m'))->count();
 
 
-        $last_site = Site::with('pop.comuna.zona.crm')->latest()->first();
-        $last_technology = Technology::with('site.pop.comuna.zona.crm')->latest()->first();
+        $last_site = Site::with('pop.comuna', 'pop.zona.crm')->latest()->first();
+        $last_technology = Technology::with('site.pop.comuna', 'site.pop.zona.crm')->latest()->first();
         $equipment = PsgTp::whereMonth('created_at', '>', Carbon::now()->format('m'))->count();
 
         $last_updated_pops = Carbon::parse(Pop::orderBy('updated_at', 'desc')->first()->updated_at)->isoFormat('DD MMMM YYYY, HH:mm:ss');
@@ -305,151 +307,70 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function roomPlanes(Request $request)
+    public function test(Request $request)
     {
-        $roles = Role::pluck('slug')->toArray();
-        $request->user()->authorizeRoles($roles);
+        $text = '';
+        $crm_id = 4;
+        $zona_id = 0;
+        $brand_id = 0;
+        $group_type_id = 0;
+        $sub_zone_id= 0;
+        $core = 0;
+        $critic = 0;
+        $vip = 0;
 
-        $rooms = Room::all();
-        foreach ($rooms as $room) {
-            $powerR = PowerRectifier::where('room_id', $room->id)->get();
-
-            $planes = [];
-            foreach ($powerR as $power) {
-                array_push($planes, $power->plane_id);
-            }
-
-            $popRooms = Room::where('pop_id', $room->pop_id)->get();
-
-            foreach ($popRooms as $pRoom) {
-                foreach ($planes as $plane_id) {
-                    if(!$pRoom->planes()->where('plane_id', $plane_id)->exists()) {
-                        $pRoom->planes()->attach($plane_id);
+        $data = GeneratorsPlatformGenerator::
+            with(
+                'g_zona.g_sector'
+                ,'generator_set_model.generator_set_brand'
+                ,'g_model.g_brand'
+                ,'g_model.g_fuel_pond'
+                ,'g_type'
+                ,'g_last_maintance.g_maintance_status'
+            )
+            ->where(function($q) use($text) {
+                if($text) {
+                    $q->where('name', 'LIKE', "%$text%")
+                    ->orWhere('mobile_code', 'LIKE', "%$text%");
+                    // ->orWhereHas('pop.sites', function($p) use($text) {
+                    //     if ($text) {
+                    //         $p->where('nem_site', 'LIKE', "%$text%")->orWhere('nombre', 'LIKE', "%$text%");
+                    //     }
+                    // });
+                }
+            })
+            ->where(function($q) use($crm_id, $zona_id) {
+                if ($crm_id) {
+                    if($zona_id) {
+                        $q->where('zone_id', $zona_id);
+                    } else {
+                        $q->whereHas('g_zona.g_sector', function($p) use($crm_id) {
+                            $p->where('sector_id', $crm_id);
+                        });
                     }
                 }
-            }            
-        }
-        dd('done');
+            })
+            ->where(function($q) use($group_type_id) {
+                if($group_type_id) {
+                    $q->where('group_type_id', $group_type_id);
+                }
+            })
+            ->whereHas('g_model', function($p) use($brand_id) {
+                if ($brand_id) {
+                    $p->where('brand_id', $brand_id);
+                }
+            })
+
+            ->where(function($q) use($sub_zone_id) {
+                if($sub_zone_id) {
+                    $q->where('sub_zone_id', $sub_zone_id);
+                }
+            })
+            ->orderBy('zone_id', 'asc')
+            ->get();
+
+            dd($data);
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function createPopRooms(Request $request)
-    {
-        $roles = Role::pluck('slug')->toArray();
-        $request->user()->authorizeRoles($roles);
-
-        // Insert Room
-        $popsWORoom = Pop::doesntHave('rooms')->get();
-        foreach ($popsWORoom as $pop) {
-            Room::create([
-                'pop_id' => $pop->id,
-                'name' => 'Sala 1.1',
-                'criticity' => 0,
-                'order' => 0
-            ]);
-        }
-        dd('done');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function insertNewPops(Request $request)
-    {
-        $roles = Role::pluck('slug')->toArray();
-        $request->user()->authorizeRoles($roles);
-
-        $newSites = DB::table('entel_pops.sites_new')
-            ->leftJoin('entel_pops.comunas', 'sites_new.comuna', '=', 'comunas.nombre_comuna')
-            ->leftJoin('entel_g_redes_inventario.electric_companies', 'sites_new.electrica', '=', 'electric_companies.name')
-            ->whereRaw('sites_new.nem_site not in (SELECT nem_tech from entel_pops.technologies)')
-            ->select(
-                'sites_new.nombre',
-                'sites_new.direccion',
-                'sites_new.dependencia',
-                'comunas.id as comuna_id',
-                'sites_new.vip',
-
-                'sites_new.nem_site',
-                'sites_new.state_id',
-                'sites_new.site_type_id',
-                'sites_new.classification_type_id',
-                'sites_new.category_type_id',
-                'sites_new.attention_type_id',
-                'sites_new.attention_priority_type_id',
-
-                'sites_new.autonomia',
-
-                'electric_companies.id as electric_company_id',
-                'sites_new.client_number'
-            )
-        ->get();
-
-        dd($newSites);
-
-        $i = 1;
-        $j = 1;
-
-        foreach ($newSites as $newPop) {
-            // Insert POP
-            $pop = Pop::create(
-                [
-                    'nombre' => $newPop->nombre, 
-                    'direccion' => $newPop->direccion, 
-                    'comuna_id' => $newPop->comuna_id, 
-                    'latitude' => -33.4446550 + ($i/1000000), 
-                    'longitude' => -70.6561690 + ($j/1000000), 
-                    'dependences' => $newPop->dependencia,
-                    'vip' => $newPop->vip
-                ]
-            );
-            $i++;
-            $j++;
-
-            // Insert Site
-            $site = Site::insertOrIgnore([
-                [
-                    'nem_site' => $newPop->nem_site,
-                    'pop_id' => $pop->id, 
-                    'nombre' => $newPop->nombre, 
-                    'site_type_id' => $newPop->site_type_id,
-                    'classification_type_id' => $newPop->classification_type_id,
-                    'category_type_id' => $newPop->category_type_id,
-                    'attention_type_id' => $newPop->attention_type_id, 
-                    'attention_priority_type_id' => $newPop->attention_priority_type_id, 
-                    'state_id' => $newPop->state_id,
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ]
-            ]);
-
-            // Insert Autonomy
-            $autonomy = Autonomy::create([
-                'pop_id' => $pop->id,
-                'theoretical' => $newPop->autonomia
-            ]);
-
-            // // Insert Autonomy
-            // $junction = Junction::insertOrIgnore([
-            //     [
-            //         'pop_id' => $pop->id,
-            //         'client_number' => $newPop->client_number,
-            //         'electric_company_id' => $newPop->electric_company_id,
-            //         'created_at' => Carbon::now(),
-            //         'updated_at' => Carbon::now()
-            //     ],
-            // ]);
-            
-        }
-
-        return redirect('/');
-
-    }
     
 }

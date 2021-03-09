@@ -154,7 +154,7 @@ class UpdatePopResume extends Command
             FROM entel_pops.pops P 
             INNER JOIN entel_pops.sites S ON S.pop_id = P.id
             INNER JOIN entel_pops.comunas C ON C.id = P.comuna_id
-            INNER JOIN entel_pops.zonas Z ON Z.id = C.zona_id
+            INNER JOIN entel_pops.zonas Z ON Z.id = P.zona_id
             INNER JOIN entel_pops.crms CRM ON CRM.id = Z.crm_id
             INNER JOIN entel_pops.regions R ON R.id = C.region_id
             LEFT JOIN entel_pops.pop_types PT ON PT.id = P.pop_type_id

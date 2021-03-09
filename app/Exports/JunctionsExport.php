@@ -97,7 +97,7 @@ class JunctionsExport implements FromCollection, WithTitle, ShouldAutoSize, With
             foreach ($ids as $id) {
                 array_push($popsIds, $id);
             }
-            $junction = Junction::with('pop.comuna.zona.crm', 'pop.sites', 'junction_type', 'junction_connection', 'electric_company')
+            $junction = Junction::with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'junction_type', 'junction_connection', 'electric_company')
             ->whereIn('pop_id', $popsIds)
             ->get();
         } else {
@@ -148,7 +148,7 @@ class JunctionsExport implements FromCollection, WithTitle, ShouldAutoSize, With
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            // $junction = Junction::with('pop.comuna.zona.crm', 'pop.sites', 'electric_line_type', 'phase_type')
+            // $junction = Junction::with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'electric_line_type', 'phase_type')
             // 	->whereHas('pop.sites', function($a) use($text, $condition_bafi, $bafi, $condition_core, $condition_pe_3g, $condition_mpls, $condition_olt, $condition_olt_3play, $condition_lloo, $condition_ranco) {
             // 		$a->withTrashed()->where(function($p) use($text, $condition_bafi) {
 	           //          $p->where(function($w) use($text) {
@@ -199,7 +199,7 @@ class JunctionsExport implements FromCollection, WithTitle, ShouldAutoSize, With
 	           //      ->whereRaw($condition_lloo)
 	           //      ->whereRaw($condition_ranco);
             // 	})
-    	       //  ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+    	       //  ->whereHas('pop.zona', function($q) use($condition_crm, $condition_zona) {
     	       //      $q->whereRaw($condition_crm)
             //         ->whereRaw($condition_zona);
     	       //  })
@@ -245,11 +245,11 @@ class JunctionsExport implements FromCollection, WithTitle, ShouldAutoSize, With
     	       //  ->get();
 
 
-            $junction = Junction::with('pop.comuna.zona.crm', 'pop.sites', 'junction_type', 'junction_connection', 'electric_company')
+            $junction = Junction::with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'junction_type', 'junction_connection', 'electric_company')
                 ->whereHas('pop.sites', function($a) use($condition_core) {
                     $a->whereRaw($condition_core);
                 })
-                ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+                ->whereHas('pop.zona', function($q) use($condition_crm, $condition_zona) {
                     $q->whereRaw($condition_crm)
                     ->whereRaw($condition_zona);
                 })
@@ -302,8 +302,8 @@ class JunctionsExport implements FromCollection, WithTitle, ShouldAutoSize, With
             $junction->pop->id,
             $junction->pop->sites ? $junction->pop->sites[0]->nem_site : null,
             $junction->pop->nombre,
-            $junction->pop->comuna->zona->nombre_zona,
-            $junction->pop->comuna->zona->crm->nombre_crm,
+            $junction->pop->zona->nombre_zona,
+            $junction->pop->zona->crm->nombre_crm,
 
             $junction->junction_type ? $junction->junction_type->type : null,
             $junction->junction_connection ? $junction->junction_connection->junction_connection : null,

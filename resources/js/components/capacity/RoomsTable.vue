@@ -30,7 +30,7 @@
                                 Comuna de {{ pop ? pop.comuna.nombre_comuna : '' }}
                             </div>
                             <div class="is-size-7 has-text-weight-light">
-                                {{ pop ? 'Zona: ' + pop.comuna.zona.nombre_zona : '' }} - {{ pop ? 'CRM: ' + pop.comuna.zona.crm.nombre_crm : '' }}
+                                {{ pop ? 'Zona: ' + pop.zona.nombre_zona : '' }} - {{ pop ? 'CRM: ' + pop.zona.crm.nombre_crm : '' }}
                             </div>
                         </div>
                     </td>

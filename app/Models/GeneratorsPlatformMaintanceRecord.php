@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class GeneratorsPlatformMaintanceRecord extends Model
 {
 	protected $connection = 'mysql_generators';
-    protected $table = 'maintance_records';
+    protected $table = 'entel.maintance_records';
 
     const CREATED_AT = 'created';
     const UPDATED_AT = 'updated';

@@ -153,7 +153,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
 
             $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
 
-            $pop = Pop::with('comuna.zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip', 'vertical_structures.beacons.beacon_type', 'protected_zones', 'comsites', 'energy_system', 'energy_responsable')
+            $pop = Pop::with('comuna', 'zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip', 'vertical_structures.beacons.beacon_type', 'protected_zones', 'comsites', 'energy_system', 'energy_responsable')
                 ->whereHas('sites', function ($q) use ($text, $condition_core, $condition_bafi, $bafi, $condition_red_minima) {
                     $q->where(function ($p) use ($text) {
                         if ($text) {
@@ -179,7 +179,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
                 ->whereHas('rooms', function ($r) use ($condition_critic) {
                     $r->whereRaw($condition_critic);
                 })
-                ->whereHas('comuna.zona', function ($q) use ($condition_crm, $condition_zona) {
+                ->whereHas('zona', function ($q) use ($condition_crm, $condition_zona) {
                     $q->whereRaw($condition_crm)
                     ->whereRaw($condition_zona);
                 })
@@ -277,7 +277,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
      */
     public function map($pop): array
     {
-        $temporary_storage = TemporaryStorage::with('pop')->where('zona_id', $pop->comuna->zona_id)->first();
+        $temporary_storage = TemporaryStorage::with('pop')->where('zona_id', $pop->zona_id)->first();
         $rca = Rca::where('pop_id', $pop->id)->first();
 
         $id_comsites = null;
@@ -295,9 +295,9 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             $pop->comuna->nombre_comuna,
             $pop->comuna->region->cod_region,
             $pop->comuna->region->nombre_region,
-            $pop->comuna->zona->cod_zona,
-            $pop->comuna->zona->nombre_zona,
-            $pop->comuna->zona->crm->nombre_crm,
+            $pop->zona->cod_zona,
+            $pop->zona->nombre_zona,
+            $pop->zona->crm->nombre_crm,
             $pop->latitude,
             $pop->longitude,
 

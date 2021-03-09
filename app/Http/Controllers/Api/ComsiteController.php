@@ -39,7 +39,7 @@ class ComsiteController extends Controller
     public function index(Request $request)
     {
         $text = $request->text;
-        $comsites = Comsite::with('pop.comuna.zona.crm')
+        $comsites = Comsite::with('pop.comuna', 'pop.zona.crm')
         ->where(function($query) use ($text) {
             $query->where('cod_pop', 'LIKE', "%$text%")
                 ->orWhere('nombre_pop', 'LIKE', "%$text%")

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class GeneratorsPlatformSector extends Model
 {
     protected $connection = 'mysql_generators';
-    protected $table = 'sectors';
+    protected $table = 'entel.sectors';
 
     public function g_zones() 
     {

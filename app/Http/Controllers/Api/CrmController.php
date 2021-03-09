@@ -20,14 +20,14 @@ class CrmController extends Controller
      */
     public function index()
     {
-        if (Cache::has('crms')) {
-            $crms = Cache::get('crms');
-        } else {
-            $crms = Cache::rememberForever('crms', function () {
+        // if (Cache::has('crms')) {
+        //     $crms = Cache::get('crms');
+        // } else {
+        //     $crms = Cache::rememberForever('crms', function () {
                 $crms = Crm::with('zonas.comunas', 'zonas.responsable')->get();
-                return $crms;
-            });
-        }
+        //         return $crms;
+        //     });
+        // }
         return new CrmCollection($crms);
     }
 

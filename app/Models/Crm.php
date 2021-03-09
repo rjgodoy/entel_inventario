@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Crm extends Model
 {
     protected $connection = 'mysql_entel_pops';
+    protected $table = 'entel_pops.crms';
 
     public function zonas() 
     {

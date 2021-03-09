@@ -21,12 +21,19 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $text = $request->text;
         $condition_role = $request->role_id == 0 ? "roles.id != 0" : "roles.id = $request->role_id";
-        $users = User::with('roles', 'permissions')
+        $users = User::with('roles', 'permissions', 'roles.permissions')
             ->whereHas('roles', function($q) use($condition_role) {
                 $q->whereRaw($condition_role);
             })
-            ->where('estado', 1)->get();
+            ->where(function($q) use($text) {
+                if($text) {
+                    $q->where('name', 'LIKE', "%$text%")
+                    ->orWhere('apellido', 'LIKE', "%$text%");
+                }
+            })
+            ->where('estado', 1)->paginate(20);
 
         return response()->json(
             [

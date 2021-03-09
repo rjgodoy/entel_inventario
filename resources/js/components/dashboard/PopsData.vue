@@ -44,29 +44,13 @@
         </table>
 
         <div class="columns">
-            <div class="column">
-                <!-- <b-field>
-                    <b-button 
-                        :loading="buttonLoading ? true : false"
-                        type="is-link"
-                        size="is-small"
-                        @click="downloadPops">
-                        <font-awesome-icon icon="download"/> 
-                        &nbsp;&nbsp;Listado de POPs
-                    </b-button>
-                    <b-tooltip label="Tooltip Text" position="is-right">
-                        <a href="/pop" type="button" class="button is-small is-link" data-tooltip="">
-                            <font-awesome-icon icon="bars"/>
-                        </a>
-                    </b-tooltip>
-                </b-field> -->
-            </div>
             <div class="column is-right">
                 <div class="is-size-7 has-text-right" style="margin-top: 10px" :class="secondaryText">
                     Ultima actualización: {{ last_updated }}
                 </div>
             </div>
         </div>
+        <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
     </div>
 
 </template>
@@ -92,12 +76,14 @@
             return {
                 popsData: [],
                 buttonLoading: 0,
+                isLoading: false
             }
         },
         created(){
         },
         mounted() {   
-            this.getData()   
+            this.getData()  
+            this.isLoading = true 
         },
         watch: {
             selectedCrm(newValue, oldValue) {
@@ -154,6 +140,7 @@
                     axios.get(`/api/popData?core=${this.core}`)
                     .then((response) => {
                         this.popsData = response.data.pop
+                        this.isLoading = false
                         // this.$eventBus.$emit('graphData', this.popsData)
                     })
                 } 
@@ -162,6 +149,7 @@
                     axios.get(`/api/popDataCrm?crm_id=${this.selectedCrm.id}&core=${this.core}`)
                     .then((response) => {
                         this.popsData = response.data.pop
+                        this.isLoading = false
                         // this.$eventBus.$emit('graphData', this.popsData)
                     })
                 } 
@@ -170,6 +158,7 @@
                     axios.get(`/api/popDataZona?zona_id=${this.selectedZona.id}&core=${this.core}`)
                     .then((response) => {
                         this.popsData = response.data.pop
+                        this.isLoading = false
                         // this.$eventBus.$emit('graphData', this.popsData)
                     })
                 }

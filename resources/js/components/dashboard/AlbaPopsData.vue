@@ -37,26 +37,7 @@
             </vue-pagination>
         </nav>
 
-        <!-- <div class="field has-addons">
-            <p class="control">
-                <b-button 
-                    :loading="buttonLoading ? true : false"
-                    type="is-link"
-                    size="is-small"
-                    @click="downloadPops">
-                    <font-awesome-icon icon="download"/> 
-                    &nbsp;&nbsp;Listado de POPs
-                </b-button>
-            </p>
-            <p class="control">
-                <b-tooltip label="Tooltip Text" position="is-right">
-                    <a href="/pop" type="button" class="button is-small is-link" data-tooltip="">
-                        <font-awesome-icon icon="bars"/>
-                    </a>
-                </b-tooltip>
-            </p>
-        </div> -->
-
+        <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
     </div>
 </template>
 
@@ -85,12 +66,14 @@
                     current_page: 1
                 },
                 buttonLoading: 0,
+                isLoading: false
             }
         },
         created(){  
         },
         mounted() {   
-            this.getData()   
+            this.getData() 
+            this.isLoading = true  
         },
         watch: {
             selectedCrm(newValue, oldValue) {
@@ -106,7 +89,6 @@
         
         methods: {
             popClassification(pop) {
-                // console.log(pop)
                 var i = 6; var cat
                 if (pop.sites) {
                     pop.sites.forEach(function(item) {
@@ -122,31 +104,10 @@
             getData() {
                 axios.get(`/api/albaPopList?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}&page=${this.data.current_page}`)
                 .then((response) => {
-                    // console.log(response.data)
                     this.data = response.data.pop;
-                    // if(true) {
-                    //     this.$emit('clicked', this.data)
-                    // }
+                    this.isLoading = false 
                 })
             },
-            // downloadPops() {
-            //     this.buttonLoading = 1
-
-            //     axios.get(`/pop/export?core=${this.core}&crm_id=${this.selectedCrm ? this.selectedCrm.id : 0}&zona_id=${this.selectedZona ? this.selectedZona.id : 0}`, {
-            //         responseType: 'blob',
-            //     })
-            //     .then((response) => {
-            //         // console.log(response.data)
-            //         const blob = new Blob([response.data], { type: 'application/xls' })
-            //         // const objectUrl = window.URL.createObjectURL(blob)
-
-            //         let link = document.createElement('a')
-            //         link.href = window.URL.createObjectURL(blob)
-            //         link.download = 'test.xlsx'
-            //         link.click()
-            //         this.buttonLoading = 0
-            //     })
-            // }
         }
     }
 </script>

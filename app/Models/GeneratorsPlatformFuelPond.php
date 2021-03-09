@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class GeneratorsPlatformFuelPond extends Model
 {
     protected $connection = 'mysql_generators';
-    protected $table = 'fuel_ponds';
+    protected $table = 'entel.fuel_ponds';
 
     public function g_models() 
     {

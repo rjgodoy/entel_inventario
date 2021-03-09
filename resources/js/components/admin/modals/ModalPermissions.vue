@@ -7,15 +7,17 @@
         </header>
 
         <section class="modal-card-body">
-            <div class="columns is-multiline">
-                <div class="column is-4" v-for="permission in permissions">
-                    <b-checkbox @input="selectedPermission=permission; updateUserPermission()" :value="true ? true : false">
-                        <div class="">{{ permission.name }}</div>
-                    </b-checkbox>
+            <div class="box tile is-child">
+                    <b-field>
+                        <div class="is-size-5 has-text-weight-bold">Permisos</div>
+                    </b-field>
+                    <div class="columns is-multiline is-vcentered">
+                        <div class="column is-4" v-for="permission in permissions" :key="permissions.id">
+                            <UserPermission :user="user" :role="userRole" :permission="permission"/>
+                        </div>
+                    </div>
+
                 </div>
-                {{ selectedPermission }}
-            </div>
-            <div class="is-size-5 has-text-weight-bold has-text-centered">Usuario {{ user.name }} {{ user.apellido }}</div>
         </section>
 
         <!-- <footer class="modal-card-foot">
@@ -26,9 +28,11 @@
 
 <script>    
     export default {
+        components: {
+            UserPermission: () => import(/* webpackChunkName: "chunks/admin/user/userPermission"*/"../user/UserPermission"),
+        },
 
         props : [
-            'thisUser',
             'user',
             'role'
         ],
@@ -36,7 +40,13 @@
         data() {
             return {
                 permissions: Object,
-                selectedPermission: null
+                userRole: this.role
+            }
+        },
+
+        watch: {
+            role(newVal) {
+                this.userRole = newVal
             }
         },
 
@@ -51,10 +61,6 @@
                     this.permissions = response.data.permissions
                 })
             },
-
-            updateUserPermission() {
-                console.log('update ' + this.selectedPermission.name)
-            }
         }
     }
 </script>

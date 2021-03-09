@@ -2,25 +2,26 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Exports\AllInfoPopsExport;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\Pop as PopResource;
-use App\Http\Resources\PopCollection;
-use App\Models\EnergySystem;
-use App\Models\EntelVip;
-use App\Models\GeneratorSet;
 use App\Models\Log;
-use App\Models\LogType;
 use App\Models\Pop;
-use App\Models\PopMenu;
-use App\Models\PopMenuType;
-use App\Models\Projection;
 use App\Models\Room;
 use App\Models\Site;
+use App\Models\Comuna;
+use App\Models\LogType;
+use App\Models\PopMenu;
+use App\Models\EntelVip;
+use App\Models\Projection;
+use App\Models\PopMenuType;
+use App\Models\EnergySystem;
+use App\Models\GeneratorSet;
 use Illuminate\Http\Request;
+use App\Exports\AllInfoPopsExport;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Resources\PopCollection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Resources\Pop as PopResource;
 
 class PopController extends Controller
 {
@@ -37,7 +38,7 @@ class PopController extends Controller
         //     $pops = Cache::get('pops');
         // } else {
             // $pops = Cache::remember('pops', $this->seconds, function () {
-                $pops = Pop::with('sites.classification_type', 'comuna.zona.crm')->orderBy('id', 'asc')->paginate(20);
+                $pops = Pop::with('sites.classification_type', 'comuna', 'zona.crm')->orderBy('id', 'asc')->paginate(20);
                 // return $pops;
         //     });
         // }
@@ -52,7 +53,7 @@ class PopController extends Controller
     public function allPops(Request $request)
     {
         $text = $request->text;
-        $pops = Pop::with('comuna.zona.crm')
+        $pops = Pop::with('comuna', 'zona.crm')
             ->where(function($q) use($text) {
                 $q->whereHas('sites', function($p) use ($text) {
                     $p->where('nem_site', 'LIKE', "%$text%")
@@ -70,102 +71,100 @@ class PopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function popsCrm(Request $request)
-    {
-        $crm_id = $request->crm_id;
-        $pops = Pop::join('comunas', 'pops.comuna_id', '=', 'comunas.id')
-                ->join('zonas', 'comunas.zona_id', '=', 'zonas.id')
-                ->join('crms', function($join) use ($crm_id) {
-                    $join->on('zonas.crm_id', '=', 'crms.id')
-                    ->where('crms.id', $crm_id);
-                })
-                // Classificación
-                ->leftJoin('classifications', function ($join) {
-                    $join->on('pops.id', '=', 'classifications.pop_id')
-                    ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
-                })->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
+    // public function popsCrm(Request $request)
+    // {
+    //     $crm_id = $request->crm_id;
+    //     $pops = Pop::join('zonas', 'pops.zona_id', '=', 'zonas.id')
+    //             ->join('crms', function($join) use ($crm_id) {
+    //                 $join->on('zonas.crm_id', '=', 'crms.id')
+    //                 ->where('crms.id', $crm_id);
+    //             })
+    //             // Classificación
+    //             ->leftJoin('classifications', function ($join) {
+    //                 $join->on('pops.id', '=', 'classifications.pop_id')
+    //                 ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
+    //             })->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
 
-                // Tipo Atención
-                ->leftJoin('attentions', function ($join) {
-                    $join->on('pops.id', '=', 'attentions.pop_id')
-                    ->whereRaw('attentions.created_at = (SELECT MAX(attentions.created_at) FROM attentions WHERE attentions.pop_id = pops.id)');
-                })
-                // ->leftJoin('attention_types', 'attentions.attention_type_id', '=', 'attention_types.id')
+    //             // Tipo Atención
+    //             ->leftJoin('attentions', function ($join) {
+    //                 $join->on('pops.id', '=', 'attentions.pop_id')
+    //                 ->whereRaw('attentions.created_at = (SELECT MAX(attentions.created_at) FROM attentions WHERE attentions.pop_id = pops.id)');
+    //             })
+    //             // ->leftJoin('attention_types', 'attentions.attention_type_id', '=', 'attention_types.id')
 
-                ->select(
-                    'pops.id as pop_id',
-                    'pops.nombre',
-                    'pops.nem_movil',
-                    'pops.nem_fijo',
-                    'pops.direccion',
-                    'pops.latitude',
-                    'pops.longitude',
-                    'pops.cod_planificacion',
-                    'comunas.*',
-                    'zonas.*',
-                    'crms.*',
-                    'classifications.classification_type_id',
-                    'classification_types.classification_type',
-                    'attentions.attention_type_id',
-                    // 'attention_types.attention_type as attention_type',
-                    'pops.alba_project'
-                )
-                ->orderBy('pops.id')
-                ->paginate(10);
+    //             ->select(
+    //                 'pops.id as pop_id',
+    //                 'pops.nombre',
+    //                 'pops.nem_movil',
+    //                 'pops.nem_fijo',
+    //                 'pops.direccion',
+    //                 'pops.latitude',
+    //                 'pops.longitude',
+    //                 'pops.cod_planificacion',
+    //                 'comunas.*',
+    //                 'zonas.*',
+    //                 'crms.*',
+    //                 'classifications.classification_type_id',
+    //                 'classification_types.classification_type',
+    //                 'attentions.attention_type_id',
+    //                 // 'attention_types.attention_type as attention_type',
+    //                 'pops.alba_project'
+    //             )
+    //             ->orderBy('pops.id')
+    //             ->paginate(10);
 
-        return new PopCollection($pops);
-    }
+    //     return new PopCollection($pops);
+    // }
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function popsZona()
-    {
-        $zona_id = $_GET["zona_id"];
-        $pops = Pop::join('comunas', 'pops.comuna_id', '=', 'comunas.id')
-                ->join('zonas', function($join) use ($zona_id) {
-                    $join->on('comunas.zona_id', '=', 'zonas.id')
-                    ->where('zonas.id', $zona_id);
-                })
-                ->join('crms', 'zonas.crm_id', '=', 'crms.id')
-                // Classificación
-                ->leftJoin('classifications', function ($join) {
-                    $join->on('pops.id', '=', 'classifications.pop_id')
-                    ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
-                })->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
+    // public function popsZona()
+    // {
+    //     $zona_id = $_GET["zona_id"];
+    //     $pops = Pop::join('zonas', function($join) use ($zona_id) {
+    //                 $join->on('pops.zona_id', '=', 'zonas.id')
+    //                 ->where('zonas.id', $zona_id);
+    //             })
+    //             ->join('crms', 'zonas.crm_id', '=', 'crms.id')
+    //             // Classificación
+    //             ->leftJoin('classifications', function ($join) {
+    //                 $join->on('pops.id', '=', 'classifications.pop_id')
+    //                 ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
+    //             })->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
 
-                // Tipo Atención
-                ->leftJoin('attentions', function ($join) {
-                    $join->on('pops.id', '=', 'attentions.pop_id')
-                    ->whereRaw('attentions.created_at = (SELECT MAX(attentions.created_at) FROM attentions WHERE attentions.pop_id = pops.id)');
-                })
-                // ->leftJoin('attention_types', 'attentions.attention_type_id', '=', 'attention_types.id')
+    //             // Tipo Atención
+    //             ->leftJoin('attentions', function ($join) {
+    //                 $join->on('pops.id', '=', 'attentions.pop_id')
+    //                 ->whereRaw('attentions.created_at = (SELECT MAX(attentions.created_at) FROM attentions WHERE attentions.pop_id = pops.id)');
+    //             })
+    //             // ->leftJoin('attention_types', 'attentions.attention_type_id', '=', 'attention_types.id')
 
-                ->select(
-                    'pops.id as pop_id',
-                    'pops.nombre',
-                    'pops.nem_movil',
-                    'pops.nem_fijo',
-                    'pops.direccion',
-                    'pops.latitude',
-                    'pops.longitude',
-                    'pops.cod_planificacion',
-                    'comunas.*',
-                    'zonas.*',
-                    'crms.*',
-                    'classifications.classification_type_id',
-                    'classification_types.classification_type',
-                    'attentions.attention_type_id',
-                    // 'attention_types.attention_type as attention_type'
-                    'pops.alba_project'
-                )
-                ->orderBy('pops.id')
-                ->paginate(10);
+    //             ->select(
+    //                 'pops.id as pop_id',
+    //                 'pops.nombre',
+    //                 'pops.nem_movil',
+    //                 'pops.nem_fijo',
+    //                 'pops.direccion',
+    //                 'pops.latitude',
+    //                 'pops.longitude',
+    //                 'pops.cod_planificacion',
+    //                 'comunas.*',
+    //                 'zonas.*',
+    //                 'crms.*',
+    //                 'classifications.classification_type_id',
+    //                 'classification_types.classification_type',
+    //                 'attentions.attention_type_id',
+    //                 // 'attention_types.attention_type as attention_type'
+    //                 'pops.alba_project'
+    //             )
+    //             ->orderBy('pops.id')
+    //             ->paginate(10);
 
-        return new PopCollection($pops);
-    }
+    //     return new PopCollection($pops);
+    // }
 
     /**
      * Display the specified resource.
@@ -175,7 +174,7 @@ class PopController extends Controller
      */
     public function popInfo(Request $request)
     {
-        $popInfo = Pop::with('comuna.zona.crm', 'sites.classification_type')
+        $popInfo = Pop::with('comuna', 'zona.crm', 'sites.classification_type')
                 ->where('id', $request->pop_id)
                 ->first();
         return $popInfo;
@@ -189,7 +188,8 @@ class PopController extends Controller
      */
     public function store(Request $request)
     {        
-        // return $request;
+        $zona_id = Comuna::where('id', $request->comuna_id)->first()->zona_id;
+
         $pop = Pop::updateOrCreate([
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
@@ -198,6 +198,7 @@ class PopController extends Controller
             'nombre' => $request->nombre,
             'direccion' => $request->direccion,
             'comuna_id' => $request->comuna_id,
+            'zona_id' => $zona_id,
             'pop_type_id' => $request->pop_type_id,
             'net_type_id' => $request->net_type_id,
 
@@ -212,8 +213,6 @@ class PopController extends Controller
             'solar' => $request->solar,
             'eolica' => $request->eolica,
         ]);
-
-        // return $pop->id;
 
         $site = Site::create([
             'pop_id' => $pop->id,
@@ -251,8 +250,9 @@ class PopController extends Controller
     public function show($id)
     {
         $pop = Pop::with(
-            'comuna.zona.crm.office', 
-            'comuna.zona.responsable', 
+            'comuna',
+            'zona.crm.office', 
+            'zona.responsable', 
             'sites.classification_type', 
             'sites.technologies.state', 
             'sites.technologies.technology_type', 
@@ -423,7 +423,7 @@ class PopController extends Controller
         $condition_crm = $crm_id != 0 ? 'crm_id = '.$crm_id : 'crm_id != '.$crm_id;
         $condition_zona = $zona_id != 0 ? 'id = '.$zona_id : 'id != '.$zona_id;
 
-        $sites = Site::withTrashed()->with('pop.comuna.zona.crm', 'state', 'classification_type', 'technologies.technology_type', 'technologies.state')
+        $sites = Site::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'state', 'classification_type', 'technologies.technology_type', 'technologies.state')
             ->where(function($p) use($text) {
                 $p->where(function($q) use ($text) {
                     $q->where('nem_site', 'LIKE', "$text%")
@@ -441,7 +441,7 @@ class PopController extends Controller
                 });
             })
             ->whereRaw($condition_core)
-            ->whereHas('pop.comuna.zona', function($q) use($condition_crm, $condition_zona) {
+            ->whereHas('pop.zona', function($q) use($condition_crm, $condition_zona) {
                 $q->whereRaw($condition_crm)
                 ->whereRaw($condition_zona);
             })
@@ -524,7 +524,7 @@ class PopController extends Controller
         $infrastructures = $request->infrastructure;
         $condition_infrastructures = 'pops.id IN (SELECT infrastructures.pop_id from entel_g_redes_inventario.infrastructures)';
 
-        $pops = Pop::with('comuna.zona.crm', 'sites.classification_type')
+        $pops = Pop::with('comuna', 'zona.crm', 'sites.classification_type')
             ->whereHas('sites', function($q) use($text, $condition_core, $condition_bafi, $bafi, $condition_red_minima) { 
                 $q->where(function ($p) use ($text) {
                     if ($text) {
@@ -549,7 +549,7 @@ class PopController extends Controller
             ->whereHas('rooms', function($r) use($condition_critic) {
                 $r->whereRaw($condition_critic);
             })
-            ->whereHas('comuna.zona', function($q) use($condition_crm, $condition_zona) {
+            ->whereHas('zona', function($q) use($condition_crm, $condition_zona) {
                 $q->whereRaw($condition_crm)
                 ->whereRaw($condition_zona);
             })
@@ -657,7 +657,7 @@ class PopController extends Controller
         $infrastructures = $request->infrastructure;
         $condition_infrastructures = 'pops.id IN (SELECT infrastructures.pop_id from entel_g_redes_inventario.infrastructures)';
 
-        $pops = Pop::with('comuna.zona.crm', 'sites.classification_type')
+        $pops = Pop::with('comuna', 'zona.crm', 'sites.classification_type')
             ->whereHas('sites', function($q) use($text, $condition_core, $condition_bafi, $bafi, $condition_red_minima) { 
                 $q->where(function($p) use($text) {
                     if ($text) {
@@ -682,7 +682,7 @@ class PopController extends Controller
             ->whereHas('rooms', function($r) use($condition_critic) {
                 $r->whereRaw($condition_critic);
             })
-            ->whereHas('comuna.zona', function($q) use($condition_crm, $condition_zona) {
+            ->whereHas('zona', function($q) use($condition_crm, $condition_zona) {
                 $q->whereRaw($condition_crm)
                 ->whereRaw($condition_zona);
             })
@@ -745,7 +745,7 @@ class PopController extends Controller
     //  */
     // public function searchPopsEdicion($text, $core)
     // {
-    //     $pops = Pop::with('comuna.zona.crm', 'comuna.region')
+    //     $pops = Pop::with('comuna', 'zona.crm', 'comuna.region')
     //         ->where(function($query) use ($text) {
     //             $query->where('pops.nem_fijo', 'LIKE', "%$text%")
     //                 ->orWhere('pops.nem_movil', 'LIKE', "%$text%")

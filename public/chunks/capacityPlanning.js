@@ -323,7 +323,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/capacity/capacity */ "chunks/capacity/capacity").then(__webpack_require__.bind(null, /*! ./tabs/Capacity */ "./resources/js/components/capacity/tabs/Capacity.vue"));
     },
     Projection: function Projection() {
-      return Promise.all(/*! import() | chunks/capacity/projection */[__webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators/generatorSlot~chunks/maps/ecoM~7428b83f"), __webpack_require__.e("chunks/capacity/projection")]).then(__webpack_require__.bind(null, /*! ./tabs/Projection */ "./resources/js/components/capacity/tabs/Projection.vue"));
+      return Promise.all(/*! import() | chunks/capacity/projection */[__webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators/modals/generatorCharts~chunks/~06d98356"), __webpack_require__.e("chunks/capacity/projection")]).then(__webpack_require__.bind(null, /*! ./tabs/Projection */ "./resources/js/components/capacity/tabs/Projection.vue"));
     },
     // Requests: () => import(/* webpackChunkName: "chunks/capacity/requests"*/'./tabs/Requests'),
     Distribution: function Distribution() {

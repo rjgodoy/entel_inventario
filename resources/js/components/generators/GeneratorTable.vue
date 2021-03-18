@@ -101,28 +101,28 @@
             
         </td>
         <b-modal :active.sync="isGeneratorDetailModalActive"
-                has-modal-card
-                full-screen
-                trap-focus
-                aria-role="dialog"
-                aria-modal>
-                <generator-detail
-                    :generator="generator" 
-                    :last_data="last_data"
-                    :last_day_data="last_day_data"
-                    />
-            </b-modal>
+            has-modal-card
+            full-screen
+            trap-focus
+            aria-role="dialog"
+            aria-modal>
+            <generator-detail
+                :generator="generator" 
+                :last_data="last_data"
+                :last_day_data="last_day_data"
+                />
+        </b-modal>
 
-            <b-modal :active.sync="isGeneratorMaintenancesModalActive"
-                has-modal-card
-                width="1200"
-                trap-focus
-                aria-role="dialog"
-                aria-modal>
-                <generator-maintenances
-                    :generator="generator" 
-                    />
-            </b-modal>
+        <b-modal :active.sync="isGeneratorMaintenancesModalActive"
+            has-modal-card
+            width="1200"
+            trap-focus
+            aria-role="dialog"
+            aria-modal>
+            <generator-maintenances
+                :generator="generator" 
+                />
+        </b-modal>
     </tr>
 </template>
 

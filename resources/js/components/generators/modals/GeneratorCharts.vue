@@ -22,6 +22,10 @@
                     :max-date="new Date()">
                 </b-datepicker>
             </b-field>
+
+            <b-field label="Datos manuales" class="has-text-left pl-4">
+                <b-button class="" @click="isModalAddActive=true">Agregar</b-button>
+            </b-field>
         </b-field>
 
         <b-field>
@@ -31,6 +35,14 @@
         <b-field>
             <GeneratorFunctionChart :unitData="unitData"/>
         </b-field>
+
+        <b-modal :active.sync="isModalAddActive"
+            has-modal-card
+            trap-focus
+            aria-role="dialog"
+            aria-modal>
+            <generator-add-data :generator="generator" @loadchart="getData"/>
+        </b-modal>
     </div>
 </template>
 
@@ -41,24 +53,31 @@ var moment = require('moment')
 export default {
     components: {
         GeneratorFuelChart: () => import(/* webpackChunkName: "chunks/generators/modals/generatorFuelChart"*/'./GeneratorFuelChart'),
-        GeneratorFunctionChart: () => import(/* webpackChunkName: "chunks/generators/modals/generatorFunctionChart"*/'./GeneratorFunctionChart')
+        GeneratorFunctionChart: () => import(/* webpackChunkName: "chunks/generators/modals/generatorFunctionChart"*/'./GeneratorFunctionChart'),
+        GeneratorAddData: () => import(/* webpackChunkName: "chunks/generators/modals/generatorAddData"*/'./GeneratorAddData')
     },
+
     props: ['generator'],
+
     data () {
         return {
             timeline: "day",
             unitData: null,
-            dates: []
+            dates: [],
+            isModalAddActive: false
         }
     },
+
     mounted () {
         this.getData()
     },
+
     watch: {
         timeline(value) {
             this.getData()
         }
     },
+
     methods: {
         async getData(){
             let params = {
@@ -69,7 +88,7 @@ export default {
             await axios.get(`/api/generatorValues/${this.generator.id}`, { params: params })
                 .then((response) => {
                     this.unitData = response.data
-                    console.log(response.data)
+                    // console.log(response.data)
                 })
         }
     }

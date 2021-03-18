@@ -167,6 +167,9 @@ Route::middleware('auth:api')->group(function () {
 		Route::get('genplaSubZones', 'Api\GeneratorSetController@generatorPlatformSubZones');
 		Route::get('getGeneratorMaintenances/{id}', 'Api\GeneratorSetController@getGeneratorMaintenances');
 
+		Route::post('createGenValData/{generator_id}', 'Api\GeneratorSetController@createGenValData');
+		Route::get('generatorsPlatformExport', 'Api\GeneratorSetController@generatorsPlatformExport');
+
 
 		Route::apiResource('telecomCompanies','Api\TelecomCompanyController');
 		Route::apiResource('generatorSetTopologyTypes','Api\GeneratorSetTopologyTypeController');

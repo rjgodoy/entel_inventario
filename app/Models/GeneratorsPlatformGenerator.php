@@ -32,6 +32,11 @@ class GeneratorsPlatformGenerator extends Model
         return $this->hasOne(GeneratorsPlatformValues::class, 'generator_id')->latest();
     }
 
+    public function g_commune() 
+    {
+        return $this->belongsTo(GeneratorsPlatformCommune::class, 'commune_id');
+    }
+
     public function zona() 
     {
         return $this->belongsTo(Zona::class, 'zone_id');
@@ -57,6 +62,11 @@ class GeneratorsPlatformGenerator extends Model
         return $this->belongsTo(GeneratorsPlatformGeneratorType::class, 'group_type_id');
     }
 
+    public function g_system_type() 
+    {
+        return $this->belongsTo(GeneratorsPlatformSystemType::class, 'system_type_id');
+    }
+
     public function generator_set_model() 
     {
         return $this->belongsTo(GeneratorSetModel::class, 'new_model_id');
@@ -65,6 +75,11 @@ class GeneratorsPlatformGenerator extends Model
     public function pop() 
     {
         return $this->belongsTo(Pop::class);
+    }
+
+    public function g_protocol() 
+    {
+        return $this->belongsTo(GeneratorsPlatformProtocol::class, 'protocol_id');
     }
 
 }

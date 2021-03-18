@@ -4,7 +4,7 @@
             v-if="loaded"
             :chartData="chartData"
             :options="options"/>
-        <button @click="fillData()">Randomize</button>
+        <!-- <button @click="fillData()">Randomize</button> -->
     </div>
 </template>
 

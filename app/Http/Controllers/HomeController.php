@@ -36,6 +36,7 @@ use Illuminate\Support\Facades\Http;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use App\Models\GeneratorsPlatformValues;
 use App\Models\GeneratorsPlatformGenerator;
 
 class HomeController extends Controller
@@ -309,67 +310,7 @@ class HomeController extends Controller
      */
     public function test(Request $request)
     {
-        $text = '';
-        $crm_id = 4;
-        $zona_id = 0;
-        $brand_id = 0;
-        $group_type_id = 0;
-        $sub_zone_id= 0;
-        $core = 0;
-        $critic = 0;
-        $vip = 0;
-
-        $data = GeneratorsPlatformGenerator::
-            with(
-                'g_zona.g_sector'
-                ,'generator_set_model.generator_set_brand'
-                ,'g_model.g_brand'
-                ,'g_model.g_fuel_pond'
-                ,'g_type'
-                ,'g_last_maintance.g_maintance_status'
-            )
-            ->where(function($q) use($text) {
-                if($text) {
-                    $q->where('name', 'LIKE', "%$text%")
-                    ->orWhere('mobile_code', 'LIKE', "%$text%");
-                    // ->orWhereHas('pop.sites', function($p) use($text) {
-                    //     if ($text) {
-                    //         $p->where('nem_site', 'LIKE', "%$text%")->orWhere('nombre', 'LIKE', "%$text%");
-                    //     }
-                    // });
-                }
-            })
-            ->where(function($q) use($crm_id, $zona_id) {
-                if ($crm_id) {
-                    if($zona_id) {
-                        $q->where('zone_id', $zona_id);
-                    } else {
-                        $q->whereHas('g_zona.g_sector', function($p) use($crm_id) {
-                            $p->where('sector_id', $crm_id);
-                        });
-                    }
-                }
-            })
-            ->where(function($q) use($group_type_id) {
-                if($group_type_id) {
-                    $q->where('group_type_id', $group_type_id);
-                }
-            })
-            ->whereHas('g_model', function($p) use($brand_id) {
-                if ($brand_id) {
-                    $p->where('brand_id', $brand_id);
-                }
-            })
-
-            ->where(function($q) use($sub_zone_id) {
-                if($sub_zone_id) {
-                    $q->where('sub_zone_id', $sub_zone_id);
-                }
-            })
-            ->orderBy('zone_id', 'asc')
-            ->get();
-
-            dd($data);
+        //
     }
 
     

@@ -22,6 +22,7 @@ use App\Models\GeneratorSetMaintainer;
 use App\Models\GeneratorSetResponsable;
 use App\Models\GeneratorsPlatformBrand;
 use App\Models\GeneratorsPlatformValues;
+use App\Exports\GeneratorsPlatformExport;
 use App\Models\GeneratorsPlatformSubZone;
 use App\Models\GeneratorsPlatformGenerator;
 use App\Models\GeneratorsPlatformMaintance;
@@ -421,12 +422,18 @@ class GeneratorSetController extends Controller
 
         $data = GeneratorsPlatformGenerator::
             with(
-                'g_zona.g_sector'
+                'g_commune.g_region'
+                ,'g_zona.g_sector'
                 ,'generator_set_model.generator_set_brand'
                 ,'g_model.g_brand'
+                ,'g_model.g_management_system'
+                ,'g_model.g_motor'
                 ,'g_model.g_fuel_pond'
+                ,'g_model.g_generator_detail'
+                ,'g_model.g_tta_controller'
                 ,'g_type'
                 ,'g_last_maintance.g_maintance_status'
+                ,'g_protocol'
             )
             ->where(function($q) use($text) {
                 if($text) {
@@ -607,6 +614,39 @@ class GeneratorSetController extends Controller
         
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function createGenValData(Request $request, $generator_id)
+    {
+        $data = GeneratorsPlatformValues::insertOrIgnore([
+            [
+                'generator_id' => $generator_id,
+                'hourmeter' => $request->hourmeter,
+                'fuel_level' => $request->fuel_level,
+                'created' => $request->date,
+                'fuel_level_percentage' => $request->fuel_level_percentage,
+                'fuel_consumption' => $request->fuel_consumption,
+                'hourmeter_consumption' => $request->hourmeter_consumption
+            ]
+        ]);
+
+        return $data;
+    }
+
+    /**
+     * Download all data from Pops (Dashboard).
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function generatorsPlatformExport(Request $request)
+    {
+        return (new GeneratorsPlatformExport($request))->download('plataforma_generadores.xlsx');
+    }
     
 
 }

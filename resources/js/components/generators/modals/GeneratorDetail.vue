@@ -8,6 +8,9 @@
             </div>
         </header>
         <section class="modal-card-body">
+            <b-field>
+                <b-button class="is-link is-small is-outlined" @click="isGeneratorDataModalActive=true">Ver detalles</b-button>
+            </b-field>
             <div class="columns">
                 <div class="column">
                     <div class="columns is-multiline">
@@ -20,21 +23,33 @@
                     </div>
                 </div>
                 <div class="column is-8">
-                    <GeneratorCharts :generator="generator"/>
+                    <GeneratorCharts :generator="generator" />
                 </div>
             </div>
 
-            <div class="columns">
+            <!-- <div class="columns">
                 <div class="column">
                     <GeneratorData :generator="generator"/>
                 </div>
-            </div>
+            </div> -->
             
         </section>
         <footer class="modal-card-foot">
             <button class="button" type="button" @click="$parent.close()">Cerrar</button>
             <!-- <button class="button is-primary">Guardar</button> -->
         </footer>
+
+        <b-modal :active.sync="isGeneratorDataModalActive"
+            has-modal-card
+            full-screen
+            trap-focus
+            aria-role="dialog"
+            aria-modal>
+            <generator-data
+                :generator="generator" 
+                :last_data='last_data'
+                />
+        </b-modal>
     </div>
 </template>
 
@@ -121,7 +136,8 @@
                     //     "info": this.generator.mobile_code,
                     //     "color": "has-background-warning"
                     // },
-                ]
+                ],
+                isGeneratorDataModalActive: false
             }
         },
 

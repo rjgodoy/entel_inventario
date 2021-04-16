@@ -22,6 +22,11 @@ class GeneratorsPlatformGenerator extends Model
         return $this->hasMany(GeneratorsPlatformMaintance::class, 'generator_id');
     }
 
+    public function g_ot_maintances() 
+    {
+        return $this->hasMany(GeneratorsPlatformOTMaintance::class, 'generator_id');
+    }
+
     public function g_last_maintance() 
     {
         return $this->hasOne(GeneratorsPlatformMaintance::class, 'generator_id')->latest();
@@ -80,6 +85,21 @@ class GeneratorsPlatformGenerator extends Model
     public function g_protocol() 
     {
         return $this->belongsTo(GeneratorsPlatformProtocol::class, 'protocol_id');
+    }
+
+    public function ot_forms() 
+    {
+        return $this->hasMany(OTForm::class, 'FormCustomerNumber', 'mobile_code');
+    }
+
+    public function ot_tmp_task_logs() 
+    {
+        return $this->hasMany(OTTmpTaskLog::class, 'CustomerName', 'mobile_code');
+    }
+
+    public function statistics() 
+    {
+        return $this->hasMany(GeneratorsPlatformStatistic::class, 'generator_id');
     }
 
 }

@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"chunks/admin":"chunks/admin","chunks/bridge":"chunks/bridge","chunks/comsite":"chunks/comsite","chunks/helpers/notFound":"chunks/helpers/notFound","chunks/login":"chunks/login","chunks/passwordEmail":"chunks/passwordEmail","chunks/passwordReset":"chunks/passwordReset","chunks/pops":"chunks/pops","chunks/register":"chunks/register","chunks/reports":"chunks/reports","vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~ad5cfa06":"vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~ad5cfa06","chunks/documents":"chunks/documents","chunks/eco":"chunks/eco","chunks/pop":"chunks/pop","vendors~chunks/capacityPlanning~chunks/dashboard":"vendors~chunks/capacityPlanning~chunks/dashboard","chunks/capacityPlanning":"chunks/capacityPlanning","vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~b50b88cc":"vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~b50b88cc","chunks/helpers":"chunks/helpers","chunks/layouts/footer":"chunks/layouts/footer","chunks/generators":"chunks/generators","vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators/modals/generatorCharts~chunks/~06d98356":"vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators/modals/generatorCharts~chunks/~06d98356","vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload":"vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload","chunks/dashboard":"chunks/dashboard","chunks/admin/bulkLoad":"chunks/admin/bulkLoad","chunks/admin/roleUsers":"chunks/admin/roleUsers","chunks/admin/tps":"chunks/admin/tps","chunks/admin/helperFiles":"chunks/admin/helperFiles","chunks/admin/pops":"chunks/admin/pops","chunks/helpers/vuePagination":"chunks/helpers/vuePagination","chunks/dashboard/modalDownload":"chunks/dashboard/modalDownload","chunks/maps/mapView":"chunks/maps/mapView","chunks/documents/modals/newFolder":"chunks/documents/modals/newFolder","chunks/documents/modals/newRootFolder":"chunks/documents/modals/newRootFolder","chunks/documents/modals/upload":"chunks/documents/modals/upload","chunks/eco/documents":"chunks/eco/documents","chunks/eco/popProtectedZones":"chunks/eco/popProtectedZones","chunks/eco/protectedZones":"chunks/eco/protectedZones","chunks/eco/rcas":"chunks/eco/rcas","chunks/eco/temporaryStorages":"chunks/eco/temporaryStorages","chunks/maps/ecoMap":"chunks/maps/ecoMap","chunks/pop/characteristics":"chunks/pop/characteristics","chunks/pop/climate/airConditioner":"chunks/pop/climate/airConditioner","chunks/pop/climate/climate":"chunks/pop/climate/climate","chunks/pop/documents/documents":"chunks/pop/documents/documents","chunks/pop/drone":"chunks/pop/drone","chunks/pop/eco":"chunks/pop/eco","chunks/pop/infrastructure/infrastructure":"chunks/pop/infrastructure/infrastructure","chunks/pop/layout/layout":"chunks/pop/layout/layout","chunks/pop/power/power":"chunks/pop/power/power","chunks/pop/sites":"chunks/pop/sites","chunks/pop/vision":"chunks/pop/vision","chunks/pop/clients":"chunks/pop/clients","chunks/pop/comsite":"chunks/pop/comsite","chunks/pop/location":"chunks/pop/location","chunks/pop/logs":"chunks/pop/logs","chunks/capacity/capacity":"chunks/capacity/capacity","chunks/capacity/distribution":"chunks/capacity/distribution","chunks/capacity/layout":"chunks/capacity/layout","chunks/capacity/modals/new/newRoom":"chunks/capacity/modals/new/newRoom","chunks/capacity/roomsTable":"chunks/capacity/roomsTable","chunks/capacity/projection":"chunks/capacity/projection","chunks/layouts/modals/info":"chunks/layouts/modals/info","chunks/generators/generatorTable":"chunks/generators/generatorTable","chunks/dashboard/airConditioners":"chunks/dashboard/airConditioners","chunks/dashboard/albaPopsData":"chunks/dashboard/albaPopsData","chunks/dashboard/criticPopsData":"chunks/dashboard/criticPopsData","chunks/dashboard/electricLines":"chunks/dashboard/electricLines","chunks/dashboard/generatorSets":"chunks/dashboard/generatorSets","chunks/dashboard/infrastructures":"chunks/dashboard/infrastructures","chunks/dashboard/junctions":"chunks/dashboard/junctions","chunks/dashboard/popsData":"chunks/dashboard/popsData","chunks/dashboard/powerRectifiers":"chunks/dashboard/powerRectifiers","chunks/dashboard/sitesData":"chunks/dashboard/sitesData","chunks/dashboard/technologyData":"chunks/dashboard/technologyData","chunks/dashboard/verticalStructures":"chunks/dashboard/verticalStructures","chunks/maps/mapView/":"chunks/maps/mapView/","vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart":"vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart","chunks/dashboard/pretDataChart":"chunks/dashboard/pretDataChart","chunks/admin/modals/modalInfoCircle":"chunks/admin/modals/modalInfoCircle","chunks/admin/permissionRoles":"chunks/admin/permissionRoles","chunks/admin/user/roleUserTable":"chunks/admin/user/roleUserTable","chunks/admin/userRequests":"chunks/admin/userRequests","chunks/admin/adminTpsTable":"chunks/admin/adminTpsTable","chunks/eco/modals/upload":"chunks/eco/modals/upload","chunks/eco/modals/newStorage":"chunks/eco/modals/newStorage","chunks/pop/documents/modals/newFolder":"chunks/pop/documents/modals/newFolder","chunks/pop/documents/modals/upload":"chunks/pop/documents/modals/upload","chunks/capacity/modals/airConditioner":"chunks/capacity/modals/airConditioner","chunks/capacity/modals/generator":"chunks/capacity/modals/generator","chunks/capacity/modals/junction":"chunks/capacity/modals/junction","chunks/capacity/modals/powerRectifier":"chunks/capacity/modals/powerRectifier","chunks/pop/power/electricLines":"chunks/pop/power/electricLines","chunks/pop/power/generatorSets":"chunks/pop/power/generatorSets","chunks/pop/power/junctions":"chunks/pop/power/junctions","chunks/pop/power/powerRectifiers":"chunks/pop/power/powerRectifiers","chunks/pop/modals/editParameter":"chunks/pop/modals/editParameter","chunks/maps/popMapView":"chunks/maps/popMapView","chunks/capacity/roomLights":"chunks/capacity/roomLights","vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/generators/m~ab4f93ad":"vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/generators/m~ab4f93ad","chunks/capacity/charts/polarChart":"chunks/capacity/charts/polarChart","chunks/capacity/charts/projectionChart":"chunks/capacity/charts/projectionChart","chunks/capacity/gaugeChart":"chunks/capacity/gaugeChart","chunks/capacity/blocks/equipment":"chunks/capacity/blocks/equipment","chunks/capacity/blocks/generator":"chunks/capacity/blocks/generator","chunks/capacity/blocks/junction":"chunks/capacity/blocks/junction","chunks/capacity/blocks/solarPanels":"chunks/capacity/blocks/solarPanels","chunks/generators/modals/GeneratorMaintenances":"chunks/generators/modals/GeneratorMaintenances","chunks/generators/modals/generatorDetail":"chunks/generators/modals/generatorDetail","chunks/admin/modals/newRole":"chunks/admin/modals/newRole","chunks/admin/user/permission":"chunks/admin/user/permission","chunks/admin/modals/modalPermissions":"chunks/admin/modals/modalPermissions","chunks/pop/power/generatorSet":"chunks/pop/power/generatorSet","chunks/pop/power/junction":"chunks/pop/power/junction","chunks/pop/power/batteryBank":"chunks/pop/power/batteryBank","chunks/pop/power/powerRectifier":"chunks/pop/power/powerRectifier","chunks/capacity/modals/editPlane":"chunks/capacity/modals/editPlane","chunks/capacity/modals/new/newAirConditioner":"chunks/capacity/modals/new/newAirConditioner","chunks/capacity/modals/new/newBatteryBank":"chunks/capacity/modals/new/newBatteryBank","chunks/capacity/modals/new/newPowerRectifier":"chunks/capacity/modals/new/newPowerRectifier","chunks/capacity/surface":"chunks/capacity/surface","chunks/capacity/modals/new/newGeneratorSet":"chunks/capacity/modals/new/newGeneratorSet","chunks/pop/layout/modals/newJunction":"chunks/pop/layout/modals/newJunction","chunks/capacity/modals/new/newSolarPanel":"chunks/capacity/modals/new/newSolarPanel","chunks/generators/modals/generatorData":"chunks/generators/modals/generatorData","chunks/generators/modals/generatorCharts":"chunks/generators/modals/generatorCharts","chunks/admin/user/userPermission":"chunks/admin/user/userPermission","chunks/pop/power/modals/editJunction":"chunks/pop/power/modals/editJunction","chunks/capacity/modals/distribution":"chunks/capacity/modals/distribution","chunks/capacity/modals/surface":"chunks/capacity/modals/surface","chunks/generators/modals/generatorAddData":"chunks/generators/modals/generatorAddData","chunks/generators/modals/generatorFuelChart":"chunks/generators/modals/generatorFuelChart","chunks/generators/modals/generatorFunctionChart":"chunks/generators/modals/generatorFunctionChart"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"chunks/admin":"chunks/admin","chunks/bridge":"chunks/bridge","chunks/comsite":"chunks/comsite","chunks/helpers/notFound":"chunks/helpers/notFound","chunks/login":"chunks/login","chunks/passwordEmail":"chunks/passwordEmail","chunks/passwordReset":"chunks/passwordReset","chunks/pops":"chunks/pops","chunks/register":"chunks/register","chunks/reports":"chunks/reports","vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~ad5cfa06":"vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~ad5cfa06","chunks/documents":"chunks/documents","chunks/eco":"chunks/eco","chunks/pop":"chunks/pop","vendors~chunks/capacityPlanning~chunks/dashboard":"vendors~chunks/capacityPlanning~chunks/dashboard","chunks/capacityPlanning":"chunks/capacityPlanning","vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~b50b88cc":"vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~b50b88cc","chunks/helpers":"chunks/helpers","chunks/layouts/footer":"chunks/layouts/footer","chunks/generators":"chunks/generators","vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators/modals/generatorCharts~chunks/~06d98356":"vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators/modals/generatorCharts~chunks/~06d98356","vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload":"vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload","chunks/dashboard":"chunks/dashboard","chunks/admin/bulkLoad":"chunks/admin/bulkLoad","chunks/admin/roleUsers":"chunks/admin/roleUsers","chunks/admin/tps":"chunks/admin/tps","chunks/admin/helperFiles":"chunks/admin/helperFiles","chunks/admin/pops":"chunks/admin/pops","chunks/helpers/vuePagination":"chunks/helpers/vuePagination","chunks/dashboard/modalDownload":"chunks/dashboard/modalDownload","vendors~chunks/maps/mapView~chunks/maps/mapView/":"vendors~chunks/maps/mapView~chunks/maps/mapView/","chunks/maps/mapView":"chunks/maps/mapView","chunks/documents/modals/newFolder":"chunks/documents/modals/newFolder","chunks/documents/modals/newRootFolder":"chunks/documents/modals/newRootFolder","chunks/documents/modals/upload":"chunks/documents/modals/upload","chunks/eco/documents":"chunks/eco/documents","chunks/eco/popProtectedZones":"chunks/eco/popProtectedZones","chunks/eco/protectedZones":"chunks/eco/protectedZones","chunks/eco/rcas":"chunks/eco/rcas","chunks/eco/temporaryStorages":"chunks/eco/temporaryStorages","chunks/maps/ecoMap":"chunks/maps/ecoMap","chunks/pop/characteristics":"chunks/pop/characteristics","chunks/pop/climate/airConditioner":"chunks/pop/climate/airConditioner","chunks/pop/climate/climate":"chunks/pop/climate/climate","chunks/pop/documents/documents":"chunks/pop/documents/documents","chunks/pop/drone":"chunks/pop/drone","chunks/pop/eco":"chunks/pop/eco","chunks/pop/infrastructure/infrastructure":"chunks/pop/infrastructure/infrastructure","chunks/pop/layout/layout":"chunks/pop/layout/layout","chunks/pop/power/power":"chunks/pop/power/power","chunks/pop/sites":"chunks/pop/sites","chunks/pop/vision":"chunks/pop/vision","chunks/pop/clients":"chunks/pop/clients","chunks/pop/comsite":"chunks/pop/comsite","chunks/pop/location":"chunks/pop/location","chunks/pop/logs":"chunks/pop/logs","chunks/capacity/capacity":"chunks/capacity/capacity","chunks/capacity/distribution":"chunks/capacity/distribution","chunks/capacity/layout":"chunks/capacity/layout","chunks/capacity/modals/new/newRoom":"chunks/capacity/modals/new/newRoom","chunks/capacity/roomsTable":"chunks/capacity/roomsTable","chunks/capacity/projection":"chunks/capacity/projection","chunks/layouts/modals/info":"chunks/layouts/modals/info","chunks/generators/generatorTable":"chunks/generators/generatorTable","chunks/generators/modals/modalDownload":"chunks/generators/modals/modalDownload","chunks/dashboard/airConditioners":"chunks/dashboard/airConditioners","chunks/dashboard/albaPopsData":"chunks/dashboard/albaPopsData","chunks/dashboard/criticPopsData":"chunks/dashboard/criticPopsData","chunks/dashboard/electricLines":"chunks/dashboard/electricLines","chunks/dashboard/generatorSets":"chunks/dashboard/generatorSets","chunks/dashboard/infrastructures":"chunks/dashboard/infrastructures","chunks/dashboard/junctions":"chunks/dashboard/junctions","chunks/dashboard/popsData":"chunks/dashboard/popsData","chunks/dashboard/powerRectifiers":"chunks/dashboard/powerRectifiers","chunks/dashboard/sitesData":"chunks/dashboard/sitesData","chunks/dashboard/technologyData":"chunks/dashboard/technologyData","chunks/dashboard/verticalStructures":"chunks/dashboard/verticalStructures","vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart":"vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart","chunks/dashboard/pretDataChart":"chunks/dashboard/pretDataChart","chunks/maps/mapView/":"chunks/maps/mapView/","chunks/admin/modals/modalInfoCircle":"chunks/admin/modals/modalInfoCircle","chunks/admin/permissionRoles":"chunks/admin/permissionRoles","chunks/admin/user/roleUserTable":"chunks/admin/user/roleUserTable","chunks/admin/userRequests":"chunks/admin/userRequests","chunks/admin/adminTpsTable":"chunks/admin/adminTpsTable","chunks/eco/modals/upload":"chunks/eco/modals/upload","chunks/eco/modals/newStorage":"chunks/eco/modals/newStorage","chunks/pop/documents/modals/newFolder":"chunks/pop/documents/modals/newFolder","chunks/pop/documents/modals/upload":"chunks/pop/documents/modals/upload","chunks/capacity/modals/airConditioner":"chunks/capacity/modals/airConditioner","chunks/capacity/modals/generator":"chunks/capacity/modals/generator","chunks/capacity/modals/junction":"chunks/capacity/modals/junction","chunks/capacity/modals/powerRectifier":"chunks/capacity/modals/powerRectifier","chunks/pop/power/electricLines":"chunks/pop/power/electricLines","chunks/pop/power/generatorSets":"chunks/pop/power/generatorSets","chunks/pop/power/junctions":"chunks/pop/power/junctions","chunks/pop/power/powerRectifiers":"chunks/pop/power/powerRectifiers","chunks/pop/modals/editParameter":"chunks/pop/modals/editParameter","chunks/maps/popMapView":"chunks/maps/popMapView","chunks/capacity/roomLights":"chunks/capacity/roomLights","vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/generators/m~ab4f93ad":"vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/generators/m~ab4f93ad","chunks/capacity/charts/polarChart":"chunks/capacity/charts/polarChart","chunks/capacity/charts/projectionChart":"chunks/capacity/charts/projectionChart","chunks/capacity/gaugeChart":"chunks/capacity/gaugeChart","chunks/capacity/blocks/equipment":"chunks/capacity/blocks/equipment","chunks/capacity/blocks/generator":"chunks/capacity/blocks/generator","chunks/capacity/blocks/junction":"chunks/capacity/blocks/junction","chunks/capacity/blocks/solarPanels":"chunks/capacity/blocks/solarPanels","chunks/generators/modals/GeneratorMaintenances":"chunks/generators/modals/GeneratorMaintenances","chunks/generators/modals/generatorDetail":"chunks/generators/modals/generatorDetail","chunks/admin/modals/newRole":"chunks/admin/modals/newRole","chunks/admin/user/permission":"chunks/admin/user/permission","chunks/admin/modals/modalPermissions":"chunks/admin/modals/modalPermissions","chunks/pop/power/generatorSet":"chunks/pop/power/generatorSet","chunks/pop/power/junction":"chunks/pop/power/junction","chunks/pop/power/batteryBank":"chunks/pop/power/batteryBank","chunks/pop/power/powerRectifier":"chunks/pop/power/powerRectifier","chunks/capacity/modals/editPlane":"chunks/capacity/modals/editPlane","chunks/capacity/modals/new/newAirConditioner":"chunks/capacity/modals/new/newAirConditioner","chunks/capacity/modals/new/newBatteryBank":"chunks/capacity/modals/new/newBatteryBank","chunks/capacity/modals/new/newPowerRectifier":"chunks/capacity/modals/new/newPowerRectifier","chunks/capacity/surface":"chunks/capacity/surface","chunks/capacity/modals/new/newGeneratorSet":"chunks/capacity/modals/new/newGeneratorSet","chunks/pop/layout/modals/newJunction":"chunks/pop/layout/modals/newJunction","chunks/capacity/modals/new/newSolarPanel":"chunks/capacity/modals/new/newSolarPanel","chunks/generators/modals/detailTable":"chunks/generators/modals/detailTable","chunks/generators/modals/generatorData":"chunks/generators/modals/generatorData","chunks/generators/modals/generatorCharts":"chunks/generators/modals/generatorCharts","chunks/admin/user/userPermission":"chunks/admin/user/userPermission","chunks/pop/power/modals/editJunction":"chunks/pop/power/modals/editJunction","chunks/capacity/modals/distribution":"chunks/capacity/modals/distribution","chunks/capacity/modals/surface":"chunks/capacity/modals/surface","chunks/generators/modals/generatorAddData":"chunks/generators/modals/generatorAddData","chunks/generators/modals/generatorFuelChart":"chunks/generators/modals/generatorFuelChart","chunks/generators/modals/generatorFunctionChart":"chunks/generators/modals/generatorFunctionChart"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -68622,34 +68622,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var buefy__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! buefy */ "./node_modules/buefy/dist/esm/index.js");
-/* harmony import */ var animate_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! animate.css */ "./node_modules/animate.css/animate.css");
-/* harmony import */ var animate_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(animate_css__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
-/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
-/* harmony import */ var vue_numeral_filter__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue-numeral-filter */ "./node_modules/vue-numeral-filter/dist/vue-numeral-filter.es.js");
-/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
-/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(vue2_google_maps__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _constants_gmaps__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants/gmaps */ "./resources/js/constants/gmaps.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var buefy__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! buefy */ "./node_modules/buefy/dist/esm/index.js");
+/* harmony import */ var animate_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! animate.css */ "./node_modules/animate.css/animate.css");
+/* harmony import */ var animate_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(animate_css__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var vue_numeral_filter__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vue-numeral-filter */ "./node_modules/vue-numeral-filter/dist/vue-numeral-filter.es.js");
+/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
+/* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(vue2_google_maps__WEBPACK_IMPORTED_MODULE_10__);
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 
- // import store from './constants/store'
+
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]); // ########################## Axios Libraries ##############################
 
 
-window.axios = axios__WEBPACK_IMPORTED_MODULE_3___default.a;
+window.axios = axios__WEBPACK_IMPORTED_MODULE_4___default.a;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; // #########################################################################
 // ########################## Buefy Libraries ##############################
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(buefy__WEBPACK_IMPORTED_MODULE_4__["default"]); // #########################################################################
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(buefy__WEBPACK_IMPORTED_MODULE_5__["default"]); // #########################################################################
 // ########################## AnimateCSS Libraries #########################
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(animate_css__WEBPACK_IMPORTED_MODULE_5___default.a); // #########################################################################
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(animate_css__WEBPACK_IMPORTED_MODULE_6___default.a); // #########################################################################
 // ########################## LeaderLine Libraries #########################
 // import LeaderLine from 'leader-line'
 // Vue.use(LeaderLine)
@@ -68658,17 +68659,17 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(animate_css__WEBPACK_IMPORTED_MOD
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["dom"].watch();
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('font-awesome-icon', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('font-awesome-layers', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeLayers"]); // #########################################################################
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_8__["dom"].watch();
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('font-awesome-icon', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_7__["FontAwesomeIcon"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('font-awesome-layers', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_7__["FontAwesomeLayers"]); // #########################################################################
 // ########################## NumeralJs ##########################
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_numeral_filter__WEBPACK_IMPORTED_MODULE_8__["default"]); // #########################################################################
-// ########################## Google Maps ##################################
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_numeral_filter__WEBPACK_IMPORTED_MODULE_9__["default"]); // #########################################################################
+// ########################## Vue2 Google Maps ##################################
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue2_google_maps__WEBPACK_IMPORTED_MODULE_9__, {
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue2_google_maps__WEBPACK_IMPORTED_MODULE_10__, {
   load: {
     key: 'AIzaSyD45pon-Eth8hRCKipTmYsMnsE-twUbATE',
     libraries: 'places' // This is required if you use the Autocomplete plugin
@@ -68689,6 +68690,42 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue2_google_maps__WEBPACK_IMPORTE
 
 }); // import GmapCluster from 'vue2-google-maps/dist/components/cluster' // replace src with dist if you have Babel issues
 // Vue.component('GmapCluster', GmapCluster)
+// #########################################################################
+// ########################## Google Maps ##################################
+// Your personal API key.
+// Get it here: https://console.cloud.google.com/google/maps-apis
+// const API_KEY = 'AIzaSyD45pon-Eth8hRCKipTmYsMnsE-twUbATE';
+// const CALLBACK_NAME = 'gmapsCallback';
+// let initialized = !!window.google;
+// let resolveInitPromise;
+// let rejectInitPromise;
+// // This promise handles the initialization
+// // status of the google maps script.
+// const initPromise = new Promise((resolve, reject) => {
+//     resolveInitPromise = resolve;
+//     rejectInitPromise = reject;
+// });
+// export default function init() {
+//     // If Google Maps already is initialized
+//     // the `initPromise` should get resolved
+//     // eventually.
+//     if (initialized) return initPromise;
+//     initialized = true;
+//     // The callback function is called by
+//     // the Google Maps script if it is
+//     // successfully loaded.
+//     window[CALLBACK_NAME] = () => resolveInitPromise(window.google);
+//     // We inject a new script tag into
+//     // the `<head>` of our HTML to load
+//     // the Google Maps script.
+//     const script = document.createElement('script');
+//     script.async = true;
+//     script.defer = true;
+//     script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=${CALLBACK_NAME}`;
+//     script.onerror = rejectInitPromise;
+//     document.querySelector('head').appendChild(script);
+//     return initPromise;
+// }
 // #########################################################################
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.config.productionTip = false;
@@ -68908,6 +68945,56 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Welcome_vue_vue_type_template_id_51777872___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/constants/gmaps.js":
+/*!*****************************************!*\
+  !*** ./resources/js/constants/gmaps.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return init; });
+// Your personal API key.
+// Get it here: https://console.cloud.google.com/google/maps-apis
+var API_KEY = 'AIzaSyD45pon-Eth8hRCKipTmYsMnsE-twUbATE';
+var CALLBACK_NAME = 'gmapsCallback';
+var initialized = !!window.google;
+var resolveInitPromise;
+var rejectInitPromise; // This promise handles the initialization
+// status of the google maps script.
+
+var initPromise = new Promise(function (resolve, reject) {
+  resolveInitPromise = resolve;
+  rejectInitPromise = reject;
+});
+function init() {
+  // If Google Maps already is initialized
+  // the `initPromise` should get resolved
+  // eventually.
+  if (initialized) return initPromise;
+  initialized = true; // The callback function is called by
+  // the Google Maps script if it is
+  // successfully loaded.
+
+  window[CALLBACK_NAME] = function () {
+    return resolveInitPromise(window.google);
+  }; // We inject a new script tag into
+  // the `<head>` of our HTML to load
+  // the Google Maps script.
+
+
+  var script = document.createElement('script');
+  script.async = true;
+  script.defer = true;
+  script.src = "https://maps.googleapis.com/maps/api/js?key=".concat(API_KEY, "&callback=").concat(CALLBACK_NAME);
+  script.onerror = rejectInitPromise;
+  document.querySelector('head').appendChild(script);
+  return initPromise;
+}
 
 /***/ }),
 

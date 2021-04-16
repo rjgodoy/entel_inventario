@@ -3,41 +3,23 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use App\Models\Crm;
 use App\Models\Pop;
-use App\Models\File;
-use App\Models\Menu;
 use App\Models\Role;
-use App\Models\Room;
 use App\Models\Site;
-use App\Models\User;
-use App\Models\Zona;
-use App\Models\Plane;
 use App\Models\PsgTp;
-use App\Models\Folder;
-use App\Models\Autonomy;
-use App\Models\Junction;
+use App\Models\OTForm;
 use App\Models\Technology;
-use Illuminate\Support\Str;
 use App\Imports\CellsImport;
-use App\Models\GeneratorSet;
-use App\Models\GeneratorTta;
+use App\Models\OTTmpTaskLog;
 use Illuminate\Http\Request;
-use App\Models\GeneratorTank;
-use App\Models\AirConditioner;
-use App\Models\GeneratorGroup;
-use App\Models\GeneratorMotor;
-use App\Models\PowerRectifier;
-use App\Imports\JunctionsImport;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Http;
-use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
-use App\Models\GeneratorsPlatformValues;
 use App\Models\GeneratorsPlatformGenerator;
+use App\Models\GeneratorsPlatformStatistic;
+use App\Models\GeneratorsPlatformOTMaintance;
+use App\Models\GeneratorsPlatformMaintanceType;
+use App\Models\GeneratorsPlatformMaintanceStatus;
+// use Illuminate\Database\Eloquent\Collection;
 
 class HomeController extends Controller
 {
@@ -62,98 +44,6 @@ class HomeController extends Controller
     {
         $roles = Role::pluck('slug')->toArray();
         $request->user()->authorizeRoles($roles);
-
-        // $folders = Folder::where('name', 'like', 'Levantamientos%')->get();
-        // foreach ($folders as $folder) {
-        //     $folder2019s = Folder::where('parent_id', $folder->id)->where('name', '2019')->get();
-        //     // selecciona las carpetas de cada una de las carpetas principales y las duplica con el parent_id de la nueva carpeta padre
-        //     foreach ($folder2019s as $folder2019) {
-        //         $folder2020 = Folder::create([
-        //             'parent_id' => $folder2019->parent_id,
-        //             'site_id' => $folder2019->site_id,
-        //             'pop_id' => $folder2019->pop_id,
-        //             'name' => '2020',
-        //             'creator_id' => $folder2019->creator_id
-        //         ]);
-
-        //         // Duplica los archivos de esa carpeta
-        //         $subfiles = File::where('folder_id', $folder2019->id)->get();
-        //         foreach ($subfiles as $subfile) {
-        //             File::create([
-        //                 'folder_id' => $folder2020->id,
-        //                 'user_id' => $subfile->user_id,
-        //                 'site_id' => $subfile->site_id,
-        //                 'pop_id' => $subfile->pop_id,
-        //                 'route' => $subfile->route,
-        //                 'dirname' => $subfile->dirname,
-        //                 'basename' => $subfile->basename,
-        //                 'extension' => $subfile->extension,
-        //                 'filename' => $subfile->filename,
-        //                 'size' => $subfile->size,
-        //                 'mime' => $subfile->mime
-        //             ]);
-        //         }
-
-
-                    
-        //         $foldersIn2019 = Folder::where('parent_id', $folder2019->id)->get();
-        //         foreach ($foldersIn2019 as $subfolder2019) {
-        //             $newInSubFolder = Folder::create([
-        //                 'parent_id' => $folder2020->id,
-        //                 'site_id' => $subfolder2019->site_id,
-        //                 'pop_id' => $subfolder2019->pop_id,
-        //                 'name' => $subfolder2019->name,
-        //                 'creator_id' => $subfolder2019->creator_id
-        //             ]);
-
-        //             $subfiles = File::where('folder_id', $subfolder2019->id)->get();
-        //             foreach ($subfiles as $subfile) {
-        //                 File::create([
-        //                     'folder_id' => $newInSubFolder->id,
-        //                     'user_id' => $subfile->user_id,
-        //                     'site_id' => $subfile->site_id,
-        //                     'pop_id' => $subfile->pop_id,
-        //                     'route' => $subfile->route,
-        //                     'dirname' => $subfile->dirname,
-        //                     'basename' => $subfile->basename,
-        //                     'extension' => $subfile->extension,
-        //                     'filename' => $subfile->filename,
-        //                     'size' => $subfile->size,
-        //                     'mime' => $subfile->mime
-        //                 ]);
-        //             }
-
-        //             $onSubfolders = Folder::where('parent_id', $subfolder2019->id)->get();
-        //             foreach ($onSubfolders as $onSubFolder) {
-        //                 $newFolder = Folder::create([
-        //                     'parent_id' => $newInSubFolder->id,
-        //                     'site_id' => $onSubFolder->site_id,
-        //                     'pop_id' => $onSubFolder->pop_id,
-        //                     'name' => $onSubFolder->name,
-        //                     'creator_id' => $onSubFolder->creator_id
-        //                 ]);
-
-        //                 $insubfiles = File::where('folder_id', $onSubFolder->id)->get();
-        //                 foreach ($insubfiles as $insubfile) {
-        //                     File::create([
-        //                         'folder_id' => $newFolder->id,
-        //                         'user_id' => $insubfile->user_id,
-        //                         'site_id' => $insubfile->site_id,
-        //                         'pop_id' => $insubfile->pop_id,
-        //                         'route' => $insubfile->route,
-        //                         'dirname' => $insubfile->dirname,
-        //                         'basename' => $insubfile->basename,
-        //                         'extension' => $insubfile->extension,
-        //                         'filename' => $insubfile->filename,
-        //                         'size' => $insubfile->size,
-        //                         'mime' => $insubfile->mime
-        //                     ]);
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-        // dd('done');
 
         // Latest Updates
         $latest = [
@@ -310,7 +200,17 @@ class HomeController extends Controller
      */
     public function test(Request $request)
     {
-        //
+        $now = Carbon::now()->isoFormat('YYYYMMDDHHmm');
+        $token = 'a3QwEBesPKm9b2f';
+        $hash = md5($now.''.$token);
+        $url = 'https://aess.entelchile.net/pop_m/all/all/?EXPORT=CSV&v=5&app=analytics&key='.$hash;
+        dd($url);
+
+        Storage::disk('local')->put('file.csv', fopen($url, 'r'));
+
+        
+
+        
     }
 
     

@@ -132,8 +132,8 @@ class DashboardApiController extends Controller
             })
             ->select(
                 'id',
-                'nombre',
-                'direccion',
+                // 'nombre',
+                // 'direccion',
                 'latitude',
                 'longitude'
             )

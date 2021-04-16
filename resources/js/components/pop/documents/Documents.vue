@@ -50,7 +50,7 @@
                     
 
                     <div class="columns is-multiline" v-if="!edit">
-                        <div class="column is-2 tile is-parent" v-for="folder in folders" :key="folder.id">
+                        <div class="column is-3 tile is-parent" v-for="folder in folders" :key="folder.id">
                             <a class="box tile is-child" @click="selected(folder)" style="position: relative;" >
                                 <font-awesome-icon
                                     :icon="['fas', 'folder-open']"
@@ -61,7 +61,7 @@
                             </a>
                         </div>
 
-                        <div class="column is-2 tile is-parent" v-for="file in files" :key="file.id">
+                        <div class="column is-3 tile is-parent" v-for="file in files" :key="file.id">
                             <a class="box tile is-child" @click="openFile(file); load = file.id" style="position: relative;">
                                 <font-awesome-icon 
                                     :icon="['fas', faFile(file.extension).icon]"
@@ -75,7 +75,7 @@
                     </div>
 
                     <div class="columns is-multiline" v-if="edit">
-                        <div class="column is-2 tile is-parent" v-for="folder in folders" :key="folder.id">
+                        <div class="column is-3 tile is-parent" v-for="folder in folders" :key="folder.id">
                             <div class="box tile is-child" style="position: relative;">
                                 <a class="is-pulled-right has-text-danger" @click="confirmDeleteFolder(folder)">
                                     <font-awesome-icon 
@@ -92,12 +92,18 @@
                             </div>
                         </div>
 
-                        <div class="column is-2 tile is-parent" v-for="file in files" :key="file.id">
+                        <div class="column is-3 tile is-parent" v-for="file in files" :key="file.id">
                             <div class="box tile is-child" style="position: relative;">
                                 <a class="is-pulled-right has-text-danger" @click="confirmDeleteFile(file)">
                                     <font-awesome-icon 
                                         :icon="['far', 'trash-alt']"
-                                        size="2x"
+                                        size="1x"
+                                        style="padding-bottom: 5px;"/>
+                                </a>
+                                <a class="is-pulled-right has-text-link" @click="makeDroneFootage(file)" v-if="isVideo(file)">
+                                    <font-awesome-icon 
+                                        :icon="['fas', 'video']"
+                                        size="1x"
                                         style="padding-bottom: 5px;"/>
                                 </a>
                                 <font-awesome-icon 
@@ -190,10 +196,10 @@
 
 <script>
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faFolderOpen, faFilePdf, faFileExcel, faFileImage, faFile, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faFolderOpen, faFilePdf, faFileExcel, faFileImage, faFile, faAngleLeft, faVideo } from "@fortawesome/free-solid-svg-icons";
 // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 import { faTrashAlt as farTrashAlt } from '@fortawesome/free-regular-svg-icons'
-library.add(faFolderOpen, faFilePdf, faFileExcel, faFileImage, faFile, faAngleLeft, farTrashAlt);
+library.add(faFolderOpen, faFilePdf, faFileExcel, faFileImage, faFile, faAngleLeft, farTrashAlt, faVideo);
 export default {
     components: {
         ModalUpload: () => import(/* webpackChunkName: "chunks/pop/documents/modals/upload"*/'./modals/ModalUpload'),
@@ -368,7 +374,7 @@ export default {
             })
             axios.get('/api/currentFolder', { params })
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 this.currentFolderView = response.data.folder
             })
         },
@@ -383,16 +389,21 @@ export default {
             this.photos = []
             axios.get(`/api/files/${this.pop.id}`, { params })
             .then(response => {
-                response.data.files.forEach(element => {
-                    this.files.push(element)
-                    if (element.extension != 'jpg' 
-                        && element.extension != 'png' 
-                        && element.extension != 'jpeg' 
-                        && element.extension != 'tiff') {
-                        element.image = '/storage/'+element.route
-                        this.photos.push(element)
+                // console.log(response.data)
+
+                Object.keys(response.data.files).forEach(element => {
+                    let file = response.data.files[element];
+                    if (file.extension.toLowerCase() == 'jpg' 
+                        || file.extension.toLowerCase() == 'png' 
+                        || file.extension.toLowerCase() == 'jpeg' 
+                        || file.extension.toLowerCase() == 'tiff') {
+                        file.image = '/storage/'+file.route
+                        this.photos.push(file)
+                    } else {
+                        this.files.push(file)
                     }
-                })
+                });
+
                 // console.log(response.data)
                 // this.files = response.data.files
                 this.canUploadFile = response.data.can.upload
@@ -401,15 +412,32 @@ export default {
         },
 
         faFile(ext) {
-            var icon = ext == 'pdf' ? 'file-pdf' : 
-                    (ext == 'jpg' || ext == 'png' || ext == 'jpeg' ? 'file-image' : 
-                        (ext == 'xls' || ext == 'xlsx' ? 'file-excel' : 'file')
-                    )
+            var icon = 'file';
+            var type = 'has-text-primary';
 
-            var type = ext == 'pdf' ? 'has-text-info' : 
-                    (ext == 'jpg' || ext == 'png' || ext == 'jpeg' ? 'has-text-warning' : 
-                        (ext == 'xls' || ext == 'xlsx' ? 'has-text-success' : 'has-text-primary')
-                    )
+            switch (ext.toLowerCase()) {
+                case 'pdf':
+                    icon = 'file-pdf';
+                    type = 'has-text-info';
+                    break;
+                case 'jpg':
+                case 'jpeg':
+                case 'png':
+                case 'tiff':
+                    icon = 'file-image';
+                    type = 'has-text-warning';
+                    break;
+                case 'xls':
+                case 'xlsx':
+                    icon = 'file-excel';
+                    type = 'has-text-success';
+                    break;
+                default:
+                    icon = 'file';
+                    type = 'has-text-primary';
+                    break;
+            }
+
             return {
                 'icon': icon,
                 'type': type
@@ -417,7 +445,7 @@ export default {
         },
 
         openFile(file) {   
-            if (file.extension == 'pdf' || file.extension == 'jpg' || file.extension == 'png' || file.extension == 'jpeg') {
+            if (file.extension.toLowerCase() == 'pdf' || file.extension.toLowerCase() == 'jpg' || file.extension.toLowerCase() == 'png' || file.extension.toLowerCase() == 'jpeg') {
                 window.open('/storage/'+file.route, "_blank");    
             } else {
                 this.readFile(file)
@@ -522,9 +550,32 @@ export default {
                 onConfirm: () => {
                     axios.delete(`/api/files/${file.id}`)
                     .then(response => {
-                        console.log(response)
+                        // console.log(response)
                         this.getFiles()
                         this.$eventBus.$emit('file-deleted');
+                    })
+                }
+            })
+        },
+
+        makeDroneFootage(file) {
+            this.$buefy.dialog.confirm({
+                message: 'Desea agregar este video como una captura de Drone?\n\rEl video aparecerá en la sección "Drone"',
+                type: 'is-link',
+                onConfirm: () => {
+                    let params = {
+                        'pop_id': this.pop.id,
+                        'file_id': file.id
+                    }
+                    axios.put(`/api/addDrone`, params)
+                    .then(response => {
+                        console.log(response)
+                        this.$eventBus.$emit('drone-added');
+                        this.$buefy.toast.open({
+                            message: 'Video agregado con exito',
+                            type: 'is-success',
+                            duration: 2000
+                        })
                     })
                 }
             })
@@ -536,6 +587,14 @@ export default {
                 return document.documentElement.classList.add('is-clipped')
             } else {
                 return document.documentElement.classList.remove('is-clipped')
+            }
+        },
+
+        isVideo(file) {
+            if (file.extension.toLowerCase() == 'mov' || file.extension.toLowerCase() == 'mp4' || file.extension.toLowerCase() == 'm4v' || file.extension.toLowerCase() == 'avi') {
+                return true
+            } else {
+                return false
             }
         }
     },

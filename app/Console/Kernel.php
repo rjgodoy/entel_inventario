@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\UpdateComsites',
         'App\Console\Commands\UpdatePsgTps',
         'App\Console\Commands\SearchRcas',
+        'App\Console\Commands\GetOTMaintances',
     ];
 
     /**
@@ -35,6 +36,12 @@ class Kernel extends ConsoleKernel
             ->daily()
             ->timezone('America/Santiago')
             ->at('00:00')
+            ->emailOutputOnFailure('proyectosinfraestructura@entel.cl');
+
+        $schedule->command('get:otmaintances')
+            ->daily()
+            ->timezone('America/Santiago')
+            ->at('11:00')
             ->emailOutputOnFailure('proyectosinfraestructura@entel.cl');
 
         $schedule->command('update:comsites')

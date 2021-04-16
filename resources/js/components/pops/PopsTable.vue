@@ -336,7 +336,7 @@ library.add(faDownload, faSortDown, faSortUp, faSearch, faInfo, faMapMarkedAlt);
 
 export default {
     components: {
-        MapView: () => import(/* webpackChunkName: "chunks/maps/mapView"*/'../maps/PopsMapView.vue'),
+        MapView: () => import(/* webpackChunkName: "chunks/maps/mapView"*/'../maps/PopsToolMapView.vue'),
         ModalDownload: () => import(/* webpackChunkName: "chunks/dashboard/modalDownload"*/'../dashboard/ModalDownload'),
         VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../helpers/VuePagination'),
     },

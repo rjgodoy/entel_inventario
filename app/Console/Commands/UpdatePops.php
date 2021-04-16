@@ -2,18 +2,19 @@
 
 namespace App\Console\Commands;
 
-use App\Imports\JunctionsImport;
-use App\Mail\PopsUpdated;
+use Carbon\Carbon;
 use App\Models\Pop;
 use App\Models\Room;
 use App\Models\Site;
 use App\Models\State;
+use App\Models\Comuna;
+use App\Mail\PopsUpdated;
 use App\Models\Technology;
-use App\Models\TechnologyType;
-use Carbon\Carbon;
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use App\Models\TechnologyType;
+use Illuminate\Console\Command;
+use App\Imports\JunctionsImport;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UpdatePops extends Command

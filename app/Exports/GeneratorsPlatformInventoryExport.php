@@ -2,7 +2,6 @@
 
 namespace App\Exports;
 
-
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\Exportable;
 use App\Models\GeneratorsPlatformGenerator;
@@ -11,7 +10,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class GeneratorsPlatformExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadings, WithMapping
+class GeneratorsPlatformInventoryExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadings, WithMapping
 {
 	use Exportable;
 

@@ -24,10 +24,10 @@
                         <tr class="" v-for="maintance in maintances">
                             <td>{{ maintance.id }}</td>
                             <td>{{ maintance.description }}</td>
-                            <td>{{ maintance.g_maintance_type.name }}</td>
+                            <td>{{ maintance.name }}</td>
                             <td>{{ maintance.task_number }}</td>
                             <td>{{ maintance.created }}</td>
-                            <td>{{ maintance.g_maintance_status.code }}</td>
+                            <td>{{ maintance.code }}</td>
                         </tr>
                     </tbody>
                     
@@ -37,7 +37,9 @@
             <div class="" v-if="!maintances.length">
                 <div class="is-size-5 has-text-centered is-vcentered">No tiene registros de mantenciones</div>
             </div>
+
             <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
+            
         </section>
         <footer class="modal-card-foot">
             <button class="button" type="button" @click="$parent.close()">Cerrar</button>

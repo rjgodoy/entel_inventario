@@ -33,4 +33,14 @@ class File extends Model
     {
         return $this->hasOne(PopLayout::class)->latest();
     }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function drone_videos()
+    {
+        return $this->belongsToMany(Pop::class, 'entel_g_redes_inventario.drone_videos')->withTimestamps();
+    }
 }

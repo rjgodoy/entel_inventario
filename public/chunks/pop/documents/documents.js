@@ -214,11 +214,17 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFilePdf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileExcel"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileImage"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFile"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAngleLeft"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTrashAlt"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFilePdf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileExcel"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileImage"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFile"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAngleLeft"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTrashAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faVideo"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalUpload: function ModalUpload() {
@@ -370,7 +376,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       axios.get('/api/currentFolder', {
         params: params
       }).then(function (response) {
-        console.log(response.data);
+        // console.log(response.data)
         _this.currentFolderView = response.data.folder;
       });
     },
@@ -387,13 +393,16 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       axios.get("/api/files/".concat(this.pop.id), {
         params: params
       }).then(function (response) {
-        response.data.files.forEach(function (element) {
-          _this2.files.push(element);
+        // console.log(response.data)
+        Object.keys(response.data.files).forEach(function (element) {
+          var file = response.data.files[element];
 
-          if (element.extension != 'jpg' && element.extension != 'png' && element.extension != 'jpeg' && element.extension != 'tiff') {
-            element.image = '/storage/' + element.route;
+          if (file.extension.toLowerCase() == 'jpg' || file.extension.toLowerCase() == 'png' || file.extension.toLowerCase() == 'jpeg' || file.extension.toLowerCase() == 'tiff') {
+            file.image = '/storage/' + file.route;
 
-            _this2.photos.push(element);
+            _this2.photos.push(file);
+          } else {
+            _this2.files.push(file);
           }
         }); // console.log(response.data)
         // this.files = response.data.files
@@ -403,15 +412,42 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       });
     },
     faFile: function faFile(ext) {
-      var icon = ext == 'pdf' ? 'file-pdf' : ext == 'jpg' || ext == 'png' || ext == 'jpeg' ? 'file-image' : ext == 'xls' || ext == 'xlsx' ? 'file-excel' : 'file';
-      var type = ext == 'pdf' ? 'has-text-info' : ext == 'jpg' || ext == 'png' || ext == 'jpeg' ? 'has-text-warning' : ext == 'xls' || ext == 'xlsx' ? 'has-text-success' : 'has-text-primary';
+      var icon = 'file';
+      var type = 'has-text-primary';
+
+      switch (ext.toLowerCase()) {
+        case 'pdf':
+          icon = 'file-pdf';
+          type = 'has-text-info';
+          break;
+
+        case 'jpg':
+        case 'jpeg':
+        case 'png':
+        case 'tiff':
+          icon = 'file-image';
+          type = 'has-text-warning';
+          break;
+
+        case 'xls':
+        case 'xlsx':
+          icon = 'file-excel';
+          type = 'has-text-success';
+          break;
+
+        default:
+          icon = 'file';
+          type = 'has-text-primary';
+          break;
+      }
+
       return {
         'icon': icon,
         'type': type
       };
     },
     openFile: function openFile(file) {
-      if (file.extension == 'pdf' || file.extension == 'jpg' || file.extension == 'png' || file.extension == 'jpeg') {
+      if (file.extension.toLowerCase() == 'pdf' || file.extension.toLowerCase() == 'jpg' || file.extension.toLowerCase() == 'png' || file.extension.toLowerCase() == 'jpeg') {
         window.open('/storage/' + file.route, "_blank");
       } else {
         this.readFile(file);
@@ -519,11 +555,35 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         type: 'is-danger',
         onConfirm: function onConfirm() {
           axios["delete"]("/api/files/".concat(file.id)).then(function (response) {
-            console.log(response);
-
+            // console.log(response)
             _this5.getFiles();
 
             _this5.$eventBus.$emit('file-deleted');
+          });
+        }
+      });
+    },
+    makeDroneFootage: function makeDroneFootage(file) {
+      var _this6 = this;
+
+      this.$buefy.dialog.confirm({
+        message: 'Desea agregar este video como una captura de Drone?\n\rEl video aparecerá en la sección "Drone"',
+        type: 'is-link',
+        onConfirm: function onConfirm() {
+          var params = {
+            'pop_id': _this6.pop.id,
+            'file_id': file.id
+          };
+          axios.put("/api/addDrone", params).then(function (response) {
+            console.log(response);
+
+            _this6.$eventBus.$emit('drone-added');
+
+            _this6.$buefy.toast.open({
+              message: 'Video agregado con exito',
+              type: 'is-success',
+              duration: 2000
+            });
           });
         }
       });
@@ -535,6 +595,13 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         return document.documentElement.classList.add('is-clipped');
       } else {
         return document.documentElement.classList.remove('is-clipped');
+      }
+    },
+    isVideo: function isVideo(file) {
+      if (file.extension.toLowerCase() == 'mov' || file.extension.toLowerCase() == 'mp4' || file.extension.toLowerCase() == 'm4v' || file.extension.toLowerCase() == 'avi') {
+        return true;
+      } else {
+        return false;
       }
     }
   },
@@ -712,7 +779,7 @@ var render = function() {
                           "div",
                           {
                             key: folder.id,
-                            staticClass: "column is-2 tile is-parent"
+                            staticClass: "column is-3 tile is-parent"
                           },
                           [
                             _c(
@@ -764,7 +831,7 @@ var render = function() {
                           "div",
                           {
                             key: file.id,
-                            staticClass: "column is-2 tile is-parent"
+                            staticClass: "column is-3 tile is-parent"
                           },
                           [
                             _c(
@@ -831,7 +898,7 @@ var render = function() {
                           "div",
                           {
                             key: folder.id,
-                            staticClass: "column is-2 tile is-parent"
+                            staticClass: "column is-3 tile is-parent"
                           },
                           [
                             _c(
@@ -901,7 +968,7 @@ var render = function() {
                           "div",
                           {
                             key: file.id,
-                            staticClass: "column is-2 tile is-parent"
+                            staticClass: "column is-3 tile is-parent"
                           },
                           [
                             _c(
@@ -927,12 +994,39 @@ var render = function() {
                                       staticStyle: { "padding-bottom": "5px" },
                                       attrs: {
                                         icon: ["far", "trash-alt"],
-                                        size: "2x"
+                                        size: "1x"
                                       }
                                     })
                                   ],
                                   1
                                 ),
+                                _vm._v(" "),
+                                _vm.isVideo(file)
+                                  ? _c(
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "is-pulled-right has-text-link",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.makeDroneFootage(file)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("font-awesome-icon", {
+                                          staticStyle: {
+                                            "padding-bottom": "5px"
+                                          },
+                                          attrs: {
+                                            icon: ["fas", "video"],
+                                            size: "1x"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  : _vm._e(),
                                 _vm._v(" "),
                                 _c("font-awesome-icon", {
                                   class: _vm.faFile(file.extension).type,

@@ -29,11 +29,11 @@
         </b-field>
 
         <b-field>
-            <GeneratorFuelChart :unitData="unitData"/>
+            <GeneratorFuelChart :unitData="unitData" :generator="generator"/>
         </b-field>
         <hr/>
         <b-field>
-            <GeneratorFunctionChart :unitData="unitData"/>
+            <GeneratorFunctionChart :unitData="statData"/>
         </b-field>
 
         <b-modal :active.sync="isModalAddActive"
@@ -63,6 +63,7 @@ export default {
         return {
             timeline: "day",
             unitData: null,
+            statData: null,
             dates: [],
             isModalAddActive: false
         }
@@ -85,10 +86,15 @@ export default {
                 'start_date': this.dates.length && new Date(this.dates[0]),
                 'end_date': this.dates.length && new Date(this.dates[1])
             }
-            await axios.get(`/api/generatorValues/${this.generator.id}`, { params: params })
+            await axios.get(`/api/generatorStatisticChart/${this.generator.id}`, { params: params })
                 .then((response) => {
                     this.unitData = response.data
-                    // console.log(response.data)
+                    console.log(response.data)
+                })
+            await axios.get(`/api/generatorValues/${this.generator.id}`, { params: params })
+                .then((response) => {
+                    this.statData = response.data
+                    console.log(response.data)
                 })
         }
     }

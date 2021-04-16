@@ -6,6 +6,7 @@ use App\Models\Log;
 use App\Models\Pop;
 use App\Models\Room;
 use App\Models\Site;
+use App\Models\User;
 use App\Models\Comuna;
 use App\Models\LogType;
 use App\Models\PopMenu;
@@ -43,6 +44,66 @@ class PopController extends Controller
         //     });
         // }
         return new PopResource($pops);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function all(Request $request)
+    {
+        $user = User::where('api_token', $request->api_token)->get();
+
+        if ($user) {
+            $pops = Pop::
+            orderBy('id')
+            ->limit(100)
+            ->get();
+
+            // $pops = Pop::chunk()
+
+
+
+            $collection = collect();
+            foreach ($pops as $pop) {
+                $sites = [];
+                foreach ($pop->sites as $site) {
+                    array_push($sites, [
+                        'id' => $site->id,
+                        'name' => $site->nombre,
+                        'nem' => $site->nem_site,
+                        'category' => [
+                            'id' => $site->classification_type->id,
+                            'type' => $site->classification_type->classification_type
+                        ]
+                    ]);
+                }
+
+                $collection->push([
+                    'id' => $pop->id,
+                    'name' => $pop->nombre,
+                    'coordinates' => [
+                        'latitude' => floatval($pop->latitude),
+                        'longitude' => floatval($pop->longitude)
+                    ],
+                    'city' => $pop->comuna->nombre_comuna,
+                    'zone' => [
+                        'name' => $pop->zona->nombre_zona,
+                        'code' => $pop->zona->cod_zona,
+                        'crm' => [
+                            'name' => $pop->zona->crm->nombre_crm,
+                        ],
+                    ],
+                    'sites' => $sites
+                ]);
+            }
+            Storage::disk('local')->put('pops.json', $collection);
+            return $collection;
+        }
+
+        return 'false';
+        
     }
 
     /**
@@ -172,12 +233,12 @@ class PopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function popInfo(Request $request)
+    public function popInfo(Request $request, $id)
     {
-        $popInfo = Pop::with('comuna', 'zona.crm', 'sites.classification_type')
-                ->where('id', $request->pop_id)
+        $info = Pop::with('comuna', 'zona.crm', 'sites.classification_type')
+                ->where('id', $id)
                 ->first();
-        return $popInfo;
+        return $info;
     }
 
     /**
@@ -276,7 +337,8 @@ class PopController extends Controller
             'current_battery_bank_autonomy',
             'client_companies.access_type',
             'layout',
-            'comsites'
+            'comsites',
+            'drone_videos'
             )
             ->where('id', $id)
             ->first();

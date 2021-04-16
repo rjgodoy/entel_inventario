@@ -91,10 +91,11 @@
                             this.isLoading = 0
                             this.$buefy.toast.open({
                                 message: 'Las credenciales no concuerdan con nuestros registros.',
-                                type: 'is-danger',
+                                type: 'is-warning',
                                 duration: 3000
                             })
                         } else {
+                            this.isLoading = 0
                             this.$buefy.toast.open({
                                 message: 'Algo inesperado ocurrió. Favor intentalo nuevamente.',
                                 type: 'is-danger',

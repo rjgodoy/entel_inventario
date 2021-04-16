@@ -176,7 +176,7 @@
                                         </p>
                                     </div>
                                     <div class="column is-1 has-text-right">
-                                        <b-button class="is-success" data-tooltip="Descargar planilla" @click="generatorExport()">
+                                        <b-button class="is-success" :loading="isbuttonLoading" @click="isDownloadModalActive=true">
                                             <font-awesome-icon :icon="['fas', 'download']" />
                                         </b-button>
                                     </div>
@@ -186,9 +186,11 @@
                             <table class="table is-fullwidth is-striped is-hoverable is-bordered">
                                 <thead>
                                     <tr class="">
+                                        <th class="is-size-6 has-text-weight-semibold"><abbr title="Ping">Ping</abbr></th>
                                         <th class="is-size-6 has-text-weight-semibold"><abbr title="Ubicación">Ubicación</abbr></th>
+                                        <th class="is-size-7 has-text-weight-semibold"><abbr title="Sub Zona">Sub Zona</abbr></th>
                                         <th class="is-size-6 has-text-weight-semibold"><abbr title="Nombre">Nombre</abbr></th>
-                                        <!-- <th class="is-size-7 has-text-weight-semibold"><abbr title="Nemónico">Nemónico</abbr></th> -->
+                                        
                                         <th class="is-size-6 has-text-weight-semibold"><abbr title="Marca">Marca</abbr></th>
                                         <th class="is-size-6 has-text-weight-semibold"><abbr title="Tipo">Tipo</abbr></th>
                                         <th class="is-size-6 has-text-weight-semibold"><abbr title="HF Día">HF Día</abbr></th>
@@ -228,6 +230,16 @@
                 
             </div>
         </div>
+
+        <b-modal :active.sync="isDownloadModalActive"
+            has-modal-card
+            trap-focus
+            aria-role="dialog"
+            aria-modal>
+            <modal-download
+                @clicked="onClickDownload"
+                />
+        </b-modal>
     </section>
 </template>
 
@@ -243,6 +255,7 @@
         components: {
             VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../helpers/VuePagination'),
             GeneratorTable: () => import(/* webpackChunkName: "chunks/generators/generatorTable"*/'./GeneratorTable'),
+            ModalDownload: () => import(/* webpackChunkName: "chunks/generators/modals/modalDownload"*/'./modals/ModalDownload'),
         },
 
         props : [
@@ -278,6 +291,7 @@
 
                 isLoading: false,
                 isbuttonLoading: false,
+                isDownloadModalActive: false,
 
                 // last_data: null,
                 // last_day_data: null,
@@ -391,7 +405,7 @@
                     'critic': this.critic,
                     'vip': this.vip
                 }
-                console.log(params)
+                // console.log(params)
                 axios.get('/api/generatorsPlatform', { params: params })
                 .then((response) => {
                     // console.log(response)
@@ -405,22 +419,79 @@
                 this.getGeneratorsData()
             },
 
-            generatorExport() {
+            onClickDownload (value) {
+                value != 0 ? this.generatorInventoryExport() : this.generatorDataExport()
+            },
+
+            generatorDataExport() {
                 this.isbuttonLoading = true
 
                 var params = {
                     'text': this.searchText,
-                    'core': this.core,
-                    'crm_id': this.selectedCrm ? this.selectedCrm.id : 0,
-                    'zona_id': this.selectedZona ? this.selectedZona.id : 0,
-                    'brand_id': this.selectedBrand ? this.selectedBrand.id : 0,
-                    'group_type_id': this.selectedType ? this.selectedType : 0,
-                    'sub_zone_id': this.selectedSubZone ? this.selectedSubZone : 0,
-                    'critic': this.critic,
-                    'vip': this.vip
+                    'core': parseInt(this.core),
+                    'crm_id': this.selectedCrm ? parseInt(this.selectedCrm.id) : 0,
+                    'zona_id': this.selectedZona ? parseInt(this.selectedZona.id) : 0,
+                    'brand_id': this.selectedBrand ? parseInt(this.selectedBrand.id) : 0,
+                    'group_type_id': this.selectedType ? parseInt(this.selectedType.id) : 0,
+                    'sub_zone_id': this.selectedSubZone ? parseInt(this.selectedSubZone.id) : 0,
+                    'critic': parseInt(this.critic),
+                    'vip': parseInt(this.vip)
+                }
+                axios.get('/api/gpDataExport', { 
+                    params: params, 
+                    responseType: 'arraybuffer' 
+                })
+                .then((response) => {
+                    console.log(response.data)
+                    const blob = new Blob([response.data], { type: 'application/xlsx' })
+                    const objectUrl = window.URL.createObjectURL(blob)
+
+                    // IE doesn't allow using a blob object directly as link href
+                    // instead it is necessary to use msSaveOrOpenBlob
+                    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                        window.navigator.msSaveOrOpenBlob(newBlob)
+                        return
+                    }
+
+                    const data = window.URL.createObjectURL(blob)
+                    let link = document.createElement('a')
+                    link.href = data
+                    link.download = `Listado Grupos Electrógenos - ${moment().format('YYYY-MM-DD hh:mm:ss')}.xlsx`
+                    link.click()
+                    
+                    this.isbuttonLoading = false
+                    this.$buefy.toast.open({
+                        message: 'La planilla se ha descargado exitosamente.',
+                        type: 'is-success',
+                        duration: 5000
+                    })
+                }).catch((error) => {
+                    console.log(error)
+                    this.isbuttonLoading = false
+                    this.$buefy.toast.open({
+                        message: 'Ha ocurrido un error. Favor contactar al administrador',
+                        type: 'is-danger',
+                        duration: 5000
+                    })
+                })     
+            },
+
+            generatorInventoryExport() {
+                this.isbuttonLoading = true
+
+                var params = {
+                    'text': this.searchText,
+                    'core': parseInt(this.core),
+                    'crm_id': this.selectedCrm ? parseInt(this.selectedCrm.id) : 0,
+                    'zona_id': this.selectedZona ? parseInt(this.selectedZona.id) : 0,
+                    'brand_id': this.selectedBrand ? parseInt(this.selectedBrand.id) : 0,
+                    'group_type_id': this.selectedType ? parseInt(this.selectedType.id) : 0,
+                    'sub_zone_id': this.selectedSubZone ? parseInt(this.selectedSubZone.id) : 0,
+                    'critic': parseInt(this.critic),
+                    'vip': parseInt(this.vip)
                 }
 
-                axios.get('/api/generatorsPlatformExport', { 
+                axios.get('/api/gpInventoryExport', { 
                     params: params, 
                     responseType: 'arraybuffer' 
                 })

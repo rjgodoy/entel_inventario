@@ -347,24 +347,17 @@
                                     <b-tab-item label="Clima"></b-tab-item>
                                 </b-tabs>
                                 <keep-alive>
-                                    <!-- <map-view
-                                        v-if="tabShow == 0"
-                                        :user="user"
-                                        :pops="pops"
-                                        :map_attributes="map_attributes"
-                                        :darkMode="darkMode"
-                                    />  -->
                                     <map-view
                                         style="margin-top: -27px;"
                                         v-if="tabShow == 0"
-                                        :user="user"
                                         :pops="pops"
-                                        :map_attributes="map_attributes"
                                         :darkMode="darkMode"
                                     /> 
                                 </keep-alive>
+
                                 <keep-alive>
-                                    <iframe style="margin-top: -27px; padding-bottom: 0" v-if="tabShow == 1" width="100%" height="95%" src="https://embed.windy.com/embed2.html?lat=-33.500&lon=-70.667&detailLat=-33.500&detailLon=-70.667&width=650&height=450&zoom=5&level=surface&overlay=temp&product=gfs&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1" frameborder="0"></iframe>
+                                    <iframe style="margin-top: -27px; padding-bottom: 0" v-if="tabShow == 1" width="100%" height="95%" src="https://embed.windy.com/embed2.html?lat=-33.500&lon=-70.667&detailLat=-33.500&detailLon=-70.667&width=650&height=450&zoom=5&level=surface&overlay=temp&product=gfs&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1" frameborder="0">
+                                    </iframe>
                                 </keep-alive>
                             </div>                               
                         </div>
@@ -580,12 +573,6 @@
                 active: 0,
                 counter: 0,
 
-                map_attributes: {
-                    latitude: -33.44444275,
-                    longitude: -70.6561017,
-                    zoom: 5
-                },
-
                 bodyBackground: '',
                 boxBackground: '',
                 primaryText: '',
@@ -750,11 +737,11 @@
                 return this.searchText
             },
 
-            getPops: debounce(function () {
+            async getPops () {
                 var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
                 var zona_id = this.selectedZona ? this.selectedZona.id : 0
 
-                axios.get(`/api/dashboardMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`)
+                await axios.get(`/api/dashboardMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`)
                 .then((response) => {
                     try {
                         // this.pops = []
@@ -762,11 +749,11 @@
                         //     setInterval(this.pops.push(element), 0.1)
                         // })
                         this.pops = response.data
-                    } catch (ex) {
-                        console.log(ex);
+                    } catch (error) {
+                        console.log(error);
                     }
                 })
-            }, 10),
+            },
 
             async viewCriticPops() {
                 this.currentTab = 'critics'

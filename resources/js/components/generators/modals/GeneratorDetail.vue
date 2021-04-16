@@ -2,15 +2,22 @@
     <div class="modal-card" style="width: auto">
         <header class="modal-card-head has-text-centered">
             <div class="modal-card-title">
-                <div class="is-size-4 has-text-weight-semibold">Datos generador {{ generator.name }}<br/>
-                    <div class="is-size-5 has-text-weight-normal p-2">CRM {{ generator.g_zona.g_sector.name }} - {{ generator.g_zona.zona }} - {{ generator.g_zona.name }}</div>
+                <div class="columns">
+                    <div class="column is-2 is-vcentered">
+                        <b-field>
+                            <b-button class="is-default is-medium is-outlined" @click="isGeneratorDataModalActive=true">Ver detalles</b-button>
+                        </b-field>
+                    </div>
+                    <div class="column">
+                        <div class="is-size-4 has-text-weight-semibold">Datos generador {{ generator.name }}<br/>
+                            <div class="is-size-5 has-text-weight-normal p-2">CRM {{ generator.g_zona.g_sector.name }} - {{ generator.g_zona.zona }} - {{ generator.g_zona.name }}</div>
+                        </div>
+                    </div>
+                    <div class="column is-2"></div>
                 </div>
             </div>
         </header>
         <section class="modal-card-body">
-            <b-field>
-                <b-button class="is-link is-small is-outlined" @click="isGeneratorDataModalActive=true">Ver detalles</b-button>
-            </b-field>
             <div class="columns">
                 <div class="column">
                     <div class="columns is-multiline">
@@ -27,11 +34,11 @@
                 </div>
             </div>
 
-            <!-- <div class="columns">
+            <div class="columns">
                 <div class="column">
-                    <GeneratorData :generator="generator"/>
+                    <DetailTable :generator="generator" :last_day_data='last_day_data'/>
                 </div>
-            </div> -->
+            </div>
             
         </section>
         <footer class="modal-card-foot">
@@ -47,7 +54,7 @@
             aria-modal>
             <generator-data
                 :generator="generator" 
-                :last_data='last_data'
+                :last_day_data='last_day_data'
                 />
         </b-modal>
     </div>
@@ -59,17 +66,23 @@
         components: {
             GeneratorCharts: () => import(/* webpackChunkName: "chunks/generators/modals/generatorCharts"*/'./GeneratorCharts'),
             GeneratorData: () => import(/* webpackChunkName: "chunks/generators/modals/generatorData"*/'./GeneratorData'),
+            DetailTable: () => import(/* webpackChunkName: "chunks/generators/modals/detailTable"*/'./DetailTable'),
         },
 
         props : [
             'generator',
-            'last_data',
             'last_day_data'
         ],
 
         data() {
             return {
-                boxes: [
+                isGeneratorDataModalActive: false
+            }
+        },
+
+        computed: {
+            boxes() {
+                return [
                     {
                         "title": "Código generador",
                         "info": this.generator.mobile_code,
@@ -80,27 +93,27 @@
                     },
                     {
                         "title": "Capacidad estanque (lts)",
-                        "info": this.generator.g_model ? numeral(this.generator.g_model.g_fuel_pond.capacity).format('0,0') + ' lts' : 'N/A',
+                        "info": this.generator.g_model ? numeral(this.generator.g_model.g_fuel_pond.capacity).format('0,00') + ' lts' : 'N/A',
                     },
                     {
                         "title": "Horometro",
-                        "info": this.last_data ? numeral(this.last_data.hourmeter).format('0,0') : 'N/A',
+                        "info": this.last_day_data ? numeral(this.last_day_data.hourmeter).format('0,00') : 'N/A',
                     },
                     {
                         "title": "Nivel combustible (%)",
-                        "info": this.last_data ? numeral(this.last_data.fuel_level_percentage * 100).format('0,0.0') + '%' : 'N/A',
+                        "info": this.last_day_data ? numeral(this.last_day_data.fuel_level_percentage * 100).format('0,0.00') + '%' : 'N/A',
                     },
                     {
                         "title": "Nivel combustible",
-                        "info": this.last_data ? numeral(this.last_data.fuel_level).format('0,0.0') + ' lts' : 'N/A',
+                        "info": this.last_day_data ? numeral(this.last_day_data.fuel_level).format('0,0.00') + ' lts' : 'N/A',
                     },
                     {
                         "title": "Promedio general HF/día",
-                        "info": this.hourmeter_consumption ? numeral(this.hourmeter_consumption).format('0,0.00') : 'N/A',
+                        "info": this.last_day_data ? numeral(this.last_day_data.avg_hourmeter_consumption).format('0,0.00') : 'N/A',
                     },
                     {
                         "title": "Promedio consumo lts./día",
-                        "info": this.fuel_consumption ? numeral(this.fuel_consumption).format('0,0.0') : 'N/A',
+                        "info": this.last_day_data ? numeral(this.last_day_data.avg_fuel_consumption).format('0,0.00') + ' lts.' : 'N/A',
                     },
                     {
                         "title": "Última medición",
@@ -136,35 +149,8 @@
                     //     "info": this.generator.mobile_code,
                     //     "color": "has-background-warning"
                     // },
-                ],
-                isGeneratorDataModalActive: false
-            }
-        },
-
-        computed: {
-            hourmeter_consumption() {
-                let data = null
-                let i = 0
-                if(this.last_day_data) {
-                    Object.keys(this.last_day_data).forEach(element => {
-                        data = data + this.last_day_data[element].hourmeter_consumption
-                        i++
-                    })
-                }
-                return data ? data / i : data
+                ]
             },
-
-            fuel_consumption() {
-                let data = null
-                let i = 0
-                if(this.last_day_data) {
-                    Object.keys(this.last_day_data).forEach(element => {
-                        data = data + this.last_day_data[element].fuel_consumption
-                        i++
-                    })
-                }
-                return data ? data / i : data
-            }
         },
 
         created() {

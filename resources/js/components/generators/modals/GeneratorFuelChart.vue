@@ -32,6 +32,13 @@ export default {
                 scales: {
                     xAxes: [{
                         type: 'time',
+                        time: {
+                            unit: 'day',
+                            unitStepSize: 1,
+                            displayFormats: {
+                                'day': 'MMM DD'
+                            }
+                        },
                         distribution: 'series',
                         offset: true,
                         ticks: {
@@ -82,7 +89,7 @@ export default {
                         },
                         scaleLabel: {
                             display: true,
-                            labelString: 'Recarga Combustible'
+                            labelString: 'Recarga Combustible (Lts.)'
                         },
                         ticks: {
                             min: 0,
@@ -152,7 +159,7 @@ export default {
                     labels: [],
                     datasets: [
                     {
-                        label: 'Recarga de combustible',
+                        label: 'Recarga de combustible (Lts.)',
                         type: 'line',
                         lineTension: 0,
                         steppedLine: false,
@@ -182,7 +189,7 @@ export default {
                 }
                 this.unitData.forEach(element => {
                     this.chartData.labels.push(element.created)
-                    this.chartData.datasets[0].data.push(element.fuel_consumption)
+                    this.chartData.datasets[0].data.push(element.fueling)
                     this.chartData.datasets[1].data.push(element.fuel_level_percentage * 100)
                 })
             }

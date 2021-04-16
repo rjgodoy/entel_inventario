@@ -320,7 +320,8 @@ class JunctionController extends Controller
         // $this->output->title('Starting import');
         // (new JunctionsImport)->withOutput($this->output)->import($request->file('file'));
         // $this->output->success('Import successful');
-        Excel::import(new JunctionsImport, $request->file('file'));
+        // Excel::import(new JunctionsImport, $request->file('file'));
+        (new JunctionsImport)->import($request->file('file'));
 
         return 'success!';
     }

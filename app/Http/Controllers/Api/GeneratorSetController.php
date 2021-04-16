@@ -9,6 +9,7 @@ use App\Models\Site;
 use App\Models\Zona;
 use App\Models\GeneratorSet;
 use App\Models\GeneratorTta;
+use App\Models\OTTmpTaskLog;
 use Illuminate\Http\Request;
 use App\Models\GeneratorTank;
 use App\Models\GeneratorGroup;
@@ -22,11 +23,14 @@ use App\Models\GeneratorSetMaintainer;
 use App\Models\GeneratorSetResponsable;
 use App\Models\GeneratorsPlatformBrand;
 use App\Models\GeneratorsPlatformValues;
-use App\Exports\GeneratorsPlatformExport;
 use App\Models\GeneratorsPlatformSubZone;
 use App\Models\GeneratorsPlatformGenerator;
 use App\Models\GeneratorsPlatformMaintance;
+use App\Models\GeneratorsPlatformStatistic;
+use App\Exports\GeneratorsPlatformDataExport;
+use App\Models\GeneratorsPlatformOTMaintance;
 use App\Models\GeneratorsPlatformGeneratorType;
+use App\Exports\GeneratorsPlatformInventoryExport;
 use App\Http\Resources\GeneratorPlatformValuesCollection;
 use App\Http\Resources\GeneratorSet as GeneratorSetResource;
 
@@ -431,6 +435,7 @@ class GeneratorSetController extends Controller
                 ,'g_model.g_fuel_pond'
                 ,'g_model.g_generator_detail'
                 ,'g_model.g_tta_controller'
+                ,'g_system_type'
                 ,'g_type'
                 ,'g_last_maintance.g_maintance_status'
                 ,'g_protocol'
@@ -484,6 +489,80 @@ class GeneratorSetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function generatorStatisticChart(Request $request, $generator_id)
+    {
+        $startDate = $request->start_date; $endDate = $request->end_date;
+        if($request->start_date && $request->end_date) {
+            $startDate = new Carbon($request->start_date);
+            $endDate = new Carbon($request->end_date);
+            $startDate = $startDate->isoFormat('YYYY-MM-DD hh:mm:ss');
+            $endDate = $endDate->isoFormat('YYYY-MM-DD hh:mm:ss');
+            // $d = DateTime::createFromFormat('d-m-Y H:i:s', $startDate);
+            // if ($d === false) {
+            //     return("Incorrect date string");
+            // } else {
+            //     echo $d->getTimestamp();
+            // }
+            // return $startDate.' - '.$endDate;
+        }
+
+        switch ($request->unit) {
+            case 'day':
+                $order = 'YEAR(created), MONTH(created), DAY(created)';
+                break;
+            case 'month':
+                $order = 'YEAR(created), MONTH(created)';
+                break;
+            case 'year':
+                $order = 'YEAR(created)';
+                break;
+            default:
+                $order = 'YEAR(created), MONTH(created)';
+                break;
+        }
+        
+        if($request->start_date && $request->end_date) {
+            $data = GeneratorsPlatformStatistic::where('generator_id', $generator_id)
+                ->where(function($q) use($startDate, $endDate) {
+                    if($startDate && $endDate) {
+                        $q->whereBetween('created', [date($startDate), date($endDate)]);
+                    }
+                })
+                ->groupByRaw($order)
+                ->orderBy('created', 'desc')
+                ->get();
+
+
+            // $data = GeneratorsPlatformValues::where('generator_id', $generator_id)
+            //     ->where('hourmeter_consumption', '!=', -1)
+            //     ->where('hourmeter_consumption', '<', 75)
+            //     ->where(function($q) use($startDate, $endDate) {
+            //         if($startDate && $endDate) {
+            //             $q->whereBetween('created', [date($startDate), date($endDate)]);
+            //         }
+            //     })
+            //     ->groupByRaw($order)
+            //     ->orderBy('created', 'desc')
+            //     ->get();
+        } else {
+            $data = GeneratorsPlatformStatistic::where('generator_id', $generator_id)
+                ->groupByRaw($order)
+                ->orderBy('created', 'desc')
+                ->limit(7)
+                ->get();
+
+            // $data = GeneratorsPlatformValues::where('generator_id', $generator_id)
+            //     ->where('hourmeter_consumption', '!=', -1)
+            //     ->where('hourmeter_consumption', '<', 75)
+            //     ->groupByRaw($order)
+            //     ->orderBy('created', 'desc')
+            //     ->limit(7)
+            //     ->get();
+        }
+
+        return $data;
+    }
+
     public function generatorValues(Request $request, $generator_id)
     {
         $startDate = $request->start_date; $endDate = $request->end_date;
@@ -515,7 +594,7 @@ class GeneratorSetController extends Controller
                 $order = 'YEAR(created), MONTH(created)';
                 break;
         }
-        
+
         if($request->start_date && $request->end_date) {
             $data = GeneratorsPlatformValues::where('generator_id', $generator_id)
                 ->where('hourmeter_consumption', '!=', -1)
@@ -528,6 +607,7 @@ class GeneratorSetController extends Controller
                 ->groupByRaw($order)
                 ->orderBy('created', 'desc')
                 ->get();
+
         } else {
             $data = GeneratorsPlatformValues::where('generator_id', $generator_id)
                 ->where('hourmeter_consumption', '!=', -1)
@@ -548,22 +628,24 @@ class GeneratorSetController extends Controller
      */
     public function generatorLastDay(Request $request)
     {
-        $latest = GeneratorsPlatformValues::with('g_generator')
-            ->where('generator_id', $request->generator_id)
-            ->latest('created')
-            ->first();
+        // $latest = GeneratorsPlatformValues::with('g_generator')
+        //     ->where('generator_id', $request->generator_id)
+        //     ->latest('created')
+        //     ->first();
 
-        if ($latest) {
-            $date = date_format($latest->created, "Y-m-d");
+        // if ($latest) {
+            // $date = date_format($latest->created, "Y-m-d");
             $data = GeneratorsPlatformValues::
-                whereRaw('DATE(created) = "'.$date.'"')
+                where('created','>=',Carbon::now()->subdays(1))
+                // whereRaw('DATE(created) = "'.$date.'"')
                 ->where('generator_id', $request->generator_id)
                 ->where('hourmeter_consumption', '!=', -1)
                 ->where('fuel_consumption', '<', 75)
                 ->orderBy('created', 'desc')
+                ->selectRaw('*, AVG(fuel_consumption) as avg_fuel_consumption, AVG(hourmeter_consumption) as avg_hourmeter_consumption')
                 ->get();
             return $data;
-        }
+        // }
 
         return $latest;
     }
@@ -608,10 +690,34 @@ class GeneratorSetController extends Controller
      */
     public function getGeneratorMaintenances(Request $request, $id)
     {
-        $maintenances = GeneratorsPlatformMaintance::with('g_maintance_type', 'g_maintance_status', 'g_last_maintance_record', 'g_generator_records')
-            ->where('generator_id', $id)->orderBy('created', 'desc')->get();
+
+        $maintenances = DB::table('entel_g_redes_inventario.generator_platform_maintances AS GM')
+            ->leftJoin('entel_g_redes_inventario.generator_platform_maintance_types AS MT', 'GM.maintance_type_id', '=', 'MT.id')
+            ->leftJoin('entel_g_redes_inventario.generator_platform_maintance_statuses AS MS', 'GM.maintance_statuses_id', '=', 'MS.id')
+            ->where('GM.generator_id', $id)
+            ->whereRaw('GM.created = (SELECT G.created from entel_g_redes_inventario.generator_platform_maintances G WHERE GM.task_number = G.task_number order by G.created desc limit 1)')
+            ->groupBy('GM.task_number')
+            ->orderBy('GM.created', 'desc')
+            ->select('GM.*', 'MT.name', 'MS.code')
+            ->get();
+
         return $maintenances;
         
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getStatistics(Request $request, $id)
+    {
+        $values = GeneratorsPlatformStatistic::where('generator_id', $id)
+        ->groupByRaw('DATE(created)')
+        ->orderBy('created', 'desc')
+        ->get();
+
+        return $values;
     }
 
     /**
@@ -643,10 +749,46 @@ class GeneratorSetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function generatorsPlatformExport(Request $request)
+    public function gpDataExport(Request $request)
     {
-        return (new GeneratorsPlatformExport($request))->download('plataforma_generadores.xlsx');
+        return (new GeneratorsPlatformDataExport($request))->download('plataforma_generadores.xlsx');
     }
+
+    /**
+     * Download all data from Pops (Dashboard).
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function gpInventoryExport(Request $request)
+    {
+        return (new GeneratorsPlatformInventoryExport($request))->download('plataforma_data_generadores.xlsx');
+    }
+
+    /**
+     * Download all data from Pops (Dashboard).
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function doPing(Request $request)
+    {
+        $url = $request->url;
+        if($url == NULL) return false;  
+        $ch = curl_init($url);  
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);  
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);  
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+        $data = curl_exec($ch);  
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);  
+        curl_close($ch);  
+        if($httpcode>=200 && $httpcode<300){  
+            return true;  
+        } else {  
+            return false;  
+        }  
+    }
+
     
 
 }

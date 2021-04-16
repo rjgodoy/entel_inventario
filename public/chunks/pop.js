@@ -329,6 +329,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -416,6 +417,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.styleMode();
     this.$eventBus.$on('parameter-updated', this.getAllData);
     this.$eventBus.$on('generator-set-capacities-updated', this.getAllData);
+    this.$eventBus.$on('drone-added', this.getAllData);
   },
   mounted: function mounted() {
     // console.log(this.user)
@@ -698,7 +700,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this3 = this;
 
       axios.get("/api/popMenu").then(function (response) {
-        console.log(response);
+        // console.log(response)
         _this3.tabs = response.data.pop;
       });
     },
@@ -714,17 +716,17 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       } // Dron
 
 
-      if (tab.component == 'drone' && (!this.pop.layout || !this.pop.layout.drone_footage)) {
+      if (tab.component == 'drone' && this.pop.drone_videos && !this.pop.drone_videos.length) {
         return false;
       } // Comsite
 
 
-      if (tab.component == 'comsite' && !this.pop.comsites.length) {
+      if (tab.component == 'comsite' && this.pop.comsites && !this.pop.comsites.length) {
         return false;
       } // Clientes empresa
 
 
-      if (tab.component == 'clients' && !this.pop.client_companies.length) {
+      if (tab.component == 'clients' && this.pop.client_companies && !this.pop.client_companies.length) {
         return false;
       }
 
@@ -734,7 +736,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this4 = this;
 
       axios.get("/api/pop/".concat(this.$route.params.id)).then(function (response) {
-        console.log(response.data);
+        // console.log(response.data)
         _this4.pop = response.data.pop;
         _this4.popName = _this4.pop.nombre;
         _this4.canEditPop = response.data.can.editPop;
@@ -785,6 +787,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
   },
   beforeDestroy: function beforeDestroy() {
     this.$eventBus.$off('parameter-updated');
+    this.$eventBus.$off('drone-added');
+    this.$eventBus.$off('generator-set-capacities-updated');
   }
 });
 
@@ -1793,7 +1797,8 @@ var render = function() {
                       secondaryText: _vm.secondaryText,
                       darkMode: _vm.darkMode,
                       isEditMode: _vm.isEditMode,
-                      bafi: _vm.bafi
+                      bafi: _vm.bafi,
+                      droneVideos: _vm.pop.drone_videos
                     }
                   })
                 ],

@@ -328,4 +328,14 @@ class Pop extends Model
         return $this->hasMany(GeneratorPlatform::class, 'pop_id');
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function drone_videos()
+    {
+        return $this->belongsToMany(File::class, 'entel_g_redes_inventario.drone_videos')->withTimestamps();
+    }
+
 }

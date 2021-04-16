@@ -286,6 +286,7 @@
                             :darkMode="darkMode"
                             :isEditMode="isEditMode"
                             :bafi="bafi"
+                            :droneVideos="pop.drone_videos"
                         />
                     </keep-alive>
                 </div>
@@ -385,6 +386,7 @@
             this.styleMode()
             this.$eventBus.$on('parameter-updated', this.getAllData)
             this.$eventBus.$on('generator-set-capacities-updated', this.getAllData);
+            this.$eventBus.$on('drone-added', this.getAllData);
         },
 
         mounted() {
@@ -655,7 +657,7 @@
 
             getTabs() {
                 axios.get(`/api/popMenu`).then((response) => {
-                    console.log(response)
+                    // console.log(response)
                     this.tabs = response.data.pop
                 })
             },
@@ -672,17 +674,17 @@
                 }
 
                 // Dron
-                if (tab.component == 'drone' && (!this.pop.layout || !this.pop.layout.drone_footage)) {
+                if (tab.component == 'drone' && (this.pop.drone_videos && !this.pop.drone_videos.length)) {
                     return false
                 }
 
                 // Comsite
-                if (tab.component == 'comsite' && !this.pop.comsites.length) {
+                if (tab.component == 'comsite' && this.pop.comsites && !this.pop.comsites.length) {
                     return false
                 }
 
                 // Clientes empresa
-                if (tab.component == 'clients' && !this.pop.client_companies.length) {
+                if (tab.component == 'clients' && this.pop.client_companies && !this.pop.client_companies.length) {
                     return false
                 }
 
@@ -692,7 +694,7 @@
             getAllData() {
                 axios.get(`/api/pop/${this.$route.params.id}`)
                 .then((response) => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.pop = response.data.pop
                     this.popName = this.pop.nombre
                     this.canEditPop = response.data.can.editPop
@@ -747,7 +749,9 @@
         },
 
         beforeDestroy() {
-             this.$eventBus.$off('parameter-updated')
+             this.$eventBus.$off('parameter-updated');
+             this.$eventBus.$off('drone-added');
+             this.$eventBus.$off('generator-set-capacities-updated');
         }
     }
 </script>

@@ -32,6 +32,13 @@ export default {
                 scales: {
                     xAxes: [{
                         type: 'time',
+                        time: {
+                            unit: 'day',
+                            unitStepSize: 1,
+                            displayFormats: {
+                                'day': 'MMM DD'
+                            }
+                        },
                         distribution: 'series',
                         offset: true,
                         ticks: {

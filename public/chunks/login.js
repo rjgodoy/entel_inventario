@@ -99,10 +99,12 @@ __webpack_require__.r(__webpack_exports__);
 
             _this.$buefy.toast.open({
               message: 'Las credenciales no concuerdan con nuestros registros.',
-              type: 'is-danger',
+              type: 'is-warning',
               duration: 3000
             });
           } else {
+            _this.isLoading = 0;
+
             _this.$buefy.toast.open({
               message: 'Algo inesperado ocurrió. Favor intentalo nuevamente.',
               type: 'is-danger',

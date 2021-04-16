@@ -521,13 +521,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
  // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -558,7 +551,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     // ###### Map ###########
     // PopsMap,
     MapView: function MapView() {
-      return __webpack_require__.e(/*! import() | chunks/maps/mapView/ */ "chunks/maps/mapView/").then(__webpack_require__.bind(null, /*! ../maps/MapView */ "./resources/js/components/maps/MapView.vue"));
+      return Promise.all(/*! import() | chunks/maps/mapView/ */[__webpack_require__.e("vendors~chunks/maps/mapView~chunks/maps/mapView/"), __webpack_require__.e("chunks/maps/mapView/")]).then(__webpack_require__.bind(null, /*! ../maps/MapView */ "./resources/js/components/maps/MapView.vue"));
     },
     // MapView,
     // ###### Charts ########
@@ -619,11 +612,6 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       popSearch: [],
       active: 0,
       counter: 0,
-      map_attributes: {
-        latitude: -33.44444275,
-        longitude: -70.6561017,
-        zoom: 5
-      },
       bodyBackground: '',
       boxBackground: '',
       primaryText: '',
@@ -767,31 +755,46 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       this.selectedSite = this.selected;
       return this.searchText;
     },
-    getPops: lodash_debounce__WEBPACK_IMPORTED_MODULE_4___default()(function () {
+    getPops: function getPops() {
       var _this2 = this;
-
-      var crm_id = this.selectedCrm ? this.selectedCrm.id : 0;
-      var zona_id = this.selectedZona ? this.selectedZona.id : 0;
-      axios.get("/api/dashboardMap?core=".concat(this.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
-        try {
-          // this.pops = []
-          // response.data.forEach(element =>{
-          //     setInterval(this.pops.push(element), 0.1)
-          // })
-          _this2.pops = response.data;
-        } catch (ex) {
-          console.log(ex);
-        }
-      });
-    }, 10),
-    viewCriticPops: function viewCriticPops() {
-      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var crm_id, zona_id;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
+              case 0:
+                crm_id = _this2.selectedCrm ? _this2.selectedCrm.id : 0;
+                zona_id = _this2.selectedZona ? _this2.selectedZona.id : 0;
+                _context.next = 4;
+                return axios.get("/api/dashboardMap?core=".concat(_this2.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
+                  try {
+                    // this.pops = []
+                    // response.data.forEach(element =>{
+                    //     setInterval(this.pops.push(element), 0.1)
+                    // })
+                    _this2.pops = response.data;
+                  } catch (error) {
+                    console.log(error);
+                  }
+                });
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    viewCriticPops: function viewCriticPops() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var crm_id, zona_id;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 _this3.currentTab = 'critics';
                 crm_id = _this3.selectedCrm ? _this3.selectedCrm.id : 0;
@@ -804,20 +807,20 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
               case 5:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }))();
     },
     viewAlbaPops: function viewAlbaPops() {
       var _this4 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var crm_id, zona_id;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
                 _this4.currentTab = 'alba';
                 crm_id = _this4.selectedCrm ? _this4.selectedCrm.id : 0;
@@ -830,21 +833,21 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
               case 5:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2);
+        }, _callee3);
       }))();
     },
     // CONTERS
     getCounters: function getCounters() {
       var _this5 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
         var crm_id, zona_id;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 crm_id = _this5.selectedCrm ? _this5.selectedCrm.id : 0;
                 zona_id = _this5.selectedZona ? _this5.selectedZona.id : 0;
@@ -858,10 +861,10 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
               case 3:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }))();
     },
     status: function status(site) {
@@ -1004,19 +1007,19 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     switchCore: function switchCore() {
       var _this7 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
                 _this7.core = _this7.core == 0 ? 1 : 0;
 
               case 1:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4);
+        }, _callee5);
       }))();
     },
     changeStyle: function changeStyle() {
@@ -2786,9 +2789,7 @@ var render = function() {
                                 ? _c("map-view", {
                                     staticStyle: { "margin-top": "-27px" },
                                     attrs: {
-                                      user: _vm.user,
                                       pops: _vm.pops,
-                                      map_attributes: _vm.map_attributes,
                                       darkMode: _vm.darkMode
                                     }
                                   })

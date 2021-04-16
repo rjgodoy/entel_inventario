@@ -94,4 +94,14 @@ class Site extends Model
         return $this->belongsTo(TransportType::class);
     }
 
+    public function ot_forms() 
+    {
+        return $this->hasMany(OTForm::class, 'FormCustomerNumber', 'nem_site');
+    }
+
+    public function ot_tmp_task_logs() 
+    {
+        return $this->hasMany(OTTmpTaskLog::class, 'CustomerName', 'nem_site');
+    }
+
 }

@@ -48,7 +48,7 @@
     export default {
         props : [
             'generator',
-            'last_data'
+            'last_day_data'
         ],
 
         data() {
@@ -120,7 +120,7 @@
                         "info": this.generator.g_model ? this.generator.g_model.g_fuel_pond.capacity + ' Lts' : '-',
                     },{
                         "title": "Consumo estanque",
-                        "info": this.last_data && this.generator.g_model ? this.generator.g_model.g_fuel_pond.capacity - this.last_data.fuel_level + ' Lts' : '-',
+                        "info": this.last_day_data && this.generator.g_model ? this.generator.g_model.g_fuel_pond.capacity - this.last_day_data.fuel_level + ' Lts' : '-',
                     },{
                         "title": "Autonomía estanque",
                         "info": this.generator.g_model ? this.generator.g_model.g_fuel_pond.autonomy : '-',

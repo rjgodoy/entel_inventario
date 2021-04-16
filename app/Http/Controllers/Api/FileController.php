@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use Carbon\Carbon;
+use App\Models\Pop;
 use App\Models\File;
-
 use App\Models\Site;
-
 use App\Models\Folder;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\For_;
@@ -175,5 +174,19 @@ class FileController extends Controller
         File::find($id)->delete();
         return 'done';
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function addDrone(Request $request)
+    {
+        $pop = Pop::find($request->pop_id);
+        $pop->drone_videos()->attach($request->file_id);
+        return $request;
+    }
+    
 
 }

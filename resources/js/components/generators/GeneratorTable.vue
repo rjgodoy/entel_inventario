@@ -1,9 +1,15 @@
 <template>
     <tr class="">
         <td class="has-text-weight-normal has-text-centered is-vcentered">
+            <div>{{ isAlive(generator) }}</div>
+        </td>
+
+        <td class="has-text-weight-normal has-text-centered is-vcentered">
             <div>{{ generator.g_zona ? generator.g_zona.zona : '' }}</div>
             <div class="is-size-7">{{ generator.g_zona ? generator.g_zona.name : '' }}</div>
         </td>
+
+        <td class="is-size-6 has-text-weight-normal has-text-centered is-vcentered">{{ generator.sub_zone }}</td>
         
         <td class="has-text-left is-vcentered">
             <router-link :to="'/pop/' + generator.pop_id" target="_blank" class="is-size-6 has-text-weight-semibold">
@@ -13,8 +19,6 @@
                 {{ generator.mobile_code }}
             </div>
         </td>
-
-        <!-- <td class="is-size-6 has-text-weight-normal has-text-centered">{{ generator.mobile_code }}</td> -->
 
         <td class="is-size-6 has-text-weight-normal has-text-centered is-vcentered">
             <div class="">
@@ -29,14 +33,14 @@
         </td>
 
         <td class="has-text-right is-vcentered">
-            <div class="" :class="hourmeter_consumption > 0 ? 'has-text-weight-semibold' : 'has-text-weight-light'">
-                {{ hourmeter_consumption | numeral('0,0.00') }}
+            <div class="" :class="this.last_day_data[0] && this.last_day_data[0].avg_hourmeter_consumption > 0 ? 'has-text-weight-semibold' : 'has-text-weight-light'">
+                {{ this.last_day_data[0] && this.last_day_data[0].avg_hourmeter_consumption | numeral('0,0.00') }}
             </div>
         </td>
 
         <td class="has-text-right is-vcentered">
-            <div class="" :class="fuel_consumption > 0 ? 'has-text-weight-semibold' : 'has-text-weight-light'">
-                {{ fuel_consumption | numeral('0,0.00') }}
+            <div class="" :class="this.last_day_data[0] && this.last_day_data[0].avg_fuel_consumption > 0 ? 'has-text-weight-semibold' : 'has-text-weight-light'">
+                {{ this.last_day_data[0] && this.last_day_data[0].avg_fuel_consumption | numeral('0,0.00') }}
             </div>
         </td>
 
@@ -108,8 +112,7 @@
             aria-modal>
             <generator-detail
                 :generator="generator" 
-                :last_data="last_data"
-                :last_day_data="last_day_data"
+                :last_day_data="last_day_data[0]"
                 />
         </b-modal>
 
@@ -139,7 +142,6 @@
 
         data() {
             return {
-                last_data: Array,
                 last_day_data: Object,
                 isGeneratorDetailModalActive: false,
                 isGeneratorMaintenancesModalActive: false
@@ -147,36 +149,12 @@
         },
 
         computed: {
-            hourmeter_consumption() {
-                let data = null
-                let i = 0
-                if(this.last_day_data) {
-                    Object.keys(this.last_day_data).forEach(element => {
-                        data = data + this.last_day_data[element].hourmeter_consumption
-                        i++
-                    })
-                }
-                return data ? data / i : 'N/A'
-            },
-
-            fuel_consumption() {
-                let data = null
-                let i = 0
-                if(this.last_day_data) {
-                    Object.keys(this.last_day_data).forEach(element => {
-                        data = data + this.last_day_data[element].fuel_consumption
-                        i++
-                    })
-                }
-                return data ? data / i : 'N/A'
-            },
-
             fuelLevelPercentage() {
-                return this.last_data ? this.last_data.fuel_level_percentage : null
+                return this.last_day_data[0] ? this.last_day_data[0].fuel_level_percentage : null
             },
 
             fuelLevel() {
-                return this.last_data ? this.last_data.fuel_level : 0
+                return this.last_day_data[0] ? this.last_day_data[0].fuel_level : 0
             },
 
             type() {
@@ -192,12 +170,13 @@
             },
 
             hourmeter() {
-                return this.last_data ? this.last_data.hourmeter : 'N/A'
+                return this.last_day_data[0] ? this.last_day_data[0].hourmeter : 'N/A'
             }
         },
 
         mounted() {
             this.getLastDayData(this.generator.id)
+            console.log(this.generator)
         },
 
         methods: {
@@ -210,10 +189,24 @@
                 axios.get('/api/generatorLastDay', { params: params })
                 .then((response) => {
                     this.last_day_data = response.data
-                    this.last_data = response.data[0]
+                    // this.last_data = response.data[0]
                     // this.isLoading = false
                 })
             },
+
+            isAlive(generator){
+                if (generator.ip && generator.ip != 'N/A') {
+                    let params = {
+                        'url': generator.ip
+                    }
+                    axios.get('/api/doPing', { params: params })
+                    .then(response => {
+                        console.log(response.data)
+                        return response.data
+                    })
+                }
+                return 'false'
+            }
         }
     }
 </script>

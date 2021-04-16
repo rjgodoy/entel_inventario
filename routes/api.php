@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('all_pops', 'Api\PopController@all');
+
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'AuthController@login');  
     Route::group(['middleware' => 'auth:api'], function() {
@@ -160,15 +162,22 @@ Route::middleware('auth:api')->group(function () {
 		Route::get('generatorSetDataZona', 'Api\GeneratorSetController@generatorSetDataZona');
 
 		Route::get('generatorsPlatform', 'Api\GeneratorSetController@generatorPlatformData');
+		Route::get('generatorStatisticChart/{generator_id}', 'Api\GeneratorSetController@generatorStatisticChart');
 		Route::get('generatorValues/{generator_id}', 'Api\GeneratorSetController@generatorValues');
 		Route::get('generatorLastDay', 'Api\GeneratorSetController@generatorLastDay');
 		Route::get('genplaBrands', 'Api\GeneratorSetController@generatorPlatformBrands');
 		Route::get('genplaTypes', 'Api\GeneratorSetController@generatorPlatformTypes');
 		Route::get('genplaSubZones', 'Api\GeneratorSetController@generatorPlatformSubZones');
 		Route::get('getGeneratorMaintenances/{id}', 'Api\GeneratorSetController@getGeneratorMaintenances');
-
+		Route::get('getStatistics/{id}', 'Api\GeneratorSetController@getStatistics');
+		
 		Route::post('createGenValData/{generator_id}', 'Api\GeneratorSetController@createGenValData');
-		Route::get('generatorsPlatformExport', 'Api\GeneratorSetController@generatorsPlatformExport');
+		Route::get('gpDataExport', 'Api\GeneratorSetController@gpDataExport');
+		Route::get('gpInventoryExport', 'Api\GeneratorSetController@gpInventoryExport');
+
+		Route::get('doPing', 'GeneratorSetController@doPing');
+
+		
 
 
 		Route::apiResource('telecomCompanies','Api\TelecomCompanyController');
@@ -234,7 +243,7 @@ Route::middleware('auth:api')->group(function () {
 
 
 	### MAPS ######################################################################
-	Route::get('popInfo', 'Api\PopController@popInfo')->name('site.stats');
+	Route::get('popInfo/{id}', 'Api\PopController@popInfo')->name('site.stats');
 	##############################################################################################
 
 
@@ -278,6 +287,8 @@ Route::middleware('auth:api')->group(function () {
 	Route::apiResource('logs','Api\LogController');
 	Route::apiResource('folders', 'Api\FolderController');
 	Route::apiResource('files', 'Api\FileController');
+
+	Route::put('addDrone', 'Api\FileController@addDrone');
 
 	Route::get('popParameters', 'Api\PopController@popParameters');
 	Route::get('siteParameters', 'Api\SiteController@siteParameters');

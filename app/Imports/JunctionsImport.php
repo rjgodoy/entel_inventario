@@ -8,12 +8,12 @@ use App\Models\Site;
 
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-// use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\Importable;
 // use Maatwebsite\Excel\Concerns\WithProgressBar;
 
 class JunctionsImport implements ToModel, WithHeadingRow
 {
-    // use Importable;
+    use Importable;
 
     /**
     * @param array $row
@@ -34,7 +34,7 @@ class JunctionsImport implements ToModel, WithHeadingRow
 
         $pop_id = $site->first()->pop_id;
 
-        return Junction::updateOrCreate(
+        return Junction::withTrashed()->updateOrCreate(
             [
                 'client_number' => $row['cliente']
             ],

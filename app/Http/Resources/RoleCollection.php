@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class RoleCollection extends ResourceCollection
@@ -29,5 +30,22 @@ class RoleCollection extends ResourceCollection
     public function toArray($request)
     {
         return parent::toArray($request);
+    }
+
+    /**
+     * Get any additional data that should be returned with the resource array.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return array
+     */
+    public function with($request)
+    {
+        return [
+            'can' => [
+                'create' => Gate::allows('create-roles', Role::class),
+                'delete' => Gate::allows('delete-roles', Role::class)
+            ],
+        ];
     }
 }

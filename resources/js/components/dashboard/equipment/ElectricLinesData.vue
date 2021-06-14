@@ -1,28 +1,28 @@
 <template>
     <div class="column is-3">
-        <article class="tile is-child box is-bold has-background" :class="boxBackground">
-            <div class="is-box-background is-transparent-light" style="margin-top: -44px">
+        <article class="tile is-child box is-bold has-background">
+            <div class="is-box-background is-transparent-light">
                 <font-awesome-layers class="fa-10x is-pulled-right">
-                    <font-awesome-icon icon="grip-lines" transform="right-13"/>
+                    <font-awesome-icon icon="grip-lines" transform="left-2"/>
                     <font-awesome-icon icon="bolt" transform="shrink-2 left-2" :style="{ color: 'grey' }"/>
                 </font-awesome-layers>
             </div>
             <div class="columns">
-                <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Empalmes</div>
-                <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</div>
+                <div class="column is-size-5 has-text-weight-semibold has-text-left">Lineas Eléctricas</div>
+                <div class="column is-size-4 has-text-weight-semibold has-text-right">{{ this.total | numeral('0,0') }}</div>
             </div>
 
             <div class="columns is-multiline">
-                <div class="column is-6" :class="primaryText" v-for="item in this.junctionData" :key="item.id">
+                <div class="column is-6" v-for="item in this.electricLineData" :key="item.id">
                     <!-- <b-message type="is-positive"> -->
-                        <div class="is-size-4 has-text-weight-normal">{{ item.q_junctions | numeral('0,0') }}</div>
+                        <div class="is-size-4 has-text-weight-normal">{{ item.q_electric_lines | numeral('0,0') }}</div>
                         <div class="is-size-7">{{ item.nombre }}</div>
                     <!-- </b-message> -->
                 </div>
             </div>
 
             <a class="tile is-child box is-bold is-white" style="position: relative; border: solid 1px #eee" 
-                @click="downloadJunctions">
+                @click="downloadElectricLines">
                 <div class="columns">
                     <div class="column is-1 has-text-centered">
                         <font-awesome-icon 
@@ -31,7 +31,7 @@
                     </div>
                     <div class="column">
                         <div class="is-size-4 has-text-weight-bold" style="margin-top: 2px;">
-                            <p class="is-size-6 has-text-weight-semibold">Descargar listado de Empalmes</p>
+                            <p class="is-size-6 has-text-weight-semibold">Descargar listado de Lineas Eléctricas</p>
                         </div>
                     </div>
                 </div>
@@ -45,28 +45,22 @@
     var moment = require('moment')
     export default {
         props : [
-            'user',
             'selectedCrm',
             'selectedZona',
-            // 'csrf',
-            'bodyBackground',
-            'boxBackground',
-            'primaryText',
-            'secondaryText',
             'core'
         ],
         data() {
             return {
                 crmSelected: this.selectedCrm,
                 zonaSelected: this.selectedZona,
-                junctionData: null,
+                electricLineData: null,
                 total: 0,
                 buttonLoading: '',
                 isLoading: false
             }
         },
         created(){
-            this.getJunctionData()
+            this.getElectricLineData()
         },
 
         computed: {
@@ -81,48 +75,48 @@
             selectedCrm(newValue, oldValue) {
                 this.crmSelected = newValue
                 this.zonaSelected = null
-                this.getJunctionData()
+                this.getElectricLineData()
             },
             selectedZona(newValue, oldValue) {
                 this.zonaSelected = newValue
-                this.getJunctionData()
+                this.getElectricLineData()
             },
             core(newValue, oldValue) {
-                this.getJunctionData()
+                this.getElectricLineData()
             }
         },
         methods: {
-            totalJunctions() {
+            totalElectricLines() {
                 this.total = 0
-                this.junctionData.forEach(this.counter)
+                this.electricLineData.forEach(this.counter)
             },
             counter(item, index) {
-                this.total = this.total + item.q_junctions;
+                this.total = this.total + item.q_electric_lines;
             },
-            getJunctionData() {
+            getElectricLineData() {
                 if (this.crmSelected == null) {
-                    axios.get(`/api/junctionData/${this.core}`)
+                    axios.get(`/api/electricLineData/${this.core}`)
                         .then((response) => {
-                            this.junctionData = response.data.junction;
-                            this.totalJunctions()
+                            this.electricLineData = response.data.electricLine;
+                            this.totalElectricLines()
                         })
                         .catch(() => {
                             console.log('handle server error from here');
                         });
                 } else if (this.zonaSelected == null){
-                    axios.get(`/api/junctionDataCrm/${this.crmSelected.id}/${this.core}`)
+                    axios.get(`/api/electricLineDataCrm/${this.crmSelected.id}/${this.core}`)
                         .then((response) => {
-                            this.junctionData = response.data.junction;
-                            this.totalJunctions()
+                            this.electricLineData = response.data.electricLine;
+                            this.totalElectricLines()
                         })
                         .catch(() => {
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`/api/junctionDataZona/${this.zonaSelected.id}/${this.core}`)
+                    axios.get(`/api/electricLineDataZona/${this.zonaSelected.id}/${this.core}`)
                         .then((response) => {
-                            this.junctionData = response.data.junction;
-                            this.totalJunctions()
+                            this.electricLineData = response.data.electricLine;
+                            this.totalElectricLines()
                         })
                         .catch(() => {
                             console.log('handle server error from here');
@@ -130,7 +124,7 @@
                 }
             },
             
-            downloadJunctions() {
+            downloadElectricLines() {
                 this.isLoading = true
 
                 var params = {
@@ -139,7 +133,7 @@
                     'zona_id': this.selectedZona ? this.selectedZona.id : 0
                 }
 
-                axios.get('/api/junctionsExport', { 
+                axios.get('/api/electricLinesExport', { 
                     params: params, 
                     responseType: 'arraybuffer' 
                 })

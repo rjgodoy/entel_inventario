@@ -2,8 +2,8 @@
     <div class="modal-card" style="width: auto">
         <header class="modal-card-head has-text-centered">
             <div class="modal-card-title">
-                <div class="is-size-4 has-text-weight-semibold">Datos generador {{ generator.name }}<br/>
-                    <div class="is-size-5 has-text-weight-normal p-2">CRM {{ generator.g_zona.g_sector.name }} - {{ generator.g_zona.zona }} - {{ generator.g_zona.name }}</div>
+                <div class="is-size-4 title has-text-weight-semibold">Mantenciones generador {{ generator.name }}<br/>
+                    <div class="is-size-5 subtitle has-text-weight-normal">CRM {{ generator.g_zona.g_sector.name }} - {{ generator.g_zona.zona }} - {{ generator.g_zona.name }}</div>
                 </div>
             </div>
         </header>
@@ -32,13 +32,14 @@
                     </tbody>
                     
                 </table>
+                <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
             </div>
 
             <div class="" v-if="!maintances.length">
                 <div class="is-size-5 has-text-centered is-vcentered">No tiene registros de mantenciones</div>
             </div>
 
-            <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
+            
             
         </section>
         <footer class="modal-card-foot">
@@ -75,11 +76,10 @@
 
         methods: {
             getGeneratorMaintenances() {
+                this.isLoading = true
                 axios.get(`/api/getGeneratorMaintenances/${this.generator.id}`)
                 .then(response => {
-                    this.isLoading = true
                     this.maintances = response.data
-                    console.log(response)
                     this.isLoading = false
                 })
             }

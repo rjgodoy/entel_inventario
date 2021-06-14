@@ -23,7 +23,20 @@ class ElectricLineController extends Controller
      */
     public function index()
     {
-        //
+        $electricLines = ElectricLine::with(
+            'pop.sites',
+            'pop.zona', 
+            'electric_line_type',
+            'postation_type',
+            'ferreteria_type',
+            'terrain_type',
+            'vegetation_type',
+            'phase_type',
+            'junctions',
+            'transformers'
+        )->paginate(20);
+
+        return new ElectricLineCollection($electricLines);
     }
 
     /**

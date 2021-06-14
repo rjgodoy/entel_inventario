@@ -12,7 +12,7 @@ class ElectricLineCollection extends ResourceCollection
      *
      * @var string
      */
-    public static $wrap = 'electricLine';
+    public static $wrap = 'electricLines';
 
     /**
      * Indicates if the resource's collection keys should be preserved.

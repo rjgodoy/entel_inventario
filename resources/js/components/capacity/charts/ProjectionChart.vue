@@ -282,13 +282,6 @@ export default {
                             moment(this.projectionData[element].created_at).month() == moment().month() && moment(this.projectionData[element].created_at).year() == moment().year() ? this.chartData.datasets[7].data.push(110) : this.chartData.datasets[7].data.push(-1)
                             j++
                         })
-
-                        // for (var i = 0; i <= 12; i++) {
-                        //     console.log(i)
-                        //     console.log(rectCount)
-                        //     console.log(Math.ceil(j/rectCount))
-                        //     console.log(i % Math.ceil(j/rectCount) == 0)
-                        // }
                         
 
                         let juncLow = ((this.projectionData[0].junction_available / this.projectionData[0].junction_total) - (this.projectionData[j].junction_available / this.projectionData[j].junction_total)) * 100 / j
@@ -389,10 +382,6 @@ export default {
                                 date = moment(date).add(1, 'M')
                             }
                         }
-
-                        // console.log(this.chartData)
-                        
-                        // PROJECTION Data
 
                     }
                     this.renderChart(this.chartData, this.chartOptions)

@@ -47,11 +47,8 @@
             VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../helpers/VuePagination'),
         },
         props : [
-            'user',
             'selectedCrm',
             'selectedZona',
-            'bodyBackground',
-            'boxBackground',
             'primaryText',
             'secondaryText',
             'core'

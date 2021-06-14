@@ -338,4 +338,14 @@ class Pop extends Model
         return $this->belongsToMany(File::class, 'entel_g_redes_inventario.drone_videos')->withTimestamps();
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function risk_types()
+    {
+        return $this->belongsToMany(RiskType::class)->withTimestamps();
+    }
+
 }

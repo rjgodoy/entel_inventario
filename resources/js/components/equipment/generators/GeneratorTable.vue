@@ -1,8 +1,8 @@
 <template>
     <tr class="">
-        <td class="has-text-weight-normal has-text-centered is-vcentered">
+        <!-- <td class="has-text-weight-normal has-text-centered is-vcentered">
             <div>{{ isAlive(generator) }}</div>
-        </td>
+        </td> -->
 
         <td class="has-text-weight-normal has-text-centered is-vcentered">
             <div>{{ generator.g_zona ? generator.g_zona.zona : '' }}</div>
@@ -181,7 +181,7 @@
 
         methods: {
             getLastDayData(generator_id) {
-                // this.isLoading = true
+                this.isLoading = true
                 let params = {
                     'generator_id': parseInt(generator_id)
                 }
@@ -190,7 +190,7 @@
                 .then((response) => {
                     this.last_day_data = response.data
                     // this.last_data = response.data[0]
-                    // this.isLoading = false
+                    this.isLoading = false
                 })
             },
 

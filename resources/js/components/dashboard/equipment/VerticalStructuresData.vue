@@ -1,26 +1,26 @@
 <template>
-    <div class="column is-3">
-        <article class="tile is-child box is-bold has-background" :class="boxBackground">
+    <div class="column is-4">
+        <article class="tile is-child box is-bold has-background">
             <div class="is-box-background is-transparent-light">
                 <font-awesome-icon 
-                    :icon="['fas', 'charging-station']" size="10x" class="is-pulled-right" style=""/>
+                    :icon="['fas', 'broadcast-tower']" size="10x" class="is-pulled-right" style=""/>
             </div>
             <div class="columns">
-                <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Grupos Electrógenos</div>
-                <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</div>
+                <div class="column is-size-5 has-text-weight-semibold has-text-left">Estructuras Verticales</div>
+                <div class="column is-size-4 has-text-weight-semibold has-text-right">{{ this.total | numeral('0,0') }}</div>
             </div>
 
             <div class="columns is-multiline">
-                <div class="column is-6" :class="primaryText" v-for="item in this.generatorSetData" :key="item.id">
-                    <!-- <b-message type="is-positive"> -->
-                        <div class="is-size-4 has-text-weight-normal">{{ item.q_generator_sets | numeral('0,0') }}</div>
+                <div class="column is-6" v-for="item in this.verticalStructureData" :key="item.id">
+                    <!-- <b-message type="is-eco"> -->
+                        <div class="is-size-4 has-text-weight-normal">{{ item.q_vertical_structures | numeral('0,0') }}</div>
                         <div class="is-size-7">{{ item.nombre }}</div>
                     <!-- </b-message> -->
                 </div>
             </div>
 
             <a class="tile is-child box is-bold is-white" style="position: relative; border: solid 1px #eee" 
-                @click="downloadGeneratorSets">
+                @click="downloadVerticalStructures">
                 <div class="columns">
                     <div class="column is-1 has-text-centered">
                         <font-awesome-icon 
@@ -29,7 +29,7 @@
                     </div>
                     <div class="column">
                         <div class="is-size-4 has-text-weight-bold" style="margin-top: 2px;">
-                            <p class="is-size-6 has-text-weight-semibold">Descargar listado de Grupos Electrógenos</p>
+                            <p class="is-size-6 has-text-weight-semibold">Descargar listado de Estructuras Verticales</p>
                         </div>
                     </div>
                 </div>
@@ -44,21 +44,15 @@
     var moment = require('moment')
     export default {
         props : [
-            'user',
             'selectedCrm',
             'selectedZona',
-            // 'csrf',
-            'bodyBackground',
-            'boxBackground',
-            'primaryText',
-            'secondaryText',
             'core'
         ],
         data() {
             return {
                 crmSelected: this.selectedCrm,
                 zonaSelected: this.selectedZona,
-                generatorSetData: null,
+                verticalStructureData: null,
                 total: 0,
                 buttonLoading: '',
                 isLoading: false
@@ -72,7 +66,7 @@
         },
 
         created(){
-            this.getGeneratorSetData()
+            this.getVerticalStructureData()
         },
         mounted() {      
         },
@@ -80,49 +74,49 @@
             selectedCrm(newValue, oldValue) {
                 this.crmSelected = newValue
                 this.zonaSelected = null
-                this.getGeneratorSetData()
+                this.getVerticalStructureData()
             },
             selectedZona(newValue, oldValue) {
                 this.zonaSelected = newValue
-                this.getGeneratorSetData()
+                this.getVerticalStructureData()
             },
             core(newValue, oldValue) {
-                this.getGeneratorSetData()
+                this.getVerticalStructureData()
             }
         },
         methods: {
-            totalGeneratorSets() {
+            totalVerticalStructures() {
                 this.total = 0
-                this.generatorSetData.forEach(this.counter)
+                this.verticalStructureData.forEach(this.counter)
             },
             counter(item, index) {
-                this.total = this.total + item.q_generator_sets;
+                this.total = this.total + item.q_vertical_structures;
             },
-            getGeneratorSetData() {
+            getVerticalStructureData() {
                 if (this.crmSelected == null) {
-                    axios.get(`/api/generatorSetData?core=${this.core}`)
+                    axios.get(`/api/verticalStructureData/${this.core}`)
                         .then((response) => {
-                            // console.log(response.data)
-                            this.generatorSetData = response.data.generatorSets;
-                            this.totalGeneratorSets()
+                            this.verticalStructureData = response.data.data;
+                            this.totalVerticalStructures()
                         })
                         .catch(() => {
                             console.log('handle server error from here');
                         });
                 } else if (this.zonaSelected == null){
-                    axios.get(`api/generatorSetDataCrm?core=${this.core}&crm_id=${this.crmSelected.id}`)
+                    axios.get(`/api/verticalStructureDataCrm/${this.crmSelected.id}/${this.core}`)
                         .then((response) => {
-                            this.generatorSetData = response.data.generatorSets;
-                            this.totalGeneratorSets()
+                            this.verticalStructureData = response.data.data;
+                            this.totalVerticalStructures()
                         })
                         .catch(() => {
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`api/generatorSetDataZona?core=${this.core}&zona_id=${this.zonaSelected.id}`)
+                    axios.get(`/api/verticalStructureDataZona/${this.zonaSelected.id}/${this.core}`)
                         .then((response) => {
-                            this.generatorSetData = response.data.generatorSets;
-                            this.totalGeneratorSets()
+                            console.log(response)
+                            this.verticalStructureData = response.data.data;
+                            this.totalVerticalStructures()
                         })
                         .catch(() => {
                             console.log('handle server error from here');
@@ -130,7 +124,7 @@
                 }
             },
             
-            downloadGeneratorSets() {
+            downloadVerticalStructures() {
                 this.isLoading = true
 
                 var params = {
@@ -139,7 +133,7 @@
                     'zona_id': this.selectedZona ? this.selectedZona.id : 0
                 }
 
-                axios.get('/api/generatorSetsExport', { 
+                axios.get('/api/verticalStructuresExport', { 
                     params: params, 
                     responseType: 'arraybuffer' 
                 })
@@ -158,7 +152,7 @@
                     const data = window.URL.createObjectURL(blob)
                     let link = document.createElement('a')
                     link.href = data
-                    link.download = `Listado Grupos Electrógenos - ${this.middleFileName}${moment().format('YYYY-MM-DD hh:mm:ss')}.xlsx`
+                    link.download = `Listado Estructuras Verticales - ${this.middleFileName}${moment().format('YYYY-MM-DD hh:mm:ss')}.xlsx`
                     link.click()
                     // setTimeout(function () {
                     //     // For Firefox it is necessary to delay revoking the ObjectURL
@@ -169,7 +163,7 @@
                     this.$buefy.toast.open({
                         message: 'La planilla se ha descargado exitosamente.',
                         type: 'is-success',
-                        duration: 5000
+                        duration: 2500
                     })
                 }).catch((error) => {
                     console.log(error)
@@ -177,7 +171,7 @@
                     this.$buefy.toast.open({
                         message: 'Ha ocurrido un error. Favor contactar al administrador',
                         type: 'is-danger',
-                        duration: 5000
+                        duration: 2500
                     })
                 })
             },

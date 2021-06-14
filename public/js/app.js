@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"chunks/admin":"chunks/admin","chunks/bridge":"chunks/bridge","chunks/comsite":"chunks/comsite","chunks/helpers/notFound":"chunks/helpers/notFound","chunks/login":"chunks/login","chunks/passwordEmail":"chunks/passwordEmail","chunks/passwordReset":"chunks/passwordReset","chunks/pops":"chunks/pops","chunks/register":"chunks/register","chunks/reports":"chunks/reports","vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~ad5cfa06":"vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~ad5cfa06","chunks/documents":"chunks/documents","chunks/eco":"chunks/eco","chunks/pop":"chunks/pop","vendors~chunks/capacityPlanning~chunks/dashboard":"vendors~chunks/capacityPlanning~chunks/dashboard","chunks/capacityPlanning":"chunks/capacityPlanning","vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~b50b88cc":"vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~b50b88cc","chunks/helpers":"chunks/helpers","chunks/layouts/footer":"chunks/layouts/footer","chunks/generators":"chunks/generators","vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators/modals/generatorCharts~chunks/~06d98356":"vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators/modals/generatorCharts~chunks/~06d98356","vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload":"vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload","chunks/dashboard":"chunks/dashboard","chunks/admin/bulkLoad":"chunks/admin/bulkLoad","chunks/admin/roleUsers":"chunks/admin/roleUsers","chunks/admin/tps":"chunks/admin/tps","chunks/admin/helperFiles":"chunks/admin/helperFiles","chunks/admin/pops":"chunks/admin/pops","chunks/helpers/vuePagination":"chunks/helpers/vuePagination","chunks/dashboard/modalDownload":"chunks/dashboard/modalDownload","vendors~chunks/maps/mapView~chunks/maps/mapView/":"vendors~chunks/maps/mapView~chunks/maps/mapView/","chunks/maps/mapView":"chunks/maps/mapView","chunks/documents/modals/newFolder":"chunks/documents/modals/newFolder","chunks/documents/modals/newRootFolder":"chunks/documents/modals/newRootFolder","chunks/documents/modals/upload":"chunks/documents/modals/upload","chunks/eco/documents":"chunks/eco/documents","chunks/eco/popProtectedZones":"chunks/eco/popProtectedZones","chunks/eco/protectedZones":"chunks/eco/protectedZones","chunks/eco/rcas":"chunks/eco/rcas","chunks/eco/temporaryStorages":"chunks/eco/temporaryStorages","chunks/maps/ecoMap":"chunks/maps/ecoMap","chunks/pop/characteristics":"chunks/pop/characteristics","chunks/pop/climate/airConditioner":"chunks/pop/climate/airConditioner","chunks/pop/climate/climate":"chunks/pop/climate/climate","chunks/pop/documents/documents":"chunks/pop/documents/documents","chunks/pop/drone":"chunks/pop/drone","chunks/pop/eco":"chunks/pop/eco","chunks/pop/infrastructure/infrastructure":"chunks/pop/infrastructure/infrastructure","chunks/pop/layout/layout":"chunks/pop/layout/layout","chunks/pop/power/power":"chunks/pop/power/power","chunks/pop/sites":"chunks/pop/sites","chunks/pop/vision":"chunks/pop/vision","chunks/pop/clients":"chunks/pop/clients","chunks/pop/comsite":"chunks/pop/comsite","chunks/pop/location":"chunks/pop/location","chunks/pop/logs":"chunks/pop/logs","chunks/capacity/capacity":"chunks/capacity/capacity","chunks/capacity/distribution":"chunks/capacity/distribution","chunks/capacity/layout":"chunks/capacity/layout","chunks/capacity/modals/new/newRoom":"chunks/capacity/modals/new/newRoom","chunks/capacity/roomsTable":"chunks/capacity/roomsTable","chunks/capacity/projection":"chunks/capacity/projection","chunks/layouts/modals/info":"chunks/layouts/modals/info","chunks/generators/generatorTable":"chunks/generators/generatorTable","chunks/generators/modals/modalDownload":"chunks/generators/modals/modalDownload","chunks/dashboard/airConditioners":"chunks/dashboard/airConditioners","chunks/dashboard/albaPopsData":"chunks/dashboard/albaPopsData","chunks/dashboard/criticPopsData":"chunks/dashboard/criticPopsData","chunks/dashboard/electricLines":"chunks/dashboard/electricLines","chunks/dashboard/generatorSets":"chunks/dashboard/generatorSets","chunks/dashboard/infrastructures":"chunks/dashboard/infrastructures","chunks/dashboard/junctions":"chunks/dashboard/junctions","chunks/dashboard/popsData":"chunks/dashboard/popsData","chunks/dashboard/powerRectifiers":"chunks/dashboard/powerRectifiers","chunks/dashboard/sitesData":"chunks/dashboard/sitesData","chunks/dashboard/technologyData":"chunks/dashboard/technologyData","chunks/dashboard/verticalStructures":"chunks/dashboard/verticalStructures","vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart":"vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart","chunks/dashboard/pretDataChart":"chunks/dashboard/pretDataChart","chunks/maps/mapView/":"chunks/maps/mapView/","chunks/admin/modals/modalInfoCircle":"chunks/admin/modals/modalInfoCircle","chunks/admin/permissionRoles":"chunks/admin/permissionRoles","chunks/admin/user/roleUserTable":"chunks/admin/user/roleUserTable","chunks/admin/userRequests":"chunks/admin/userRequests","chunks/admin/adminTpsTable":"chunks/admin/adminTpsTable","chunks/eco/modals/upload":"chunks/eco/modals/upload","chunks/eco/modals/newStorage":"chunks/eco/modals/newStorage","chunks/pop/documents/modals/newFolder":"chunks/pop/documents/modals/newFolder","chunks/pop/documents/modals/upload":"chunks/pop/documents/modals/upload","chunks/capacity/modals/airConditioner":"chunks/capacity/modals/airConditioner","chunks/capacity/modals/generator":"chunks/capacity/modals/generator","chunks/capacity/modals/junction":"chunks/capacity/modals/junction","chunks/capacity/modals/powerRectifier":"chunks/capacity/modals/powerRectifier","chunks/pop/power/electricLines":"chunks/pop/power/electricLines","chunks/pop/power/generatorSets":"chunks/pop/power/generatorSets","chunks/pop/power/junctions":"chunks/pop/power/junctions","chunks/pop/power/powerRectifiers":"chunks/pop/power/powerRectifiers","chunks/pop/modals/editParameter":"chunks/pop/modals/editParameter","chunks/maps/popMapView":"chunks/maps/popMapView","chunks/capacity/roomLights":"chunks/capacity/roomLights","vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/generators/m~ab4f93ad":"vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/generators/m~ab4f93ad","chunks/capacity/charts/polarChart":"chunks/capacity/charts/polarChart","chunks/capacity/charts/projectionChart":"chunks/capacity/charts/projectionChart","chunks/capacity/gaugeChart":"chunks/capacity/gaugeChart","chunks/capacity/blocks/equipment":"chunks/capacity/blocks/equipment","chunks/capacity/blocks/generator":"chunks/capacity/blocks/generator","chunks/capacity/blocks/junction":"chunks/capacity/blocks/junction","chunks/capacity/blocks/solarPanels":"chunks/capacity/blocks/solarPanels","chunks/generators/modals/GeneratorMaintenances":"chunks/generators/modals/GeneratorMaintenances","chunks/generators/modals/generatorDetail":"chunks/generators/modals/generatorDetail","chunks/admin/modals/newRole":"chunks/admin/modals/newRole","chunks/admin/user/permission":"chunks/admin/user/permission","chunks/admin/modals/modalPermissions":"chunks/admin/modals/modalPermissions","chunks/pop/power/generatorSet":"chunks/pop/power/generatorSet","chunks/pop/power/junction":"chunks/pop/power/junction","chunks/pop/power/batteryBank":"chunks/pop/power/batteryBank","chunks/pop/power/powerRectifier":"chunks/pop/power/powerRectifier","chunks/capacity/modals/editPlane":"chunks/capacity/modals/editPlane","chunks/capacity/modals/new/newAirConditioner":"chunks/capacity/modals/new/newAirConditioner","chunks/capacity/modals/new/newBatteryBank":"chunks/capacity/modals/new/newBatteryBank","chunks/capacity/modals/new/newPowerRectifier":"chunks/capacity/modals/new/newPowerRectifier","chunks/capacity/surface":"chunks/capacity/surface","chunks/capacity/modals/new/newGeneratorSet":"chunks/capacity/modals/new/newGeneratorSet","chunks/pop/layout/modals/newJunction":"chunks/pop/layout/modals/newJunction","chunks/capacity/modals/new/newSolarPanel":"chunks/capacity/modals/new/newSolarPanel","chunks/generators/modals/detailTable":"chunks/generators/modals/detailTable","chunks/generators/modals/generatorData":"chunks/generators/modals/generatorData","chunks/generators/modals/generatorCharts":"chunks/generators/modals/generatorCharts","chunks/admin/user/userPermission":"chunks/admin/user/userPermission","chunks/pop/power/modals/editJunction":"chunks/pop/power/modals/editJunction","chunks/capacity/modals/distribution":"chunks/capacity/modals/distribution","chunks/capacity/modals/surface":"chunks/capacity/modals/surface","chunks/generators/modals/generatorAddData":"chunks/generators/modals/generatorAddData","chunks/generators/modals/generatorFuelChart":"chunks/generators/modals/generatorFuelChart","chunks/generators/modals/generatorFunctionChart":"chunks/generators/modals/generatorFunctionChart"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"chunks/admin":"chunks/admin","chunks/bridge":"chunks/bridge","chunks/comsite":"chunks/comsite","chunks/helpers/notFound":"chunks/helpers/notFound","chunks/login":"chunks/login","chunks/passwordEmail":"chunks/passwordEmail","chunks/passwordReset":"chunks/passwordReset","chunks/pops":"chunks/pops","chunks/register":"chunks/register","chunks/reports":"chunks/reports","vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~05b340cb":"vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~05b340cb","chunks/documents":"chunks/documents","chunks/eco":"chunks/eco","chunks/pop":"chunks/pop","vendors~chunks/capacityPlanning~chunks/dashboard":"vendors~chunks/capacityPlanning~chunks/dashboard","chunks/capacityPlanning":"chunks/capacityPlanning","vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~516f4ecc":"vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~516f4ecc","chunks/helpers":"chunks/helpers","chunks/layouts/footer":"chunks/layouts/footer","chunks/equipment/electricLines":"chunks/equipment/electricLines","chunks/equipment/generators":"chunks/equipment/generators","chunks/equipment/junctions":"chunks/equipment/junctions","vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators/modals/generatorCharts~chunks/~06d98356":"vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators/modals/generatorCharts~chunks/~06d98356","vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload":"vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload","chunks/dashboard":"chunks/dashboard","chunks/admin/bulkLoad":"chunks/admin/bulkLoad","chunks/admin/roleUsers":"chunks/admin/roleUsers","chunks/admin/tps":"chunks/admin/tps","chunks/admin/helperFiles":"chunks/admin/helperFiles","chunks/admin/pops":"chunks/admin/pops","chunks/helpers/vuePagination":"chunks/helpers/vuePagination","chunks/dashboard/modalDownload":"chunks/dashboard/modalDownload","vendors~chunks/maps/mapView~chunks/maps/mapView/":"vendors~chunks/maps/mapView~chunks/maps/mapView/","chunks/maps/mapView":"chunks/maps/mapView","chunks/documents/modals/newFolder":"chunks/documents/modals/newFolder","chunks/documents/modals/newRootFolder":"chunks/documents/modals/newRootFolder","chunks/documents/modals/upload":"chunks/documents/modals/upload","chunks/eco/documents":"chunks/eco/documents","chunks/eco/popProtectedZones":"chunks/eco/popProtectedZones","chunks/eco/protectedZones":"chunks/eco/protectedZones","chunks/eco/rcas":"chunks/eco/rcas","chunks/eco/temporaryStorages":"chunks/eco/temporaryStorages","chunks/maps/ecoMap":"chunks/maps/ecoMap","chunks/pop/characteristics":"chunks/pop/characteristics","chunks/pop/climate/airConditioner":"chunks/pop/climate/airConditioner","chunks/pop/climate/climate":"chunks/pop/climate/climate","chunks/pop/documents/documents":"chunks/pop/documents/documents","chunks/pop/drone":"chunks/pop/drone","chunks/pop/eco":"chunks/pop/eco","chunks/pop/infrastructure/infrastructure":"chunks/pop/infrastructure/infrastructure","chunks/pop/layout/layout":"chunks/pop/layout/layout","chunks/pop/power/power":"chunks/pop/power/power","chunks/pop/sites":"chunks/pop/sites","chunks/pop/vision":"chunks/pop/vision","chunks/pop/clients":"chunks/pop/clients","chunks/pop/comsite":"chunks/pop/comsite","chunks/pop/location":"chunks/pop/location","chunks/pop/logs":"chunks/pop/logs","chunks/capacity/capacity":"chunks/capacity/capacity","chunks/capacity/distribution":"chunks/capacity/distribution","chunks/capacity/layout":"chunks/capacity/layout","chunks/capacity/modals/new/newRoom":"chunks/capacity/modals/new/newRoom","chunks/capacity/roomsTable":"chunks/capacity/roomsTable","chunks/capacity/projection":"chunks/capacity/projection","chunks/layouts/modals/info":"chunks/layouts/modals/info","chunks/electricLines/electricLineTable":"chunks/electricLines/electricLineTable","chunks/generators/generatorTable":"chunks/generators/generatorTable","chunks/generators/modals/modalDownload":"chunks/generators/modals/modalDownload","chunks/junctions/junctionTable":"chunks/junctions/junctionTable","chunks/dashboard/albaPopsData":"chunks/dashboard/albaPopsData","chunks/dashboard/criticPopsData":"chunks/dashboard/criticPopsData","chunks/dashboard/equipment/airConditioners":"chunks/dashboard/equipment/airConditioners","chunks/dashboard/equipment/electricLines":"chunks/dashboard/equipment/electricLines","chunks/dashboard/equipment/generatorSets":"chunks/dashboard/equipment/generatorSets","chunks/dashboard/equipment/infrastructures":"chunks/dashboard/equipment/infrastructures","chunks/dashboard/equipment/junctions":"chunks/dashboard/equipment/junctions","chunks/dashboard/equipment/powerRectifiers":"chunks/dashboard/equipment/powerRectifiers","chunks/dashboard/equipment/verticalStructures":"chunks/dashboard/equipment/verticalStructures","chunks/dashboard/popsData":"chunks/dashboard/popsData","chunks/dashboard/sitesData":"chunks/dashboard/sitesData","chunks/dashboard/technologyData":"chunks/dashboard/technologyData","vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart":"vendors~chunks/capacity/gaugeChart~chunks/dashboard/pretDataChart","chunks/dashboard/pretDataChart":"chunks/dashboard/pretDataChart","chunks/maps/mapView/":"chunks/maps/mapView/","chunks/admin/modals/modalInfoCircle":"chunks/admin/modals/modalInfoCircle","chunks/admin/permissionRoles":"chunks/admin/permissionRoles","chunks/admin/user/roleUserTable":"chunks/admin/user/roleUserTable","chunks/admin/userRequests":"chunks/admin/userRequests","chunks/admin/adminTpsTable":"chunks/admin/adminTpsTable","chunks/eco/modals/upload":"chunks/eco/modals/upload","chunks/eco/modals/newStorage":"chunks/eco/modals/newStorage","chunks/pop/documents/modals/newFolder":"chunks/pop/documents/modals/newFolder","chunks/pop/documents/modals/upload":"chunks/pop/documents/modals/upload","chunks/capacity/modals/airConditioner":"chunks/capacity/modals/airConditioner","chunks/capacity/modals/generator":"chunks/capacity/modals/generator","chunks/capacity/modals/junction":"chunks/capacity/modals/junction","chunks/capacity/modals/powerRectifier":"chunks/capacity/modals/powerRectifier","chunks/pop/power/electricLines":"chunks/pop/power/electricLines","chunks/pop/power/generatorSets":"chunks/pop/power/generatorSets","chunks/pop/power/junctions":"chunks/pop/power/junctions","chunks/pop/power/powerRectifiers":"chunks/pop/power/powerRectifiers","chunks/pop/modals/editParameter":"chunks/pop/modals/editParameter","chunks/maps/popMapView":"chunks/maps/popMapView","chunks/capacity/roomLights":"chunks/capacity/roomLights","vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/generators/m~ab4f93ad":"vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/generators/m~ab4f93ad","chunks/capacity/charts/polarChart":"chunks/capacity/charts/polarChart","chunks/capacity/charts/projectionChart":"chunks/capacity/charts/projectionChart","chunks/capacity/gaugeChart":"chunks/capacity/gaugeChart","chunks/capacity/blocks/equipment":"chunks/capacity/blocks/equipment","chunks/capacity/blocks/generator":"chunks/capacity/blocks/generator","chunks/capacity/blocks/junction":"chunks/capacity/blocks/junction","chunks/capacity/blocks/solarPanels":"chunks/capacity/blocks/solarPanels","chunks/generators/modals/GeneratorMaintenances":"chunks/generators/modals/GeneratorMaintenances","chunks/generators/modals/generatorDetail":"chunks/generators/modals/generatorDetail","chunks/admin/modals/newRole":"chunks/admin/modals/newRole","chunks/admin/user/permission":"chunks/admin/user/permission","chunks/admin/modals/modalPermissions":"chunks/admin/modals/modalPermissions","chunks/pop/power/generatorSet":"chunks/pop/power/generatorSet","chunks/pop/power/junction":"chunks/pop/power/junction","chunks/pop/power/batteryBank":"chunks/pop/power/batteryBank","chunks/pop/power/powerRectifier":"chunks/pop/power/powerRectifier","chunks/capacity/modals/editPlane":"chunks/capacity/modals/editPlane","chunks/capacity/modals/new/newAirConditioner":"chunks/capacity/modals/new/newAirConditioner","chunks/capacity/modals/new/newBatteryBank":"chunks/capacity/modals/new/newBatteryBank","chunks/capacity/modals/new/newPowerRectifier":"chunks/capacity/modals/new/newPowerRectifier","chunks/capacity/surface":"chunks/capacity/surface","chunks/capacity/modals/new/newGeneratorSet":"chunks/capacity/modals/new/newGeneratorSet","chunks/pop/layout/modals/newJunction":"chunks/pop/layout/modals/newJunction","chunks/capacity/modals/new/newSolarPanel":"chunks/capacity/modals/new/newSolarPanel","chunks/generators/modals/detailTable":"chunks/generators/modals/detailTable","chunks/generators/modals/generatorData":"chunks/generators/modals/generatorData","chunks/generators/modals/generatorCharts":"chunks/generators/modals/generatorCharts","chunks/admin/user/userPermission":"chunks/admin/user/userPermission","chunks/pop/power/modals/editJunction":"chunks/pop/power/modals/editJunction","chunks/capacity/modals/distribution":"chunks/capacity/modals/distribution","chunks/capacity/modals/surface":"chunks/capacity/modals/surface","chunks/generators/modals/generatorAddData":"chunks/generators/modals/generatorAddData","chunks/generators/modals/generatorFuelChart":"chunks/generators/modals/generatorFuelChart","chunks/generators/modals/generatorFunctionChart":"chunks/generators/modals/generatorFunctionChart"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -12334,18 +12334,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faClipboardList"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEnvelope"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faThLarge"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCogs"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAngleDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSeedling"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faWarehouse"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBell"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCog"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignOutAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAdjust"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faChargingStation"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faClipboardList"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEnvelope"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faThLarge"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTrafficLight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCogs"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAngleDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSeedling"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faWarehouse"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBell"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCog"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignOutAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faAdjust"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faChargingStation"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faLaptopHouse"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faPlug"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFan"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faRandom"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBroadcastTower"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCarBattery"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Clock: function Clock() {
-      return Promise.all(/*! import() | chunks/helpers */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~b50b88cc"), __webpack_require__.e("chunks/helpers")]).then(__webpack_require__.bind(null, /*! ./helpers/Clock */ "./resources/js/components/helpers/Clock.vue"));
+      return Promise.all(/*! import() | chunks/helpers */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~516f4ecc"), __webpack_require__.e("chunks/helpers")]).then(__webpack_require__.bind(null, /*! ./helpers/Clock */ "./resources/js/components/helpers/Clock.vue"));
     },
     Footer: function Footer() {
-      return Promise.all(/*! import() | chunks/layouts/footer */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~b50b88cc"), __webpack_require__.e("chunks/layouts/footer")]).then(__webpack_require__.bind(null, /*! ./layouts/Footer */ "./resources/js/components/layouts/Footer.vue"));
+      return Promise.all(/*! import() | chunks/layouts/footer */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~516f4ecc"), __webpack_require__.e("chunks/layouts/footer")]).then(__webpack_require__.bind(null, /*! ./layouts/Footer */ "./resources/js/components/layouts/Footer.vue"));
     }
   },
   props: ['user', 'user_permissions', 'app_name', 'last_data_counters', 'last_updated_data', 'is_dark_mode'],
@@ -12405,16 +12443,17 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         return false;
       }
     },
+    getSubmenus: function getSubmenus(menu) {
+      axios.get("/api/submenus").then(function (response) {});
+    },
     getUserRequestAlerts: function getUserRequestAlerts() {
       var _this2 = this;
 
-      axios.get("/api/userRequests").then(function (response) {
-        if (_this2.user.roles[0].name == 'admin' || _this2.user.roles[0].name == 'developer') {
+      if (this.user.roles[0].name == 'admin' || this.user.roles[0].name == 'developer') {
+        axios.get("/api/userRequests").then(function (response) {
           _this2.userRequestAlerts = response.data.requests;
-        } else {
-          _this2.userRequestAlerts = [];
-        }
-      });
+        });
+      }
     },
     logout: function logout(e) {
       var _this3 = this;
@@ -50163,77 +50202,259 @@ var render = function() {
                                 {
                                   key: menu.id,
                                   staticClass: "column has-text-centered",
-                                  class: _vm.currentRoute
-                                    .toLowerCase()
-                                    .includes(menu.path)
-                                    ? "is-active"
-                                    : ""
+                                  class:
+                                    _vm.currentRoute
+                                      .toLowerCase()
+                                      .includes(menu.path) && "is-active"
                                 },
                                 [
-                                  _c(
-                                    "router-link",
-                                    {
-                                      class:
-                                        _vm.currentRoute.toLowerCase() ===
-                                        menu.path
-                                          ? menu.path == "/eco"
-                                            ? "has-text-eco"
-                                            : "has-text-link"
-                                          : "",
-                                      attrs: { to: menu.path }
-                                    },
-                                    [
-                                      _c("font-awesome-icon", {
-                                        class: _vm.currentRoute
-                                          .toLowerCase()
-                                          .includes(menu.path)
-                                          ? menu.path == "/eco"
-                                            ? "has-text-eco"
-                                            : "has-text-link"
-                                          : "has-text-grey-light",
-                                        attrs: {
-                                          size: "2x",
-                                          icon: [menu.icon_type, menu.icon]
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
+                                  !menu.dropdown
+                                    ? _c(
+                                        "router-link",
                                         {
-                                          staticClass: "pt-1",
-                                          class: _vm.currentRoute
-                                            .toLowerCase()
-                                            .includes(menu.path)
-                                            ? "has-text-white has-text-weight-bold"
-                                            : "has-text-grey has-text-weight-semibold",
-                                          staticStyle: {
-                                            "font-size": "0.65rem"
-                                          }
+                                          class:
+                                            _vm.currentRoute.toLowerCase() ===
+                                            menu.path
+                                              ? menu.path == "/eco"
+                                                ? "has-text-eco"
+                                                : "has-text-link"
+                                              : "",
+                                          attrs: { to: menu.path }
                                         },
                                         [
-                                          _vm._v(
-                                            _vm._s(menu.title.toUpperCase())
+                                          _c("font-awesome-icon", {
+                                            class: _vm.currentRoute
+                                              .toLowerCase()
+                                              .includes(menu.path)
+                                              ? menu.path == "/eco"
+                                                ? "has-text-eco"
+                                                : "has-text-link"
+                                              : "has-text-grey-light",
+                                            attrs: {
+                                              size: "2x",
+                                              icon: [menu.icon_type, menu.icon]
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass: "pt-1",
+                                              class: _vm.currentRoute
+                                                .toLowerCase()
+                                                .includes(menu.path)
+                                                ? "has-text-white has-text-weight-bold"
+                                                : "has-text-grey has-text-weight-semibold",
+                                              staticStyle: {
+                                                "font-size": "0.65rem"
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(menu.title.toUpperCase())
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  menu.dropdown
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "dropdown is-centered is-hoverable"
+                                        },
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "dropdown-trigger" },
+                                            [
+                                              _c("font-awesome-icon", {
+                                                class: _vm.currentRoute
+                                                  .toLowerCase()
+                                                  .includes(menu.path)
+                                                  ? "has-text-link"
+                                                  : "has-text-grey-light",
+                                                attrs: {
+                                                  size: "2x",
+                                                  icon: [
+                                                    menu.icon_type,
+                                                    menu.icon
+                                                  ]
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass: "pt-1",
+                                                  class: _vm.currentRoute
+                                                    .toLowerCase()
+                                                    .includes(menu.path)
+                                                    ? "has-text-white has-text-weight-bold"
+                                                    : "has-text-grey has-text-weight-semibold",
+                                                  staticStyle: {
+                                                    "font-size": "0.65rem"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      menu.title.toUpperCase()
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass: "dropdown-menu",
+                                              attrs: {
+                                                id: "dropdown-menu",
+                                                role: "menu"
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "dropdown-content has-background-grey-dark p-4",
+                                                  staticStyle: {
+                                                    width: "400px"
+                                                  }
+                                                },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "columns is-multiline "
+                                                    },
+                                                    _vm._l(
+                                                      menu.submenus,
+                                                      function(submenu) {
+                                                        return _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "dropdown-item column is-6"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "router-link",
+                                                              {
+                                                                class:
+                                                                  _vm.currentRoute.toLowerCase() ===
+                                                                  submenu.path
+                                                                    ? submenu.path ==
+                                                                      "/eco"
+                                                                      ? "has-text-eco"
+                                                                      : "has-text-link"
+                                                                    : "",
+                                                                attrs: {
+                                                                  to:
+                                                                    submenu.path
+                                                                }
+                                                              },
+                                                              [
+                                                                _c(
+                                                                  "div",
+                                                                  {
+                                                                    staticClass:
+                                                                      "columns is-vcentered"
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "div",
+                                                                      {
+                                                                        staticClass:
+                                                                          "column is-3"
+                                                                      },
+                                                                      [
+                                                                        _c(
+                                                                          "font-awesome-icon",
+                                                                          {
+                                                                            class: _vm.currentRoute
+                                                                              .toLowerCase()
+                                                                              .includes(
+                                                                                submenu.path
+                                                                              )
+                                                                              ? "has-text-link"
+                                                                              : "has-text-grey-light",
+                                                                            attrs: {
+                                                                              size:
+                                                                                "2x",
+                                                                              icon: [
+                                                                                submenu.icon_type,
+                                                                                submenu.icon
+                                                                              ]
+                                                                            }
+                                                                          }
+                                                                        )
+                                                                      ],
+                                                                      1
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "div",
+                                                                      {
+                                                                        staticClass:
+                                                                          "column has-text-left"
+                                                                      },
+                                                                      [
+                                                                        _c(
+                                                                          "div",
+                                                                          {
+                                                                            staticClass:
+                                                                              "pt-1",
+                                                                            class: _vm.currentRoute
+                                                                              .toLowerCase()
+                                                                              .includes(
+                                                                                submenu.path
+                                                                              )
+                                                                              ? "has-text-white has-text-weight-bold"
+                                                                              : "has-text-grey-light has-text-weight-semibold",
+                                                                            staticStyle: {
+                                                                              "font-size":
+                                                                                "0.65rem"
+                                                                            }
+                                                                          },
+                                                                          [
+                                                                            _vm._v(
+                                                                              _vm._s(
+                                                                                submenu.title.toUpperCase()
+                                                                              )
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      ]
+                                                                    )
+                                                                  ]
+                                                                )
+                                                              ]
+                                                            )
+                                                          ],
+                                                          1
+                                                        )
+                                                      }
+                                                    ),
+                                                    0
+                                                  )
+                                                ]
+                                              )
+                                            ]
                                           )
                                         ]
-                                      ),
-                                      _vm._v(" "),
-                                      _vm.currentRoute
-                                        .toLowerCase()
-                                        .includes(menu.path)
-                                        ? _c("div", {
-                                            class:
-                                              menu.path == "/eco"
-                                                ? "has-text-eco"
-                                                : "has-text-link",
-                                            staticStyle: {
-                                              "border-bottom": "3px solid",
-                                              "padding-top": "5px"
-                                            }
-                                          })
-                                        : _vm._e()
-                                    ],
-                                    1
-                                  )
+                                      )
+                                    : _vm._e()
                                 ],
                                 1
                               )
@@ -69031,7 +69252,7 @@ var Register = function Register() {
 };
 
 var Dashboard = function Dashboard() {
-  return Promise.all(/*! import() | chunks/dashboard */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~b50b88cc"), __webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators/modals/generatorCharts~chunks/~06d98356"), __webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload"), __webpack_require__.e("vendors~chunks/capacityPlanning~chunks/dashboard"), __webpack_require__.e("chunks/dashboard")]).then(__webpack_require__.bind(null, /*! ./components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
+  return Promise.all(/*! import() | chunks/dashboard */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~516f4ecc"), __webpack_require__.e("vendors~chunks/capacity/projection~chunks/dashboard~chunks/generators/modals/generatorCharts~chunks/~06d98356"), __webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload"), __webpack_require__.e("vendors~chunks/capacityPlanning~chunks/dashboard"), __webpack_require__.e("chunks/dashboard")]).then(__webpack_require__.bind(null, /*! ./components/dashboard/Dashboard.vue */ "./resources/js/components/dashboard/Dashboard.vue"));
 };
 
 var PopTable = function PopTable() {
@@ -69039,19 +69260,19 @@ var PopTable = function PopTable() {
 };
 
 var Pop = function Pop() {
-  return Promise.all(/*! import() | chunks/pop */[__webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~ad5cfa06"), __webpack_require__.e("chunks/pop")]).then(__webpack_require__.bind(null, /*! ./components/pop/Pop.vue */ "./resources/js/components/pop/Pop.vue"));
+  return Promise.all(/*! import() | chunks/pop */[__webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~05b340cb"), __webpack_require__.e("chunks/pop")]).then(__webpack_require__.bind(null, /*! ./components/pop/Pop.vue */ "./resources/js/components/pop/Pop.vue"));
 };
 
 var CapacityPlanning = function CapacityPlanning() {
-  return Promise.all(/*! import() | chunks/capacityPlanning */[__webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~ad5cfa06"), __webpack_require__.e("vendors~chunks/capacityPlanning~chunks/dashboard"), __webpack_require__.e("chunks/capacityPlanning")]).then(__webpack_require__.bind(null, /*! ./components/capacity/CapacityPlanning.vue */ "./resources/js/components/capacity/CapacityPlanning.vue"));
+  return Promise.all(/*! import() | chunks/capacityPlanning */[__webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~05b340cb"), __webpack_require__.e("vendors~chunks/capacityPlanning~chunks/dashboard"), __webpack_require__.e("chunks/capacityPlanning")]).then(__webpack_require__.bind(null, /*! ./components/capacity/CapacityPlanning.vue */ "./resources/js/components/capacity/CapacityPlanning.vue"));
 };
 
 var RoomDetail = function RoomDetail() {
-  return Promise.all(/*! import() | chunks/capacityPlanning */[__webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~ad5cfa06"), __webpack_require__.e("vendors~chunks/capacityPlanning~chunks/dashboard"), __webpack_require__.e("chunks/capacityPlanning")]).then(__webpack_require__.bind(null, /*! ./components/capacity/RoomDetail.vue */ "./resources/js/components/capacity/RoomDetail.vue"));
+  return Promise.all(/*! import() | chunks/capacityPlanning */[__webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~05b340cb"), __webpack_require__.e("vendors~chunks/capacityPlanning~chunks/dashboard"), __webpack_require__.e("chunks/capacityPlanning")]).then(__webpack_require__.bind(null, /*! ./components/capacity/RoomDetail.vue */ "./resources/js/components/capacity/RoomDetail.vue"));
 };
 
 var Eco = function Eco() {
-  return Promise.all(/*! import() | chunks/eco */[__webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~ad5cfa06"), __webpack_require__.e("chunks/eco")]).then(__webpack_require__.bind(null, /*! ./components/eco/Eco.vue */ "./resources/js/components/eco/Eco.vue"));
+  return Promise.all(/*! import() | chunks/eco */[__webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~05b340cb"), __webpack_require__.e("chunks/eco")]).then(__webpack_require__.bind(null, /*! ./components/eco/Eco.vue */ "./resources/js/components/eco/Eco.vue"));
 };
 
 var Comsite = function Comsite() {
@@ -69059,7 +69280,7 @@ var Comsite = function Comsite() {
 };
 
 var Documents = function Documents() {
-  return Promise.all(/*! import() | chunks/documents */[__webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~ad5cfa06"), __webpack_require__.e("chunks/documents")]).then(__webpack_require__.bind(null, /*! ./components/documents/Documents.vue */ "./resources/js/components/documents/Documents.vue"));
+  return Promise.all(/*! import() | chunks/documents */[__webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~05b340cb"), __webpack_require__.e("chunks/documents")]).then(__webpack_require__.bind(null, /*! ./components/documents/Documents.vue */ "./resources/js/components/documents/Documents.vue"));
 };
 
 var Admin = function Admin() {
@@ -69078,8 +69299,16 @@ var Bridge = function Bridge() {
   return __webpack_require__.e(/*! import() | chunks/bridge */ "chunks/bridge").then(__webpack_require__.bind(null, /*! ./components/auth/Bridge.vue */ "./resources/js/components/auth/Bridge.vue"));
 };
 
+var ElectricLines = function ElectricLines() {
+  return Promise.all(/*! import() | chunks/equipment/electricLines */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~516f4ecc"), __webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~05b340cb"), __webpack_require__.e("chunks/equipment/electricLines")]).then(__webpack_require__.bind(null, /*! ./components/equipment/electricLines/ElectricLines.vue */ "./resources/js/components/equipment/electricLines/ElectricLines.vue"));
+};
+
+var Junctions = function Junctions() {
+  return Promise.all(/*! import() | chunks/equipment/junctions */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~516f4ecc"), __webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~05b340cb"), __webpack_require__.e("chunks/equipment/junctions")]).then(__webpack_require__.bind(null, /*! ./components/equipment/junctions/Junctions.vue */ "./resources/js/components/equipment/junctions/Junctions.vue"));
+};
+
 var Generators = function Generators() {
-  return Promise.all(/*! import() | chunks/generators */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~b50b88cc"), __webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~ad5cfa06"), __webpack_require__.e("chunks/generators")]).then(__webpack_require__.bind(null, /*! ./components/generators/Generators.vue */ "./resources/js/components/generators/Generators.vue"));
+  return Promise.all(/*! import() | chunks/equipment/generators */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~516f4ecc"), __webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~05b340cb"), __webpack_require__.e("chunks/equipment/generators")]).then(__webpack_require__.bind(null, /*! ./components/equipment/generators/Generators.vue */ "./resources/js/components/equipment/generators/Generators.vue"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -69166,8 +69395,17 @@ var Generators = function Generators() {
       path: '/reports',
       name: 'Reportes',
       component: Reports
+    }, // { path: '/equipment', name: 'Equipment', component: Generators },
+    {
+      path: '/equipment/electric_lines',
+      name: 'Líneas Eléctricas',
+      component: ElectricLines
     }, {
-      path: '/generators',
+      path: '/equipment/junctions',
+      name: 'Empalmes',
+      component: Junctions
+    }, {
+      path: '/equipment/generators',
       name: 'Generadores',
       component: Generators
     }]

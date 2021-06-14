@@ -61,7 +61,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() | chunks/helpers/vuePagination */ "chunks/helpers/vuePagination").then(__webpack_require__.bind(null, /*! ../helpers/VuePagination */ "./resources/js/components/helpers/VuePagination.vue"));
     }
   },
-  props: ['user', 'selectedCrm', 'selectedZona', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'core'],
+  props: ['selectedCrm', 'selectedZona', 'primaryText', 'secondaryText', 'core'],
   data: function data() {
     return {
       data: {

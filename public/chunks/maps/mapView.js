@@ -45,7 +45,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       mapAttributes: {
         latitude: -33.4446550,
         longitude: -70.6561690,
-        zoom: 3
+        zoom: 4
       },
       popData: null
     };

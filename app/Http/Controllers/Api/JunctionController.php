@@ -23,9 +23,54 @@ class JunctionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(Request $request)
+    {      
+        $brand_id = $request->brand_id;
+        $core = $request->core;
+        $critic = $request->critic;
+        $crm_id = $request->crm_id;
+        $group_type_id = $request->group_type_id;
+        $page = $request->page;
+        $sub_zone_id = $request->sub_zone_id;
+        $text = $request->text;
+        $vip = $request->vip;
+        $zona_id = $request->zona_id;
+
+        $junctions = Junction::with(
+            'pop.sites',
+            'pop.zona',
+            'electric_company',
+            'junction_type',
+            'junction_connection',
+            'junction_measurements',
+            'junction_protections',
+            'latest_measurement',
+            'latest_protection',
+            'solar_panels' 
+        )
+        ->where(function($q) use($text) {
+            $q->whereHas('pop.sites', function($p) use($text) {
+                $p->where('nem_site', 'LIKE', "%$text%")
+                ->orWhere('nombre', 'LIKE', "%$text%");
+            });
+        })
+        ->orWhere(function($q) use($text) {
+            $q->whereHas('pop', function($p) use($text) {
+                $p->where('nombre', 'LIKE', "%$text%");
+            });
+        })
+        ->orWhere('junction_number', 'LIKE', "%$text%")
+        ->orWhere('client_number', 'LIKE', "%$text%")
+        ->orWhere('rate_type', 'LIKE', "%$text%")
+        
+        ->orWhere(function($q) use($text) {
+            $q->whereHas('electric_company', function($p) use($text) {
+                $p->where('name', 'LIKE', "%$text%");
+            });
+        })
+        ->paginate(20);
+
+        return new JunctionCollection($junctions);
     }
 
     /**

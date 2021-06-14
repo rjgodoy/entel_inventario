@@ -37,9 +37,9 @@
                         <div class="column is-1"></div>
                         <div class="column">
                             <ul class="columns">
-                                <li v-if="canView(menu.path)" v-for="menu in menus" :key="menu.id" class="column has-text-centered" :class="currentRoute.toLowerCase().includes(menu.path) ? 'is-active' : ''">
+                                <li v-if="canView(menu.path)" v-for="menu in menus" :key="menu.id" class="column has-text-centered" :class="currentRoute.toLowerCase().includes(menu.path) && 'is-active'">
 
-                                    <router-link :to="menu.path" :class="currentRoute.toLowerCase() === menu.path ? (menu.path == '/eco' ? 'has-text-eco' : 'has-text-link') : ''">
+                                    <router-link v-if="!menu.dropdown" :to="menu.path" :class="currentRoute.toLowerCase() === menu.path ? (menu.path == '/eco' ? 'has-text-eco' : 'has-text-link') : ''">
                                         <font-awesome-icon
                                             class=""
                                             size="2x"
@@ -48,8 +48,46 @@
                                         />
                                         <div class="pt-1" :class="currentRoute.toLowerCase().includes(menu.path) ? 'has-text-white has-text-weight-bold' : 'has-text-grey has-text-weight-semibold'" style="font-size: 0.65rem">{{ menu.title.toUpperCase() }}</div>
 
-                                        <div v-if="currentRoute.toLowerCase().includes(menu.path)" :class="menu.path == '/eco' ? 'has-text-eco' : 'has-text-link'" style="border-bottom: 3px solid; padding-top: 5px;"></div>
+                                        <!-- <div v-if="currentRoute.toLowerCase().includes(menu.path)" :class="menu.path == '/eco' ? 'has-text-eco' : 'has-text-link'" style="border-bottom: 3px solid; padding-top: 5px;"></div> -->
                                     </router-link>
+
+
+                                    <div class="dropdown is-centered is-hoverable" v-if="menu.dropdown">
+                                        <div class="dropdown-trigger">
+                                            <font-awesome-icon
+                                                class=""
+                                                size="2x"
+                                                :icon="[menu.icon_type, menu.icon]" 
+                                                :class="currentRoute.toLowerCase().includes(menu.path) ? 'has-text-link' : 'has-text-grey-light'"
+                                            />
+                                            <div class="pt-1" :class="currentRoute.toLowerCase().includes(menu.path) ? 'has-text-white has-text-weight-bold' : 'has-text-grey has-text-weight-semibold'" style="font-size: 0.65rem">{{ menu.title.toUpperCase() }}</div>
+                                        </div>
+                                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                            <div class="dropdown-content has-background-grey-dark p-4" style="width: 400px">
+                                                <div class="columns is-multiline ">
+                                                    <div class="dropdown-item column is-6" v-for="submenu in menu.submenus">
+                                                        <router-link :to="submenu.path" :class="currentRoute.toLowerCase() === submenu.path ? (submenu.path == '/eco' ? 'has-text-eco' : 'has-text-link') : ''">
+                                                            <div class="columns is-vcentered">
+                                                                <div class="column is-3">
+                                                                    <font-awesome-icon
+                                                                        class=""
+                                                                        size="2x"
+                                                                        :icon="[submenu.icon_type, submenu.icon]" 
+                                                                        :class="currentRoute.toLowerCase().includes(submenu.path) ? 'has-text-link' : 'has-text-grey-light'"
+                                                                    />
+                                                                </div>
+                                                                <div class="column has-text-left">
+                                                                    <div class="pt-1" :class="currentRoute.toLowerCase().includes(submenu.path) ? 'has-text-white has-text-weight-bold' : 'has-text-grey-light has-text-weight-semibold'" style="font-size: 0.65rem">{{ submenu.title.toUpperCase() }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </router-link>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 </li>
                             </ul>
                         </div>
@@ -175,11 +213,11 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faClipboardList, faEnvelope, faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust, faChargingStation } from "@fortawesome/free-solid-svg-icons";
+    import { faClipboardList, faEnvelope, faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust, faChargingStation, faLaptopHouse, faPlug, faBolt, faFan, faRandom, faBroadcastTower, faCarBattery } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
-    library.add(faClipboardList, faEnvelope, faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust, faChargingStation);
+    library.add(faClipboardList, faEnvelope, faMapMarkerAlt, faThLarge, faTrafficLight, faFolderOpen, faCogs, faAngleDown, faFileContract, faSeedling, faWarehouse, faBell, faCog, faSignOutAlt, faHome, faAdjust, faChargingStation, faLaptopHouse, faPlug, faBolt, faFan, faRandom, faBroadcastTower, faCarBattery);
 
     export default {
         components: {
@@ -270,17 +308,22 @@
 
             },
 
-            getUserRequestAlerts() {
-                axios.get(`/api/userRequests`)
+            getSubmenus(menu) {
+                axios.get(`/api/submenus`)
                 .then(response => {
-                    if (this.user.roles[0].name == 'admin'
-                    || this.user.roles[0].name == 'developer') {
-                        this.userRequestAlerts = response.data.requests
-                    } else {
-                        this.userRequestAlerts = []
-                    }
+                    
                     
                 })
+            },
+
+            getUserRequestAlerts() {
+                if (this.user.roles[0].name == 'admin'
+                    || this.user.roles[0].name == 'developer') {
+                    axios.get(`/api/userRequests`)
+                    .then(response => {
+                        this.userRequestAlerts = response.data.requests
+                    })
+                }
             },
 
             logout: function(e){

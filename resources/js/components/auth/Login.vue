@@ -74,35 +74,35 @@
                         }
                     }
 
-                    axios.post('/api/auth/login', credentials, config)
-                    .then(response => { 
-                        console.log(response)
-                        if (response.status === 200) {
+                    // axios.post('/api/auth/login', credentials, config)
+                    // .then(response => { 
+                    //     console.log(response)
+                    //     if (response.status === 200) {
                             axios.post('/login', credentials, config)
                             .then(response => {
                                 this.isLoading = 0
                                 console.log(response)
                                 this.$router.go('/dashboard')
                             })
-                        }
-                    }).catch((error) => {
-                        console.log(error.response.status)
-                        if (error.response.status === 401) {
-                            this.isLoading = 0
-                            this.$buefy.toast.open({
-                                message: 'Las credenciales no concuerdan con nuestros registros.',
-                                type: 'is-warning',
-                                duration: 3000
-                            })
-                        } else {
-                            this.isLoading = 0
-                            this.$buefy.toast.open({
-                                message: 'Algo inesperado ocurrió. Favor intentalo nuevamente.',
-                                type: 'is-danger',
-                                duration: 3000
-                            })
-                        }
-                    })
+                    //     }
+                    // }).catch((error) => {
+                    //     console.log(error.response.status)
+                    //     if (error.response.status === 401) {
+                    //         this.isLoading = 0
+                    //         this.$buefy.toast.open({
+                    //             message: 'Las credenciales no concuerdan con nuestros registros.',
+                    //             type: 'is-warning',
+                    //             duration: 3000
+                    //         })
+                    //     } else {
+                    //         this.isLoading = 0
+                    //         this.$buefy.toast.open({
+                    //             message: 'Algo inesperado ocurrió. Favor intentalo nuevamente.',
+                    //             type: 'is-danger',
+                    //             duration: 3000
+                    //         })
+                    //     }
+                    // })
                 }
             }
         }

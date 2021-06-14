@@ -44,7 +44,7 @@ class UpdateCells extends Command
         $now = Carbon::now()->isoFormat('YYYYMMDDHHmm');
         $token = 'a3QwEBesPKm9b2f';
         $hash = md5($now.''.$token);
-        $url = 'https://aess.entelchile.net/pop_m/all/all/?EXPORT=CSV&v=5&app=analytics&key='.$hash;
+        $url = 'http://aess.entelchile.net/pop_m/all/all/?EXPORT=CSV&v=5&app=analytics&key='.$hash;
 
         Storage::disk('local')->put('file.csv', fopen($url, 'r'));
 

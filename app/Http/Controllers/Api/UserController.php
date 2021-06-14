@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\UserCollection;
 use App\Models\User;
 use App\Models\UserRequest;
 use Illuminate\Support\Str;
@@ -22,10 +23,14 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $text = $request->text;
-        $condition_role = $request->role_id == 0 ? "roles.id != 0" : "roles.id = $request->role_id";
+        $role_id = $request->role_id;
         $users = User::with('roles', 'permissions', 'roles.permissions')
-            ->whereHas('roles', function($q) use($condition_role) {
-                $q->whereRaw($condition_role);
+            ->where(function($r) use($role_id) {
+                if ($role_id) {
+                    $r->whereHas('roles', function($q) use($role_id) {
+                        $q->whereRaw("roles.id = $role_id");
+                    });
+                }
             })
             ->where(function($q) use($text) {
                 if($text) {
@@ -35,13 +40,7 @@ class UserController extends Controller
             })
             ->where('estado', 1)->paginate(20);
 
-        return response()->json(
-            [
-                'status' => 'success',
-                'users' => $users->toArray()
-            ],
-            200
-        );
+        return new UserCollection($users);
     }
 
     /**

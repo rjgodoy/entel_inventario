@@ -35,14 +35,7 @@ class PopController extends Controller
      */
     public function index()
     {
-        // if (Cache::has('pops')) {
-        //     $pops = Cache::get('pops');
-        // } else {
-            // $pops = Cache::remember('pops', $this->seconds, function () {
-                $pops = Pop::with('sites.classification_type', 'comuna', 'zona.crm')->orderBy('id', 'asc')->paginate(20);
-                // return $pops;
-        //     });
-        // }
+        $pops = Pop::with('sites.classification_type', 'comuna', 'zona.crm')->orderBy('id', 'asc')->paginate(20);
         return new PopResource($pops);
     }
 
@@ -56,9 +49,9 @@ class PopController extends Controller
         $user = User::where('api_token', $request->api_token)->get();
 
         if ($user) {
-            $pops = Pop::
-            orderBy('id')
-            ->limit(100)
+            $pops = Pop::has('sites')
+            ->orderBy('id')
+            ->limit(1000)
             ->get();
 
             // $pops = Pop::chunk()
@@ -76,6 +69,10 @@ class PopController extends Controller
                         'category' => [
                             'id' => $site->classification_type->id,
                             'type' => $site->classification_type->classification_type
+                        ],
+                        'priority' => [
+                            'id' => $site->attention_priority_type->id,
+                            'type' => $site->attention_priority_type->attention_priority_type
                         ]
                     ]);
                 }
@@ -95,7 +92,8 @@ class PopController extends Controller
                             'name' => $pop->zona->crm->nombre_crm,
                         ],
                     ],
-                    'sites' => $sites
+                    'sites' => $sites,
+                    'isFavorite' => false
                 ]);
             }
             Storage::disk('local')->put('pops.json', $collection);
@@ -338,7 +336,8 @@ class PopController extends Controller
             'client_companies.access_type',
             'layout',
             'comsites',
-            'drone_videos'
+            'drone_videos',
+            'risk_types'
             )
             ->where('id', $id)
             ->first();

@@ -11,6 +11,7 @@ use App\Models\OTForm;
 use App\Models\Technology;
 use App\Imports\CellsImport;
 use App\Models\OTTmpTaskLog;
+use App\Models\RoomCapacity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -203,13 +204,23 @@ class HomeController extends Controller
         $now = Carbon::now()->isoFormat('YYYYMMDDHHmm');
         $token = 'a3QwEBesPKm9b2f';
         $hash = md5($now.''.$token);
-        $url = 'https://aess.entelchile.net/pop_m/all/all/?EXPORT=CSV&v=5&app=analytics&key='.$hash;
+        $url = 'http://aess.entelchile.net/pop_m/all/all/?EXPORT=CSV&v=5&app=analytics&key='.$hash;
         dd($url);
 
-        Storage::disk('local')->put('file.csv', fopen($url, 'r'));
+        // Storage::disk('local')->put('file.csv', fopen($url, 'r'));
 
-        
+        // $id = 1;
 
+        // $data = RoomCapacity::where('room_id', $id)
+        // ->whereIn('created_at', [
+        //     \DB::raw('SELECT MAX(created_at) 
+        //         FROM entel_g_redes_inventario.room_capacities
+        //         WHERE room_id = '.$id.'
+        //         GROUP BY DATE(created_at)')
+        // ])
+        // ->orderBy('created_at', 'asc')->get();
+
+        // dd($data);
         
     }
 

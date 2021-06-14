@@ -4,14 +4,14 @@
             <div class="column is-4 tile">
                 <div class="box tile is-child">
                     <div class="field">
-                        <b-button @click="isNewRoleModalActive = true" type="is-link" size="is-small" style="float: right;" outlined>
+                        <b-button @click="isNewRoleModalActive = true" type="is-link" size="is-small" style="float: right;" outlined v-if="canCreateRole">
                             <font-awesome-icon :icon="['fas', 'plus']"/>
                         </b-button>
                         <div class="is-size-5 has-text-weight-bold">Roles</div>
                     </div>
 
                     <b-table
-                        :data="roles"
+                        :data="rolesData.roles"
                         :selected.sync="selectedRole"
                         :default-sort-direction="defaultSortDirection"
                         :sort-icon="sortIcon"
@@ -41,6 +41,17 @@
                                 <div class="is-size-6">{{ props.row.name }}</div>
                             </template>
                         </b-table-column>
+
+                        <b-table-column v-if="canDeleteRole">
+                            <template v-slot="props">
+                                <div class="is-size-6">
+                                    <a class="button is-small is-outlined" @click="deleteRole(props.row)">
+                                        <font-awesome-icon :icon="['fas', 'trash']" />
+                                    </a>
+                                </div>
+                            </template>
+                        </b-table-column>
+
                     </b-table>
                     
                     <b-modal :active.sync="isNewRoleModalActive"
@@ -77,10 +88,10 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faPlus } from "@fortawesome/free-solid-svg-icons";
+    import { faPlus,faTrash } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
-    library.add(faPlus);
+    library.add(faPlus,faTrash);
 
     export default {
 
@@ -111,7 +122,7 @@
 
         data() {
             return {
-                roles: [],
+                rolesData: Object,
                 permissions: [],
                 defaultSortDirection: 'asc',
                 sortIcon: 'arrow-up',
@@ -121,12 +132,24 @@
             }
         },
 
+        computed: {
+            canCreateRole() {
+                console.log(this.rolesData)
+                return this.rolesData.can ? this.rolesData.can.create : false
+            },
+
+            canDeleteRole() {
+                console.log(this.rolesData)
+                return this.rolesData.can ? this.rolesData.can.delete : false
+            }
+        },
+
         methods: {
             getRoles() {
                 axios.get(`/api/roles`)
                 .then(response => {
-                    this.roles = response.data.roles
-                    // this.selectedRole = this.roles[0]
+                    console.log(response.data)
+                    this.rolesData = response.data
                 })
             },
 
@@ -136,6 +159,19 @@
                     this.permissions = response.data.permissions
                 })
             },
+
+            deleteRole(role) {
+                this.$buefy.dialog.confirm({
+                    message: `Confirma la eliminación del rol?`,
+                    type: 'is-link',
+                    onConfirm: () => {
+                        axios.delete(`/api/roles/${role.id}`)
+                        .then(response => {
+                            this.getRoles()
+                        })
+                    }
+                })
+            }     
         },
 
         beforeDestroy() {

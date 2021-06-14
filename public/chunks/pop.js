@@ -330,15 +330,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignInAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTasks"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTemperatureLow"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBroadcastTower"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faDollarSign"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faLeaf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignal"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkedAlt"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCamera"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faUserTie"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faVideo"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faStreetView"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignInAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTasks"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTemperatureLow"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBroadcastTower"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faDollarSign"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faLeaf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignal"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkedAlt"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCamera"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faUserTie"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faVideo"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faStreetView"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faExclamationTriangle"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Location: function Location() {
-      return Promise.all(/*! import() | chunks/pop/location */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~b50b88cc"), __webpack_require__.e("chunks/pop/location")]).then(__webpack_require__.bind(null, /*! ./Location */ "./resources/js/components/pop/Location.vue"));
+      return Promise.all(/*! import() | chunks/pop/location */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~516f4ecc"), __webpack_require__.e("chunks/pop/location")]).then(__webpack_require__.bind(null, /*! ./Location */ "./resources/js/components/pop/Location.vue"));
     },
     Sites: function Sites() {
       return __webpack_require__.e(/*! import() | chunks/pop/sites */ "chunks/pop/sites").then(__webpack_require__.bind(null, /*! ./Sites */ "./resources/js/components/pop/Sites.vue"));
@@ -369,17 +379,18 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/pop/eco */ "chunks/pop/eco").then(__webpack_require__.bind(null, /*! ./Eco */ "./resources/js/components/pop/Eco.vue"));
     },
     Comsite: function Comsite() {
-      return Promise.all(/*! import() | chunks/pop/comsite */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~b50b88cc"), __webpack_require__.e("chunks/pop/comsite")]).then(__webpack_require__.bind(null, /*! ./Comsite */ "./resources/js/components/pop/Comsite.vue"));
+      return Promise.all(/*! import() | chunks/pop/comsite */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~516f4ecc"), __webpack_require__.e("chunks/pop/comsite")]).then(__webpack_require__.bind(null, /*! ./Comsite */ "./resources/js/components/pop/Comsite.vue"));
     },
     Clients: function Clients() {
-      return Promise.all(/*! import() | chunks/pop/clients */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~b50b88cc"), __webpack_require__.e("chunks/pop/clients")]).then(__webpack_require__.bind(null, /*! ./Clients */ "./resources/js/components/pop/Clients.vue"));
+      return Promise.all(/*! import() | chunks/pop/clients */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~516f4ecc"), __webpack_require__.e("chunks/pop/clients")]).then(__webpack_require__.bind(null, /*! ./Clients */ "./resources/js/components/pop/Clients.vue"));
     },
     Documents: function Documents() {
       return __webpack_require__.e(/*! import() | chunks/pop/documents/documents */ "chunks/pop/documents/documents").then(__webpack_require__.bind(null, /*! ./documents/Documents */ "./resources/js/components/pop/documents/Documents.vue"));
     },
     Log: function Log() {
-      return Promise.all(/*! import() | chunks/pop/logs */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~b50b88cc"), __webpack_require__.e("chunks/pop/logs")]).then(__webpack_require__.bind(null, /*! ./Log */ "./resources/js/components/pop/Log.vue"));
-    }
+      return Promise.all(/*! import() | chunks/pop/logs */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~516f4ecc"), __webpack_require__.e("chunks/pop/logs")]).then(__webpack_require__.bind(null, /*! ./Log */ "./resources/js/components/pop/Log.vue"));
+    } // VulnerabilityIndex: () => import(/* webpackChunkName: "chunks/pop/vulnerabilityIndex"*/'./VulnerabilityIndex'),
+
   },
   props: ['user'],
   data: function data() {
@@ -858,12 +869,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("log", { attrs: { user: _vm.user, pop: _vm.pop } }),
-      _vm._v(" "),
-      _c("section", { staticClass: "hero is-black-ter" }, [
+  return _c("div", [
+    _c(
+      "section",
+      {
+        staticClass: "hero is-bold",
+        class:
+          _vm.pop.risk_types && _vm.pop.risk_types.length
+            ? "is-danger"
+            : "is-black-ter"
+      },
+      [
         _c("div", { staticClass: "hero-body" }, [
           _c("div", {}, [
             _c("div", { staticClass: "columns" }, [
@@ -905,9 +921,15 @@ var render = function() {
                           }
                         },
                         [
-                          _c("div", { staticClass: "title is-size-4" }, [
-                            _vm._v(_vm._s(_vm.popClassification.classification))
-                          ])
+                          _c(
+                            "div",
+                            { staticClass: "is-size-3 has-text-weight-bold" },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.popClassification.classification)
+                              )
+                            ]
+                          )
                         ]
                       )
                     ],
@@ -917,7 +939,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "column is-5" }, [
+              _c("div", { staticClass: "column is-4" }, [
                 _c(
                   "div",
                   { staticClass: "is-size-4" },
@@ -947,7 +969,7 @@ var render = function() {
                       "h2",
                       {
                         staticClass:
-                          "subtitle has-text-weight-semibold has-text-grey-light",
+                          "subtitle has-text-weight-semibold has-text-light",
                         staticStyle: { "margin-bottom": "4px" }
                       },
                       [
@@ -978,201 +1000,154 @@ var render = function() {
                             ])
                           : _vm._e()
                       ]
-                    ),
-                    _vm._v(" "),
-                    _vm.pop.current_office || _vm.pop.alba_project
-                      ? _c("div", [
-                          _vm.pop.current_office
-                            ? _c(
-                                "div",
-                                { staticStyle: { "padding-bottom": "4px" } },
-                                [
-                                  _c(
-                                    "b-tag",
-                                    {
-                                      staticClass: "has-text-weight-semibold",
-                                      attrs: {
-                                        type: "is-link",
-                                        size: "is-medium"
-                                      }
-                                    },
-                                    [
-                                      _c("font-awesome-icon", {
-                                        staticStyle: {
-                                          "padding-bottom": "2px"
-                                        },
-                                        attrs: { icon: ["fas", "home"] }
-                                      }),
-                                      _vm._v(
-                                        "  OFICINA CRM\n                                    "
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.pop.alba_project
-                            ? _c(
-                                "div",
-                                { staticStyle: { "padding-top": "4px" } },
-                                [
-                                  _c("div", {}, [
-                                    _c(
-                                      "div",
-                                      [
-                                        _c(
-                                          "b-tooltip",
-                                          {
-                                            attrs: {
-                                              label: "Entel",
-                                              position: "is-bottom",
-                                              type: "is-black"
-                                            }
-                                          },
-                                          [
-                                            _c("div", [
-                                              _c("img", {
-                                                staticClass: "img-container",
-                                                staticStyle: { width: "32px" },
-                                                attrs: {
-                                                  alt: "image",
-                                                  src:
-                                                    "/img/iconografia/entel-logo-negativo.png"
-                                                }
-                                              })
-                                            ])
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "b-tooltip",
-                                          {
-                                            staticStyle: {
-                                              "padding-left": "8px"
-                                            },
-                                            attrs: {
-                                              label: "American Tower",
-                                              position: "is-bottom",
-                                              type: "is-black"
-                                            }
-                                          },
-                                          [
-                                            _c("div", [
-                                              _c("img", {
-                                                staticClass: "img-container",
-                                                staticStyle: { width: "36px" },
-                                                attrs: {
-                                                  alt: "image",
-                                                  src:
-                                                    "/img/logos/american_tower_logo_simple.png"
-                                                }
-                                              })
-                                            ])
-                                          ]
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ])
-                                ]
-                              )
-                            : _vm._e()
-                        ])
-                      : _vm._e()
+                    )
                   ],
                   1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "is-size-6 has-text-weight-normal has-text-light"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Zona " +
+                        _vm._s(_vm.pop.zona ? _vm.pop.zona.nombre_zona : "") +
+                        " - CRM " +
+                        _vm._s(
+                          _vm.pop.zona ? _vm.pop.zona.crm.nombre_crm : ""
+                        ) +
+                        "\n                        "
+                    )
+                  ]
                 )
               ]),
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "column is-2", staticStyle: { padding: "0px" } },
+                { staticClass: "column is-3", staticStyle: { padding: "0px" } },
                 [
-                  _c(
-                    "p",
-                    {
-                      staticClass:
-                        "is-size-6 has-text-weight-semibold has-text-grey-light"
-                    },
-                    [_vm._v("Zona")]
-                  ),
+                  _vm.pop.risk_types && _vm.pop.risk_types.length
+                    ? _c("div", { staticClass: "columns is-vcentered" }, [
+                        _c(
+                          "div",
+                          { staticClass: "column is-2 has-text-centered" },
+                          [
+                            _c("font-awesome-icon", {
+                              staticClass: "has-text-warning",
+                              attrs: {
+                                icon: ["fas", "exclamation-triangle"],
+                                size: "3x"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _vm._m(0)
+                      ])
+                    : _vm._e(),
                   _vm._v(" "),
-                  _c("p", { staticClass: "is-size-5 has-text-weight-bold" }, [
-                    _vm._v(_vm._s(_vm.pop.zona ? _vm.pop.zona.nombre_zona : ""))
-                  ]),
+                  _vm.pop.current_office
+                    ? _c("div", { staticClass: "columns is-vcentered" }, [
+                        _c(
+                          "div",
+                          { staticClass: "column is-2 has-text-centered" },
+                          [
+                            _c("font-awesome-icon", {
+                              staticClass: "has-text-link",
+                              attrs: { icon: ["fas", "home"], size: "3x" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _vm._m(1)
+                      ])
+                    : _vm._e(),
                   _vm._v(" "),
-                  _c(
-                    "p",
-                    {
-                      staticClass:
-                        "is-size-6 has-text-weight-semibold has-text-grey-light",
-                      staticStyle: { "margin-top": "10px" }
-                    },
-                    [_vm._v("CRM")]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "is-size-5 has-text-weight-bold" }, [
-                    _vm._v(
-                      _vm._s(_vm.pop.zona ? _vm.pop.zona.crm.nombre_crm : "")
-                    )
-                  ])
+                  _vm.pop.alba_project
+                    ? _c("div", { staticClass: "columns is-vcentered" }, [
+                        _c(
+                          "div",
+                          { staticClass: "column is-2 has-text-centered" },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "box p-1" },
+                              [
+                                _c(
+                                  "b-tooltip",
+                                  {
+                                    staticClass: "pt-1",
+                                    attrs: {
+                                      label: "American Tower",
+                                      type: "is-black"
+                                    }
+                                  },
+                                  [
+                                    _c("div", [
+                                      _c("img", {
+                                        staticClass: "img-container",
+                                        staticStyle: { width: "36px" },
+                                        attrs: {
+                                          alt: "image",
+                                          src:
+                                            "/img/logos/american_tower_logo_simple.png"
+                                        }
+                                      })
+                                    ])
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._m(2)
+                      ])
+                    : _vm._e()
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "column is-3" }, [
-                _c("div", { staticClass: "columns is-multiline" }, [
+              _c("div", { staticClass: "column is-2 pt-0 pb-0" }, [
+                _c("div", { staticClass: "columns is-multiline is-size-6" }, [
                   _c("div", { staticClass: "column is-6" }, [
                     _c(
                       "div",
-                      { staticClass: "control" },
+                      {
+                        staticClass: "box pt-1 pb-1",
+                        class:
+                          _vm.popClassification.id == 1
+                            ? "is-eco is-bold"
+                            : "has-background-grey-darker has-text-grey",
+                        style:
+                          _vm.popClassification.id == 1
+                            ? "opacity: 1"
+                            : "opacity: 0.5"
+                      },
                       [
+                        _c("font-awesome-icon", {
+                          attrs: {
+                            icon:
+                              _vm.popClassification.id == 1
+                                ? ["far", "check-circle"]
+                                : ["far", "times-circle"]
+                          }
+                        }),
+                        _vm._v(" "),
                         _c(
-                          "b-taglist",
-                          { attrs: { attached: "" } },
-                          [
-                            _c(
-                              "b-tag",
-                              {
-                                staticClass: "has-text-white",
-                                attrs: {
-                                  size: "is-medium",
-                                  type:
-                                    _vm.popClassification.id == 1
-                                      ? "is-eco"
-                                      : "has-background-grey-light has-text-grey"
-                                }
-                              },
-                              [
-                                _c("font-awesome-icon", {
-                                  attrs: {
-                                    icon:
-                                      _vm.popClassification.id == 1
-                                        ? ["far", "check-circle"]
-                                        : ["far", "times-circle"]
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "b-tag",
-                              {
-                                attrs: {
-                                  size: "is-medium",
-                                  type:
-                                    _vm.popClassification.id == 1
-                                      ? "is-dark has-text-weight-bold"
-                                      : "has-background-grey has-text-grey-light"
-                                }
-                              },
-                              [_vm._v("CORE")]
-                            )
-                          ],
-                          1
+                          "div",
+                          {
+                            class:
+                              _vm.popClassification.id == 1
+                                ? "is-dark has-text-weight-bold"
+                                : "has-text-grey-light"
+                          },
+                          [_vm._v("CORE")]
                         )
                       ],
                       1
@@ -1182,52 +1157,34 @@ var render = function() {
                   _c("div", { staticClass: "column is-6" }, [
                     _c(
                       "div",
-                      { staticClass: "control" },
+                      {
+                        staticClass: "box pt-1 pb-1",
+                        class:
+                          _vm.popCritical == 1
+                            ? "is-eco is-bold"
+                            : "has-background-grey-darker has-text-grey",
+                        style:
+                          _vm.popCritical == 1 ? "opacity: 1" : "opacity: 0.5"
+                      },
                       [
+                        _c("font-awesome-icon", {
+                          attrs: {
+                            icon:
+                              _vm.popCritical == 1
+                                ? ["far", "check-circle"]
+                                : ["far", "times-circle"]
+                          }
+                        }),
+                        _vm._v(" "),
                         _c(
-                          "b-taglist",
-                          { attrs: { attached: "" } },
-                          [
-                            _c(
-                              "b-tag",
-                              {
-                                staticClass: "has-text-white",
-                                attrs: {
-                                  size: "is-medium",
-                                  type:
-                                    _vm.popCritical == 1
-                                      ? "is-eco"
-                                      : "has-background-grey-light has-text-grey"
-                                }
-                              },
-                              [
-                                _c("font-awesome-icon", {
-                                  attrs: {
-                                    icon:
-                                      _vm.popCritical == 1
-                                        ? ["far", "check-circle"]
-                                        : ["far", "times-circle"]
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "b-tag",
-                              {
-                                attrs: {
-                                  size: "is-medium",
-                                  type:
-                                    _vm.popCritical == 1
-                                      ? "is-dark has-text-weight-bold"
-                                      : "has-background-grey has-text-grey-light"
-                                }
-                              },
-                              [_vm._v("Crítico")]
-                            )
-                          ],
-                          1
+                          "div",
+                          {
+                            class:
+                              _vm.popCritical == 1
+                                ? "is-dark has-text-weight-bold"
+                                : "has-text-grey-light"
+                          },
+                          [_vm._v("CRITICO")]
                         )
                       ],
                       1
@@ -1237,60 +1194,39 @@ var render = function() {
                   _c("div", { staticClass: "column is-6" }, [
                     _c(
                       "div",
-                      { staticClass: "control" },
+                      {
+                        staticClass: "box pt-1 pb-1",
+                        class:
+                          _vm.pop.vip == 1
+                            ? "is-eco is-bold"
+                            : "has-background-grey-darker has-text-grey",
+                        style: _vm.pop.vip == 1 ? "opacity: 1" : "opacity: 0.5"
+                      },
                       [
+                        _c("font-awesome-icon", {
+                          attrs: {
+                            icon:
+                              _vm.pop.vip == 1
+                                ? ["far", "check-circle"]
+                                : ["far", "times-circle"]
+                          }
+                        }),
+                        _vm._v(" "),
                         _c(
-                          "b-taglist",
-                          { attrs: { attached: "" } },
+                          "div",
+                          {
+                            class:
+                              _vm.pop.vip == 1
+                                ? "is-dark has-text-weight-bold"
+                                : "has-text-grey-light"
+                          },
                           [
-                            _c(
-                              "b-tag",
-                              {
-                                staticClass: "has-text-white",
-                                attrs: {
-                                  size: "is-medium",
-                                  type:
-                                    _vm.pop.vip == 1
-                                      ? "is-eco"
-                                      : "has-background-grey-light has-text-grey"
-                                }
-                              },
-                              [
-                                _c("font-awesome-icon", {
-                                  attrs: {
-                                    icon:
-                                      _vm.pop.vip == 1
-                                        ? ["far", "check-circle"]
-                                        : ["far", "times-circle"]
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "b-tag",
-                              {
-                                attrs: {
-                                  size: "is-medium",
-                                  type:
-                                    _vm.pop.vip == 1
-                                      ? "is-dark has-text-weight-bold"
-                                      : "has-background-grey has-text-grey-light"
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.pop.current_entel_vip
-                                      ? "VIP Entel"
-                                      : "VIP"
-                                  )
-                                )
-                              ]
+                            _vm._v(
+                              _vm._s(
+                                _vm.pop.current_entel_vip ? "VIP Entel" : "VIP"
+                              )
                             )
-                          ],
-                          1
+                          ]
                         )
                       ],
                       1
@@ -1300,49 +1236,33 @@ var render = function() {
                   _c("div", { staticClass: "column is-6" }, [
                     _c(
                       "div",
-                      { staticClass: "control" },
+                      {
+                        staticClass: "box pt-1 pb-1",
+                        class: _vm.pop.alba_project
+                          ? "is-eco is-bold"
+                          : "has-background-grey-darker has-text-grey",
+                        style:
+                          _vm.pop.alba_project == 1
+                            ? "opacity: 1"
+                            : "opacity: 0.5"
+                      },
                       [
+                        _c("font-awesome-icon", {
+                          attrs: {
+                            icon: _vm.pop.alba_project
+                              ? ["far", "check-circle"]
+                              : ["far", "times-circle"]
+                          }
+                        }),
+                        _vm._v(" "),
                         _c(
-                          "b-taglist",
-                          { attrs: { attached: "" } },
-                          [
-                            _c(
-                              "b-tag",
-                              {
-                                staticClass: "has-text-white",
-                                attrs: {
-                                  size: "is-medium",
-                                  type: _vm.pop.alba_project
-                                    ? "is-eco"
-                                    : "has-background-grey-light has-text-grey"
-                                }
-                              },
-                              [
-                                _c("font-awesome-icon", {
-                                  attrs: {
-                                    icon: _vm.pop.alba_project
-                                      ? ["far", "check-circle"]
-                                      : ["far", "times-circle"]
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "b-tag",
-                              {
-                                attrs: {
-                                  size: "is-medium",
-                                  type: _vm.pop.alba_project
-                                    ? "is-dark has-text-weight-bold"
-                                    : "has-background-grey has-text-grey-light"
-                                }
-                              },
-                              [_vm._v("Proyecto Alba")]
-                            )
-                          ],
-                          1
+                          "div",
+                          {
+                            class: _vm.pop.alba_project
+                              ? "is-dark has-text-weight-bold"
+                              : "has-text-grey-light"
+                          },
+                          [_vm._v("ATC")]
                         )
                       ],
                       1
@@ -1351,444 +1271,426 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm.canViewLog
-                ? _c("div", { staticClass: "column is-1 has-text-right" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "button is-warning",
-                        staticStyle: {
-                          height: "auto",
-                          "margin-right": "-24px"
+              _vm.canEditPop
+                ? _c(
+                    "div",
+                    { staticClass: "column is-2 has-text-right" },
+                    [
+                      _c(
+                        "b-tooltip",
+                        {
+                          attrs: {
+                            label: _vm.isEditMode
+                              ? "Salir del modo edición"
+                              : "Entrar en modo edición",
+                            position: "is-left",
+                            type: "is-link",
+                            animated: ""
+                          }
                         },
-                        attrs: {
-                          type: "button",
-                          "data-target": "quickviewDefault",
-                          "data-show": "quickview"
-                        },
-                        on: { click: _vm.openLog }
-                      },
-                      [
-                        _c("div", { staticClass: "columns" }, [
+                        [
                           _c(
-                            "div",
+                            "button",
                             {
-                              staticClass: "column",
+                              staticClass: "button",
+                              class: _vm.isEditMode ? "is-info" : "is-link",
                               staticStyle: {
-                                "padding-left": "8px",
-                                "padding-right": "5px"
+                                height: "48px",
+                                "margin-right": "-24px"
+                              },
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.isEditMode = !_vm.isEditMode
+                                }
                               }
                             },
                             [
-                              _vm._v("\n                                     "),
-                              _c("br"),
-                              _c("font-awesome-icon", {
-                                attrs: {
-                                  icon: ["fas", "sign-in-alt"],
-                                  rotation: "180"
-                                }
-                              }),
-                              _c("br"),
-                              _vm._v(" \n                                ")
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _vm._m(0)
-                        ])
-                      ]
-                    )
-                  ])
+                              _c("div", { staticClass: "columns" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "column",
+                                    staticStyle: {
+                                      "padding-left": "8px",
+                                      "padding-right": "5px"
+                                    }
+                                  },
+                                  [
+                                    _c("font-awesome-icon", {
+                                      attrs: {
+                                        icon: _vm.isEditMode
+                                          ? ["fas", "edit"]
+                                          : ["fas", "edit"]
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("div", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.isEditMode ? "MODO EDICION" : ""
+                                        )
+                                      )
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ])
+                            ]
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
                 : _vm._e()
             ])
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "is-divider", staticStyle: { margin: "0px" } }),
-      _vm._v(" "),
-      _c("div", { staticClass: "hero is-dark" }, [
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "is-divider", staticStyle: { margin: "0px" } }),
+    _vm._v(" "),
+    _c("div", { staticClass: "hero is-dark" }, [
+      _c(
+        "div",
+        {
+          staticClass: "hero-body",
+          staticStyle: { "padding-top": "32px", "padding-bottom": "32px" }
+        },
+        [
+          _c("nav", { staticClass: "level" }, [
+            _c("div", { staticClass: "level-item has-text-centered" }, [
+              _c(
+                "div",
+                [
+                  _c(
+                    "b-tag",
+                    {
+                      staticClass:
+                        "has-text-link has-text-weight-bold is-size-5",
+                      attrs: { type: "is-white", size: "is-large" }
+                    },
+                    [_vm._v(_vm._s(_vm.popAttentionPriority))]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(3)
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item has-text-centered" }, [
+              _c(
+                "div",
+                [
+                  _c(
+                    "b-tag",
+                    {
+                      staticClass:
+                        "has-text-link has-text-weight-bold is-size-5",
+                      attrs: { type: "is-white", size: "is-large" }
+                    },
+                    [_vm._v(_vm._s(_vm.pop.dependences))]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(4)
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item has-text-centered" }, [
+              _c(
+                "div",
+                [
+                  _c(
+                    "b-tag",
+                    {
+                      staticClass:
+                        "has-text-link has-text-weight-bold is-size-5",
+                      attrs: { type: "is-white", size: "is-large" }
+                    },
+                    [_vm._v(_vm._s(_vm.popCategory ? _vm.popCategory : "-"))]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(5)
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item has-text-centered" }, [
+              _c(
+                "div",
+                [
+                  _c(
+                    "b-tag",
+                    {
+                      staticClass:
+                        "has-text-link has-text-weight-bold is-size-5",
+                      attrs: { type: "is-white", size: "is-large" }
+                    },
+                    [_vm._v(_vm._s(_vm.popAttentionType))]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(6)
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item has-text-centered" }, [
+              _c(
+                "div",
+                [
+                  _c(
+                    "b-tag",
+                    {
+                      staticClass:
+                        "has-text-link has-text-weight-bold is-size-5",
+                      attrs: { type: "is-white", size: "is-large" }
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(
+                          _vm.pop.current_autonomy
+                            ? _vm.pop.current_autonomy.theoretical
+                            : "-"
+                        ) + " "
+                      ),
+                      _c("span", { staticClass: "is-size-6" }, [_vm._v("hrs.")])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(7)
+                ],
+                1
+              )
+            ])
+          ])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("section", {}, [
+      _c("div", { staticClass: "columns is-marginless" }, [
         _c(
           "div",
           {
-            staticClass: "hero-body",
-            staticStyle: { "padding-top": "32px", "padding-bottom": "32px" }
+            staticClass: "column is-2 has-background-white is-paddingless",
+            staticStyle: { "border-right": "solid 0.5px rgba(0,0,0,0.1)" }
           },
           [
             _c(
-              "nav",
-              { staticClass: "level" },
-              [
-                _c("div", { staticClass: "level-item has-text-centered" }, [
-                  _c(
-                    "div",
-                    [
-                      _c(
-                        "b-tag",
-                        {
-                          staticClass:
-                            "has-text-link has-text-weight-bold is-size-5",
-                          attrs: { type: "is-white", size: "is-large" }
-                        },
-                        [_vm._v(_vm._s(_vm.popAttentionPriority))]
-                      ),
-                      _vm._v(" "),
-                      _vm._m(1)
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "level-item has-text-centered" }, [
-                  _c(
-                    "div",
-                    [
-                      _c(
-                        "b-tag",
-                        {
-                          staticClass:
-                            "has-text-link has-text-weight-bold is-size-5",
-                          attrs: { type: "is-white", size: "is-large" }
-                        },
-                        [_vm._v(_vm._s(_vm.pop.dependences))]
-                      ),
-                      _vm._v(" "),
-                      _vm._m(2)
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "level-item has-text-centered" }, [
-                  _c(
-                    "div",
-                    [
-                      _c(
-                        "b-tag",
-                        {
-                          staticClass:
-                            "has-text-link has-text-weight-bold is-size-5",
-                          attrs: { type: "is-white", size: "is-large" }
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(_vm.popCategory ? _vm.popCategory : "-")
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm._m(3)
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "level-item has-text-centered" }, [
-                  _c(
-                    "div",
-                    [
-                      _c(
-                        "b-tag",
-                        {
-                          staticClass:
-                            "has-text-link has-text-weight-bold is-size-5",
-                          attrs: { type: "is-white", size: "is-large" }
-                        },
-                        [_vm._v(_vm._s(_vm.popAttentionType))]
-                      ),
-                      _vm._v(" "),
-                      _vm._m(4)
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "level-item has-text-centered" }, [
-                  _c(
-                    "div",
-                    [
-                      _c(
-                        "b-tag",
-                        {
-                          staticClass:
-                            "has-text-link has-text-weight-bold is-size-5",
-                          attrs: { type: "is-white", size: "is-large" }
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              _vm.pop.current_autonomy
-                                ? _vm.pop.current_autonomy.theoretical
-                                : "-"
-                            ) + " "
-                          ),
-                          _c("span", { staticClass: "is-size-6" }, [
-                            _vm._v("hrs.")
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm._m(5)
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _vm.canEditPop
-                  ? _c(
-                      "b-tooltip",
-                      {
-                        attrs: {
-                          label: _vm.isEditMode
-                            ? "Salir del modo edición"
-                            : "Entrar en modo edición",
-                          position: "is-left",
-                          type: "is-link",
-                          animated: ""
-                        }
-                      },
-                      [
-                        _c(
-                          "button",
+              "div",
+              {
+                staticClass: "columns is-multiline",
+                staticStyle: { padding: "24px" }
+              },
+              _vm._l(_vm.tabs, function(tab) {
+                return _c(
+                  "div",
+                  {
+                    key: tab.component,
+                    staticClass:
+                      "column is-block-desktop-only is-block-tablet-only is-block-mobile tile is-parent",
+                    class: !_vm.isMobile() && "is-6",
+                    staticStyle: { padding: "8px" },
+                    attrs: { label: tab.title, type: "is-dark" }
+                  },
+                  [
+                    _vm.showTab(tab)
+                      ? _c(
+                          "a",
                           {
-                            staticClass: "button",
-                            class: _vm.isEditMode ? "is-info" : "is-link",
-                            staticStyle: {
-                              height: "48px",
-                              "margin-right": "-24px"
-                            },
-                            attrs: { type: "button" },
+                            staticClass:
+                              "box is-bold tile is-child has-text-centered columns is-vcentered",
+                            class:
+                              _vm.currentTab === tab.component &&
+                              (_vm.currentTab == "eco"
+                                ? "is-eco is-bold"
+                                : "is-bold is-link"),
+                            style:
+                              !tab.title.includes(" ") &&
+                              "padding-right: 8px; padding-left: 8px",
                             on: {
                               click: function($event) {
-                                _vm.isEditMode = !_vm.isEditMode
+                                _vm.currentTab = tab.component
                               }
                             }
                           },
                           [
-                            _c("div", { staticClass: "columns" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "column",
-                                  staticStyle: {
-                                    "padding-left": "8px",
-                                    "padding-right": "5px"
+                            _c(
+                              "div",
+                              { staticClass: "column is-paddingless" },
+                              [
+                                _c("font-awesome-icon", {
+                                  class:
+                                    _vm.currentTab === tab.component
+                                      ? "has-text-white"
+                                      : "has-text-grey",
+                                  attrs: {
+                                    icon: [tab.icon_type, tab.icon],
+                                    size: "2x"
                                   }
-                                },
-                                [
-                                  _c("font-awesome-icon", {
-                                    attrs: {
-                                      icon: _vm.isEditMode
-                                        ? ["fas", "edit"]
-                                        : ["fas", "edit"]
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("div", [
-                                    _vm._v(
-                                      _vm._s(
-                                        _vm.isEditMode ? "MODO EDICION" : ""
-                                      )
-                                    )
-                                  ])
-                                ],
-                                1
-                              )
-                            ])
-                          ]
-                        )
-                      ]
-                    )
-                  : _vm._e()
-              ],
-              1
-            )
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("section", {}, [
-        _c("div", { staticClass: "columns is-marginless" }, [
-          _c(
-            "div",
-            {
-              staticClass: "column is-2 has-background-white is-paddingless",
-              staticStyle: { "border-right": "solid 0.5px rgba(0,0,0,0.1)" }
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "columns is-multiline",
-                  staticStyle: { padding: "24px" }
-                },
-                _vm._l(_vm.tabs, function(tab) {
-                  return _c(
-                    "div",
-                    {
-                      key: tab.component,
-                      staticClass:
-                        "column is-block-desktop-only is-block-tablet-only is-block-mobile tile is-parent",
-                      class: !_vm.isMobile() && "is-6",
-                      staticStyle: { padding: "8px" },
-                      attrs: { label: tab.title, type: "is-dark" }
-                    },
-                    [
-                      _vm.showTab(tab)
-                        ? _c(
-                            "a",
-                            {
-                              staticClass:
-                                "box is-bold tile is-child has-text-centered columns is-vcentered",
-                              class:
-                                _vm.currentTab === tab.component &&
-                                (_vm.currentTab == "eco"
-                                  ? "is-eco is-bold"
-                                  : "is-bold is-link"),
-                              style:
-                                !tab.title.includes(" ") &&
-                                "padding-right: 8px; padding-left: 8px",
-                              on: {
-                                click: function($event) {
-                                  _vm.currentTab = tab.component
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "div",
-                                { staticClass: "column is-paddingless" },
-                                [
-                                  _c("font-awesome-icon", {
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only is-hidden-widescreen-only",
                                     class:
                                       _vm.currentTab === tab.component
                                         ? "has-text-white"
                                         : "has-text-grey",
-                                    attrs: {
-                                      icon: [tab.icon_type, tab.icon],
-                                      size: "2x"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only is-hidden-widescreen-only",
-                                      class:
-                                        _vm.currentTab === tab.component
-                                          ? "has-text-white"
-                                          : "has-text-grey",
-                                      staticStyle: { "padding-top": "12px" }
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "is-size-7 has-text-weight-semibold"
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                            " +
-                                              _vm._s(tab.title.toUpperCase()) +
-                                              "\n                                        "
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      !_vm.showTab(tab)
-                        ? _c(
-                            "div",
-                            {
-                              staticClass:
-                                "box is-bold tile is-child has-text-centered columns is-vcentered has-background-light",
-                              style:
-                                !tab.title.includes(" ") &&
-                                "padding-right: 8px; padding-left: 8px"
-                            },
-                            [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "column is-paddingless has-text-grey-light"
-                                },
-                                [
-                                  _c("font-awesome-icon", {
-                                    attrs: {
-                                      icon: [tab.icon_type, tab.icon],
-                                      size: "2x"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only is-hidden-widescreen-only",
-                                      staticStyle: { "padding-top": "12px" }
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "is-size-7 has-text-weight-semibold"
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                            " +
-                                              _vm._s(tab.title.toUpperCase()) +
-                                              "\n                                        "
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            ]
-                          )
-                        : _vm._e()
-                    ]
-                  )
-                }),
-                0
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "column section has-background-light",
-              class:
-                _vm.currentTabComponent == "location" ||
-                _vm.currentTabComponent == "sites"
-                  ? "is-paddingless"
-                  : "",
-              staticStyle: { "padding-top": "32px" }
-            },
-            [
+                                    staticStyle: { "padding-top": "12px" }
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "is-size-7 has-text-weight-semibold"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                            " +
+                                            _vm._s(tab.title.toUpperCase()) +
+                                            "\n                                        "
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.showTab(tab)
+                      ? _c(
+                          "div",
+                          {
+                            staticClass:
+                              "box is-bold tile is-child has-text-centered columns is-vcentered has-background-light",
+                            style:
+                              !tab.title.includes(" ") &&
+                              "padding-right: 8px; padding-left: 8px"
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "column is-paddingless has-text-grey-light"
+                              },
+                              [
+                                _c("font-awesome-icon", {
+                                  attrs: {
+                                    icon: [tab.icon_type, tab.icon],
+                                    size: "2x"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only is-hidden-widescreen-only",
+                                    staticStyle: { "padding-top": "12px" }
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "is-size-7 has-text-weight-semibold"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                            " +
+                                            _vm._s(tab.title.toUpperCase()) +
+                                            "\n                                        "
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ]
+                )
+              }),
+              0
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "column section has-background-light",
+            class:
+              _vm.currentTabComponent == "location" ||
+              _vm.currentTabComponent == "sites"
+                ? "is-paddingless"
+                : "",
+            staticStyle: { "padding-top": "32px" }
+          },
+          [
+            _c(
+              "keep-alive",
+              [
+                _c(_vm.currentTabComponent, {
+                  tag: "detail",
+                  attrs: {
+                    user: _vm.user,
+                    pop: _vm.pop,
+                    layout: _vm.pop.layout,
+                    popClassification: _vm.popClassification,
+                    popCritical: _vm.popCritical,
+                    bodyBackground: _vm.bodyBackground,
+                    boxBackground: _vm.boxBackground,
+                    primaryText: _vm.primaryText,
+                    secondaryText: _vm.secondaryText,
+                    darkMode: _vm.darkMode,
+                    isEditMode: _vm.isEditMode,
+                    bafi: _vm.bafi,
+                    droneVideos: _vm.pop.drone_videos
+                  }
+                })
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "column is-2 has-background-white is-paddingless",
+            staticStyle: { "border-left": "solid 0.5px rgba(0,0,0,0.1)" }
+          },
+          [
+            _c("section", { staticClass: "section" }, [
               _c(
-                "keep-alive",
+                "div",
+                { staticClass: "columns is-multiline tile is-ancestor" },
                 [
-                  _c(_vm.currentTabComponent, {
-                    tag: "detail",
+                  _c("characteristics", {
                     attrs: {
                       user: _vm.user,
                       pop: _vm.pop,
-                      layout: _vm.pop.layout,
                       popClassification: _vm.popClassification,
                       popCritical: _vm.popCritical,
                       bodyBackground: _vm.bodyBackground,
@@ -1797,77 +1699,49 @@ var render = function() {
                       secondaryText: _vm.secondaryText,
                       darkMode: _vm.darkMode,
                       isEditMode: _vm.isEditMode,
-                      bafi: _vm.bafi,
-                      droneVideos: _vm.pop.drone_videos
+                      bafi: _vm.bafi
                     }
                   })
                 ],
                 1
               )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "column is-2 has-background-white is-paddingless",
-              staticStyle: { "border-left": "solid 0.5px rgba(0,0,0,0.1)" }
-            },
-            [
-              _c("section", { staticClass: "section" }, [
-                _c(
-                  "div",
-                  { staticClass: "columns is-multiline tile is-ancestor" },
-                  [
-                    _c("characteristics", {
-                      attrs: {
-                        user: _vm.user,
-                        pop: _vm.pop,
-                        popClassification: _vm.popClassification,
-                        popCritical: _vm.popCritical,
-                        bodyBackground: _vm.bodyBackground,
-                        boxBackground: _vm.boxBackground,
-                        primaryText: _vm.primaryText,
-                        secondaryText: _vm.secondaryText,
-                        darkMode: _vm.darkMode,
-                        isEditMode: _vm.isEditMode,
-                        bafi: _vm.bafi
-                      }
-                    })
-                  ],
-                  1
-                )
-              ])
-            ]
-          )
-        ])
+            ])
+          ]
+        )
       ])
-    ],
-    1
-  )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "column",
-        staticStyle: { "padding-left": "5px", "padding-right": "8px" }
-      },
-      [
-        _c("div", { staticClass: "has-text-weight-semibold is-size-6" }, [
-          _vm._v("L"),
-          _c("br"),
-          _vm._v("O"),
-          _c("br"),
-          _vm._v("G")
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "column" }, [
+      _c("div", { staticClass: "is-size-5 has-text-weight-semibold" }, [
+        _vm._v("Pop en zona de riesgo")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column" }, [
+      _c("div", { staticClass: "is-size-5 has-text-weight-semibold" }, [
+        _vm._v("Oficina CRM")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column" }, [
+      _c("div", { staticClass: "is-size-5 has-text-weight-semibold" }, [
+        _vm._v("ATC")
+      ])
+    ])
   },
   function() {
     var _vm = this

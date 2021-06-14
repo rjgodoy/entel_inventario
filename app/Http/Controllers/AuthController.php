@@ -18,32 +18,10 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-
         $http = new Client([
             'base_uri' => config('app.url'),
             'timeout'  => 5.0,
         ]);
-        // try {
-        //     $response = $http->post(config('services.passport.login_endpoint'), [
-        //         'form_params' => [
-        //             'grant_type' => 'password',
-        //             'client_id' => config('services.passport.client_id'),
-        //             'client_secret' => config('services.passport.client_secret'),
-        //             'username' => $request->username,
-        //             'password' => $request->password,
-        //         ],
-        //     ]);
-        //     // return $response;
-        //     // return auth()->loginWithId();
-	       //  return json_decode((string) $response->getBody(), true);
-        // } catch (BadResponseException $e) {
-        //     if ($e->getCode() === 400) {
-        //         return response()->json('Invalid Request. Please enter a username or a password.', $e->getCode());
-        //     } else if ($e->getCode() === 401) {
-        //         return response()->json('Your credentials are incorrect. Please try again', $e->getCode());
-        //     }
-        //     return response()->json('Something went wrong on the server.', $e->getCode());
-        // }
 
         $request->validate([
             'username' => 'required|string',
@@ -72,7 +50,6 @@ class AuthController extends Controller
                 $tokenResult->token->expires_at)
                     ->toDateTimeString(),
         ]);
-
     }
 
     public function logout(Request $request)

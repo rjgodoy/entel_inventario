@@ -51,11 +51,8 @@
         },
         
         props : [
-            'user',
             'selectedCrm',
             'selectedZona',
-            'bodyBackground',
-            'boxBackground',
             'primaryText',
             'secondaryText',
             'core'

@@ -457,70 +457,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
  // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -560,29 +496,29 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     },
     // RedCoreChart,
     // ###### Equipment #####
-    JunctionsData: function JunctionsData() {
-      return __webpack_require__.e(/*! import() | chunks/dashboard/junctions */ "chunks/dashboard/junctions").then(__webpack_require__.bind(null, /*! ./JunctionsData */ "./resources/js/components/dashboard/JunctionsData.vue"));
-    },
     ElectricLinesData: function ElectricLinesData() {
-      return __webpack_require__.e(/*! import() | chunks/dashboard/electricLines */ "chunks/dashboard/electricLines").then(__webpack_require__.bind(null, /*! ./ElectricLinesData */ "./resources/js/components/dashboard/ElectricLinesData.vue"));
+      return __webpack_require__.e(/*! import() | chunks/dashboard/equipment/electricLines */ "chunks/dashboard/equipment/electricLines").then(__webpack_require__.bind(null, /*! ./equipment/ElectricLinesData */ "./resources/js/components/dashboard/equipment/ElectricLinesData.vue"));
+    },
+    JunctionsData: function JunctionsData() {
+      return __webpack_require__.e(/*! import() | chunks/dashboard/equipment/junctions */ "chunks/dashboard/equipment/junctions").then(__webpack_require__.bind(null, /*! ./equipment/JunctionsData */ "./resources/js/components/dashboard/equipment/JunctionsData.vue"));
     },
     GeneratorSetsData: function GeneratorSetsData() {
-      return __webpack_require__.e(/*! import() | chunks/dashboard/generatorSets */ "chunks/dashboard/generatorSets").then(__webpack_require__.bind(null, /*! ./GeneratorSetsData */ "./resources/js/components/dashboard/GeneratorSetsData.vue"));
+      return __webpack_require__.e(/*! import() | chunks/dashboard/equipment/generatorSets */ "chunks/dashboard/equipment/generatorSets").then(__webpack_require__.bind(null, /*! ./equipment/GeneratorSetsData */ "./resources/js/components/dashboard/equipment/GeneratorSetsData.vue"));
     },
     PowerRectifiersData: function PowerRectifiersData() {
-      return __webpack_require__.e(/*! import() | chunks/dashboard/powerRectifiers */ "chunks/dashboard/powerRectifiers").then(__webpack_require__.bind(null, /*! ./PowerRectifiersData */ "./resources/js/components/dashboard/PowerRectifiersData.vue"));
+      return __webpack_require__.e(/*! import() | chunks/dashboard/equipment/powerRectifiers */ "chunks/dashboard/equipment/powerRectifiers").then(__webpack_require__.bind(null, /*! ./equipment/PowerRectifiersData */ "./resources/js/components/dashboard/equipment/PowerRectifiersData.vue"));
     },
     AirConditionersData: function AirConditionersData() {
-      return __webpack_require__.e(/*! import() | chunks/dashboard/airConditioners */ "chunks/dashboard/airConditioners").then(__webpack_require__.bind(null, /*! ./AirConditionersData */ "./resources/js/components/dashboard/AirConditionersData.vue"));
+      return __webpack_require__.e(/*! import() | chunks/dashboard/equipment/airConditioners */ "chunks/dashboard/equipment/airConditioners").then(__webpack_require__.bind(null, /*! ./equipment/AirConditionersData */ "./resources/js/components/dashboard/equipment/AirConditionersData.vue"));
     },
     VerticalStructuresData: function VerticalStructuresData() {
-      return __webpack_require__.e(/*! import() | chunks/dashboard/verticalStructures */ "chunks/dashboard/verticalStructures").then(__webpack_require__.bind(null, /*! ./VerticalStructuresData */ "./resources/js/components/dashboard/VerticalStructuresData.vue"));
+      return __webpack_require__.e(/*! import() | chunks/dashboard/equipment/verticalStructures */ "chunks/dashboard/equipment/verticalStructures").then(__webpack_require__.bind(null, /*! ./equipment/VerticalStructuresData */ "./resources/js/components/dashboard/equipment/VerticalStructuresData.vue"));
     },
     InfrastructuresData: function InfrastructuresData() {
-      return __webpack_require__.e(/*! import() | chunks/dashboard/infrastructures */ "chunks/dashboard/infrastructures").then(__webpack_require__.bind(null, /*! ./InfrastructuresData */ "./resources/js/components/dashboard/InfrastructuresData.vue"));
+      return __webpack_require__.e(/*! import() | chunks/dashboard/equipment/infrastructures */ "chunks/dashboard/equipment/infrastructures").then(__webpack_require__.bind(null, /*! ./equipment/InfrastructuresData */ "./resources/js/components/dashboard/equipment/InfrastructuresData.vue"));
     },
     ModalDownload: function ModalDownload() {
-      return Promise.all(/*! import() | chunks/dashboard/modalDownload */[__webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~ad5cfa06"), __webpack_require__.e("chunks/dashboard/modalDownload")]).then(__webpack_require__.bind(null, /*! ./ModalDownload */ "./resources/js/components/dashboard/ModalDownload.vue"));
+      return Promise.all(/*! import() | chunks/dashboard/modalDownload */[__webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~05b340cb"), __webpack_require__.e("chunks/dashboard/modalDownload")]).then(__webpack_require__.bind(null, /*! ./ModalDownload */ "./resources/js/components/dashboard/ModalDownload.vue"));
     }
   },
   props: ['user', 'last_data_counters', 'darkMode'],
@@ -602,6 +538,21 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       core: 0,
       pops: [],
       zonas: [],
+      equipmentComponent: [{
+        'name': 'ElectricLinesData'
+      }, {
+        'name': 'JunctionsData'
+      }, {
+        'name': 'GeneratorSetsData'
+      }, {
+        'name': 'PowerRectifiersData'
+      }, {
+        'name': 'AirConditionersData'
+      }, {
+        'name': 'VerticalStructuresData'
+      }, {
+        'name': 'InfrastructuresData'
+      }],
       crms: Array,
       tabShow: 0,
       isFetching: false,
@@ -769,10 +720,6 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
                 _context.next = 4;
                 return axios.get("/api/dashboardMap?core=".concat(_this2.core, "&crm_id=").concat(crm_id, "&zona_id=").concat(zona_id)).then(function (response) {
                   try {
-                    // this.pops = []
-                    // response.data.forEach(element =>{
-                    //     setInterval(this.pops.push(element), 0.1)
-                    // })
                     _this2.pops = response.data;
                   } catch (error) {
                     console.log(error);
@@ -1491,8 +1438,6 @@ var render = function() {
             [
               _c("b-field", [
                 _c("div", { staticClass: "columns" }, [
-                  _c("div", { staticClass: "column" }),
-                  _vm._v(" "),
                   _c(
                     "div",
                     { staticClass: "column has-text-centered" },
@@ -1517,9 +1462,7 @@ var render = function() {
                       )
                     ],
                     1
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "column" })
+                  )
                 ])
               ]),
               _vm._v(" "),
@@ -2856,9 +2799,6 @@ var render = function() {
                                 staticClass:
                                   "animate__animated animate__fadeIn",
                                 attrs: {
-                                  user: _vm.user,
-                                  bodyBackground: _vm.bodyBackground,
-                                  boxBackground: _vm.boxBackground,
                                   primaryText: _vm.primaryText,
                                   secondaryText: _vm.secondaryText,
                                   selectedCrm: this.selectedCrm,
@@ -2878,17 +2818,7 @@ var render = function() {
                       this.currentTab !== "alba"
                         ? _c(
                             "article",
-                            [
-                              _c("pret-data-chart", {
-                                attrs: {
-                                  user: _vm.user,
-                                  bodyBackground: _vm.bodyBackground,
-                                  boxBackground: _vm.boxBackground,
-                                  primaryText: _vm.primaryText,
-                                  secondaryText: _vm.secondaryText
-                                }
-                              })
-                            ],
+                            [_c("keep-alive", [_c("pret-data-chart")], 1)],
                             1
                           )
                         : _vm._e()
@@ -2901,6 +2831,11 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
+      _c("hr", {
+        staticClass: "is-paddingless is-divider p-0 mb-1",
+        attrs: { "data-content": "Equipamiento" }
+      }),
+      _vm._v(" "),
       _c("section", { staticClass: "section", class: _vm.bodyBackground }, [
         _c(
           "div",
@@ -2908,11 +2843,6 @@ var render = function() {
           [
             _c("electric-lines-data", {
               attrs: {
-                user: _vm.user,
-                bodyBackground: _vm.bodyBackground,
-                boxBackground: _vm.boxBackground,
-                primaryText: _vm.primaryText,
-                secondaryText: _vm.secondaryText,
                 selectedCrm: this.selectedCrm,
                 selectedZona: this.selectedZona,
                 core: _vm.core
@@ -2921,11 +2851,6 @@ var render = function() {
             _vm._v(" "),
             _c("junctions-data", {
               attrs: {
-                user: _vm.user,
-                bodyBackground: _vm.bodyBackground,
-                boxBackground: _vm.boxBackground,
-                primaryText: _vm.primaryText,
-                secondaryText: _vm.secondaryText,
                 selectedCrm: this.selectedCrm,
                 selectedZona: this.selectedZona,
                 core: _vm.core
@@ -2934,11 +2859,6 @@ var render = function() {
             _vm._v(" "),
             _c("generator-sets-data", {
               attrs: {
-                user: _vm.user,
-                bodyBackground: _vm.bodyBackground,
-                boxBackground: _vm.boxBackground,
-                primaryText: _vm.primaryText,
-                secondaryText: _vm.secondaryText,
                 selectedCrm: this.selectedCrm,
                 selectedZona: this.selectedZona,
                 core: _vm.core
@@ -2947,11 +2867,6 @@ var render = function() {
             _vm._v(" "),
             _c("power-rectifiers-data", {
               attrs: {
-                user: _vm.user,
-                bodyBackground: _vm.bodyBackground,
-                boxBackground: _vm.boxBackground,
-                primaryText: _vm.primaryText,
-                secondaryText: _vm.secondaryText,
                 selectedCrm: this.selectedCrm,
                 selectedZona: this.selectedZona,
                 core: _vm.core
@@ -2960,11 +2875,6 @@ var render = function() {
             _vm._v(" "),
             _c("air-conditioners-data", {
               attrs: {
-                user: _vm.user,
-                bodyBackground: _vm.bodyBackground,
-                boxBackground: _vm.boxBackground,
-                primaryText: _vm.primaryText,
-                secondaryText: _vm.secondaryText,
                 selectedCrm: this.selectedCrm,
                 selectedZona: this.selectedZona,
                 core: _vm.core
@@ -2973,11 +2883,6 @@ var render = function() {
             _vm._v(" "),
             _c("vertical-structures-data", {
               attrs: {
-                user: _vm.user,
-                bodyBackground: _vm.bodyBackground,
-                boxBackground: _vm.boxBackground,
-                primaryText: _vm.primaryText,
-                secondaryText: _vm.secondaryText,
                 selectedCrm: this.selectedCrm,
                 selectedZona: this.selectedZona,
                 core: _vm.core
@@ -2986,11 +2891,6 @@ var render = function() {
             _vm._v(" "),
             _c("infrastructures-data", {
               attrs: {
-                user: _vm.user,
-                bodyBackground: _vm.bodyBackground,
-                boxBackground: _vm.boxBackground,
-                primaryText: _vm.primaryText,
-                secondaryText: _vm.secondaryText,
                 selectedCrm: this.selectedCrm,
                 selectedZona: this.selectedZona,
                 core: _vm.core

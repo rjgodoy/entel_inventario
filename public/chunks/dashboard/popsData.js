@@ -68,7 +68,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['user', 'selectedCrm', 'selectedZona', 'core', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'last_updated'],
+  props: ['selectedCrm', 'selectedZona', 'core', 'primaryText', 'secondaryText', 'last_updated'],
   data: function data() {
     return {
       popsData: [],

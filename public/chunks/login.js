@@ -79,39 +79,35 @@ __webpack_require__.r(__webpack_exports__);
             'content-type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest'
           }
-        };
-        axios.post('/api/auth/login', credentials, config).then(function (response) {
+        }; // axios.post('/api/auth/login', credentials, config)
+        // .then(response => { 
+        //     console.log(response)
+        //     if (response.status === 200) {
+
+        axios.post('/login', credentials, config).then(function (response) {
+          _this.isLoading = 0;
           console.log(response);
 
-          if (response.status === 200) {
-            axios.post('/login', credentials, config).then(function (response) {
-              _this.isLoading = 0;
-              console.log(response);
-
-              _this.$router.go('/dashboard');
-            });
-          }
-        })["catch"](function (error) {
-          console.log(error.response.status);
-
-          if (error.response.status === 401) {
-            _this.isLoading = 0;
-
-            _this.$buefy.toast.open({
-              message: 'Las credenciales no concuerdan con nuestros registros.',
-              type: 'is-warning',
-              duration: 3000
-            });
-          } else {
-            _this.isLoading = 0;
-
-            _this.$buefy.toast.open({
-              message: 'Algo inesperado ocurrió. Favor intentalo nuevamente.',
-              type: 'is-danger',
-              duration: 3000
-            });
-          }
-        });
+          _this.$router.go('/dashboard');
+        }); //     }
+        // }).catch((error) => {
+        //     console.log(error.response.status)
+        //     if (error.response.status === 401) {
+        //         this.isLoading = 0
+        //         this.$buefy.toast.open({
+        //             message: 'Las credenciales no concuerdan con nuestros registros.',
+        //             type: 'is-warning',
+        //             duration: 3000
+        //         })
+        //     } else {
+        //         this.isLoading = 0
+        //         this.$buefy.toast.open({
+        //             message: 'Algo inesperado ocurrió. Favor intentalo nuevamente.',
+        //             type: 'is-danger',
+        //             duration: 3000
+        //         })
+        //     }
+        // })
       }
     }
   }

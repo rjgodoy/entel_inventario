@@ -473,7 +473,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "button is-link",
+            staticClass: "button is-info has-text-weight-bold is-medium",
             staticStyle: {
               border: "2px solid #fff",
               borderRadius: "3px",

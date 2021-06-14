@@ -22,7 +22,7 @@
         <!-- Dependencias -->
         <div class="" ref="myDependencesButton">
             <button 
-                class="button is-link" 
+                class="button is-info has-text-weight-bold is-medium" 
                 @click="panDependences(google)" 
                 style="
                     border: 2px solid #fff;

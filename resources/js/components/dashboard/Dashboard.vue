@@ -7,9 +7,6 @@
             <div class="container" style="margin-top: -32px; margin-bottom: 20px">
                 <b-field>
                     <div class="columns">
-                        <div class="column">
-                            <!-- <b-button class="button is-warning is-small is-pulled-left" @click="viewCriticPops" v-model="criticPopsSwitch">POP Críticos</b-button> -->
-                        </div>
                         <div class="column has-text-centered">
                             <b-switch  
                                 @input="switchCore" 
@@ -21,9 +18,6 @@
                                 POP CORE
                             </b-switch>
                         </div>
-                        <div class="column">
-                            <!-- <b-button class="button is-link is-small is-pulled-right" @click="changeStyle" v-model="darkMode">Style</b-button> -->
-                        </div>
                     </div> 
                 </b-field>
 
@@ -34,7 +28,6 @@
                                 <div class="is-size-6 has-text-weight-semibold">
                                     CRM {{ crm.nombre_crm }}
                                 </div>
-
                                 <div style="margin-top: 10px;" class="is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only">
                                     <div class="is-size-7 has-text-weight-light" v-text="'Subgerente'"></div> 
                                     <div class="is-size-7 has-text-weight-normal">{{ crm.subgerente_crm }}</div>
@@ -56,7 +49,6 @@
                                     <div class="is-size-6 has-text-weight-semibold">
                                         Zona {{ zona.nombre_zona }}
                                     </div>
-
                                     <div style="margin-top: 10px;" class="is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only">
                                         <div class="is-size-7 has-text-weight-light">Coordinador</div> 
                                         <div class="is-size-7 has-text-weight-semibold">{{ zona.responsable.nombre }} {{ zona.responsable.apellido }}</div>
@@ -68,6 +60,7 @@
                 </div>
             </div>
 
+            <!-- BUSCADOR -->
             <div class="container" style="width: 50%; margin-top: 30px;">
                 <b-autocomplete
                     autofocus
@@ -92,7 +85,6 @@
 
                     <template slot-scope="props">
                         <div class="columns" style="padding: 10px;">
-
                             <div class="column is-5">
                                 <div class="is-size-7 has-text-weight-semibold" :class="secondaryText">
                                     <span>
@@ -114,7 +106,6 @@
                             </div>
 
                             <div class="column is-2">
-
                                 <div class="tags has-addons">
                                     <span class="tag is-dark">categoría</span>
                                     <span 
@@ -131,7 +122,6 @@
                                         {{ props.option.pop.alba_project == 1 ? 'alba' : '' }}
                                     </span>
                                 </div>
-
                             </div>
 
                             <div class="column is-3">
@@ -160,9 +150,9 @@
             <!-- CUADROS -->
             <div class="" :class="bodyBackground" style="margin: 20px 0 -30px 0;">
                 <div class="">
-
                     <div class="tile is-ancestor">
 
+                        <!-- Cuadros sector izquierdo -->
                         <div class="tile is-vertical">
                             <div class="tile">
                                 <div class="tile is-parent">
@@ -269,27 +259,6 @@
                             </div>
 
                             <div class="tile">
-                                <!-- <div class="tile is-parent">
-                                    <div class="tile is-child box">
-                                        <div class="is-size-5 has-text-weight-semibold title">POP nuevos</div>
-                                        <div class="is-size-3 has-text-centered">{{ last_data_counters && last_data_counters.pop_news_month }}
-                                            <p class="is-size-6 has-text-weight-normal">POP nuevos ingresados este mes</p>
-                                        </div>
-                                        <div class="field" style="margin-top: 20px;">
-                                            <div class="is-size-7 has-text-weight-light">Utimo POP ingresado:</div>
-                                            <router-link class="is-size-6" :to="'/pop/' + last_data_counters.last_site.pop.id" target="_blank">
-                                                {{ last_data_counters.last_site.nem_site }} - {{ last_data_counters.last_site.nombre }}
-                                            </router-link>
-                                            <div class="is-size-7">
-                                                <p>{{ last_data_counters.last_site.pop.zona.nombre_zona }}</p>
-                                                <p class="has-text-weight-light">CRM {{ last_data_counters.last_site.pop.zona.crm.nombre_crm }}</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="has-text-right is-size-7 has-text-weight-light" style="padding-top: 10px;">Fecha actualización: {{ last_data_counters.last_updated_pops }}</div>
-                                    </div>
-                                </div> -->
-
                                 <div class="tile is-parent">
                                     <div class="tile is-child box">
                                         <div class="is-size-6 has-text-weight-semibold title">Nuevos Sitios</div>
@@ -309,8 +278,6 @@
                                                 <div>Zona {{ last_data_counters.last_site.pop.zona.nombre_zona }} - <span class="has-text-weight-light">CRM {{ last_data_counters.last_site.pop.zona.crm.nombre_crm }}</span></div>
                                             </div>
                                         </div>
-
-                                        <!-- <div class="has-text-right is-size-7 has-text-weight-light" style="padding-top: 12px;">Fecha actualización: {{ last_data_counters.last_updated_sites }}</div> -->
                                     </div>
                                 </div>
 
@@ -322,7 +289,7 @@
                                             <div class="is-size-6 has-text-weight-light">Tecnologías nuevas ingresados este mes</div>
                                         </div>
 
-                                        <hr class="is-paddingless" />
+                                        <hr class="is-paddingless"/>
 
                                         <div class="field" style="margin-top: -12px;">
                                             <div class="is-size-7 has-text-weight-light">Utima Tecnología ingresada:</div>
@@ -333,18 +300,18 @@
                                                 <div>Zona {{ last_data_counters.last_technology.site.pop.zona.nombre_zona }} - <span class="has-text-weight-light">CRM {{ last_data_counters.last_technology.site.pop.zona.crm.nombre_crm }}</span></div>
                                             </div>
                                         </div>
-
-                                        <!-- <div class="has-text-right is-size-7 has-text-weight-light" style="padding-top: 12px; align-items: flex-end">Fecha actualización: {{ last_data_counters.last_updated_sites }}</div> -->
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
+                        <!-- Cuadros sector mapa -->
                         <div class="tile is-parent is-vertical is-hidden-mobile is-hidden-tablet-only is-hidden-desktop-only">
                             <div class="tile is-child card" style="border: solid 4px white" :class="boxBackground">
                                 <b-tabs type="is-toggle" size="is-small" expanded v-model="tabShow" class="is-marginless">
                                     <b-tab-item label="POP"></b-tab-item>
                                     <b-tab-item label="Clima"></b-tab-item>
+                                    <!-- <b-tab-item label="Chile"></b-tab-item> -->
                                 </b-tabs>
                                 <keep-alive>
                                     <map-view
@@ -359,9 +326,15 @@
                                     <iframe style="margin-top: -27px; padding-bottom: 0" v-if="tabShow == 1" width="100%" height="95%" src="https://embed.windy.com/embed2.html?lat=-33.500&lon=-70.667&detailLat=-33.500&detailLon=-70.667&width=650&height=450&zoom=5&level=surface&overlay=temp&product=gfs&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1" frameborder="0">
                                     </iframe>
                                 </keep-alive>
+
+                                <!-- <keep-alive>
+                                    <iframe  style="margin-top: -27px; padding-bottom: 0" v-if="tabShow == 2" width="100%" height="95%"  src="https://app.powerbi.com/view?r=eyJrIjoiZWEzYjg4YmUtODM2Ny00MTBkLWJhNzUtYzNlYzk1YjgxYzE2IiwidCI6IjVmNjBkNjdiLTg0YmUtNGRkNy1hYzM2LTkwYzgxOTEwMTFmYSIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
+                                </keep-alive> -->
+
                             </div>                               
                         </div>
 
+                        <!-- Cuadros sector derecho -->
                         <div class="tile">
                             <div class="tile is-parent is-vertical">
                                 <article class="tile is-child box has-background" :class="boxBackground">
@@ -372,9 +345,6 @@
                                     <keep-alive>
                                         <component :is="currentTabComponent"
                                             class="animate__animated animate__fadeIn"
-                                            :user="user"
-                                            :bodyBackground="bodyBackground"
-                                            :boxBackground="boxBackground"
                                             :primaryText="primaryText"
                                             :secondaryText="secondaryText"
                                             :selectedCrm="this.selectedCrm"
@@ -386,97 +356,63 @@
                                 </article>
 
                                 <article v-if="(this.currentTab !== 'critics') && (this.currentTab !== 'alba')">
-                                    <!-- <keep-alive> -->
-                                    <pret-data-chart    
-                                        :user="user"
-                                        :bodyBackground="bodyBackground"
-                                        :boxBackground="boxBackground"
-                                        :primaryText="primaryText"
-                                        :secondaryText="secondaryText"
-                                    ></pret-data-chart>
-                                    <!-- </keep-alive> -->
+                                    <keep-alive>
+                                        <pret-data-chart/>
+                                    </keep-alive>
                                 </article>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- <iframe width="650" height="450" src="https://embed.windy.com/embed2.html?lat=-33.708&lon=-70.815&zoom=10&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=-33.708&detailLon=-70.815&metricWind=default&metricTemp=default&radarRange=-1" frameborder="0"></iframe> -->
+        <hr class="is-paddingless is-divider p-0 mb-1" data-content="Equipamiento"/>
 
         <!-- Equipamiento -->
         <section class="section" :class="bodyBackground">
-            <!-- <div class="title">Equipamiento</div> -->
             <div class="columns is-multiline">
+                <!-- <equipment-component v-for="equipment in equipmentComponent" :key="equipment.name"
+                    :selectedCrm="this.selectedCrm"
+                    :selectedZona="this.selectedZona"
+                    :core="core"
+                    /> -->
+
                 <electric-lines-data
-                    :user="user"
-                    :bodyBackground="bodyBackground"
-                    :boxBackground="boxBackground"
-                    :primaryText="primaryText"
-                    :secondaryText="secondaryText"
                     :selectedCrm="this.selectedCrm"
                     :selectedZona="this.selectedZona"
                     :core="core"
                 />
                 <junctions-data
-                    :user="user"
-                    :bodyBackground="bodyBackground"
-                    :boxBackground="boxBackground"
-                    :primaryText="primaryText"
-                    :secondaryText="secondaryText"
                     :selectedCrm="this.selectedCrm"
                     :selectedZona="this.selectedZona"
                     :core="core"
                 />
                 <generator-sets-data
-                    :user="user"
-                    :bodyBackground="bodyBackground"
-                    :boxBackground="boxBackground"
-                    :primaryText="primaryText"
-                    :secondaryText="secondaryText"
                     :selectedCrm="this.selectedCrm"
                     :selectedZona="this.selectedZona"
                     :core="core"
                 />
                 <power-rectifiers-data
-                    :user="user"
-                    :bodyBackground="bodyBackground"
-                    :boxBackground="boxBackground"
-                    :primaryText="primaryText"
-                    :secondaryText="secondaryText"
                     :selectedCrm="this.selectedCrm"
                     :selectedZona="this.selectedZona"
                     :core="core"
                 />
 
                 <air-conditioners-data
-                    :user="user"
-                    :bodyBackground="bodyBackground"
-                    :boxBackground="boxBackground"
-                    :primaryText="primaryText"
-                    :secondaryText="secondaryText"
                     :selectedCrm="this.selectedCrm"
                     :selectedZona="this.selectedZona"
                     :core="core"
                 />
 
                 <vertical-structures-data
-                    :user="user"
-                    :bodyBackground="bodyBackground"
-                    :boxBackground="boxBackground"
-                    :primaryText="primaryText"
-                    :secondaryText="secondaryText"
                     :selectedCrm="this.selectedCrm"
                     :selectedZona="this.selectedZona"
                     :core="core"
                 />
                 <infrastructures-data
-                    :user="user"
-                    :bodyBackground="bodyBackground"
-                    :boxBackground="boxBackground"
-                    :primaryText="primaryText"
-                    :secondaryText="secondaryText"
                     :selectedCrm="this.selectedCrm"
                     :selectedZona="this.selectedZona"
                     :core="core"
@@ -526,13 +462,13 @@
             // RedCoreChart,
 
             // ###### Equipment #####
-            JunctionsData: () => import(/* webpackChunkName: "chunks/dashboard/junctions"*/'./JunctionsData'),
-            ElectricLinesData: () => import(/* webpackChunkName: "chunks/dashboard/electricLines"*/'./ElectricLinesData'),
-            GeneratorSetsData: () => import(/* webpackChunkName: "chunks/dashboard/generatorSets"*/'./GeneratorSetsData'),
-            PowerRectifiersData: () => import(/* webpackChunkName: "chunks/dashboard/powerRectifiers"*/'./PowerRectifiersData'),
-            AirConditionersData: () => import(/* webpackChunkName: "chunks/dashboard/airConditioners"*/'./AirConditionersData'),
-            VerticalStructuresData: () => import(/* webpackChunkName: "chunks/dashboard/verticalStructures"*/'./VerticalStructuresData'),
-            InfrastructuresData: () => import(/* webpackChunkName: "chunks/dashboard/infrastructures"*/'./InfrastructuresData'),
+            ElectricLinesData: () => import(/* webpackChunkName: "chunks/dashboard/equipment/electricLines"*/'./equipment/ElectricLinesData'),
+            JunctionsData: () => import(/* webpackChunkName: "chunks/dashboard/equipment/junctions"*/'./equipment/JunctionsData'),
+            GeneratorSetsData: () => import(/* webpackChunkName: "chunks/dashboard/equipment/generatorSets"*/'./equipment/GeneratorSetsData'),
+            PowerRectifiersData: () => import(/* webpackChunkName: "chunks/dashboard/equipment/powerRectifiers"*/'./equipment/PowerRectifiersData'),
+            AirConditionersData: () => import(/* webpackChunkName: "chunks/dashboard/equipment/airConditioners"*/'./equipment/AirConditionersData'),
+            VerticalStructuresData: () => import(/* webpackChunkName: "chunks/dashboard/equipment/verticalStructures"*/'./equipment/VerticalStructuresData'),
+            InfrastructuresData: () => import(/* webpackChunkName: "chunks/dashboard/equipment/infrastructures"*/'./equipment/InfrastructuresData'),
             ModalDownload: () => import(/* webpackChunkName: "chunks/dashboard/modalDownload"*/'./ModalDownload'),
         },
 
@@ -560,6 +496,16 @@
                 core: 0,
                 pops: [],
                 zonas: [],
+
+                equipmentComponent: [
+                    { 'name': 'ElectricLinesData' },
+                    { 'name': 'JunctionsData' },
+                    { 'name': 'GeneratorSetsData' },
+                    { 'name': 'PowerRectifiersData' },
+                    { 'name': 'AirConditionersData' },
+                    { 'name': 'VerticalStructuresData' },
+                    { 'name': 'InfrastructuresData' }
+                ],
 
                 crms: Array,
                 tabShow: 0,
@@ -740,14 +686,9 @@
             async getPops () {
                 var crm_id = this.selectedCrm ? this.selectedCrm.id : 0
                 var zona_id = this.selectedZona ? this.selectedZona.id : 0
-
                 await axios.get(`/api/dashboardMap?core=${this.core}&crm_id=${crm_id}&zona_id=${zona_id}`)
                 .then((response) => {
                     try {
-                        // this.pops = []
-                        // response.data.forEach(element =>{
-                        //     setInterval(this.pops.push(element), 0.1)
-                        // })
                         this.pops = response.data
                     } catch (error) {
                         console.log(error);

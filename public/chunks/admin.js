@@ -81,7 +81,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() | chunks/admin/roleUsers */ "chunks/admin/roleUsers").then(__webpack_require__.bind(null, /*! ./RoleUsersTab */ "./resources/js/components/admin/RoleUsersTab.vue"));
     },
     HelperFilesTab: function HelperFilesTab() {
-      return Promise.all(/*! import() | chunks/admin/helperFiles */[__webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~ad5cfa06"), __webpack_require__.e("chunks/admin/helperFiles")]).then(__webpack_require__.bind(null, /*! ./HelperFilesTab */ "./resources/js/components/admin/HelperFilesTab.vue"));
+      return Promise.all(/*! import() | chunks/admin/helperFiles */[__webpack_require__.e("vendors~chunks/admin/helperFiles~chunks/capacityPlanning~chunks/dashboard/modalDownload~chunks/docum~05b340cb"), __webpack_require__.e("chunks/admin/helperFiles")]).then(__webpack_require__.bind(null, /*! ./HelperFilesTab */ "./resources/js/components/admin/HelperFilesTab.vue"));
     }
   },
   props: ['user'],

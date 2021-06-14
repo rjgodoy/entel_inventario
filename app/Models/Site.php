@@ -104,4 +104,9 @@ class Site extends Model
         return $this->hasMany(OTTmpTaskLog::class, 'CustomerName', 'nem_site');
     }
 
+    public function vandalism_records() 
+    {
+        return $this->hasMany(VandalismRecord::class);
+    }
+
 }

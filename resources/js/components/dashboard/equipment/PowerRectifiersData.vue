@@ -1,28 +1,26 @@
 <template>
     <div class="column is-3">
-        <article class="tile is-child box is-bold has-background" :class="boxBackground">
-            <div class="is-box-background is-transparent-light" style="margin-top: -44px">
-                <font-awesome-layers class="fa-10x is-pulled-right">
-                    <font-awesome-icon icon="grip-lines" transform="right-13"/>
-                    <font-awesome-icon icon="bolt" transform="shrink-2 left-2" :style="{ color: 'grey' }"/>
-                </font-awesome-layers>
+        <article class="tile is-child box is-bold has-background">
+            <div class="is-box-background is-transparent-light">
+                <font-awesome-icon 
+                    :icon="['fab', 'superpowers']" size="10x" class="is-pulled-right" style=""/>
             </div>
             <div class="columns">
-                <div class="column is-size-5 has-text-weight-semibold has-text-left" :class="primaryText">Lineas Eléctricas</div>
-                <div class="column is-size-4 has-text-weight-semibold has-text-right" :class="primaryText">{{ this.total | numeral('0,0') }}</div>
+                <div class="column is-8 is-size-5 has-text-weight-semibold has-text-left">Plantas Rectificadoras</div>
+                <div class="column is-size-4 has-text-weight-semibold has-text-right">{{ this.total | numeral('0,0') }}</div>
             </div>
 
             <div class="columns is-multiline">
-                <div class="column is-6" :class="primaryText" v-for="item in this.electricLineData" :key="item.id">
+                <div class="column is-6" v-for="item in this.powerRectifierData" :key="item.id">
                     <!-- <b-message type="is-positive"> -->
-                        <div class="is-size-4 has-text-weight-normal">{{ item.q_electric_lines | numeral('0,0') }}</div>
+                        <div class="is-size-4 has-text-weight-normal">{{ item.q_power_rectifiers | numeral('0,0') }}</div>
                         <div class="is-size-7">{{ item.nombre }}</div>
                     <!-- </b-message> -->
                 </div>
             </div>
-
+            
             <a class="tile is-child box is-bold is-white" style="position: relative; border: solid 1px #eee" 
-                @click="downloadElectricLines">
+                @click="downloadPowerRectifiers">
                 <div class="columns">
                     <div class="column is-1 has-text-centered">
                         <font-awesome-icon 
@@ -31,7 +29,7 @@
                     </div>
                     <div class="column">
                         <div class="is-size-4 has-text-weight-bold" style="margin-top: 2px;">
-                            <p class="is-size-6 has-text-weight-semibold">Descargar listado de Lineas Eléctricas</p>
+                            <p class="is-size-6 has-text-weight-semibold">Descargar listado de Plantas Rectificadoras</p>
                         </div>
                     </div>
                 </div>
@@ -45,28 +43,19 @@
     var moment = require('moment')
     export default {
         props : [
-            'user',
             'selectedCrm',
             'selectedZona',
-            // 'csrf',
-            'bodyBackground',
-            'boxBackground',
-            'primaryText',
-            'secondaryText',
             'core'
         ],
         data() {
             return {
                 crmSelected: this.selectedCrm,
                 zonaSelected: this.selectedZona,
-                electricLineData: null,
+                powerRectifierData: null,
                 total: 0,
                 buttonLoading: '',
                 isLoading: false
             }
-        },
-        created(){
-            this.getElectricLineData()
         },
 
         computed: {
@@ -75,54 +64,57 @@
             },
         },
 
+        created(){
+            this.getPowerRectifierData()
+        },
         mounted() {      
         },
         watch: {
             selectedCrm(newValue, oldValue) {
                 this.crmSelected = newValue
                 this.zonaSelected = null
-                this.getElectricLineData()
+                this.getPowerRectifierData()
             },
             selectedZona(newValue, oldValue) {
                 this.zonaSelected = newValue
-                this.getElectricLineData()
+                this.getPowerRectifierData()
             },
             core(newValue, oldValue) {
-                this.getElectricLineData()
+                this.getPowerRectifierData()
             }
         },
         methods: {
-            totalElectricLines() {
+            totalPowerRectifiers() {
                 this.total = 0
-                this.electricLineData.forEach(this.counter)
+                this.powerRectifierData.forEach(this.counter)
             },
             counter(item, index) {
-                this.total = this.total + item.q_electric_lines;
+                this.total = this.total + item.q_power_rectifiers;
             },
-            getElectricLineData() {
+            getPowerRectifierData() {
                 if (this.crmSelected == null) {
-                    axios.get(`/api/electricLineData/${this.core}`)
+                    axios.get(`/api/powerRectifierData/${this.core}`)
                         .then((response) => {
-                            this.electricLineData = response.data.electricLine;
-                            this.totalElectricLines()
+                            this.powerRectifierData = response.data.powerRectifiers;
+                            this.totalPowerRectifiers()
                         })
                         .catch(() => {
                             console.log('handle server error from here');
                         });
                 } else if (this.zonaSelected == null){
-                    axios.get(`/api/electricLineDataCrm/${this.crmSelected.id}/${this.core}`)
+                    axios.get(`api/powerRectifierDataCrm/${this.crmSelected.id}/${this.core}`)
                         .then((response) => {
-                            this.electricLineData = response.data.electricLine;
-                            this.totalElectricLines()
+                            this.powerRectifierData = response.data.powerRectifiers;
+                            this.totalPowerRectifiers()
                         })
                         .catch(() => {
                             console.log('handle server error from here');
                         });
                 } else {
-                    axios.get(`/api/electricLineDataZona/${this.zonaSelected.id}/${this.core}`)
+                    axios.get(`api/powerRectifierDataZona/${this.zonaSelected.id}/${this.core}`)
                         .then((response) => {
-                            this.electricLineData = response.data.electricLine;
-                            this.totalElectricLines()
+                            this.powerRectifierData = response.data.powerRectifiers;
+                            this.totalPowerRectifiers()
                         })
                         .catch(() => {
                             console.log('handle server error from here');
@@ -130,7 +122,7 @@
                 }
             },
             
-            downloadElectricLines() {
+            downloadPowerRectifiers() {
                 this.isLoading = true
 
                 var params = {
@@ -139,7 +131,7 @@
                     'zona_id': this.selectedZona ? this.selectedZona.id : 0
                 }
 
-                axios.get('/api/electricLinesExport', { 
+                axios.get('/api/powerRectifiersExport', { 
                     params: params, 
                     responseType: 'arraybuffer' 
                 })
@@ -158,7 +150,7 @@
                     const data = window.URL.createObjectURL(blob)
                     let link = document.createElement('a')
                     link.href = data
-                    link.download = `Listado Lineas Eléctricas - ${this.middleFileName}${moment().format('YYYY-MM-DD hh:mm:ss')}.xlsx`
+                    link.download = `Listado Plantas Rectificadoras - ${this.middleFileName}${moment().format('YYYY-MM-DD hh:mm:ss')}.xlsx`
                     link.click()
                     // setTimeout(function () {
                     //     // For Firefox it is necessary to delay revoking the ObjectURL

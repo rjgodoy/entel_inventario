@@ -186,7 +186,7 @@
                             <table class="table is-fullwidth is-striped is-hoverable is-bordered">
                                 <thead>
                                     <tr class="">
-                                        <th class="is-size-6 has-text-weight-semibold"><abbr title="Ping">Ping</abbr></th>
+                                        <!-- <th class="is-size-6 has-text-weight-semibold"><abbr title="Ping">Ping</abbr></th> -->
                                         <th class="is-size-6 has-text-weight-semibold"><abbr title="Ubicación">Ubicación</abbr></th>
                                         <th class="is-size-7 has-text-weight-semibold"><abbr title="Sub Zona">Sub Zona</abbr></th>
                                         <th class="is-size-6 has-text-weight-semibold"><abbr title="Nombre">Nombre</abbr></th>
@@ -253,7 +253,7 @@
 
     export default {
         components: {
-            VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../helpers/VuePagination'),
+            VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../../helpers/VuePagination'),
             GeneratorTable: () => import(/* webpackChunkName: "chunks/generators/generatorTable"*/'./GeneratorTable'),
             ModalDownload: () => import(/* webpackChunkName: "chunks/generators/modals/modalDownload"*/'./modals/ModalDownload'),
         },

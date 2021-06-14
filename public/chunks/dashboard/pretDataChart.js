@@ -25,7 +25,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText'],
+  props: [],
   data: function data() {
     return {
       chart: '',
@@ -217,19 +217,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "article",
-    { staticClass: "tile is-child box", class: _vm.boxBackground },
-    [
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("article", { staticClass: "tile is-child box" }, [
       _c("div", {
         staticClass: "has-text-dark",
         staticStyle: { height: "200px", width: "100%" },
         attrs: { id: "chart" }
       })
-    ]
-  )
-}
-var staticRenderFns = []
+    ])
+  }
+]
 render._withStripped = true
 
 

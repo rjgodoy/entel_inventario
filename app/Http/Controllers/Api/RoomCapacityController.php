@@ -63,17 +63,6 @@ class RoomCapacityController extends Controller
      */
     public function show($id)
     {
-        // $data = DB::select(DB::raw("
-        //     SELECT * 
-        //     FROM entel_g_redes_inventario.room_capacities
-        //     WHERE 
-        //         room_id = $id AND
-        //         created_at IN (
-        //         SELECT MAX(created_at) 
-        //         FROM entel_g_redes_inventario.room_capacities
-        //         GROUP BY DATE(created_at)
-        //     )
-        // "));
         $graphDates = [];
         $dates = RoomCapacity::where('room_id', $id)->groupByRaw('DATE(created_at)')->orderBy('created_at', 'asc')->get();
         foreach ($dates as $date) {

@@ -61,13 +61,10 @@
             
         },
         props : [
-            'user',
             'selectedCrm',
             'selectedZona',
             'core',
 
-            'bodyBackground',
-            'boxBackground',
             'primaryText',
             'secondaryText',
             'last_updated'

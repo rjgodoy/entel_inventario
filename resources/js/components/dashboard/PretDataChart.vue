@@ -1,5 +1,5 @@
 <template>
-    <article class="tile is-child box" :class="boxBackground">
+    <article class="tile is-child box">
         <!-- <div class='chart'> -->
             <div id='chart' class="has-text-dark" style="height: 200px; width: 100%"></div>
         <!-- </div> -->
@@ -12,12 +12,8 @@ import c3 from 'c3'
 import * as d3 from 'd3'
 export default {
     props : [
-        'user',
-        'bodyBackground',
-        'boxBackground',
-        'primaryText',
-        'secondaryText'
     ],
+    
     data() {
         return {
             chart: '',

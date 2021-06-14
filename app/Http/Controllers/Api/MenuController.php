@@ -16,7 +16,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menus = Menu::where('active', 1)->orderBy('order', 'asc')->get();
+        $menus = Menu::with('submenus')->where('active', 1)->orderBy('order', 'asc')->get();
         return new MenuCollection($menus);
     }
 

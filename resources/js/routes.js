@@ -20,7 +20,11 @@ let Admin = () => import(/* webpackChunkName: "chunks/admin"*/'./components/admi
 let Reports = () => import(/* webpackChunkName: "chunks/reports"*/'./components/reports/Reports.vue')
 let NotFound = () => import(/* webpackChunkName: "chunks/helpers/notFound"*/ './components/helpers/NotFound');
 let Bridge = () => import(/* webpackChunkName: "chunks/bridge"*/'./components/auth/Bridge.vue')
-let Generators = () => import(/* webpackChunkName: "chunks/generators"*/'./components/generators/Generators.vue')
+
+let ElectricLines = () => import(/* webpackChunkName: "chunks/equipment/electricLines"*/'./components/equipment/electricLines/ElectricLines.vue')
+let Junctions = () => import(/* webpackChunkName: "chunks/equipment/junctions"*/'./components/equipment/junctions/Junctions.vue')
+let Generators = () => import(/* webpackChunkName: "chunks/equipment/generators"*/'./components/equipment/generators/Generators.vue')
+
 
 export default {
     mode: 'history',
@@ -66,7 +70,11 @@ export default {
                 { path: '/docs', name: 'Documentos', component: Documents },
                 { path: '/admin', name: 'Administración', component: Admin },
                 { path: '/reports', name: 'Reportes', component: Reports },
-                { path: '/generators', name: 'Generadores', component: Generators },
+                // { path: '/equipment', name: 'Equipment', component: Generators },
+                { path: '/equipment/electric_lines', name: 'Líneas Eléctricas', component: ElectricLines },
+                { path: '/equipment/junctions', name: 'Empalmes', component: Junctions },
+                { path: '/equipment/generators', name: 'Generadores', component: Generators },
+
             ]
         }
     ]

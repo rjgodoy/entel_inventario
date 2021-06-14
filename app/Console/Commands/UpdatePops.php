@@ -151,6 +151,11 @@ class UpdatePops extends Command
             $site->delete();
         }
 
+        $sitesToRestore = Site::withTrashed()->where('state_id', '!=', 2)->restore();
+        // foreach ($sitesDeleted as $site) {
+        //     $site->restore();
+        // }
+
         $technologiesDeleted = Technology::where('state_id', 2)->get();
         foreach ($technologiesDeleted as $technology) {
             $technology->delete();

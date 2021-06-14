@@ -306,6 +306,9 @@ Route::middleware('auth:api')->group(function () {
     Route::put('vipEntel/{id}', 'Api\PopController@updateVipEntel');
 
     Route::get('iframeLayout/{pop_id}', 'Api\PopController@getIframeLayout');
+
+    Route::apiResource('vandalismRecords','Api\VandalismRecordController');
+    Route::get('coordinatesCaluculation', 'Api\VandalismRecordController@coordinatesCaluculation');
 		
 	##############################################################################################
 

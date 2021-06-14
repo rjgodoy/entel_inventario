@@ -1,11 +1,11 @@
 <template>
     <div>
-        <log
+        <!-- <log
             :user="user"
             :pop="pop"
-        />
+        /> -->
         <!-- POP Name -->
-        <section class="hero is-black-ter">
+        <section class="hero is-bold" :class="pop.risk_types && pop.risk_types.length ? 'is-danger' : 'is-black-ter'">
             <div class="hero-body">
                 <div class="">
                     <div class="columns">
@@ -17,101 +17,100 @@
                             size="is-large"
                             multilined>
                                 <b-button type="is-primary" size="is-large" :class="popClassification.id == 1 ? 'is-info' : (popClassification.id == 2 ? 'is-warning' : (popClassification.id == 3 ? 'is-primary' : (popClassification.id == 4 ? 'is-smart' : 'is-eco')))" @click="currentTab = 'sites'">
-                                    <div class="title is-size-4">{{ popClassification.classification }}</div>
+                                    <div class="is-size-3 has-text-weight-bold">{{ popClassification.classification }}</div>
                                 </b-button>
                             </b-tooltip>
                         </div>
 
-                        <div class="column is-5">
+                        <div class="column is-4">
                             <div class="is-size-4">
                                 <h1 class="title" v-if="!canEditName || !isEditMode || !noMovil">{{ pop.nombre }}</h1>
 
                                 <b-input class="is-size-5 has-text-weight-semibold has-background-dark" size="is-large" v-model="popName" v-if="canEditName && (isEditMode && noMovil)"></b-input>
 
-                                <h2 class="subtitle has-text-weight-semibold has-text-grey-light" style="margin-bottom: 4px;">{{ popNems }}
+                                <h2 class="subtitle has-text-weight-semibold has-text-light" style="margin-bottom: 4px;">{{ popNems }}
                                     <span class="is-size-5 " v-if="pop.sites && pop.sites.length > 2"> y <a class="has-text-smart" @click="currentTab = 'sites'">{{ pop.sites.length - 2 }} sitios</a> más.
                                     </span>
                                 </h2>
-                                <div v-if="pop.current_office || pop.alba_project">
-                                    <div v-if="pop.current_office" style="padding-bottom: 4px;">
-                                        <b-tag type="is-link" size="is-medium" class="has-text-weight-semibold">
-                                            <font-awesome-icon :icon="['fas', 'home']" style="padding-bottom: 2px;"/>&nbsp;&nbsp;OFICINA CRM
-                                        </b-tag>
-                                    </div>
-                                    <div v-if="pop.alba_project" style="padding-top: 4px;">
-                                        <div class="">
-                                            <div>
-                                                <b-tooltip label="Entel" position="is-bottom" type="is-black">
-                                                    <div>
-                                                    <img alt="image" class="img-container" src="/img/iconografia/entel-logo-negativo.png" style="width: 32px"/>
-                                                    </div>
-                                                </b-tooltip>
-                                                <b-tooltip label="American Tower" position="is-bottom" type="is-black" style="padding-left: 8px;">
-                                                    <div>
-                                                        <img alt="image" class="img-container" src="/img/logos/american_tower_logo_simple.png" style="width: 36px"/>
-                                                    </div>
-                                                </b-tooltip>
-                                            </div>
+                            </div>
+
+                            <div class="is-size-6 has-text-weight-normal has-text-light">
+                                Zona {{ pop.zona ? pop.zona.nombre_zona : '' }} - CRM {{ pop.zona ? pop.zona.crm.nombre_crm : '' }}
+                            </div>
+                        </div>
+
+                        <div class="column is-3" style="padding: 0px">
+                            <div class="columns is-vcentered" v-if="pop.risk_types && pop.risk_types.length">
+                                <div class="column is-2 has-text-centered">
+                                    <font-awesome-icon :icon="['fas', 'exclamation-triangle']" size="3x" class="has-text-warning"/>
+                                </div>
+                                <div class="column">
+                                    <div class="is-size-5 has-text-weight-semibold">Pop en zona de riesgo</div>
+                                    <!-- <div class="is-size-6">Tipo de riesgo: {{ pop.risk_types.length && pop.risk_types[0].type }}</div> -->
+                                </div>
+                            </div>
+
+                            <div class="columns is-vcentered" v-if="pop.current_office">
+                                <div class="column is-2 has-text-centered">
+                                    <font-awesome-icon :icon="['fas', 'home']" size="3x" class="has-text-link"/>
+                                </div>
+                                <div class="column">
+                                    <div class="is-size-5 has-text-weight-semibold">Oficina CRM</div>
+                                </div>
+                            </div>
+
+                            <div class="columns is-vcentered" v-if="pop.alba_project">
+                                <div class="column is-2 has-text-centered">
+                                    <!-- <b-tooltip label="Entel" position="is-bottom" type="is-black">
+                                        <div>
+                                        <img alt="image" class="img-container" src="/img/iconografia/entel-logo-negativo.png" style="width: 32px"/>
                                         </div>
+                                    </b-tooltip> -->
+                                    <div class="box p-1">
+                                        <b-tooltip label="American Tower" type="is-black" class="pt-1">
+                                            <div>
+                                                <img alt="image" class="img-container" src="/img/logos/american_tower_logo_simple.png" style="width: 36px"/>
+                                            </div>
+                                        </b-tooltip>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="is-size-5 has-text-weight-semibold">ATC</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="column is-2 pt-0 pb-0">
+                            <div class="columns is-multiline is-size-6">
+                                <div class="column is-6">
+                                    <div class="box pt-1 pb-1" :class="popClassification.id == 1 ? 'is-eco is-bold' : 'has-background-grey-darker has-text-grey'" :style="popClassification.id == 1 ? 'opacity: 1' : 'opacity: 0.5'">
+                                            <font-awesome-icon :icon="popClassification.id == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
+                                        <div :class="popClassification.id == 1 ? 'is-dark has-text-weight-bold' : 'has-text-grey-light'">CORE</div>
+                                    </div>
+                                </div>
+                                <div class="column is-6">
+                                    <div class="box pt-1 pb-1" :class="popCritical == 1 ? 'is-eco is-bold' : 'has-background-grey-darker has-text-grey'" :style="popCritical == 1 ? 'opacity: 1' : 'opacity: 0.5'">
+                                            <font-awesome-icon :icon="popCritical == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
+                                        <div :class="popCritical == 1 ? 'is-dark has-text-weight-bold' : 'has-text-grey-light'">CRITICO</div>
+                                    </div>
+                                </div>
+                                <div class="column is-6">
+                                    <div class="box pt-1 pb-1" :class="pop.vip == 1 ? 'is-eco is-bold' : 'has-background-grey-darker has-text-grey'" :style="pop.vip == 1 ? 'opacity: 1' : 'opacity: 0.5'">
+                                            <font-awesome-icon :icon="pop.vip == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
+                                        <div :class="pop.vip == 1 ? 'is-dark has-text-weight-bold' : 'has-text-grey-light'">{{ pop.current_entel_vip ? 'VIP Entel' : 'VIP' }}</div>
+                                    </div>
+                                </div>
+                                <div class="column is-6">
+                                    <div class="box pt-1 pb-1" :class="pop.alba_project ? 'is-eco is-bold' : 'has-background-grey-darker has-text-grey'" :style="pop.alba_project == 1 ? 'opacity: 1' : 'opacity: 0.5'">
+                                            <font-awesome-icon :icon="pop.alba_project ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
+                                        <div :class="pop.alba_project ? 'is-dark has-text-weight-bold' : 'has-text-grey-light'">ATC</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="column is-2" style="padding: 0px">
-                            <p class="is-size-6 has-text-weight-semibold has-text-grey-light">Zona</p>
-                            <p class="is-size-5 has-text-weight-bold">{{ pop.zona ? pop.zona.nombre_zona : '' }}</p>
-                            <p class="is-size-6 has-text-weight-semibold has-text-grey-light" style="margin-top: 10px;">CRM</p>
-                            <p class="is-size-5 has-text-weight-bold">{{ pop.zona ? pop.zona.crm.nombre_crm : '' }}</p>
-                        </div>
-
-                        <div class="column is-3">
-                            <div class="columns is-multiline">
-                                <div class="column is-6">
-                                    <div class="control">
-                                        <b-taglist attached>
-                                            <b-tag size="is-medium" :type="popClassification.id == 1 ? 'is-eco' : 'has-background-grey-light has-text-grey'" class="has-text-white">
-                                                <font-awesome-icon :icon="popClassification.id == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
-                                            </b-tag>
-                                            <b-tag size="is-medium" :type="popClassification.id == 1 ? 'is-dark has-text-weight-bold' : 'has-background-grey has-text-grey-light'">CORE</b-tag>
-                                        </b-taglist>
-                                    </div>
-                                </div>
-                                <div class="column is-6">
-                                    <div class="control">
-                                        <b-taglist attached>
-                                            <b-tag size="is-medium" :type="popCritical == 1 ? 'is-eco' : 'has-background-grey-light has-text-grey'" class="has-text-white">
-                                                <font-awesome-icon :icon="popCritical == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
-                                            </b-tag>
-                                            <b-tag size="is-medium" :type="popCritical == 1 ? 'is-dark has-text-weight-bold' : 'has-background-grey has-text-grey-light'">Crítico</b-tag>
-                                        </b-taglist>
-                                    </div>
-                                </div>
-                                <div class="column is-6">
-                                    <div class="control">
-                                        <b-taglist attached>
-                                            <b-tag size="is-medium" :type="pop.vip == 1 ? 'is-eco' : 'has-background-grey-light has-text-grey'" class="has-text-white">
-                                                <font-awesome-icon :icon="pop.vip == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
-                                            </b-tag>
-                                            <b-tag size="is-medium" :type="pop.vip == 1 ? 'is-dark has-text-weight-bold' : 'has-background-grey has-text-grey-light'">{{ pop.current_entel_vip ? 'VIP Entel' : 'VIP' }}</b-tag>
-                                        </b-taglist>
-                                    </div>
-                                </div>
-                                <div class="column is-6">
-                                    <div class="control">
-                                        <b-taglist attached>
-                                            <b-tag size="is-medium" :type="pop.alba_project ? 'is-eco' : 'has-background-grey-light has-text-grey'" class="has-text-white">
-                                                <font-awesome-icon :icon="pop.alba_project ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
-                                            </b-tag>
-                                            <b-tag size="is-medium" :type="pop.alba_project ? 'is-dark has-text-weight-bold' : 'has-background-grey has-text-grey-light'">Proyecto Alba</b-tag>
-                                        </b-taglist>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column is-1 has-text-right" v-if="canViewLog">
-                            
+                        <!-- <div class="column is-1 has-text-right" v-if="canViewLog">
                             <button
                                 class="button is-warning" 
                                 @click="openLog" 
@@ -128,6 +127,28 @@
                                     </div>
                                 </div>
                             </button>
+                        </div> -->
+
+                        <div class="column is-2 has-text-right" v-if="canEditPop">
+                            <b-tooltip 
+                                :label="isEditMode ? 'Salir del modo edición' : 'Entrar en modo edición'" 
+                                position="is-left"
+                                type="is-link"
+                                animated>
+                                <button
+                                    class="button"
+                                    :class="isEditMode ? 'is-info' : 'is-link'"
+                                    @click="isEditMode=!isEditMode" 
+                                    type="button"
+                                    style="height: 48px; margin-right: -24px">
+                                    <div class="columns">
+                                        <div class="column" style="padding-left: 8px; padding-right: 5px;">
+                                            <font-awesome-icon :icon="isEditMode ? ['fas', 'edit'] : ['fas', 'edit']"/>
+                                            <div>{{ isEditMode ? 'MODO EDICION' : '' }}</div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </b-tooltip>
                         </div>
                     </div>
                 </div>
@@ -136,8 +157,7 @@
 
         <div class="is-divider" style="margin: 0px"></div>
 
-        <!-- CARACTERISTICAS -->
-        <!-- ############### -->
+        <!-- CARACTERISTICAS ############### -->
         <div class="hero is-dark" :class="">
             <div class="hero-body" style="padding-top: 32px; padding-bottom: 32px;">
                 <nav class="level">
@@ -188,26 +208,16 @@
                             </div>
                         </div>
                     </div>
-                    <b-tooltip 
-                        v-if="canEditPop"
-                        :label="isEditMode ? 'Salir del modo edición' : 'Entrar en modo edición'" 
-                        position="is-left"
-                        type="is-link"
-                        animated>
-                        <button
-                            class="button"
-                            :class="isEditMode ? 'is-info' : 'is-link'"
-                            @click="isEditMode=!isEditMode" 
-                            type="button"
-                            style="height: 48px; margin-right: -24px">
-                            <div class="columns">
-                                <div class="column" style="padding-left: 8px; padding-right: 5px;">
-                                    <font-awesome-icon :icon="isEditMode ? ['fas', 'edit'] : ['fas', 'edit']"/>
-                                    <div>{{ isEditMode ? 'MODO EDICION' : '' }}</div>
-                                </div>
+                    <!-- <div class="level-item has-text-centered">
+                        <div>
+                            <b-tag type="is-warning" size="is-large" class="is-loading has-text-weight-bold is-size-5">
+                                <VulnerabilityIndex :pop="pop"/>
+                            </b-tag>
+                            <div style="padding-top: 4px;">
+                                <div class="is-size-6 has-text-weight-semibold">INDICE VULNERABILIDAD</div>
                             </div>
-                        </button>
-                    </b-tooltip>
+                        </div>
+                    </div> -->
                 </nav>
             </div>
         </div>
@@ -318,10 +328,10 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faHome, faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, faCamera, faUserTie, faVideo, faStreetView } from "@fortawesome/free-solid-svg-icons";
+    import { faHome, faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     import { faCheckCircle as farCheckCircle, faTimesCircle as farTimesCircle } from '@fortawesome/free-regular-svg-icons'
-    library.add(faHome, faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle, faCamera, faUserTie, faVideo, faStreetView)
+    library.add(faHome, faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle)
     export default {
         components: {
             Location: () => import(/* webpackChunkName: "chunks/pop/location"*/'./Location'),
@@ -339,6 +349,7 @@
             Clients: () => import(/* webpackChunkName: "chunks/pop/clients"*/'./Clients'),
             Documents: () => import(/* webpackChunkName: "chunks/pop/documents/documents"*/'./documents/Documents'),
             Log: () => import(/* webpackChunkName: "chunks/pop/logs"*/'./Log'),
+            // VulnerabilityIndex: () => import(/* webpackChunkName: "chunks/pop/vulnerabilityIndex"*/'./VulnerabilityIndex'),
         },
         props : [
             'user'

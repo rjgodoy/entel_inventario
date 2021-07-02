@@ -116,7 +116,7 @@ library.add(faSearch, faBars);
 
 export default {
     components: {
-        VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../helpers/VuePagination'),
+        VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../../helpers/VuePagination'),
     },
     props : [
         'user'

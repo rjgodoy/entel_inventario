@@ -214,7 +214,12 @@ class JunctionController extends Controller
         } else {
             Junction::create([
                 'pop_id' => $request->pop_id,
-                'electric_company_id' => $request->electric_company_id
+                'electric_company_id' => $request->electric_company_id,
+                'client_number' => $request->client_number,
+                'junction_number' => $request->junction_number,
+                'rate_type' => $request->rate_type,
+                'junction_type_id' => $request->junction_type_id,
+                'junction_connection_id' => $request->junction_connection_id
             ]);
         }
 
@@ -260,42 +265,53 @@ class JunctionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(!$request->isSimpleEdit) {
 
-        JunctionMeasurement::create([
-            'junction_id' => $id,
-            'r_a_amp_measure' => $request->r_a_amp_measure,
-            's_a_amp_measure' => $request->s_a_amp_measure,
-            't_a_amp_measure' => $request->t_a_amp_measure,
-            'r_b_amp_measure' => $request->r_b_amp_measure,
-            's_b_amp_measure' => $request->s_b_amp_measure,
-            't_b_amp_measure' => $request->t_b_amp_measure,
-            'r_a_volt_measure' => $request->r_a_volt_measure,
-            's_a_volt_measure' => $request->s_a_volt_measure,
-            't_a_volt_measure' => $request->t_a_volt_measure,
-            'r_b_volt_measure' => $request->r_b_volt_measure,
-            's_b_volt_measure' => $request->s_b_volt_measure,
-            't_b_volt_measure' => $request->t_b_volt_measure,
-            'nominal_a' => $request->nominal_a,
-            'regulada_a' => $request->regulada_a,
-            'nominal_b' => $request->nominal_b,
-            'regulada_b' => $request->regulada_b,
-            'use_factor' => $request->use_factor
-        ]);
+            JunctionMeasurement::create([
+                'junction_id' => $id,
+                'r_a_amp_measure' => $request->r_a_amp_measure,
+                's_a_amp_measure' => $request->s_a_amp_measure,
+                't_a_amp_measure' => $request->t_a_amp_measure,
+                'r_b_amp_measure' => $request->r_b_amp_measure,
+                's_b_amp_measure' => $request->s_b_amp_measure,
+                't_b_amp_measure' => $request->t_b_amp_measure,
+                'r_a_volt_measure' => $request->r_a_volt_measure,
+                's_a_volt_measure' => $request->s_a_volt_measure,
+                't_a_volt_measure' => $request->t_a_volt_measure,
+                'r_b_volt_measure' => $request->r_b_volt_measure,
+                's_b_volt_measure' => $request->s_b_volt_measure,
+                't_b_volt_measure' => $request->t_b_volt_measure,
+                'nominal_a' => $request->nominal_a,
+                'regulada_a' => $request->regulada_a,
+                'nominal_b' => $request->nominal_b,
+                'regulada_b' => $request->regulada_b,
+                'use_factor' => $request->use_factor
+            ]);
 
-        JunctionProtection::create([
-            'junction_id' => $id,
-            'nominal_a' => $request->nominal_a,
-            'regulada_a' => $request->regulada_a,
-            'nominal_b' => $request->nominal_b,
-            'regulada_b' => $request->regulada_b
-        ]);
+            JunctionProtection::create([
+                'junction_id' => $id,
+                'nominal_a' => $request->nominal_a,
+                'regulada_a' => $request->regulada_a,
+                'nominal_b' => $request->nominal_b,
+                'regulada_b' => $request->regulada_b
+            ]);
 
-        Log::create([
-            'pop_id' => $request->pop_id,
-            'user_id' => $request->user_id,
-            'log_type_id' => 1,
-            'description' => 'Se ha introducido nuevos parámetros en el empalme.'
-        ]);
+            Log::create([
+                'pop_id' => $request->pop_id,
+                'user_id' => $request->user_id,
+                'log_type_id' => 1,
+                'description' => 'Se ha introducido nuevos parámetros en el empalme.'
+            ]);
+        } else {
+            $junction = Junction::find($id);
+            $junction->update([
+                'junction_number' => $request->junction_number,
+                'client_number' => $request->client_number,
+                'junction_type_id' => $request->junction_type_id,
+                'junction_connection_id' => $request->junction_connection_id,
+                'rate_type' => $request->rate_type
+            ]);
+        }
 
         return;
     }
@@ -369,18 +385,6 @@ class JunctionController extends Controller
         (new JunctionsImport)->import($request->file('file'));
 
         return 'success!';
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function junctionConnections()
-    {
-        $junctionConnections = JunctionConnection::all();
-        return new JunctionCollection($junctionConnections);
     }
 
     /**

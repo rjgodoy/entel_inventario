@@ -10,10 +10,6 @@
                 :user="user"
             />
         </section>
-        <!-- <footer class="modal-card-foot" style="background: rgba(0,0,0,0)"> -->
-            <!-- <button class="button" type="button" @click="$parent.close()">Cerrar</button> -->
-            <!-- <button class="button is-primary">Guardar</button> -->
-        <!-- </footer> -->
     </div>
 </template>
 

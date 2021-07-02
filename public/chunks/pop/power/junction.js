@@ -694,7 +694,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this5 = this;
 
       axios.get("/api/junctionConnections").then(function (response) {
-        _this5.junctionConnections = response.data.junctions;
+        _this5.junctionConnections = response.data.junctionConnections;
       });
     },
     saveChanges: function saveChanges() {

@@ -144,8 +144,8 @@ Route::middleware('auth:api')->group(function () {
 		Route::get('junctionDataCrm/{crm_id}/{core}','Api\JunctionController@junctionDataCrm');
 		Route::get('junctionDataZona/{zona_id}/{core}','Api\JunctionController@junctionDataZona');
 		Route::apiResource('junctionTypes','Api\JunctionTypeController');
+		Route::apiResource('junctionConnections','Api\JunctionConnectionController');
 		
-		Route::get('junctionConnections','Api\JunctionController@junctionConnections');
 		Route::get('popJunctions/{pop_id}','Api\JunctionController@popJunctions');
 		
 		Route::post('junction/efizity','Api\JunctionController@syncEfizity');
@@ -311,5 +311,13 @@ Route::middleware('auth:api')->group(function () {
     Route::get('coordinatesCaluculation', 'Api\VandalismRecordController@coordinatesCaluculation');
 		
 	##############################################################################################
+
+	Route::apiResource('energyEquipmentRevisions','Api\EnergyEquipmentRevisionController');
+	Route::apiResource('energyEquipmentRevisionTypes','Api\EnergyEquipmentRevisionTypeController');
+	Route::apiResource('energyEquipmentRevisionItems','Api\EnergyEquipmentRevisionItemController');
+	Route::apiResource('energyEquipmentRevisionStatuses','Api\EnergyEquipmentRevisionStatusController');
+	
+	Route::get('crmEnergyReportsStatus/{id}', 'Api\EnergyEquipmentRevisionController@getStatusOfCrm');
+	
 
 });

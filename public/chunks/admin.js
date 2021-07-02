@@ -68,7 +68,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     PopsTab: function PopsTab() {
-      return Promise.all(/*! import() | chunks/admin/pops */[__webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload"), __webpack_require__.e("chunks/admin/pops")]).then(__webpack_require__.bind(null, /*! ./PopsTab */ "./resources/js/components/admin/PopsTab.vue"));
+      return Promise.all(/*! import() | chunks/admin/pops */[__webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload~chu~fc18a3eb"), __webpack_require__.e("chunks/admin/pops")]).then(__webpack_require__.bind(null, /*! ./PopsTab */ "./resources/js/components/admin/PopsTab.vue"));
     },
     TpsTab: function TpsTab() {
       return __webpack_require__.e(/*! import() | chunks/admin/tps */ "chunks/admin/tps").then(__webpack_require__.bind(null, /*! ./TpsTab */ "./resources/js/components/admin/TpsTab.vue"));

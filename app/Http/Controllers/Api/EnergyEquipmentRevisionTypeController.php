@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\EnergyEquipmentRevisionType;
 
-class CapacityController extends Controller
+class EnergyEquipmentRevisionTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class CapacityController extends Controller
      */
     public function index()
     {
-        //
+        return EnergyEquipmentRevisionType::with('items')->get();
     }
 
     /**

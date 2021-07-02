@@ -688,7 +688,7 @@
 
             getJunctionConnections() {
                 axios.get(`/api/junctionConnections`).then(response => {
-                    this.junctionConnections = response.data.junctions
+                    this.junctionConnections = response.data.junctionConnections
                 })
             },
 

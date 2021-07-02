@@ -67,6 +67,12 @@
 
                             <div class="field">
                                 <div class="columns">
+                                    <div class="column is-1 has-text-left" v-if="canCreate">
+                                        <b-button class="is-link" @click="isModalCreateJunctionActive = true">
+                                            <font-awesome-icon :icon="['fas', 'plus']" />
+                                        </b-button>
+                                    </div>
+
                                     <div class="column">
                                         <p class="control has-icons-left has-icons-right">
                                             <input 
@@ -87,6 +93,7 @@
                                             </span>
                                         </p>
                                     </div>
+
                                     <div class="column is-1 has-text-right">
                                         <b-button class="is-success" :loading="isbuttonLoading" 
                                             @click="downloadJunctions">
@@ -142,31 +149,32 @@
             </div>
         </div>
 
-        <!-- <b-modal :active.sync="isDownloadModalActive"
+        <b-modal :active.sync="isModalCreateJunctionActive"
             has-modal-card
             trap-focus
             aria-role="dialog"
             aria-modal>
-            <modal-download
-                @clicked="onClickDownload"
+            <ModalCreateJunction
+                @new-junction="getJunctionsData"
                 />
-        </b-modal> -->
+        </b-modal>
+
     </section>
 </template>
 
 <script>
     var moment = require('moment')
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faSearch, faBars, faSortDown, faSortUp, faChevronLeft, faChevronRight, faDownload } from "@fortawesome/free-solid-svg-icons";
+    import { faSearch, faBars, faSortDown, faSortUp, faChevronLeft, faChevronRight, faDownload, faPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     import { faClipboard as farClipboard } from '@fortawesome/free-regular-svg-icons'
-    library.add(faSearch, faBars, farClipboard, faSortDown, faSortUp, faChevronLeft, faChevronRight, faDownload);
+    library.add(faSearch, faBars, farClipboard, faSortDown, faSortUp, faChevronLeft, faChevronRight, faDownload, faPlus, faEdit);
 
     export default {
         components: {
             VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../../helpers/VuePagination'),
             JunctionTable: () => import(/* webpackChunkName: "chunks/junctions/junctionTable"*/'./JunctionTable'),
-            // ModalDownload: () => import(/* webpackChunkName: "chunks/electrcLines/modals/modalDownload"*/'./modals/ModalDownload'),
+            ModalCreateJunction: () => import(/* webpackChunkName: "chunks/equipmentjunctions/modals/modalCreateJunction"*/'./modals/ModalCreateJunction'),
         },
 
         props : [
@@ -206,6 +214,9 @@
                 isLoading: false,
                 isbuttonLoading: false,
                 isDownloadModalActive: false,
+
+                isModalCreateJunctionActive: false,
+                isModalEditJunctionActive: false,
 
                 // last_data: null,
                 // last_day_data: null,
@@ -257,6 +268,14 @@
             middleFileName() {
                 return this.selectedZona ? `Zona ${this.selectedZona.nombre_zona} - ` : (this.selectedCrm ? `CRM ${this.selectedCrm.nombre_crm} - ` : '')
             },
+
+            canUpdate() {
+                return this.junctionsData.can && this.junctionsData.can.update;
+            },
+
+            canCreate() {
+                return this.junctionsData.can && this.junctionsData.can.create;
+            }
         },
 
         mounted() {
@@ -265,6 +284,11 @@
             // this.getTypes()
             // this.getSubZones()
             this.getJunctionsData()
+        },
+
+        created() {
+            this.$eventBus.$on('new-junction', this.getJunctionsData)
+            this.$eventBus.$on('junction-deleted', this.getJunctionsData)
         },
 
         methods: {
@@ -306,7 +330,7 @@
             },
 
             selectZona(zona) {
-                console.log(zona)
+                // console.log(zona)
                 this.selectedZona = this.selectedZona != zona ? zona : null
                 this.getJunctionsData()
             },
@@ -328,7 +352,7 @@
                 // console.log(params)
                 axios.get('/api/junctions', { params: params })
                 .then((response) => {
-                    console.log(response)
+                    // console.log(response)
                     this.junctionsData = response.data
                     this.isLoading = false
                 })
@@ -391,6 +415,11 @@
                 })
             },
 
-        }
+        },
+
+        beforeDestroy() {
+            this.$eventBus.$off('new-junction')
+            this.$eventBus.$off('junction-deleted')
+        },
     }
 </script>

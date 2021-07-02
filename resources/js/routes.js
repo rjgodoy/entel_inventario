@@ -14,12 +14,14 @@ let Pop = () => import(/* webpackChunkName: "chunks/pop"*/'./components/pop/Pop.
 let CapacityPlanning = () => import(/* webpackChunkName: "chunks/capacityPlanning"*/'./components/capacity/CapacityPlanning.vue')
 let RoomDetail = () => import(/* webpackChunkName: "chunks/capacityPlanning"*/'./components/capacity/RoomDetail.vue')
 let Eco = () => import(/* webpackChunkName: "chunks/eco"*/'./components/eco/Eco.vue')
-let Comsite = () => import(/* webpackChunkName: "chunks/comsite"*/'./components/comsite/Comsite.vue')
 let Documents = () => import(/* webpackChunkName: "chunks/documents"*/'./components/documents/Documents.vue')
 let Admin = () => import(/* webpackChunkName: "chunks/admin"*/'./components/admin/Admin.vue')
 let Reports = () => import(/* webpackChunkName: "chunks/reports"*/'./components/reports/Reports.vue')
 let NotFound = () => import(/* webpackChunkName: "chunks/helpers/notFound"*/ './components/helpers/NotFound');
 let Bridge = () => import(/* webpackChunkName: "chunks/bridge"*/'./components/auth/Bridge.vue')
+
+let Comsite = () => import(/* webpackChunkName: "chunks/comsite"*/'./components/reports/comsite/Comsite.vue')
+let Revisions = () => import(/* webpackChunkName: "chunks/revisions"*/'./components/reports/maintenance/Revisions.vue')
 
 let ElectricLines = () => import(/* webpackChunkName: "chunks/equipment/electricLines"*/'./components/equipment/electricLines/ElectricLines.vue')
 let Junctions = () => import(/* webpackChunkName: "chunks/equipment/junctions"*/'./components/equipment/junctions/Junctions.vue')
@@ -66,6 +68,7 @@ export default {
                 { path: '/capacity', name: 'Capacity Planning', component: CapacityPlanning },
                 { path: '/capacity/:id', name: 'Detalle de Sala', component: RoomDetail },
                 { path: '/comsite', name: 'Comsite', component: Comsite },
+                { path: '/revisions', name: 'Revisiones', component: Revisions },
                 { path: '/eco', name: 'Gestion Ambiental', component: Eco },
                 { path: '/docs', name: 'Documentos', component: Documents },
                 { path: '/admin', name: 'Administración', component: Admin },

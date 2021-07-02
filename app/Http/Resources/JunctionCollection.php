@@ -40,7 +40,7 @@ class JunctionCollection extends ResourceCollection
     protected function permissions()
     {
         return [
-            // 'create' => Gate::allows('create-electric-line', Junction::class),
+            'create' => Gate::allows('create-junction', Junction::class),
             'update' => Gate::allows('edit-junction', Junction::class),
             // 'delete' => Gate::allows('delete-electric-line', $this->resource)
         ];

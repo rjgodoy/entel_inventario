@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\EnergyEquipmentRevisionType;
+use App\Models\PopFavorite;
+use Illuminate\Http\Request;
 
-class EnergyEquipmentRevisionTypeController extends Controller
+class PopFavoriteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class EnergyEquipmentRevisionTypeController extends Controller
      */
     public function index()
     {
-        return EnergyEquipmentRevisionType::with('items')->get();
+        //
     }
 
     /**
@@ -26,7 +26,16 @@ class EnergyEquipmentRevisionTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        if ($request->is_favorite == 1) {
+            $popFavorite = PopFavorite::where('pop_id', $request->pop_id)->where('user_id', $request->user_id)->first();
+            $popFavorite->delete();
+        } else {
+            PopFavorite::create([
+                'pop_id' => $request->pop_id,
+                'user_id' => $request->user_id
+            ]);
+        }
     }
 
     /**
@@ -62,4 +71,5 @@ class EnergyEquipmentRevisionTypeController extends Controller
     {
         //
     }
+    
 }

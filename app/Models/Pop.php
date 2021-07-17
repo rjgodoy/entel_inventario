@@ -348,4 +348,24 @@ class Pop extends Model
         return $this->belongsToMany(RiskType::class)->withTimestamps();
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function turret_type()
+    {
+        return $this->belongsTo(TurretType::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function pop_favorites()
+    {
+        return $this->hasMany(PopFavorite::class);
+    }
+
 }

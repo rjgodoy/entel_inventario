@@ -460,8 +460,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
           label: 'Zona protegida',
           selected: 0
         },
-        alba_project: {
-          label: 'Proyecto Alba',
+        turret_type_id: {
+          label: 'Torreras - ATC/SBA',
           selected: 0
         }
       },
@@ -608,7 +608,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         'offgrid': this.characteristics.offgrid.selected,
         'solar': this.characteristics.solar.selected,
         'eolica': this.characteristics.eolica.selected,
-        'alba_project': this.characteristics.alba_project.selected,
+        'turret_type_id': this.characteristics.turret_type_id.selected,
         'protected_zone': this.characteristics.protected_zone.selected,
         'electric_line': this.equipments.electric_line.selected,
         'junction': this.equipments.junction.selected,
@@ -649,7 +649,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       //     'offgrid': this.characteristics.offgrid.selected,
       //     'solar': this.characteristics.solar.selected,
       //     'eolica': this.characteristics.eolica.selected,
-      //     'alba_project': this.characteristics.alba_project.selected,
+      //     'turret_type_id': this.characteristics.turret_type_id.selected,
       //     'protected_zone': this.characteristics.protected_zone.selected,
       //     'electric_line': this.equipments.electric_line.selected,
       //     'junction': this.equipments.junction.selected,
@@ -749,7 +749,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         'offgrid': this.characteristics.offgrid.selected,
         'solar': this.characteristics.solar.selected,
         'eolica': this.characteristics.eolica.selected,
-        'alba_project': this.characteristics.alba_project.selected,
+        'turret_type_id': this.characteristics.turret_type_id.selected,
         'protected_zone': this.characteristics.protected_zone.selected,
         'electric_line': this.equipments.electric_line.selected,
         'junction': this.equipments.junction.selected,
@@ -1188,45 +1188,49 @@ var render = function() {
                     "div",
                     { staticClass: "columns is-multiline is-gapless" },
                     _vm._l(_vm.characteristics, function(characteristic) {
-                      return _c("div", { staticClass: "column is-3" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "field",
-                            staticStyle: { margin: "1px" }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "tile is-child button",
-                                class: characteristic.selected
-                                  ? "is-link"
-                                  : "is-black-ter",
-                                on: {
-                                  click: function($event) {
-                                    return _vm.changeCharacteristic(
-                                      characteristic
-                                    )
+                      return _c(
+                        "div",
+                        { key: characteristic.id, staticClass: "column is-3" },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "field",
+                              staticStyle: { margin: "1px" }
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "tile is-child button",
+                                  class: characteristic.selected
+                                    ? "is-link"
+                                    : "is-black-ter",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.changeCharacteristic(
+                                        characteristic
+                                      )
+                                    }
                                   }
-                                }
-                              },
-                              [
-                                _c("div", { class: _vm.secondaryText }, [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "is-size-7 has-text-weight-normal has-text-light"
-                                    },
-                                    [_vm._v(_vm._s(characteristic.label))]
-                                  )
-                                ])
-                              ]
-                            )
-                          ]
-                        )
-                      ])
+                                },
+                                [
+                                  _c("div", { class: _vm.secondaryText }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "is-size-7 has-text-weight-normal has-text-light"
+                                      },
+                                      [_vm._v(_vm._s(characteristic.label))]
+                                    )
+                                  ])
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      )
                     }),
                     0
                   )
@@ -1247,43 +1251,47 @@ var render = function() {
                     "div",
                     { staticClass: "columns is-multiline is-gapless" },
                     _vm._l(_vm.equipments, function(equipment) {
-                      return _c("div", { staticClass: "column is-4" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "field",
-                            staticStyle: { margin: "1px" }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "tile is-child button",
-                                class: equipment.selected
-                                  ? "is-link"
-                                  : "is-black-ter",
-                                on: {
-                                  click: function($event) {
-                                    return _vm.changeEquipment(equipment)
+                      return _c(
+                        "div",
+                        { key: equipment.id, staticClass: "column is-4" },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "field",
+                              staticStyle: { margin: "1px" }
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "tile is-child button",
+                                  class: equipment.selected
+                                    ? "is-link"
+                                    : "is-black-ter",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.changeEquipment(equipment)
+                                    }
                                   }
-                                }
-                              },
-                              [
-                                _c("div", { class: _vm.secondaryText }, [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "is-size-7 has-text-weight-normal has-text-light"
-                                    },
-                                    [_vm._v(_vm._s(equipment.label))]
-                                  )
-                                ])
-                              ]
-                            )
-                          ]
-                        )
-                      ])
+                                },
+                                [
+                                  _c("div", { class: _vm.secondaryText }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "is-size-7 has-text-weight-normal has-text-light"
+                                      },
+                                      [_vm._v(_vm._s(equipment.label))]
+                                    )
+                                  ])
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      )
                     }),
                     0
                   )

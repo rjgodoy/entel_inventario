@@ -42,7 +42,7 @@
                 }
                 axios.put(`/api/roles/${this.role.id}`, params)
                 .then(response => {
-                    console.log(response)
+                    // console.log(response)
                 })
             }
         }

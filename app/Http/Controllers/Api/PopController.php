@@ -12,10 +12,12 @@ use App\Models\LogType;
 use App\Models\PopMenu;
 use App\Models\EntelVip;
 use App\Models\Projection;
+use App\Models\PopFavorite;
 use App\Models\PopMenuType;
 use App\Models\EnergySystem;
 use App\Models\GeneratorSet;
 use Illuminate\Http\Request;
+use App\Models\EnergyResponsable;
 use App\Exports\AllInfoPopsExport;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
@@ -124,106 +126,6 @@ class PopController extends Controller
 
         return new PopCollection($pops);
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function popsCrm(Request $request)
-    // {
-    //     $crm_id = $request->crm_id;
-    //     $pops = Pop::join('zonas', 'pops.zona_id', '=', 'zonas.id')
-    //             ->join('crms', function($join) use ($crm_id) {
-    //                 $join->on('zonas.crm_id', '=', 'crms.id')
-    //                 ->where('crms.id', $crm_id);
-    //             })
-    //             // Classificación
-    //             ->leftJoin('classifications', function ($join) {
-    //                 $join->on('pops.id', '=', 'classifications.pop_id')
-    //                 ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
-    //             })->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
-
-    //             // Tipo Atención
-    //             ->leftJoin('attentions', function ($join) {
-    //                 $join->on('pops.id', '=', 'attentions.pop_id')
-    //                 ->whereRaw('attentions.created_at = (SELECT MAX(attentions.created_at) FROM attentions WHERE attentions.pop_id = pops.id)');
-    //             })
-    //             // ->leftJoin('attention_types', 'attentions.attention_type_id', '=', 'attention_types.id')
-
-    //             ->select(
-    //                 'pops.id as pop_id',
-    //                 'pops.nombre',
-    //                 'pops.nem_movil',
-    //                 'pops.nem_fijo',
-    //                 'pops.direccion',
-    //                 'pops.latitude',
-    //                 'pops.longitude',
-    //                 'pops.cod_planificacion',
-    //                 'comunas.*',
-    //                 'zonas.*',
-    //                 'crms.*',
-    //                 'classifications.classification_type_id',
-    //                 'classification_types.classification_type',
-    //                 'attentions.attention_type_id',
-    //                 // 'attention_types.attention_type as attention_type',
-    //                 'pops.alba_project'
-    //             )
-    //             ->orderBy('pops.id')
-    //             ->paginate(10);
-
-    //     return new PopCollection($pops);
-    // }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function popsZona()
-    // {
-    //     $zona_id = $_GET["zona_id"];
-    //     $pops = Pop::join('zonas', function($join) use ($zona_id) {
-    //                 $join->on('pops.zona_id', '=', 'zonas.id')
-    //                 ->where('zonas.id', $zona_id);
-    //             })
-    //             ->join('crms', 'zonas.crm_id', '=', 'crms.id')
-    //             // Classificación
-    //             ->leftJoin('classifications', function ($join) {
-    //                 $join->on('pops.id', '=', 'classifications.pop_id')
-    //                 ->whereRaw('classifications.created_at = (SELECT MAX(classifications.created_at) FROM classifications WHERE classifications.pop_id = pops.id)');
-    //             })->leftJoin('classification_types', 'classifications.classification_type_id', '=', 'classification_types.id')
-
-    //             // Tipo Atención
-    //             ->leftJoin('attentions', function ($join) {
-    //                 $join->on('pops.id', '=', 'attentions.pop_id')
-    //                 ->whereRaw('attentions.created_at = (SELECT MAX(attentions.created_at) FROM attentions WHERE attentions.pop_id = pops.id)');
-    //             })
-    //             // ->leftJoin('attention_types', 'attentions.attention_type_id', '=', 'attention_types.id')
-
-    //             ->select(
-    //                 'pops.id as pop_id',
-    //                 'pops.nombre',
-    //                 'pops.nem_movil',
-    //                 'pops.nem_fijo',
-    //                 'pops.direccion',
-    //                 'pops.latitude',
-    //                 'pops.longitude',
-    //                 'pops.cod_planificacion',
-    //                 'comunas.*',
-    //                 'zonas.*',
-    //                 'crms.*',
-    //                 'classifications.classification_type_id',
-    //                 'classification_types.classification_type',
-    //                 'attentions.attention_type_id',
-    //                 // 'attention_types.attention_type as attention_type'
-    //                 'pops.alba_project'
-    //             )
-    //             ->orderBy('pops.id')
-    //             ->paginate(10);
-
-    //     return new PopCollection($pops);
-    // }
 
     /**
      * Display the specified resource.
@@ -337,7 +239,9 @@ class PopController extends Controller
             'layout',
             'comsites',
             'drone_videos',
-            'risk_types'
+            'risk_types',
+            'turret_type',
+            'pop_favorites'
             )
             ->where('id', $id)
             ->first();
@@ -565,7 +469,7 @@ class PopController extends Controller
         $condition_offgrid = $request->offgrid ? 'pops.energy_system_id = 2' : 'pops.energy_system_id IN (0,1,2)';
         $condition_solar = 'pops.solar IN ('.$request->solar.',1)';
         $condition_eolica = 'pops.eolica IN ('.$request->eolica.',1)';
-        $condition_alba_project = 'pops.alba_project IN ('.$request->alba_project.',1)';
+        $condition_turret_type = $request->turret_type_id ? 'pops.turret_type_id IS NOT NULL' : 'pops.turret_type_id IN (1,2) || pops.turret_type_id IS NULL';
 
         $protected_zone = $request->protected_zone;
         $condition_protected_zone = 'pops.id IN (SELECT pop_protected_zone.pop_id from entel_pops.pop_protected_zone)';
@@ -625,7 +529,7 @@ class PopController extends Controller
             ->whereRaw($condition_offgrid)
             ->whereRaw($condition_solar)
             ->whereRaw($condition_eolica)
-            ->whereRaw($condition_alba_project)
+            ->whereRaw($condition_turret_type)
 
             ->where(function($q) use($condition_protected_zone, $protected_zone) {
                 $protected_zone ? $q->whereRaw($condition_protected_zone) : $q->whereRaw('1 = 1');
@@ -698,7 +602,7 @@ class PopController extends Controller
         $condition_solar = 'pops.solar IN ('.$request->solar.',1)';
         $condition_eolica = 'pops.eolica IN ('.$request->eolica.',1)';
         
-        $condition_alba_project = 'pops.alba_project IN ('.$request->alba_project.',1)';
+        $condition_turret_type = $request->turret_type_id ? 'pops.turret_type_id IS NOT NULL' : 'pops.turret_type_id IN (1,2) || pops.turret_type_id IS NULL';
 
         $protected_zone = $request->protected_zone;
         $condition_protected_zone = 'pops.id IN (SELECT pop_protected_zone.pop_id from entel_pops.pop_protected_zone)';
@@ -757,7 +661,7 @@ class PopController extends Controller
             ->whereRaw($condition_offgrid)
             ->whereRaw($condition_solar)
             ->whereRaw($condition_eolica)
-            ->whereRaw($condition_alba_project)
+            ->whereRaw($condition_turret_type)
 
             ->where(function($q) use($condition_protected_zone, $protected_zone) {
                 $protected_zone ? $q->whereRaw($condition_protected_zone) : $q->whereRaw('1 = 1');
@@ -849,6 +753,18 @@ class PopController extends Controller
     public function export(Request $request)
     {
         return (new AllInfoPopsExport($request))->download('pops.xlsx');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function popFavorite(Request $request)
+    {
+        $favorite = PopFavorite::where('user_id', $request->user_id)->where('pop_id', $request->pop_id)->get();
+        return $favorite;
     }
 
 }

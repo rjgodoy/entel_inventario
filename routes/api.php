@@ -176,10 +176,6 @@ Route::middleware('auth:api')->group(function () {
 		Route::get('gpInventoryExport', 'Api\GeneratorSetController@gpInventoryExport');
 
 		Route::get('doPing', 'GeneratorSetController@doPing');
-
-		
-
-
 		Route::apiResource('telecomCompanies','Api\TelecomCompanyController');
 		Route::apiResource('generatorSetTopologyTypes','Api\GeneratorSetTopologyTypeController');
 		Route::apiResource('generatorSetLevelTypes','Api\GeneratorSetLevelTypeController');
@@ -257,18 +253,13 @@ Route::middleware('auth:api')->group(function () {
 	Route::get('filters', 'Api\PopController@filters');
 	Route::get('allPops', 'Api\PopController@allPops');
 	##############################################################################################
-
-
 	### COMSITE ######################################################################
 	Route::apiResource('comsites','Api\ComsiteController');
 
 	Route::get('comsiteLastData', 'Api\ComsiteController@lastData');
 	##############################################################################################
-
-
 	### GESTION AMBIENTAL ######################################################################
 	Route::apiResource('eco','Api\EcoController');
-
 	Route::get('ecoZones','Api\EcoController@zones');
 	Route::get('ecoStorage/{pop_id}','Api\EcoController@storage');
 	Route::get('rcas','Api\EcoController@rcas');
@@ -279,17 +270,13 @@ Route::middleware('auth:api')->group(function () {
 	Route::post('rcas','Api\EcoController@upload');
 	Route::post('newStorage','Api\EcoController@newStorage');
 	##############################################################################################
-
-
 	### POP DETAIL ######################################################################
 	Route::apiResource('site','Api\SiteController');
 	Route::apiResource('dependences','Api\DependenceController');
 	Route::apiResource('logs','Api\LogController');
 	Route::apiResource('folders', 'Api\FolderController');
 	Route::apiResource('files', 'Api\FileController');
-
 	Route::put('addDrone', 'Api\FileController@addDrone');
-
 	Route::get('popParameters', 'Api\PopController@popParameters');
 	Route::get('siteParameters', 'Api\SiteController@siteParameters');
 	Route::get('popTechnologies', 'Api\PopController@technologies');
@@ -299,25 +286,21 @@ Route::middleware('auth:api')->group(function () {
     // Route::get('getFolders', 'Api\FolderController@getFolders');
     Route::get('currentFolder', 'Api\FolderController@currentFolder');
     Route::get('getFiles', 'Api\FileController@getFiles');
-
     Route::post('createFolder/{id}', 'Api\FolderController@createFolder');
     Route::post('createRootFolder', 'Api\FolderController@createRootFolder');
-
     Route::put('vipEntel/{id}', 'Api\PopController@updateVipEntel');
-
     Route::get('iframeLayout/{pop_id}', 'Api\PopController@getIframeLayout');
-
     Route::apiResource('vandalismRecords','Api\VandalismRecordController');
     Route::get('coordinatesCaluculation', 'Api\VandalismRecordController@coordinatesCaluculation');
-		
 	##############################################################################################
-
 	Route::apiResource('energyEquipmentRevisions','Api\EnergyEquipmentRevisionController');
 	Route::apiResource('energyEquipmentRevisionTypes','Api\EnergyEquipmentRevisionTypeController');
 	Route::apiResource('energyEquipmentRevisionItems','Api\EnergyEquipmentRevisionItemController');
 	Route::apiResource('energyEquipmentRevisionStatuses','Api\EnergyEquipmentRevisionStatusController');
-	
+	Route::get('energyEquipmentRevisionsExport', 'Api\EnergyEquipmentRevisionController@export');
 	Route::get('crmEnergyReportsStatus/{id}', 'Api\EnergyEquipmentRevisionController@getStatusOfCrm');
+	Route::get('popFavoriteForUser', 'Api\PopController@popFavorite');
+	Route::apiResource('popFavorites', 'Api\PopFavoriteController');
 	
-
+	
 });

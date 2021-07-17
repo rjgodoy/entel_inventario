@@ -47,7 +47,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
     protected $offgrid;
     protected $solar;
     protected $eolica;
-    protected $alba_project;
+    protected $turret_type_id;
     protected $protected_zone;
 
     protected $junction;
@@ -81,7 +81,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
         $this->offgrid = $request->offgrid ? $request->offgrid : 0;
         $this->solar = $request->solar ? $request->solar : 0;
         $this->eolica = $request->eolica ? $request->eolica : 0;
-        $this->alba_project = $request->alba_project ? $request->alba_project : 0;
+        $this->turret_type_id = $request->turret_type_id ? $request->turret_type_id : 0;
         $this->protected_zone = $request->protected_zone ? $request->protected_zone : 0;
 
         $this->electric_line = $request->electric_line ? $request->electric_line : 0;
@@ -151,9 +151,9 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             $infrastructure = $this->infrastructure;
             $condition_infrastructures = 'pops.id IN (SELECT infrastructures.pop_id from entel_g_redes_inventario.infrastructures)';
 
-            $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
+            $condition_turret_type = $this->turret_type_id != null ? 'pops.turret_type_id IS NOT NULL' : 'pops.turret_type_id IN (1,2) || pops.turret_type_id IS NULL';
 
-            $pop = Pop::with('comuna', 'zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip', 'vertical_structures.beacons.beacon_type', 'protected_zones', 'comsites', 'energy_system', 'energy_responsable')
+            $pop = Pop::with('comuna', 'zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip', 'vertical_structures.beacons.beacon_type', 'protected_zones', 'comsites', 'energy_system', 'energy_responsable', 'turret_type')
                 ->whereHas('sites', function ($q) use ($text, $condition_core, $condition_bafi, $bafi, $condition_red_minima) {
                     $q->where(function ($p) use ($text) {
                         if ($text) {
@@ -193,7 +193,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
                 ->whereRaw($condition_offgrid)
                 ->whereRaw($condition_solar)
                 ->whereRaw($condition_eolica)
-                ->whereRaw($condition_alba_project)
+                ->whereRaw($condition_turret_type)
 
                 ->where(function($q) use($condition_protected_zone, $protected_zone) {
                     $protected_zone ? $q->whereRaw($condition_protected_zone) : $q->whereRaw('1 = 1');
@@ -265,7 +265,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             'ZONA PROTEGIDA',
             'RCA',
             'ZONA ACOPIO TEMPORAL (ZAT)',
-            'PROYECTO ALBA',
+            'TIPO TORRERA',
 
             'Q CONTRATOS COMSITE',
             'Nº CONTRATOS'
@@ -327,7 +327,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             $pop->protected_zones->first() ? $pop->protected_zones->first()->cod_zone.' - '.$pop->protected_zones->first()->name : 'NO',
             $rca ? 'SI' : 'NO',
             $temporary_storage ? $temporary_storage->pop->nombre : 'NO TIENE ZAT ASIGNADA',
-            $pop->alba_project ? 'SI' : 'NO',
+            $pop->turret_type ? $pop->turret_type->type : '',
 
             $pop->comsites->count(),
             $id_comsites
@@ -364,38 +364,6 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
 
     public static function afterSheet(AfterSheet $event) 
     {
-
-        // $event->sheet->styleCells(
-            //     'A1:ZZ1',
-            //     [
-            //         'font' => [
-            //             'size' => 11,
-            //             // 'name' => 'Arial',
-            //             'bold' => true,
-            //             'italic' => false,
-            //             // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
-            //             'strikethrough' => false,
-            //             // 'color' => ['argb' => '000000']
-            //         ],
-            //         'alignment' => [
-            //             'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-            //             'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-            //             'wrapText' => true,
-            //         ],
-            //         // 'borders' => [
-            //         //     'outline' => [
-            //         //         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
-            //         //         'color' => ['argb' => 'FFFF0000'],
-            //         //     ],
-            //         // ],
-
-            //         'fill' => [
-            //             'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-            //             'color' => ['argb' => 'F4D35E']
-            //         ]
-            //     ]
-        // );
-
         $event->sheet->styleCells(
             'A1:L1',
             [
@@ -539,7 +507,5 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
                 ]
             ]
         );
-
     }
-
 }

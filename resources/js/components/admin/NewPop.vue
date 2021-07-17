@@ -541,7 +541,7 @@
 
         methods: {
             siteType(val) {
-                console.log(val)
+                // console.log(val)
             },
 
             isNewPop(bool) {
@@ -621,7 +621,7 @@
                 }
                 axios.post('/api/pop', params)
                 .then(response => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     if (response.data === 'success') {
                         this.$buefy.toast.open({
                             message: 'El nuevo POP se ha ingresado correctamente.',
@@ -693,7 +693,7 @@
                 this.isFetching = true
                 axios.get(`/api/allPops?text=${name}&page=${this.page}`)
                     .then( response  => {
-                        console.log(response.data.meta.last_page)
+                        // console.log(response.data.meta.last_page)
                         response.data.pops.forEach((item) => this.pops.push(item))
                         this.page++
                         this.totalPages = response.data.meta.last_page

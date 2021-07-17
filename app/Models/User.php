@@ -175,4 +175,14 @@ class User extends Authenticatable
         return $this->hasMany(Log::class);
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function pop_favorites()
+    {
+        return $this->hasMany(PopFavorite::class);
+    }
+
 }

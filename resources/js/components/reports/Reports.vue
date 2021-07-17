@@ -54,7 +54,7 @@
                                 <div class="has-text-centered is-size-5 has-text-weight-semibold">Contratos</div>
                             </div>
                             <div class="">
-                                <li class="p-2"><router-link to="/comsites" class="has-text-weight-normal is-size-5" expanded>Comsites</router-link></li>
+                                <div class="p-2"><router-link to="/comsite" class="has-text-weight-normal is-size-5" expanded>Comsites</router-link></div>
                             </div>
                         </div>
                         <div class="column">
@@ -62,7 +62,7 @@
                                 <div class="has-text-centered is-size-5 has-text-weight-semibold">Mantenciones</div>
                             </div>
                             <div class="">
-                                <li class="p-2"><router-link to="/revisions" class="has-text-weight-normal is-size-5" expanded>Revisiones</router-link></li>
+                                <div class="p-2"><router-link to="/revisions" class="has-text-weight-normal is-size-5" expanded>Registros de rondas Técnicas</router-link></div>
                             </div>
                         </div>
                         <div class="column">

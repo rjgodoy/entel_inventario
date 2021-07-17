@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EnergyEquipmentRevision extends Model
+class PopFavorite extends Model
 {
     protected $connection = 'mysql';
-    protected $table = 'entel_g_redes_inventario.energy_equipment_revisions';
-    
+    protected $table = 'entel_g_redes_inventario.pop_favorites';
+	
     protected $guarded = [];
 
     public function pop() 
@@ -16,8 +16,8 @@ class EnergyEquipmentRevision extends Model
         return $this->belongsTo(Pop::class);
     }
 
-    public function statuses() 
+    public function user() 
     {
-        return $this->hasMany(EnergyEquipmentRevisionStatus::class);
+        return $this->belongsTo(User::class);
     }
 }

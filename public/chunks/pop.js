@@ -331,24 +331,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignInAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTasks"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTemperatureLow"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBroadcastTower"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faDollarSign"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faLeaf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignal"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkedAlt"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCamera"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faUserTie"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faVideo"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faStreetView"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faExclamationTriangle"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignInAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTasks"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTemperatureLow"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBroadcastTower"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faDollarSign"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faLeaf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignal"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkedAlt"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCamera"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faUserTie"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faVideo"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faStreetView"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faExclamationTriangle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBookmark"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faBookmark"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Location: function Location() {
-      return Promise.all(/*! import() | chunks/pop/location */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~516f4ecc"), __webpack_require__.e("chunks/pop/location")]).then(__webpack_require__.bind(null, /*! ./Location */ "./resources/js/components/pop/Location.vue"));
+      return Promise.all(/*! import() | chunks/pop/location */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~0bfc6c0c"), __webpack_require__.e("chunks/pop/location")]).then(__webpack_require__.bind(null, /*! ./Location */ "./resources/js/components/pop/Location.vue"));
     },
     Sites: function Sites() {
       return __webpack_require__.e(/*! import() | chunks/pop/sites */ "chunks/pop/sites").then(__webpack_require__.bind(null, /*! ./Sites */ "./resources/js/components/pop/Sites.vue"));
@@ -379,16 +370,16 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return __webpack_require__.e(/*! import() | chunks/pop/eco */ "chunks/pop/eco").then(__webpack_require__.bind(null, /*! ./Eco */ "./resources/js/components/pop/Eco.vue"));
     },
     Comsite: function Comsite() {
-      return Promise.all(/*! import() | chunks/pop/comsite */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~516f4ecc"), __webpack_require__.e("chunks/pop/comsite")]).then(__webpack_require__.bind(null, /*! ./Comsite */ "./resources/js/components/pop/Comsite.vue"));
+      return Promise.all(/*! import() | chunks/pop/comsite */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~0bfc6c0c"), __webpack_require__.e("chunks/pop/comsite")]).then(__webpack_require__.bind(null, /*! ./Comsite */ "./resources/js/components/pop/Comsite.vue"));
     },
     Clients: function Clients() {
-      return Promise.all(/*! import() | chunks/pop/clients */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~516f4ecc"), __webpack_require__.e("chunks/pop/clients")]).then(__webpack_require__.bind(null, /*! ./Clients */ "./resources/js/components/pop/Clients.vue"));
+      return Promise.all(/*! import() | chunks/pop/clients */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~0bfc6c0c"), __webpack_require__.e("chunks/pop/clients")]).then(__webpack_require__.bind(null, /*! ./Clients */ "./resources/js/components/pop/Clients.vue"));
     },
     Documents: function Documents() {
       return __webpack_require__.e(/*! import() | chunks/pop/documents/documents */ "chunks/pop/documents/documents").then(__webpack_require__.bind(null, /*! ./documents/Documents */ "./resources/js/components/pop/documents/Documents.vue"));
     },
     Log: function Log() {
-      return Promise.all(/*! import() | chunks/pop/logs */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~516f4ecc"), __webpack_require__.e("chunks/pop/logs")]).then(__webpack_require__.bind(null, /*! ./Log */ "./resources/js/components/pop/Log.vue"));
+      return Promise.all(/*! import() | chunks/pop/logs */[__webpack_require__.e("vendors~chunks/capacity/charts/polarChart~chunks/capacity/charts/projectionChart~chunks/capacity/gau~0bfc6c0c"), __webpack_require__.e("chunks/pop/logs")]).then(__webpack_require__.bind(null, /*! ./Log */ "./resources/js/components/pop/Log.vue"));
     } // VulnerabilityIndex: () => import(/* webpackChunkName: "chunks/pop/vulnerabilityIndex"*/'./VulnerabilityIndex'),
 
   },
@@ -419,9 +410,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       isFocusable: false,
       isLoading: false,
       hasMobileCards: true,
+      isFavorite: false,
       canEditPop: false,
       canViewLog: false,
-      canEditName: false
+      canEditName: false,
+      canSaveFavorites: true
     };
   },
   created: function created() {
@@ -431,7 +424,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     this.$eventBus.$on('drone-added', this.getAllData);
   },
   mounted: function mounted() {
-    // console.log(this.user)
     this.getAllData();
     this.getTabs();
   },
@@ -685,6 +677,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       if (this.popName != this.pop.nombre && val == false) {
         this.updateParameter('nombre', this.popName);
       }
+    },
+    pop: function pop(val) {
+      this.isPopFavorite(val);
     }
   },
   methods: {
@@ -753,6 +748,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         _this4.canEditPop = response.data.can.editPop;
         _this4.canViewLog = response.data.can.viewLog;
         _this4.canEditName = response.data.can.editName;
+        _this4.canSaveFavorites = response.data.can.saveFavorites;
       });
     },
     // Style mode
@@ -794,6 +790,33 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       } else {
         return false;
       }
+    },
+    isPopFavorite: function isPopFavorite(pop) {
+      var _this5 = this;
+
+      var params = {
+        'pop_id': pop.id,
+        'user_id': this.user.id
+      };
+      axios.get('/api/popFavoriteForUser', {
+        params: params
+      }).then(function (response) {
+        console.log(response.data);
+        _this5.isFavorite = response.data.length;
+      });
+    },
+    asignFavorite: function asignFavorite() {
+      var params = {
+        'pop_id': this.pop.id,
+        'user_id': this.user.id,
+        'is_favorite': this.isFavorite
+      };
+      axios.post('/api/popFavorites', params).then(function (response) {
+        // this.isPopFavorite = response.data.length
+        console.log(response.data);
+      });
+      console.log("POP id is: " + this.pop.id);
+      console.log("User id is: " + this.user.id);
     }
   },
   beforeDestroy: function beforeDestroy() {
@@ -885,11 +908,12 @@ var render = function() {
             _c("div", { staticClass: "columns" }, [
               _c(
                 "div",
-                { staticClass: "column is-1 has-text-centered" },
+                { staticClass: "column is-1 has-text-centered pt-2 pb-0" },
                 [
                   _c(
                     "b-tooltip",
                     {
+                      staticClass: "pb-4",
                       attrs: {
                         label:
                           "Corresponde a la categoría más crítica entre todos sus Sitios activos.",
@@ -934,12 +958,48 @@ var render = function() {
                       )
                     ],
                     1
-                  )
+                  ),
+                  _vm._v(" "),
+                  _c("div", {}, [
+                    _vm.canSaveFavorites
+                      ? _c(
+                          "a",
+                          {
+                            on: {
+                              click: function($event) {
+                                _vm.asignFavorite()
+                                _vm.isFavorite = !_vm.isFavorite
+                              }
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "columns is-vcentered" }, [
+                              _c(
+                                "div",
+                                { staticClass: "column has-text-centered" },
+                                [
+                                  _c("font-awesome-icon", {
+                                    attrs: {
+                                      icon: [
+                                        _vm.isFavorite ? "fas" : "far",
+                                        "bookmark"
+                                      ],
+                                      size: "3x"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          ]
+                        )
+                      : _vm._e()
+                  ])
                 ],
                 1
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "column is-4" }, [
+              _c("div", { staticClass: "column is-4 pt-2" }, [
                 _c(
                   "div",
                   { staticClass: "is-size-4" },
@@ -1068,7 +1128,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.pop.alba_project
+                  _vm.pop.turret_type_id > 0
                     ? _c("div", { staticClass: "columns is-vcentered" }, [
                         _c(
                           "div",
@@ -1083,7 +1143,7 @@ var render = function() {
                                   {
                                     staticClass: "pt-1",
                                     attrs: {
-                                      label: "American Tower",
+                                      label: _vm.pop.turret_type.description,
                                       type: "is-black"
                                     }
                                   },
@@ -1094,8 +1154,7 @@ var render = function() {
                                         staticStyle: { width: "36px" },
                                         attrs: {
                                           alt: "image",
-                                          src:
-                                            "/img/logos/american_tower_logo_simple.png"
+                                          src: _vm.pop.turret_type.image
                                         }
                                       })
                                     ])
@@ -1107,7 +1166,15 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(2)
+                        _c("div", { staticClass: "column" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "is-size-5 has-text-weight-semibold"
+                            },
+                            [_vm._v(_vm._s(_vm.pop.turret_type.type))]
+                          )
+                        ])
                       ])
                     : _vm._e()
                 ]
@@ -1238,18 +1305,17 @@ var render = function() {
                       "div",
                       {
                         staticClass: "box pt-1 pb-1",
-                        class: _vm.pop.alba_project
+                        class: _vm.pop.turret_type_id
                           ? "is-eco is-bold"
                           : "has-background-grey-darker has-text-grey",
-                        style:
-                          _vm.pop.alba_project == 1
-                            ? "opacity: 1"
-                            : "opacity: 0.5"
+                        style: _vm.pop.turret_type_id
+                          ? "opacity: 1"
+                          : "opacity: 0.5"
                       },
                       [
                         _c("font-awesome-icon", {
                           attrs: {
-                            icon: _vm.pop.alba_project
+                            icon: _vm.pop.turret_type_id
                               ? ["far", "check-circle"]
                               : ["far", "times-circle"]
                           }
@@ -1258,11 +1324,19 @@ var render = function() {
                         _c(
                           "div",
                           {
-                            class: _vm.pop.alba_project
+                            class: _vm.pop.turret_type_id
                               ? "is-dark has-text-weight-bold"
                               : "has-text-grey-light"
                           },
-                          [_vm._v("ATC")]
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.pop.turret_type_id
+                                  ? _vm.pop.turret_type.type
+                                  : "TORRERA"
+                              )
+                            )
+                          ]
                         )
                       ],
                       1
@@ -1271,10 +1345,12 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
+              _c("div", { staticClass: "column is-1 has-text-right" }),
+              _vm._v(" "),
               _vm.canEditPop
                 ? _c(
                     "div",
-                    { staticClass: "column is-2 has-text-right" },
+                    { staticClass: "column is-1 has-text-right" },
                     [
                       _c(
                         "b-tooltip",
@@ -1375,7 +1451,7 @@ var render = function() {
                     [_vm._v(_vm._s(_vm.popAttentionPriority))]
                   ),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _vm._m(2)
                 ],
                 1
               )
@@ -1395,7 +1471,7 @@ var render = function() {
                     [_vm._v(_vm._s(_vm.pop.dependences))]
                   ),
                   _vm._v(" "),
-                  _vm._m(4)
+                  _vm._m(3)
                 ],
                 1
               )
@@ -1415,7 +1491,7 @@ var render = function() {
                     [_vm._v(_vm._s(_vm.popCategory ? _vm.popCategory : "-"))]
                   ),
                   _vm._v(" "),
-                  _vm._m(5)
+                  _vm._m(4)
                 ],
                 1
               )
@@ -1435,7 +1511,7 @@ var render = function() {
                     [_vm._v(_vm._s(_vm.popAttentionType))]
                   ),
                   _vm._v(" "),
-                  _vm._m(6)
+                  _vm._m(5)
                 ],
                 1
               )
@@ -1464,7 +1540,7 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _vm._m(7)
+                  _vm._m(6)
                 ],
                 1
               )
@@ -1730,16 +1806,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "column" }, [
       _c("div", { staticClass: "is-size-5 has-text-weight-semibold" }, [
         _vm._v("Oficina CRM")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column" }, [
-      _c("div", { staticClass: "is-size-5 has-text-weight-semibold" }, [
-        _vm._v("ATC")
       ])
     ])
   },

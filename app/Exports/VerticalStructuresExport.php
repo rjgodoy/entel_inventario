@@ -40,7 +40,7 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
     protected $offgrid;
     protected $solar;
     protected $eolica;
-    protected $alba_project;
+    protected $turret_type_id;
     protected $protected_zone;
 
     protected $electric_line;
@@ -74,7 +74,7 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
         $this->offgrid = $request->offgrid ? $request->offgrid : 0;
         $this->solar = $request->solar ? $request->solar : 0;
         $this->eolica = $request->eolica ? $request->eolica : 0;
-        $this->alba_project = $request->alba_project ? $request->alba_project : 0;
+        $this->turret_type_id = $request->turret_type_id ? $request->turret_type_id : 0;
         $this->protected_zone = $request->protected_zone ? $request->protected_zone : 0;
 
         $this->electric_line = $request->electric_line ? $request->electric_line : 0;
@@ -146,7 +146,7 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
             $infrastructure = $this->infrastructure;
             $condition_infrastructures = 'pops.id IN (SELECT infrastructures.pop_id from entel_g_redes_inventario.infrastructures)';
 
-            $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
+            $condition_turret_type = $this->turret_type_id != null ? 'pops.turret_type_id IS NOT NULL' : 'pops.turret_type_id IN (1,2) || pops.turret_type_id IS NULL';
 
             // $verticalStructure = VerticalStructure::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'vertical_structure_type', 'beacons.beacon_type')
             // 	->whereHas('pop.sites', function($a) use($text, $condition_bafi, $bafi, $condition_core, $condition_pe_3g, $condition_mpls, $condition_olt, $condition_olt_3play, $condition_lloo, $condition_ranco) {
@@ -207,7 +207,7 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
             //     //     $r->whereRaw($condition_critic);
             //     // })
             //     ->whereHas('pop', function($s) use($condition_vip, $condition_offgrid, $condition_solar, $condition_eolica, $condition_protected_zone, $protected_zone, 
-            //         $condition_electric_lines, $electric_line, $condition_junctions, $junction, $condition_generators, $generator_set, $condition_rectifiers, $power_rectifier, $condition_air_conditioners, $air_conditioner, $condition_vertical_structures, $vertical_structure, $condition_infrastructures, $infrastructure, $condition_alba_project) {
+            //         $condition_electric_lines, $electric_line, $condition_junctions, $junction, $condition_generators, $generator_set, $condition_rectifiers, $power_rectifier, $condition_air_conditioners, $air_conditioner, $condition_vertical_structures, $vertical_structure, $condition_infrastructures, $infrastructure, $condition_turret_type) {
             //         $s->whereRaw($condition_vip)
             //         ->whereRaw($condition_offgrid)
             //         ->whereRaw($condition_solar)
@@ -239,7 +239,7 @@ class VerticalStructuresExport implements FromCollection, WithTitle, ShouldAutoS
             //             $infrastructure ? $q->whereRaw($condition_infrastructures) : $q->whereRaw('1 = 1');
             //         })
 
-            //         ->whereRaw($condition_alba_project);
+            //         ->whereRaw($condition_turret_type);
             //     })
             //     ->orderBy('pop_id', 'asc')
     	       //  ->get();

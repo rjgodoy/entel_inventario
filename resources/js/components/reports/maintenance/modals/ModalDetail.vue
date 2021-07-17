@@ -6,7 +6,7 @@
         <section class="modal-card-body">
             <div class="tile is-ancestor">
                 <div class="columns is-multiline tile is-parent">
-                    <div class="column is-6 tile" v-for="type in itemTypes" :key="type.id">
+                    <div class="column is-6 tile" v-for="type in types" :key="type.id">
                         <TypeBox :revision=revision :type=type :user=user />
                     </div>
                 </div>
@@ -28,23 +28,20 @@
 
         data() {
             return {
-                itemTypes: Object,
+                types: Object,
             }
         },
 
-        computed: {
-
-        },
-
         mounted() {
-            this.getItemTypes()
+            this.getTypes()
         },
 
         methods: {
-            getItemTypes() {
+            getTypes() {
                 axios.get('/api/energyEquipmentRevisionTypes')
                 .then(response => {
-                    this.itemTypes = response.data
+                    this.types = response.data
+                    // console.log(this.types)
                 })
             },
 

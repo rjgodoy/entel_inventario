@@ -48,7 +48,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
     protected $offgrid;
     protected $solar;
     protected $eolica;
-    protected $alba_project;
+    protected $turret_type_id;
     protected $protected_zone;
 
     protected $electric_line;
@@ -82,7 +82,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
         $this->offgrid = $request->offgrid ? $request->offgrid : 0;
         $this->solar = $request->solar ? $request->solar : 0;
         $this->eolica = $request->eolica ? $request->eolica : 0;
-        $this->alba_project = $request->alba_project ? $request->alba_project : 0;
+        $this->turret_type_id = $request->turret_type_id ? $request->turret_type_id : 0;
         $this->protected_zone = $request->protected_zone ? $request->protected_zone : 0;
 
         $this->electric_line = $request->electric_line ? $request->electric_line : 0;
@@ -133,7 +133,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
             $condition_offgrid = $this->offgrid ? 'pops.energy_system_id = 2' : 'pops.energy_system_id IN (1,2) OR pops.energy_system_id IS NULL';
             $condition_solar = 'pops.solar IN ('.$this->solar.',1)';
             $condition_eolica = 'pops.eolica IN ('.$this->eolica.',1)';
-            $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
+            $condition_turret_type = $this->turret_type_id != null ? 'pops.turret_type_id IS NOT NULL' : 'pops.turret_type_id IN (1,2) || pops.turret_type_id IS NULL';
 
             $protected_zone = $this->protected_zone;
             $condition_protected_zone = 'pops.id IN (SELECT pop_protected_zone.pop_id from entel_pops.pop_protected_zone)';
@@ -155,7 +155,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
 
             $pop = PopResume::with('pop.sites.classification_type', 'pop.sites.attention_priority_type')
             ->whereHas('pop', function ($w) use ($text, $condition_core, $condition_bafi, $bafi, $condition_critic, $condition_crm, $condition_zona, $condition_pe_3g, $condition_mpls, $condition_olt, $condition_olt_3play, $condition_vip, $condition_lloo, $condition_ranco, $condition_offgrid, $condition_solar, $condition_eolica, $condition_protected_zone, $protected_zone,
-            $condition_electric_lines, $electric_line, $condition_junctions, $junction, $condition_generators, $generator_set, $condition_rectifiers, $power_rectifier, $condition_air_conditioners, $air_conditioner, $condition_vertical_structures, $vertical_structure, $condition_infrastructures, $infrastructure, $condition_alba_project) {
+            $condition_electric_lines, $electric_line, $condition_junctions, $junction, $condition_generators, $generator_set, $condition_rectifiers, $power_rectifier, $condition_air_conditioners, $air_conditioner, $condition_vertical_structures, $vertical_structure, $condition_infrastructures, $infrastructure, $condition_turret_type) {
                 $w->whereHas('sites', function ($q) use ($text, $condition_core, $condition_bafi, $bafi) {
                     $q->withTrashed()->where(function ($p) use ($text) {
                         if ($text) {
@@ -220,7 +220,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
                     $infrastructure ? $q->whereRaw($condition_infrastructures) : $q->whereRaw('1 = 1');
                 })
 
-                ->whereRaw($condition_alba_project);
+                ->whereRaw($condition_turret_type);
             })
             ->orderBy('pop_resumes.pop_id', 'asc')
             ->get(); 
@@ -300,7 +300,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
 	        'ZONA PROTEGIDA',
 	        'RCA',
             'ZONA ACOPIO TEMPORAL (ZAT)',
-	        'PROYECTO ALBA'
+	        'TIPO TORRERA'
 
         ];
     }
@@ -391,7 +391,7 @@ class PopResumeExport implements FromCollection, WithTitle, ShouldAutoSize, With
             $pop->cod_protected_zone ? $pop->cod_protected_zone.' - '.$pop->protected_zone : null,
             $pop->rca ? 'SI' : 'NO',
             $pop->zat,
-            $pop->alba_project ? 'SI' : 'NO'
+            $pop->turret_type ? $pop->turret_type->type : ''
 
         ];
     }

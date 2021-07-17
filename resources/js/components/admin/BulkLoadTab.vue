@@ -97,7 +97,7 @@ export default {
 
             axios.post(`/api/junction/efizity`, formData, config)
             .then((response) => {
-                console.log(response.data)
+                // console.log(response.data)
                 this.$buefy.toast.open({
                     message: 'Los datos de efizity se han inrgesado exitosamente',
                     type: 'is-success',

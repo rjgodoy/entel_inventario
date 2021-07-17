@@ -99,7 +99,7 @@
                             <div class="is-size-6 has-text-weight-normal has-text-centered has-text-grey-light" style="padding-bottom: 8px;">CARACTERISTICAS</div>
                             <div class="columns is-multiline is-gapless">
 
-                                <div class="column is-3" v-for="characteristic in characteristics">
+                                <div class="column is-3" v-for="characteristic in characteristics" :key="characteristic.id">
                                     <div class="field" style="margin: 1px;">
                                         <a class="tile is-child button" :class="characteristic.selected ? 'is-link' : 'is-black-ter'" @click="changeCharacteristic(characteristic)" >
                                             <div :class="secondaryText"> 
@@ -119,7 +119,7 @@
                             <div class="is-size-6 has-text-weight-normal has-text-centered has-text-grey-light" style="padding-bottom: 8px;">EQUIPAMIENTO</div>
                             <div class="columns is-multiline is-gapless">
 
-                                <div class="column is-4" v-for="equipment in equipments">
+                                <div class="column is-4" v-for="equipment in equipments" :key="equipment.id">
                                     <div class="field" style="margin: 1px;">
                                         <a class="tile is-child button" 
                                             :class="equipment.selected ? 'is-link' : 'is-black-ter'" @click="changeEquipment(equipment)">
@@ -450,8 +450,8 @@ export default {
                     label: 'Zona protegida',
                     selected: 0
                 },
-                alba_project: {
-                    label: 'Proyecto Alba',
+                turret_type_id: {
+                    label: 'Torreras - ATC/SBA',
                     selected: 0
                 },
             },
@@ -628,7 +628,7 @@ export default {
                 'offgrid': this.characteristics.offgrid.selected,
                 'solar': this.characteristics.solar.selected,
                 'eolica': this.characteristics.eolica.selected,
-                'alba_project': this.characteristics.alba_project.selected,
+                'turret_type_id': this.characteristics.turret_type_id.selected,
                 'protected_zone': this.characteristics.protected_zone.selected,
 
                 'electric_line': this.equipments.electric_line.selected,
@@ -671,7 +671,7 @@ export default {
             //     'offgrid': this.characteristics.offgrid.selected,
             //     'solar': this.characteristics.solar.selected,
             //     'eolica': this.characteristics.eolica.selected,
-            //     'alba_project': this.characteristics.alba_project.selected,
+            //     'turret_type_id': this.characteristics.turret_type_id.selected,
             //     'protected_zone': this.characteristics.protected_zone.selected,
 
             //     'electric_line': this.equipments.electric_line.selected,
@@ -780,7 +780,7 @@ export default {
                 'offgrid': this.characteristics.offgrid.selected,
                 'solar': this.characteristics.solar.selected,
                 'eolica': this.characteristics.eolica.selected,
-                'alba_project': this.characteristics.alba_project.selected,
+                'turret_type_id': this.characteristics.turret_type_id.selected,
                 'protected_zone': this.characteristics.protected_zone.selected,
 
                 'electric_line': this.equipments.electric_line.selected,

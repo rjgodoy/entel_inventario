@@ -59,13 +59,13 @@ __webpack_require__.r(__webpack_exports__);
 
       if (+this.tab) {
         axios.get("/api/psgTp?page=".concat(this.currentPage, "&history=1")).then(function (response) {
-          console.log(response.data);
+          // console.log(response.data)
           _this.dataHistory = response.data;
           _this.loadingHistory = false;
         });
       } else {
         axios.get("/api/psgTp?page=".concat(this.currentPage, "&history=0")).then(function (response) {
-          console.log(response.data);
+          // console.log(response.data)
           _this.data = response.data;
           _this.loading = false;
         });

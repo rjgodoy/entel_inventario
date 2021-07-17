@@ -118,8 +118,8 @@
                                     </span>
                                 </div>
                                 <div class="">
-                                    <span v-if="props.option.pop.alba_project == 1" class="tag is-light is-info has-text-weight-bold is-size-7">
-                                        {{ props.option.pop.alba_project == 1 ? 'alba' : '' }}
+                                    <span v-if="props.option.pop.turret_type_id == 1" class="tag is-light is-info has-text-weight-bold is-size-7">
+                                        {{ props.option.pop.turret_type_id == 1 ? 'alba' : '' }}
                                     </span>
                                 </div>
                             </div>

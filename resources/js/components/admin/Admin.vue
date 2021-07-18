@@ -174,7 +174,7 @@
                     if(response.data.can.viewAdmin) {
                         this.tabs = response.data.admin
                     }
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.canCreatePop = response.data.can.createPop
                     this.canUpdateEfizity = response.data.can.updateEfizity
                     this.canEditPermissions = response.data.can.editPermissions

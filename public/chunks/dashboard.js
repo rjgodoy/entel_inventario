@@ -1868,7 +1868,7 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("div", {}, [
-                                  props.option.pop.alba_project == 1
+                                  props.option.pop.turret_type_id == 1
                                     ? _c(
                                         "span",
                                         {
@@ -1879,8 +1879,8 @@ var render = function() {
                                           _vm._v(
                                             "\n                                    " +
                                               _vm._s(
-                                                props.option.pop.alba_project ==
-                                                  1
+                                                props.option.pop
+                                                  .turret_type_id == 1
                                                   ? "alba"
                                                   : ""
                                               ) +

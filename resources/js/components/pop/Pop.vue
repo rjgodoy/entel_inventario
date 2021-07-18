@@ -10,8 +10,9 @@
                 <div class="">
                     <div class="columns">
 
-                        <div class="column is-1 has-text-centered">
+                        <div class="column is-1 has-text-centered pt-2 pb-0">
                             <b-tooltip label="Corresponde a la categoría más crítica entre todos sus Sitios activos."
+                            class="pb-4"
                             type="is-link"
                             position="is-right"
                             size="is-large"
@@ -20,9 +21,19 @@
                                     <div class="is-size-3 has-text-weight-bold">{{ popClassification.classification }}</div>
                                 </b-button>
                             </b-tooltip>
+
+                            <div class="">
+                                <a v-if="canSaveFavorites" @click="asignFavorite(); isFavorite=!isFavorite">
+                                    <div class="columns is-vcentered">
+                                        <div class="column has-text-centered">
+                                            <font-awesome-icon :icon="[isFavorite ? 'fas' : 'far', 'bookmark']" size="3x"/>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
 
-                        <div class="column is-4">
+                        <div class="column is-4 pt-2">
                             <div class="is-size-4">
                                 <h1 class="title" v-if="!canEditName || !isEditMode || !noMovil">{{ pop.nombre }}</h1>
 
@@ -59,23 +70,18 @@
                                 </div>
                             </div>
 
-                            <div class="columns is-vcentered" v-if="pop.alba_project">
+                            <div class="columns is-vcentered" v-if="pop.turret_type_id > 0">
                                 <div class="column is-2 has-text-centered">
-                                    <!-- <b-tooltip label="Entel" position="is-bottom" type="is-black">
-                                        <div>
-                                        <img alt="image" class="img-container" src="/img/iconografia/entel-logo-negativo.png" style="width: 32px"/>
-                                        </div>
-                                    </b-tooltip> -->
                                     <div class="box p-1">
-                                        <b-tooltip label="American Tower" type="is-black" class="pt-1">
+                                        <b-tooltip :label="pop.turret_type.description" type="is-black" class="pt-1">
                                             <div>
-                                                <img alt="image" class="img-container" src="/img/logos/american_tower_logo_simple.png" style="width: 36px"/>
+                                                <img alt="image" class="img-container" :src="pop.turret_type.image" style="width: 36px"/>
                                             </div>
                                         </b-tooltip>
                                     </div>
                                 </div>
                                 <div class="column">
-                                    <div class="is-size-5 has-text-weight-semibold">ATC</div>
+                                    <div class="is-size-5 has-text-weight-semibold">{{ pop.turret_type.type }}</div>
                                 </div>
                             </div>
 
@@ -102,34 +108,19 @@
                                     </div>
                                 </div>
                                 <div class="column is-6">
-                                    <div class="box pt-1 pb-1" :class="pop.alba_project ? 'is-eco is-bold' : 'has-background-grey-darker has-text-grey'" :style="pop.alba_project == 1 ? 'opacity: 1' : 'opacity: 0.5'">
-                                            <font-awesome-icon :icon="pop.alba_project ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
-                                        <div :class="pop.alba_project ? 'is-dark has-text-weight-bold' : 'has-text-grey-light'">ATC</div>
+                                    <div class="box pt-1 pb-1" :class="pop.turret_type_id ? 'is-eco is-bold' : 'has-background-grey-darker has-text-grey'" :style="pop.turret_type_id ? 'opacity: 1' : 'opacity: 0.5'">
+                                            <font-awesome-icon :icon="pop.turret_type_id ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
+                                        <div :class="pop.turret_type_id ? 'is-dark has-text-weight-bold' : 'has-text-grey-light'">{{ pop.turret_type_id ? pop.turret_type.type : 'TORRERA'}}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- <div class="column is-1 has-text-right" v-if="canViewLog">
-                            <button
-                                class="button is-warning" 
-                                @click="openLog" 
-                                type="button"
-                                data-target="quickviewDefault" 
-                                data-show="quickview" 
-                                style="height: auto; margin-right: -24px">
-                                <div class="columns">
-                                    <div class="column" style="padding-left: 8px; padding-right: 5px;">
-                                        &nbsp;<br><font-awesome-icon :icon="['fas', 'sign-in-alt']" rotation="180"/><br>&nbsp;
-                                    </div>
-                                    <div class="column" style="padding-left: 5px; padding-right: 8px;">
-                                        <div class="has-text-weight-semibold is-size-6">L<br/>O<br/>G</div>
-                                    </div>
-                                </div>
-                            </button>
-                        </div> -->
+                        <div class="column is-1 has-text-right" >
+                            
+                        </div>
 
-                        <div class="column is-2 has-text-right" v-if="canEditPop">
+                        <div class="column is-1 has-text-right" v-if="canEditPop">
                             <b-tooltip 
                                 :label="isEditMode ? 'Salir del modo edición' : 'Entrar en modo edición'" 
                                 position="is-left"
@@ -158,7 +149,7 @@
         <div class="is-divider" style="margin: 0px"></div>
 
         <!-- CARACTERISTICAS ############### -->
-        <div class="hero is-dark" :class="">
+        <div class="hero is-dark">
             <div class="hero-body" style="padding-top: 32px; padding-bottom: 32px;">
                 <nav class="level">
                     <div class="level-item has-text-centered">
@@ -328,10 +319,10 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faHome, faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+    import { faHome, faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle, faBookmark } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
-    import { faCheckCircle as farCheckCircle, faTimesCircle as farTimesCircle } from '@fortawesome/free-regular-svg-icons'
-    library.add(faHome, faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle)
+    import { faCheckCircle as farCheckCircle, faTimesCircle as farTimesCircle, faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons'
+    library.add(faHome, faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle, faBookmark, farBookmark)
     export default {
         components: {
             Location: () => import(/* webpackChunkName: "chunks/pop/location"*/'./Location'),
@@ -386,10 +377,12 @@
                 isFocusable: false,
                 isLoading: false,
                 hasMobileCards: true,
+                isFavorite: false,
 
                 canEditPop: false,
                 canViewLog: false,
-                canEditName: false
+                canEditName: false,
+                canSaveFavorites: true
             }
         },
 
@@ -401,10 +394,8 @@
         },
 
         mounted() {
-            // console.log(this.user)
             this.getAllData()
             this.getTabs()
-            
         },
 
         computed: {
@@ -642,6 +633,9 @@
                 if(this.popName != this.pop.nombre && val == false) {
                     this.updateParameter('nombre', this.popName)
                 }
+            },
+            pop(val) {
+                this.isPopFavorite(val)
             }
         },
 
@@ -711,6 +705,7 @@
                     this.canEditPop = response.data.can.editPop
                     this.canViewLog = response.data.can.viewLog
                     this.canEditName = response.data.can.editName
+                    this.canSaveFavorites = response.data.can.saveFavorites
                 })
             },
 
@@ -756,6 +751,34 @@
                 } else {
                     return false
                 }
+            },
+
+            isPopFavorite(pop) {
+                let params = {
+                    'pop_id': pop.id,
+                    'user_id': this.user.id
+                }
+                axios.get('/api/popFavoriteForUser', { params })
+                .then(response => {
+                    console.log(response.data)
+                    this.isFavorite = response.data.length
+                })
+            },
+
+            asignFavorite() {
+                const params = {
+                    'pop_id': this.pop.id,
+                    'user_id': this.user.id,
+                    'is_favorite': this.isFavorite
+                }
+                axios.post('/api/popFavorites', params)
+                .then(response => {
+                    // this.isPopFavorite = response.data.length
+                    console.log(response.data)
+                })
+
+                console.log("POP id is: " + this.pop.id)
+                console.log("User id is: " + this.user.id)
             }
         },
 

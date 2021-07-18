@@ -145,7 +145,7 @@
                 }
                 axios.get(`/api/getFiles`, { params })
                 .then(response => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.files = response.data.files
                 })
             },
@@ -176,7 +176,7 @@
                 try {
                     axios.post(`/api/files`, formData, config)
                     .then(response => {
-                        console.log(response.data)
+                        // console.log(response.data)
                         this.$eventBus.$emit('reload-files')
                         this.getInfoFiles()
                         this.filename = ''
@@ -198,7 +198,7 @@
                     onConfirm: () => {
                         axios.delete(`/api/files/${file.id}`)
                         .then(response => {
-                            console.log(response)
+                            // console.log(response)
                             this.getInfoFiles()
                         })
                     }

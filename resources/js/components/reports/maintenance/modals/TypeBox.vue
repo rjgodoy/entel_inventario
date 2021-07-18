@@ -1,7 +1,7 @@
 <template>
     <div class="box tile is-child">
-        <div class="field">
-            <b-checkbox class="is-pulled-right is-link" type="is-round" v-model="validated" @input="validate()"/>
+        <div class="field pb-2">
+            <!-- <b-checkbox class="is-pulled-right is-link" type="is-round" v-model="validated" @input="validate()"/> -->
             <div class="is-size-6 has-text-weight-semibold title">{{ type.type }}</div>
         </div>
 
@@ -28,11 +28,8 @@ export default {
 
     data() {
         return {
-            validated: false
+            // validated: false
         }
-    },
-
-    mounted() {
     },
 
     methods: {
@@ -46,19 +43,19 @@ export default {
             return q != 0 ? 'success' : 'warning'
         },
 
-        validate() {
-            this.type.items.forEach(element => {
-                let params = {
-                    'energy_equipment_revision_id': this.revision.id,
-                    'user_id': this.user.id,
-                    'validated': this.validated ? 1:0
-                }
-                axios.put(`/api/energyEquipmentRevisionStatuses/${element.id}`, params)
-                .then(response => {
-                    console.log(response.data)
-                })
-            })
-        }
+        // validate() {
+        //     this.type.items.forEach(element => {
+        //         let params = {
+        //             'energy_equipment_revision_id': this.revision.id,
+        //             'user_id': this.user.id,
+        //             'validated': this.validated ? 1:0
+        //         }
+        //         axios.put(`/api/energyEquipmentRevisionStatuses/${element.id}`, params)
+        //         .then(response => {
+        //             // console.log(response.data)
+        //         })
+        //     })
+        // }
     }
 }
 </script>

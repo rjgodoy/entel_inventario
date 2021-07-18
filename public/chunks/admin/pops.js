@@ -520,8 +520,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     }
   },
   methods: {
-    siteType: function siteType(val) {
-      console.log(val);
+    siteType: function siteType(val) {// console.log(val)
     },
     isNewPop: function isNewPop(bool) {
       this.newPop = bool;
@@ -596,8 +595,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         'eolica': +this.eolica
       };
       axios.post('/api/pop', params).then(function (response) {
-        console.log(response.data);
-
+        // console.log(response.data)
         if (response.data === 'success') {
           _this11.$buefy.toast.open({
             message: 'El nuevo POP se ha ingresado correctamente.',
@@ -671,7 +669,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       this.isFetching = true;
       axios.get("/api/allPops?text=".concat(name, "&page=").concat(this.page)).then(function (response) {
-        console.log(response.data.meta.last_page);
+        // console.log(response.data.meta.last_page)
         response.data.pops.forEach(function (item) {
           return _this12.pops.push(item);
         });

@@ -111,7 +111,7 @@
             this.$eventBus.$on('new-role', (value) => {
                 this.getRoles()
                 this.selectedRole = value
-                console.log(this.selectedRole)
+                // console.log(this.selectedRole)
             })
         },
 
@@ -134,12 +134,12 @@
 
         computed: {
             canCreateRole() {
-                console.log(this.rolesData)
+                // console.log(this.rolesData)
                 return this.rolesData.can ? this.rolesData.can.create : false
             },
 
             canDeleteRole() {
-                console.log(this.rolesData)
+                // console.log(this.rolesData)
                 return this.rolesData.can ? this.rolesData.can.delete : false
             }
         },
@@ -148,7 +148,7 @@
             getRoles() {
                 axios.get(`/api/roles`)
                 .then(response => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.rolesData = response.data
                 })
             },

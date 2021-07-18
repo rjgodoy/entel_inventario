@@ -95,7 +95,7 @@ class UpdatePopResume extends Command
                 protected_zone,
                 rca,
                 zat,
-                alba_project    
+                turret_type_id    
             )
             SELECT 
             P.id,
@@ -149,7 +149,7 @@ class UpdatePopResume extends Command
             PZ.`name`,
             IF(RC.id,1,0),
             (SELECT PO.nombre FROM entel_pops.pops PO WHERE ZAT.pop_id = PO.id AND Z.id = ZAT.zona_id),
-            P.alba_project
+            P.turret_type_id
 
             FROM entel_pops.pops P 
             INNER JOIN entel_pops.sites S ON S.pop_id = P.id

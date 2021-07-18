@@ -68,7 +68,7 @@ export default {
                 { path: '/capacity', name: 'Capacity Planning', component: CapacityPlanning },
                 { path: '/capacity/:id', name: 'Detalle de Sala', component: RoomDetail },
                 { path: '/comsite', name: 'Comsite', component: Comsite },
-                { path: '/revisions', name: 'Revisiones', component: Revisions },
+                { path: '/revisions', name: 'Registros de rondas Técnicas', component: Revisions },
                 { path: '/eco', name: 'Gestion Ambiental', component: Eco },
                 { path: '/docs', name: 'Documentos', component: Documents },
                 { path: '/admin', name: 'Administración', component: Admin },

@@ -4,7 +4,7 @@
 
             <div class="columns">
                 <div class="column tile is-parent" v-for="crm in crms" :key="crm.id" @click="currentCrm = currentCrm === crm.id ? 0 : crm.id">
-                    <div class="tile is-child box has-text-centered" :class="currentCrm === crm.id && 'is-bold is-link'">
+                    <div class="tile is-child box has-text-centered p-1" :class="currentCrm === crm.id && 'is-bold is-link'">
                         <div v-text="crm.sigla_crm" class="is-size-4 has-text-weight-semibold"></div>
                         <div style="padding-top: 5px;">
                             <div class="is-size-7 has-text-weight-normal">
@@ -19,22 +19,52 @@
             </div>
 
             <div class="box">
-                <div class="field">
-                    <div class="control has-icons-left has-icons-right">
-                        <input 
-                            class="input is-rounded" 
-                            @keyup="getEnergyEquipmentRevisionsData" 
-                            v-model="searchText" 
-                            type="text" 
-                            arial-label="Buscar" 
-                            placeholder="Buscar..." 
-                            autofocus>
-                        <span class="icon is-small is-left">
-                            <font-awesome-icon icon="search"/>
-                        </span>
-                        <span class="icon is-small is-right">
-                            <button class="delete" @click="clearSearch"></button>
-                        </span>
+                <div class="columns">
+                    <div class="column">
+                        <div class="control has-icons-left has-icons-right">
+                            <input 
+                                class="input is-rounded" 
+                                @keyup="getEnergyEquipmentRevisionsData" 
+                                v-model="searchText" 
+                                type="text" 
+                                arial-label="Buscar" 
+                                placeholder="Buscar..." 
+                                autofocus>
+                            <span class="icon is-small is-left">
+                                <font-awesome-icon icon="search"/>
+                            </span>
+                            <span class="icon is-small is-right">
+                                <button class="delete" @click="clearSearch"></button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="column is-3">
+                        <div class="control has-icons-left has-icons-right">
+                            <b-datepicker
+                                placeholder="Selecciona fechas..."
+                                v-model="dates"
+                                icon-pack="fas"
+                                icon-prev="chevron-left"
+                                icon-next="chevron-right"
+                                range
+                                @input="getEnergyEquipmentRevisionsData"
+                                :first-day-of-week="1"
+                                :max-date="new Date()">
+                            </b-datepicker>
+                            <span class="icon is-small is-left">
+                                <font-awesome-icon icon="calendar-alt"/>
+                            </span>
+                            <span class="icon is-small is-right">
+                                <button class="delete" @click="clearDates"></button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="column is-1 has-text-right">
+                        <b-button class="is-success" :loading="isbuttonLoading" 
+                            @click="downloadRevisions">
+                            <font-awesome-icon :icon="['fas', 'download']" />
+                        </b-button>
                     </div>
                 </div>
 
@@ -100,11 +130,11 @@
 
 <script>
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSearch, faBars, faCircle } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faBars, faCircle, faDownload, faAngleLeft, faAngleRight, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
-library.add(faSearch, faBars, faCircle);
-
+library.add(faSearch, faBars, faCircle, faDownload, faAngleLeft, faAngleRight, faCalendarAlt);
+var moment = require('moment')
 export default {
     components: {
         CrmStatus: () => import(/* webpackChunkName: "chunks/reports/maintenance/crmStatus"*/'./CrmStatus'),
@@ -117,6 +147,7 @@ export default {
         return {
             crms: Array,
             selectedRevision: null,
+            dates: [],
             revisionsData: {
                 // can: Array,
                 revisions: Object,
@@ -129,25 +160,17 @@ export default {
                 }
             },
             columns: [
-                {
-                    'name': 'POP',
-                    'width': 25
-                }, {
-                    'name': 'Fecha',
-                }, {
-                    'name': 'Status',
-                }, {
-                    'name': 'Reisor',
-                }, {
-                    'name': 'Empresa',
-                },
-                {
-
-                }
+                { 'name': 'POP', 'width': 25 }, 
+                { 'name': 'Fecha' },
+                { 'name': 'Status' },
+                { 'name': 'Empresa' },
+                { 'name': 'Reisor' },
+                { }
             ],
             searchText: '',
             currentCrm: 0,
-            isDetailModalActive: false
+            isDetailModalActive: false,
+            isbuttonLoading: false
         }
     },
 
@@ -186,7 +209,9 @@ export default {
             var params = {
                 'page': this.revisionsData.meta.current_page,
                 'crm_id': this.currentCrm,
-                'text': this.searchText != '' ?  this.searchText : 0
+                'text': this.searchText != '' ?  this.searchText : 0,
+                'start_date': this.dates.length && new Date(this.dates[0]),
+                'end_date': this.dates.length && new Date(this.dates[1])
             }
             axios.get('/api/energyEquipmentRevisions', { params: params })
             .then((response) => {
@@ -282,8 +307,66 @@ export default {
             return( arrData );
         },
 
+        downloadRevisions() {
+            this.isbuttonLoading = true
+
+            var params = {
+                'crm_id': this.currentCrm,
+                'text': this.searchText != '' ?  this.searchText : 0,
+                'start_date': this.dates.length && new Date(this.dates[0]),
+                'end_date': this.dates.length && new Date(this.dates[1])
+            }
+
+            axios.get('/api/energyEquipmentRevisionsExport', { 
+                params: params, 
+                responseType: 'arraybuffer' 
+            })
+            .then((response) => {
+                console.log(response.data)
+                const blob = new Blob([response.data], { type: 'application/xlsx' })
+                // const objectUrl = window.URL.createObjectURL(blob)
+
+                // IE doesn't allow using a blob object directly as link href
+                // instead it is necessary to use msSaveOrOpenBlob
+                if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                    window.navigator.msSaveOrOpenBlob(newBlob)
+                    return
+                }
+
+                const data = window.URL.createObjectURL(blob)
+                let link = document.createElement('a')
+                link.href = data
+                link.download = `Listado Rondas Técnicas - ${moment().format('YYYY-MM-DD hh:mm:ss')}.xlsx`
+                link.click()
+                // setTimeout(function () {
+                //     // For Firefox it is necessary to delay revoking the ObjectURL
+                //     window.URL.revokeObjectURL(data)
+                // }, 100)
+                
+                this.isbuttonLoading = false
+                this.$buefy.toast.open({
+                    message: 'La planilla se ha descargado exitosamente.',
+                    type: 'is-success',
+                    duration: 5000
+                })
+            }).catch((error) => {
+                console.log(error)
+                this.isbuttonLoading = false
+                this.$buefy.toast.open({
+                    message: 'Ha ocurrido un error. Favor contactar al administrador',
+                    type: 'is-danger',
+                    duration: 5000
+                })
+            })
+        },
+
         clearSearch() {
             this.searchText = ''
+            this.getEnergyEquipmentRevisionsData()
+        },
+
+        clearDates() {
+            this.dates=[]
             this.getEnergyEquipmentRevisionsData()
         },
     }

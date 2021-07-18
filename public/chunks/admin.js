@@ -198,9 +198,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("/api/tabs").then(function (response) {
         if (response.data.can.viewAdmin) {
           _this.tabs = response.data.admin;
-        }
+        } // console.log(response.data)
 
-        console.log(response.data);
+
         _this.canCreatePop = response.data.can.createPop;
         _this.canUpdateEfizity = response.data.can.updateEfizity;
         _this.canEditPermissions = response.data.can.editPermissions;

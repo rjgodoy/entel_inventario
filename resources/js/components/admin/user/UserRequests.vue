@@ -151,7 +151,7 @@
             getUserRequests() {
                 axios.get(`/api/userRequests`)
                 .then(response => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.requests = response.data.requests
                 })
             },
@@ -166,7 +166,7 @@
                         }
                         axios.post('/api/newUserAccepted', params )
                         .then(response => {
-                            console.log(response)
+                            // console.log(response)
                             this.$buefy.toast.open({
                                 message: response.data.message,
                                 type: 'is-success',

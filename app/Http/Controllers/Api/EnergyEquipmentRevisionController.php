@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\EnergyEquipmentRevision;
 use App\Models\EnergyEquipmentRevisionItem;
 use App\Models\EnergyEquipmentRevisionStatus;
+use App\Exports\EnergyEquipmentRevisionsExport;
 use App\Http\Resources\EnergyEquipmentRevisionCollection;
 
 class EnergyEquipmentRevisionController extends Controller
@@ -22,27 +23,58 @@ class EnergyEquipmentRevisionController extends Controller
     {
         $text = $request->text;
         $crm_id = $request->crm_id;
-
         $condition_crm = $crm_id != 0 ? 'crm_id = '.$crm_id : 'crm_id != '.$crm_id;
 
-        $revisions = EnergyEquipmentRevision::with(
-                'pop.comuna',
-                'pop.zona.crm', 
-                'pop.sites',
-                'statuses.item.revisor',
-                'statuses.item.type',
-                'statuses.validator'
-            )
-            ->whereHas('pop.sites', function($q) use($text) {
-                if ($text) {
-                    $q->where('nem_site', 'LIKE', "%$text%")
-                    ->orWhere('nombre', 'LIKE', "%$text%");
-                }
-            })
-            ->whereHas('pop.zona', function($r) use($condition_crm) {
-                $r->whereRaw($condition_crm);
-            })
-            ->paginate(20);
+        if($request->start_date && $request->end_date) {
+            $startDate = new Carbon($request->start_date);
+            $endDate = new Carbon($request->end_date);
+            $startDate = $startDate->isoFormat('YYYY-MM-DD');
+            $endDate = $endDate->isoFormat('YYYY-MM-DD');
+
+            $revisions = EnergyEquipmentRevision::with(
+                    'pop.comuna',
+                    'pop.zona.crm', 
+                    'pop.sites',
+                    'statuses.item',
+                    'statuses.item.type',
+                    'statuses.validator'
+                )
+                ->where(function($q) use($startDate, $endDate) {
+                    if($startDate && $endDate) {
+                        $q->whereBetween('date', [date($startDate), date($endDate)]);
+                    }
+                })
+                ->whereHas('pop.sites', function($q) use($text) {
+                    if ($text) {
+                        $q->where('nem_site', 'LIKE', "%$text%")
+                        ->orWhere('nombre', 'LIKE', "%$text%");
+                    }
+                })
+                ->whereHas('pop.zona', function($r) use($condition_crm) {
+                    $r->whereRaw($condition_crm);
+                })
+                ->paginate(20);
+        }
+        else {
+            $revisions = EnergyEquipmentRevision::with(
+                    'pop.comuna',
+                    'pop.zona.crm', 
+                    'pop.sites',
+                    'statuses.item',
+                    'statuses.item.type',
+                    'statuses.validator'
+                )
+                ->whereHas('pop.sites', function($q) use($text) {
+                    if ($text) {
+                        $q->where('nem_site', 'LIKE', "%$text%")
+                        ->orWhere('nombre', 'LIKE', "%$text%");
+                    }
+                })
+                ->whereHas('pop.zona', function($r) use($condition_crm) {
+                    $r->whereRaw($condition_crm);
+                })
+                ->paginate(20);
+        }
 
         return new EnergyEquipmentRevisionCollection($revisions);
     }
@@ -148,5 +180,16 @@ class EnergyEquipmentRevisionController extends Controller
         ->count();
         
         return $revisions;
+    }
+
+    /**
+     * Download all data from Pops (Dashboard).
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function export(Request $request)
+    {
+        return (new EnergyEquipmentRevisionsExport($request))->download('revisions.xlsx');
     }
 }

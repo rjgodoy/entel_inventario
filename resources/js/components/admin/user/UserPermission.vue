@@ -51,7 +51,7 @@
                 // console.log(params)
                 axios.put(`/api/permissions/${this.permission.id}`, params)
                 .then(response => {
-                    console.log(response)
+                    // console.log(response)
                 })
             }
         }

@@ -47,7 +47,7 @@ class PopResumeExportOriginal implements FromCollection, WithTitle, ShouldAutoSi
     protected $offgrid;
     protected $solar;
     protected $eolica;
-    protected $alba_project;
+    protected $turret_type_id;
     protected $protected_zone;
 
     protected $electric_line;
@@ -80,7 +80,7 @@ class PopResumeExportOriginal implements FromCollection, WithTitle, ShouldAutoSi
         $this->offgrid = $request->offgrid ? $request->offgrid : 0;
         $this->solar = $request->solar ? $request->solar : 0;
         $this->eolica = $request->eolica ? $request->eolica : 0;
-        $this->alba_project = $request->alba_project ? $request->alba_project : 0;
+        $this->turret_type_id = $request->turret_type_id ? $request->turret_type_id : 0;
         $this->protected_zone = $request->protected_zone ? $request->protected_zone : 0;
 
         $this->electric_line = $request->electric_line ? $request->electric_line : 0;
@@ -131,7 +131,7 @@ class PopResumeExportOriginal implements FromCollection, WithTitle, ShouldAutoSi
             $condition_offgrid = 'pops.offgrid IN ('.$this->offgrid.',1)';
             $condition_solar = 'pops.solar IN ('.$this->solar.',1)';
             $condition_eolica = 'pops.eolica IN ('.$this->eolica.',1)';
-            $condition_alba_project = 'pops.alba_project IN ('.$this->alba_project.',1)';
+            $condition_turret_type = 'pops.turret_type_id IN ('.$this->turret_type_id.',1)';
 
             $protected_zone = $this->protected_zone;
             $condition_protected_zone = 'pops.id IN (SELECT pop_protected_zone.pop_id from entel_pops.pop_protected_zone)';
@@ -216,7 +216,7 @@ class PopResumeExportOriginal implements FromCollection, WithTitle, ShouldAutoSi
                     $infrastructure ? $q->whereRaw($condition_infrastructures) : $q->whereRaw('1 = 1');
                 })
 
-                ->whereRaw($condition_alba_project)
+                ->whereRaw($condition_turret_type)
                 ->orderBy('pops.id', 'asc')
                 ->get();   
         }
@@ -436,7 +436,7 @@ class PopResumeExportOriginal implements FromCollection, WithTitle, ShouldAutoSi
             $rca ? 'SI' : 'NO',
             $temporary_storage ? $temporary_storage->pop->nombre : 'NO TIENE ZAT ASIGNADA',
 
-            $pop->alba_project ? 'SI' : 'NO'
+            $pop->turret_type_id ? 'SI' : 'NO'
 
         ];
     }

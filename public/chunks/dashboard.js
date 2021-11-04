@@ -819,14 +819,20 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       var id = 0;
 
       switch (site.site_type_id) {
-        case 1:
-        case 3:
-        case 4:
+        case 1: // Fijo
+
+        case 3: // Switch
+
+        case 4: // Phone
+
+        case 5:
+          // Repetidor
           id = site.state_id;
           state = site.state.state;
           break;
 
         case 2:
+          // Movil
           site.technologies.forEach(function (element) {
             switch (element.state_id) {
               case 1:

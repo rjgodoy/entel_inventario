@@ -1,18 +1,21 @@
 <!-- ESTE COMPONENTE ES EXCLUSIVAMENTE PARA LOS MARGENES DE LA VISTA DEL POP, NO PARA USO EN EL CAPACITY PLANNING, YA QUE EN ESA VISTA MUESTRA UN SOLO EQUIPO EN UN MODAL-->
 <template>
-    <section class="" v-if="generatorSets.length">  
-        <div class="" v-for="generatorSet in generatorSets">
-            
-            <div class="columns">
-                <div class="column is-2"></div>
-                <generator-set class="column is-8" 
-                    :generatorSet="generatorSet"
-                    :canEditGeneratorSets="canEditGeneratorSets"
-                    :user="user"
-                    :pop="pop"/>
-                <div class="column is-2"></div>
+    <section class=""> 
+        <div class="" v-if="generatorSets.length"> 
+            <div class="" v-for="generatorSet in generatorSets" :key="generatorSet.id">
+                <div class="columns">
+                    <div class="column is-2"></div>
+                    <generator-set class="column is-8" 
+                        :generatorSet="generatorSet"
+                        :canEditGeneratorSets="canEditGeneratorSets"
+                        :user="user"
+                        :pop="pop"/>
+                    <div class="column is-2"></div>
+                </div>
             </div>
-
+        </div>
+        <div class="has-text-centered" v-if="!generatorSets.length">
+            <div class="is-size-4 has-text-weight-light has-text-grey">No hay grupos electrógenos registrados en este POP</div>
         </div>
     </section>
 </template>

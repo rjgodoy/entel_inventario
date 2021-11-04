@@ -33,7 +33,7 @@
 
         <div class="is-divider" data-content="Condensadores" style="margin-bottom: 16px;" v-if="airConditioner.air_conditioner_condensers.length"></div>
         <div class="columns is-multiline" v-if="airConditioner.air_conditioner_condensers.length">
-            <div class="column is-4" v-for="condenser in airConditioner.air_conditioner_condensers">
+            <div class="column is-4" v-for="condenser in airConditioner.air_conditioner_condensers" :key="condenser.id">
                 <div class="box">
                     <div class="has-text-weight-light is-size-7">Modelo</div>
                     <div class="has-text-weight-semibold is-size-6">{{ condenser.model }}</div>

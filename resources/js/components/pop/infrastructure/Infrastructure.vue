@@ -28,13 +28,13 @@
                                             <div class="has-text-weight-semibold is-size-6">{{ data.use_factor ? data.use_factor : 'Sin información' }}</div>
 
                                             <div class="has-text-weight-light is-size-7" style="margin-top: 5px;">Balizas</div>
-                                            <div v-for="beacon in data.beacons">
+                                            <div v-for="beacon in data.beacons" :key="beacon.id">
                                                 <div class="has-text-weight-semibold is-size-6">🚨 {{ beacon.beacon_type.type }}</div>
                                             </div>
                                             <div class="has-text-weight-normal is-size-6" v-if="!data.beacons.length">No tiene Balizas</div>
                                             
                                         </div>
-                                        <div class="column has-text-centered">
+                                        <div class="column has-text-centered" v-if="data.vertical_structure_type.image">
                                             <img :src="'/img/vertical_structures/' + data.vertical_structure_type.image" style="max-height: 500px;"> 
                                         </div>
                                     </div>

@@ -266,6 +266,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             'RCA',
             'ZONA ACOPIO TEMPORAL (ZAT)',
             'TIPO TORRERA',
+            'AUTONOMIA TEORICA',
 
             'Q CONTRATOS COMSITE',
             'Nº CONTRATOS'
@@ -328,6 +329,8 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             $rca ? 'SI' : 'NO',
             $temporary_storage ? $temporary_storage->pop->nombre : 'NO TIENE ZAT ASIGNADA',
             $pop->turret_type ? $pop->turret_type->type : '',
+
+            $pop->theoretical_autonomy,
 
             $pop->comsites->count(),
             $id_comsites
@@ -485,7 +488,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
         );
 
         $event->sheet->styleCells(
-            'W1:X1',
+            'W1:Z1',
             [
                 'font' => [
                     'size' => 11,

@@ -28,7 +28,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     PowerRectifier: function PowerRectifier() {
@@ -77,38 +76,53 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.powerRectifiers.length
-    ? _c(
-        "section",
-        {
-          staticClass: "section",
-          staticStyle: { "padding-top": "0px", "padding-bottom": "48px" }
-        },
-        [
-          _c(
-            "div",
-            { staticClass: "columns tile is-ancestor is-multiline" },
-            _vm._l(_vm.powerRectifiers, function(powerRectifier) {
-              return _c(
-                "div",
-                { staticClass: "column is-6 tile is-parent" },
-                [
-                  _c("power-rectifier", {
-                    attrs: {
-                      powerRectifier: powerRectifier,
-                      canEdit: _vm.canEdit,
-                      user: _vm.user
-                    }
-                  })
-                ],
-                1
-              )
-            }),
-            0
-          )
-        ]
-      )
-    : _vm._e()
+  return _c(
+    "section",
+    {
+      staticClass: "section",
+      staticStyle: { "padding-top": "0px", "padding-bottom": "48px" }
+    },
+    [
+      _vm.powerRectifiers.length
+        ? _c("div", {}, [
+            _c(
+              "div",
+              { staticClass: "columns tile is-ancestor is-multiline" },
+              _vm._l(_vm.powerRectifiers, function(powerRectifier) {
+                return _c(
+                  "div",
+                  {
+                    key: powerRectifier.id,
+                    staticClass: "column is-6 tile is-parent"
+                  },
+                  [
+                    _c("power-rectifier", {
+                      attrs: {
+                        powerRectifier: powerRectifier,
+                        canEdit: _vm.can,
+                        user: _vm.user
+                      }
+                    })
+                  ],
+                  1
+                )
+              }),
+              0
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.powerRectifiers.length
+        ? _c("div", { staticClass: "has-text-centered" }, [
+            _c(
+              "div",
+              { staticClass: "is-size-4 has-text-weight-light has-text-grey" },
+              [_vm._v("No hay plantas rectificadoras registradas en este POP")]
+            )
+          ])
+        : _vm._e()
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

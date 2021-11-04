@@ -311,9 +311,9 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__["library"].add(_f
         this.infoWinOpen = !this.infoWinOpen;
       } //if different pop set infowindow to open and reset current pop index
       else {
-          this.infoWinOpen = true;
-          this.currentMidx = idx;
-        }
+        this.infoWinOpen = true;
+        this.currentMidx = idx;
+      }
 
       this.$refs.map.$mapPromise.then(function (map) {
         map.panTo({

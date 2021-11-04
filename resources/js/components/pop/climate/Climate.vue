@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <section class="" v-if="airConditioners.length">
+    <section class="">
+        <div class="" v-if="airConditioners.length">
             <div class="columns">
                 <div class="column has-text-weight-semibold has-text-dark is-size-3 has-text-left">Clima</div>
             </div>
@@ -12,16 +12,12 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="section" style="padding-top: 0px; padding-bottom: 48px;" v-if="airConditioners.length == 0">
-            <div class="container">
-                <div class="box">
-                    POP no tiene equipos de clima.
-                </div>
-            </div>
-        </section>
-    </div>
+        <div class="has-text-centered" v-if="!airConditioners.length">
+            <div class="is-size-4 has-text-weight-light has-text-grey">No hay equipos de clima registrados en este POP</div>
+        </div>
+    </section>
 </template>
 
 <script>

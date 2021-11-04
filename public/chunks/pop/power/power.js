@@ -127,8 +127,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       var _this = this;
 
       axios.get("/api/electricLines/".concat(this.pop.id)).then(function (response) {
-        _this.electricLines = response.data;
-        console.log(response.data);
+        _this.electricLines = response.data; // console.log(response.data)
       })["catch"](function (error) {
         console.log('Error al traer los datos de Líneas Eléctricas: ' + error);
       });

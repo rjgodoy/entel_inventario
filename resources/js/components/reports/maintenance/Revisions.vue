@@ -81,6 +81,18 @@
                         <tbody>
                             <tr class="" v-for="data in revisionsData.energyEquipmentRevisions" :key="data.id">
                                 <td class="">
+                                    <div class="is-size-6 has-text-weight-normal">
+                                        {{ data.id }}
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="is-size-6 has-text-weight-semibold">
+                                        <b-tooltip :label="data.weekly_review ? 'Revisión Semanal' : 'Revisión Mensual'" position="is-left" :type="data.weekly_review ? 'is-link' : 'is-success'">
+                                            <b-tag :type="data.weekly_review ? 'is-link' : 'is-success'">{{ data.weekly_review ? "W" : "M" }}</b-tag>
+                                        </b-tooltip>
+                                    </div>
+                                </td>
+                                <td class="">
                                     <div class="">
                                         <a class="is-size-6 has-text-weight-semibold" target="_blank" :href="'/pop/' + data.pop.id">
                                             {{ data.pop.nombre }}
@@ -111,6 +123,19 @@
                             </tr>    
                         </tbody>
                     </table>
+                    <div class="level">
+                        <nav class="level-left pagination" role="navigation" aria-label="pagination">
+                            <vue-pagination  
+                                :pagination="revisionsData.meta"
+                                @paginate="getEnergyEquipmentRevisionsData()"
+                                :offset="4"
+                                :primaryText="primaryText">
+                            </vue-pagination>
+                        </nav>
+                        <!-- <div class="level-right has-text-right">
+                            <div class="is-size-7 " :class="secondaryText">Fecha ultima actualización: {{ last_updated.formatted }}</div>
+                        </div> -->
+                    </div>
                 </div>
                
             </div>
@@ -135,10 +160,12 @@ import { faSearch, faBars, faCircle, faDownload, faAngleLeft, faAngleRight, faCa
 // import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 library.add(faSearch, faBars, faCircle, faDownload, faAngleLeft, faAngleRight, faCalendarAlt);
 var moment = require('moment')
+
 export default {
     components: {
         CrmStatus: () => import(/* webpackChunkName: "chunks/reports/maintenance/crmStatus"*/'./CrmStatus'),
         ModalDetail: () => import(/* webpackChunkName: "chunks/reports/mintenance/modalDetail"*/'./modals/ModalDetail'),
+        VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../../helpers/VuePagination'),
     },
     props : [
         'user'
@@ -150,7 +177,7 @@ export default {
             dates: [],
             revisionsData: {
                 // can: Array,
-                revisions: Object,
+                // revisions: Object,
                 meta: {
                     current_page: 1,
                     total: 0,
@@ -159,7 +186,10 @@ export default {
                     to: 0,
                 }
             },
+
             columns: [
+                { 'name': 'Id'},
+                { 'name': 'Revisión'},
                 { 'name': 'POP', 'width': 25 }, 
                 { 'name': 'Fecha' },
                 { 'name': 'Status' },
@@ -170,7 +200,14 @@ export default {
             searchText: '',
             currentCrm: 0,
             isDetailModalActive: false,
-            isbuttonLoading: false
+            isbuttonLoading: false,
+
+            primaryText: '',
+
+            CLIENT_ID: '109797837306016330637',
+            API_KEY: '3d298f5a0e3117f9de11ee1bd1a2eb5391e41b08',
+            DISCOVERY_DOCS: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+            SCOPES: "https://www.googleapis.com/auth/spreadsheets.readonly",
         }
     },
 
@@ -186,10 +223,34 @@ export default {
     mounted() {
         this.getCrms()
         this.getEnergyEquipmentRevisionsData()
-        this.getFormResponses()
+        // this.getFormResponses()
+        this.handleClientLoad()
     },
     
     methods: {
+        handleClientLoad() {
+            gapi.load('client:auth2', this.initClient());
+        },
+
+        initClient() {
+            gapi.client.init({
+                apiKey: this.API_KEY,
+                clientId: this.CLIENT_ID,
+                discoveryDocs: this.DISCOVERY_DOCS,
+                scope: this.SCOPES
+            }).then(function () {
+                // Listen for sign-in state changes.
+                // gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+                // Handle the initial sign-in state.
+                // updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+                // authorizeButton.onclick = handleAuthClick;
+                // signoutButton.onclick = handleSignoutClick;
+            }, function(error) {
+                appendPre(JSON.stringify(error, null, 2));
+            });
+        },
+
         getCrms() {
             axios.get(`/api/crms`)
             .then((response) => {
@@ -199,10 +260,15 @@ export default {
 
         status(revision) {
             let q = 0
+            let nulls = 0
             Object.keys(revision.statuses).forEach(element => {
+                if (revision.statuses[element].status == null) {
+                    nulls = nulls + 1
+                }
                 q = q + revision.statuses[element].status
             })
-            return q == revision.statuses.length ? 'success' : 'warning'
+            let statusIcon = q + nulls == revision.statuses.length ? 'success' : 'warning'
+            return statusIcon
         },
 
         getEnergyEquipmentRevisionsData() {
@@ -215,23 +281,32 @@ export default {
             }
             axios.get('/api/energyEquipmentRevisions', { params: params })
             .then((response) => {
-                // console.log(response)
+                console.log(response)
                 this.revisionsData = response.data
                 // console.log(this.revisionsData.length)
             })
         },
 
-        getFormResponses() {
-            let google_url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTfSUx2kGqO14cDWvAIWaRifz8mJVWjaGg1X3DInSQiprxCrkRRVvJmKm__HqEUe4mdIUgw-cnJR0Z8/pub?output=csv'
-            let data = Array
-            axios.get(google_url)
-            .then((response) => {
-                data = this.CSVToArray(response.data, ",")
-                if (data.length - 1 != this.revisionsData.length) {
-                    this.insertRevisions(data)
-                }
-            })
-        },
+        // async getFormResponses() {
+        //     // gapi.getGapiClient().then((gapi) => {
+        //     //     let google_url = 'https://docs.google.com/spreadsheets/d/1q_sZOLtDhHkb7iCQPORfHh2vmP9jV-vOM1DrdwebUGQ/edit?usp=sharing'
+        //     //     gapi.sheets.spreadsheet.get(google_url)
+        //     //     .then(response => {
+        //     //         console.log(response.data)
+        //     //     })
+        //     // })
+        //     // let google_url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTfSUx2kGqO14cDWvAIWaRifz8mJVWjaGg1X3DInSQiprxCrkRRVvJmKm__HqEUe4mdIUgw-cnJR0Z8/pub?output=csv'
+        //     let google_url = 'https://docs.google.com/spreadsheets/d/1q_sZOLtDhHkb7iCQPORfHh2vmP9jV-vOM1DrdwebUGQ/edit?usp=sharing'
+        //     // let data = Array
+        //     axios.get(google_url)
+        //     .then((response) => {
+        //         console.log(response)
+        //         // data = this.CSVToArray(response.data, ",")
+        //         // if (data.length - 1 != this.revisionsData.length) {
+        //         //     this.insertRevisions(data)
+        //         // }
+        //     })
+        // },
 
         insertRevisions(data) {
             let params = data
@@ -241,71 +316,71 @@ export default {
             })
         },
 
-        CSVToArray( strData, strDelimiter ){
-            // Check to see if the delimiter is defined. If not,
-            // then default to comma.
-            strDelimiter = (strDelimiter || ",");
+        // CSVToArray( strData, strDelimiter ){
+        //     // Check to see if the delimiter is defined. If not,
+        //     // then default to comma.
+        //     strDelimiter = (strDelimiter || ",");
 
-            // Create a regular expression to parse the CSV values.
-            var objPattern = new RegExp(
-                (
-                    // Delimiters.
-                    "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
+        //     // Create a regular expression to parse the CSV values.
+        //     var objPattern = new RegExp(
+        //         (
+        //             // Delimiters.
+        //             "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
 
-                    // Quoted fields.
-                    "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+        //             // Quoted fields.
+        //             "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
 
-                    // Standard fields.
-                    "([^\"\\" + strDelimiter + "\\r\\n]*))"
-                ),
-                "gi"
-                );
-            // Create an array to hold our data. Give the array
-            // a default empty first row.
-            var arrData = [[]];
-            // Create an array to hold our individual pattern
-            // matching groups.
-            var arrMatches = null;
-            // Keep looping over the regular expression matches
-            // until we can no longer find a match.
-            while (arrMatches = objPattern.exec( strData )){
-                // Get the delimiter that was found.
-                var strMatchedDelimiter = arrMatches[ 1 ];
+        //             // Standard fields.
+        //             "([^\"\\" + strDelimiter + "\\r\\n]*))"
+        //         ),
+        //         "gi"
+        //         );
+        //     // Create an array to hold our data. Give the array
+        //     // a default empty first row.
+        //     var arrData = [[]];
+        //     // Create an array to hold our individual pattern
+        //     // matching groups.
+        //     var arrMatches = null;
+        //     // Keep looping over the regular expression matches
+        //     // until we can no longer find a match.
+        //     while (arrMatches = objPattern.exec( strData )){
+        //         // Get the delimiter that was found.
+        //         var strMatchedDelimiter = arrMatches[ 1 ];
 
-                // Check to see if the given delimiter has a length
-                // (is not the start of string) and if it matches
-                // field delimiter. If id does not, then we know
-                // that this delimiter is a row delimiter.
-                if (
-                    strMatchedDelimiter.length &&
-                    strMatchedDelimiter !== strDelimiter
-                    ){
-                    // Since we have reached a new row of data,
-                    // add an empty row to our data array.
-                    arrData.push( [] );
-                }
-                var strMatchedValue;
-                // Now that we have our delimiter out of the way,
-                // let's check to see which kind of value we
-                // captured (quoted or unquoted).
-                if (arrMatches[ 2 ]){
-                    // We found a quoted value. When we capture
-                    // this value, unescape any double quotes.
-                    strMatchedValue = arrMatches[ 2 ].replace(
-                        new RegExp( "\"\"", "g" ),
-                        "\""
-                        );
-                } else {
-                    // We found a non-quoted value.
-                    strMatchedValue = arrMatches[ 3 ];
-                }
-                // Now that we have our value string, let's add
-                // it to the data array.
-                arrData[ arrData.length - 1 ].push( strMatchedValue );
-            }
-            // Return the parsed data.
-            return( arrData );
-        },
+        //         // Check to see if the given delimiter has a length
+        //         // (is not the start of string) and if it matches
+        //         // field delimiter. If id does not, then we know
+        //         // that this delimiter is a row delimiter.
+        //         if (
+        //             strMatchedDelimiter.length &&
+        //             strMatchedDelimiter !== strDelimiter
+        //             ){
+        //             // Since we have reached a new row of data,
+        //             // add an empty row to our data array.
+        //             arrData.push( [] );
+        //         }
+        //         var strMatchedValue;
+        //         // Now that we have our delimiter out of the way,
+        //         // let's check to see which kind of value we
+        //         // captured (quoted or unquoted).
+        //         if (arrMatches[ 2 ]){
+        //             // We found a quoted value. When we capture
+        //             // this value, unescape any double quotes.
+        //             strMatchedValue = arrMatches[ 2 ].replace(
+        //                 new RegExp( "\"\"", "g" ),
+        //                 "\""
+        //                 );
+        //         } else {
+        //             // We found a non-quoted value.
+        //             strMatchedValue = arrMatches[ 3 ];
+        //         }
+        //         // Now that we have our value string, let's add
+        //         // it to the data array.
+        //         arrData[ arrData.length - 1 ].push( strMatchedValue );
+        //     }
+        //     // Return the parsed data.
+        //     return( arrData );
+        // },
 
         downloadRevisions() {
             this.isbuttonLoading = true

@@ -268,35 +268,46 @@ var render = function() {
           _vm._l(_vm.airConditioner.air_conditioner_condensers, function(
             condenser
           ) {
-            return _c("div", { staticClass: "column is-4" }, [
-              _c("div", { staticClass: "box" }, [
-                _c("div", { staticClass: "has-text-weight-light is-size-7" }, [
-                  _vm._v("Modelo")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "has-text-weight-semibold is-size-6" },
-                  [_vm._v(_vm._s(condenser.model))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "has-text-weight-light is-size-7",
-                    staticStyle: { "padding-top": "10px" }
-                  },
-                  [_vm._v("Capacidad")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "has-text-weight-normal is-size-6" }, [
-                  _vm._v(
-                    _vm._s(_vm._f("numeral")(condenser.capacity, "0,0")) + " "
+            return _c(
+              "div",
+              { key: condenser.id, staticClass: "column is-4" },
+              [
+                _c("div", { staticClass: "box" }, [
+                  _c(
+                    "div",
+                    { staticClass: "has-text-weight-light is-size-7" },
+                    [_vm._v("Modelo")]
                   ),
-                  _c("span", { staticClass: "is-size-7" }, [_vm._v("kW")])
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "has-text-weight-semibold is-size-6" },
+                    [_vm._v(_vm._s(condenser.model))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "has-text-weight-light is-size-7",
+                      staticStyle: { "padding-top": "10px" }
+                    },
+                    [_vm._v("Capacidad")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "has-text-weight-normal is-size-6" },
+                    [
+                      _vm._v(
+                        _vm._s(_vm._f("numeral")(condenser.capacity, "0,0")) +
+                          " "
+                      ),
+                      _c("span", { staticClass: "is-size-7" }, [_vm._v("kW")])
+                    ]
+                  )
                 ])
-              ])
-            ])
+              ]
+            )
           }),
           0
         )

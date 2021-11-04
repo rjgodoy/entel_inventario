@@ -2,20 +2,24 @@
     <div class="box tile is-child">
         <div class="field pb-2">
             <!-- <b-checkbox class="is-pulled-right is-link" type="is-round" v-model="validated" @input="validate()"/> -->
-            <div class="is-size-6 has-text-weight-semibold title">{{ type.type }}</div>
+            <div class="is-size-5 has-text-weight-bold has-text-grey title">{{ type.type }}</div>
+
         </div>
 
         <div v-for="item in type.items" :key="item.id">
-            <div class="columns">
+            <div class="columns mb-1">
                 <div class="column is-1">
-                    <font-awesome-icon 
-                        icon="circle"
-                        size="1x" 
-                        :class="'has-text-' + status(revision.statuses, item.id)"
-                        />
+                    <b-tooltip :label="status(revision.statuses, item.id).status == 'success' ? 'OK' : (status(revision.statuses, item.id).status == 'warning' ? 'NO OK' : 'N/A')" position="is-left" type="is-dark">
+                        <font-awesome-icon 
+                            icon="circle"
+                            size="1x" 
+                            :class="'has-text-' + status(revision.statuses, item.id).status"
+                            />
+                    </b-tooltip>
                 </div>
                 <div class="column">
-                    <div class="is-size-6">{{ item.item }}</div>
+                    <div class="is-size-5 has-text-weight-normal">{{ item.item }}</div>
+                    <div v-if="status(revision.statuses, item.id).observation" class="is-size-6 has-text-weight-light">Observación: {{ status(revision.statuses, item.id).observation }}</div>
                 </div>
             </div>
         </div>
@@ -34,13 +38,19 @@ export default {
 
     methods: {
         status(statuses, item_id) {
-            let q = 0;
+            let q = null
+            let obs = null
             Object.keys(statuses).forEach(element => {
                 if (statuses[element].energy_equipment_revision_item_id == item_id) {
-                    q=q+statuses[element].status;
+                    q=statuses[element].status;
+                    obs=statuses[element].observation
                 }
+
             })
-            return q != 0 ? 'success' : 'warning'
+            return {
+                status: q == 1 ? 'success' : (q == 0 || obs ? 'warning' : 'grey-light'),
+                observation: obs
+            }
         },
 
         // validate() {

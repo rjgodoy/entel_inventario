@@ -216,7 +216,7 @@
             getJunctionConnections() {
                 axios.get('/api/junctionConnections')
                 .then(response => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.junctionConnections = response.data.junctionConnections
                 })
             },
@@ -234,7 +234,7 @@
                     }
                     axios.post(`/api/junctions`, params)
                     .then(response => {
-                        console.log(response)
+                        // console.log(response.data)
                         // this.$eventBus.$emit('new-junction')
                         this.$emit('new-junction');
                         this.$parent.close()

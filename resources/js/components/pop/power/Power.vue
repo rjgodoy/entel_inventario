@@ -120,7 +120,7 @@ library.add(faPlug, faChargingStation,faRandom, faMicrochip, faGasPump, faExclam
                 axios.get(`/api/electricLines/${this.pop.id}`)
                 .then((response) => {
                     this.electricLines = response.data
-                    console.log(response.data)
+                    // console.log(response.data)
                 })
                 .catch((error) => {
                     console.log('Error al traer los datos de Líneas Eléctricas: ' + error);

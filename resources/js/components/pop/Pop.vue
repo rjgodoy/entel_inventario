@@ -43,11 +43,16 @@
                                     <span class="is-size-5 " v-if="pop.sites && pop.sites.length > 2"> y <a class="has-text-smart" @click="currentTab = 'sites'">{{ pop.sites.length - 2 }} sitios</a> más.
                                     </span>
                                 </h2>
-                            </div>
 
-                            <div class="is-size-6 has-text-weight-normal has-text-light">
-                                Zona {{ pop.zona ? pop.zona.nombre_zona : '' }} - CRM {{ pop.zona ? pop.zona.crm.nombre_crm : '' }}
+                                <div class="is-size-6 has-text-weight-normal has-text-light" v-if="!canEditZona || !isEditMode">
+                                    Zona {{ pop.zona ? pop.zona.nombre_zona : '' }} - CRM {{ pop.zona ? pop.zona.crm.nombre_crm : '' }}
+                                </div>
+
+                                <b-select class="" v-model="popZona" v-if="canEditZona && isEditMode" @input="updateZona(pop.id, popZona)">
+                                    <option v-for="zona in zonas" :key="zona.id" :value="zona.id">{{ zona.id }} - {{ zona.nombre_zona }}</option>
+                                </b-select>
                             </div>
+                            
                         </div>
 
                         <div class="column is-3" style="padding: 0px">
@@ -349,6 +354,7 @@
             return {
                 pop: [],
                 technologiesArray: [],
+                zonas: [],
                 i: 0,
 
                 isEditMode: false,
@@ -368,6 +374,7 @@
                 currentTab: this.$route.hash != '' ? this.$route.hash.split('#')[1] : 'location',
 
                 popName: '',
+                popZona: 0,
 
                 isEmpty: false,
                 isBordered: false,
@@ -382,12 +389,12 @@
                 canEditPop: false,
                 canViewLog: false,
                 canEditName: false,
+                canEditZona: false,
                 canSaveFavorites: true
             }
         },
 
         created() {
-            this.styleMode()
             this.$eventBus.$on('parameter-updated', this.getAllData)
             this.$eventBus.$on('generator-set-capacities-updated', this.getAllData);
             this.$eventBus.$on('drone-added', this.getAllData);
@@ -414,21 +421,6 @@
                 }
                 return i > 0 && i == m ? bool : true
             },
-
-            // canViewLog() {
-            //     return this.user.roles[0].id == 1 
-            //         || this.user.roles[0].id == 2
-            //         || this.user.roles[0].id == 4
-            //         || this.user.roles[0].id == 6
-            //         || this.user.roles[0].id == 7
-            //         || this.user.roles[0].id == 8 ? true : false
-            // },
-
-            // canEditName() {
-            //     return this.user.roles[0].id == 1 
-            //         || this.user.roles[0].id == 2
-            //         || this.user.roles[0].id == 8 ? true : false
-            // },
 
             popClassification() {
                 var id = 6; var classification
@@ -633,6 +625,10 @@
                 if(this.popName != this.pop.nombre && val == false) {
                     this.updateParameter('nombre', this.popName)
                 }
+
+                if(!this.zonas.length) {
+                    this.getZones()
+                }
             },
             pop(val) {
                 this.isPopFavorite(val)
@@ -702,10 +698,19 @@
                     // console.log(response.data)
                     this.pop = response.data.pop
                     this.popName = this.pop.nombre
+                    this.popZona = this.pop.zona_id
                     this.canEditPop = response.data.can.editPop
                     this.canViewLog = response.data.can.viewLog
                     this.canEditName = response.data.can.editName
+                    this.canEditZona = response.data.can.editZona
                     this.canSaveFavorites = response.data.can.saveFavorites
+                })
+            },
+
+            getZones() {
+                axios.get('/api/zonas').then(response => {
+                    // console.log(response.data)
+                    this.zonas = response.data.zonas
                 })
             },
 
@@ -760,7 +765,7 @@
                 }
                 axios.get('/api/popFavoriteForUser', { params })
                 .then(response => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.isFavorite = response.data.length
                 })
             },
@@ -774,11 +779,19 @@
                 axios.post('/api/popFavorites', params)
                 .then(response => {
                     // this.isPopFavorite = response.data.length
-                    console.log(response.data)
+                    // console.log(response.data)
                 })
 
                 console.log("POP id is: " + this.pop.id)
                 console.log("User id is: " + this.user.id)
+            },
+
+            updateZona(pop_id, zona_id) {
+                axios.put(`/api/pop/${pop_id}?parameter=zona_id&value=${zona_id}`)
+                .then(response => {
+                    console.log(response)
+                    // this.roles = response.data.data
+                })
             }
         },
 

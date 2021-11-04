@@ -134,6 +134,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['powerRectifier', 'canEdit', 'user'],
@@ -145,11 +155,19 @@ __webpack_require__.r(__webpack_exports__);
       powerRectifierModulesCapacity: this.currentPowerRectifierModulesCapacity(),
       powerRectifierModulesQuantity: this.powerRectifier.power_rectifier_modules.length,
       power_rectifier_mode_id: this.powerRectifier.power_rectifier_mode_id,
-      isEditMode: false
+      isEditMode: false,
+      temp: 0,
+      volt: 0
     };
   },
   mounted: function mounted() {
+    var _this = this;
+
     this.getPowerRectifierModes();
+    this.getSnmpInfo();
+    setInterval(function () {
+      return _this.getSnmpInfo();
+    }, 5 * 1000);
   },
   computed: {
     totalModulesCapacityMasterA: function totalModulesCapacityMasterA() {
@@ -158,40 +176,40 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     power_rectifier_mode_id: function power_rectifier_mode_id(val) {
-      var _this = this;
+      var _this2 = this;
 
       this.powerRectifierModes.forEach(function (item) {
         if (item.id == val) {
-          _this.currentPowerRectifierMode = item.mode;
+          _this2.currentPowerRectifierMode = item.mode;
         }
       });
     }
   },
   methods: {
     getPowerRectifierModes: function getPowerRectifierModes() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get("/api/powerRectifierModes").then(function (response) {
         // console.log(response.data.telecomCompanies)
-        _this2.powerRectifierModes = response.data.powerRectifierModes;
+        _this3.powerRectifierModes = response.data.powerRectifierModes;
 
         if (response.data.powerRectifierModes) {
-          _this2.powerRectifierModes.forEach(function (item) {
-            if (item.id == _this2.power_rectifier_mode_id) {
-              _this2.currentPowerRectifierMode = item.mode;
+          _this3.powerRectifierModes.forEach(function (item) {
+            if (item.id == _this3.power_rectifier_mode_id) {
+              _this3.currentPowerRectifierMode = item.mode;
             }
           });
         }
       });
     },
     currentPowerRectifierModulesCapacity: function currentPowerRectifierModulesCapacity() {
-      var _this3 = this;
+      var _this4 = this;
 
       var capacity = 0;
 
       if (this.powerRectifier.power_rectifier_modules.length) {
         Object.keys(this.powerRectifier.power_rectifier_modules).forEach(function (element) {
-          capacity = _this3.powerRectifier.power_rectifier_modules[element].capacity;
+          capacity = _this4.powerRectifier.power_rectifier_modules[element].capacity;
           return capacity;
         });
       }
@@ -199,7 +217,7 @@ __webpack_require__.r(__webpack_exports__);
       return capacity;
     },
     saveChanges: function saveChanges() {
-      var _this4 = this;
+      var _this5 = this;
 
       if (!this.isEditMode && (this.powerRectifier.capacity != this.newPowerRectifierCapacity || this.powerRectifier.power_rectifier_mode_id != this.power_rectifier_mode_id || this.powerRectifier.power_rectifier_modules.length != this.powerRectifierModulesQuantity || this.currentPowerRectifierModulesCapacity() != this.powerRectifierModulesCapacity)) {
         var params = {
@@ -214,27 +232,40 @@ __webpack_require__.r(__webpack_exports__);
         }; // console.log(params)
 
         axios.put("/api/powerRectifiers/".concat(this.powerRectifier.id), params).then(function (response) {
-          console.log(response.data);
-
-          _this4.$eventBus.$emit('power-rectifier-updated');
+          // console.log(response.data)
+          _this5.$eventBus.$emit('power-rectifier-updated');
         });
       }
     },
     deletePowerRectifier: function deletePowerRectifier() {
-      var _this5 = this;
+      var _this6 = this;
 
       console.log(this.powerRectifier);
       this.$buefy.dialog.confirm({
         message: "Confirma la eliminaci\xF3n de la Planta Rectificadora de la sala?",
         type: 'is-link',
         onConfirm: function onConfirm() {
-          axios["delete"]("/api/powerRectifiers/".concat(_this5.powerRectifier.id)).then(function (response) {
+          axios["delete"]("/api/powerRectifiers/".concat(_this6.powerRectifier.id)).then(function (response) {
             // console.log(response.data)
-            _this5.$eventBus.$emit('power-rectifier-deleted');
+            _this6.$eventBus.$emit('power-rectifier-deleted');
 
-            _this5.$eventBus.$emit('room-data');
+            _this6.$eventBus.$emit('room-data');
           });
         }
+      });
+    },
+    getSnmpInfo: function getSnmpInfo() {
+      var _this7 = this;
+
+      var params = {
+        ip: '10.244.110.181'
+      };
+      axios.get('/api/powerRectifiersSnmp', {
+        params: params
+      }).then(function (response) {
+        console.log(response.data);
+        _this7.temp = response.data.temp;
+        _this7.volt = response.data.volt / 100;
       });
     }
   }
@@ -258,6 +289,36 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "tile is-child box" }, [
+    _c("div", { staticClass: "box p-2 is-shadowless has-background-dark" }, [
+      _c("div", { staticClass: "columns is-vcentered" }, [
+        _c("div", { staticClass: "column has-text-centered" }, [
+          _c(
+            "div",
+            { staticClass: "has-text-light has-text-weight-normal is-size-5" },
+            [
+              _vm._v("Voltaje: "),
+              _c("span", { staticClass: "has-text-weight-semibold" }, [
+                _vm._v(_vm._s(_vm.volt) + " V")
+              ])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "column has-text-centered" }, [
+          _c(
+            "div",
+            { staticClass: "has-text-light has-text-weight-normal is-size-5" },
+            [
+              _vm._v("Temperatura: "),
+              _c("span", { staticClass: "has-text-weight-semibold" }, [
+                _vm._v(_vm._s(_vm.temp) + " ºC")
+              ])
+            ]
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "columns" }, [
       _c("div", { staticClass: "column" }, [
         _c("div", { staticClass: "columns" }, [

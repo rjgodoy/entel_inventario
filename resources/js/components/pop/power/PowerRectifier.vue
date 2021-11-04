@@ -1,6 +1,17 @@
 <template>        
     <!-- <section class="section is-paddingless"> -->
         <div class="tile is-child box">
+            <div class="box p-2 is-shadowless has-background-dark">
+                <div class="columns is-vcentered">
+                    <div class="column has-text-centered">
+                        <div class="has-text-light has-text-weight-normal is-size-5">Voltaje: <span class="has-text-weight-semibold">{{ volt }} V</span></div>
+                    </div>
+                    <div class="column has-text-centered">
+                        <div class="has-text-light has-text-weight-normal is-size-5">Temperatura: <span class="has-text-weight-semibold">{{ temp }} ºC</span></div>
+                    </div>
+                </div>
+            </div>
+
             <div class="columns">
                 <div class="column">
                     <div class="columns">
@@ -19,7 +30,6 @@
                                     style="opacity: 0.5;"/>
                             </div>
                         </div>
-                        
                     </div>
 
                     <div class="field">
@@ -145,12 +155,16 @@
                 powerRectifierModulesQuantity: this.powerRectifier.power_rectifier_modules.length,
                 power_rectifier_mode_id: this.powerRectifier.power_rectifier_mode_id,
 
-                isEditMode: false
+                isEditMode: false,
+                temp: 0,
+                volt: 0
             }
         },
 
         mounted() {
             this.getPowerRectifierModes()
+            this.getSnmpInfo()
+            setInterval(() => this.getSnmpInfo(), 5 * 1000)
         },
 
         computed: {
@@ -217,7 +231,7 @@
                     // console.log(params)
                     axios.put(`/api/powerRectifiers/${this.powerRectifier.id}`, params)
                     .then(response => {
-                        console.log(response.data)
+                        // console.log(response.data)
                         this.$eventBus.$emit('power-rectifier-updated');
                     })
                 }
@@ -237,7 +251,21 @@
                         })
                     }
                 })
-            }      
+            },   
+
+            getSnmpInfo() {
+                let params = {
+                    ip: '10.244.110.181'
+                }
+                axios.get('/api/powerRectifiersSnmp', { params })
+                .then(response => {
+                    console.log(response.data)
+                    this.temp = response.data.temp
+                    this.volt = response.data.volt / 100
+                })
+            },
+            
+            
         }
     }
 </script>

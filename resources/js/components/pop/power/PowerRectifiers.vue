@@ -1,19 +1,18 @@
 <template>
-    <section class="section" style="padding-top: 0px; padding-bottom: 48px;" v-if="powerRectifiers.length">
-        <!-- <div class="field">
-            <div class="has-text-weight-semibold has-text-dark is-size-4 has-text-left">Plantas Rectificadoras</div>
-        </div> -->
-        
-        <div class="columns tile is-ancestor is-multiline">
-            <div class="column is-6 tile is-parent" v-for="powerRectifier in powerRectifiers">
-
-                <power-rectifier 
-                    :powerRectifier="powerRectifier"
-                    :canEdit="canEdit"
-                    :user="user"
-                    />
-
+    <section class="section" style="padding-top: 0px; padding-bottom: 48px;" >
+        <div class="" v-if="powerRectifiers.length">
+            <div class="columns tile is-ancestor is-multiline">
+                <div class="column is-6 tile is-parent" v-for="powerRectifier in powerRectifiers" :key="powerRectifier.id">
+                    <power-rectifier 
+                        :powerRectifier="powerRectifier"
+                        :canEdit="can"
+                        :user="user"
+                        />
+                </div>
             </div>
+        </div>
+        <div class="has-text-centered" v-if="!powerRectifiers.length">
+            <div class="is-size-4 has-text-weight-light has-text-grey">No hay plantas rectificadoras registradas en este POP</div>
         </div>
     </section>
 </template>

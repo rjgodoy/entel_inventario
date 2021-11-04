@@ -1,20 +1,23 @@
 <template>
-    <section class="" v-if="junctions.length">
-        <div class="" v-for="junction in junctions" :key="junction.id">
-
-            <div class="columns">
-                <div class="column is-2"></div>
-                <div class="column is-8">
-                    <junction 
-                        :junction="junction" 
-                        :canEditJunctions="canEditJunctions"
-                        :user="user"
-                        :pop="pop"
-                    />
+    <section class="">
+        <div class="" v-if="junctions.length">
+            <div class="" v-for="junction in junctions" :key="junction.id">
+                <div class="columns">
+                    <div class="column is-2"></div>
+                    <div class="column is-8">
+                        <junction 
+                            :junction="junction" 
+                            :canEditJunctions="canEditJunctions"
+                            :user="user"
+                            :pop="pop"
+                        />
+                    </div>
+                    <div class="column is-2"></div>
                 </div>
-                <div class="column is-2"></div>
             </div>
-            
+        </div>
+        <div class="has-text-centered" v-if="!junctions.length">
+            <div class="is-size-4 has-text-weight-light has-text-grey">No hay empalmes registrados en este POP</div>
         </div>
     </section>
 </template>

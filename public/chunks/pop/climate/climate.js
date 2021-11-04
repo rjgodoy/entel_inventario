@@ -32,10 +32,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -83,9 +79,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("section", {}, [
     _vm.airConditioners.length
-      ? _c("section", {}, [
+      ? _c("div", {}, [
           _vm._m(0),
           _vm._v(" "),
           _c(
@@ -117,15 +113,14 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _vm.airConditioners.length == 0
-      ? _c(
-          "section",
-          {
-            staticClass: "section",
-            staticStyle: { "padding-top": "0px", "padding-bottom": "48px" }
-          },
-          [_vm._m(1)]
-        )
+    !_vm.airConditioners.length
+      ? _c("div", { staticClass: "has-text-centered" }, [
+          _c(
+            "div",
+            { staticClass: "is-size-4 has-text-weight-light has-text-grey" },
+            [_vm._v("No hay equipos de clima registrados en este POP")]
+          )
+        ])
       : _vm._e()
   ])
 }
@@ -143,16 +138,6 @@ var staticRenderFns = [
         },
         [_vm._v("Clima")]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "box" }, [
-        _vm._v("\n                POP no tiene equipos de clima.\n            ")
-      ])
     ])
   }
 ]

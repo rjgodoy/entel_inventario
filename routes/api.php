@@ -199,6 +199,8 @@ Route::middleware('auth:api')->group(function () {
 		Route::get('powerRectifierDataZona/{zona_id}/{core}','Api\PowerRectifierController@powerRectifierDataZona');
 		Route::get('powerRectifiersWithoutRoom/{pop_id}','Api\PowerRectifierController@powerRectifiersWithoutRoom');
 
+		Route::get('powerRectifiersSnmp', 'Api\PowerRectifierController@getSnmpInfo');
+
 		Route::apiResource('batteries','Api\BatteryController');
 		Route::apiResource('batteryBanks','Api\BatteryBankController');
 		Route::apiResource('batteryBankBrands','Api\BatteryBankBrandController');

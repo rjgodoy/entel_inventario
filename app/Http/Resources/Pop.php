@@ -43,6 +43,7 @@ class Pop extends JsonResource
             'editPop' => Gate::allows('edit-pop', $this->resource),
             'viewLog' => Gate::allows('view-log', $this->resource),
             'editName' => Gate::allows('edit-pop-name', $this->resource),
+            'editZona' => Gate::allows('edit-pop-zona', $this->resource),
             'saveFavorites' => Gate::allows('save-favorites', $this->resource),
         ];
     }

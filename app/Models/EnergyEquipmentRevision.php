@@ -20,4 +20,9 @@ class EnergyEquipmentRevision extends Model
     {
         return $this->hasMany(EnergyEquipmentRevisionStatus::class);
     }
+
+    public function images() 
+    {
+        return $this->hasMany(EnergyEquipmentRevisionImage::class);
+    }
 }

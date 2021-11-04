@@ -331,6 +331,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -388,6 +393,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     return {
       pop: [],
       technologiesArray: [],
+      zonas: [],
       i: 0,
       isEditMode: false,
       darkMode: 0,
@@ -402,6 +408,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       tabs: null,
       currentTab: this.$route.hash != '' ? this.$route.hash.split('#')[1] : 'location',
       popName: '',
+      popZona: 0,
       isEmpty: false,
       isBordered: false,
       isStriped: true,
@@ -414,11 +421,11 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       canEditPop: false,
       canViewLog: false,
       canEditName: false,
+      canEditZona: false,
       canSaveFavorites: true
     };
   },
   created: function created() {
-    this.styleMode();
     this.$eventBus.$on('parameter-updated', this.getAllData);
     this.$eventBus.$on('generator-set-capacities-updated', this.getAllData);
     this.$eventBus.$on('drone-added', this.getAllData);
@@ -448,19 +455,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 
       return i > 0 && i == m ? bool : true;
     },
-    // canViewLog() {
-    //     return this.user.roles[0].id == 1 
-    //         || this.user.roles[0].id == 2
-    //         || this.user.roles[0].id == 4
-    //         || this.user.roles[0].id == 6
-    //         || this.user.roles[0].id == 7
-    //         || this.user.roles[0].id == 8 ? true : false
-    // },
-    // canEditName() {
-    //     return this.user.roles[0].id == 1 
-    //         || this.user.roles[0].id == 2
-    //         || this.user.roles[0].id == 8 ? true : false
-    // },
     popClassification: function popClassification() {
       var id = 6;
       var classification;
@@ -677,6 +671,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       if (this.popName != this.pop.nombre && val == false) {
         this.updateParameter('nombre', this.popName);
       }
+
+      if (!this.zonas.length) {
+        this.getZones();
+      }
     },
     pop: function pop(val) {
       this.isPopFavorite(val);
@@ -745,10 +743,20 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         // console.log(response.data)
         _this4.pop = response.data.pop;
         _this4.popName = _this4.pop.nombre;
+        _this4.popZona = _this4.pop.zona_id;
         _this4.canEditPop = response.data.can.editPop;
         _this4.canViewLog = response.data.can.viewLog;
         _this4.canEditName = response.data.can.editName;
+        _this4.canEditZona = response.data.can.editZona;
         _this4.canSaveFavorites = response.data.can.saveFavorites;
+      });
+    },
+    getZones: function getZones() {
+      var _this5 = this;
+
+      axios.get('/api/zonas').then(function (response) {
+        // console.log(response.data)
+        _this5.zonas = response.data.zonas;
       });
     },
     // Style mode
@@ -792,7 +800,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       }
     },
     isPopFavorite: function isPopFavorite(pop) {
-      var _this5 = this;
+      var _this6 = this;
 
       var params = {
         'pop_id': pop.id,
@@ -801,8 +809,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       axios.get('/api/popFavoriteForUser', {
         params: params
       }).then(function (response) {
-        console.log(response.data);
-        _this5.isFavorite = response.data.length;
+        // console.log(response.data)
+        _this6.isFavorite = response.data.length;
       });
     },
     asignFavorite: function asignFavorite() {
@@ -811,12 +819,16 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         'user_id': this.user.id,
         'is_favorite': this.isFavorite
       };
-      axios.post('/api/popFavorites', params).then(function (response) {
-        // this.isPopFavorite = response.data.length
-        console.log(response.data);
+      axios.post('/api/popFavorites', params).then(function (response) {// this.isPopFavorite = response.data.length
+        // console.log(response.data)
       });
       console.log("POP id is: " + this.pop.id);
       console.log("User id is: " + this.user.id);
+    },
+    updateZona: function updateZona(pop_id, zona_id) {
+      axios.put("/api/pop/".concat(pop_id, "?parameter=zona_id&value=").concat(zona_id)).then(function (response) {
+        console.log(response); // this.roles = response.data.data
+      });
     }
   },
   beforeDestroy: function beforeDestroy() {
@@ -1060,28 +1072,68 @@ var render = function() {
                             ])
                           : _vm._e()
                       ]
-                    )
+                    ),
+                    _vm._v(" "),
+                    !_vm.canEditZona || !_vm.isEditMode
+                      ? _c(
+                          "div",
+                          {
+                            staticClass:
+                              "is-size-6 has-text-weight-normal has-text-light"
+                          },
+                          [
+                            _vm._v(
+                              "\n                                Zona " +
+                                _vm._s(
+                                  _vm.pop.zona ? _vm.pop.zona.nombre_zona : ""
+                                ) +
+                                " - CRM " +
+                                _vm._s(
+                                  _vm.pop.zona
+                                    ? _vm.pop.zona.crm.nombre_crm
+                                    : ""
+                                ) +
+                                "\n                            "
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.canEditZona && _vm.isEditMode
+                      ? _c(
+                          "b-select",
+                          {
+                            on: {
+                              input: function($event) {
+                                return _vm.updateZona(_vm.pop.id, _vm.popZona)
+                              }
+                            },
+                            model: {
+                              value: _vm.popZona,
+                              callback: function($$v) {
+                                _vm.popZona = $$v
+                              },
+                              expression: "popZona"
+                            }
+                          },
+                          _vm._l(_vm.zonas, function(zona) {
+                            return _c(
+                              "option",
+                              { key: zona.id, domProps: { value: zona.id } },
+                              [
+                                _vm._v(
+                                  _vm._s(zona.id) +
+                                    " - " +
+                                    _vm._s(zona.nombre_zona)
+                                )
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      : _vm._e()
                   ],
                   1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "is-size-6 has-text-weight-normal has-text-light"
-                  },
-                  [
-                    _vm._v(
-                      "\n                            Zona " +
-                        _vm._s(_vm.pop.zona ? _vm.pop.zona.nombre_zona : "") +
-                        " - CRM " +
-                        _vm._s(
-                          _vm.pop.zona ? _vm.pop.zona.crm.nombre_crm : ""
-                        ) +
-                        "\n                        "
-                    )
-                  ]
                 )
               ]),
               _vm._v(" "),

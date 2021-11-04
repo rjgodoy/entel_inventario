@@ -151,17 +151,17 @@ __webpack_require__.r(__webpack_exports__);
         });
       } //Si hay un CRM seleccionado, pero no hay zona seleccionada
       else if (!this.selectedZona) {
-          axios.get("/api/popDataCrm?crm_id=".concat(this.selectedCrm.id, "&core=").concat(this.core)).then(function (response) {
-            _this.popsData = response.data.pop;
-            _this.isLoading = false; // this.$eventBus.$emit('graphData', this.popsData)
-          });
-        } // Si hay una zona seleccionada
-        else {
-            axios.get("/api/popDataZona?zona_id=".concat(this.selectedZona.id, "&core=").concat(this.core)).then(function (response) {
-              _this.popsData = response.data.pop;
-              _this.isLoading = false; // this.$eventBus.$emit('graphData', this.popsData)
-            });
-          }
+        axios.get("/api/popDataCrm?crm_id=".concat(this.selectedCrm.id, "&core=").concat(this.core)).then(function (response) {
+          _this.popsData = response.data.pop;
+          _this.isLoading = false; // this.$eventBus.$emit('graphData', this.popsData)
+        });
+      } // Si hay una zona seleccionada
+      else {
+        axios.get("/api/popDataZona?zona_id=".concat(this.selectedZona.id, "&core=").concat(this.core)).then(function (response) {
+          _this.popsData = response.data.pop;
+          _this.isLoading = false; // this.$eventBus.$emit('graphData', this.popsData)
+        });
+      }
     }
   }
 });

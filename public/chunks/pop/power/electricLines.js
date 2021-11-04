@@ -89,6 +89,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['user', 'pop', 'bodyBackground', 'boxBackground', 'primaryText', 'secondaryText', 'darkMode'],
@@ -141,296 +142,314 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.electricLines.electricLine
-    ? _c(
-        "section",
-        {
-          staticClass: "section",
-          staticStyle: { "padding-top": "0px", "padding-bottom": "48px" }
-        },
-        [
-          _c(
-            "div",
-            { staticClass: "columns is-multiline" },
-            _vm._l(_vm.electricLines.electricLine, function(data) {
-              return _c("div", { staticClass: "column is-6" }, [
-                _c("div", { staticClass: "tile is-child box" }, [
-                  _c("div", { staticClass: "columns" }, [
-                    _c("div", { staticClass: "column" }, [
-                      _c(
-                        "div",
-                        { staticClass: "has-text-weight-light is-size-7" },
-                        [_vm._v("Nº Línea Eléctrica")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "has-text-weight-semibold is-size-5" },
-                        [_vm._v(_vm._s(data.id))]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "has-text-weight-light is-size-7",
-                          staticStyle: { "margin-top": "5px" }
-                        },
-                        [_vm._v("Tipo fase")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "has-text-weight-semibold is-size-6" },
-                        [
-                          _vm._v(
-                            _vm._s(
-                              data.phase_type
-                                ? data.phase_type.phase_type
-                                : "Sin información"
+  return _c("section", {}, [
+    _vm.electricLines.electricLine && _vm.electricLines.electricLine.length
+      ? _c(
+          "div",
+          {
+            staticClass: "section",
+            staticStyle: { "padding-top": "0px", "padding-bottom": "48px" }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "columns is-multiline" },
+              _vm._l(_vm.electricLines.electricLine, function(data) {
+                return _c("div", { key: data.id, staticClass: "column is-6" }, [
+                  _c("div", { staticClass: "tile is-child box" }, [
+                    _c("div", { staticClass: "columns" }, [
+                      _c("div", { staticClass: "column" }, [
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-light is-size-7" },
+                          [_vm._v("Nº Línea Eléctrica")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-semibold is-size-5" },
+                          [_vm._v(_vm._s(data.id))]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "has-text-weight-light is-size-7",
+                            staticStyle: { "margin-top": "5px" }
+                          },
+                          [_vm._v("Tipo fase")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-semibold is-size-6" },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                data.phase_type
+                                  ? data.phase_type.phase_type
+                                  : "Sin información"
+                              )
                             )
-                          )
-                        ]
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "column has-text-right" },
+                        [
+                          _c("font-awesome-icon", {
+                            staticClass: "has-text-grey-lighter",
+                            staticStyle: { opacity: "0.5" },
+                            attrs: { icon: ["fas", "bolt"], size: "3x" }
+                          })
+                        ],
+                        1
                       )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "columns" }, [
+                      _c("div", { staticClass: "column is-4" }, [
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-light is-size-7" },
+                          [_vm._v("Voltaje")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-semibold is-size-5" },
+                          [
+                            _vm._v(
+                              _vm._s(_vm._f("numeral")(data.volt, "0,0")) + " "
+                            ),
+                            data.volt
+                              ? _c("span", { staticClass: "is-size-7" }, [
+                                  _vm._v("kV")
+                                ])
+                              : _vm._e()
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "has-text-weight-light is-size-7",
+                            staticStyle: { "margin-top": "5px" }
+                          },
+                          [_vm._v("Distancia")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "has-text-weight-semibold is-size-5" },
+                          [
+                            _vm._v(
+                              _vm._s(_vm._f("numeral")(data.distance, "0,0")) +
+                                " "
+                            ),
+                            data.distance
+                              ? _c("span", { staticClass: "is-size-7" }, [
+                                  _vm._v("m")
+                                ])
+                              : _vm._e()
+                          ]
+                        )
+                      ])
                     ]),
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "column has-text-right" },
-                      [
-                        _c("font-awesome-icon", {
-                          staticClass: "has-text-grey-lighter",
-                          staticStyle: { opacity: "0.5" },
-                          attrs: { icon: ["fas", "bolt"], size: "3x" }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c("div", { staticClass: "column is-4" }, [
-                      _c(
-                        "div",
-                        { staticClass: "has-text-weight-light is-size-7" },
-                        [_vm._v("Voltaje")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "has-text-weight-semibold is-size-5" },
-                        [
-                          _vm._v(
-                            _vm._s(_vm._f("numeral")(data.volt, "0,0")) + " "
-                          ),
-                          data.volt
-                            ? _c("span", { staticClass: "is-size-7" }, [
-                                _vm._v("kV")
-                              ])
-                            : _vm._e()
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "has-text-weight-light is-size-7",
-                          staticStyle: { "margin-top": "5px" }
-                        },
-                        [_vm._v("Distancia")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "has-text-weight-semibold is-size-5" },
-                        [
-                          _vm._v(
-                            _vm._s(_vm._f("numeral")(data.distance, "0,0")) +
-                              " "
-                          ),
-                          data.distance
-                            ? _c("span", { staticClass: "is-size-7" }, [
-                                _vm._v("m")
-                              ])
-                            : _vm._e()
-                        ]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "columns is-multiline" },
-                    _vm._l(data.transformers, function(transformer) {
-                      return _c("div", { staticClass: "column is-6" }, [
-                        _c(
+                      { staticClass: "columns is-multiline" },
+                      _vm._l(data.transformers, function(transformer) {
+                        return _c(
                           "div",
-                          {
-                            staticClass:
-                              "tile is-child box has-background-light"
-                          },
+                          { key: transformer.id, staticClass: "column is-6" },
                           [
                             _c(
                               "div",
                               {
                                 staticClass:
-                                  "title is-size-5 has-text-weight-semibold"
+                                  "tile is-child box has-background-light"
                               },
                               [
-                                _vm._v(
-                                  "Transformador Nº " + _vm._s(transformer.id)
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _vm.electricLines.can.update
-                              ? _c(
-                                  "b-field",
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "title is-size-5 has-text-weight-semibold"
+                                  },
                                   [
-                                    _c(
-                                      "b-select",
-                                      {
-                                        attrs: {
-                                          icon: "bolt",
-                                          "icon-pack": "fas",
-                                          placeholder: ""
-                                        },
-                                        on: {
-                                          input: function($event) {
-                                            return _vm.setTransformerElectricLine(
-                                              transformer.id,
-                                              _vm.electricLineSelected
-                                            )
-                                          }
-                                        },
-                                        model: {
-                                          value: _vm.electricLineSelected,
-                                          callback: function($$v) {
-                                            _vm.electricLineSelected = $$v
-                                          },
-                                          expression: "electricLineSelected"
-                                        }
-                                      },
-                                      _vm._l(
-                                        _vm.electricLines.electricLine,
-                                        function(electricLine) {
-                                          return _c(
-                                            "option",
-                                            {
-                                              key: electricLine.id,
-                                              domProps: {
-                                                value: electricLine.id
+                                    _vm._v(
+                                      "Transformador Nº " +
+                                        _vm._s(transformer.id)
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm.electricLines.can.update
+                                  ? _c(
+                                      "b-field",
+                                      [
+                                        _c(
+                                          "b-select",
+                                          {
+                                            attrs: {
+                                              icon: "bolt",
+                                              "icon-pack": "fas",
+                                              placeholder: ""
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                return _vm.setTransformerElectricLine(
+                                                  transformer.id,
+                                                  _vm.electricLineSelected
+                                                )
                                               }
                                             },
-                                            [
-                                              _vm._v(
-                                                "\n                                        " +
-                                                  _vm._s(electricLine.id) +
-                                                  "\n                                    "
+                                            model: {
+                                              value: _vm.electricLineSelected,
+                                              callback: function($$v) {
+                                                _vm.electricLineSelected = $$v
+                                              },
+                                              expression: "electricLineSelected"
+                                            }
+                                          },
+                                          _vm._l(
+                                            _vm.electricLines.electricLine,
+                                            function(electricLine) {
+                                              return _c(
+                                                "option",
+                                                {
+                                                  key: electricLine.id,
+                                                  domProps: {
+                                                    value: electricLine.id
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                            " +
+                                                      _vm._s(electricLine.id) +
+                                                      "\n                                        "
+                                                  )
+                                                ]
                                               )
-                                            ]
-                                          )
-                                        }
-                                      ),
-                                      0
+                                            }
+                                          ),
+                                          0
+                                        )
+                                      ],
+                                      1
                                     )
-                                  ],
-                                  1
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "columns" }, [
-                              _c("div", { staticClass: "column" }, [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "has-text-weight-normal is-size-7"
-                                  },
-                                  [_vm._v("Tensión primaria")]
-                                ),
+                                  : _vm._e(),
                                 _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "has-text-weight-normal is-size-6"
-                                  },
-                                  [
-                                    _vm._v(
-                                      _vm._s(
-                                        transformer.primary_tension
-                                          ? transformer.primary_tension
-                                          : "Sin información"
-                                      ) +
-                                        "\n                                    "
+                                _c("div", { staticClass: "columns" }, [
+                                  _c("div", { staticClass: "column" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "has-text-weight-normal is-size-7"
+                                      },
+                                      [_vm._v("Tensión primaria")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "has-text-weight-normal is-size-6"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            transformer.primary_tension
+                                              ? transformer.primary_tension
+                                              : "Sin información"
+                                          ) +
+                                            "\n                                        "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "has-text-weight-normal is-size-7",
+                                        staticStyle: { "margin-top": "5px" }
+                                      },
+                                      [_vm._v("Tipo fase")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "has-text-weight-normal is-size-6"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            transformer.phase_type
+                                              ? transformer.phase_type
+                                                  .phase_type
+                                              : "Sin información"
+                                          ) +
+                                            "\n                                        "
+                                        )
+                                      ]
                                     )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "has-text-weight-normal is-size-7",
-                                    staticStyle: { "margin-top": "5px" }
-                                  },
-                                  [_vm._v("Tipo fase")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "has-text-weight-normal is-size-6"
-                                  },
-                                  [
-                                    _vm._v(
-                                      _vm._s(
-                                        transformer.phase_type
-                                          ? transformer.phase_type.phase_type
-                                          : "Sin información"
-                                      ) +
-                                        "\n                                    "
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "column" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "has-text-weight-normal is-size-7"
+                                      },
+                                      [_vm._v("Potencia")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "has-text-weight-normal is-size-6"
+                                      },
+                                      [_vm._v(_vm._s(transformer.power))]
                                     )
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "column" }, [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "has-text-weight-normal is-size-7"
-                                  },
-                                  [_vm._v("Potencia")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "has-text-weight-normal is-size-6"
-                                  },
-                                  [_vm._v(_vm._s(transformer.power))]
-                                )
-                              ])
-                            ])
-                          ],
-                          1
+                                  ])
+                                ])
+                              ],
+                              1
+                            )
+                          ]
                         )
-                      ])
-                    }),
-                    0
-                  )
+                      }),
+                      0
+                    )
+                  ])
                 ])
-              ])
-            }),
-            0
+              }),
+              0
+            )
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.electricLines.electricLine && !_vm.electricLines.electricLine.length
+      ? _c("div", { staticClass: "has-text-centered" }, [
+          _c(
+            "div",
+            { staticClass: "is-size-4 has-text-weight-light has-text-grey" },
+            [_vm._v("No hay lineas eléctricas registradas en este POP")]
           )
-        ]
-      )
-    : _vm._e()
+        ])
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

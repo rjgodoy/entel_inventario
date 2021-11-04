@@ -37,7 +37,8 @@ class EnergyEquipmentRevisionController extends Controller
                     'pop.sites',
                     'statuses.item',
                     'statuses.item.type',
-                    'statuses.validator'
+                    'statuses.validator',
+                    'images'
                 )
                 ->where(function($q) use($startDate, $endDate) {
                     if($startDate && $endDate) {
@@ -53,7 +54,7 @@ class EnergyEquipmentRevisionController extends Controller
                 ->whereHas('pop.zona', function($r) use($condition_crm) {
                     $r->whereRaw($condition_crm);
                 })
-                ->paginate(20);
+                ->latest()->paginate(20);
         }
         else {
             $revisions = EnergyEquipmentRevision::with(
@@ -62,7 +63,8 @@ class EnergyEquipmentRevisionController extends Controller
                     'pop.sites',
                     'statuses.item',
                     'statuses.item.type',
-                    'statuses.validator'
+                    'statuses.validator',
+                    'images'
                 )
                 ->whereHas('pop.sites', function($q) use($text) {
                     if ($text) {
@@ -73,7 +75,7 @@ class EnergyEquipmentRevisionController extends Controller
                 ->whereHas('pop.zona', function($r) use($condition_crm) {
                     $r->whereRaw($condition_crm);
                 })
-                ->paginate(20);
+                ->latest()->paginate(20);
         }
 
         return new EnergyEquipmentRevisionCollection($revisions);

@@ -30,6 +30,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Junction: function Junction() {
@@ -87,38 +90,50 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.junctions.length
-    ? _c(
-        "section",
-        {},
-        _vm._l(_vm.junctions, function(junction) {
-          return _c("div", { key: junction.id }, [
-            _c("div", { staticClass: "columns" }, [
-              _c("div", { staticClass: "column is-2" }),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "column is-8" },
-                [
-                  _c("junction", {
-                    attrs: {
-                      junction: junction,
-                      canEditJunctions: _vm.canEditJunctions,
-                      user: _vm.user,
-                      pop: _vm.pop
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "column is-2" })
+  return _c("section", {}, [
+    _vm.junctions.length
+      ? _c(
+          "div",
+          {},
+          _vm._l(_vm.junctions, function(junction) {
+            return _c("div", { key: junction.id }, [
+              _c("div", { staticClass: "columns" }, [
+                _c("div", { staticClass: "column is-2" }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "column is-8" },
+                  [
+                    _c("junction", {
+                      attrs: {
+                        junction: junction,
+                        canEditJunctions: _vm.canEditJunctions,
+                        user: _vm.user,
+                        pop: _vm.pop
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "column is-2" })
+              ])
             ])
-          ])
-        }),
-        0
-      )
-    : _vm._e()
+          }),
+          0
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    !_vm.junctions.length
+      ? _c("div", { staticClass: "has-text-centered" }, [
+          _c(
+            "div",
+            { staticClass: "is-size-4 has-text-weight-light has-text-grey" },
+            [_vm._v("No hay empalmes registrados en este POP")]
+          )
+        ])
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

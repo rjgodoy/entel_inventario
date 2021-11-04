@@ -15,6 +15,7 @@ use App\Models\Room;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Ndum\Laravel\Snmp;
 
 class PowerRectifierController extends Controller
 {
@@ -406,4 +407,29 @@ class PowerRectifierController extends Controller
     {
         return (new PowerRectifiersExport($request))->download('power_rectifiers.xlsx');
     }
+
+    /**
+     * Download all data from Pops (Dashboard).
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getSnmpInfo(Request $request)
+    {
+        // return $request;
+        $snmp = new Snmp;
+        $snmp->newClient($request->ip, 2, 'public');
+        $volt = $snmp->getValue('1.3.6.1.4.1.1918.2.13.10.90.10.30.1.40.1.0');
+        $temp = $snmp->getValue('1.3.6.1.4.1.1918.2.13.10.100.30.0');
+
+        $data = [
+            'temp' => $temp,
+            'volt' => $volt
+        ];  
+
+        return $data;
+    }
+
+
+    
 }

@@ -28,6 +28,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     GeneratorSet: function GeneratorSet() {
@@ -76,37 +79,49 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.generatorSets.length
-    ? _c(
-        "section",
-        {},
-        _vm._l(_vm.generatorSets, function(generatorSet) {
-          return _c("div", {}, [
-            _c(
-              "div",
-              { staticClass: "columns" },
-              [
-                _c("div", { staticClass: "column is-2" }),
-                _vm._v(" "),
-                _c("generator-set", {
-                  staticClass: "column is-8",
-                  attrs: {
-                    generatorSet: generatorSet,
-                    canEditGeneratorSets: _vm.canEditGeneratorSets,
-                    user: _vm.user,
-                    pop: _vm.pop
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "column is-2" })
-              ],
-              1
-            )
-          ])
-        }),
-        0
-      )
-    : _vm._e()
+  return _c("section", {}, [
+    _vm.generatorSets.length
+      ? _c(
+          "div",
+          {},
+          _vm._l(_vm.generatorSets, function(generatorSet) {
+            return _c("div", { key: generatorSet.id }, [
+              _c(
+                "div",
+                { staticClass: "columns" },
+                [
+                  _c("div", { staticClass: "column is-2" }),
+                  _vm._v(" "),
+                  _c("generator-set", {
+                    staticClass: "column is-8",
+                    attrs: {
+                      generatorSet: generatorSet,
+                      canEditGeneratorSets: _vm.canEditGeneratorSets,
+                      user: _vm.user,
+                      pop: _vm.pop
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "column is-2" })
+                ],
+                1
+              )
+            ])
+          }),
+          0
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    !_vm.generatorSets.length
+      ? _c("div", { staticClass: "has-text-centered" }, [
+          _c(
+            "div",
+            { staticClass: "is-size-4 has-text-weight-light has-text-grey" },
+            [_vm._v("No hay grupos electrógenos registrados en este POP")]
+          )
+        ])
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

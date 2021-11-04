@@ -323,23 +323,28 @@ var render = function() {
                                           _vm._l(data.beacons, function(
                                             beacon
                                           ) {
-                                            return _c("div", [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "has-text-weight-semibold is-size-6"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "🚨 " +
-                                                      _vm._s(
-                                                        beacon.beacon_type.type
-                                                      )
-                                                  )
-                                                ]
-                                              )
-                                            ])
+                                            return _c(
+                                              "div",
+                                              { key: beacon.id },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "has-text-weight-semibold is-size-6"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "🚨 " +
+                                                        _vm._s(
+                                                          beacon.beacon_type
+                                                            .type
+                                                        )
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
                                           }),
                                           _vm._v(" "),
                                           !data.beacons.length
@@ -356,26 +361,28 @@ var render = function() {
                                         2
                                       ),
                                       _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "column has-text-centered"
-                                        },
-                                        [
-                                          _c("img", {
-                                            staticStyle: {
-                                              "max-height": "500px"
+                                      data.vertical_structure_type.image
+                                        ? _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "column has-text-centered"
                                             },
-                                            attrs: {
-                                              src:
-                                                "/img/vertical_structures/" +
-                                                data.vertical_structure_type
-                                                  .image
-                                            }
-                                          })
-                                        ]
-                                      )
+                                            [
+                                              _c("img", {
+                                                staticStyle: {
+                                                  "max-height": "500px"
+                                                },
+                                                attrs: {
+                                                  src:
+                                                    "/img/vertical_structures/" +
+                                                    data.vertical_structure_type
+                                                      .image
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        : _vm._e()
                                     ])
                                   ]
                                 )

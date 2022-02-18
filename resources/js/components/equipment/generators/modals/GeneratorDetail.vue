@@ -9,8 +9,8 @@
                         </b-field>
                     </div>
                     <div class="column">
-                        <div class="is-size-4 has-text-weight-semibold">Datos generador {{ generator.name }}<br/>
-                            <div class="is-size-5 has-text-weight-normal p-2">CRM {{ generator.g_zona.g_sector.name }} - {{ generator.g_zona.zona }} - {{ generator.g_zona.name }}</div>
+                        <div class="is-size-4 has-text-weight-semibold">Datos generador {{ generator.pop.nombre }}<br/>
+                            <div class="is-size-5 has-text-weight-normal p-2">CRM {{ generator.pop.zona.crm.nombre_crm }} - {{ generator.pop.zona.nombre_zona }} - {{ generator.pop.zona.nombre_zona }}</div>
                         </div>
                     </div>
                     <div class="column is-2"></div>
@@ -21,7 +21,7 @@
             <div class="columns">
                 <div class="column">
                     <div class="columns is-multiline">
-                        <div class="column is-6" v-for="data in boxes">
+                        <div class="column is-6" v-for="data in boxes" :key="data.id">
                             <div class="box p-3 has-text-left" :class="data.color">
                                 <div class="is-size-7">{{ data.title }}</div>
                                 <div class="is-size-5 has-text-weight-semibold">{{ data.info }}</div>
@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="column is-8">
-                    <GeneratorCharts :generator="generator" />
+                    <GeneratorCharts :generator="generator.generator_platform" />
                 </div>
             </div>
 
@@ -85,15 +85,15 @@
                 return [
                     {
                         "title": "Código generador",
-                        "info": this.generator.mobile_code,
+                        "info": this.generator.pop ? this.generator.pop.sites[0].nem_site : '',
                     },
                     {
                         "title": "Marca grupo",
-                        "info": this.generator.g_model ? this.generator.g_model.g_brand.name : 'N/A',
+                        "info": this.generator.generator_set_model ? this.generator.generator_set_model.generator_set_brand.name : 'N/A',
                     },
                     {
                         "title": "Capacidad estanque (lts)",
-                        "info": this.generator.g_model ? numeral(this.generator.g_model.g_fuel_pond.capacity).format('0,00') + ' lts' : 'N/A',
+                        "info": this.generator.generator_platform.g_model && this.generator.generator_platform.g_model.g_fuel_pond ? numeral(this.generator.generator_platform.g_model.g_fuel_pond.capacity).format('0,00') + ' lts' : 'N/A',
                     },
                     {
                         "title": "Horometro",
@@ -117,7 +117,7 @@
                     },
                     {
                         "title": "Última medición",
-                        "info": this.generator.g_last_maintance ? this.generator.g_last_maintance.created : 'N/A',
+                        "info": this.generator.generator_platform.g_last_maintance ? this.generator.generator_platform.g_last_maintance.created : 'N/A',
                     },
                     // {
                     //     "title": "Horas de funcionamiento entre visitas",

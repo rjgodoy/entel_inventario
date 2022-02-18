@@ -78,6 +78,7 @@ class GeneratorSetController extends Controller
 
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+                            WHERE GS.deleted_at IS NULL
                             
                             ) AS q_info,
 
@@ -91,6 +92,7 @@ class GeneratorSetController extends Controller
 
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
                             INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+                            WHERE GS.deleted_at IS NULL
 
                             ) AS q_generator_sets
 
@@ -132,6 +134,7 @@ class GeneratorSetController extends Controller
                             -- AND T.state_id IN (1)
 
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+                            WHERE GS.deleted_at IS NULL
                             ) AS q_info,
 
                     @q_generator_sets:=(SELECT count(DISTINCT GS.id) 
@@ -143,6 +146,7 @@ class GeneratorSetController extends Controller
                             -- AND T.state_id IN (1)
 
                             INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id AND C.zona_id = @zona_id
+                            WHERE GS.deleted_at IS NULL
 
                             ) AS q_generator_sets
 
@@ -184,6 +188,7 @@ class GeneratorSetController extends Controller
                             -- INNER JOIN entel_pops.technologies T ON S.id = T.site_id
                             -- AND T.state_id IN (1)
                             WHERE P.comuna_id = @comuna_id
+                            AND GS.deleted_at IS NULL
                             ) AS q_info,
 
                     @q_generator_sets:=(SELECT count(DISTINCT GS.id) 
@@ -195,6 +200,7 @@ class GeneratorSetController extends Controller
                             -- AND T.state_id IN (1)
 
                             WHERE P.comuna_id = @comuna_id
+                            AND GS.deleted_at IS NULL
 
                             ) AS q_generator_sets
 
@@ -254,9 +260,8 @@ class GeneratorSetController extends Controller
      */
     public function show($id)
     {
-        $generatorSets = GeneratorSet::with(
-            'generator_set_type',
-            'generator_set_model.generator_set_brand',
+        $generatorSet = GeneratorSet::with(
+            // 'generator_set_type',
             'current_generator_group.generator_group_type',
             // 'generator_groups.generator_group_type', 
             'current_generator_motor.generator_motor_type',
@@ -271,10 +276,25 @@ class GeneratorSetController extends Controller
             'current_generator_set_capacity',
             'generator_set_topology_type',
             'generator_set_level_type',
-            'pop.rooms'
+            'pop.rooms',
+            'pop.comuna.region'
+            ,'pop.zona.crm'
+            ,'pop.sites'
+            // ,'generator_platform.g_zona.g_sector'
+            ,'generator_set_model.generator_set_brand'
+            // ,'generator_platform.g_model.g_brand'
+            ,'generator_platform.g_model.g_management_system'
+            ,'generator_platform.g_model.g_motor'
+            ,'generator_platform.g_model.g_fuel_pond'
+            ,'generator_platform.g_model.g_generator_detail'
+            ,'generator_platform.g_model.g_tta_controller'
+            ,'generator_platform.g_system_type'
+            ,'generator_platform.g_type'
+            ,'generator_platform.g_last_maintance.g_maintance_status'
+            ,'generator_platform.g_protocol'
 
              )->where('pop_id', $id)->get();
-        return new GeneratorSetResource($generatorSets);
+        return new GeneratorSetResource($generatorSet);
     }
 
     /**
@@ -424,61 +444,80 @@ class GeneratorSetController extends Controller
         $critic = $request->critic;
         $vip = $request->vip;
 
-        $data = GeneratorsPlatformGenerator::
+        $data = GeneratorSet::
+            // $data = GeneratorsPlatformGenerator::
+            // with(
+            //     'g_commune.g_region'
+            //     ,'g_zona.g_sector'
+            //     ,'generator_set_model.generator_set_brand'
+            //     ,'g_model.g_brand'
+            //     ,'g_model.g_management_system'
+            //     ,'g_model.g_motor'
+            //     ,'g_model.g_fuel_pond'
+            //     ,'g_model.g_generator_detail'
+            //     ,'g_model.g_tta_controller'
+            //     ,'g_system_type'
+            //     ,'g_type'
+            //     ,'g_last_maintance.g_maintance_status'
+            //     ,'g_protocol'
+            // )
             with(
-                'g_commune.g_region'
-                ,'g_zona.g_sector'
+                'pop.comuna.region'
+                ,'pop.zona.crm'
+                ,'pop.sites'
+                // ,'generator_platform.g_zona.g_sector'
                 ,'generator_set_model.generator_set_brand'
-                ,'g_model.g_brand'
-                ,'g_model.g_management_system'
-                ,'g_model.g_motor'
-                ,'g_model.g_fuel_pond'
-                ,'g_model.g_generator_detail'
-                ,'g_model.g_tta_controller'
-                ,'g_system_type'
-                ,'g_type'
-                ,'g_last_maintance.g_maintance_status'
-                ,'g_protocol'
+                // ,'generator_platform.g_model.g_brand'
+                ,'generator_platform.g_model.g_management_system'
+                ,'generator_platform.g_model.g_motor'
+                ,'generator_platform.g_model.g_fuel_pond'
+                ,'generator_platform.g_model.g_generator_detail'
+                ,'generator_platform.g_model.g_tta_controller'
+                ,'generator_platform.g_system_type'
+                ,'generator_platform.g_type'
+                ,'generator_platform.g_last_maintance.g_maintance_status'
+                ,'generator_platform.g_protocol'
             )
             ->where(function($q) use($text) {
                 if($text) {
-                    $q->where('name', 'LIKE', "%$text%")
-                    ->orWhere('mobile_code', 'LIKE', "%$text%");
-                    // ->orWhereHas('pop.sites', function($p) use($text) {
-                    //     if ($text) {
-                    //         $p->where('nem_site', 'LIKE', "%$text%")->orWhere('nombre', 'LIKE', "%$text%");
-                    //     }
-                    // });
+                    $q->whereHas('pop', function($p) use($text) {
+                        $p->where('nombre', 'LIKE', "%$text%");
+                    })
+                    ->orWhereHas('pop.sites', function($p) use($text) {
+                        if ($text) {
+                            $p->where('nem_site', 'LIKE', "%$text%")->orWhere('nombre', 'LIKE', "%$text%");
+                        }
+                    });
                 }
             })
             ->where(function($q) use($crm_id, $zona_id) {
                 if ($crm_id) {
                     if($zona_id) {
-                        $q->where('zone_id', $zona_id);
+                        $q->where('pop.zona_id', $zona_id);
                     } else {
-                        $q->whereHas('g_zona', function($p) use($crm_id) {
-                            $p->where('sector_id', $crm_id);
+                        $q->whereHas('pop.zona', function($p) use($crm_id) {
+                            $p->where('crm_id', $crm_id);
                         });
                     }
                 }
             })
-            ->where(function($q) use($group_type_id) {
-                if($group_type_id) {
-                    $q->where('group_type_id', $group_type_id);
-                }
-            })
-            ->whereHas('g_model', function($p) use($brand_id) {
-                if ($brand_id) {
-                    $p->where('brand_id', $brand_id);
-                }
-            })
+            // ->where(function($q) use($group_type_id) {
+            //     if($group_type_id) {
+            //         $q->where('group_type_id', $group_type_id);
+            //     }
+            // })
+            // ->whereHas('g_model', function($p) use($brand_id) {
+            //     if ($brand_id) {
+            //         $p->where('brand_id', $brand_id);
+            //     }
+            // })
 
-            ->where(function($q) use($sub_zone_id) {
-                if($sub_zone_id) {
-                    $q->where('sub_zone_id', $sub_zone_id);
-                }
-            })
-            ->orderBy('zone_id', 'asc')
+            // ->where(function($q) use($sub_zone_id) {
+            //     if($sub_zone_id) {
+            //         $q->where('sub_zone_id', $sub_zone_id);
+            //     }
+            // })
+            // ->orderBy('zone_id', 'asc')
             ->paginate(15);
 
         return $data;     
@@ -647,7 +686,7 @@ class GeneratorSetController extends Controller
             return $data;
         // }
 
-        return $latest;
+        // return $latest;
     }
 
     /**

@@ -168,15 +168,15 @@ class Pop extends Model
         return $this->hasMany(Log::class);
     }
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    public function layout() 
-    {
-        return $this->hasOne(PopLayout::class)->latest();
-    }
+    // /**
+    //  * The attributes that are mass assignable.
+    //  *
+    //  * @var array
+    //  */
+    // public function layout() 
+    // {
+    //     return $this->hasOne(PopLayout::class)->latest();
+    // }
 
     /**
      * The attributes that are mass assignable.
@@ -336,6 +336,16 @@ class Pop extends Model
     public function drone_videos()
     {
         return $this->belongsToMany(File::class, 'entel_g_redes_inventario.drone_videos')->withTimestamps();
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function layouts()
+    {
+        return $this->hasMany(IframeView::class);
     }
 
     /**

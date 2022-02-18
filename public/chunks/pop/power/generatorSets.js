@@ -90,19 +90,15 @@ var render = function() {
                 "div",
                 { staticClass: "columns" },
                 [
-                  _c("div", { staticClass: "column is-2" }),
-                  _vm._v(" "),
                   _c("generator-set", {
-                    staticClass: "column is-8",
+                    staticClass: "column",
                     attrs: {
                       generatorSet: generatorSet,
                       canEditGeneratorSets: _vm.canEditGeneratorSets,
                       user: _vm.user,
                       pop: _vm.pop
                     }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "column is-2" })
+                  })
                 ],
                 1
               )

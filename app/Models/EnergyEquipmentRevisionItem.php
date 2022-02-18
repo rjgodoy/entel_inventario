@@ -13,7 +13,7 @@ class EnergyEquipmentRevisionItem extends Model
 
     public function type() 
     {
-        return $this->belongsTo(EnergyEquipmentRevisionType::class, 'energy_equipment_revision_type_id');
+        return $this->belongsTo(EnergyEquipmentRevisionType::class);
     }
 
     public function statuses()

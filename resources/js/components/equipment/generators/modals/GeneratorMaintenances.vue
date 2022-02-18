@@ -2,8 +2,8 @@
     <div class="modal-card" style="width: auto">
         <header class="modal-card-head has-text-centered">
             <div class="modal-card-title">
-                <div class="is-size-4 title has-text-weight-semibold">Mantenciones generador {{ generator.name }}<br/>
-                    <div class="is-size-5 subtitle has-text-weight-normal">CRM {{ generator.g_zona.g_sector.name }} - {{ generator.g_zona.zona }} - {{ generator.g_zona.name }}</div>
+                <div class="is-size-4 title has-text-weight-semibold">Mantenciones generador {{ generator.pop.nombre }}<br/>
+                    <div class="is-size-5 subtitle has-text-weight-normal">CRM {{ generator.pop.zona.crm.nombre_crm }} - {{ generator.pop.zona.cod_zona }} - {{ generator.pop.zona.nombre_zona }}</div>
                 </div>
             </div>
         </header>
@@ -21,7 +21,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="" v-for="maintance in maintances">
+                        <tr class="" v-for="maintance in maintances" :key="maintance.id">
                             <td>{{ maintance.id }}</td>
                             <td>{{ maintance.description }}</td>
                             <td>{{ maintance.name }}</td>

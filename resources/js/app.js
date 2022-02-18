@@ -31,6 +31,11 @@ Vue.use(AnimateCSS);
 // #########################################################################
 
 
+// ############################ Moment Libraries ###########################
+import moment from 'moment'
+Vue.use(moment);
+// #########################################################################
+
 // ########################## FontAwesome Libraries ########################
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import { dom } from '@fortawesome/fontawesome-svg-core'

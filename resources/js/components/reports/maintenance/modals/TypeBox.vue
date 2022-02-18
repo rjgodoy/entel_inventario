@@ -9,13 +9,24 @@
         <div v-for="item in type.items" :key="item.id">
             <div class="columns mb-1">
                 <div class="column is-1">
-                    <b-tooltip :label="status(revision.statuses, item.id).status == 'success' ? 'OK' : (status(revision.statuses, item.id).status == 'warning' ? 'NO OK' : 'N/A')" position="is-left" type="is-dark">
-                        <font-awesome-icon 
+                    <!-- <b-tooltip :label="status(revision.statuses, item.id).status == 'success' ? 'OK' : (status(revision.statuses, item.id).status == 'warning' ? 'NO OK' : 'N/A')" position="is-bottom" type="is-dark"> -->
+                        <!-- <div> -->
+                            <div class="has-text-weight-bold">
+                                {{ status(revision.statuses, item.id).status == 1 ? 'SI' : (status(revision.statuses, item.id).status == 0 ? 'NO' : 'N/A') }}
+                            </div>
+                        <!-- </div> -->
+                        <!-- <div v-if="item.id>4">
+                            <b-tag :type="'is-' + status(revision.statuses, item.id).status" class="has-text-weight-bold">
+                                {{ status(revision.statuses, item.id).status == 'success' ? 'SI' : (status(revision.statuses, item.id).status == 'warning' ? 'NO' : 'N/A') }}
+                            </b-tag>
+                        </div> -->
+                        <!-- <font-awesome-icon 
+                            v-if="item.id>4"
                             icon="circle"
                             size="1x" 
                             :class="'has-text-' + status(revision.statuses, item.id).status"
-                            />
-                    </b-tooltip>
+                            /> -->
+                    <!-- </b-tooltip> -->
                 </div>
                 <div class="column">
                     <div class="is-size-5 has-text-weight-normal">{{ item.item }}</div>
@@ -47,8 +58,12 @@ export default {
                 }
 
             })
+            // return {
+            //     status: q == 1 ? 'success' : (q == 0 || obs ? 'warning' : 'grey-light'),
+            //     observation: obs
+            // }
             return {
-                status: q == 1 ? 'success' : (q == 0 || obs ? 'warning' : 'grey-light'),
+                status: q,
                 observation: obs
             }
         },

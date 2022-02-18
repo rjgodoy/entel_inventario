@@ -4,13 +4,13 @@
         <div class="" v-if="generatorSets.length"> 
             <div class="" v-for="generatorSet in generatorSets" :key="generatorSet.id">
                 <div class="columns">
-                    <div class="column is-2"></div>
-                    <generator-set class="column is-8" 
+                    <!-- <div class="column is-2"></div> -->
+                    <generator-set class="column" 
                         :generatorSet="generatorSet"
                         :canEditGeneratorSets="canEditGeneratorSets"
                         :user="user"
                         :pop="pop"/>
-                    <div class="column is-2"></div>
+                    <!-- <div class="column is-2"></div> -->
                 </div>
             </div>
         </div>

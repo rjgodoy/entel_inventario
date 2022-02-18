@@ -1,6 +1,8 @@
 <template>
     <section class="is-paddingless">
-        <iframe height='610' :src="layout.iframe" frameborder='0' allowfullscreen allow='xr-spatial-tracking' style="width: 100%;"></iframe>
+        <div v-for="layout in layouts" :key="layout.id">
+            <iframe height='610' :src="layout.iframe" frameborder='0' allowfullscreen allow='xr-spatial-tracking' style="width: 100%;"></iframe>
+        </div>
     </section>
 </template>
 
@@ -9,7 +11,7 @@ export default {
     components: {
     },
     props : [
-        'layout'
+        'layouts'
     ],
     data() {
         return {   

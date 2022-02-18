@@ -18,7 +18,7 @@ class EnergyEquipmentRevisionStatus extends Model
 
     public function item() 
     {
-        return $this->belongsTo(EnergyEquipmentRevisionItem::class, 'energy_equipment_revision_item_id');
+        return $this->belongsTo(EnergyEquipmentRevisionItem::class);
     }
 
     public function validator() 

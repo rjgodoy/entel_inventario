@@ -97,6 +97,12 @@
                                 <div class="is-size-6 has-text-weight-semibold" :class="primaryText">
                                     {{ props.option ? props.option.nombre : '' }}
                                 </div>
+
+                                <div class="is-size-7 has-text-weight-semibold " :class="primaryText">
+                                    <span class="">POP: {{ props.option ? props.option.pop.nombre.toUpperCase() : '' }}</span> 
+                                </div>
+
+
                                 <div class="is-size-7 has-text-weight-normal" :class="secondaryText">
                                     {{ props.option ? props.option.pop.comuna.nombre_comuna : '' }}
                                 </div>

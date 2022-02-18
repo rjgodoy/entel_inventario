@@ -24,6 +24,7 @@ class EnergyEquipmentRevisionController extends Controller
         $text = $request->text;
         $crm_id = $request->crm_id;
         $condition_crm = $crm_id != 0 ? 'crm_id = '.$crm_id : 'crm_id != '.$crm_id;
+        $weekly_review = $request->weekly_review;
 
         if($request->start_date && $request->end_date) {
             $startDate = new Carbon($request->start_date);
@@ -45,6 +46,11 @@ class EnergyEquipmentRevisionController extends Controller
                         $q->whereBetween('date', [date($startDate), date($endDate)]);
                     }
                 })
+                ->where(function($q) use($weekly_review){
+                    if($weekly_review != null) {
+                        $q->where('weekly_review', $weekly_review);
+                    }
+                })
                 ->whereHas('pop.sites', function($q) use($text) {
                     if ($text) {
                         $q->where('nem_site', 'LIKE', "%$text%")
@@ -54,6 +60,7 @@ class EnergyEquipmentRevisionController extends Controller
                 ->whereHas('pop.zona', function($r) use($condition_crm) {
                     $r->whereRaw($condition_crm);
                 })
+                ->orderBy('date', 'desc')
                 ->latest()->paginate(20);
         }
         else {
@@ -66,6 +73,11 @@ class EnergyEquipmentRevisionController extends Controller
                     'statuses.validator',
                     'images'
                 )
+                ->where(function($q) use($weekly_review){
+                    if($weekly_review != null) {
+                        $q->where('weekly_review', $weekly_review);
+                    }
+                })
                 ->whereHas('pop.sites', function($q) use($text) {
                     if ($text) {
                         $q->where('nem_site', 'LIKE', "%$text%")
@@ -75,6 +87,7 @@ class EnergyEquipmentRevisionController extends Controller
                 ->whereHas('pop.zona', function($r) use($condition_crm) {
                     $r->whereRaw($condition_crm);
                 })
+                ->orderBy('date', 'desc')
                 ->latest()->paginate(20);
         }
 

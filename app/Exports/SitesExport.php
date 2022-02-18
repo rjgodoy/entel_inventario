@@ -282,7 +282,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             'ESTADO',
 
             'AUTONOMIA TEORICA',
-
+            'TIPO TORRERA (ALBA)',
             'Q CONTRATOS COMSITE',
             'Nº CONTRATOS'
         ];
@@ -374,7 +374,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             $site->state->state,
 
             $site->pop->theoretical_autonomy,
-
+            $site->pop->turret_type ? $site->pop->turret_type->type : '',
             $site->pop->comsites->count(),
             $id_comsites
 
@@ -543,7 +543,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'AM1:AO1',
+            'AM1:AP1',
             [
                 'font' => [
                     'size' => 11,

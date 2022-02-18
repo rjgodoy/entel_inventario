@@ -102,4 +102,9 @@ class GeneratorsPlatformGenerator extends Model
         return $this->hasMany(GeneratorsPlatformStatistic::class, 'generator_id');
     }
 
+    public function generator_set() 
+    {
+        return $this->hasMany(GeneratorsSet::class)->first();
+    }
+
 }

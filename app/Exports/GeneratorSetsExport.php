@@ -97,7 +97,7 @@ class GeneratorSetsExport implements FromCollection, WithTitle, ShouldAutoSize, 
             foreach ($ids as $id) {
                 array_push($popsIds, $id);
             }
-            $generatorSet = GeneratorSet::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'generator_set_type', 'current_generator_group.generator_group_type', 'current_generator_group.phase_type', 'current_generator_motor.generator_motor_type', 'current_generator_tank.generator_tank_type', 'current_generator_tta.generator_tta_type', 'current_maintainer')
+            $generatorSet = GeneratorSet::with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'generator_set_type', 'current_generator_group.generator_group_type', 'current_generator_group.phase_type', 'current_generator_motor.generator_motor_type', 'current_generator_tank.generator_tank_type', 'current_generator_tta.generator_tta_type', 'current_maintainer')
             ->whereIn('pop_id', $popsIds)
             ->get();
         } else {
@@ -245,7 +245,7 @@ class GeneratorSetsExport implements FromCollection, WithTitle, ShouldAutoSize, 
             //     ->orderBy('pop_id', 'asc')
     	       //  ->get();
 
-            $generatorSet = GeneratorSet::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'generator_set_type', 'current_generator_group.generator_group_type', 'current_generator_group.phase_type', 'current_generator_motor.generator_motor_type', 'current_generator_tank.generator_tank_type', 'current_generator_tta.generator_tta_type', 'current_maintainer')
+            $generatorSet = GeneratorSet::with('pop.comuna', 'pop.zona.crm', 'pop.sites', 'generator_set_model', 'current_generator_group.generator_group_type', 'current_generator_group.phase_type', 'current_generator_motor.generator_motor_type', 'current_generator_tank.generator_tank_type', 'current_generator_tta.generator_tta_type', 'current_maintainer')
                 ->whereHas('pop.sites', function($a) use($condition_core) {
                     $a->whereRaw($condition_core);
                 })
@@ -285,35 +285,41 @@ class GeneratorSetsExport implements FromCollection, WithTitle, ShouldAutoSize, 
 			// set
 	        'TIPO',
             'MODELO',
-            'HOROMETRO',
-            'NUMERO SERIE',
+            'IP HOROMETRO',
+            'SPID HOROMETRO',
+            // 'NUMERO SERIE',
 
             // generador
             'TIPO GENERADOR',
             'MODELO GENERADOR',
-            'POTENCIA',
+            'POTENCIA (kVA)',
             'FASE',
-            'NUMERO SERIE GENERADOR',
+            // 'NUMERO SERIE GENERADOR',
 
             // motor
             'TIPO MOTOR',
             'MODELO MOTOR',
-            'NUMERO SERIE MOTOR',
+            // 'NUMERO SERIE MOTOR',
 
             // tank
             'TIPO ESTANQUE',
             'CAPACIDAD',
             'CONSUMO',
-            'CONSULTA REMOTA',
-            'NUMERO SERIE ESTANQUE',
+            // 'CONSULTA REMOTA',
+            'IP ESTANQUE',
+            'SPID ESTANQUE',
+            // 'NUMERO SERIE ESTANQUE',
 
             // tta
             'TIPO TTA',
             'MODELO TTA',
-            'NUMERO SERIE TTA',
+            // 'NUMERO SERIE TTA',
 
             // mantenedor
-            'MANTENEDOR'
+            'MANTENEDOR',
+            'FECHA INGRESO',
+
+            // 'IP'
 
         ];
     }
@@ -335,30 +341,35 @@ class GeneratorSetsExport implements FromCollection, WithTitle, ShouldAutoSize, 
 
             $generatorSet->generator_set_type ? $generatorSet->generator_set_type->type : null,
             $generatorSet->generator_set_type ? $generatorSet->generator_set_type->model : null,
-            $generatorSet->horometer ? 'SI' : 'NO',
-            $generatorSet->serial_number,
+            $generatorSet->hourometer_address,
+            $generatorSet->hourmeter_spid,
+            // $generatorSet->serial_number,
 
             $generatorSet->current_generator_group && $generatorSet->current_generator_group->generator_group_type ? $generatorSet->current_generator_group->generator_group_type->type : null,
             $generatorSet->current_generator_group && $generatorSet->current_generator_group->generator_group_type ? $generatorSet->current_generator_group->generator_group_type->model : null,
             $generatorSet->current_generator_group ? $generatorSet->current_generator_group->power : null,
             $generatorSet->current_generator_group && $generatorSet->current_generator_group->phase_type ? $generatorSet->current_generator_group->phase_type->phase_type : null,
-            $generatorSet->current_generator_group ? $generatorSet->current_generator_group->serial_number : null,
+            // $generatorSet->current_generator_group ? $generatorSet->current_generator_group->serial_number : null,
 
             $generatorSet->current_generator_motor && $generatorSet->current_generator_motor->generator_motor_type ? $generatorSet->current_generator_motor->generator_motor_type->type : null,
             $generatorSet->current_generator_motor && $generatorSet->current_generator_motor->generator_motor_type ? $generatorSet->current_generator_motor->generator_motor_type->model : null,
-            $generatorSet->current_generator_motor && $generatorSet->current_generator_motor->serial_number,
+            // $generatorSet->current_generator_motor && $generatorSet->current_generator_motor->serial_number,
 
             $generatorSet->current_generator_motor && $generatorSet->current_generator_tank->generator_tank_type ? $generatorSet->current_generator_tank->generator_tank_type->type : null,
             $generatorSet->current_generator_tank ? $generatorSet->current_generator_tank->capacity : null,
             $generatorSet->current_generator_tank ? $generatorSet->current_generator_tank->consumption : null,
-            $generatorSet->current_generator_tank && $generatorSet->current_generator_tank->remote_consultation ? 'SI' : 'NO',
-            $generatorSet->current_generator_tank ? $generatorSet->current_generator_tank->serial_number : null,
+            // $generatorSet->current_generator_tank && $generatorSet->current_generator_tank->remote_consultation ? 'SI' : 'NO',
+            $generatorSet->fuel_level_address,
+            $generatorSet->fuel_level_spid,
+            // $generatorSet->current_generator_tank ? $generatorSet->current_generator_tank->serial_number : null,
 
             $generatorSet->current_generator_tta && $generatorSet->current_generator_tta->generator_tta_type ? $generatorSet->current_generator_tta->generator_tta_type->type : null,
             $generatorSet->current_generator_tta && $generatorSet->current_generator_tta->generator_tta_type ? $generatorSet->current_generator_tta->generator_tta_type->model : null,
-            $generatorSet->current_generator_tta ? $generatorSet->current_generator_tta->serial_number : null,
+            // $generatorSet->current_generator_tta ? $generatorSet->current_generator_tta->serial_number : null,
 
-            $generatorSet->current_maintainer ? $generatorSet->current_maintainer->telecom_company->name : null
+            $generatorSet->current_maintainer ? $generatorSet->current_maintainer->telecom_company->name : null,
+            $generatorSet->created_at,
+            // $generatorSet->ip
 
   		];
   	}
@@ -430,7 +441,7 @@ class GeneratorSetsExport implements FromCollection, WithTitle, ShouldAutoSize, 
 
 
         $event->sheet->styleCells(
-            'L1:P1',
+            'L1:O1',
             [
                 'font' => [
                     'size' => 11,
@@ -454,7 +465,7 @@ class GeneratorSetsExport implements FromCollection, WithTitle, ShouldAutoSize, 
         );
 
         $event->sheet->styleCells(
-            'Q1:S1',
+            'P1:Q1',
             [
                 'font' => [
                     'size' => 11,
@@ -478,7 +489,7 @@ class GeneratorSetsExport implements FromCollection, WithTitle, ShouldAutoSize, 
         );
 
         $event->sheet->styleCells(
-            'T1:X1',
+            'R1:V1',
             [
                 'font' => [
                     'size' => 11,
@@ -502,7 +513,7 @@ class GeneratorSetsExport implements FromCollection, WithTitle, ShouldAutoSize, 
         );
 
         $event->sheet->styleCells(
-            'Y1:AA1',
+            'W1:X1',
             [
                 'font' => [
                     'size' => 11,
@@ -526,7 +537,7 @@ class GeneratorSetsExport implements FromCollection, WithTitle, ShouldAutoSize, 
         );
 
         $event->sheet->styleCells(
-            'AB1',
+            'Y1:Z1',
             [
                 'font' => [
                     'size' => 11,

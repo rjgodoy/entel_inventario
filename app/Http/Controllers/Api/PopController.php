@@ -236,7 +236,7 @@ class PopController extends Controller
             'current_autonomy',
             'current_battery_bank_autonomy',
             'client_companies.access_type',
-            'layout',
+            'layouts',
             'comsites',
             'drone_videos',
             'risk_types',

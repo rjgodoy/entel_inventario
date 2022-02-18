@@ -282,7 +282,7 @@
                         <detail :is="currentTabComponent"
                             :user="user"
                             :pop="pop"
-                            :layout="pop.layout"
+                            :layouts="pop.layouts"
                             :popClassification="popClassification"
                             :popCritical="popCritical"
                             :bodyBackground="bodyBackground"
@@ -324,10 +324,10 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faHome, faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle, faBookmark } from "@fortawesome/free-solid-svg-icons";
+    import { faHome, faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle, faBookmark, faBars } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
-    import { faCheckCircle as farCheckCircle, faTimesCircle as farTimesCircle, faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons'
-    library.add(faHome, faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle, faBookmark, farBookmark)
+    import { faCheckCircle as farCheckCircle, faTimesCircle as farTimesCircle, faBookmark as farBookmark, faClipboard as farClipboard } from '@fortawesome/free-regular-svg-icons'
+    library.add(faHome, faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle, faBookmark, farBookmark, farClipboard, faBars)
     export default {
         components: {
             Location: () => import(/* webpackChunkName: "chunks/pop/location"*/'./Location'),
@@ -670,7 +670,7 @@
                 }
 
                 // Visopn 3D
-                if (tab.component == 'vision' && (!this.pop.layout || !this.pop.layout.iframe)) {
+                if (tab.component == 'vision' && (!this.pop.layouts || !this.pop.layouts.length)) {
                     return false
                 }
 
@@ -695,7 +695,7 @@
             getAllData() {
                 axios.get(`/api/pop/${this.$route.params.id}`)
                 .then((response) => {
-                    // console.log(response.data)
+                    console.log(response.data)
                     this.pop = response.data.pop
                     this.popName = this.pop.nombre
                     this.popZona = this.pop.zona_id

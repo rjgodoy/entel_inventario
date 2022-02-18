@@ -209,9 +209,9 @@ class Room extends Model
      *
      * @var array
      */
-    public function layout() 
+    public function layout()
     {
-        return $this->hasOne(PopLayout::class)->latest();
+        return $this->hasOne(IframeView::class);
     }
 
 }

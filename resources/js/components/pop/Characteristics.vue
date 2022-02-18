@@ -310,10 +310,6 @@ export default {
             return !!+this.pop.ranco
         },
 
-        offgrid() {
-            return !!+this.pop.offgrid
-        },
-
         solar() {
             return !!+this.pop.solar
         },

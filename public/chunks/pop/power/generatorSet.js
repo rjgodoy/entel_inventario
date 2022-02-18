@@ -333,21 +333,134 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {},
+  components: {
+    GeneratorDetail: function GeneratorDetail() {
+      return __webpack_require__.e(/*! import() | chunks/generators/modals/generatorDetail */ "chunks/generators/modals/generatorDetail").then(__webpack_require__.bind(null, /*! ../../equipment/generators/modals/GeneratorDetail */ "./resources/js/components/equipment/generators/modals/GeneratorDetail.vue"));
+    },
+    GeneratorMaintenances: function GeneratorMaintenances() {
+      return __webpack_require__.e(/*! import() | chunks/generators/modals/GeneratorMaintenances */ "chunks/generators/modals/GeneratorMaintenances").then(__webpack_require__.bind(null, /*! ../../equipment/generators/modals/GeneratorMaintenances */ "./resources/js/components/equipment/generators/modals/GeneratorMaintenances.vue"));
+    }
+  },
   props: ['canEditGeneratorSets', 'generatorSet', 'user'],
   data: function data() {
     return {
+      statistic: [],
+      last_day_data: Object,
       maintainers: [],
       responsableAreas: [],
       topologyTypes: [],
       levelTypes: [],
-      generatorSetTypes: [],
+      generatorSetModels: [],
       currentMaintainerName: 'Sin Información',
       currentResponsableArea: 'Sin Información',
       currentTopologyType: 'Sin Información',
       currentLevelType: 'Sin Información',
-      currentGeneratorSetType: 'Sin Información',
+      currentGeneratorSetBrand: 'Sin Información',
       currentGeneratorSetModel: 'Sin Información',
       rooms: this.generatorSet.pop && this.generatorSet.pop.rooms,
       generatorRoom: this.generatorSet.room_id,
@@ -356,11 +469,13 @@ __webpack_require__.r(__webpack_exports__);
       responsable_area_id: this.generatorSet.current_generator_responsable ? this.generatorSet.current_generator_responsable.generator_set_responsable_area_id : null,
       topology_id: this.generatorSet.generator_set_topology_type_id,
       level_id: this.generatorSet.generator_set_level_type_id,
-      generator_set_type_id: this.generatorSet.generator_set_type_id,
+      generator_set_model_id: this.generatorSet.generator_set_model_id,
       newPrimeCapacity: this.generatorSet.current_generator_set_capacity ? this.generatorSet.current_generator_set_capacity.prime_capacity : 0,
       newUsedCapacity: this.generatorSet.current_generator_set_capacity ? this.generatorSet.current_generator_set_capacity.used_capacity : 0,
       isEditMode: false,
-      generatorSetHorometer: null
+      generatorSetHorometer: null,
+      isGeneratorDetailModalActive: false,
+      isGeneratorMaintenancesModalActive: false
     };
   },
   mounted: function mounted() {
@@ -368,8 +483,8 @@ __webpack_require__.r(__webpack_exports__);
     this.getResponsableAreas();
     this.getTopologyTypes();
     this.getLevelTypes();
-    this.getGeneratorSetTypes();
-    this.getGeneratorSetDataOnline();
+    this.getGeneratorSetModels();
+    this.getLastDayData(this.generatorSet.id); // this.getGeneratorSetDataOnline()
   },
   computed: {
     currentGeneratorGroup: function currentGeneratorGroup() {
@@ -392,13 +507,45 @@ __webpack_require__.r(__webpack_exports__);
     },
     availableCapacity: function availableCapacity() {
       return this.capacity - this.newUsedCapacity;
+    },
+    fuelLevelPercentage: function fuelLevelPercentage() {
+      return this.last_day_data[0] ? this.last_day_data[0].fuel_level_percentage : null;
+    },
+    fuelLevel: function fuelLevel() {
+      return this.last_day_data[0] ? this.last_day_data[0].fuel_level : 0;
+    },
+    type: function type() {
+      var type = '';
+
+      if (this.fuelLevelPercentage <= 0.2) {
+        type = 'is-danger';
+      } else if (this.fuelLevelPercentage > 0.2 && this.fuelLevelPercentage <= 0.5) {
+        type = 'is-warning';
+      } else {
+        type = 'is-success';
+      }
+
+      return type;
+    },
+    hourmeter: function hourmeter() {
+      return this.last_day_data[0] ? this.last_day_data[0].hourmeter : 'N/A';
+    },
+    isAlive: function isAlive() {
+      // Función desactivada porque servidor no llega a la IP de los generadores
+      var params = {
+        'url': this.generatorSet.ip
+      };
+      axios.get('/api/doPing', {
+        params: params
+      }).then(function (response) {
+        console.log(response.data);
+        return response.data;
+      });
     }
   },
   watch: {
-    generatorSet: function generatorSet(val) {// if (this.generatorSet.pop && this.generatorSet.pop.rooms) {
-      //     // console.log(this.generatorSet.pop.rooms[0].current_room_capacity)
-      //     this.rooms = this.generatorSet.pop.rooms
-      // }
+    generatorSet: function generatorSet(val) {
+      this.getLastDayData(val.id);
     },
     maintainer_id: function maintainer_id(val) {
       var _this = this;
@@ -436,13 +583,13 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    generator_set_type_id: function generator_set_type_id(val) {
+    generator_set_model_id: function generator_set_model_id(val) {
       var _this5 = this;
 
-      this.generatorSetTypes.forEach(function (item) {
+      this.generatorSetModels.forEach(function (item) {
         if (item.id == val) {
-          _this5.currentGeneratorSetType = item.type;
-          _this5.currentGeneratorSetModel = item.model;
+          _this5.currentGeneratorSetBrand = item.generator_set_brand.name;
+          _this5.currentGeneratorSetModel = item.name;
         }
       });
     }
@@ -512,20 +659,40 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    getGeneratorSetTypes: function getGeneratorSetTypes() {
+    getGeneratorSetModels: function getGeneratorSetModels() {
       var _this10 = this;
 
-      axios.get("/api/generatorSetTypes").then(function (response) {
-        // console.log(response.data.telecomCompanies)
-        _this10.generatorSetTypes = response.data.generatorSetTypes;
+      axios.get("/api/generatorSetModels").then(function (response) {
+        // console.log(response.data)
+        if (response.data.generatorSetModels) {
+          _this10.generatorSetModels = response.data.generatorSetModels;
 
-        if (response.data.generatorSetTypes) {
-          _this10.generatorSetTypes.forEach(function (item) {
-            if (item.id == _this10.generator_set_type_id) {
-              _this10.currentGeneratorSetType = item.type;
+          _this10.generatorSetModels.sort(function (a, b) {
+            return a.generator_set_brand.name - b.generator_set_brand.name;
+          });
+
+          _this10.generatorSetModels.forEach(function (item) {
+            if (item.id == _this10.generator_set_model_id) {
+              _this10.currentGeneratorSetBrand = item.generator_set_brand.name;
+              _this10.currentGeneratorSetModel = item.name;
             }
           });
         }
+      });
+    },
+    getLastDayData: function getLastDayData(generator_id) {
+      var _this11 = this;
+
+      // this.isLoading = true
+      var params = {
+        'generator_id': parseInt(generator_id)
+      };
+      axios.get('/api/generatorLastDay', {
+        params: params
+      }).then(function (response) {
+        console.log(response.data);
+        _this11.last_day_data = response.data; // this.last_data = response.data[0]
+        // this.isLoading = false
       });
     },
     // async getGeneratorSetDataOnline() {
@@ -539,10 +706,10 @@ __webpack_require__.r(__webpack_exports__);
     //     })
     // },
     saveChanges: function saveChanges() {
-      var _this11 = this;
+      var _this12 = this;
 
       // console.log(this.currentGeneratorResponsableAreaId)
-      if (!this.isEditMode && (this.primeCapacity != this.newPrimeCapacity || this.usedCapacity != this.newUsedCapacity || this.generatorSet.current_maintainer && this.generatorSet.current_maintainer.telecom_company_id != this.maintainer_id || this.generatorSet.generator_set_topology_type_id != this.topology_id || this.generatorSet.generator_set_level_type_id != this.level_id || this.generatorSet.generator_set_type_id != this.generator_set_type_id || this.currentGeneratorResponsableAreaId != this.responsable_area_id) || this.generatorRoom != this.generatorSet.room_id) {
+      if (!this.isEditMode && (this.primeCapacity != this.newPrimeCapacity || this.usedCapacity != this.newUsedCapacity || this.generatorSet.current_maintainer && this.generatorSet.current_maintainer.telecom_company_id != this.maintainer_id || this.generatorSet.generator_set_topology_type_id != this.topology_id || this.generatorSet.generator_set_level_type_id != this.level_id || this.generatorSet.generator_set_model_id != this.generator_set_model_id || this.currentGeneratorResponsableAreaId != this.responsable_area_id) || this.generatorRoom != this.generatorSet.room_id) {
         // console.log(this.currentGeneratorResponsableAreaId)
         var params = {
           'user_id': parseFloat(this.user.id),
@@ -553,29 +720,29 @@ __webpack_require__.r(__webpack_exports__);
           'generator_set_responsable_area_id': parseFloat(this.responsable_area_id),
           'generator_set_topology_type_id': parseFloat(this.topology_id),
           'generator_set_level_type_id': parseFloat(this.level_id),
-          'generator_set_type_id': parseFloat(this.generator_set_type_id),
+          'generator_set_model_id': parseFloat(this.generator_set_model_id),
           'is_only_room': this.isOnlyRoom,
           'room_id': this.generatorRoom
         }; // console.log(params)
 
         axios.put("/api/generatorSets/".concat(this.generatorSet.id), params).then(function (response) {
-          _this11.$eventBus.$emit('generator-set-capacities-updated');
+          _this12.$eventBus.$emit('generator-set-capacities-updated');
         });
       }
     },
     deleteGeneratorSet: function deleteGeneratorSet() {
-      var _this12 = this;
+      var _this13 = this;
 
       console.log(this.generatorSet);
       this.$buefy.dialog.confirm({
         message: "Confirma la eliminaci\xF3n del Grupo Electr\xF3geno de la sala?",
         type: 'is-link',
         onConfirm: function onConfirm() {
-          axios["delete"]("/api/generatorSets/".concat(_this12.generatorSet.id)).then(function (response) {
+          axios["delete"]("/api/generatorSets/".concat(_this13.generatorSet.id)).then(function (response) {
             // console.log(response.data)
-            _this12.$eventBus.$emit('generator-set-deleted');
+            _this13.$eventBus.$emit('generator-set-deleted');
 
-            _this12.$eventBus.$emit('room-data');
+            _this13.$eventBus.$emit('room-data');
           });
         }
       });
@@ -605,9 +772,7 @@ var render = function() {
     { staticClass: "section", staticStyle: { "padding-top": "0px" } },
     [
       _c("div", { staticClass: "columns" }, [
-        _c("div", { staticClass: "column is-3" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "column is-6 tile is-parent" }, [
+        _c("div", { staticClass: "column is-4 tile is-parent" }, [
           _c("div", { staticClass: "tile is-child box" }, [
             _c(
               "div",
@@ -630,7 +795,9 @@ var render = function() {
                   [
                     _vm._v(
                       _vm._s(
-                        _vm.generatorSet.generator_tta_type
+                        _vm.generatorSet.current_generator_tta &&
+                          _vm.generatorSet.current_generator_tta
+                            .generator_tta_type
                           ? _vm.generatorSet.generator_tta_type.type
                           : "Sin información"
                       )
@@ -655,7 +822,218 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "column is-3" })
+        _c("div", { staticClass: "column tile is-parent" }, [
+          _c("div", { staticClass: "tile is-child box" }, [
+            _c(
+              "div",
+              {
+                staticClass: "has-text-weight-semibold is-size-6 has-text-link",
+                staticStyle: { "padding-bottom": "10px" }
+              },
+              [_vm._v("CONSUMOS")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "columns is-multiline" }, [
+              _c("div", { staticClass: "column is-6" }, [
+                _c("div", { staticClass: "is-size-6 has-text-weight-normal" }, [
+                  _vm._v("Horometro")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { class: _vm.hourmeter > 0 && "has-text-weight-semibold" },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm._f("numeral")(_vm.hourmeter, "0,0.00")) +
+                        "\n                        "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "column is-6" },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "is-size-6 has-text-weight-normal" },
+                    [_vm._v("Nivel Combustible")]
+                  ),
+                  _vm._v(" "),
+                  _vm.fuelLevelPercentage
+                    ? _c(
+                        "b-progress",
+                        {
+                          attrs: {
+                            value: _vm.fuelLevelPercentage * 100,
+                            size: "is-medium",
+                            type: _vm.type,
+                            "show-value": ""
+                          }
+                        },
+                        [
+                          _c(
+                            "span",
+                            {
+                              staticClass: "has-text-weight-bold has-text-dark"
+                            },
+                            [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(
+                                    _vm._f("numeral")(
+                                      _vm.fuelLevelPercentage * 100,
+                                      "0,0.0"
+                                    )
+                                  ) +
+                                  "%\n                            "
+                              )
+                            ]
+                          ),
+                          _vm._v(
+                            "\n                             \n                            "
+                          ),
+                          _vm.generatorSet.generator_platform.g_model
+                            .g_fuel_pond
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "has-text-weight-bold has-text-dark"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(
+                                        _vm.fuelLevel +
+                                          "/" +
+                                          _vm.generatorSet.generator_platform
+                                            .g_model.g_fuel_pond.capacity
+                                      ) +
+                                      "\n                            "
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ]
+                      )
+                    : _vm._e()
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-6" }, [
+                _c("div", { staticClass: "is-size-6 has-text-weight-normal" }, [
+                  _vm._v("Promedio Hrs. funcionamiento / día")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    class:
+                      this.last_day_data[0] &&
+                      this.last_day_data[0].avg_hourmeter_consumption > 0
+                        ? "has-text-weight-semibold"
+                        : "has-text-weight-light"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(
+                          _vm._f("numeral")(
+                            this.last_day_data[0] &&
+                              this.last_day_data[0].avg_hourmeter_consumption,
+                            "0,0.00"
+                          )
+                        ) +
+                        "\n                        "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-6" }, [
+                _c("div", { staticClass: "is-size-6 has-text-weight-normal" }, [
+                  _vm._v("Promedio consumo / día")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    class:
+                      this.last_day_data[0] &&
+                      this.last_day_data[0].avg_fuel_consumption > 0
+                        ? "has-text-weight-semibold"
+                        : "has-text-weight-light"
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(
+                          _vm._f("numeral")(
+                            this.last_day_data[0] &&
+                              this.last_day_data[0].avg_fuel_consumption,
+                            "0,0.00"
+                          )
+                        ) +
+                        " Lts.\n                        "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "column is-12" }, [
+                !_vm.isEditMode
+                  ? _c(
+                      "button",
+                      {
+                        staticClass:
+                          "button is-link is-outlined is-small is-pulled-right",
+                        on: {
+                          click: function($event) {
+                            _vm.isGeneratorDetailModalActive = true
+                          }
+                        }
+                      },
+                      [
+                        _c("font-awesome-icon", {
+                          attrs: { icon: ["far", "clipboard"] }
+                        }),
+                        _vm._v(
+                          "\n                               Detalles\n                        "
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.isEditMode
+                  ? _c(
+                      "button",
+                      {
+                        staticClass:
+                          "button is-link is-outlined is-small is-pulled-right",
+                        on: {
+                          click: function($event) {
+                            _vm.isGeneratorMaintenancesModalActive = true
+                          }
+                        }
+                      },
+                      [
+                        _c("font-awesome-icon", { attrs: { icon: "bars" } }),
+                        _vm._v(
+                          "\n                               Mantenciones\n                        "
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              ])
+            ])
+          ])
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "box" }, [
@@ -685,7 +1063,7 @@ var render = function() {
                   _c(
                     "div",
                     { staticClass: "has-text-weight-semibold is-size-5" },
-                    [_vm._v(_vm._s(_vm.currentGeneratorSetType))]
+                    [_vm._v(_vm._s(_vm.currentGeneratorSetBrand))]
                   ),
                   _vm._v(" "),
                   _c(
@@ -714,23 +1092,23 @@ var render = function() {
                       {
                         attrs: { placeholder: "Selecciona..." },
                         model: {
-                          value: _vm.generator_set_type_id,
+                          value: _vm.generator_set_model_id,
                           callback: function($$v) {
-                            _vm.generator_set_type_id = $$v
+                            _vm.generator_set_model_id = $$v
                           },
-                          expression: "generator_set_type_id"
+                          expression: "generator_set_model_id"
                         }
                       },
-                      _vm._l(_vm.generatorSetTypes, function(option) {
+                      _vm._l(_vm.generatorSetModels, function(option) {
                         return _c(
                           "option",
                           { key: option.id, domProps: { value: option.id } },
                           [
                             _vm._v(
                               "\n                            " +
-                                _vm._s(option.type) +
+                                _vm._s(option.generator_set_brand.name) +
                                 " - " +
-                                _vm._s(option.model) +
+                                _vm._s(option.name) +
                                 "\n                        "
                             )
                           ]
@@ -755,8 +1133,10 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass: "has-text-weight-semibold is-size-6",
-                class: _vm.generatorSet.serial_number ? "" : "has-text-info"
+                staticClass: "is-size-6",
+                class: _vm.generatorSet.serial_number
+                  ? ""
+                  : "has-text-grey-light has-text-weight-light"
               },
               [
                 _vm._v(
@@ -1135,7 +1515,7 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "div",
-                        { staticClass: "has-text-weight-semibold is-size-6" },
+                        { staticClass: "has-text-weight-semibold is-size-4" },
                         [
                           _vm._v(
                             _vm._s(
@@ -1179,10 +1559,10 @@ var render = function() {
                       _c(
                         "div",
                         {
-                          staticClass: "has-text-weight-semibold is-size-6",
+                          staticClass: "is-size-6",
                           class: _vm.generatorSet.generator_motor_type
                             ? ""
-                            : "has-text-info"
+                            : "has-text-grey-light has-text-weight-light"
                         },
                         [
                           _vm._v(
@@ -1207,10 +1587,10 @@ var render = function() {
                       _c(
                         "div",
                         {
-                          staticClass: "has-text-weight-semibold is-size-6",
+                          staticClass: "is-size-6",
                           class: _vm.generatorSet.generator_motor_type
                             ? ""
-                            : "has-text-info"
+                            : "has-text-grey-light has-text-weight-light"
                         },
                         [
                           _vm._v(
@@ -1250,10 +1630,10 @@ var render = function() {
                       _c(
                         "div",
                         {
-                          staticClass: "has-text-weight-semibold is-size-6",
+                          staticClass: "is-size-6",
                           class: _vm.generatorSet.generator_tank_type
                             ? ""
-                            : "has-text-info"
+                            : "has-text-grey-light has-text-weight-light"
                         },
                         [
                           _vm._v(
@@ -1276,17 +1656,17 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "div",
-                        { staticClass: "has-text-weight-semibold is-size-6" },
+                        { staticClass: "has-text-weight-semibold is-size-4" },
                         [
                           _vm._v(
                             _vm._s(
                               _vm.currentGeneratorTank
                                 ? _vm.currentGeneratorTank.capacity
                                 : "Sin información"
-                            ) + " "
+                            ) + "\n                                        "
                           ),
                           _vm.currentGeneratorTank
-                            ? _c("span", { staticClass: "is-size-7" }, [
+                            ? _c("span", { staticClass: "is-size-6" }, [
                                 _vm._v("Lts")
                               ])
                             : _vm._e()
@@ -1305,25 +1685,25 @@ var render = function() {
                       _c(
                         "div",
                         {
-                          staticClass: "has-text-weight-semibold is-size-6",
+                          staticClass: "is-size-6",
                           class:
                             _vm.currentGeneratorTank &&
                             _vm.currentGeneratorTank.consumption
                               ? ""
-                              : "has-text-info"
+                              : "has-text-grey-light has-text-weight-light"
                         },
                         [
                           _vm._v(
                             "\n                                        " +
                               _vm._s(
-                                _vm.currentGeneratorTank
+                                _vm.currentGeneratorTank.consumption
                                   ? _vm.currentGeneratorTank.consumption
                                   : "Sin información"
                               ) +
                               " \n                                        "
                           ),
-                          _vm.currentGeneratorTank
-                            ? _c("span", { staticClass: "is-size-7" }, [
+                          _vm.currentGeneratorTank.consumption
+                            ? _c("span", { staticClass: "is-size-6" }, [
                                 _vm._v("Lts")
                               ])
                             : _vm._e()
@@ -1458,74 +1838,154 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm.canEditGeneratorSets
-          ? _c(
-              "div",
-              { staticClass: "field has-text-centered" },
-              [
-                _c(
-                  "b-button",
-                  {
-                    attrs: {
-                      type: _vm.isEditMode ? "is-info" : "is-link is-outlined",
-                      size: "is-small"
-                    },
-                    on: {
-                      click: function($event) {
-                        _vm.isEditMode = !_vm.isEditMode
-                        _vm.saveChanges()
-                      }
-                    }
-                  },
-                  [
-                    _c("font-awesome-icon", {
-                      attrs: { icon: ["fas", "edit"] }
-                    }),
-                    _vm._v(
-                      "\n                  " +
-                        _vm._s(
-                          _vm.isEditMode
-                            ? "Modo Edición"
-                            : "Editar parámetros de Grupo"
-                        ) +
-                        "\n            "
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _vm.isEditMode
-                  ? _c(
-                      "b-button",
-                      {
-                        staticClass: "is-pulled-right",
-                        attrs: { type: "is-danger", size: "is-small" },
-                        on: {
-                          click: function($event) {
-                            return _vm.deleteGeneratorSet()
+        _c(
+          "div",
+          {
+            staticClass:
+              "columns has-text-centered has-text-weight-semibold field pt-4"
+          },
+          [
+            _c("div", { staticClass: "column is-4" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "column is-4" }, [
+              _vm.canEditGeneratorSets
+                ? _c(
+                    "div",
+                    [
+                      _c(
+                        "b-button",
+                        {
+                          attrs: {
+                            type: _vm.isEditMode
+                              ? "is-success is-outlined"
+                              : "is-link is-outlined",
+                            size: "is-small"
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.isEditMode = !_vm.isEditMode
+                              _vm.saveChanges()
+                            }
                           }
-                        }
-                      },
-                      [
-                        _c("font-awesome-icon", {
-                          attrs: { icon: ["fas", "trash"] }
-                        }),
-                        _vm._v("\n                   Eliminar\n            ")
-                      ],
-                      1
-                    )
-                  : _vm._e()
-              ],
-              1
-            )
-          : _vm._e()
+                        },
+                        [
+                          _c("font-awesome-icon", {
+                            attrs: { icon: ["fas", "edit"] }
+                          }),
+                          _vm._v(
+                            "\n                           " +
+                              _vm._s(
+                                _vm.isEditMode
+                                  ? "Salir modo edición"
+                                  : "Editar Grupo"
+                              ) +
+                              "\n                    "
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "column is-4" }, [
+              _vm.canEditGeneratorSets
+                ? _c(
+                    "div",
+                    [
+                      _vm.isEditMode
+                        ? _c(
+                            "b-button",
+                            {
+                              staticClass: "is-pulled-right",
+                              attrs: { type: "is-danger", size: "is-small" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteGeneratorSet()
+                                }
+                              }
+                            },
+                            [
+                              _c("font-awesome-icon", {
+                                attrs: { icon: ["fas", "trash"] }
+                              }),
+                              _vm._v(
+                                "\n                           Eliminar\n                    "
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                : _vm._e()
+            ])
+          ]
+        )
       ]),
       _vm._v(" "),
       _c("div", {
         staticClass: "is-divider",
         staticStyle: { "padding-bottom": "0px" }
-      })
-    ]
+      }),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            active: _vm.isGeneratorDetailModalActive,
+            "has-modal-card": "",
+            "full-screen": "",
+            "trap-focus": "",
+            "aria-role": "dialog",
+            "aria-modal": ""
+          },
+          on: {
+            "update:active": function($event) {
+              _vm.isGeneratorDetailModalActive = $event
+            }
+          }
+        },
+        [
+          _c("generator-detail", {
+            attrs: {
+              generator: _vm.generatorSet,
+              last_day_data: _vm.last_day_data[0]
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            active: _vm.isGeneratorMaintenancesModalActive,
+            "has-modal-card": "",
+            width: "1200",
+            "trap-focus": "",
+            "aria-role": "dialog",
+            "aria-modal": ""
+          },
+          on: {
+            "update:active": function($event) {
+              _vm.isGeneratorMaintenancesModalActive = $event
+            }
+          }
+        },
+        [
+          _c("generator-maintenances", {
+            attrs: { generator: _vm.generatorSet }
+          })
+        ],
+        1
+      )
+    ],
+    1
   )
 }
 var staticRenderFns = []

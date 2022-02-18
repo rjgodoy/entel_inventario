@@ -71,7 +71,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
       return this.room.layout ? this.room.layout.file_path : this.pop.layout && this.pop.layout.file_path;
     },
     showLayout: function showLayout() {
-      if (this.pop.layout && this.pop.layout.iframe) {
+      if (this.pop.layouts && this.pop.layouts.iframe) {
         return true;
       }
 
@@ -136,7 +136,7 @@ var render = function() {
                     staticStyle: { width: "100%" },
                     attrs: {
                       height: "610",
-                      src: this.pop.layout && this.pop.layout.iframe,
+                      src: this.pop.layouts && this.pop.layouts.iframe,
                       frameborder: "0",
                       allowfullscreen: "",
                       allow: "xr-spatial-tracking"

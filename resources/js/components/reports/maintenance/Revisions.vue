@@ -4,22 +4,22 @@
 
             <div class="columns">
                 <div class="column tile is-parent" v-for="crm in crms" :key="crm.id" @click="currentCrm = currentCrm === crm.id ? 0 : crm.id">
-                    <div class="tile is-child box has-text-centered p-1" :class="currentCrm === crm.id && 'is-bold is-link'">
+                    <div class="tile is-child box has-text-centered p-2" :class="currentCrm === crm.id && 'is-bold is-link'">
                         <div v-text="crm.sigla_crm" class="is-size-4 has-text-weight-semibold"></div>
                         <div style="padding-top: 5px;">
                             <div class="is-size-7 has-text-weight-normal">
                                 {{ crm.nombre_crm }}
                             </div>
                         </div>
-                        <div class="">
-                            <CrmStatus :crm=crm />
-                        </div>
+                        <!-- <div class=""> -->
+                            <!-- <CrmStatus :crm=crm /> -->
+                        <!-- </div> -->
                     </div>
                 </div>
             </div>
 
             <div class="box">
-                <div class="columns">
+                <div class="columns is-vcentered">
                     <div class="column">
                         <div class="control has-icons-left has-icons-right">
                             <input 
@@ -38,6 +38,25 @@
                             </span>
                         </div>
                     </div>
+
+                    <div class="column is-2">
+                        <b-field class="has-text-weight-semibold">
+                            <b-checkbox-button v-model="checkboxGroup"
+                                @input="getEnergyEquipmentRevisionsData()"
+                                native-value="0"
+                                type="is-success">
+                                <span>Mensual</span>
+                            </b-checkbox-button>
+
+                            <b-checkbox-button v-model="checkboxGroup"
+                                @input="getEnergyEquipmentRevisionsData()"
+                                native-value="1"
+                                type="is-link">
+                                <span>Semanal</span>
+                            </b-checkbox-button>
+                        </b-field>
+                    </div>
+
                     <div class="column is-3">
                         <div class="control has-icons-left has-icons-right">
                             <b-datepicker
@@ -88,7 +107,7 @@
                                 <td class="">
                                     <div class="is-size-6 has-text-weight-semibold">
                                         <b-tooltip :label="data.weekly_review ? 'Revisión Semanal' : 'Revisión Mensual'" position="is-left" :type="data.weekly_review ? 'is-link' : 'is-success'">
-                                            <b-tag :type="data.weekly_review ? 'is-link' : 'is-success'">{{ data.weekly_review ? "W" : "M" }}</b-tag>
+                                            <b-tag :type="data.weekly_review ? 'is-link' : 'is-success'">{{ data.weekly_review ? "S" : "M" }}</b-tag>
                                         </b-tooltip>
                                     </div>
                                 </td>
@@ -102,7 +121,7 @@
                                 <td class="">
                                     <div class="is-size-6 has-text-weight-normal">{{ data.date }}</div>
                                 </td>
-                                <td class="">
+                                <!-- <td class="">
                                     <div class="is-size-6 has-text-weight-normal">
                                         <font-awesome-icon 
                                             icon="circle"
@@ -110,7 +129,7 @@
                                             :class="'has-text-' + status(data)"
                                             />
                                     </div>
-                                </td>
+                                </td> -->
                                 <td class="">
                                     <div class="is-size-6 has-text-weight-normal">{{ data.revisor }}</div>
                                 </td>
@@ -163,7 +182,7 @@ var moment = require('moment')
 
 export default {
     components: {
-        CrmStatus: () => import(/* webpackChunkName: "chunks/reports/maintenance/crmStatus"*/'./CrmStatus'),
+        // CrmStatus: () => import(/* webpackChunkName: "chunks/reports/maintenance/crmStatus"*/'./CrmStatus'),
         ModalDetail: () => import(/* webpackChunkName: "chunks/reports/mintenance/modalDetail"*/'./modals/ModalDetail'),
         VuePagination: () => import(/* webpackChunkName: "chunks/helpers/vuePagination"*/'../../helpers/VuePagination'),
     },
@@ -192,7 +211,7 @@ export default {
                 { 'name': 'Revisión'},
                 { 'name': 'POP', 'width': 25 }, 
                 { 'name': 'Fecha' },
-                { 'name': 'Status' },
+                // { 'name': 'Status' },
                 { 'name': 'Empresa' },
                 { 'name': 'Reisor' },
                 { }
@@ -202,12 +221,9 @@ export default {
             isDetailModalActive: false,
             isbuttonLoading: false,
 
-            primaryText: '',
+            checkboxGroup: ["0","1"],
 
-            CLIENT_ID: '109797837306016330637',
-            API_KEY: '3d298f5a0e3117f9de11ee1bd1a2eb5391e41b08',
-            DISCOVERY_DOCS: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
-            SCOPES: "https://www.googleapis.com/auth/spreadsheets.readonly",
+            primaryText: ''
         }
     },
 
@@ -223,33 +239,9 @@ export default {
     mounted() {
         this.getCrms()
         this.getEnergyEquipmentRevisionsData()
-        // this.getFormResponses()
-        this.handleClientLoad()
     },
     
     methods: {
-        handleClientLoad() {
-            gapi.load('client:auth2', this.initClient());
-        },
-
-        initClient() {
-            gapi.client.init({
-                apiKey: this.API_KEY,
-                clientId: this.CLIENT_ID,
-                discoveryDocs: this.DISCOVERY_DOCS,
-                scope: this.SCOPES
-            }).then(function () {
-                // Listen for sign-in state changes.
-                // gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-
-                // Handle the initial sign-in state.
-                // updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-                // authorizeButton.onclick = handleAuthClick;
-                // signoutButton.onclick = handleSignoutClick;
-            }, function(error) {
-                appendPre(JSON.stringify(error, null, 2));
-            });
-        },
 
         getCrms() {
             axios.get(`/api/crms`)
@@ -258,138 +250,59 @@ export default {
             })
         },
 
-        status(revision) {
-            let q = 0
-            let nulls = 0
-            Object.keys(revision.statuses).forEach(element => {
-                if (revision.statuses[element].status == null) {
-                    nulls = nulls + 1
-                }
-                q = q + revision.statuses[element].status
-            })
-            let statusIcon = q + nulls == revision.statuses.length ? 'success' : 'warning'
-            return statusIcon
-        },
+        // status(revision) {
+        //     let q = 0
+        //     let nulls = 0
+        //     Object.keys(revision.statuses).forEach(element => {
+        //         if (revision.statuses[element].status == null) {
+        //             nulls = nulls + 1
+        //         }
+        //         q = q + revision.statuses[element].status
+        //     })
+        //     let statusIcon = q + nulls == revision.statuses.length ? 'success' : 'warning'
+        //     return statusIcon
+        // },
 
         getEnergyEquipmentRevisionsData() {
-            var params = {
+            var weekly = null
+            if (this.checkboxGroup.includes("0") && !this.checkboxGroup.includes("1")) {
+                weekly = 0
+            } else if (!this.checkboxGroup.includes("0") && this.checkboxGroup.includes("1")) {
+                weekly = 1
+            }
+
+            const params = {
                 'page': this.revisionsData.meta.current_page,
                 'crm_id': this.currentCrm,
                 'text': this.searchText != '' ?  this.searchText : 0,
                 'start_date': this.dates.length && new Date(this.dates[0]),
-                'end_date': this.dates.length && new Date(this.dates[1])
+                'end_date': this.dates.length && new Date(this.dates[1]),
+                'weekly_review': weekly
             }
             axios.get('/api/energyEquipmentRevisions', { params: params })
             .then((response) => {
-                console.log(response)
+                // console.log(response)
                 this.revisionsData = response.data
                 // console.log(this.revisionsData.length)
             })
         },
 
-        // async getFormResponses() {
-        //     // gapi.getGapiClient().then((gapi) => {
-        //     //     let google_url = 'https://docs.google.com/spreadsheets/d/1q_sZOLtDhHkb7iCQPORfHh2vmP9jV-vOM1DrdwebUGQ/edit?usp=sharing'
-        //     //     gapi.sheets.spreadsheet.get(google_url)
-        //     //     .then(response => {
-        //     //         console.log(response.data)
-        //     //     })
-        //     // })
-        //     // let google_url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTfSUx2kGqO14cDWvAIWaRifz8mJVWjaGg1X3DInSQiprxCrkRRVvJmKm__HqEUe4mdIUgw-cnJR0Z8/pub?output=csv'
-        //     let google_url = 'https://docs.google.com/spreadsheets/d/1q_sZOLtDhHkb7iCQPORfHh2vmP9jV-vOM1DrdwebUGQ/edit?usp=sharing'
-        //     // let data = Array
-        //     axios.get(google_url)
-        //     .then((response) => {
-        //         console.log(response)
-        //         // data = this.CSVToArray(response.data, ",")
-        //         // if (data.length - 1 != this.revisionsData.length) {
-        //         //     this.insertRevisions(data)
-        //         // }
-        //     })
-        // },
-
-        insertRevisions(data) {
-            let params = data
-            axios.post('/api/energyEquipmentRevisions', { params: params })
-            .then(response => {
-                // console.log(response.data)
-            })
-        },
-
-        // CSVToArray( strData, strDelimiter ){
-        //     // Check to see if the delimiter is defined. If not,
-        //     // then default to comma.
-        //     strDelimiter = (strDelimiter || ",");
-
-        //     // Create a regular expression to parse the CSV values.
-        //     var objPattern = new RegExp(
-        //         (
-        //             // Delimiters.
-        //             "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
-
-        //             // Quoted fields.
-        //             "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
-
-        //             // Standard fields.
-        //             "([^\"\\" + strDelimiter + "\\r\\n]*))"
-        //         ),
-        //         "gi"
-        //         );
-        //     // Create an array to hold our data. Give the array
-        //     // a default empty first row.
-        //     var arrData = [[]];
-        //     // Create an array to hold our individual pattern
-        //     // matching groups.
-        //     var arrMatches = null;
-        //     // Keep looping over the regular expression matches
-        //     // until we can no longer find a match.
-        //     while (arrMatches = objPattern.exec( strData )){
-        //         // Get the delimiter that was found.
-        //         var strMatchedDelimiter = arrMatches[ 1 ];
-
-        //         // Check to see if the given delimiter has a length
-        //         // (is not the start of string) and if it matches
-        //         // field delimiter. If id does not, then we know
-        //         // that this delimiter is a row delimiter.
-        //         if (
-        //             strMatchedDelimiter.length &&
-        //             strMatchedDelimiter !== strDelimiter
-        //             ){
-        //             // Since we have reached a new row of data,
-        //             // add an empty row to our data array.
-        //             arrData.push( [] );
-        //         }
-        //         var strMatchedValue;
-        //         // Now that we have our delimiter out of the way,
-        //         // let's check to see which kind of value we
-        //         // captured (quoted or unquoted).
-        //         if (arrMatches[ 2 ]){
-        //             // We found a quoted value. When we capture
-        //             // this value, unescape any double quotes.
-        //             strMatchedValue = arrMatches[ 2 ].replace(
-        //                 new RegExp( "\"\"", "g" ),
-        //                 "\""
-        //                 );
-        //         } else {
-        //             // We found a non-quoted value.
-        //             strMatchedValue = arrMatches[ 3 ];
-        //         }
-        //         // Now that we have our value string, let's add
-        //         // it to the data array.
-        //         arrData[ arrData.length - 1 ].push( strMatchedValue );
-        //     }
-        //     // Return the parsed data.
-        //     return( arrData );
-        // },
-
         downloadRevisions() {
             this.isbuttonLoading = true
 
-            var params = {
+            var weekly = null
+            if (this.checkboxGroup.includes("0") && !this.checkboxGroup.includes("1")) {
+                weekly = 0
+            } else if (!this.checkboxGroup.includes("0") && this.checkboxGroup.includes("1")) {
+                weekly = 1
+            }
+
+            const params = {
                 'crm_id': this.currentCrm,
                 'text': this.searchText != '' ?  this.searchText : 0,
                 'start_date': this.dates.length && new Date(this.dates[0]),
-                'end_date': this.dates.length && new Date(this.dates[1])
+                'end_date': this.dates.length && new Date(this.dates[1]),
+                'weekly_review': weekly
             }
 
             axios.get('/api/energyEquipmentRevisionsExport', { 
@@ -397,7 +310,6 @@ export default {
                 responseType: 'arraybuffer' 
             })
             .then((response) => {
-                console.log(response.data)
                 const blob = new Blob([response.data], { type: 'application/xlsx' })
                 // const objectUrl = window.URL.createObjectURL(blob)
 

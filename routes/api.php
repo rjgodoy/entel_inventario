@@ -180,7 +180,7 @@ Route::middleware('auth:api')->group(function () {
 		Route::apiResource('generatorSetTopologyTypes','Api\GeneratorSetTopologyTypeController');
 		Route::apiResource('generatorSetLevelTypes','Api\GeneratorSetLevelTypeController');
 		Route::apiResource('generatorSetResponsableAreas','Api\GeneratorSetResponsableAreaController');
-		Route::apiResource('generatorSetTypes','Api\GeneratorSetTypeController');
+		Route::apiResource('generatorSetModels','Api\GeneratorSetModelController');
 
 	// Power Rectifiers
 		Route::apiResource('planes','Api\PlaneController');

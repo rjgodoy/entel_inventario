@@ -123,4 +123,9 @@ class GeneratorSet extends Model
     {
         return $this->hasMany(GeneratorSetCorpDisponibility::class);
     }
+
+    public function generator_platform() 
+    {
+        return $this->belongsTo(GeneratorsPlatformGenerator::class);
+    }
 }

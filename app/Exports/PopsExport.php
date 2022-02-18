@@ -265,7 +265,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             'ZONA PROTEGIDA',
             'RCA',
             'ZONA ACOPIO TEMPORAL (ZAT)',
-            'TIPO TORRERA',
+            'TIPO TORRERA (ALBA)',
             'AUTONOMIA TEORICA',
 
             'Q CONTRATOS COMSITE',

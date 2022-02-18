@@ -5,30 +5,30 @@
         </td> -->
 
         <td class="has-text-weight-normal has-text-centered is-vcentered">
-            <div>{{ generator.g_zona ? generator.g_zona.zona : '' }}</div>
-            <div class="is-size-7">{{ generator.g_zona ? generator.g_zona.name : '' }}</div>
+            <div>{{ generator.pop.zona ? generator.pop.zona.cod_zona : '' }}</div>
+            <div class="is-size-7">{{ generator.pop.zona ? generator.pop.zona.nombre_zona : '' }}</div>
         </td>
 
         <td class="is-size-6 has-text-weight-normal has-text-centered is-vcentered">{{ generator.sub_zone }}</td>
         
         <td class="has-text-left is-vcentered">
             <router-link :to="'/pop/' + generator.pop_id" target="_blank" class="is-size-6 has-text-weight-semibold">
-                {{ generator.name }}
+                {{ generator.pop.nombre }}
             </router-link>
             <div class="is-size-6 has-text-weight-semibold">
-                {{ generator.mobile_code }}
+                {{ generator.pop ? generator.pop.sites[0].nem_site : '' }}
             </div>
         </td>
 
         <td class="is-size-6 has-text-weight-normal has-text-centered is-vcentered">
             <div class="">
-                {{ generator.g_model && generator.g_model.g_brand ? generator.g_model.g_brand.name : 'N/A' }}
+                {{ generator.generator_set_model && generator.generator_set_model.generator_set_brand ? generator.generator_set_model.generator_set_brand.name : 'N/A' }}
             </div>
         </td>
 
         <td class="is-size-6 has-text-weight-normal has-text-centered is-vcentered">
             <div class="subtitle is-size-6">
-                {{ generator.g_type ? generator.g_type.name : 'N/A' }}
+                {{ generator.generator_set_model ? generator.generator_set_model.name : 'N/A' }}
             </div>
         </td>
 
@@ -56,8 +56,8 @@
                     {{ fuelLevelPercentage * 100 | numeral('0,0.0') }}%
                 </span>
                 &nbsp;
-                <span v-if="generator.g_model.g_fuel_pond" class="has-text-weight-bold has-text-dark">
-                    {{ fuelLevel + '/' + generator.g_model.g_fuel_pond.capacity }}
+                <span v-if="generator.generator_platform.g_model.g_fuel_pond" class="has-text-weight-bold has-text-dark">
+                    {{ fuelLevel + '/' + generator.generator_platform.g_model.g_fuel_pond.capacity }}
                 </span>
             </b-progress>
         </td>
@@ -70,11 +70,11 @@
 
         <td class="has-text-weight-normal has-text-left is-vcentered">
             <div class="is-size-6">
-                {{ generator.g_last_maintance ? generator.g_last_maintance.created : 'N/A' }}
+                {{ generator.generator_platform.g_last_maintance ? generator.generator_platform.g_last_maintance.created : 'N/A' }}
             </div>
-            <div class="is-size-7" v-if="generator.g_last_maintance">
+            <div class="is-size-7" v-if="generator.generator_platform.g_last_maintance">
                 <span class="">
-                    Estado: <span class="has-text-weight-semibold" :class="generator.g_last_maintance && generator.g_last_maintance.g_maintance_status.code == 'Closed' ? '' : 'has-text-info'">{{ generator.g_last_maintance ? generator.g_last_maintance.g_maintance_status.code : 'N/A' }}</span>
+                    Estado: <span class="has-text-weight-semibold" :class="generator.generator_platform.g_last_maintance && generator.generator_platform.g_last_maintance.g_maintance_status.code == 'Closed' ? '' : 'has-text-info'">{{ generator.generator_platform.g_last_maintance ? generator.generator_platform.g_last_maintance.g_maintance_status.code : 'N/A' }}</span>
                 </span>
             </div>
         </td>

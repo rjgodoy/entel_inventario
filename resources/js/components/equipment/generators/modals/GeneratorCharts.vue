@@ -48,7 +48,7 @@
 
 
 <script>
-var moment = require('moment')
+var moment = require('moment');
 
 export default {
     components: {
@@ -74,6 +74,10 @@ export default {
     },
 
     watch: {
+        generator(val) {
+            this.getData()
+        },
+
         timeline(value) {
             this.getData()
         }

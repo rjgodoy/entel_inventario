@@ -79,8 +79,8 @@
                             {{ props.row.fuel_level_percentage * 100 | numeral('0,0.00') }}%
                         </span>
                         &nbsp;
-                        <span v-if="generator.g_model.g_fuel_pond" class="has-text-weight-bold has-text-dark">
-                            {{ Math.round(generator.g_model.g_fuel_pond.capacity * props.row.fuel_level_percentage, 2) + '/' + generator.g_model.g_fuel_pond.capacity }}
+                        <span v-if="generator.generator_platform.g_model.g_fuel_pond" class="has-text-weight-bold has-text-dark">
+                            {{ Math.round(generator.generator_platform.g_model.g_fuel_pond.capacity * props.row.fuel_level_percentage, 2) + '/' + generator.generator_platform.g_model.g_fuel_pond.capacity }}
                         </span>
                     </b-progress>
                 </template>
@@ -146,8 +146,8 @@
                             {{ props.row.fuel_consumption_percentage * 100 | numeral('0,0.00') }}%
                         </span>
                         &nbsp;
-                        <span v-if="generator.g_model.g_fuel_pond" class="has-text-weight-bold has-text-dark">
-                            {{ props.row.average_daily_consumption + '/' + generator.g_model.g_fuel_pond.capacity }}
+                        <span v-if="generator.generator_platform.g_model.g_fuel_pond" class="has-text-weight-bold has-text-dark">
+                            {{ props.row.average_daily_consumption + '/' + generator.generator_platform.g_model.g_fuel_pond.capacity }}
                         </span>
                     </b-progress>
                 </template>
@@ -234,7 +234,7 @@
         methods: {
             getData() {
                 this.isLoading = true
-                axios.get(`/api/getStatistics/${this.generator.id}`)
+                axios.get(`/api/getStatistics/${this.generator.generator_platform.id}`)
                 .then(response => {
                     this.statistics = response.data
                     console.log(response.data)

@@ -2,16 +2,16 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class GeneratorSetTypeCollection extends ResourceCollection
+class GeneratorSetModel extends JsonResource
 {
     /**
      * The "data" wrapper that should be applied.
      *
      * @var string
      */
-    public static $wrap = 'generatorSetTypes';
+    public static $wrap = 'generatorSetModel';
 
     /**
      * Indicates if the resource's collection keys should be preserved.
@@ -21,7 +21,7 @@ class GeneratorSetTypeCollection extends ResourceCollection
     public $preserveKeys = true;
 
     /**
-     * Transform the resource collection into an array.
+     * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array

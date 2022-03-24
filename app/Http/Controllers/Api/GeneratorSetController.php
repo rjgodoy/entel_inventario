@@ -424,7 +424,9 @@ class GeneratorSetController extends Controller
      */
     public function export(Request $request)
     {
-        return (new GeneratorSetsExport($request))->download('grupos_electrógenos.xlsx');
+        $response = (new GeneratorSetsExport($request))->download('grupos_electrógenos.xlsx');
+        ob_end_clean();
+        return $response;
     }
 
     /**
@@ -790,7 +792,9 @@ class GeneratorSetController extends Controller
      */
     public function gpDataExport(Request $request)
     {
-        return (new GeneratorsPlatformDataExport($request))->download('plataforma_generadores.xlsx');
+        $response = (new GeneratorsPlatformDataExport($request))->download('plataforma_generadores.xlsx');
+        ob_end_clean();
+        return $response;
     }
 
     /**
@@ -801,7 +805,9 @@ class GeneratorSetController extends Controller
      */
     public function gpInventoryExport(Request $request)
     {
-        return (new GeneratorsPlatformInventoryExport($request))->download('plataforma_data_generadores.xlsx');
+        $response = (new GeneratorsPlatformInventoryExport($request))->download('plataforma_data_generadores.xlsx');
+        ob_end_clean();
+        return $response;
     }
 
     /**

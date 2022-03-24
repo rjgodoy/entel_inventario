@@ -269,7 +269,9 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             'AUTONOMIA TEORICA',
 
             'Q CONTRATOS COMSITE',
-            'Nº CONTRATOS'
+            'Nº CONTRATOS',
+
+            'DEPENDENCIAS'
         ];
     }
 
@@ -333,7 +335,9 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             $pop->theoretical_autonomy,
 
             $pop->comsites->count(),
-            $id_comsites
+            $id_comsites,
+
+            $pop->dependences
 
         ];
     }

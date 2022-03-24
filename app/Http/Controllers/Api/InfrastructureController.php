@@ -202,6 +202,8 @@ class InfrastructureController extends Controller
      */
     public function export(Request $request)
     {
-        return (new InfrastructuresExport($request))->download('infraestructuras.xlsx');
+        $response = (new InfrastructuresExport($request))->download('infraestructuras.xlsx');
+        ob_end_clean();
+        return $response;
     }
 }

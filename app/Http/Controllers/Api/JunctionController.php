@@ -395,6 +395,8 @@ class JunctionController extends Controller
      */
     public function export(Request $request)
     {
-        return (new JunctionsExport($request))->download('empalmes.xlsx');
+        $response = (new JunctionsExport($request))->download('empalmes.xlsx');
+        ob_end_clean();
+        return $response;
     }
 }

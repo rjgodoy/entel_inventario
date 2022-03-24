@@ -252,6 +252,8 @@ class AirConditionerController extends Controller
      */
     public function export(Request $request)
     {
-        return (new AirConditionersExport($request))->download('aires_acondicionados.xlsx');
+        $response = (new AirConditionersExport($request))->download('aires_acondicionados.xlsx');
+        ob_end_clean();
+        return $response;
     }
 }

@@ -205,6 +205,8 @@ class EnergyEquipmentRevisionController extends Controller
      */
     public function export(Request $request)
     {
-        return (new EnergyEquipmentRevisionsExport($request))->download('revisions.xlsx');
+        $response = (new EnergyEquipmentRevisionsExport($request))->download('revisions.xlsx');
+        ob_end_clean();
+        return $response;
     }
 }

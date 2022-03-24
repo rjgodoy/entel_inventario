@@ -313,9 +313,29 @@ class Pop extends Model
      *
      * @var array
      */
+    public function air_conditioners() 
+    {
+        return $this->hasMany(AirConditioner::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     public function vertical_structures() 
     {
         return $this->hasMany(VerticalStructure::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function infrastructures() 
+    {
+        return $this->hasMany(Infrastructure::class);
     }
 
     /**

@@ -18,9 +18,13 @@ export default {
         }
     },
     mounted() {
+
     },
 
     watch: {
+        layouts(val){
+
+        }
     },
 
     computed: {

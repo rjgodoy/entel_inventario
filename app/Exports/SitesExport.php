@@ -278,13 +278,16 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             'TEC LTE 1900',
             'TEC LTE 2600',
             'TEC LTE 3500',
+            'TEC LTE 5800',
 
             'ESTADO',
 
             'AUTONOMIA TEORICA',
             'TIPO TORRERA (ALBA)',
             'Q CONTRATOS COMSITE',
-            'Nº CONTRATOS'
+            'Nº CONTRATOS',
+
+            'DEPENDENCIAS'
         ];
     }
 
@@ -301,6 +304,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         $tech_4g1900 = null;
         $tech_4g2600 = null;
         $tech_4g3500 = null;
+        $tech_5g5800 = null;
 
         foreach ($site->technologies as $technology) {
             if($technology->technology_type_id == 1 && $technology->frequency == 1900) {
@@ -318,6 +322,8 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             } elseif($technology->technology_type_id == 3 && $technology->frequency == 3500) {
                 $tech_4g3500 = $technology->nem_tech;
                 $bafi = 1;
+            } elseif($technology->technology_type_id == 3 && $technology->frequency == 5800) {
+                $tech_5g5800 = $technology->nem_tech;
             }
         }
 
@@ -370,13 +376,16 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             $tech_4g1900,
             $tech_4g2600,
             $tech_4g3500,
+            $tech_5g5800,
 
             $site->state->state,
 
             $site->pop->theoretical_autonomy,
             $site->pop->turret_type ? $site->pop->turret_type->type : '',
             $site->pop->comsites->count(),
-            $id_comsites
+            $id_comsites,
+
+            $site->pop->dependences
 
   		];
   	}
@@ -495,7 +504,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'AE1:AK1',
+            'AE1:AL1',
             [
                 'font' => [
                     'size' => 11,
@@ -519,7 +528,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'AL1',
+            'AM1',
             [
                 'font' => [
                     'size' => 11,
@@ -543,7 +552,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'AM1:AP1',
+            'AN1:AQ1',
             [
                 'font' => [
                     'size' => 11,

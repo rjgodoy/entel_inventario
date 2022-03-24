@@ -234,4 +234,28 @@ trait AuthenticatesUsers
     {
         return Auth::guard();
     }
+
+    /**
+     * Handle a login request to the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function loginapp(Request $request)
+    {
+        $this->validateLogin($request);
+
+        if ($this->attemptLogin($request)) {
+            $user = $this->guard()->user();
+            $user->generateToken();
+
+            return response()->json([
+                'user' => $user->toArray(),
+            ]);
+        }
+
+        return $this->sendFailedLoginResponse($request);
+    }
 }

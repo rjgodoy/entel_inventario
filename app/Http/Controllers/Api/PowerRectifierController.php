@@ -405,7 +405,9 @@ class PowerRectifierController extends Controller
      */
     public function export(Request $request)
     {
-        return (new PowerRectifiersExport($request))->download('power_rectifiers.xlsx');
+        $response = (new PowerRectifiersExport($request))->download('power_rectifiers.xlsx');
+        ob_end_clean();
+        return $response;
     }
 
     /**

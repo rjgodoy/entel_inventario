@@ -202,6 +202,8 @@ class VerticalStructureController extends Controller
      */
     public function export(Request $request)
     {
-        return (new VerticalStructuresExport($request))->download('estructuras_verticales.xlsx');
+        $response = (new VerticalStructuresExport($request))->download('estructuras_verticales.xlsx');
+        ob_end_clean();
+        return $response;
     }
 }

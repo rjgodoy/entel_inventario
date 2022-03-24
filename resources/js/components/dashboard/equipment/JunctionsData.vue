@@ -150,7 +150,7 @@
                     const data = window.URL.createObjectURL(blob)
                     let link = document.createElement('a')
                     link.href = data
-                    link.download = `Listado Lineas Eléctricas - ${this.middleFileName}${moment().format('YYYY-MM-DD hh:mm:ss')}.xlsx`
+                    link.download = `Listado Empalmes - ${this.middleFileName}${moment().format('YYYY-MM-DD hh:mm:ss')}.xlsx`
                     link.click()
                     // setTimeout(function () {
                     //     // For Firefox it is necessary to delay revoking the ObjectURL

@@ -217,6 +217,8 @@ class ElectricLineController extends Controller
      */
     public function export(Request $request)
     {
-        return (new ElectricLinesExport($request))->download('electric_lines.xlsx');
+        $response = (new ElectricLinesExport($request))->download('electric_lines.xlsx');
+        ob_end_clean();
+        return $response;
     }
 }

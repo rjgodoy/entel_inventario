@@ -18,13 +18,10 @@ export default {
         }
     },
     mounted() {
-
+        console.log(this.layouts)
     },
 
     watch: {
-        layouts(val){
-
-        }
     },
 
     computed: {

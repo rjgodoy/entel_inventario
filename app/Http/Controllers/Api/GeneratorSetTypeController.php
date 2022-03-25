@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\GeneratorSetModel as GeneratorSetBrandResource;
-use App\Http\Resources\GeneratorSetModelCollection;
-use App\Models\GeneratorSetModel;
+use App\Http\Resources\GeneratorSetType as GeneratorSetTypeResource;
+use App\Http\Resources\GeneratorSetTypeCollection;
+use App\Models\GeneratorSetType;
 use Illuminate\Http\Request;
 
-class GeneratorSetModelController extends Controller
+class GeneratorSetTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,7 @@ class GeneratorSetModelController extends Controller
      */
     public function index()
     {
-        return new GeneratorSetModelCollection(GeneratorSetModel::with(['generator_set_brand' => function ($q) {
-            $q->orderBy('name', 'DESC');
-        }])->get());
+        return new GeneratorSetTypeCollection(GeneratorSetType::orderBy('type')->orderBy('model')->get());
     }
 
     /**

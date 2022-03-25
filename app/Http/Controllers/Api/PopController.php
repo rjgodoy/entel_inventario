@@ -881,8 +881,8 @@ class PopController extends Controller
     public function export(Request $request)
     {
         $response = (new AllInfoPopsExport($request))->download('pops.xlsx');
-	    ob_end_clean();
-	    return $response;
+	   ob_end_clean();
+	   return $response;
     }
 
     /**

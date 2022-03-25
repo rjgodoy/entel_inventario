@@ -8,7 +8,7 @@ use App\Http\Resources\GeneratorSetModelCollection;
 use App\Models\GeneratorSetModel;
 use Illuminate\Http\Request;
 
-class GeneratorSetModelController extends Controller
+class GeneratorSetBrandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,7 @@ class GeneratorSetModelController extends Controller
      */
     public function index()
     {
-        return new GeneratorSetModelCollection(GeneratorSetModel::with(['generator_set_brand' => function ($q) {
-            $q->orderBy('name', 'DESC');
-        }])->get());
+        return new GeneratorSetModelCollection(GeneratorSetModel::with('generator_set_brand')->orderBy('name')->orderBy('name')->get());
     }
 
     /**

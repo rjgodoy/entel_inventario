@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 
 Route::get('all_pops_ios', 'Api\PopController@alliOS');
 Route::get('all_pops_android', 'Api\PopController@allAndroid');
+Route::get('pop_info_ios', 'Api\PopController@popInfoIos');
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'AuthController@login');
@@ -48,7 +49,9 @@ Route::middleware('auth:api')->group(function () {
    
     Route::get('getFoldersSgcPop','Api\SgcFilesController@getFoldersSgcPop');
     Route::get('filesSgcTicketPop','Api\SgcFilesController@getFilesSgcTicketPop');
-    
+    Route::get('getFoldersOfficeTrackPopZone','Api\SgcFilesController@getFoldersOfficeTrackPopZone');
+
+
 
     ######################################################
 
@@ -194,7 +197,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('gpDataExport', 'Api\GeneratorSetController@gpDataExport');
     Route::get('gpInventoryExport', 'Api\GeneratorSetController@gpInventoryExport');
 
-    Route::get('doPing', 'GeneratorSetController@doPing');
+    Route::get('doPing', 'Api\GeneratorSetController@doPing');
     Route::apiResource('telecomCompanies', 'Api\TelecomCompanyController');
     Route::apiResource('generatorSetTopologyTypes', 'Api\GeneratorSetTopologyTypeController');
     Route::apiResource('generatorSetLevelTypes', 'Api\GeneratorSetLevelTypeController');

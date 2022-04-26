@@ -257,6 +257,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             'PRIORIDAD ATENCION',
             'CATEGORIA PLANIFICACION',
             'TIPO ATENCION TERRENO',
+            'VIP',
 
 	        'PE 3G',
 	        'MPLS',
@@ -356,6 +357,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             $site->attention_priority_type->attention_priority_type,
             $site->category_type ? $site->category_type->category_type : null,
             $site->attention_type->attention_type,
+            $site->pop->vip ? 'SI' : 'NO',
 
             $site->pop->pe_3g ? 'SI' : 'NO',
             $site->pop->mpls ? 'SI' : 'NO',
@@ -456,7 +458,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'P1:S1',
+            'P1:T1',
             [
                 'font' => [
                     'size' => 11,
@@ -480,7 +482,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'T1:AD1',
+            'U1:AE1',
             [
                 'font' => [
                     'size' => 11,
@@ -504,7 +506,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'AE1:AL1',
+            'AF1:AM1',
             [
                 'font' => [
                     'size' => 11,
@@ -528,7 +530,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'AM1',
+            'AN1',
             [
                 'font' => [
                     'size' => 11,
@@ -552,7 +554,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'AN1:AQ1',
+            'AO1:AR1',
             [
                 'font' => [
                     'size' => 11,

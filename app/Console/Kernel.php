@@ -69,6 +69,8 @@ class Kernel extends ConsoleKernel
             ->timezone('America/Santiago')
             ->at('07:00')
             ->emailOutputOnFailure('proyectosinfraestructura@entel.cl');
+        $schedule->command('telescope:prune')
+            ->daily();
         
     }
 

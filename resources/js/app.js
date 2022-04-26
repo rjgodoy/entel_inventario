@@ -6,6 +6,23 @@ import routes from './routes';
 import gmapsInit from './constants/gmaps'
 Vue.use(VueRouter);
 
+// ########################## Passport Components ##############################
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue').default
+);
+ 
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue').default
+);
+ 
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue').default
+);
+// #########################################################################
+
 // ########################## Axios Libraries ##############################
 import axios from 'axios';
 window.axios = axios;
@@ -32,8 +49,8 @@ Vue.use(AnimateCSS);
 
 
 // ############################ Moment Libraries ###########################
-import moment from 'moment'
-Vue.use(moment);
+// import moment from 'moment'
+// Vue.use(moment);
 // #########################################################################
 
 // ########################## FontAwesome Libraries ########################

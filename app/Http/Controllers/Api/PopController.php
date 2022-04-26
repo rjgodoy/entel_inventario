@@ -52,123 +52,21 @@ class PopController extends Controller
         $user = User::where('api_token', $request->api_token)->get();
 
         if ($user) {
-            ini_set('max_execution_time', 600);
-            $pops = Pop::has('sites')
+
+            $pops = Pop::with('sites.state', 'sites.technologies.state', 'sites.technologies.technology_type', 'zona.crm', 'comuna', 'sites.classification_type', 'sites.attention_priority_type', 'sites.attention_type', 'autonomies', 'junctions.electric_company')
+            // ->select('id', 'nombre', 'direccion', 'latitude', 'longitude', 'core')
+            ->whereHas('sites', function($q) { 
+                $q->withoutTrashed();
+            })
+            // ->whereHas('junctions', function($q) { 
+            //     $q->withoutTrashed();
+            // })
+            // ->withoutTrashed()
             ->orderBy('id')
             // ->limit(100)
             ->get();
 
-            ini_set('max_execution_time', 600);
-            $collection = collect();
-            foreach ($pops as $pop) {
-
-                $sites = [];
-                foreach ($pop->sites as $site) {
-
-                    $technologies = [];
-                    foreach ($site->technologies as $technology) {
-                        array_push($technologies, [
-                            'id' => $technology->id,
-                            'name' => $technology->ran_device_name ? $technology->ran_device_name : "",
-                            'nem' => $technology->nem_tech ? $technology->nem_tech : "",
-                            'frequency' => $technology->frequency ? $technology->frequency : 0,
-                            'type' => $technology->technology_type->type ? $technology->technology_type->type : ""
-                            // 'state' => $technology->state
-                        ]);
-                    }
-
-                    array_push($sites, [
-                        'id' => $site->id,
-                        'name' => $site->nombre,
-                        'nem' => $site->nem_site,
-                        'category' => [
-                            'id' => $site->classification_type->id,
-                            'type' => $site->classification_type->classification_type
-                        ],
-                        'priority' => [
-                            'id' => $site->attention_priority_type->id,
-                            'type' => $site->attention_priority_type->attention_priority_type
-                        ],
-                        'attention' => [
-                            'id' => $site->attention_type->id,
-                            'type' => $site->attention_type->attention_type
-                        ],
-                        'technologies' => $technologies
-                    ]);
-                }
-
-                $junctions = [];
-                foreach ($pop->junctions as $junction) {
-                    array_push($junctions, [
-                        'id' => $junction->id,
-                        'clientNumber' => $junction->client_number
-                    ]);
-                }
-
-                $generators = [];
-                foreach ($pop->generator_sets as $generator) {
-                    array_push($generators, [
-                        'id' => $generator->id
-                    ]);
-                }
-
-                $powerRectifiers = [];
-                foreach ($pop->power_rectifiers as $powerRectifier) {
-                    array_push($powerRectifiers, [
-                        'id' => $powerRectifier->id
-                    ]);
-                }
-
-                $airConditioners = [];
-                foreach ($pop->air_conditioners as $airConditioner) {
-                    array_push($airConditioners, [
-                        'id' => $airConditioner->id
-                    ]);
-                }
-
-                $verticalStructures = [];
-                foreach ($pop->vertical_structures as $verticalStructure) {
-                    array_push($verticalStructures, [
-                        'id' => $verticalStructure->id
-                    ]);
-                }
-
-                $infrastructures = [];
-                foreach ($pop->infrastructures as $infrastructure) {
-                    array_push($infrastructures, [
-                        'id' => $infrastructure->id
-                    ]);
-                }
-
-                $collection->push([
-                    'id' => $pop->id,
-                    'name' => $pop->nombre,
-                    'address' => $pop->direccion ? $pop->direccion : "",
-                    'coordinates' => [
-                        'latitude' => floatval($pop->latitude),
-                        'longitude' => floatval($pop->longitude)
-                    ],
-                    'city' => $pop->comuna->nombre_comuna,
-                    'zone' => [
-                        'name' => $pop->zona->nombre_zona,
-                        'code' => $pop->zona->cod_zona,
-                        'crm' => [
-                            'name' => $pop->zona->crm->nombre_crm,
-                        ],
-                    ],
-                    'sites' => $sites,
-                    'autonomy' => $pop->autonomy ? $pop->autonomy->theoretical : 8,
-                    'junctions' => count($junctions),
-                    'generators' => count($generators),
-                    'powerRectifiers' => count($powerRectifiers),
-                    'airConditioners' => count($airConditioners),
-                    'verticalStructures' => count($verticalStructures),
-                    'infrastructures' => count($infrastructures),
-                    'isFavorite' => false
-                ]);
-            }
-            // Storage::disk('local')->put('pops.json', $collection);
-            return $collection;
+            return $pops;
         }
 
         return 'false';
@@ -186,51 +84,33 @@ class PopController extends Controller
         if ($user) {
             $pops = Pop::has('sites')
             ->orderBy('id')
-            // ->limit(10)
             ->get();
-
-            $collection = collect();
-            foreach ($pops as $pop) {
-                $sites = [];
-                foreach ($pop->sites as $site) {
-                    array_push($sites, [
-                        'id' => $site->id,
-                        'name' => $site->nombre,
-                        'nem' => $site->nem_site,
-                        'category' => [
-                            'id' => $site->classification_type->id,
-                            'type' => $site->classification_type->classification_type
-                        ],
-                        'priority' => [
-                            'id' => $site->attention_priority_type->id,
-                            'type' => $site->attention_priority_type->attention_priority_type
-                        ]
-                    ]);
-                }
-
-                $collection->push([
-                    'id' => $pop->id,
-                    'name' => $pop->nombre,
-                    'address' => $pop->direccion,
-                    'coordinates' => [
-                        'latitude' => floatval($pop->latitude),
-                        'longitude' => floatval($pop->longitude)
-                    ],
-                    'city' => $pop->comuna->nombre_comuna,
-                    'zone' => [
-                        'name' => $pop->zona->nombre_zona,
-                        'code' => $pop->zona->cod_zona,
-                        'crm' => [
-                            'name' => $pop->zona->crm->nombre_crm,
-                        ],
-                    ],
-                    'sites' => $sites,
-                    'isFavorite' => false
-                ]);
-            }
-            Storage::disk('local')->put('pops.json', $collection);
-            return $collection;
+            return $pops;
         }
+        return 'false';
+    }
+
+    /**
+     * Display a listing of the resource for iOS.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function popInfoiOS(Request $request)
+    {
+        $user = User::where('api_token', $request->api_token)->get();
+
+        if ($user) {
+            $pop = Pop::with('sites.state', 'sites.technologies.state', 'sites.technologies.technology_type', 'zona.crm', 'comuna', 'sites.classification_type', 'sites.attention_priority_type', 'sites.attention_type', 'autonomies', 'junctions.electric_company', 'energy_system', 'energy_responsable')
+            // ->select('id', 'nombre', 'direccion', 'latitude', 'longitude', 'core')
+            ->whereHas('sites', function($q) { 
+                $q->withoutTrashed();
+            })
+            ->where('id', $request->pop_id)
+            ->first();
+
+            return $pop;
+        }
+
         return 'false';
     }
 

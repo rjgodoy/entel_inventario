@@ -42,6 +42,7 @@ class DashboardApiController extends Controller
             ->whereHas('sites', function($q) use($condition_core) { 
                 $q->withoutTrashed()->whereRaw($condition_core);
             })
+            ->withoutTrashed()
             ->distinct('pops.id')->count();
 
         $sites = Site::whereRaw($condition_core)

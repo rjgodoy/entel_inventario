@@ -48,6 +48,9 @@ Route::middleware('auth:api')->group(function () {
    
     Route::get('getFoldersSgcPop','Api\SgcFilesController@getFoldersSgcPop');
     Route::get('filesSgcTicketPop','Api\SgcFilesController@getFilesSgcTicketPop');
+    Route::get('getFoldersOfficeTrackPopZone','Api\SgcFilesController@getFoldersOfficeTrackPopZone');
+    
+    
     
 
     ######################################################

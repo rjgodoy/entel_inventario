@@ -100,6 +100,12 @@ class SgcFilesController extends Controller
         return $folders;
     }
 
+    public function getFoldersOfficeTrackPopZone(Request $request)
+    {
+        $folders = FoldersRepositorio::where('zona_id',$request->zona_id)->get(['id', 'nombre', 'created_at']);
+        return $folders;
+    }
+
     /**
      * Update the specified resource in storage.
      *

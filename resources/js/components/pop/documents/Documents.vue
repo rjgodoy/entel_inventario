@@ -1,152 +1,209 @@
 <template>
-
     <section class="">
         <div class="columns">
-            <div class="column has-text-weight-semibold has-text-dark is-size-3 has-text-left">Documentos</div>
-        </div>
+            <div class="column has-text-weight-semibold has-text-dark is-size-3 has-text-left">
+                Documentos
+               
 
+            </div>
+        </div>
         <div class="columns">
             <div class="column">
                 <div class="box">
-                    <b-tabs v-model="activeTab" :multiline="multiline" position="is-centered" @input="setFolderTab()" style="margin-bottom: 0px;">
+                    <b-tabs :multiline="multiline" @input="setFolderTab()" position="is-centered" style="margin-bottom: 0px;" v-model="activeTab">
                         <template v-for="(tab, index) in tabs">
-                            <b-tab-item
-                                v-if="tab.displayed"
-                                :key="index"
-                                :label="tab.label">
+                            <b-tab-item :key="index" :label="tab.label" v-if="tab.displayed">
                             </b-tab-item>
                         </template>
                     </b-tabs>
-
-                    <div class="columns" style="padding-bottom: 20px; padding-left: 24px;">
+                    <div class="columns" style="padding-bottom: 20px; padding-left: 24px;" v-if="!newFolderSelect && !newFolderSelectOffice">
                         <div class="column has-text-left">
-                            <span>
-                                <a v-if="bread" @click="backOne">
-                                    <font-awesome-icon
-                                        :icon="['fas', 'angle-left']"
-                                        class="is-link"
-                                        size="2x"
-                                        style="margin-bottom: -4px;"/>
+                            <span v-if="bread">
+                                <a @click="backOne">
+                                    <font-awesome-icon :icon="['fas', 'angle-left']" class="is-link" size="2x" style="margin-bottom: -4px;">
+                                    </font-awesome-icon>
                                 </a>
-                                <span class="is-size-6" style="margin-bottom: 25px;">&nbsp;{{ bread }}</span>
+                                <span class="is-size-6" style="margin-bottom: 25px;">
+                                    {{ bread }}
+                                </span>
                             </span>
-                            
                         </div>
-
                         <div class="column has-text-right">
                             <span class="" v-if="canUploadFile">
-                                <button class="button" @click="isUploadModalActive = true">Subir archivos</button>
+                                <button @click="isUploadModalActive = true" class="button">
+                                    Subir archivos
+                                </button>
                             </span>
-
                             <span class="" v-if="canUploadFile">
-                                <button class="button" @click="isNewFolderModalActive = true">Nueva Carpeta</button>
+                                <button @click="isNewFolderModalActive = true" class="button">
+                                    Nueva Carpeta
+                                </button>
                             </span>
-
                             <span class="" v-if="canUploadFile">
-                                <button class="button" :class="edit && 'is-danger'" @click="edit = !edit">Editar</button>
+                                <button :class="edit && 'is-danger'" @click="edit = !edit" class="button">
+                                    Editar
+                                </button>
                             </span>
                         </div>
                     </div>
-                    
-
-                    <div class="columns is-multiline" v-if="!edit">
-                        <div class="column is-3 tile is-parent" v-for="folder in folders" :key="folder.id">
-                            <a class="box tile is-child" @click="selected(folder)" style="position: relative;" >
-                                <font-awesome-icon
-                                    :icon="['fas', 'folder-open']"
-                                    class="has-text-smart"
-                                    size="3x"
-                                    style="padding-bottom: 5px;"/>
-                                <div class="is-size-6 has-text-weight-bold">{{ bread != '' ? folder.name : (folder.site && folder.site.nem_site) }}</div>
+                    <div class="columns" style="padding-bottom: 20px; padding-left: 24px;" v-if="foldersSgcTicket.length != 0 || newFolderSelectOffice ">
+                        <span v-if="otherBread ">
+                            <a @click="backFold">
+                                <font-awesome-icon :icon="['fas', 'angle-left']" class="is-link" size="2x" style="margin-bottom: -4px;">
+                                </font-awesome-icon>
                             </a>
-                        </div>
-
-                        <div class="column is-3 tile is-parent" v-for="file in files" :key="file.id">
-                            <a class="box tile is-child" @click="openFile(file); load = file.id" style="position: relative;">
-                                <font-awesome-icon 
-                                    :icon="['fas', faFile(file.extension).icon]"
-                                    :class="faFile(file.extension).type"
-                                    size="3x"
-                                    style="padding-bottom: 5px;"/>
-                                <div class="is-size-7">{{ file.basename }}</div>
-                                <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true" v-if="load == file.id"></b-loading>
-                            </a>
-                        </div>
+                            <span class="is-size-6" style="margin-bottom: 25px;">
+                                {{ otherBread }}
+                            </span>
+                        </span>
                     </div>
-
-                    <div class="columns is-multiline" v-if="edit">
-                        <div class="column is-3 tile is-parent" v-for="folder in folders" :key="folder.id">
-                            <div class="box tile is-child" style="position: relative;">
-                                <a class="is-pulled-right has-text-danger" @click="confirmDeleteFolder(folder)">
-                                    <font-awesome-icon 
-                                        :icon="['far', 'trash-alt']"
-                                        size="2x"
-                                        style="padding-bottom: 5px;"/>
+                    <div v-if="!newFolderSelect && !newFolderSelectOffice">
+                        <div class="columns is-multiline" v-if="!edit ">
+                            <div :key="folder.id" class="column is-3 tile is-parent" v-for="folder in folders">
+                                <a @click="selected(folder)" class="box tile is-child" style="position: relative;">
+                                    <font-awesome-icon :icon="['fas', 'folder-open']" class="has-text-smart" size="3x" style="padding-bottom: 5px;">
+                                    </font-awesome-icon>
+                                    <div class="is-size-6 has-text-weight-bold">
+                                        {{ bread != '' ? folder.name : (folder.site && folder.site.nem_site) }}
+                                    </div>
                                 </a>
-                                <font-awesome-icon
-                                    :icon="['fas', 'folder-open']"
-                                    class="has-text-smart"
-                                    size="3x"
-                                    style="padding-bottom: 5px;"/>
-                                <div class="is-size-6 has-text-weight-bold">{{ bread != '' ? folder.name : (folder.site && folder.site.nem_site) }}</div>
+                            </div>
+                            <div :key="file.id" class="column is-3 tile is-parent" v-for="file in files">
+                                <a @click="openFile(file); load = file.id" class="box tile is-child" style="position: relative;">
+                                    <font-awesome-icon :class="faFile(file.extension).type" :icon="['fas', faFile(file.extension).icon]" size="3x" style="padding-bottom: 5px;">
+                                    </font-awesome-icon>
+                                    <div class="is-size-7">
+                                        {{ file.basename }}
+                                    </div>
+                                    <b-loading :active.sync="isLoading" :can-cancel="true" :is-full-page="false" v-if="load == file.id">
+                                    </b-loading>
+                                </a>
                             </div>
                         </div>
-
-                        <div class="column is-3 tile is-parent" v-for="file in files" :key="file.id">
-                            <div class="box tile is-child" style="position: relative;">
-                                <a class="is-pulled-right has-text-danger" @click="confirmDeleteFile(file)">
-                                    <font-awesome-icon 
-                                        :icon="['far', 'trash-alt']"
-                                        size="1x"
-                                        style="padding-bottom: 5px;"/>
-                                </a>
-                                <a class="is-pulled-right has-text-link" @click="makeDroneFootage(file)" v-if="isVideo(file)">
-                                    <font-awesome-icon 
-                                        :icon="['fas', 'video']"
-                                        size="1x"
-                                        style="padding-bottom: 5px;"/>
-                                </a>
-                                <font-awesome-icon 
-                                    :icon="['fas', faFile(file.extension).icon]"
-                                    :class="faFile(file.extension).type"
-                                    size="3x"
-                                    style="padding-bottom: 5px;"/>
-                                <div class="is-size-7">{{ file.basename }}</div>
-                                <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true" v-if="load == file.id"></b-loading>
+                        <div class="columns is-multiline" v-if="edit">
+                            <div :key="folder.id" class="column is-3 tile is-parent" v-for="folder in folders">
+                                <div class="box tile is-child" style="position: relative;">
+                                    <a @click="confirmDeleteFolder(folder)" class="is-pulled-right has-text-danger">
+                                        <font-awesome-icon :icon="['far', 'trash-alt']" size="2x" style="padding-bottom: 5px;">
+                                        </font-awesome-icon>
+                                    </a>
+                                    <font-awesome-icon :icon="['fas', 'folder-open']" class="has-text-smart" size="3x" style="padding-bottom: 5px;">
+                                    </font-awesome-icon>
+                                    <div class="is-size-6 has-text-weight-bold">
+                                        {{ bread != '' ? folder.name : (folder.site && folder.site.nem_site) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div :key="file.id" class="column is-3 tile is-parent" v-for="file in files">
+                                <div class="box tile is-child" style="position: relative;">
+                                    <a @click="confirmDeleteFile(file)" class="is-pulled-right has-text-danger">
+                                        <font-awesome-icon :icon="['far', 'trash-alt']" size="1x" style="padding-bottom: 5px;">
+                                        </font-awesome-icon>
+                                    </a>
+                                    <a @click="makeDroneFootage(file)" class="is-pulled-right has-text-link" v-if="isVideo(file)">
+                                        <font-awesome-icon :icon="['fas', 'video']" size="1x" style="padding-bottom: 5px;">
+                                        </font-awesome-icon>
+                                    </a>
+                                    <font-awesome-icon :class="faFile(file.extension).type" :icon="['fas', faFile(file.extension).icon]" size="3x" style="padding-bottom: 5px;">
+                                    </font-awesome-icon>
+                                    <div class="is-size-7">
+                                        {{ file.basename }}
+                                    </div>
+                                    <b-loading :active.sync="isLoading" :can-cancel="true" :is-full-page="false" v-if="load == file.id">
+                                    </b-loading>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <!-- SGC - TICKET-->
+                    <div v-if="folderSelectN == 9 || folderSelectN == 10">
+                        <div class="columns is-multiline" ref="element">
+                            <div :key="folder.id" class="column is-3 tile is-parent" v-for="folder in foldersSgcTicket" v-if="!selectFold">
+                                <a @click="selectedFolderSgcTicket(folder.id)" class="box tile is-child" style="position: relative;">
+                                    <font-awesome-icon :icon="['fas', 'folder-open']" class="has-text-smart" size="3x" style="padding-bottom: 5px;">
+                                    </font-awesome-icon>
+                                    <div class="is-size-6 has-text-weight-bold">
+                                        {{ folder.id }}
+                                    </div>
+                                </a>
+                            </div>
+                            <div :key="folder.id" class="column is-3 tile is-parent" v-for="folder in type_files" v-if="selectFold && !selectFoldFiles">
+                                <a @click="selectedFolderSgcTicketFiles(folder)" class="box tile is-child" style="position: relative;">
+                                    <font-awesome-icon :icon="['fas', 'folder-open']" class="has-text-smart" size="3x" style="padding-bottom: 5px;">
+                                    </font-awesome-icon>
+                                    <div class="is-size-6 has-text-weight-bold">
+                                        {{ folder.nombre }}
+                                    </div>
+                                </a>
+                            </div>
+                            <div :key="file.id" class="column is-3 tile is-parent" v-for="file in filesSgcTicket" v-if="selectFoldFiles">
+                                <a :href="folderSelectN == 9? 'http://172.16.100.112/archivosSgc/'+file.nombre_archivo:'http://172.16.100.112/archivos/'+file.nombre_archivo" class="box tile is-child" style="position: relative;" target="_blank">
+                                    <i :class="file.class" style="font-size: 2rem">
+                                    </i>
+                                    <div class="is-size-7">
+                                        {{ file.nombre_archivo }}
+                                    </div>
+                                    <b-loading :active.sync="isLoading" :can-cancel="true" :is-full-page="false" v-if="load == file.id">
+                                    </b-loading>
+                                </a>
+                            </div>
+                            <section v-if="foldersSgcTicket.length== 0" class="section container" >
+                                <div class="has-text-weight-normal">
+                                   {{folderSelectN == 9 ? 'No hay SGC asociados a este Pop':'No hay Tickets asociados a este Pop'}}
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <!-- ############################################################################################################################ -->
+                     <!-- OfficeTrack-->
+                    <div v-if="folderSelectN == 11">
+                        <div class="columns is-multiline" ref="element">
+                            <div :key="folder.id" class="column is-3 tile is-parent" v-for="folder in foldersOffice" >
+                                <a @click="selectedFolderOffice(folder)" class="box tile is-child" style="position: relative;">
+                                    <font-awesome-icon :icon="['fas', 'folder-open']" class="has-text-smart" size="3x" style="padding-bottom: 5px;">
+                                    </font-awesome-icon>
+                                    <div class="is-size-6 has-text-weight-bold">
+                                        {{ folder.nombre }}
+                                    </div>
+                                </a>
 
+                            </div>
+                              <b-loading :is-full-page="true" :active.sync="isLoading" :can-cancel="true"></b-loading>
+                            <div :key="file.id" class="column is-3 tile is-parent" v-for="file in filesRepositorioOffice">
+                                <a  :href="'http://172.16.100.112/'+file.directorio+'/'+file.nombre" class="box tile is-child" style="position: relative;" target="_blank">
+                                    <i class="fas fa-file" style="font-size: 2rem">
+                                    </i>
+                                    <div class="is-size-7">
+                                        {{ file.nombre }}
+                                    </div>
+                                
+                                </a>
+                            </div>
+                            
+                        </div>
+                       
+                    </div>
+                    <!-- ############################################################################################################################ -->
                     <div v-if="photos.length">
                         <hr/>
-
                         <div class="block">
-                            <div class="is-size-5 has-text-weight-semibold">Visor de fotos</div>
+                            <div class="is-size-5 has-text-weight-semibold">
+                                Visor de fotos
+                            </div>
                         </div>
-
                         <div class="container has-background-light">
-                            <b-carousel
-                                icon-pack="fas"
-                                indicator-custom
-                                :autoplay="false"
-                                with-carousel-list
-                                :indicator="false"
-                                :overlay="gallery"
-                                @click="switchGallery(true)">
-                                <b-carousel-item v-for="(item, i) in photos" :key="i" class="has-text-centered">
+                            <b-carousel :autoplay="false" :indicator="false" :overlay="gallery" @click="switchGallery(true)" icon-pack="fas" indicator-custom="" with-carousel-list="">
+                                <b-carousel-item :key="i" class="has-text-centered" v-for="(item, i) in photos">
                                     <figure class="image">
                                         <img :src="item.image" style="max-height: 800px; width: auto; display: block;">
+                                        </img>
                                     </figure>
                                 </b-carousel-item>
-                                <span v-if="gallery" @click="switchGallery(false)" class="modal-close is-large"/>
+                                <span @click="switchGallery(false)" class="modal-close is-large" v-if="gallery">
+                                </span>
                                 <template slot="list" slot-scope="props">
-                                    <b-carousel-list
-                                        v-model="props.active"
-                                        :data="photos"
-                                        v-bind="al"
-                                        @switch="props.switch($event, false)"
-                                        as-indicator
-                                        :has-drag="true" />
+                                    <b-carousel-list :data="photos" :has-drag="true" @switch="props.switch($event, false)" as-indicator="" v-bind="al" v-model="props.active">
+                                    </b-carousel-list>
                                 </template>
                                 <template slot="overlay">
                                     <div class="has-text-centered has-text-white">
@@ -156,46 +213,26 @@
                             </b-carousel>
                         </div>
                     </div>
-
-                    <section v-if="noFiles" class="section container">
-                        <div class="has-text-weight-normal">No hay archivos en esta sección.</div>
+                    <section class="section container" v-if="noFiles &&  !newFolderSelect"> 
+                        <div class="has-text-weight-normal">
+                            No hay archivos en esta sección.
+                        </div>
                     </section>
                 </div>
             </div>
         </div>
-
-
-        <b-modal :active.sync="isUploadModalActive"
-            has-modal-card
-            trap-focus
-            aria-role="dialog"
-            aria-modal>
-            <modal-upload 
-                :folder_id="currentFolderView.id"
-                :folderTab="folderTab"
-                :pop="pop"
-                :user="user"
-                />
+        <b-modal :active.sync="isUploadModalActive" aria-modal="" aria-role="dialog" has-modal-card="" trap-focus="">
+            <modal-upload :folder_id="currentFolderView.id" :foldertab="folderTab" :pop="pop" :user="user">
+            </modal-upload>
         </b-modal>
-
-        <b-modal :active.sync="isNewFolderModalActive"
-            has-modal-card
-            trap-focus
-            aria-role="dialog"
-            aria-modal>
-            <modal-new-folder 
-                :folder_id="currentFolderView.id"
-                :folderTab="folderTab"
-                :pop="pop"
-                :user="user"
-                />
+        <b-modal :active.sync="isNewFolderModalActive" aria-modal="" aria-role="dialog" has-modal-card="" trap-focus="">
+            <modal-new-folder :folder_id="currentFolderView.id" :foldertab="folderTab" :pop="pop" :user="user">
+            </modal-new-folder>
         </b-modal>
-        
     </section>
 </template>
-
 <script>
-import { library } from "@fortawesome/fontawesome-svg-core";
+    import { library } from "@fortawesome/fontawesome-svg-core";
 import { faFolderOpen, faFilePdf, faFileExcel, faFileImage, faFile, faAngleLeft, faVideo } from "@fortawesome/free-solid-svg-icons";
 // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 import { faTrashAlt as farTrashAlt } from '@fortawesome/free-regular-svg-icons'
@@ -218,7 +255,10 @@ export default {
             folders: [],
             files: [],
             photos: [],
+            foldersSgcTicket:[],
+            filesSgcTicket:[],
             activeTab: 0,
+            currentFolder:null,
             showCam: true,
             multiline: true,
             isLoading: false,
@@ -255,6 +295,23 @@ export default {
                     }
                 }
             },
+
+            type_files:[{'id':1,'nombre':'Cotizaciones'}, {'id':2,'nombre':'Informe Final'}, {'id':4,'nombre':'Guia despacho'}, {'id':6,'nombre':'LPU'}, {'id':7,'nombre':'Mail'}, {'id':5,'nombre':'Otros'}],
+            selectFold:false,
+            id_ticket_sgc:null,
+            selectFoldFiles:false,
+            otherBread:'',
+            isFullPage:false,
+            newFolderSelect:false,
+            folderSelectN:'',
+            foldersOffice:[],
+            filesRepositorioOffice:[],
+            newFolderSelectOffice:false,
+            first_fold:'',
+            second_fold:'',
+            third_fold:'',
+
+
 
         }
     },
@@ -323,7 +380,29 @@ export default {
                     label: 'Gestión Ambiental',
                     content: 'Gestión Ambiental: Lorem ipsum dolor sit amet.',
                     displayed: true,
+                }, 
+                  {
+                    id: 9,
+                    label: 'SGC',
+                    content: 'Archivos SGC: Lorem ipsum dolor sit amet.',
+                    displayed: true,
+                   
                 },
+                {
+                    id: 10, 
+                    label: 'Ticketera',
+                    content: 'Archivos Ticketera: Lorem ipsum dolor sit amet.',
+                    displayed: true,
+                  
+                },
+                {
+                    id: 11, 
+                    label: 'OfficeTrack',
+                    content: 'Archivos Ticketera: Lorem ipsum dolor sit amet.',
+                    displayed: true,
+                  
+                },
+                 
             ]
         },
 
@@ -344,7 +423,9 @@ export default {
     },
     
     methods: {
-        setFolderTab() {
+        setFolderTab(tabId) {
+
+            this.currentFolder = this.folderTab.id;
             this.bread = ''
             this.currentFolderView.id = null
             this.getFolders()
@@ -360,24 +441,163 @@ export default {
         },
 
         getFolders() {
-            let params = {
-                'folder_name': this.folderTab.label,
-                'folder_id': this.currentFolderView.id,
-                'pop_id': this.pop.id
+            console.log(this.folderTab.id )
+            if(this.folderTab.id == 11 ){
+                    this.isLoading = true
+                    this.foldersSgcTicket=[]
+                    this.filesRepositorioOffice= []
+                    this.newFolderSelectOffice = true;
+                    this.newFolderSelect = false;
+                    this.folderSelectN = this.folderTab.id;
+
+                    axios.get(`/api/getFoldersOfficeTrackPopZone/?zona_id=${this.pop.zona_id}`).then(response=>{
+                      this.foldersOffice = response.data
+                      this.isLoading = false
+                      
+                    })
             }
-            axios.get(`/api/folders/${this.pop.id}`, { params })
-            .then((response) => {
-                this.folders = response.data.folders
-                this.canCreateFolder = response.data.can.create
-                this.canDeleteFolder = response.data.can.delete
+            this.otherBread = ''
+            if(this.folderTab.id== 9 || this.folderTab.id == 10){
+                this.foldersOffice = [];
+                this.newFolderSelect = true;
+                this.selectFold = false;
+                this.selectFoldFiles = false;
+                this.folderSelectN = this.folderTab.id;
+                this.newFolderSelectOffice = false;
+                this.isLoading = true
+                this.filesRepositorioOffice= []
+                this.foldersOffice = []
+
+                axios.get(`/api/getFoldersSgcPop/?pop_id=${this.pop.id}&tab_select=${this.folderTab.id}`).then(response=>{
+                    this.foldersSgcTicket = response.data
+                    this.isLoading = false
+                })
+
+            }else{
+
+              
+             
+                    this.newFolderSelectOffice = false;
+                    this.newFolderSelect = false;
+                    this.foldersSgcTicket=[]
+                    this.foldersOffice = [];
+                      this.folderSelectN = this.folderTab.id;
+
+               
+                       let params = {
+                          'folder_name': this.folderTab.label,
+                          'folder_id': this.currentFolderView.id,
+                          'pop_id': this.pop.id
+                      }
+                      axios.get(`/api/folders/${this.pop.id}`, { params })
+                      .then((response) => {
+                          this.folders = response.data.folders
+                          this.canCreateFolder = response.data.can.create
+                          this.canDeleteFolder = response.data.can.delete
+                
+                      })
+                      axios.get('/api/currentFolder', { params })
+                      .then(response => {
+                // console.log(response.data)
+                          this.currentFolderView = response.data.folder
+                      })
+                
+
+                 
+
+                
+            }
+          
+        },
+        selectedFolderSgcTicket:function(id){
+             this.selectFold = true;
+             this.id_ticket_sgc = id;
+             this.otherBread = id
+        
+            
+        },
+        selectedFolderSgcTicketFiles:function(type_file){
+              this.otherBread = this.otherBread +'/' + type_file.nombre
+              axios.get(`/api/filesSgcTicketPop?id=${this.id_ticket_sgc}&tab_select=${this.folderTab.id}&type_file=${type_file.id}`).then(response=>{
+
+                    this.filesSgcTicket = response.data
+                    this.selectFoldFiles = true;
+              })
+        },
+        selectedFolderOffice:function(folder){
+             this.isLoading = true
+             if(this.first_fold == ''){
+                this.first_fold = folder.id
+             }
+             if(this.second_fold == ''){
+                this.second_fold = folder.id
+             }
+             if(this.third_fold == ''){
+                this.third_fold = folder.id
+             }
+             
+
+             if(this.otherBread != ''){
+                   this.otherBread = this.otherBread +'/' + folder.nombre
+               }else{
+                 this.otherBread = folder.nombre
+               }
+            
+            axios.get(`/api/getSubFolderRepositorio?subcarpeta_id=${folder.id}`).then(response=>{
+                this.foldersOffice = response.data;
+                this.filesRepositorioOffice= []
+                this.isLoading = false
+                
                 
             })
-            axios.get('/api/currentFolder', { params })
-            .then(response => {
-                // console.log(response.data)
-                this.currentFolderView = response.data.folder
-            })
+            if(folder.nombre == 'Fotos' || folder.nombre == 'Informes' || folder.nombre == 'Foto' || folder.nombre == 'Informe'){
+                 
+                this.getFilesOficetrack(folder.id)
+            }else{
+                this.filesRepositorioOffice= []
+            }
         },
+        getFilesOficetrack(folder){
+            this.isLoading = true
+            axios.get(`/api/getFilesSubFolderRepositorio?carpeta_id=${folder}`).then(response=>{
+                this.filesRepositorioOffice = response.data;
+                
+            }).finally(() => {
+                 this.isLoading = false
+            });
+        },
+        backFold(){
+            if(this.newFolderSelectOffice){
+               if(this.third_fold != ''){
+                   this.third_fold = '';
+                   axios.get(`/api/getSubFolderRepositorio?subcarpeta_id=${this.second_fold}`).then(response=>{
+                    this.foldersOffice = response.data;
+                    this.filesRepositorioOffice= []
+                    this.isLoading = false
+                
+                
+                   })
+               }else{
+                if(this.second_fold){
+                    this.second_fold = ''
+                   this.getFolders()
+                }
+               }
+            }else{
+                if(this.selectFoldFiles){
+                   this.otherBread =  this.id_ticket_sgc;
+                   this.selectFoldFiles = false;
+                   this.filesSgcTicket = [];
+                }else{
+                  if(this.selectFold){
+                   this.selectFold = false;
+                   this.otherBread = '';
+                  }
+                }
+            }
+          
+        },
+       
 
         // File Management
         getFiles() {

@@ -309,6 +309,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('getFiles', 'Api\FileController@getFiles');
     Route::post('createFolder/{id}', 'Api\FolderController@createFolder');
     Route::post('createRootFolder', 'Api\FolderController@createRootFolder');
+    Route::get('vipCategories', 'Api\PopController@getVipCategories');
     Route::put('vipEntel/{id}', 'Api\PopController@updateVipEntel');
     Route::get('iframeLayout/{pop_id}', 'Api\PopController@getIframeLayout');
     Route::apiResource('vandalismRecords', 'Api\VandalismRecordController');

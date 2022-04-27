@@ -107,9 +107,24 @@
                                     </div>
                                 </div>
                                 <div class="column is-6">
-                                    <div class="box pt-1 pb-1" :class="pop.vip == 1 ? 'is-eco is-bold' : 'has-background-grey-darker has-text-grey'" :style="pop.vip == 1 ? 'opacity: 1' : 'opacity: 0.5'">
-                                            <font-awesome-icon :icon="pop.vip == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
-                                        <div :class="pop.vip == 1 ? 'is-dark has-text-weight-bold' : 'has-text-grey-light'">{{ pop.current_entel_vip ? 'VIP Entel' : 'VIP' }}</div>
+                                    <div class="box pt-1 pb-1" :class="vip_entel.is_vip ? 'is-eco is-bold' : 'has-background-grey-darker has-text-grey'" :style="vip_entel.is_vip ? 'opacity: 1' : 'opacity: 0.5'">
+
+
+                                        <div class="" :class="vip_entel.is_vip ? 'is-dark has-text-weight-bold' : 'has-text-grey-light'">
+
+                                            <div class="">
+                                                <font-awesome-icon :icon="vip_entel.is_vip == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
+                                                <span v-if="vip_entel.is_vip">&nbsp;VIP {{ vip_entel.category }}</span>
+                                            </div>
+
+                                            <div class="" v-if="vip_entel.is_vip">
+                                                <div class="" :class="vip_entel.is_vip ? 'is-dark has-text-weight-bold' : 'has-text-grey-light'">{{ vip_entel.is_vip ? vip_entel.category_type : "VIP" }}</div>
+                                            </div>
+                                            <div class="" v-if="!vip_entel.is_vip">
+                                                <div class="has-text-grey-light">VIP</div>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <div class="column is-6">
@@ -613,6 +628,14 @@
             },
             currentTabComponent() {
                 return this.currentTab
+            },
+
+            vip_entel() {
+                return {
+                    is_vip: this.pop.current_entel_vip ? true : false,
+                    category_type: this.pop.current_entel_vip ? this.pop.current_entel_vip.vip_category_type.type : "",
+                    category: this.pop.current_entel_vip ? this.pop.current_entel_vip.category : ""
+                }
             },
 
             // heroBackground() {

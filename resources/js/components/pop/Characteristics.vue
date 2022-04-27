@@ -104,19 +104,55 @@
                                     <label :class="pop.red_minima_n2 ? 'has-text-weight-bold' : 'has-text-grey-light has-text-weight-light'" class="is-size-6">Red Mínima N2</label>
                                 </div>
 
-                                <div class="field" v-if="!isEditMode">
+                                <!-- <div class="field" v-if="!isEditMode">
                                     <font-awesome-icon 
                                         :icon="vip ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="vip ? 'has-text-eco' : 'has-text-grey-light'"
                                         :disabled="!vip"
                                     />
                                     <label :class="vip ? 'has-text-weight-bold' : 'has-text-grey-light has-text-weight-light'" class="is-size-6">VIP</label>
-                                </div>
-                                <div class="field" v-if="isEditMode">
+                                </div> -->
+                                <!-- <div class="field" v-if="isEditMode">
                                     <b-checkbox :value="vip" @input="updateParameter('vip', vip)"><div class="is-size-6">VIP</div></b-checkbox>
+                                </div> -->
+
+                                <div class="field">
+                                    <font-awesome-icon 
+                                        :icon="vip_entel.is_vip ? ['fas', 'check-circle'] : ['far', 'times-circle']"
+                                        :class="vip_entel.is_vip ? 'has-text-eco' : 'has-text-grey-light'"
+                                        :disabled="!vip_entel.is_vip"
+                                    />
+                                    <label :class="vip_entel.is_vip ? 'has-text-weight-bold' : 'has-text-grey-light has-text-weight-light'" class="is-size-6">{{ vip_entel.is_vip ? "VIP&nbsp;" + vip_entel.category + " - " + vip_entel.category_type : "VIP" }}
+                                    </label>
                                 </div>
 
-                                <div class="field" v-if="vip & !isEditMode">
+                                <div class="field" v-if="isEditMode">
+                                    <b-select placeholder="Selecciona..." v-model="vip_entel_category" @input="updateVipEntel()">
+                                        <option
+                                            v-for="option in vip_categories"
+                                            :value="option"
+                                            :key="option.id">
+                                            {{ option.type }}
+                                        </option>
+                                        <option @input="delete_vip = true">Delete</option>
+                                    </b-select>
+                                </div>
+
+                                <div class="field" v-if="isEditMode">
+                                    <b-select placeholder="Selecciona..." v-model="vip_category" @input="updateVipEntel()">
+                                        <option
+                                            v-for="option in vip_category_options"
+                                            :value="option"
+                                            :key="option">
+                                            {{ option }}
+                                        </option>
+                                    </b-select>
+                                </div>
+                                <!-- <div class="field" v-if="isEditMode">
+                                    <b-checkbox :value="vip" @input="updateParameter('vip', vip)"><div class="is-size-6">VIP</div></b-checkbox>
+                                </div> -->
+
+                                <!-- <div class="field" v-if="vip & !isEditMode">
                                     <font-awesome-icon 
                                         :icon="vip_entel ? ['fas', 'check-circle'] : ['far', 'times-circle']"
                                         :class="vip_entel ? 'has-text-eco' : 'has-text-grey-light'"
@@ -126,7 +162,7 @@
                                 </div>
                                 <div class="field" v-if="vip & isEditMode">
                                     <b-checkbox :value="vip_entel" @input="updateVipEntel()"><div class="is-size-6">VIP Entel</div></b-checkbox>
-                                </div>
+                                </div> -->
 
 
                                 <div class="field" v-if="!isEditMode">
@@ -269,7 +305,12 @@ export default {
             energySystems: Array,
             energy_system: Object,
             energyResponsables: Array,
-            energy_responsable: Object
+            energy_responsable: Object,
+            vip_categories: Array,
+            vip_entel_category: Object,
+            vip_category: 0,
+            vip_category_options: [0, 1, 2],
+            delete_vip: false
         }
     },
 
@@ -299,7 +340,12 @@ export default {
         },
 
         vip_entel() {
-            return this.pop.current_entel_vip ? true : false
+            return {
+                is_vip: this.pop.current_entel_vip ? true : false,
+                category_type_id: this.pop.current_entel_vip ? this.pop.current_entel_vip.vip_category_type_id : 1,
+                category_type: !this.pop.current_entel_vip ? "" : this.pop.current_entel_vip.vip_category_type ? this.pop.current_entel_vip.vip_category_type.type : "",
+                category: this.pop.current_entel_vip ? this.pop.current_entel_vip.category : ""
+            }
         },
 
         localidad_obligatoria() {
@@ -323,6 +369,7 @@ export default {
     mounted() {
         this.getEnergySystems()
         this.getEnergyResponsables()
+        this.getVipEntelCategories()
     },
 
     watch: {
@@ -344,6 +391,13 @@ export default {
             axios.get('/api/energyResponsables')
             .then(response => {
                 this.energyResponsables = response.data.energyResponsables
+            })
+        },
+
+        getVipEntelCategories() {
+            axios.get('/api/vipCategories')
+            .then(response => {
+                this.vip_categories = response.data
             })
         },
 
@@ -409,8 +463,10 @@ export default {
 
         updateVipEntel() {
             let params = {
-                'value': !this.vip_entel,
-                'user_id': this.user.id
+                'vip_category_type_id': this.vip_entel_category.id,
+                'category': this.vip_category,
+                'user_id': this.user.id,
+                'delete': this.delete_vip
             }
 
             axios.put(`/api/vipEntel/${this.pop.id}`, params)

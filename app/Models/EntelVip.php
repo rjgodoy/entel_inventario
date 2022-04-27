@@ -19,4 +19,9 @@ class EntelVip extends Model
         return $this->belongsTo(Pop::class);
     }
 
+    public function vip_category_type()
+    {
+        return $this->belongsTo(VipCategoryType::class);
+    }
+
 }

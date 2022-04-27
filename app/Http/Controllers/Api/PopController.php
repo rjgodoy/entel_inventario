@@ -2,29 +2,30 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exports\AllInfoPopsExport;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Pop as PopResource;
+use App\Http\Resources\PopCollection;
+use App\Models\Comuna;
+use App\Models\EnergyResponsable;
+use App\Models\EnergySystem;
+use App\Models\EntelVip;
+use App\Models\GeneratorSet;
 use App\Models\Log;
+use App\Models\LogType;
 use App\Models\Pop;
+use App\Models\PopFavorite;
+use App\Models\PopMenu;
+use App\Models\PopMenuType;
+use App\Models\Projection;
 use App\Models\Room;
 use App\Models\Site;
 use App\Models\User;
-use App\Models\Comuna;
-use App\Models\LogType;
-use App\Models\PopMenu;
-use App\Models\EntelVip;
-use App\Models\Projection;
-use App\Models\PopFavorite;
-use App\Models\PopMenuType;
-use App\Models\EnergySystem;
-use App\Models\GeneratorSet;
+use App\Models\VipCategoryType;
 use Illuminate\Http\Request;
-use App\Models\EnergyResponsable;
-use App\Exports\AllInfoPopsExport;
-use App\Http\Controllers\Controller;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Http\Resources\PopCollection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Resources\Pop as PopResource;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PopController extends Controller
 {
@@ -239,7 +240,7 @@ class PopController extends Controller
             'protected_zones',
             'energy_system',
             'energy_responsable',
-            'current_entel_vip',
+            'current_entel_vip.vip_category_type',
             'current_office',
             'current_autonomy',
             'current_battery_bank_autonomy',
@@ -347,11 +348,15 @@ class PopController extends Controller
     public function updateVipEntel(Request $request, $id)
     {
         $vip = EntelVip::where('pop_id', $id)->first();
-        if($vip) {
+        if($vip || $request->delete) {
             $vip->delete();
-        } else {
+        }
+
+        if($request->vip_category_type_id && $request->category) {
             EntelVip::create([
-                'pop_id' => $id
+                'pop_id' => $id,
+                'vip_category_type_id' => $request->vip_category_type_id,
+                'category' => $request->category
             ]);
         }
         
@@ -776,5 +781,17 @@ class PopController extends Controller
         $favorite = PopFavorite::where('user_id', $request->user_id)->where('pop_id', $request->pop_id)->get();
         return $favorite;
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getVipCategories(Request $request)
+    {
+        return VipCategoryType::all();
+    }
+    
 
 }

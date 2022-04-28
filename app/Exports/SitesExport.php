@@ -15,6 +15,7 @@ use Maatwebsite\Excel\Events\BeforeExport;
 use Maatwebsite\Excel\Events\BeforeWriting;
 use Maatwebsite\Excel\Events\BeforeSheet;
 use Maatwebsite\Excel\Events\AfterSheet;
+// use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 
 class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadings, WithMapping, WithEvents
 {
@@ -119,7 +120,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             $condition_mpls = 'mpls IN ('.$this->mpls.',1)';
             $condition_olt = 'olt IN ('.$this->olt.',1)';
             $condition_olt_3play = 'olt_3play IN ('.$this->olt_3play.',1)';
-            $condition_vip = 'pops.vip IN ('.$this->vip.',1)';
+            // $condition_vip = 'pops.vip IN ('.$this->vip.',1)';
             $condition_lloo = 'localidad_obligatoria IN ('.$this->lloo.',1)';
             $condition_ranco = 'ranco IN ('.$this->ranco.',1)';
             $condition_bafi = $this->bafi ? 'technology_type_id = 3 AND frequency = 3500' : 'technology_type_id != 0';
@@ -145,9 +146,9 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             $infrastructure = $this->infrastructure;
             $condition_infrastructures = 'pops.id IN (SELECT infrastructures.pop_id from entel_g_redes_inventario.infrastructures)';
 
-            $condition_turret_type = $this->turret_type_id != null ? 'pops.turret_type_id IS NOT NULL' : 'pops.turret_type_id IN (1,2) || pops.turret_type_id IS NULL';
+            // $condition_turret_type = $this->turret_type_id != null ? 'pops.current_alba.turret_type_id IS NOT NULL' : 'pops.current_alba.turret_type_id IN (1,2,3) || pops.current_alba.turret_type_id IS NULL';
 
-            $site = Site::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'state', 'classification_type', 'attention_priority_type', 'category_type', 'attention_type',  'pop.current_entel_vip', 'pop.vertical_structures.beacons.beacon_type', 'pop.protected_zones', 'technologies', 'pop.comsites', 'pop.energy_system', 'pop.energy_responsable')
+            $site = Site::withTrashed()->with('pop.comuna', 'pop.zona.crm', 'state', 'classification_type', 'attention_priority_type', 'category_type', 'attention_type',  'pop.current_entel_vip', 'pop.vertical_structures.beacons.beacon_type', 'pop.protected_zones', 'technologies', 'pop.comsites', 'pop.energy_system', 'pop.energy_responsable', 'pop.current_alba.turret_type')
             	->where(function($p) use($text) {
                     if ($text) {
                         $p->where('nem_site', 'LIKE', "%$text%")
@@ -172,10 +173,9 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
                 ->whereHas('pop.rooms', function($r) use($condition_critic) {
                     $r->whereRaw($condition_critic);
                 })
-                ->whereHas('pop', function($s) use($condition_vip, $condition_offgrid, $condition_solar, $condition_eolica, $condition_protected_zone, $protected_zone, 
-                    $condition_electric_lines, $electric_line, $condition_junctions, $junction, $condition_generators, $generator_set, $condition_rectifiers, $power_rectifier, $condition_air_conditioners, $air_conditioner, $condition_vertical_structures, $vertical_structure, $condition_infrastructures, $infrastructure, $condition_turret_type) {
-                    $s->whereRaw($condition_vip)
-                    ->whereRaw($condition_offgrid)
+                ->whereHas('pop', function($s) use($condition_offgrid, $condition_solar, $condition_eolica, $condition_protected_zone, $protected_zone, 
+                    $condition_electric_lines, $electric_line, $condition_junctions, $junction, $condition_generators, $generator_set, $condition_rectifiers, $power_rectifier, $condition_air_conditioners, $air_conditioner, $condition_vertical_structures, $vertical_structure, $condition_infrastructures, $infrastructure) {
+                    $s->whereRaw($condition_offgrid)
                     ->whereRaw($condition_solar)
                     ->whereRaw($condition_eolica)
                     
@@ -203,9 +203,9 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
                     })
                     ->where(function($q) use($condition_infrastructures, $infrastructure) {
                         $infrastructure ? $q->whereRaw($condition_infrastructures) : $q->whereRaw('1 = 1');
-                    })
+                    });
 
-                    ->whereRaw($condition_turret_type);
+                    // ->whereRaw($condition_turret_type);
                 })
                 ->whereRaw($condition_core)
                 ->whereRaw($condition_pe_3g)
@@ -257,7 +257,8 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             'PRIORIDAD ATENCION',
             'CATEGORIA PLANIFICACION',
             'TIPO ATENCION TERRENO',
-            'VIP',
+            'TIPO VIP',
+            'CATEGORIA VIP',
 
 	        'PE 3G',
 	        'MPLS',
@@ -335,6 +336,16 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             }
         }
 
+        $vip_category = "";
+        if ($site->pop->current_entel_vip) {
+            if ($site->pop->current_entel_vip->category == 0) {
+                $vip_category = 0;
+            } else {
+                $vip_category = $site->pop->current_entel_vip->category;
+            }
+        }
+
+
         return [
             $site->id,
             $site->nem_site,
@@ -357,7 +368,8 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             $site->attention_priority_type->attention_priority_type,
             $site->category_type ? $site->category_type->category_type : null,
             $site->attention_type->attention_type,
-            $site->pop->vip ? 'SI' : 'NO',
+            $site->pop->current_entel_vip ? $site->pop->current_entel_vip->vip_category_type->type : '',
+            $site->pop->current_entel_vip ? $site->pop->current_entel_vip->category : null,
 
             $site->pop->pe_3g ? 'SI' : 'NO',
             $site->pop->mpls ? 'SI' : 'NO',
@@ -383,7 +395,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
             $site->state->state,
 
             $site->pop->theoretical_autonomy,
-            $site->pop->turret_type ? $site->pop->turret_type->type : '',
+            $site->pop->current_alba ? $site->pop->current_alba->turret_type->type : '',
             $site->pop->comsites->count(),
             $id_comsites,
 
@@ -391,6 +403,13 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
 
   		];
   	}
+
+    // public function columnFormats(): array
+    // {
+    //     return [
+    //         'U' => NumberFormat::FORMAT_DATE_DDMMYYYY,
+    //     ];
+    // }
 
     public static function beforeExport(BeforeExport $event)
     {
@@ -458,7 +477,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'P1:T1',
+            'P1:U1',
             [
                 'font' => [
                     'size' => 11,
@@ -482,7 +501,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'U1:AE1',
+            'V1:AF1',
             [
                 'font' => [
                     'size' => 11,
@@ -506,7 +525,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'AF1:AM1',
+            'AG1:AN1',
             [
                 'font' => [
                     'size' => 11,
@@ -530,7 +549,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'AN1',
+            'AO1',
             [
                 'font' => [
                     'size' => 11,
@@ -554,7 +573,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
         $event->sheet->styleCells(
-            'AO1:AR1',
+            'AP1:AS1',
             [
                 'font' => [
                     'size' => 11,
@@ -578,5 +597,12 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
         );
 
     }
+
+    // public function columnFormats(): array
+    // {
+    //     return [
+    //         'U' => NumberFormat::FORMAT_NUMBER
+    //     ];
+    // }
     
 }

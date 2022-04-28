@@ -94,7 +94,7 @@ class DashboardApiController extends Controller
                 $condition_zona = $zona_id != 0 ? 'zonas.id = '.$zona_id : 'zonas.id != '.$zona_id;
                 $q->whereRaw($condition_crm)->whereRaw($condition_zona);
             })
-            ->where('turret_type_id', 1)
+            ->whereHas('current_alba')
             ->distinct('pops.id')->count();
 
 
@@ -251,7 +251,7 @@ class DashboardApiController extends Controller
                     ->whereHas('zona', function($q) use($condition_crm, $condition_zona) {
                         $q->whereRaw($condition_crm)->whereRaw($condition_zona);
                     })
-                    ->where('turret_type_id', 1)
+                    ->whereHas('current_alba')
                     ->paginate(10);
 
         //         return $albaPopList;
@@ -293,7 +293,7 @@ class DashboardApiController extends Controller
                     })
                     ->join('crms', 'zonas.crm_id', '=', 'crms.id')
                     ->join('classification_types', 'sites.classification_type_id', '=', 'classification_types.id')
-                    ->where('pops.turret_type_id', 1)
+                    ->whereHas('current_alba')
                     ->select(
                         'pops.id',
                         'pops.nombre',

@@ -9,8 +9,13 @@ class TurretType extends Model
     protected $connection = 'mysql_entel_pops';
     protected $table = 'turret_types';
 
-    public function pops() 
+    // public function pops() 
+    // {
+    //     return $this->hasMany(Pop::class);
+    // }
+
+    public function albas()
     {
-        return $this->hasMany(Pop::class);
+        return $this->hasMany(Alba::class);
     }
 }

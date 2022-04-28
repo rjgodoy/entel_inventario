@@ -249,7 +249,7 @@ class PopController extends Controller
             'comsites',
             'drone_videos',
             'risk_types',
-            'turret_type',
+            'current_alba.turret_type',
             'pop_favorites'
             )
             ->where('id', $id)
@@ -482,7 +482,7 @@ class PopController extends Controller
         $condition_offgrid = $request->offgrid ? 'pops.energy_system_id = 2' : 'pops.energy_system_id IN (0,1,2)';
         $condition_solar = 'pops.solar IN ('.$request->solar.',1)';
         $condition_eolica = 'pops.eolica IN ('.$request->eolica.',1)';
-        $condition_turret_type = $request->turret_type_id ? 'pops.turret_type_id IN (1,2)' : '1=1';
+        $condition_turret_type = $request->turret_type_id ? 'pops.turret_type_id IN (1,2,3)' : '1=1';
 
         $protected_zone = $request->protected_zone;
         $condition_protected_zone = 'pops.id IN (SELECT pop_protected_zone.pop_id from entel_pops.pop_protected_zone)';

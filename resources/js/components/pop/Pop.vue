@@ -75,18 +75,19 @@
                                 </div>
                             </div>
 
-                            <div class="columns is-vcentered" v-if="pop.turret_type_id > 0">
+                            <div class="columns is-vcentered" v-if="pop.current_alba">
                                 <div class="column is-2 has-text-centered">
                                     <div class="box p-1">
-                                        <b-tooltip :label="pop.turret_type.description" type="is-black" class="pt-1">
+                                        <b-tooltip :label="pop.current_alba.turret_type.description" type="is-black" class="pt-1">
                                             <div>
-                                                <img alt="image" class="img-container" :src="pop.turret_type.image" style="width: 36px"/>
+                                                <img alt="image" class="img-container" :src="pop.current_alba.turret_type.image" style="width: 36px"/>
                                             </div>
                                         </b-tooltip>
                                     </div>
                                 </div>
                                 <div class="column">
-                                    <div class="is-size-5 has-text-weight-semibold">{{ pop.turret_type.type }}</div>
+                                    <div class="is-size-6 has-text-weight-semibold">Alba</div>
+                                    <div class="is-size-5 has-text-weight-semibold">{{ pop.current_alba.turret_type.type }}</div>
                                 </div>
                             </div>
 
@@ -128,9 +129,9 @@
                                     </div>
                                 </div>
                                 <div class="column is-6">
-                                    <div class="box pt-1 pb-1" :class="pop.turret_type_id ? 'is-eco is-bold' : 'has-background-grey-darker has-text-grey'" :style="pop.turret_type_id ? 'opacity: 1' : 'opacity: 0.5'">
-                                            <font-awesome-icon :icon="pop.turret_type_id ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
-                                        <div :class="pop.turret_type_id ? 'is-dark has-text-weight-bold' : 'has-text-grey-light'">{{ pop.turret_type_id ? pop.turret_type.type : 'TORRERA'}}</div>
+                                    <div class="box pt-1 pb-1" :class="pop.current_alba ? 'is-eco is-bold' : 'has-background-grey-darker has-text-grey'" :style="pop.current_alba ? 'opacity: 1' : 'opacity: 0.5'">
+                                            <font-awesome-icon :icon="pop.current_alba ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
+                                        <div :class="pop.current_alba ? 'is-dark has-text-weight-bold' : 'has-text-grey-light'">{{ pop.current_alba ? pop.current_alba.turret_type.type + " ALBA" : 'TORRERA ALBA'}}</div>
                                     </div>
                                 </div>
                             </div>

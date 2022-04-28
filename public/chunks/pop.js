@@ -351,6 +351,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
@@ -1202,7 +1203,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.pop.turret_type_id > 0
+                  _vm.pop.current_alba
                     ? _c("div", { staticClass: "columns is-vcentered" }, [
                         _c(
                           "div",
@@ -1217,7 +1218,9 @@ var render = function() {
                                   {
                                     staticClass: "pt-1",
                                     attrs: {
-                                      label: _vm.pop.turret_type.description,
+                                      label:
+                                        _vm.pop.current_alba.turret_type
+                                          .description,
                                       type: "is-black"
                                     }
                                   },
@@ -1228,7 +1231,9 @@ var render = function() {
                                         staticStyle: { width: "36px" },
                                         attrs: {
                                           alt: "image",
-                                          src: _vm.pop.turret_type.image
+                                          src:
+                                            _vm.pop.current_alba.turret_type
+                                              .image
                                         }
                                       })
                                     ])
@@ -1244,9 +1249,21 @@ var render = function() {
                           _c(
                             "div",
                             {
+                              staticClass: "is-size-6 has-text-weight-semibold"
+                            },
+                            [_vm._v("Alba")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
                               staticClass: "is-size-5 has-text-weight-semibold"
                             },
-                            [_vm._v(_vm._s(_vm.pop.turret_type.type))]
+                            [
+                              _vm._v(
+                                _vm._s(_vm.pop.current_alba.turret_type.type)
+                              )
+                            ]
                           )
                         ])
                       ])
@@ -1419,17 +1436,17 @@ var render = function() {
                       "div",
                       {
                         staticClass: "box pt-1 pb-1",
-                        class: _vm.pop.turret_type_id
+                        class: _vm.pop.current_alba
                           ? "is-eco is-bold"
                           : "has-background-grey-darker has-text-grey",
-                        style: _vm.pop.turret_type_id
+                        style: _vm.pop.current_alba
                           ? "opacity: 1"
                           : "opacity: 0.5"
                       },
                       [
                         _c("font-awesome-icon", {
                           attrs: {
-                            icon: _vm.pop.turret_type_id
+                            icon: _vm.pop.current_alba
                               ? ["far", "check-circle"]
                               : ["far", "times-circle"]
                           }
@@ -1438,16 +1455,17 @@ var render = function() {
                         _c(
                           "div",
                           {
-                            class: _vm.pop.turret_type_id
+                            class: _vm.pop.current_alba
                               ? "is-dark has-text-weight-bold"
                               : "has-text-grey-light"
                           },
                           [
                             _vm._v(
                               _vm._s(
-                                _vm.pop.turret_type_id
-                                  ? _vm.pop.turret_type.type
-                                  : "TORRERA"
+                                _vm.pop.current_alba
+                                  ? _vm.pop.current_alba.turret_type.type +
+                                      " ALBA"
+                                  : "TORRERA ALBA"
                               )
                             )
                           ]

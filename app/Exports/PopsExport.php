@@ -47,7 +47,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
     protected $offgrid;
     protected $solar;
     protected $eolica;
-    protected $turret_type_id;
+    // protected $turret_type_id;
     protected $protected_zone;
 
     protected $junction;
@@ -81,7 +81,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
         $this->offgrid = $request->offgrid ? $request->offgrid : 0;
         $this->solar = $request->solar ? $request->solar : 0;
         $this->eolica = $request->eolica ? $request->eolica : 0;
-        $this->turret_type_id = $request->turret_type_id ? $request->turret_type_id : 0;
+        // $this->turret_type_id = $request->turret_type_id ? $request->turret_type_id : 0;
         $this->protected_zone = $request->protected_zone ? $request->protected_zone : 0;
 
         $this->electric_line = $request->electric_line ? $request->electric_line : 0;
@@ -151,9 +151,9 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             $infrastructure = $this->infrastructure;
             $condition_infrastructures = 'pops.id IN (SELECT infrastructures.pop_id from entel_g_redes_inventario.infrastructures)';
 
-            $condition_turret_type = $this->turret_type_id != null ? 'pops.turret_type_id IS NOT NULL' : 'pops.turret_type_id IN (1,2) || pops.turret_type_id IS NULL';
+            // $condition_turret_type = $this->turret_type_id != null ? 'pops.current_alba.turret_type_id IS NOT NULL' : 'pops.current_alba.turret_type_id IN (1,2,3) || pops.current_alba.turret_type_id IS NULL';
 
-            $pop = Pop::with('comuna', 'zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip', 'vertical_structures.beacons.beacon_type', 'protected_zones', 'comsites', 'energy_system', 'energy_responsable', 'turret_type')
+            $pop = Pop::with('comuna', 'zona.crm', 'sites.classification_type', 'sites.attention_priority_type', 'current_entel_vip', 'vertical_structures.beacons.beacon_type', 'protected_zones', 'comsites', 'energy_system', 'energy_responsable', 'current_alba.turret_type')
                 ->whereHas('sites', function ($q) use ($text, $condition_core, $condition_bafi, $bafi, $condition_red_minima) {
                     $q->where(function ($p) use ($text) {
                         if ($text) {
@@ -193,7 +193,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
                 ->whereRaw($condition_offgrid)
                 ->whereRaw($condition_solar)
                 ->whereRaw($condition_eolica)
-                ->whereRaw($condition_turret_type)
+                // ->whereRaw($condition_turret_type)
 
                 ->where(function($q) use($condition_protected_zone, $protected_zone) {
                     $protected_zone ? $q->whereRaw($condition_protected_zone) : $q->whereRaw('1 = 1');
@@ -254,8 +254,8 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             'LATITUD',
             'LONGITUD',
 
-            'VIP',
-            'VIP ENTEL',
+            'TIPO VIP',
+            'CATEGORIA VIP',
 
             'SISTEMA DE ENERGÍA',
             'RESPONSABLE DE ENERGÍA',
@@ -319,8 +319,8 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             // $pop->coverages->first() ? $pop->coverages->first()->coverage_type->type : '',
             // // $pop->towers->first() ? $pop->history_tower_types->first()->tower_type->tower_type : '',
 
-            $pop->vip ? 'SI' : 'NO',
-            $pop->current_entel_vip ? 'SI' : 'NO',
+            $pop->current_entel_vip ? $pop->current_entel_vip->vip_category_type->type : '',
+            $pop->current_entel_vip ? $pop->current_entel_vip->category : '',
 
             $pop->energy_system ? $pop->energy_system->system : 'PENDIENTE',
             $pop->energy_responsable ? $pop->energy_responsable->responsable : 'PENDIENTE',
@@ -330,7 +330,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             $pop->protected_zones->first() ? $pop->protected_zones->first()->cod_zone.' - '.$pop->protected_zones->first()->name : 'NO',
             $rca ? 'SI' : 'NO',
             $temporary_storage ? $temporary_storage->pop->nombre : 'NO TIENE ZAT ASIGNADA',
-            $pop->turret_type ? $pop->turret_type->type : '',
+            $pop->current_alba ? $pop->current_alba->turret_type->type : '',
 
             $pop->theoretical_autonomy,
 

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Autonomy;
-use App\Models\EnergySystem;
+// use App\Models\Autonomy;
+// use App\Models\EnergySystem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -383,9 +383,19 @@ class Pop extends Model
      *
      * @var array
      */
-    public function turret_type()
+    // public function turret_type()
+    // {
+    //     return $this->belongsTo(TurretType::class);
+    // }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function current_alba()
     {
-        return $this->belongsTo(TurretType::class);
+        return $this->hasOne(Alba::class)->latest();
     }
 
     /**

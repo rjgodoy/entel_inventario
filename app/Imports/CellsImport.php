@@ -3,9 +3,12 @@
 namespace App\Imports;
 
 use App\Models\AessCell;
+use App\Models\Comuna;
+use App\Models\SolutionType;
+use App\Models\State;
+use App\Models\TechnologyType;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToModel;
-// use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -48,7 +51,7 @@ WithCustomCsvSettings
             'pop_name' => $row['pop_name'],
             'lat_wgs84' => $row['lat_wgs84'],
             'lon_wgs84' => $row['lon_wgs84'],
-            'comuna_id' => $row['comuna_id'],
+            'comuna_id' => $row['comuna'] ? Comuna::where('nombre_comuna', $row['comuna'])->first()->id : null,
             'comuna' => $row['comuna'],
             'provincia_id' => $row['provincia_id'],
             'provincia' => $row['provincia'],
@@ -58,6 +61,10 @@ WithCustomCsvSettings
             'zona_fdt' => $row['zona_fdt'],
             'lloo700' => $row['lloo700'],
             'lloo2600' => $row['lloo2600'],
+            'rat_type_id' => $row['rat_type'] ? TechnologyType::where('type', $row['rat_type'])->first()->id : null,
+            'ran_device_status_id' => $row['ran_device_status'] ? State::where('state', $row['ran_device_status'])->first()->id : null,
+            'pop_m_status_id' => $row['pop_m_status'] ? State::where('state', $row['pop_m_status'])->first()->id : null,
+            'solution_type_id' => $row['tipo_solucion'] && SolutionType::where('solution_type', $row['tipo_solucion'])->first() ? SolutionType::where('solution_type', $row['tipo_solucion'])->first()->id : null
         ]);
     }
 

@@ -41,12 +41,12 @@ class UpdateCells extends Command
      */
     public function handle()
     {
-        $now = Carbon::now()->isoFormat('YYYYMMDDHHmm');
-        $token = 'a3QwEBesPKm9b2f';
-        $hash = md5($now.''.$token);
-        $url = 'http://aess.entelchile.net/pop_m/all/all/?EXPORT=CSV&v=5&app=analytics&key='.$hash;
+        // $now = Carbon::now()->isoFormat('YYYYMMDDHHmm');
+        // $token = 'a3QwEBesPKm9b2f';
+        // $hash = md5($now.''.$token);
+        // $url = 'http://aess.entelchile.net/pop_m/all/all/?EXPORT=CSV&v=5&app=analytics&key='.$hash;
 
-        Storage::disk('local')->put('file.csv', fopen($url, 'r'));
+        // Storage::disk('local')->put('file.csv', fopen($url, 'r'));
 
         (new CellsImport)->import('file.csv', null, \Maatwebsite\Excel\Excel::CSV);
         

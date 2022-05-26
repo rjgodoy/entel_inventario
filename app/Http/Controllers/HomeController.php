@@ -2,25 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use App\Models\Pop;
-use App\Models\Role;
-use App\Models\Site;
-use App\Models\PsgTp;
-use App\Models\OTForm;
-use App\Models\Technology;
 use App\Imports\CellsImport;
+use App\Models\Comuna;
 use App\Models\GeneratorSet;
+use App\Models\GeneratorsPlatformGenerator;
+use App\Models\GeneratorsPlatformMaintanceStatus;
+use App\Models\GeneratorsPlatformMaintanceType;
+use App\Models\GeneratorsPlatformOTMaintance;
+use App\Models\GeneratorsPlatformStatistic;
+use App\Models\OTForm;
 use App\Models\OTTmpTaskLog;
+use App\Models\Pop;
+use App\Models\PsgTp;
+use App\Models\Role;
 use App\Models\RoomCapacity;
+use App\Models\Site;
+use App\Models\State;
+use App\Models\Technology;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use App\Models\GeneratorsPlatformGenerator;
-use App\Models\GeneratorsPlatformStatistic;
-use App\Models\GeneratorsPlatformOTMaintance;
-use App\Models\GeneratorsPlatformMaintanceType;
-use App\Models\GeneratorsPlatformMaintanceStatus;
 // use Illuminate\Database\Eloquent\Collection;
 
 class HomeController extends Controller
@@ -181,18 +183,121 @@ class HomeController extends Controller
      */
     public function apiPops(Request $request)
     {
-        $roles = Role::pluck('slug')->toArray();
-        $request->user()->authorizeRoles($roles);
+        // $roles = Role::pluck('slug')->toArray();
+        // $request->user()->authorizeRoles($roles);
 
-        $now = Carbon::now()->isoFormat('YYYYMMDDHHmm');
-        $token = 'a3QwEBesPKm9b2f';
-        $hash = md5($now.''.$token);
-        $url = 'https://aess.entelchile.net/pop_m/all/all/?EXPORT=CSV&v=5&app=analytics&key='.$hash;
-        dd($url);
-        Storage::disk('local')->put('file.csv', fopen($url, 'r'));
+        // $now = Carbon::now()->isoFormat('YYYYMMDDHHmm');
+        // $token = 'a3QwEBesPKm9b2f';
+        // $hash = md5($now.''.$token);
+        // $url = 'https://aess.entelchile.net/pop_m/all/all/?EXPORT=CSV&v=5&app=analytics&key='.$hash;
+        // dd($url);
+        // Storage::disk('local')->put('file.csv', fopen($url, 'r'));
 
-        (new CellsImport)->import('file.csv');
-        dd('success');
+        // (new CellsImport)->import('file.csv');
+        // dd('success');
+
+
+        $aessData = AessCell::whereRaw('aess_cells.pop_e_id IS NOT NULL AND aess_cells.pop_m_id NOT IN ("TBD", "EV001")')
+            ->select(
+                'aess_cells.rat_type_id',
+                'aess_cells.frequency',
+                'aess_cells.ran_device_id',
+                'aess_cells.ran_device_status_id',
+                'aess_cells.pop_m_status_id',
+                'aess_cells.ran_device_name',
+                'aess_cells.pop_m_id',
+                'aess_cells.solution_type_id',
+                'aess_cells.pop_e_id',
+                'aess_cells.pop_name',
+                'aess_cells.lat_wgs84',
+                'aess_cells.lon_wgs84',
+                'aess_cells.comuna_id',
+                'aess_cells.address',
+                'aess_cells.zona_fdt',
+                'aess_cells.lloo700', 
+                'aess_cells.lloo2600'               
+            )
+            ->get();
+
+        foreach ($aessData as $newPop) {
+
+            $zona_id = Comuna::where('id', $newPop->comuna_id)->first()->zona_id;
+
+            // Insert POP
+            $pop = Pop::insertOrIgnore([
+                [
+                    'pop_e_id' => $newPop->pop_e_id, 
+                    'nombre' => $newPop->pop_name, 
+                    'direccion' => $newPop->address, 
+                    'comuna_id' => $newPop->comuna_id, 
+                    'zona_id' => $zona_id,
+                    'latitude' => $newPop->lat_wgs84, 
+                    'longitude' => $newPop->lon_wgs84, 
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]
+            ]);
+
+            // Insert Site
+            $site = Site::withTrashed()->updateOrCreate(
+                [
+                    'nem_site' => $newPop->pop_m_id
+                ],
+                [
+                    'pop_e_id' => $newPop->pop_e_id,
+                    'pop_id' => Pop::withTrashed()->where('pop_e_id', $newPop->pop_e_id)->first()->id, 
+                    'nombre' => $newPop->pop_name, 
+                    'site_type_id' => 2,
+                    'solution_type_id' => $newPop->solution_type_id, 
+                    'site_class_type_id' => 6,
+                    'state_id' => $newPop->pop_m_status_id,
+                    'zona_fdt' => $newPop->zona_fdt ? $newPop->zona_fdt : 0,
+                    'lloo700' => $newPop->lloo700 ? $newPop->lloo700 : 0,
+                    'lloo2600' => $newPop->lloo2600 ? $newPop->lloo2600 : 0,
+                    'localidad_obligatoria' => $newPop->lloo700 || $newPop->lloo2600 ? 1 : 0
+                ]
+            );
+
+            // Insert Technologies
+            $technology = Technology::withTrashed()->updateOrCreate(
+                [
+                    'nem_tech' => $newPop->ran_device_id 
+                ],
+                [
+                    'site_id' => Site::withTrashed()->where('nem_site', $newPop->pop_m_id)->first()->id, 
+                    'ran_device_name' => $newPop->ran_device_name,
+                    'technology_type_id' => $newPop->rat_type_id,
+                    'frequency' => $newPop->frequency,
+                    'state_id' => $newPop->ran_device_status_id
+                ]
+            );
+        }
+
+        // Insert Room
+        // $popsWORoom = Pop::doesntHave('rooms')->get();
+        // foreach ($popsWORoom as $pop) {
+        //     Room::create([
+        //         'pop_id' => $pop->id,
+        //         'name' => 'Sala 1.1',
+        //         'criticity' => 0,
+        //         'order' => 0
+        //     ]);
+        // }
+
+        // $sitesDeleted = Site::where('state_id', 2)->get();
+        // foreach ($sitesDeleted as $site) {
+        //     $site->delete();
+        // }
+
+        // $sitesToRestore = Site::withTrashed()->where('state_id', '!=', 2)->restore();
+        // // foreach ($sitesDeleted as $site) {
+        // //     $site->restore();
+        // // }
+
+        // $technologiesDeleted = Technology::where('state_id', 2)->get();
+        // foreach ($technologiesDeleted as $technology) {
+        //     $technology->delete();
+        // }
     }
 
     /**

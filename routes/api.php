@@ -16,9 +16,14 @@ use Illuminate\Http\Request;
 |
  */
 
-Route::get('all_pops_ios', 'Api\PopController@alliOS');
+// APIs iOS
+Route::get('all_pops_ios', 'Api\PopController@alliOS');         // All Pops data v1
+Route::get('all_pops_ios_v2', 'Api\PopController@alliOSv2');    // All Pops data v2
+Route::get('pop_info_ios', 'Api\PopController@popInfoIos');     // Pop detail data
+Route::get('all_sites_ios_v2', 'Api\SiteController@allSitesiOSv2');    // All Sites data
+
+// APIs Android
 Route::get('all_pops_android', 'Api\PopController@allAndroid');
-Route::get('pop_info_ios', 'Api\PopController@popInfoIos');
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'AuthController@login');

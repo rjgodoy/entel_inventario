@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Site as SiteResource;
+use App\Http\Resources\SiteCollection;
 use App\Models\AttentionPriorityType;
 use App\Models\ClassificationType;
 use App\Models\Log;
@@ -22,6 +23,31 @@ class SiteController extends Controller
     public function index()
     {
         //
+    }
+
+    /**
+     * Display a listing of the resource for iOS.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function allSitesiOSv2(Request $request)
+    {
+
+        $user = User::where('api_token', $request->api_token)->get();
+
+        if ($user) {
+
+            $sites = Site::with('state', 'technologies.state', 'technologies.technology_type', 'classification_type', 'attention_priority_type', 'attention_type')
+            ->whereHas('technologies', function($q) { 
+                $q->withoutTrashed();
+            })
+            ->limit(200)
+            ->get();
+
+            return new SiteCollection($sites);
+        }
+
+        return 'false';
     }
 
     /**

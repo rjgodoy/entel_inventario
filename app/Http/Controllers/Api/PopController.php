@@ -74,6 +74,32 @@ class PopController extends Controller
     }
 
     /**
+     * Display a listing of the resource for iOS.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function alliOSv2(Request $request)
+    {
+
+        $user = User::where('api_token', $request->api_token)->get();
+
+        if ($user) {
+
+            $pops = Pop::with('sites.state', 'sites.technologies.state', 'sites.technologies.technology_type', 'zona.crm', 'comuna', 'sites.classification_type', 'sites.attention_priority_type', 'sites.attention_type', 'current_autonomy', 'junctions.electric_company')
+            ->whereHas('sites', function($q) { 
+                $q->withoutTrashed();
+            })
+            // ->orderBy('id')
+            ->limit(100)
+            ->get();
+
+            return new PopCollection($pops);
+        }
+
+        return 'false';
+    }
+
+    /**
      * Display a listing of the resource for Android.
      *
      * @return \Illuminate\Http\Response

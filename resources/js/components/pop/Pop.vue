@@ -5,10 +5,10 @@
             :pop="pop"
         /> -->
         <!-- POP Name -->
-        <section class="hero is-bold" :class="pop.risk_types && pop.risk_types.length ? 'is-danger' : 'is-black-ter'">
+        <section class="hero is-bold" :class="pop.risk_types && pop.risk_types.length ? 'is-danger' : pop.centro_invernal == 1 ? 'is-white' : 'is-black-ter'">
             <div class="hero-body">
                 <div class="">
-                    <div class="columns">
+                    <div class="columns tile is-ancestor">
 
                         <div class="column is-1 has-text-centered pt-2 pb-0">
                             <b-tooltip label="Corresponde a la categoría más crítica entre todos sus Sitios activos."
@@ -39,20 +39,19 @@
 
                                 <b-input class="is-size-5 has-text-weight-semibold has-background-dark" size="is-large" v-model="popName" v-if="canEditName && (isEditMode && noMovil)"></b-input>
 
-                                <h2 class="subtitle has-text-weight-semibold has-text-light" style="margin-bottom: 4px;">{{ popNems }}
+                                <h2 class="subtitle has-text-weight-semibold" style="margin-bottom: 4px;">{{ popNems }}
                                     <span class="is-size-5 " v-if="pop.sites && pop.sites.length > 2"> y <a class="has-text-smart" @click="currentTab = 'sites'">{{ pop.sites.length - 2 }} sitios</a> más.
                                     </span>
                                 </h2>
 
-                                <div class="is-size-6 has-text-weight-normal has-text-light" v-if="!canEditZona || !isEditMode">
+                                <div class="is-size-6 has-text-weight-normal" v-if="!canEditZona || !isEditMode">
                                     Zona {{ pop.zona ? pop.zona.nombre_zona : '' }} - CRM {{ pop.zona ? pop.zona.crm.nombre_crm : '' }}
                                 </div>
 
                                 <b-select class="" v-model="popZona" v-if="canEditZona && isEditMode" @input="updateZona(pop.id, popZona)">
                                     <option v-for="zona in zonas" :key="zona.id" :value="zona.id">{{ zona.id }} - {{ zona.nombre_zona }}</option>
                                 </b-select>
-                            </div>
-                            
+                            </div>  
                         </div>
 
                         <div class="column is-3" style="padding: 0px">
@@ -62,6 +61,16 @@
                                 </div>
                                 <div class="column">
                                     <div class="is-size-5 has-text-weight-semibold">Pop en zona de riesgo</div>
+                                    <!-- <div class="is-size-6">Tipo de riesgo: {{ pop.risk_types.length && pop.risk_types[0].type }}</div> -->
+                                </div>
+                            </div>
+
+                            <div class="columns is-vcentered" v-if="pop.centro_invernal == 1">
+                                <div class="column is-2 has-text-centered">
+                                    <font-awesome-icon :icon="['fas', 'snowboarding']" size="3x"/>
+                                </div>
+                                <div class="column">
+                                    <div class="is-size-5 has-text-weight-semibold">Centro Invernal</div>
                                     <!-- <div class="is-size-6">Tipo de riesgo: {{ pop.risk_types.length && pop.risk_types[0].type }}</div> -->
                                 </div>
                             </div>
@@ -90,29 +99,29 @@
                                     <div class="is-size-5 has-text-weight-semibold">{{ pop.current_alba.turret_type.type }}</div>
                                 </div>
                             </div>
-
                         </div>
 
-                        <div class="column is-2 pt-0 pb-0">
-                            <div class="columns is-multiline is-size-6">
-                                <div class="column is-6">
+                        <div class="column is-2 pt-0 pb-0 tile">
+                            <div class="columns is-multiline is-size-6 tile is-parent">
+
+                                <div class="column is-6 tile is-child">
                                     <div class="box pt-1 pb-1" :class="popClassification.id == 1 ? 'is-eco is-bold' : 'has-background-grey-darker has-text-grey'" :style="popClassification.id == 1 ? 'opacity: 1' : 'opacity: 0.5'">
                                             <font-awesome-icon :icon="popClassification.id == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
                                         <div :class="popClassification.id == 1 ? 'is-dark has-text-weight-bold' : 'has-text-grey-light'">CORE</div>
                                     </div>
                                 </div>
-                                <div class="column is-6">
+
+                                <div class="column is-6 tile is-child">
                                     <div class="box pt-1 pb-1" :class="popCritical == 1 ? 'is-eco is-bold' : 'has-background-grey-darker has-text-grey'" :style="popCritical == 1 ? 'opacity: 1' : 'opacity: 0.5'">
                                             <font-awesome-icon :icon="popCritical == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
                                         <div :class="popCritical == 1 ? 'is-dark has-text-weight-bold' : 'has-text-grey-light'">CRITICO</div>
                                     </div>
                                 </div>
-                                <div class="column is-6">
+
+                                <div class="column is-6 tile is-child">
                                     <div class="box pt-1 pb-1" :class="vip_entel.is_vip ? 'is-eco is-bold' : 'has-background-grey-darker has-text-grey'" :style="vip_entel.is_vip ? 'opacity: 1' : 'opacity: 0.5'">
 
-
                                         <div class="" :class="vip_entel.is_vip ? 'is-dark has-text-weight-bold' : 'has-text-grey-light'">
-
                                             <div class="">
                                                 <font-awesome-icon :icon="vip_entel.is_vip == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
                                                 <span v-if="vip_entel.is_vip">&nbsp;VIP {{ vip_entel.category }}</span>
@@ -125,20 +134,33 @@
                                                 <div class="has-text-grey-light">VIP</div>
                                             </div>
                                         </div>
-                                        
                                     </div>
                                 </div>
-                                <div class="column is-6">
+
+                                <div class="column is-6 tile is-child">
                                     <div class="box pt-1 pb-1" :class="pop.current_alba ? 'is-eco is-bold' : 'has-background-grey-darker has-text-grey'" :style="pop.current_alba ? 'opacity: 1' : 'opacity: 0.5'">
                                             <font-awesome-icon :icon="pop.current_alba ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
-                                        <div :class="pop.current_alba ? 'is-dark has-text-weight-bold' : 'has-text-grey-light'">{{ pop.current_alba ? pop.current_alba.turret_type.type + " ALBA" : 'TORRERA ALBA'}}</div>
+                                        <div :class="pop.current_alba ? 'is-dark has-text-weight-bold' : 'has-text-grey-light'">{{ pop.current_alba ? pop.current_alba.turret_type.type : 'TORRERA'}}</div>
                                     </div>
                                 </div>
+
+                                <!-- <div class="column is-6">
+                                    <div class="box pt-1 pb-1" :class="pop.centro_invernal == 1 ? 'is-eco is-bold' : 'has-background-grey-darker has-text-grey'" :style="pop.centro_invernal == 1 ? 'opacity: 1' : 'opacity: 0.5'">
+                                            <font-awesome-icon :icon="pop.centro_invernal == 1 ? ['far', 'check-circle'] : ['far', 'times-circle']"/>
+                                        <div :class="pop.centro_invernal == 1 ? 'is-dark has-text-weight-bold' : 'has-text-grey-light'">CENTRO INVERNAL</div>
+                                    </div>
+                                </div> -->
+
+                                
                             </div>
                         </div>
 
-                        <div class="column is-1 has-text-right" >
-                            
+                        <div class="column is-1 tile">
+                            <div class="box pt-1 pb-1 is-grey is-bold tile is-child is-size-6" style="opacity: 1">
+                                <div class="is-dark has-text-weight-bold pb-2">RESPONSABLE OPERACION</div>
+                                <div :class="pop.operation_responsable_id == 1 ? 'has-text-link has-text-weight-bold' : 'has-text-grey-light'">Infraestructura</div>
+                                <div :class="pop.operation_responsable_id == 2 ? 'has-text-link has-text-weight-bold' : 'has-text-grey-light'">CRM</div>
+                            </div>
                         </div>
 
                         <div class="column is-1 has-text-right" v-if="canEditPop">
@@ -173,6 +195,7 @@
         <div class="hero is-dark">
             <div class="hero-body" style="padding-top: 32px; padding-bottom: 32px;">
                 <nav class="level">
+
                     <div class="level-item has-text-centered">
                         <div>
                             <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold is-size-5">{{ popAttentionPriority }}</b-tag>
@@ -181,6 +204,25 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="level-item has-text-centered">
+                        <div>
+                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold is-size-5">{{ pop.service_type ? pop.service_type.service_type.toUpperCase() : '-' }}</b-tag>
+                            <div style="padding-top: 4px;">
+                                <div class="is-size-6 has-text-weight-semibold">TIPO POP</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="level-item has-text-centered">
+                        <div>
+                            <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold is-size-5">{{ pop.operation_responsable ? pop.operation_responsable.responsable.toUpperCase() : '-' }}</b-tag>
+                            <div style="padding-top: 4px;">
+                                <div class="is-size-6 has-text-weight-semibold">RESPONSABLE OPERACION</div>
+                            </div>
+                        </div>
+                    </div> -->
+
                     <div class="level-item has-text-centered">
                         <div>
                             <!-- <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold is-size-5">{{ popDependences }}</b-tag> -->
@@ -190,12 +232,14 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- <div class="level-item has-text-centered">
                         <div>
                             <p class="is-size-5 has-text-weight-semibold">{{ dependences ? dependences.length : 0 }}</p>
                             <p class="is-size-7 has-text-weight-semibold">DEPENDENCIAS TOTALES</p>
                         </div>
                     </div> -->
+
                     <div class="level-item has-text-centered">
                         <div>
                             <b-tag type="is-white" size="is-large" class="has-text-link has-text-weight-bold is-size-5">{{ popCategory ? popCategory : '-' }}</b-tag>
@@ -340,10 +384,10 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faHome, faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle, faBookmark, faBars } from "@fortawesome/free-solid-svg-icons";
+    import { faHome, faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle, faBookmark, faBars, faSnowboarding } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     import { faCheckCircle as farCheckCircle, faTimesCircle as farTimesCircle, faBookmark as farBookmark, faClipboard as farClipboard } from '@fortawesome/free-regular-svg-icons'
-    library.add(faHome, faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle, faBookmark, farBookmark, farClipboard, faBars)
+    library.add(faHome, faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle, faBookmark, farBookmark, farClipboard, faBars, faSnowboarding)
     export default {
         components: {
             Location: () => import(/* webpackChunkName: "chunks/pop/location"*/'./Location'),

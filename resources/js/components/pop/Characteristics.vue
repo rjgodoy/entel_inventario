@@ -86,6 +86,17 @@
                         <div class="">
                             <div class="" style="padding-left: 8px; padding-bottom: 0px; padding-top: 16px;">
                                 <div class="is-size-5 title has-text-weight-semibold has-text-grey-dark">Negocio Movil</div>
+
+                                <div class="field" v-if="!isEditMode">
+                                    <div class="has-text-weight-semibold is-size-6">Cluster Alta Criticidad (CAC):</div>
+                                    <font-awesome-icon 
+                                        :icon="pop.cluster_type ? ['fas', 'check-circle'] : ['far', 'times-circle']"
+                                        :class="pop.cluster_type ? 'has-text-eco' : 'has-text-grey-light'"
+                                        :disabled="!pop.cluster_type"
+                                    />
+                                    <label class="has-text-weight-normal is-size-6">{{ pop.cluster_type ? pop.cluster_type.cluster_type : 'No es CAC' }}</label>
+                                </div>
+
                                 <div class="field">
                                     <font-awesome-icon 
                                         :icon="pop.red_minima_n1 ? ['fas', 'check-circle'] : ['far', 'times-circle']"

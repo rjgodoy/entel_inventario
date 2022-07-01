@@ -59,6 +59,7 @@ class UpdatePops extends Command
             AND comuna_id IS NOT NULL
             AND solution_type_id IS NOT NULL
             AND ran_device_status_id IS NOT NULL
+            AND pop_m_status IS NOT NULL
             AND pop_m_id IS NOT NULL')
             ->select(
                 'aess_cells.rat_type_id',
@@ -83,17 +84,17 @@ class UpdatePops extends Command
 
         foreach ($aessData as $newPop) {
 
-            $zona_id = Comuna::where('id', $newPop->comuna_id)->first();
+            $comuna = Comuna::where('id', $newPop->comuna_id)->first();
 
             // Insert POP
-            if ($zona_id) {
+            if ($comuna) {
                 $pop = Pop::insertOrIgnore([
                     [
                         'pop_e_id' => $newPop->pop_e_id, 
                         'nombre' => $newPop->pop_name, 
                         'direccion' => $newPop->address, 
                         'comuna_id' => $newPop->comuna_id, 
-                        'zona_id' => $zona_id,
+                        'zona_id' => $comuna->zona_id,
                         'latitude' => $newPop->lat_wgs84, 
                         'longitude' => $newPop->lon_wgs84, 
                         'created_at' => Carbon::now(),

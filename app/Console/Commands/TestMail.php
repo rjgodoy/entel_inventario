@@ -39,7 +39,7 @@ class TestMail extends Command
      */
     public function handle()
     {
-        Mail::to('proyectosinfraestructura@entel.cl')
+        Mail::to('rodrigo.godoy@anidalatam.com')
             ->send(new UserRequestAccepted());
     }
 }

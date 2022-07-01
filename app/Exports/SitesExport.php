@@ -216,6 +216,7 @@ class SitesExport implements FromCollection, WithTitle, ShouldAutoSize, WithHead
                 ->whereRaw($condition_ranco)
                 ->whereRaw($condition_red_minima)
                 ->orderBy('pop_id', 'asc')
+                // ->groupBy('pop_id')
     	        ->get();
         }
 

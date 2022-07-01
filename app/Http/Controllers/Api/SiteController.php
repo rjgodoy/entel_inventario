@@ -10,6 +10,7 @@ use App\Models\ClassificationType;
 use App\Models\Log;
 use App\Models\LogType;
 use App\Models\Site;
+use App\Models\User;
 use DB;
 use Illuminate\Http\Request;
 
@@ -38,10 +39,10 @@ class SiteController extends Controller
         if ($user) {
 
             $sites = Site::with('state', 'technologies.state', 'technologies.technology_type', 'classification_type', 'attention_priority_type', 'attention_type')
-            ->whereHas('technologies', function($q) { 
-                $q->withoutTrashed();
-            })
-            ->limit(200)
+            // ->whereHas('technologies', function($q) { 
+            //     $q->withoutTrashed();
+            // })
+            // ->limit(200)
             ->get();
 
             return new SiteCollection($sites);

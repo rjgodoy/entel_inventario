@@ -254,11 +254,19 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             'LATITUD',
             'LONGITUD',
 
+            'DEPENDENCIAS',
+            'AUTONOMIA TEORICA',
+
             'TIPO VIP',
             'CATEGORIA VIP',
+            'CENTRO INVERNAL',
+            'TIPO CLUSTER ALATA CRITICIDAD (CAC)',
 
+            'TIPO SERVICIO',
             'SISTEMA DE ENERGÍA',
             'RESPONSABLE DE ENERGÍA',
+            'RESPONSABLE OPERACION',
+
             'PANEL SOLAR',
             'EOLICA',
             'BALIZA',
@@ -266,12 +274,11 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             'RCA',
             'ZONA ACOPIO TEMPORAL (ZAT)',
             'TIPO TORRERA (ALBA)',
-            'AUTONOMIA TEORICA',
 
             'Q CONTRATOS COMSITE',
-            'Nº CONTRATOS',
+            'Nº CONTRATOS'
 
-            'DEPENDENCIAS'
+            
         ];
     }
 
@@ -290,6 +297,20 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             }
         }
 
+        // $classification_id = 10;
+        // $classification_type = '';
+        // $pe_3g = 0;
+        // foreach ($pop->sites as $site) {
+        //     if ($site->classification_type_id && $site->classification_type_id <= $classification_id) {
+        //         $classification_id = $site->classification_type_id;
+        //         $classification_type = $site->classification_type->classification_type;
+        //     }
+        //     if ($site->pe_3g == 1) {
+        //         $pe_3g = 1;
+        //     }
+
+        // }
+
         return [
             $pop->id,
             $pop->pop_e_id,
@@ -304,7 +325,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             $pop->latitude,
             $pop->longitude,
 
-            // $pop->classification_type ? $pop->classification_type->classification_type : '',
+            // $classification_type,
             // $pop->category ? $pop->category->type : '',
             // $pop->attention_priority ? $pop->attention_priority->type : '',
 
@@ -318,12 +339,21 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             // $pop->derivations->first() ? $pop->derivations->first()->derivation_type->type : '',
             // $pop->coverages->first() ? $pop->coverages->first()->coverage_type->type : '',
             // // $pop->towers->first() ? $pop->history_tower_types->first()->tower_type->tower_type : '',
+            // $pe_3g ? 'SI' : 'NO',
+            $pop->dependences,
+            $pop->theoretical_autonomy,
 
-            $pop->current_entel_vip ? $pop->current_entel_vip->vip_category_type->type : '',
-            $pop->current_entel_vip ? $pop->current_entel_vip->category : '',
 
+            $pop->current_entel_vip ? $pop->current_entel_vip->vip_category_type->type : 'N/A',
+            $pop->current_entel_vip ? $pop->current_entel_vip->category : '-',
+            $pop->centro_invernal ? 'SI' : 'NO',
+            $pop->cluster_type ? $pop->cluster_type->type : '',
+
+            $pop->service_type ? $pop->service_type->service_type : '',
             $pop->energy_system ? $pop->energy_system->system : 'PENDIENTE',
             $pop->energy_responsable ? $pop->energy_responsable->responsable : 'PENDIENTE',
+            $pop->operation_responsable ? $pop->operation_responsable->responsable : '',
+
             $pop->solar ? 'SI' : 'NO',
             $pop->eolica ? 'SI' : 'NO',
             $pop->vertical_structures->first() ? ($pop->vertical_structures->first()->beacons->first() ? $pop->vertical_structures->first()->beacons->first()->beacon_type->type : null) : null,
@@ -332,12 +362,10 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
             $temporary_storage ? $temporary_storage->pop->nombre : 'NO TIENE ZAT ASIGNADA',
             $pop->current_alba ? $pop->current_alba->turret_type->type : '',
 
-            $pop->theoretical_autonomy,
-
             $pop->comsites->count(),
             $id_comsites,
 
-            $pop->dependences
+            
 
         ];
     }
@@ -414,13 +442,37 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
                 ],
                 'fill' => [
                     'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => ['argb' => '5081bd']
+                ]
+            ]
+        );
+
+        $event->sheet->styleCells(
+            'O1:P1',
+            [
+                'font' => [
+                    'size' => 11,
+                    // 'name' => 'Arial',
+                    'bold' => true,
+                    'italic' => false,
+                    // 'underline' => \PhpOffice\PhpSpreadsheet\Style\Font::UNDERLINE_DOUBLE,
+                    'strikethrough' => false,
+                    'color' => ['argb' => 'FFFFFF']
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'wrapText' => true,
+                ],
+                'fill' => [
+                    'fillType'  => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => ['argb' => '4bacc6']
                 ]
             ]
         );
 
         $event->sheet->styleCells(
-            'O1:R1',
+            'Q1:V1',
             [
                 'font' => [
                     'size' => 11,
@@ -444,7 +496,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
         );
 
         $event->sheet->styleCells(
-            'S1:U1',
+            'W1:Y1',
             [
                 'font' => [
                     'size' => 11,
@@ -468,7 +520,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
         );
 
         $event->sheet->styleCells(
-            'V1',
+            'Z1:AB1',
             [
                 'font' => [
                     'size' => 11,
@@ -492,7 +544,7 @@ class PopsExport implements FromCollection, WithTitle, ShouldAutoSize, WithHeadi
         );
 
         $event->sheet->styleCells(
-            'W1:Z1',
+            'AC1:AE1',
             [
                 'font' => [
                     'size' => 11,

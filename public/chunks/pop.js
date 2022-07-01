@@ -352,11 +352,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignInAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTasks"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTemperatureLow"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBroadcastTower"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faDollarSign"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faLeaf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignal"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkedAlt"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCamera"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faUserTie"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faVideo"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faStreetView"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faExclamationTriangle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBookmark"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faBookmark"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faClipboard"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBars"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faEdit"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimesCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignInAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTasks"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBolt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTemperatureLow"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBroadcastTower"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faDollarSign"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFileContract"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFolderOpen"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faLeaf"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSignal"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBezierCurve"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faMapMarkedAlt"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCheckCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faCamera"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faUserTie"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faVideo"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faStreetView"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faExclamationTriangle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBookmark"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faBookmark"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faClipboard"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faBars"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faSnowboarding"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Location: function Location() {
@@ -935,12 +979,14 @@ var render = function() {
         class:
           _vm.pop.risk_types && _vm.pop.risk_types.length
             ? "is-danger"
+            : _vm.pop.centro_invernal == 1
+            ? "is-white"
             : "is-black-ter"
       },
       [
         _c("div", { staticClass: "hero-body" }, [
           _c("div", {}, [
-            _c("div", { staticClass: "columns" }, [
+            _c("div", { staticClass: "columns tile is-ancestor" }, [
               _c(
                 "div",
                 { staticClass: "column is-1 has-text-centered pt-2 pb-0" },
@@ -1063,8 +1109,7 @@ var render = function() {
                     _c(
                       "h2",
                       {
-                        staticClass:
-                          "subtitle has-text-weight-semibold has-text-light",
+                        staticClass: "subtitle has-text-weight-semibold",
                         staticStyle: { "margin-bottom": "4px" }
                       },
                       [
@@ -1100,10 +1145,7 @@ var render = function() {
                     !_vm.canEditZona || !_vm.isEditMode
                       ? _c(
                           "div",
-                          {
-                            staticClass:
-                              "is-size-6 has-text-weight-normal has-text-light"
-                          },
+                          { staticClass: "is-size-6 has-text-weight-normal" },
                           [
                             _vm._v(
                               "\n                                Zona " +
@@ -1185,6 +1227,26 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
+                  _vm.pop.centro_invernal == 1
+                    ? _c("div", { staticClass: "columns is-vcentered" }, [
+                        _c(
+                          "div",
+                          { staticClass: "column is-2 has-text-centered" },
+                          [
+                            _c("font-awesome-icon", {
+                              attrs: {
+                                icon: ["fas", "snowboarding"],
+                                size: "3x"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _vm._m(1)
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
                   _vm.pop.current_office
                     ? _c("div", { staticClass: "columns is-vcentered" }, [
                         _c(
@@ -1199,7 +1261,7 @@ var render = function() {
                           1
                         ),
                         _vm._v(" "),
-                        _vm._m(1)
+                        _vm._m(2)
                       ])
                     : _vm._e(),
                   _vm._v(" "),
@@ -1271,213 +1333,257 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "column is-2 pt-0 pb-0" }, [
-                _c("div", { staticClass: "columns is-multiline is-size-6" }, [
-                  _c("div", { staticClass: "column is-6" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "box pt-1 pb-1",
-                        class:
-                          _vm.popClassification.id == 1
+              _c("div", { staticClass: "column is-2 pt-0 pb-0 tile" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "columns is-multiline is-size-6 tile is-parent"
+                  },
+                  [
+                    _c("div", { staticClass: "column is-6 tile is-child" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "box pt-1 pb-1",
+                          class:
+                            _vm.popClassification.id == 1
+                              ? "is-eco is-bold"
+                              : "has-background-grey-darker has-text-grey",
+                          style:
+                            _vm.popClassification.id == 1
+                              ? "opacity: 1"
+                              : "opacity: 0.5"
+                        },
+                        [
+                          _c("font-awesome-icon", {
+                            attrs: {
+                              icon:
+                                _vm.popClassification.id == 1
+                                  ? ["far", "check-circle"]
+                                  : ["far", "times-circle"]
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              class:
+                                _vm.popClassification.id == 1
+                                  ? "is-dark has-text-weight-bold"
+                                  : "has-text-grey-light"
+                            },
+                            [_vm._v("CORE")]
+                          )
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "column is-6 tile is-child" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "box pt-1 pb-1",
+                          class:
+                            _vm.popCritical == 1
+                              ? "is-eco is-bold"
+                              : "has-background-grey-darker has-text-grey",
+                          style:
+                            _vm.popCritical == 1 ? "opacity: 1" : "opacity: 0.5"
+                        },
+                        [
+                          _c("font-awesome-icon", {
+                            attrs: {
+                              icon:
+                                _vm.popCritical == 1
+                                  ? ["far", "check-circle"]
+                                  : ["far", "times-circle"]
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              class:
+                                _vm.popCritical == 1
+                                  ? "is-dark has-text-weight-bold"
+                                  : "has-text-grey-light"
+                            },
+                            [_vm._v("CRITICO")]
+                          )
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "column is-6 tile is-child" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "box pt-1 pb-1",
+                          class: _vm.vip_entel.is_vip
                             ? "is-eco is-bold"
                             : "has-background-grey-darker has-text-grey",
-                        style:
-                          _vm.popClassification.id == 1
+                          style: _vm.vip_entel.is_vip
                             ? "opacity: 1"
                             : "opacity: 0.5"
-                      },
-                      [
-                        _c("font-awesome-icon", {
-                          attrs: {
-                            icon:
-                              _vm.popClassification.id == 1
-                                ? ["far", "check-circle"]
-                                : ["far", "times-circle"]
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            class:
-                              _vm.popClassification.id == 1
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              class: _vm.vip_entel.is_vip
                                 ? "is-dark has-text-weight-bold"
                                 : "has-text-grey-light"
-                          },
-                          [_vm._v("CORE")]
-                        )
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "column is-6" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "box pt-1 pb-1",
-                        class:
-                          _vm.popCritical == 1
+                            },
+                            [
+                              _c(
+                                "div",
+                                {},
+                                [
+                                  _c("font-awesome-icon", {
+                                    attrs: {
+                                      icon:
+                                        _vm.vip_entel.is_vip == 1
+                                          ? ["far", "check-circle"]
+                                          : ["far", "times-circle"]
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _vm.vip_entel.is_vip
+                                    ? _c("span", [
+                                        _vm._v(
+                                          " VIP " +
+                                            _vm._s(_vm.vip_entel.category)
+                                        )
+                                      ])
+                                    : _vm._e()
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _vm.vip_entel.is_vip
+                                ? _c("div", {}, [
+                                    _c(
+                                      "div",
+                                      {
+                                        class: _vm.vip_entel.is_vip
+                                          ? "is-dark has-text-weight-bold"
+                                          : "has-text-grey-light"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.vip_entel.is_vip
+                                              ? _vm.vip_entel.category_type
+                                              : "VIP"
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              !_vm.vip_entel.is_vip
+                                ? _c("div", {}, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "has-text-grey-light" },
+                                      [_vm._v("VIP")]
+                                    )
+                                  ])
+                                : _vm._e()
+                            ]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "column is-6 tile is-child" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "box pt-1 pb-1",
+                          class: _vm.pop.current_alba
                             ? "is-eco is-bold"
                             : "has-background-grey-darker has-text-grey",
-                        style:
-                          _vm.popCritical == 1 ? "opacity: 1" : "opacity: 0.5"
-                      },
-                      [
-                        _c("font-awesome-icon", {
-                          attrs: {
-                            icon:
-                              _vm.popCritical == 1
+                          style: _vm.pop.current_alba
+                            ? "opacity: 1"
+                            : "opacity: 0.5"
+                        },
+                        [
+                          _c("font-awesome-icon", {
+                            attrs: {
+                              icon: _vm.pop.current_alba
                                 ? ["far", "check-circle"]
                                 : ["far", "times-circle"]
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            class:
-                              _vm.popCritical == 1
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              class: _vm.pop.current_alba
                                 ? "is-dark has-text-weight-bold"
                                 : "has-text-grey-light"
-                          },
-                          [_vm._v("CRITICO")]
-                        )
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "column is-6" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "box pt-1 pb-1",
-                        class: _vm.vip_entel.is_vip
-                          ? "is-eco is-bold"
-                          : "has-background-grey-darker has-text-grey",
-                        style: _vm.vip_entel.is_vip
-                          ? "opacity: 1"
-                          : "opacity: 0.5"
-                      },
-                      [
-                        _c(
-                          "div",
-                          {
-                            class: _vm.vip_entel.is_vip
-                              ? "is-dark has-text-weight-bold"
-                              : "has-text-grey-light"
-                          },
-                          [
-                            _c(
-                              "div",
-                              {},
-                              [
-                                _c("font-awesome-icon", {
-                                  attrs: {
-                                    icon:
-                                      _vm.vip_entel.is_vip == 1
-                                        ? ["far", "check-circle"]
-                                        : ["far", "times-circle"]
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _vm.vip_entel.is_vip
-                                  ? _c("span", [
-                                      _vm._v(
-                                        " VIP " + _vm._s(_vm.vip_entel.category)
-                                      )
-                                    ])
-                                  : _vm._e()
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _vm.vip_entel.is_vip
-                              ? _c("div", {}, [
-                                  _c(
-                                    "div",
-                                    {
-                                      class: _vm.vip_entel.is_vip
-                                        ? "is-dark has-text-weight-bold"
-                                        : "has-text-grey-light"
-                                    },
-                                    [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.vip_entel.is_vip
-                                            ? _vm.vip_entel.category_type
-                                            : "VIP"
-                                        )
-                                      )
-                                    ]
-                                  )
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            !_vm.vip_entel.is_vip
-                              ? _c("div", {}, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "has-text-grey-light" },
-                                    [_vm._v("VIP")]
-                                  )
-                                ])
-                              : _vm._e()
-                          ]
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "column is-6" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "box pt-1 pb-1",
-                        class: _vm.pop.current_alba
-                          ? "is-eco is-bold"
-                          : "has-background-grey-darker has-text-grey",
-                        style: _vm.pop.current_alba
-                          ? "opacity: 1"
-                          : "opacity: 0.5"
-                      },
-                      [
-                        _c("font-awesome-icon", {
-                          attrs: {
-                            icon: _vm.pop.current_alba
-                              ? ["far", "check-circle"]
-                              : ["far", "times-circle"]
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            class: _vm.pop.current_alba
-                              ? "is-dark has-text-weight-bold"
-                              : "has-text-grey-light"
-                          },
-                          [
-                            _vm._v(
-                              _vm._s(
-                                _vm.pop.current_alba
-                                  ? _vm.pop.current_alba.turret_type.type +
-                                      " ALBA"
-                                  : "TORRERA ALBA"
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.pop.current_alba
+                                    ? _vm.pop.current_alba.turret_type.type
+                                    : "TORRERA"
+                                )
                               )
-                            )
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  ])
-                ])
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  ]
+                )
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "column is-1 has-text-right" }),
+              _c("div", { staticClass: "column is-1 tile" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "box pt-1 pb-1 is-grey is-bold tile is-child is-size-6",
+                    staticStyle: { opacity: "1" }
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "is-dark has-text-weight-bold pb-2" },
+                      [_vm._v("RESPONSABLE OPERACION")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        class:
+                          _vm.pop.operation_responsable_id == 1
+                            ? "has-text-link has-text-weight-bold"
+                            : "has-text-grey-light"
+                      },
+                      [_vm._v("Infraestructura")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        class:
+                          _vm.pop.operation_responsable_id == 2
+                            ? "has-text-link has-text-weight-bold"
+                            : "has-text-grey-light"
+                      },
+                      [_vm._v("CRM")]
+                    )
+                  ]
+                )
+              ]),
               _vm._v(" "),
               _vm.canEditPop
                 ? _c(
@@ -1583,26 +1689,6 @@ var render = function() {
                     [_vm._v(_vm._s(_vm.popAttentionPriority))]
                   ),
                   _vm._v(" "),
-                  _vm._m(2)
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "level-item has-text-centered" }, [
-              _c(
-                "div",
-                [
-                  _c(
-                    "b-tag",
-                    {
-                      staticClass:
-                        "has-text-link has-text-weight-bold is-size-5",
-                      attrs: { type: "is-white", size: "is-large" }
-                    },
-                    [_vm._v(_vm._s(_vm.pop.dependences))]
-                  ),
-                  _vm._v(" "),
                   _vm._m(3)
                 ],
                 1
@@ -1620,7 +1706,15 @@ var render = function() {
                         "has-text-link has-text-weight-bold is-size-5",
                       attrs: { type: "is-white", size: "is-large" }
                     },
-                    [_vm._v(_vm._s(_vm.popCategory ? _vm.popCategory : "-"))]
+                    [
+                      _vm._v(
+                        _vm._s(
+                          _vm.pop.service_type
+                            ? _vm.pop.service_type.service_type.toUpperCase()
+                            : "-"
+                        )
+                      )
+                    ]
                   ),
                   _vm._v(" "),
                   _vm._m(4)
@@ -1640,10 +1734,50 @@ var render = function() {
                         "has-text-link has-text-weight-bold is-size-5",
                       attrs: { type: "is-white", size: "is-large" }
                     },
-                    [_vm._v(_vm._s(_vm.popAttentionType))]
+                    [_vm._v(_vm._s(_vm.pop.dependences))]
                   ),
                   _vm._v(" "),
                   _vm._m(5)
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item has-text-centered" }, [
+              _c(
+                "div",
+                [
+                  _c(
+                    "b-tag",
+                    {
+                      staticClass:
+                        "has-text-link has-text-weight-bold is-size-5",
+                      attrs: { type: "is-white", size: "is-large" }
+                    },
+                    [_vm._v(_vm._s(_vm.popCategory ? _vm.popCategory : "-"))]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(6)
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item has-text-centered" }, [
+              _c(
+                "div",
+                [
+                  _c(
+                    "b-tag",
+                    {
+                      staticClass:
+                        "has-text-link has-text-weight-bold is-size-5",
+                      attrs: { type: "is-white", size: "is-large" }
+                    },
+                    [_vm._v(_vm._s(_vm.popAttentionType))]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(7)
                 ],
                 1
               )
@@ -1672,7 +1806,7 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _vm._m(6)
+                  _vm._m(8)
                 ],
                 1
               )
@@ -1937,6 +2071,16 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "column" }, [
       _c("div", { staticClass: "is-size-5 has-text-weight-semibold" }, [
+        _vm._v("Centro Invernal")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column" }, [
+      _c("div", { staticClass: "is-size-5 has-text-weight-semibold" }, [
         _vm._v("Oficina CRM")
       ])
     ])
@@ -1948,6 +2092,16 @@ var staticRenderFns = [
     return _c("div", { staticStyle: { "padding-top": "4px" } }, [
       _c("div", { staticClass: "is-size-6 has-text-weight-semibold" }, [
         _vm._v("PRIORIDAD ATENCION")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticStyle: { "padding-top": "4px" } }, [
+      _c("div", { staticClass: "is-size-6 has-text-weight-semibold" }, [
+        _vm._v("TIPO POP")
       ])
     ])
   },

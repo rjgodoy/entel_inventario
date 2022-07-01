@@ -408,4 +408,34 @@ class Pop extends Model
         return $this->hasMany(PopFavorite::class);
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function operation_responsable() 
+    {
+        return $this->belongsTo(OperationResponsable::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function cluster_type() 
+    {
+        return $this->belongsTo(ClusterType::class);
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function service_type() 
+    {
+        return $this->belongsTo(ServiceType::class);
+    }
+
 }

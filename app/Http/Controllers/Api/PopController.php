@@ -90,7 +90,7 @@ class PopController extends Controller
                 $q->withoutTrashed();
             })
             // ->orderBy('id')
-            ->limit(100)
+            // ->limit(100)
             ->get();
 
             return new PopCollection($pops);
@@ -276,7 +276,10 @@ class PopController extends Controller
             'drone_videos',
             'risk_types',
             'current_alba.turret_type',
-            'pop_favorites'
+            'pop_favorites',
+            'operation_responsable',
+            'cluster_type',
+            'service_type'
             )
             ->where('id', $id)
             ->first();

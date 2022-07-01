@@ -3,10 +3,10 @@
 
 Su solicitud de ingreso a Inventario ha sido rechazada. Si tiene dudas, favor contactar con el administrador.
 
-@component('mail::button', ['url' => 'mailto:proyectosinfraestructura@entel.cl'])
+@component('mail::button', ['url' => 'mailto:nponce@dataenergy.cl'])
 Contactar
 @endcomponent
 
-Thanks,<br>
+Gracias,<br>
 {{ config('app.name') }}
 @endcomponent

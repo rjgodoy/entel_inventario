@@ -1,7 +1,7 @@
 <template>
     <GmapMap
         class="map"
-        style=" min-height: 800px; /*min-height: 576px; */ height: 100%"
+        style=" min-height: 920px; /*min-height: 576px; */ height: 100%"
         ref="map"
         :center="center"
         :zoom="zoom"

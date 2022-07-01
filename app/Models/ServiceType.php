@@ -12,4 +12,9 @@ class ServiceType extends Model
     {
         return $this->hasMany(SiteType::class);
     }
+
+    public function pop() 
+    {
+        return $this->hasMany(Pop::class);
+    }
 }

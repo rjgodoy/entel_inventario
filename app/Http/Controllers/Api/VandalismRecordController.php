@@ -63,12 +63,24 @@ class VandalismRecordController extends Controller
      */
     public function store(Request $request)
     {
-        VandalismRecord::create([
-            'site_id' => $request->site_id,
-            'vandalized_at' => $request->date,
-            'description' => $request->description,
-            'impact' => $request->impact
-        ]);
+        $recordDate = date('Y-m-d', strtotime($request->date));
+
+        $record = VandalismRecord::onlyTrashed()
+        ->where('site_id', $request->site_id)
+        ->where('vandalized_at', $recordDate)
+        ->where('description', $request->description)
+        ->first();
+
+        if ($record) {
+            $record->restore();
+        } else {
+            VandalismRecord::create([
+                'site_id' => $request->site_id,
+                'vandalized_at' => $request->date,
+                'description' => $request->description,
+                'impact' => $request->impact
+            ]);
+        }
     }
 
     /**

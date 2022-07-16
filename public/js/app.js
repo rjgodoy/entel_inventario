@@ -54843,7 +54843,7 @@ var render = function() {
         "section",
         {
           staticClass: "section has-background-black-ter",
-          staticStyle: { "padding-top": "0px", "padding-bottom": "0px" }
+          staticStyle: { "padding-top": "10px", "padding-bottom": "10px" }
         },
         [
           _c(

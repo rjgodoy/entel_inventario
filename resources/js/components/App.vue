@@ -1,7 +1,7 @@
 <template>
     <div class="sticky">
 
-        <section class="section has-background-black-ter" style="padding-top: 0px; padding-bottom: 0px;">
+        <section class="section has-background-black-ter" style="padding-top: 10px; padding-bottom: 10px;">
             <div class="columns is-vcentered" style="padding: 12px;">
 
                 <!-- ICONO Y NOMBRE -->

@@ -330,20 +330,53 @@ export default {
 
     computed: {
         pe_3g() {
-            // console.log(!!+this.pop.pe_3g)
             return !!+this.pop.pe_3g
+            // if (this.pop.sites) {
+            //     console.log(this.pop.sites)
+            //     this.pop.sites.forEach(site => {
+            //         if (site.pe_3g == 1) { 
+            //             return true
+            //         }
+            //     })
+            // }
+            // return false
         },
 
         mpls() {
             return !!+this.pop.mpls
+            // if (this.pop.sites) {
+            //     this.pop.sites.forEach(site => {
+            //         if (site.mpls == 1) { 
+            //             return true
+            //         }
+            //     })
+            // }
+            // return false
         },
 
         olt() {
             return !!+this.pop.olt
+            // if (this.pop.sites) {
+            //     this.pop.sites.forEach(site => {
+            //         if (site.olt == 1) { 
+            //             return true
+            //         }
+            //     })
+            // }
+            // return false
         },
 
         olt_3play() {
-            return !!+this.pop.olt_3play
+            // return !!+this.pop.olt_3play
+            if (this.pop.sites) {
+                console.log(this.pop.sites)
+                this.pop.sites.forEach(site => {
+                    if (site.olt_3play == 1) { 
+                        return true
+                    }
+                })
+            }
+            return false
         },
 
         vip() {

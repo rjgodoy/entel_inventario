@@ -9,12 +9,12 @@
                 <div class="columns is-multiline">
                     <div class="column is-6">
                         <b-field label="Marca / Modelo">
-                            <b-select placeholder="Selecciona..." v-model="generatorSetType">
+                            <b-select placeholder="Selecciona..." v-model="generatorSetModel">
                                 <option
-                                    v-for="option in generatorSetTypes"
+                                    v-for="option in generatorSetModels"
                                     :value="option"
                                     :key="option.id">
-                                    {{ option.type }} - {{ option.model }}
+                                    {{ option.generator_set_brand && option.generator_set_brand.name }} - {{ option.name }}
                                 </option>
                             </b-select>
                         </b-field>
@@ -49,8 +49,8 @@
 
         data() {
             return {
-                generatorSetTypes: Array,
-                generatorSetType: null,
+                generatorSetModels: Array,
+                generatorSetModel: null,
                 isOnlyRoom: false
             }
         },
@@ -63,20 +63,21 @@
         },
 
         mounted() {
-           this.getGeneratorSetTypes()
+           this.getGeneratorSetModels()
         },
 
         methods: {
-            getGeneratorSetTypes() {
-                axios.get('/api/generatorSetTypes')
+            getGeneratorSetModels() {
+                axios.get('/api/generatorSetModels')
                 .then(response => {
-                    this.generatorSetTypes = response.data.generatorSetTypes
+                    console.log(response.data)
+                    this.generatorSetModels = response.data.generatorSetModels
                 })
             },
 
             register() {
                 const params = {
-                    'generator_set_type_id': this.generatorSetType.id,
+                    'generator_set_model_id': this.generatorSetModel.id,
                     'user_id': this.user.id,
                     'pop_id': this.pop.id,
                     'room_id': this.room.id,

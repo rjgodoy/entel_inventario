@@ -224,13 +224,13 @@ class GeneratorSetController extends Controller
         if ($request->is_only_room) {
             $generatorSet = GeneratorSet::create([
                 'pop_id' => $request->pop_id,
-                'generator_set_type_id' => $request->generator_set_type_id,
+                'generator_set_model_id' => $request->generator_set_model_id,
                 'room_id' => $request->room_id
             ]);
         } else {
             $generatorSet = GeneratorSet::create([
                 'pop_id' => $request->pop_id,
-                'generator_set_type_id' => $request->generator_set_type_id
+                'generator_set_model_id' => $request->generator_set_model_id
             ]);
         }
 
@@ -366,9 +366,9 @@ class GeneratorSetController extends Controller
             ]);
         }
 
-        if($generatorSet->generator_set_type_id != $request->generator_set_type_id) {
+        if($generatorSet->generator_set_model_id != $request->generator_set_model_id) {
             $generatorSet->update([
-                'generator_set_type_id' => $request->generator_set_type_id
+                'generator_set_model_id' => $request->generator_set_model_id
             ]);
 
             Log::create([

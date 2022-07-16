@@ -20,9 +20,12 @@ let Reports = () => import(/* webpackChunkName: "chunks/reports"*/'./components/
 let NotFound = () => import(/* webpackChunkName: "chunks/helpers/notFound"*/ './components/helpers/NotFound');
 let Bridge = () => import(/* webpackChunkName: "chunks/bridge"*/'./components/auth/Bridge.vue')
 
+// Reportes
 let Comsite = () => import(/* webpackChunkName: "chunks/comsite"*/'./components/reports/comsite/Comsite.vue')
 let Revisions = () => import(/* webpackChunkName: "chunks/revisions"*/'./components/reports/maintenance/Revisions.vue')
+let Vandalism = () => import(/* webpackChunkName: "chunks/vandalism"*/'./components/reports/vandalism/Vandalism.vue')
 
+// Equipamiento
 let ElectricLines = () => import(/* webpackChunkName: "chunks/equipment/electricLines"*/'./components/equipment/electricLines/ElectricLines.vue')
 let Junctions = () => import(/* webpackChunkName: "chunks/equipment/junctions"*/'./components/equipment/junctions/Junctions.vue')
 let Generators = () => import(/* webpackChunkName: "chunks/equipment/generators"*/'./components/equipment/generators/Generators.vue')
@@ -69,6 +72,7 @@ export default {
                 { path: '/capacity/:id', name: 'Detalle de Sala', component: RoomDetail },
                 { path: '/comsite', name: 'Comsite', component: Comsite },
                 { path: '/revisions', name: 'Registros de rondas Técnicas', component: Revisions },
+                { path: '/vandalism', name: 'Registro de Vandalismos', component: Vandalism },
                 { path: '/eco', name: 'Gestion Ambiental', component: Eco },
                 { path: '/docs', name: 'Documentos', component: Documents },
                 { path: '/admin', name: 'Administración', component: Admin },

@@ -31,4 +31,32 @@ class VandalismRecord extends JsonResource
     {
         return parent::toArray($request);
     }
+
+    /**
+     * Returns the permissions of the resource.
+     *
+     * @return array
+     */
+    protected function permissions()
+    {
+        return [
+            'create' => Gate::allows('create-vandalism-record', $this->resource),
+            'update' => Gate::allows('update-vandalism-record', $this->resource),
+            'delete' => Gate::allows('delete-vandalism-record', $this->resource)
+        ];
+    }
+
+    /**
+     * Get any additional data that should be returned with the resource array.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return array
+     */
+    public function with($request)
+    {        
+        return [
+            'can' => $this->permissions()
+        ];
+    }
 }

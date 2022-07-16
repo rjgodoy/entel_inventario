@@ -88,7 +88,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalNewStorage: function ModalNewStorage() {
-      return Promise.all(/*! import() | chunks/eco/modals/newStorage */[__webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload~chu~fc18a3eb"), __webpack_require__.e("chunks/eco/modals/newStorage")]).then(__webpack_require__.bind(null, /*! ./modals/ModalNewStorage */ "./resources/js/components/eco/modals/ModalNewStorage.vue"));
+      return Promise.all(/*! import() | chunks/eco/modals/newStorage */[__webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload~chu~8c45ef65"), __webpack_require__.e("chunks/eco/modals/newStorage")]).then(__webpack_require__.bind(null, /*! ./modals/ModalNewStorage */ "./resources/js/components/eco/modals/ModalNewStorage.vue"));
     }
   },
   props: ['storageZones', 'user'],

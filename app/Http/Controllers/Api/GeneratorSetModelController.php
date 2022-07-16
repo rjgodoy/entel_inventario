@@ -19,7 +19,9 @@ class GeneratorSetModelController extends Controller
     {
         return new GeneratorSetModelCollection(GeneratorSetModel::with(['generator_set_brand' => function ($q) {
             $q->orderBy('name', 'DESC');
-        }])->get());
+        }])
+        ->orderBy('generator_set_brand_id', 'ASC')
+        ->get());
     }
 
     /**

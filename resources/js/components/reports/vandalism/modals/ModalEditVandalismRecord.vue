@@ -1,0 +1,200 @@
+<template>
+	<div class="modal-card">
+        <div class="modal-card" style="width: auto">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Editar registro de vandalismo</p>
+            </header>
+
+            <section class="modal-card-body">
+                <div class="columns is-multiline">
+                    <div class="column is-12">
+                        <b-field label="Sitio">
+                            <b-autocomplete
+                                autofocus
+                                :data="sites"
+                                icon-pack="fas"
+                                icon="search"
+                                :placeholder="!selected ? 'Nemónico del Sitio o nombre del POP...' : selected.nombre"
+                                :keep-first="true"
+                                :open-on-focus="text ? true : false"
+                                :loading="isFetching"
+                                :check-infinite-scroll="true"
+                                @typing="getAsyncData"
+                                @select="option => selected = option"
+                                @infinite-scroll="getMoreAsyncData">
+
+                                <template slot-scope="props">
+                                    <div class="field">
+                                        <div class="is-size-6 has-text-weight-semibold">
+                                            {{ props.option ? props.option.nem_site : '' }}
+                                        </div>
+                                        <div class="is-size-7 has-text-weight-normal">
+                                            {{ props.option ? props.option.nombre : '' }}
+                                        </div>
+                                    </div>
+                                </template>
+                                <template slot="footer">
+                                    <span v-show="page > totalPages" class="has-text-grey"> No hay mas sitios que mostrar. </span>
+                                </template>
+                            </b-autocomplete>
+                        </b-field>
+                    </div>
+
+                    <div class="column is-6">
+                        <b-field label="Fecha">
+                            <b-datepicker
+                            placeholder="Selecciona fecha..."
+                            v-model="date"
+                            icon-pack="fas"
+                            icon-prev="chevron-left"
+                            icon-next="chevron-right"
+                            :first-day-of-week="1"
+                            :max-date="new Date()">
+                        </b-datepicker>
+                        </b-field>
+                    </div>
+
+                    <div class="column is-12">
+                        <b-field label="Descripción">
+                            <b-input
+                                v-model="description"
+                                type="textarea"
+                                placeholder="Describa el vandalismo">
+                            </b-input>
+                        </b-field>
+                    </div>
+                    <div class="column is-12">
+                        <b-field label="Impacto">
+                            <b-input
+                                v-model="impact"
+                                type="textarea"
+                                placeholder="Describa el impacto">
+                            </b-input>
+                        </b-field>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="modal-card-foot">
+                <button class="button" type="button" @click="$parent.close()">Cerrar</button>
+                <button class="button is-link" @click="updateRecord()">Guardar</button>
+                <button class="button is-danger is-right" @click="deleteRecord()" v-if="canDelete">
+                    Eliminar
+                </button>
+            </footer>
+        </div>
+    </div>
+</template>
+
+<script>
+    import debounce from 'lodash/debounce'
+    export default {
+        components: {
+
+        },
+
+        props : [ 'record', 'canDelete'],
+
+        data() {
+            return {
+                sites: [],
+
+                site_id: this.record.site_id,
+                description: this.record.description,
+                impact: this.record.impact,
+                date: new Date(this.record.vandalized_at),
+
+                selected: this.record.site,
+                isFetching: false,
+                text: '',
+                page: 1,
+                totalPages: 1,
+
+            }
+        },
+
+        computed: {
+            
+        },
+
+        watch: {
+        },
+
+        created() {
+        },
+
+        mounted() {
+            this.getAsyncData()
+        },
+
+        methods: {
+            getAsyncData: debounce(function (name) {
+                // String update
+                if (this.text !== name) {
+                    this.text = name
+                    this.sites = []
+                    this.page = 1
+                    this.totalPages = 1
+                }
+                // String cleared
+                if (!name) {
+                    this.sites = []
+                    this.page = 1
+                    this.totalPages = 1
+                    return
+                }
+                // Reached last page
+                if (this.page > this.totalPages) {
+                    return
+                }
+                this.isFetching = true
+                axios.get(`/api/allSites?text=${name}&page=${this.page}`)
+                .then( response  => {
+                    response.data.sites.forEach((item) => this.sites.push(item))
+                    this.page++
+                    this.totalPages = response.data.meta.last_page
+                })
+                .catch((error) => {
+                    throw error
+                })
+                .finally(() => {
+                    this.isFetching = false
+                })
+            }, 350),
+            getMoreAsyncData: debounce(function () {
+                this.getAsyncData(this.text)
+            }, 50),
+
+            updateRecord() {
+                let params = {
+                    'site_id': this.selected.id,
+                    'date': this.date,
+                    'description': this.description,
+                    'impact': this.impact
+                }
+                axios.put(`/api/vandalismRecords/${this.record.id}`, params)
+                .then(response => {
+                    console.log(response.data)
+                    this.$eventBus.$emit('vandalism-records-updated')
+                    this.$parent.close()
+                })
+            },
+            
+            deleteRecord() {
+                console.log(this.record)
+                this.$buefy.dialog.confirm({
+                    message: `Confirma la eliminación del registro?`,
+                    type: 'is-link',
+                    onConfirm: () => {
+                        axios.delete(`/api/vandalismRecords/${this.record.id}`)
+                        .then(response => {
+                            this.$eventBus.$emit('vandalism-records-updated')
+                            this.$parent.close()
+                        })
+                    }
+                })
+            } 
+
+        }
+    }
+</script>

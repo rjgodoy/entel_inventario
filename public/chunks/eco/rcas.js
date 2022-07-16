@@ -161,7 +161,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ModalUpload: function ModalUpload() {
-      return Promise.all(/*! import() | chunks/eco/modals/upload */[__webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload~chu~fc18a3eb"), __webpack_require__.e("chunks/eco/modals/upload")]).then(__webpack_require__.bind(null, /*! ./modals/ModalUpload */ "./resources/js/components/eco/modals/ModalUpload.vue"));
+      return Promise.all(/*! import() | chunks/eco/modals/upload */[__webpack_require__.e("vendors~chunks/admin/pops~chunks/dashboard~chunks/eco/modals/newStorage~chunks/eco/modals/upload~chu~8c45ef65"), __webpack_require__.e("chunks/eco/modals/upload")]).then(__webpack_require__.bind(null, /*! ./modals/ModalUpload */ "./resources/js/components/eco/modals/ModalUpload.vue"));
     }
   },
   props: ['user'],

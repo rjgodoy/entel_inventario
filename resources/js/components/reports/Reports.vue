@@ -1,7 +1,7 @@
 <template>
     <section class="section is-marginless">
         <div class="container">
-            <div class="columns">
+            <div class="columns tile is-parent">
                 <!-- <div class="column" is-2>
                     <div class="block">
                         <div class="has-text-centered is-size-5 has-text-weight-semibold">Datos del POP</div>
@@ -31,20 +31,34 @@
                     </div>
                 </div> -->
                 
-                <div class="column is-2">
-                    <div class="block">
-                        <div class="has-text-centered is-size-4 has-text-weight-semibold">Contratos</div>
-                    </div>
-                    <div class="">
-                        <li class="p-2"><router-link to="/comsite" class="has-text-weight-normal is-size-5" expanded>Comsites</router-link></li>
+                <div class="column is-4 tile is-child">
+                    <div class="box">
+                        <div class="block">
+                            <div class="has-text-centered is-size-4 has-text-weight-semibold">Contratos</div>
+                        </div>
+                        <div class="">
+                            <li class="p-2"><router-link to="/comsite" class="has-text-weight-normal is-size-5" expanded>Comsites</router-link></li>
+                        </div>
                     </div>
                 </div>
-                <div class="column is-2">
-                    <div class="block">
-                        <div class="has-text-centered is-size-4 has-text-weight-semibold">Mantenciones</div>
+                <div class="column is-4 tile is-child">
+                    <div class="box">
+                        <div class="block">
+                            <div class="has-text-centered is-size-4 has-text-weight-semibold">Mantenciones</div>
+                        </div>
+                        <div class="">
+                            <li class="p-2"><router-link to="/revisions" class="has-text-weight-normal is-size-5" expanded>Registros de rondas Técnicas</router-link></li>
+                        </div>
                     </div>
-                    <div class="">
-                        <li class="p-2"><router-link to="/revisions" class="has-text-weight-normal is-size-5" expanded>Registros de rondas Técnicas</router-link></li>
+                </div>
+                <div class="column is-4 tile is-child">
+                    <div class="box">
+                        <div class="block">
+                            <div class="has-text-centered is-size-4 has-text-weight-semibold">Vandalismos</div>
+                        </div>
+                        <div class="">
+                            <li class="p-2"><router-link to="/vandalism" class="has-text-weight-normal is-size-5" expanded>Registros de Vandalismos</router-link></li>
+                        </div>
                     </div>
                 </div>
 

@@ -38,10 +38,17 @@ class SiteController extends Controller
 
         if ($user) {
 
-            $sites = Site::with('state', 'technologies.state', 'technologies.technology_type', 'classification_type', 'attention_priority_type', 'attention_type')
-            // ->whereHas('technologies', function($q) { 
-            //     $q->withoutTrashed();
-            // })
+            $sites = Site::with(
+                'pop.comuna', 
+                'pop.zona.crm', 
+                'state', 
+                'technologies.state', 
+                'technologies.technology_type', 
+                'classification_type', 
+                'attention_priority_type', 
+                'attention_type',
+                'pop.current_entel_vip.vip_category_type',
+            )
             // ->limit(200)
             ->get();
 
@@ -173,6 +180,21 @@ class SiteController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function allSites(Request $request)
+    {
+        $text = $request->text;
+        $sites = Site::where('nem_site', 'LIKE', "%$text%")
+        ->orWhere('nombre', 'LIKE', "%$text%")
+        ->paginate(20);
+
+        return new SiteCollection($sites);
     }
 
     /**

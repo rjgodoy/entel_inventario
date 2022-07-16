@@ -19,6 +19,7 @@ use App\Models\RoomCapacity;
 use App\Models\Site;
 use App\Models\State;
 use App\Models\Technology;
+use App\Models\VandalismRecord;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -307,60 +308,7 @@ class HomeController extends Controller
      */
     public function test(Request $request)
     {
-        // $now = Carbon::now()->isoFormat('YYYYMMDDHHmm');
-        // $token = 'a3QwEBesPKm9b2f';
-        // $hash = md5($now.''.$token);
-        // $url = 'http://aess.entelchile.net/pop_m/all/all/?EXPORT=CSV&v=5&app=analytics&key='.$hash;
-        // dd($url);
-
-        $data = GeneratorSet::
-            // with(
-            //     'g_commune.g_region'
-            //     ,'g_zona.g_sector'
-            //     ,'generator_set_model.generator_set_brand'
-            //     ,'g_model.g_brand'
-            //     ,'g_model.g_management_system'
-            //     ,'g_model.g_motor'
-            //     ,'g_model.g_fuel_pond'
-            //     ,'g_model.g_generator_detail'
-            //     ,'g_model.g_tta_controller'
-            //     ,'g_system_type'
-            //     ,'g_type'
-            //     ,'g_last_maintance.g_maintance_status'
-            //     ,'g_protocol'
-            // )
-            with(
-                'generator_platform.g_commune.g_region'
-                ,'generator_platform.g_zona.g_sector'
-                ,'generator_platform.generator_set_model.generator_set_brand'
-                ,'generator_platform.g_model.g_brand'
-                ,'generator_platform.g_model.g_management_system'
-                ,'generator_platform.g_model.g_motor'
-                ,'generator_platform.g_model.g_fuel_pond'
-                ,'generator_platform.g_model.g_generator_detail'
-                ,'generator_platform.g_model.g_tta_controller'
-                ,'generator_platform.g_system_type'
-                ,'generator_platform.g_type'
-                ,'generator_platform.g_last_maintance.g_maintance_status'
-                ,'generator_platform.g_protocol'
-            )
-            ->orderBy('zone_id', 'asc')
-            ->get();
-        // Storage::disk('local')->put('file.csv', fopen($url, 'r'));
-
-        // $id = 1;
-
-        // $data = RoomCapacity::where('room_id', $id)
-        // ->whereIn('created_at', [
-        //     \DB::raw('SELECT MAX(created_at) 
-        //         FROM entel_g_redes_inventario.room_capacities
-        //         WHERE room_id = '.$id.'
-        //         GROUP BY DATE(created_at)')
-        // ])
-        // ->orderBy('created_at', 'asc')->get();
-
-        dd($data);
-        
+        //
     }
 
     

@@ -279,6 +279,11 @@ Route::middleware('auth:api')->group(function () {
     Route::get('filters', 'Api\PopController@filters');
     Route::get('allPops', 'Api\PopController@allPops');
     ##############################################################################################
+
+    ### SITES ######################################################################
+    Route::get('allSites', 'Api\SiteController@allSites');
+    ##############################################################################################
+
     ### COMSITE ######################################################################
     Route::apiResource('comsites', 'Api\ComsiteController');
 
@@ -319,6 +324,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('iframeLayout/{pop_id}', 'Api\PopController@getIframeLayout');
     Route::apiResource('vandalismRecords', 'Api\VandalismRecordController');
     Route::get('coordinatesCaluculation', 'Api\VandalismRecordController@coordinatesCaluculation');
+    Route::get('vandalismRecordsExport', 'Api\VandalismRecordController@export');
     ##############################################################################################
     Route::apiResource('energyEquipmentRevisions', 'Api\EnergyEquipmentRevisionController');
     Route::apiResource('energyEquipmentRevisionTypes', 'Api\EnergyEquipmentRevisionTypeController');

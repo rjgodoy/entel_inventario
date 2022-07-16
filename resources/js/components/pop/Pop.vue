@@ -384,10 +384,10 @@
 
 <script>
     import { library } from "@fortawesome/fontawesome-svg-core";
-    import { faHome, faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle, faBookmark, faBars, faSnowboarding } from "@fortawesome/free-solid-svg-icons";
+    import { faHome, faEdit, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle, faBookmark, faBars, faSnowboarding, faEllipsisV, faPlus } from "@fortawesome/free-solid-svg-icons";
     // import { faFontAwesome } from "@fortawesome/free-brands-svg-icons";
     import { faCheckCircle as farCheckCircle, faTimesCircle as farTimesCircle, faBookmark as farBookmark, faClipboard as farClipboard } from '@fortawesome/free-regular-svg-icons'
-    library.add(faHome, faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle, faBookmark, farBookmark, farClipboard, faBars, faSnowboarding)
+    library.add(faHome, faEdit, farTimesCircle, faSignInAlt, faTasks, faBolt, faTemperatureLow, faBroadcastTower, faDollarSign, faFileContract, faFolderOpen, faLeaf, faSignal, faBezierCurve, faMapMarkerAlt, faMapMarkedAlt, farCheckCircle, faCamera, faUserTie, faVideo, faStreetView, faExclamationTriangle, faBookmark, farBookmark, farClipboard, faBars, faSnowboarding, faEllipsisV, faPlus)
     export default {
         components: {
             Location: () => import(/* webpackChunkName: "chunks/pop/location"*/'./Location'),

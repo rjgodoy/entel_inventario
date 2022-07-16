@@ -31,23 +31,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     GeneratorSet: function GeneratorSet() {
       return __webpack_require__.e(/*! import() | chunks/pop/power/generatorSet */ "chunks/pop/power/generatorSet").then(__webpack_require__.bind(null, /*! ./GeneratorSet */ "./resources/js/components/pop/power/GeneratorSet.vue"));
+    },
+    ModalNewGeneratorSet: function ModalNewGeneratorSet() {
+      return __webpack_require__.e(/*! import() | chunks/capacity/modals/new/newGeneratorSet */ "chunks/capacity/modals/new/newGeneratorSet").then(__webpack_require__.bind(null, /*! ../../capacity/modals/new/ModalNewGeneratorSet */ "./resources/js/components/capacity/modals/new/ModalNewGeneratorSet.vue"));
     }
   },
   props: ['user', 'pop'],
   data: function data() {
     return {
       generatorSets: Array,
-      canEditGeneratorSets: null
+      canEditGeneratorSets: null,
+      isNewGeneratorSetModalActive: false
     };
   },
   mounted: function mounted() {
     this.getGeneratorSets();
   },
   computed: {},
+  created: function created() {
+    this.$eventBus.$on('new-generator-set', this.getGeneratorSets);
+  },
   methods: {
     getGeneratorSets: function getGeneratorSets() {
       var _this = this;
@@ -79,45 +118,152 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", {}, [
-    _vm.generatorSets.length
-      ? _c(
-          "div",
-          {},
-          _vm._l(_vm.generatorSets, function(generatorSet) {
-            return _c("div", { key: generatorSet.id }, [
+  return _c(
+    "section",
+    {},
+    [
+      _vm.canEditGeneratorSets
+        ? _c(
+            "div",
+            { staticClass: "column" },
+            [
               _c(
-                "div",
-                { staticClass: "columns" },
+                "b-dropdown",
+                {
+                  staticClass: "is-pulled-right",
+                  attrs: { "aria-role": "list", position: "is-bottom-left" },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "trigger",
+                        fn: function(ref) {
+                          var active = ref.active
+                          return _c(
+                            "button",
+                            { staticClass: "button is-default is-small" },
+                            [
+                              _c(
+                                "span",
+                                [
+                                  _c("font-awesome-icon", {
+                                    attrs: { icon: ["fas", "ellipsis-v"] }
+                                  })
+                                ],
+                                1
+                              )
+                            ]
+                          )
+                        }
+                      }
+                    ],
+                    null,
+                    false,
+                    1113762171
+                  )
+                },
                 [
-                  _c("generator-set", {
-                    staticClass: "column",
-                    attrs: {
-                      generatorSet: generatorSet,
-                      canEditGeneratorSets: _vm.canEditGeneratorSets,
-                      user: _vm.user,
-                      pop: _vm.pop
-                    }
-                  })
+                  _vm._v(" "),
+                  _c(
+                    "b-dropdown-item",
+                    {
+                      staticClass: "is-size-6",
+                      attrs: { "aria-role": "listitem" },
+                      on: {
+                        click: function($event) {
+                          _vm.isNewGeneratorSetModalActive = true
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "media" },
+                        [
+                          _c("font-awesome-icon", {
+                            staticClass: "media-left",
+                            attrs: { icon: ["fas", "plus"] }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "media-content" }, [
+                            _c("h3", [_vm._v("Nuevo Grupo Electrógeno")])
+                          ])
+                        ],
+                        1
+                      )
+                    ]
+                  )
                 ],
                 1
               )
-            ])
-          }),
-          0
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    !_vm.generatorSets.length
-      ? _c("div", { staticClass: "has-text-centered" }, [
-          _c(
-            "div",
-            { staticClass: "is-size-4 has-text-weight-light has-text-grey" },
-            [_vm._v("No hay grupos electrógenos registrados en este POP")]
+            ],
+            1
           )
-        ])
-      : _vm._e()
-  ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.generatorSets.length
+        ? _c(
+            "div",
+            {},
+            _vm._l(_vm.generatorSets, function(generatorSet) {
+              return _c("div", { key: generatorSet.id }, [
+                _c(
+                  "div",
+                  { staticClass: "columns" },
+                  [
+                    _c("generator-set", {
+                      staticClass: "column",
+                      attrs: {
+                        generatorSet: generatorSet,
+                        canEditGeneratorSets: _vm.canEditGeneratorSets,
+                        user: _vm.user,
+                        pop: _vm.pop
+                      }
+                    })
+                  ],
+                  1
+                )
+              ])
+            }),
+            0
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.generatorSets.length
+        ? _c("div", { staticClass: "has-text-centered" }, [
+            _c(
+              "div",
+              { staticClass: "is-size-4 has-text-weight-light has-text-grey" },
+              [_vm._v("No hay grupos electrógenos registrados en este POP")]
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            active: _vm.isNewGeneratorSetModalActive,
+            "has-modal-card": "",
+            "trap-focus": "",
+            "aria-role": "dialog",
+            "aria-modal": ""
+          },
+          on: {
+            "update:active": function($event) {
+              _vm.isNewGeneratorSetModalActive = $event
+            }
+          }
+        },
+        [
+          _c("modal-new-generator-set", {
+            attrs: { user: _vm.user, pop: _vm.pop, room: _vm.pop.rooms[0] }
+          })
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

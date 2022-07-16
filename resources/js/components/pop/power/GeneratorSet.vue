@@ -77,9 +77,6 @@
                                 &nbsp;&nbsp; Mantenciones
                             </button>
                         </div>
-
-                        
-
                     </div>
 
                 </div>

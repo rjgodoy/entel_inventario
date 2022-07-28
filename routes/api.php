@@ -21,6 +21,8 @@ Route::get('all_pops_ios', 'Api\PopController@alliOS');         // All Pops data
 Route::get('all_pops_ios_v2', 'Api\PopController@alliOSv2');    // All Pops data v2
 Route::get('pop_info_ios', 'Api\PopController@popInfoIos');     // Pop detail data
 Route::get('all_sites_ios_v2', 'Api\SiteController@allSitesiOSv2');    // All Sites data
+Route::get('all_technologies_ios_v2', 'Api\TechnologyController@allTechnologiesiOSv2');    // All Technologies data
+Route::get('all_junctions_ios_v2', 'Api\JunctionController@allJunctionsiOSv2');    // All Junctions data
 
 // APIs Android
 Route::get('all_pops_android', 'Api\PopController@allAndroid');

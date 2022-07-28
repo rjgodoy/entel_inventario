@@ -13,6 +13,7 @@ use App\Models\JunctionMeasurement;
 use App\Models\JunctionProtection;
 use App\Models\JunctionType;
 use App\Models\Log;
+use App\Models\User;
 use DB;
 use Illuminate\Http\Request;
 
@@ -398,5 +399,32 @@ class JunctionController extends Controller
         $response = (new JunctionsExport($request))->download('empalmes.xlsx');
         ob_end_clean();
         return $response;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function allJunctionsiOSv2(Request $request)
+    {     
+        $user = User::where('api_token', $request->api_token)->get();
+        if ($user) {
+            $junctions = Junction::
+            select(
+                "id",
+                "pop_id",
+                "client_number",
+                "junction_number",
+                "electric_company_id",
+                "rate_type"
+            )
+            ->with(
+                'electric_company'
+            )->get();
+
+            return new JunctionCollection($junctions);
+        }
+        return false;
     }
 }

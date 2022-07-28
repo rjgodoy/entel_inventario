@@ -85,12 +85,61 @@ class PopController extends Controller
 
         if ($user) {
 
-            $pops = Pop::with('sites.state', 'sites.technologies.state', 'sites.technologies.technology_type', 'zona.crm', 'comuna', 'sites.classification_type', 'sites.attention_priority_type', 'sites.attention_type', 'current_autonomy', 'junctions.electric_company')
+            $pops = Pop::
+            select(
+            "id",
+            "pop_e_id",
+            "nombre",
+            "direccion",
+            "comuna_id",
+            "zona_id",
+            "latitude",
+            "longitude",
+            // "pop_type_id",
+            // "service_type_id",
+            // "net_type_id",
+            // "derivation_type_id",
+            "dependences",
+            "pe_3g",
+            "mpls",
+            "olt",
+            "olt_3play",
+            "core",
+            "vip",
+            "localidad_obligatoria",
+            "isla",
+            "paragua",
+            "estival",
+            "centro_invernal",
+            "ranco",
+            "energy_system_id",
+            "operation_responsable_id",
+            "cluster_type_id",
+            "energy_responsable_id",
+            "offgrid",
+            "solar",
+            "eolica",
+            // "gestion_ambiental",
+            // "turret_type_id",
+            )
+            ->with(
+                'zona.crm', 
+                'comuna',
+                'current_autonomy', 
+                'energy_responsable',
+                'energy_system',
+                'operation_responsable',
+                'cluster_type',
+                'current_entel_vip.vip_category_type',
+                'layouts'
+
+                // 'junctions.electric_company',
+                // 'generator_sets',
+                // 'power_rectifiers',
+            )
             ->whereHas('sites', function($q) { 
                 $q->withoutTrashed();
             })
-            // ->orderBy('id')
-            // ->limit(100)
             ->get();
 
             return new PopCollection($pops);

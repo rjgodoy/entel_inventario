@@ -33,23 +33,44 @@ class SiteController extends Controller
      */
     public function allSitesiOSv2(Request $request)
     {
-
         $user = User::where('api_token', $request->api_token)->get();
 
         if ($user) {
-
-            $sites = Site::with(
-                'pop.comuna', 
-                'pop.zona.crm', 
+            $sites = Site::
+            select(
+                "id",
+                "pop_id",
+                // "pop_e_id",
+                "nem_site",
+                "state_id",
+                "nombre",
+                // "site_type_id",
+                "classification_type_id",
+                // "category_type_id",
+                "attention_type_id",
+                "attention_priority_type_id",
+                // "solution_type_id",
+                // "site_class_type_id",
+                // "coverage_type_id",
+                // "transport_type_id",
+                "pe_3g",
+                "mpls",
+                "olt",
+                "olt_3play",
+                "core",
+                "red_minima",
+                "zona_fdt",
+                "lloo700",
+                "lloo2600",
+                "localidad_obligatoria",
+                "ranco"
+            )
+            ->with(
                 'state', 
-                'technologies.state', 
-                'technologies.technology_type', 
                 'classification_type', 
                 'attention_priority_type', 
-                'attention_type',
-                'pop.current_entel_vip.vip_category_type',
+                'attention_type'
             )
-            // ->limit(200)
             ->get();
 
             return new SiteCollection($sites);

@@ -96,7 +96,7 @@
                 if (this.crmSelected == null) {
                     axios.get(`/api/infrastructureData/${this.core}`)
                         .then((response) => {
-                            this.infrastructureData = response.data.data;
+                            this.infrastructureData = response.data.infrastructure;
                             this.totalInfrastructures()
                         })
                         .catch(() => {
@@ -105,7 +105,7 @@
                 } else if (this.zonaSelected == null){
                     axios.get(`/api/infrastructureDataCrm/${this.crmSelected.id}/${this.core}`)
                         .then((response) => {
-                            this.infrastructureData = response.data.data;
+                            this.infrastructureData = response.data.infrastructure;
                             this.totalInfrastructures()
                         })
                         .catch(() => {
@@ -114,8 +114,7 @@
                 } else {
                     axios.get(`/api/infrastructureDataZona/${this.zonaSelected.id}/${this.core}`)
                         .then((response) => {
-                            console.log(response)
-                            this.infrastructureData = response.data.data;
+                            this.infrastructureData = response.data.infrastructure;
                             this.totalInfrastructures()
                         })
                         .catch(() => {

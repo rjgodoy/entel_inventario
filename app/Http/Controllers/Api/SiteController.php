@@ -31,7 +31,7 @@ class SiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function allSitesiOSv2(Request $request)
+    public function apiSites(Request $request)
     {
         $user = User::where('api_token', $request->api_token)->get();
 

@@ -406,7 +406,7 @@ class JunctionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function allJunctionsiOSv2(Request $request)
+    public function apiJunctions(Request $request)
     {     
         $user = User::where('api_token', $request->api_token)->get();
         if ($user) {
@@ -417,11 +417,13 @@ class JunctionController extends Controller
                 "client_number",
                 "junction_number",
                 "electric_company_id",
-                "rate_type"
+                "rate_type",
             )
             ->with(
-                'electric_company'
-            )->get();
+                'electric_company:id,name,contact_number',
+                "pop:id,nombre"
+            )
+            ->get();
 
             return new JunctionCollection($junctions);
         }

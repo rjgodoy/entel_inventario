@@ -12,6 +12,7 @@ use App\Models\PowerRectifier;
 use App\Models\PowerRectifierMode;
 use App\Models\PowerRectifierModule;
 use App\Models\Room;
+use App\Models\User;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -432,6 +433,35 @@ class PowerRectifierController extends Controller
         return $data;
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiPowerRectifiers(Request $request)
+    {     
+        $user = User::where('api_token', $request->api_token)->get();
+        if ($user) {
+            $powerRectifiers = PowerRectifier::
+            select(
+                "id",
+                "pop_id",
+                "power_rectifier_type_id",
+                "power_rectifier_mode_id",
+                "capacity",
+                "volt"
+            )
+            ->with(
+                "power_rectifier_type:id,type,model",
+                'power_rectifier_mode:id,mode',
+                "pop:id,nombre"
+            )
+            ->get();
+
+            return new PowerRectifierCollection($powerRectifiers);
+        }
+        return false;
+    }
 
     
 }

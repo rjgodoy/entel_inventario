@@ -73,80 +73,7 @@ class PopController extends Controller
         return 'false';
     }
 
-    /**
-     * Display a listing of the resource for iOS.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function alliOSv2(Request $request)
-    {
-
-        $user = User::where('api_token', $request->api_token)->get();
-
-        if ($user) {
-
-            $pops = Pop::
-            select(
-            "id",
-            "pop_e_id",
-            "nombre",
-            "direccion",
-            "comuna_id",
-            "zona_id",
-            "latitude",
-            "longitude",
-            // "pop_type_id",
-            // "service_type_id",
-            // "net_type_id",
-            // "derivation_type_id",
-            "dependences",
-            "pe_3g",
-            "mpls",
-            "olt",
-            "olt_3play",
-            "core",
-            "vip",
-            "localidad_obligatoria",
-            "isla",
-            "paragua",
-            "estival",
-            "centro_invernal",
-            "ranco",
-            "energy_system_id",
-            "operation_responsable_id",
-            "cluster_type_id",
-            "energy_responsable_id",
-            "offgrid",
-            "solar",
-            "eolica",
-            // "gestion_ambiental",
-            // "turret_type_id",
-            )
-            ->with(
-                'zona.crm', 
-                'comuna',
-                'current_autonomy', 
-                'energy_responsable',
-                'energy_system',
-                'operation_responsable',
-                'cluster_type',
-                'current_entel_vip.vip_category_type',
-                'layouts'
-
-                // 'junctions.electric_company',
-                // 'generator_sets',
-                // 'power_rectifiers',
-            )
-            ->whereHas('sites', function($q) { 
-                $q->withoutTrashed();
-            })
-            ->get();
-
-            return new PopCollection($pops);
-        }
-
-        return 'false';
-    }
+    
 
     /**
      * Display a listing of the resource for Android.
@@ -871,5 +798,77 @@ class PopController extends Controller
         return VipCategoryType::all();
     }
     
+    /**
+     * Display a listing of the resource for iOS.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiPops(Request $request)
+    {
+
+        $user = User::where('api_token', $request->api_token)->get();
+
+        if ($user) {
+
+            $pops = Pop::
+            select(
+            "id",
+            "pop_e_id",
+            "nombre",
+            "direccion",
+            "comuna_id",
+            "zona_id",
+            "latitude",
+            "longitude",
+            // "pop_type_id",
+            // "service_type_id",
+            // "net_type_id",
+            // "derivation_type_id",
+            "dependences",
+            "pe_3g",
+            "mpls",
+            "olt",
+            "olt_3play",
+            "core",
+            "vip",
+            "localidad_obligatoria",
+            "isla",
+            "paragua",
+            "estival",
+            "centro_invernal",
+            "ranco",
+            "energy_system_id",
+            "operation_responsable_id",
+            "cluster_type_id",
+            "energy_responsable_id",
+            "offgrid",
+            "solar",
+            "eolica",
+            // "gestion_ambiental",
+            // "turret_type_id",
+            )
+            ->with(
+                'zona:id,cod_zona,nombre_zona,crm_id',
+                'zona.crm:id,nombre_crm,subgerente_crm,sigla_crm', 
+                'comuna:id,nombre_comuna',
+                'current_autonomy:id,pop_id,theoretical', 
+                'energy_responsable:id,responsable',
+                'energy_system:id,system',
+                'operation_responsable:id,responsable',
+                'cluster_type:id,type',
+                'current_entel_vip:pop_id,vip_category_type_id,category',
+                'current_entel_vip.vip_category_type:id,type',
+                'layouts:pop_id,iframe'
+            )
+            ->whereHas('sites', function($q) { 
+                $q->withoutTrashed();
+            })
+            ->get();
+
+            return new PopCollection($pops);
+        }
+
+        return 'false';
+    }
 
 }

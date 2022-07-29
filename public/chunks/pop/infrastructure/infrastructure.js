@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/api/verticalStructures/".concat(this.pop.id)).then(function (response) {
-        _this.verticalStructures = response.data.data;
+        _this.verticalStructures = response.data.verticalStructure;
         console.log(_this.verticalStructures);
       })["catch"](function (error) {
         console.log('Error al traer los datos de Líneas Eléctricas: ' + error);
@@ -140,7 +140,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get("/api/infrastructures/".concat(this.pop.id)).then(function (response) {
-        _this2.infrastructures = response.data.data;
+        _this2.infrastructures = response.data.infrastructure;
         console.log(_this2.infrastructures);
       })["catch"](function (error) {
         console.log('Error al traer los datos de Transformadores: ' + error);

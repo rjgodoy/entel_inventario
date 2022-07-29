@@ -70,7 +70,7 @@ class TechnologyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function allTechnologiesiOSv2(Request $request)
+    public function apiTechnologies(Request $request)
     {
         $user = User::where('api_token', $request->api_token)->get();
         if ($user) {

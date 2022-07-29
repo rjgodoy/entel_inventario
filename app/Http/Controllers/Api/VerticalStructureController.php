@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Exports\VerticalStructuresExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\VerticalStructure as VerticalStructureResource;
+use App\Http\Resources\VerticalStructureCollection;
+use App\Models\User;
 use App\Models\VerticalStructure;
 use DB;
 use Illuminate\Http\Request;
@@ -205,5 +207,33 @@ class VerticalStructureController extends Controller
         $response = (new VerticalStructuresExport($request))->download('estructuras_verticales.xlsx');
         ob_end_clean();
         return $response;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiVerticalStructures(Request $request)
+    {     
+        $user = User::where('api_token', $request->api_token)->get();
+        if ($user) {
+            $vertical_structures = VerticalStructure::
+            select(
+                "id",
+                "pop_id",
+                "vertical_structure_type_id",
+                "height",
+                "use_factor"
+            )
+            ->with(
+                "vertical_structure_type:id,type",
+                "pop:id,nombre"
+            )
+            ->get();
+
+            return new VerticalStructureCollection($vertical_structures);
+        }
+        return false;
     }
 }

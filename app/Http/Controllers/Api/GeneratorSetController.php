@@ -2,37 +2,39 @@
 
 namespace App\Http\Controllers\Api;
 
-use DB;
-use Carbon\Carbon;
-use App\Models\Log;
-use App\Models\Site;
-use App\Models\Zona;
-use App\Models\GeneratorSet;
-use App\Models\GeneratorTta;
-use App\Models\OTTmpTaskLog;
-use Illuminate\Http\Request;
-use App\Models\GeneratorTank;
-use App\Models\GeneratorGroup;
-use App\Models\GeneratorMotor;
-use App\Models\TelecomCompany;
 use App\Exports\GeneratorSetsExport;
-use App\Http\Controllers\Controller;
-use App\Models\GeneratorSetCapacity;
-use Illuminate\Support\Facades\Cache;
-use App\Models\GeneratorSetMaintainer;
-use App\Models\GeneratorSetResponsable;
-use App\Models\GeneratorsPlatformBrand;
-use App\Models\GeneratorsPlatformValues;
-use App\Models\GeneratorsPlatformSubZone;
-use App\Models\GeneratorsPlatformGenerator;
-use App\Models\GeneratorsPlatformMaintance;
-use App\Models\GeneratorsPlatformStatistic;
 use App\Exports\GeneratorsPlatformDataExport;
-use App\Models\GeneratorsPlatformOTMaintance;
-use App\Models\GeneratorsPlatformGeneratorType;
 use App\Exports\GeneratorsPlatformInventoryExport;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\GeneratorPlatformValuesCollection;
 use App\Http\Resources\GeneratorSet as GeneratorSetResource;
+use App\Http\Resources\GeneratorSetCollection;
+use App\Models\GeneratorGroup;
+use App\Models\GeneratorMotor;
+use App\Models\GeneratorSet;
+use App\Models\GeneratorSetCapacity;
+use App\Models\GeneratorSetMaintainer;
+use App\Models\GeneratorSetResponsable;
+use App\Models\GeneratorTank;
+use App\Models\GeneratorTta;
+use App\Models\GeneratorsPlatformBrand;
+use App\Models\GeneratorsPlatformGenerator;
+use App\Models\GeneratorsPlatformGeneratorType;
+use App\Models\GeneratorsPlatformMaintance;
+use App\Models\GeneratorsPlatformOTMaintance;
+use App\Models\GeneratorsPlatformStatistic;
+use App\Models\GeneratorsPlatformSubZone;
+use App\Models\GeneratorsPlatformValues;
+use App\Models\Log;
+use App\Models\OTTmpTaskLog;
+use App\Models\Site;
+use App\Models\TelecomCompany;
+use App\Models\User;
+use App\Models\Zona;
+use Carbon\Carbon;
+use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class GeneratorSetController extends Controller
 {
@@ -832,6 +834,34 @@ class GeneratorSetController extends Controller
         } else {  
             return false;  
         }  
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiGeneratorSets(Request $request)
+    {     
+        $user = User::where('api_token', $request->api_token)->get();
+        if ($user) {
+            $generatorSets = GeneratorSet::
+            select(
+                "id",
+                "pop_id",
+                "generator_set_model_id"
+            )
+            ->with(
+                "generator_set_model:id,name,generator_set_brand_id",
+                'generator_set_model.generator_set_brand:id,name',
+                "pop:id,nombre"
+            )
+            ->get();
+
+            return new GeneratorSetCollection($generatorSets);
+        }
+        return false;
     }
 
     

@@ -131,7 +131,7 @@
             getVerticalStructures() {
                 axios.get(`/api/verticalStructures/${this.pop.id}`)
                 .then((response) => {
-                    this.verticalStructures = response.data.data
+                    this.verticalStructures = response.data.verticalStructure
                     console.log(this.verticalStructures)
                 })
                 .catch((error) => {
@@ -142,7 +142,7 @@
             getInfrastructures() {
                 axios.get(`/api/infrastructures/${this.pop.id}`)
                 .then((response) => {
-                    this.infrastructures = response.data.data
+                    this.infrastructures = response.data.infrastructure
                     console.log(this.infrastructures)
                 })
                 .catch((error) => {

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Exports\InfrastructuresExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Infrastructure as InfrastructureResource;
+use App\Http\Resources\InfrastructureCollection;
 use App\Models\Infrastructure;
+use App\Models\User;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -31,38 +33,31 @@ class InfrastructureController extends Controller
      */
     public function infrastructureData($core)
     {
-        if (Cache::has('infrastructuresData_core'.$core)) {
-            $infrastructuresQuantity = Cache::get('infrastructuresData_core'.$core);
-        } else {
-            $infrastructuresQuantity = Cache::remember('infrastructuresData_core'.$core, $this->seconds, function () use ($core) {
 
-                $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1) AND S.state_id = 1' : '';
-                $infrastructuresQuantity = DB::select(DB::raw("
-                    SELECT
-                    @crm_id:=id AS id,
-                    @crm:=nombre_crm AS nombre,
+        $condition = $core == 1 ? 'INNER JOIN entel_pops.sites S ON P.id = S.pop_id AND S.classification_type_id IN (1) AND S.state_id = 1' : '';
+        $infrastructuresQuantity = DB::select(DB::raw("
+            SELECT
+            @crm_id:=id AS id,
+            @crm:=nombre_crm AS nombre,
 
-                    @q_info:=(SELECT count(DISTINCT AC.pop_id) 
-                            FROM entel_g_redes_inventario.infrastructures AC 
-                            INNER JOIN entel_pops.pops P ON AC.pop_id = P.id
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
-                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            $condition
-                            ) AS q_info,
+            @q_info:=(SELECT count(DISTINCT AC.pop_id) 
+                FROM entel_g_redes_inventario.infrastructures AC 
+                INNER JOIN entel_pops.pops P ON AC.pop_id = P.id
+                INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
+                INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+                $condition
+                ) AS q_info,
 
-                    @q_infrastructures:=(SELECT count(DISTINCT AC.id) 
-                            FROM entel_g_redes_inventario.infrastructures AC 
-                            INNER JOIN entel_pops.pops P ON AC.pop_id = P.id
-                            INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
-                            INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
-                            $condition
-                            ) AS q_infrastructures
+            @q_infrastructures:=(SELECT count(DISTINCT AC.id) 
+                FROM entel_g_redes_inventario.infrastructures AC 
+                INNER JOIN entel_pops.pops P ON AC.pop_id = P.id
+                INNER JOIN entel_pops.comunas C ON P.comuna_id = C.id 
+                INNER JOIN entel_pops.zonas Z ON C.zona_id = Z.id AND Z.crm_id = @crm_id
+                $condition
+                ) AS q_infrastructures
 
-                    FROM entel_pops.crms
-                "));
-                return $infrastructuresQuantity;
-            });
-        }
+            FROM entel_pops.crms
+            "));
         return new InfrastructureResource($infrastructuresQuantity);
     }
 
@@ -205,5 +200,31 @@ class InfrastructureController extends Controller
         $response = (new InfrastructuresExport($request))->download('infraestructuras.xlsx');
         ob_end_clean();
         return $response;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiInfrastructures(Request $request)
+    {     
+        $user = User::where('api_token', $request->api_token)->get();
+        if ($user) {
+            $infrastructure = Infrastructure::
+            select(
+                "id",
+                "pop_id",
+                "infrastructure_type_id"
+            )
+            ->with(
+                "infrastructure_type:id,type",
+                "pop:id,nombre"
+            )
+            ->get();
+
+            return new InfrastructureCollection($infrastructure);
+        }
+        return false;
     }
 }

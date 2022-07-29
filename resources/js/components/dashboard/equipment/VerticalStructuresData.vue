@@ -96,7 +96,7 @@
                 if (this.crmSelected == null) {
                     axios.get(`/api/verticalStructureData/${this.core}`)
                         .then((response) => {
-                            this.verticalStructureData = response.data.data;
+                            this.verticalStructureData = response.data.verticalStructure;
                             this.totalVerticalStructures()
                         })
                         .catch(() => {
@@ -105,7 +105,7 @@
                 } else if (this.zonaSelected == null){
                     axios.get(`/api/verticalStructureDataCrm/${this.crmSelected.id}/${this.core}`)
                         .then((response) => {
-                            this.verticalStructureData = response.data.data;
+                            this.verticalStructureData = response.data.verticalStructure;
                             this.totalVerticalStructures()
                         })
                         .catch(() => {
@@ -115,7 +115,7 @@
                     axios.get(`/api/verticalStructureDataZona/${this.zonaSelected.id}/${this.core}`)
                         .then((response) => {
                             console.log(response)
-                            this.verticalStructureData = response.data.data;
+                            this.verticalStructureData = response.data.verticalStructure;
                             this.totalVerticalStructures()
                         })
                         .catch(() => {

@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Exports\AirConditionersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AirConditioner as AirConditionerResource;
+use App\Http\Resources\AirConditionerCollection;
 use App\Models\AirConditioner;
 use App\Models\AirConditionerBrand;
 use App\Models\AirConditionerType;
 use App\Models\Pop;
 use App\Models\PsgTp;
 use App\Models\PsgTpSource;
+use App\Models\User;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -255,5 +257,33 @@ class AirConditionerController extends Controller
         $response = (new AirConditionersExport($request))->download('aires_acondicionados.xlsx');
         ob_end_clean();
         return $response;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiAirConditioners(Request $request)
+    {     
+        $user = User::where('api_token', $request->api_token)->get();
+        if ($user) {
+            $air_conditioner = AirConditioner::
+            select(
+                "id",
+                "pop_id",
+                "air_conditioner_brand_id",
+                "capacity"
+            )
+            ->with(
+                "air_conditioner_brand:id,air_conditioner_type_id,brand,model",
+                "air_conditioner_brand.air_conditioner_type:id,type",
+                "pop:id,nombre"
+            )
+            ->get();
+
+            return new AirConditionerCollection($air_conditioner);
+        }
+        return false;
     }
 }

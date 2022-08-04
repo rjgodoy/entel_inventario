@@ -44,7 +44,7 @@
         },
         props : [
             'pop',
-            'folderTab',
+            'foldertab',
             'folder_id',
             'user'
         ],
@@ -66,7 +66,6 @@
 
         methods: {
             submit() {
-                // console.log(this.folderTab)
                 this.dropFiles.forEach(element => this.submitForm(element))
             },
 
@@ -78,7 +77,7 @@
                     },
                     params: {
                         'pop_id': this.pop.id,
-                        'folder_name': this.folderTab.label,
+                        'folder_name': this.foldertab.label,
                         'folder_id': this.folder_id,
                         'user_id': this.user.id,
                     }

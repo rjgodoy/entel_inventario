@@ -53,7 +53,7 @@ __webpack_require__.r(__webpack_exports__);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faUpload"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
-  props: ['pop', 'folderTab', 'folder_id', 'user'],
+  props: ['pop', 'foldertab', 'folder_id', 'user'],
   data: function data() {
     return {
       dropFiles: []
@@ -66,7 +66,6 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
     submit: function submit() {
       var _this = this;
 
-      // console.log(this.folderTab)
       this.dropFiles.forEach(function (element) {
         return _this.submitForm(element);
       });
@@ -81,7 +80,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__["library"].add(_f
         },
         params: {
           'pop_id': this.pop.id,
-          'folder_name': this.folderTab.label,
+          'folder_name': this.foldertab.label,
           'folder_id': this.folder_id,
           'user_id': this.user.id
         }
